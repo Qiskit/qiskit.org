@@ -8,8 +8,8 @@
 // import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 useHead({
-  title: 'Introduction course'
-})
+  title: "Introduction course",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Introduction to Quantum Computing'

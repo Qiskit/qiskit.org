@@ -2,47 +2,45 @@
   <article class="the-hero-moment">
     <MetalGrid>
       <div class="bx--grid the-hero-moment__container">
-        <VersionInfo
-          class="the-hero-moment__version-info"
-          :version="version"
-        />
+        <VersionInfo class="the-hero-moment__version-info" :version="version" />
         <div class="bx--row">
-          <h1 class="bx--col-md-4 bx--col-lg-9 bx--col-xlg-7 bx--col-max-7 the-hero-moment__title">
+          <h1
+            class="bx--col-md-4 bx--col-lg-9 bx--col-xlg-7 bx--col-max-7 the-hero-moment__title"
+          >
             Open-Source Quantum Development
           </h1>
         </div>
         <div class="bx--row">
-          <p class="bx--col-sm bx--col-md-4 bx--col-lg-6 bx--col-xlg-4 the-hero-moment__description">
+          <p
+            class="bx--col-sm bx--col-md-4 bx--col-lg-6 bx--col-xlg-4 the-hero-moment__description"
+          >
             Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
             with quantum computers at the level of pulses, circuits, and
             application modules.
           </p>
         </div>
-        <AppCta
-          class="the-hero-moment__cta"
-          v-bind="getStartedLink"
-        />
+        <AppCta class="the-hero-moment__cta" v-bind="getStartedLink" />
       </div>
     </MetalGrid>
   </article>
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 interface Props {
-  version: string
+  version: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 
 const getStartedLink: GeneralLink = {
-  url: 'https://qiskit.org/documentation/getting_started.html',
-  label: 'Get started',
-  segment: { cta: 'get-started', location: 'hero-moment' }
-}
+  url: "https://qiskit.org/documentation/getting_started.html",
+  label: "Get started",
+  segment: { cta: "get-started", location: "hero-moment" },
+};
 
-const qiskitPronunciation = Math.random() < 0.5 ? '[kiss-kit]' : '[quiss-kit]'
+const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 </script>
 
 <style lang="scss">

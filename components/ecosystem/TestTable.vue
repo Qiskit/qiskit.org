@@ -52,49 +52,53 @@
 </template>
 
 <script setup lang="ts">
-import { TableRowElement } from '~/components/ui/AppDataTable.vue'
+import { TableRowElement } from "~/components/ui/AppDataTable.vue";
 
 interface Props {
   filteredData?: Object[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  filteredData: () => [['', '', '']]
-})
+  filteredData: () => [["", "", ""]],
+});
 
 const testTypeTooltip = {
-  development: 'This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit',
-  stable: 'This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit',
-  standard: 'This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements',
-  'last passing version': 'This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package'
-}
+  development:
+    "This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit",
+  stable:
+    "This test type indicates the ecosystem tests were run for this package using the latest stable version of Qiskit",
+  standard:
+    "This test type means the ecosystem tests were run for this package using the Qiskit version specified in the package requirements",
+  "last passing version":
+    "This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package",
+};
 
-const tableData = computed(() => dataPerRow(props.filteredData))
+const tableData = computed(() => dataPerRow(props.filteredData));
 
-function dataPerRow (filteredData: Object[]): TableRowElement[][] {
+function dataPerRow(filteredData: Object[]): TableRowElement[][] {
   return filteredData.map(
     ({ passed, testType, packageVersion, logsLink, packageName }: any) => [
       {
         component: passed,
-        styles: passed ? '#42be65' : '#da1e28',
-        data: ''
+        styles: passed ? "#42be65" : "#da1e28",
+        data: "",
       },
       {
-        component: 'span',
+        component: "span",
         data: testType,
-        addTooltip: true
+        addTooltip: true,
       },
       {
-        component: 'span',
+        component: "span",
         data: packageVersion,
-        packageName
+        packageName,
       },
       {
-        component: 'link',
-        data: logsLink
-      }
+        component: "link",
+        data: logsLink,
+      },
     ]
-  )
+  );
 }
 </script>
 

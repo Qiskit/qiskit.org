@@ -20,8 +20,8 @@
       muted
       playsinline
     >
-      <source :src="visualResource" type="video/mp4">
-      <source :src="visualResource" type="video/ogg">
+      <source :src="visualResource" type="video/mp4" />
+      <source :src="visualResource" type="video/ogg" />
       Your browser does not support video.
     </video>
     <div
@@ -39,12 +39,14 @@ interface Props {
   description: string;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const isVideo = computed<boolean>(() => {
-  const extension = props.visualResource.substring(props.visualResource.length - 4)
-  return extension === '.mp4'
-})
+  const extension = props.visualResource.substring(
+    props.visualResource.length - 4
+  );
+  return extension === ".mp4";
+});
 </script>
 
 <style lang="scss" scoped>

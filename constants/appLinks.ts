@@ -1,152 +1,153 @@
 // TODO: Refactor central links definitions: https://github.com/Qiskit/qiskit.org/issues/1566
 
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 /**
  * Represent a general link use on the site
  */
 interface GeneralLink {
   /** The visible name of the link */
-  label: string
+  label: string;
   /** Where we want to go */
-  url: string
-  segment?: CtaClickedEventProp
+  url: string;
+  segment?: CtaClickedEventProp;
   /** Text shown when leaving the cursor on the link */
-  title?: string,
+  title?: string;
 }
 
 const EVENT_REQUEST_LINK: GeneralLink = {
-  url: 'https://airtable.com/shrRP0Td8TN4ttlFx',
-  label: 'Request an event'
-}
+  url: "https://airtable.com/shrRP0Td8TN4ttlFx",
+  label: "Request an event",
+};
 
-const seminarSeriesPlaylistUrl = 'https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2'
+const seminarSeriesPlaylistUrl =
+  "https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2";
 
 const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
-  label: 'Go to YouTube playlist',
+  label: "Go to YouTube playlist",
   segment: {
-    cta: 'youtube-playlist',
-    location: 'header'
-  }
-}
+    cta: "youtube-playlist",
+    location: "header",
+  },
+};
 
 const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
   url: seminarSeriesPlaylistUrl,
-  label: 'Explore Full Seminar Archive',
+  label: "Explore Full Seminar Archive",
   segment: {
-    cta: 'youtube-playlist',
-    location: 'past-events-section'
-  }
-}
+    cta: "youtube-playlist",
+    location: "past-events-section",
+  },
+};
 
 const LEARN_START_LEARNING: GeneralLink = {
-  url: '/learn/course/introduction-course',
-  label: 'Start learning',
+  url: "/learn/course/introduction-course",
+  label: "Start learning",
   segment: {
-    cta: 'start-learning',
-    location: 'header'
-  }
-}
+    cta: "start-learning",
+    location: "header",
+  },
+};
 
 enum StartLearningUrl {
-  Introduction = 'https://learn.qiskit.org/course/introduction',
-  BasicsQuantumInformation = 'https://learn.qiskit.org/course/basics',
-  QML = 'https://learn.qiskit.org/course/machine-learning',
-  SummerSchool2020 = 'https://learn.qiskit.org/summer-school/2020/',
-  SummerSchool2021 = 'https://learn.qiskit.org/summer-school/2021/',
-  SummerSchool2022 = 'https://learn.qiskit.org/summer-school/2022/'
+  Introduction = "https://learn.qiskit.org/course/introduction",
+  BasicsQuantumInformation = "https://learn.qiskit.org/course/basics",
+  QML = "https://learn.qiskit.org/course/machine-learning",
+  SummerSchool2020 = "https://learn.qiskit.org/summer-school/2020/",
+  SummerSchool2021 = "https://learn.qiskit.org/summer-school/2021/",
+  SummerSchool2022 = "https://learn.qiskit.org/summer-school/2022/",
 }
 
 enum PrerequisitesUrl {
-  SettingUp = 'https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook',
-  Introduction = 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+  SettingUp = "https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook",
+  Introduction = "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
 }
 
 enum QuantumStatesAndQubitsUrl {
-  Introduction = 'https://learn.qiskit.org/course/ch-states/introduction',
-  AtomsOfComputation = 'https://learn.qiskit.org/course/ch-states/the-atoms-of-computation',
-  RepresentingQubitStates = 'https://learn.qiskit.org/course/ch-states/representing-qubit-states',
-  SingleQubitGates = 'https://learn.qiskit.org/course/ch-states/single-qubit-gates',
-  CaseForQuantum = 'https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers'
+  Introduction = "https://learn.qiskit.org/course/ch-states/introduction",
+  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/the-atoms-of-computation",
+  RepresentingQubitStates = "https://learn.qiskit.org/course/ch-states/representing-qubit-states",
+  SingleQubitGates = "https://learn.qiskit.org/course/ch-states/single-qubit-gates",
+  CaseForQuantum = "https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers",
 }
 
 enum MultipleQubitsAndEntanglementUrl {
-  Introduction = 'https://learn.qiskit.org/course/ch-gates/introduction',
-  MultipleQubitsAndEntangledStates = 'https://learn.qiskit.org/course/ch-gates/multiple-qubits-and-entangled-states',
-  PhaseKickback = 'https://learn.qiskit.org/course/ch-gates/phase-kickback',
-  BasicCircuitIdentities = 'https://learn.qiskit.org/course/ch-gates/basic-circuit-identities',
-  ProvingUniversality = 'https://learn.qiskit.org/course/ch-gates/proving-universality',
-  ClassicalComputationOnAQuantumComputer = 'https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer'
+  Introduction = "https://learn.qiskit.org/course/ch-gates/introduction",
+  MultipleQubitsAndEntangledStates = "https://learn.qiskit.org/course/ch-gates/multiple-qubits-and-entangled-states",
+  PhaseKickback = "https://learn.qiskit.org/course/ch-gates/phase-kickback",
+  BasicCircuitIdentities = "https://learn.qiskit.org/course/ch-gates/basic-circuit-identities",
+  ProvingUniversality = "https://learn.qiskit.org/course/ch-gates/proving-universality",
+  ClassicalComputationOnAQuantumComputer = "https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer",
 }
 
 enum QuantumProtocolsAndQuantumAlgorithmsUrl {
-  DefiningQuantumCircuits = 'https://learn.qiskit.org/course/ch-algorithms/quantum-circuits',
-  DeutschJozsaAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/deutsch-jozsa-algorithm',
-  BernsteinVaziraniAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/bernstein-vazirani-algorithm',
-  SimonsAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/simons-algorithm',
-  QuantumFourierTransformation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-fourier-transform',
-  QuantumPhaseEstimation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-phase-estimation',
-  ShorsAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/shors-algorithm',
-  GroversAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/grovers-algorithm',
-  QuantumCounting = 'https://learn.qiskit.org/course/ch-algorithms/quantum-counting',
-  QuantumTeleportation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-teleportation',
-  SuperdenseCoding = 'https://learn.qiskit.org/course/ch-algorithms/superdense-coding',
-  QuantumKeyDistribution = 'https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution'
+  DefiningQuantumCircuits = "https://learn.qiskit.org/course/ch-algorithms/quantum-circuits",
+  DeutschJozsaAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/deutsch-jozsa-algorithm",
+  BernsteinVaziraniAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/bernstein-vazirani-algorithm",
+  SimonsAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/simons-algorithm",
+  QuantumFourierTransformation = "https://learn.qiskit.org/course/ch-algorithms/quantum-fourier-transform",
+  QuantumPhaseEstimation = "https://learn.qiskit.org/course/ch-algorithms/quantum-phase-estimation",
+  ShorsAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/shors-algorithm",
+  GroversAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/grovers-algorithm",
+  QuantumCounting = "https://learn.qiskit.org/course/ch-algorithms/quantum-counting",
+  QuantumTeleportation = "https://learn.qiskit.org/course/ch-algorithms/quantum-teleportation",
+  SuperdenseCoding = "https://learn.qiskit.org/course/ch-algorithms/superdense-coding",
+  QuantumKeyDistribution = "https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution",
 }
 
 enum QuantumHardwarePulsesUrl {
-  CalibratingQubitsWithQiskitPulse = 'https://learn.qiskit.org/course/quantum-hardware-pulses/calibrating-qubits-using-qiskit-pulse',
-  AccessingHigherEnergyStates = 'https://learn.qiskit.org/course/quantum-hardware-pulses/accessing-higher-energy-states-with-qiskit-pulse',
-  IntroductionToTransmonPhysics = 'https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics',
-  CircuitQuantumElectrodynamics = 'https://learn.qiskit.org/course/quantum-hardware-pulses/circuit-quantum-electrodynamics',
-  ExploringTheJaynesCummingsHamiltonianWithQiskitPulse = 'https://learn.qiskit.org/course/quantum-hardware-pulses/exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse',
-  MeasuringTheQubitacStakShift = 'https://learn.qiskit.org/course/quantum-hardware-pulses/measuring-the-qubit-ac-stark-shift',
-  HamiltonianTomography = 'https://learn.qiskit.org/course/quantum-hardware-pulses/hamiltonian-tomography'
+  CalibratingQubitsWithQiskitPulse = "https://learn.qiskit.org/course/quantum-hardware-pulses/calibrating-qubits-using-qiskit-pulse",
+  AccessingHigherEnergyStates = "https://learn.qiskit.org/course/quantum-hardware-pulses/accessing-higher-energy-states-with-qiskit-pulse",
+  IntroductionToTransmonPhysics = "https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics",
+  CircuitQuantumElectrodynamics = "https://learn.qiskit.org/course/quantum-hardware-pulses/circuit-quantum-electrodynamics",
+  ExploringTheJaynesCummingsHamiltonianWithQiskitPulse = "https://learn.qiskit.org/course/quantum-hardware-pulses/exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse",
+  MeasuringTheQubitacStakShift = "https://learn.qiskit.org/course/quantum-hardware-pulses/measuring-the-qubit-ac-stark-shift",
+  HamiltonianTomography = "https://learn.qiskit.org/course/quantum-hardware-pulses/hamiltonian-tomography",
 }
 
 enum QuantumAlgorithmsForApplications {
-  SolvingLinearSystemsOfEquationsUsingHHL = 'https://learn.qiskit.org/course/ch-applications/solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation',
-  SimulatingMoleculesUsingVQE = 'https://learn.qiskit.org/course/ch-applications/simulating-molecules-using-vqe',
-  SolvingCombinatorialOptimizationProblemsUsingQaoa = 'https://learn.qiskit.org/course/ch-applications/solving-combinatorial-optimization-problems-using-qaoa',
-  SolvingSatisfiabilityProblemsUsingGroversAlgorithm = 'https://learn.qiskit.org/course/ch-applications/solving-satisfiability-problems-using-grovers-algorithm',
-  HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit = 'https://learn.qiskit.org/course/ch-applications/hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit',
-  VariationalQuantumLinearSolver = 'https://learn.qiskit.org/course/ch-applications/the-variational-quantum-linear-solver',
-  FlexibleRepresentationOfQuantumImages = 'https://learn.qiskit.org/course/ch-applications/flexible-representation-of-quantum-images-frqi'
+  SolvingLinearSystemsOfEquationsUsingHHL = "https://learn.qiskit.org/course/ch-applications/solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation",
+  SimulatingMoleculesUsingVQE = "https://learn.qiskit.org/course/ch-applications/simulating-molecules-using-vqe",
+  SolvingCombinatorialOptimizationProblemsUsingQaoa = "https://learn.qiskit.org/course/ch-applications/solving-combinatorial-optimization-problems-using-qaoa",
+  SolvingSatisfiabilityProblemsUsingGroversAlgorithm = "https://learn.qiskit.org/course/ch-applications/solving-satisfiability-problems-using-grovers-algorithm",
+  HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit = "https://learn.qiskit.org/course/ch-applications/hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit",
+  VariationalQuantumLinearSolver = "https://learn.qiskit.org/course/ch-applications/the-variational-quantum-linear-solver",
+  FlexibleRepresentationOfQuantumImages = "https://learn.qiskit.org/course/ch-applications/flexible-representation-of-quantum-images-frqi",
 }
 
 enum QuantumHardwareCircuitsUrl {
-  Introduction = 'https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code',
-  MeasurementErrorMitigation = 'https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation',
-  RandomizedBenchmarking = 'https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking',
-  MeasuringQuantumVolume = 'https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume'
+  Introduction = "https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code",
+  MeasurementErrorMitigation = "https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation",
+  RandomizedBenchmarking = "https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking",
+  MeasuringQuantumVolume = "https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume",
 }
 
 enum GamesAndDemos {
-  BonusLevelSandbox = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox',
-  BonusLevelMakeYourOwnPuzzle = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-148-0',
-  Level5ProvingTheUniquenessOfQuantumVariables = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-153-0',
-  EstimatingPiUsingQPEA = 'https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm',
-  LocalRealityAndTheChshInequality = 'https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality',
-  WidgetsDemonstration = 'https://learn.qiskit.org/course/ch-demos/widgets-demonstration'
+  BonusLevelSandbox = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox",
+  BonusLevelMakeYourOwnPuzzle = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-148-0",
+  Level5ProvingTheUniquenessOfQuantumVariables = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-153-0",
+  EstimatingPiUsingQPEA = "https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm",
+  LocalRealityAndTheChshInequality = "https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality",
+  WidgetsDemonstration = "https://learn.qiskit.org/course/ch-demos/widgets-demonstration",
 }
 
 enum QuantumComputingLabs {
-  Lab1 = 'https://learn.qiskit.org/course/ch-labs/lab-1-quantum-circuits',
-  Lab2 = 'https://learn.qiskit.org/course/ch-labs/lab-2-single-qubit-gates',
-  Lab3 = 'https://learn.qiskit.org/course/ch-labs/lab-3-quantum-measurements',
-  Lab4 = 'https://learn.qiskit.org/course/ch-labs/lab-4-bell-ghz-circuit',
-  Lab5 = 'https://learn.qiskit.org/course/ch-labs/lab-5-accuracy-of-quantum-phase-estimation',
-  Lab6 = 'https://learn.qiskit.org/course/ch-labs/lab-6-iterative-phase-estimation-algorithm',
-  Lab7 = 'https://learn.qiskit.org/course/ch-labs/lab-7-scalable-shors-algorithm',
-  Lab8 = 'https://learn.qiskit.org/course/ch-labs/lab-8-grovers-search-with-an-unknown-number-of-solutions',
-  Lab9 = 'https://learn.qiskit.org/course/ch-labs/lab-9-quantum-simulation-as-a-search-algorithm',
+  Lab1 = "https://learn.qiskit.org/course/ch-labs/lab-1-quantum-circuits",
+  Lab2 = "https://learn.qiskit.org/course/ch-labs/lab-2-single-qubit-gates",
+  Lab3 = "https://learn.qiskit.org/course/ch-labs/lab-3-quantum-measurements",
+  Lab4 = "https://learn.qiskit.org/course/ch-labs/lab-4-bell-ghz-circuit",
+  Lab5 = "https://learn.qiskit.org/course/ch-labs/lab-5-accuracy-of-quantum-phase-estimation",
+  Lab6 = "https://learn.qiskit.org/course/ch-labs/lab-6-iterative-phase-estimation-algorithm",
+  Lab7 = "https://learn.qiskit.org/course/ch-labs/lab-7-scalable-shors-algorithm",
+  Lab8 = "https://learn.qiskit.org/course/ch-labs/lab-8-grovers-search-with-an-unknown-number-of-solutions",
+  Lab9 = "https://learn.qiskit.org/course/ch-labs/lab-9-quantum-simulation-as-a-search-algorithm",
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
-  url: 'https://quantum-computing.ibm.com/lab',
-  label: 'IBM Quantum Lab'
-}
+  url: "https://quantum-computing.ibm.com/lab",
+  label: "IBM Quantum Lab",
+};
 
 export {
   GeneralLink,
@@ -164,5 +165,5 @@ export {
   QuantumHardwareCircuitsUrl,
   QuantumComputingLabs,
   GamesAndDemos,
-  IBM_Q_EXPERIENCE
-}
+  IBM_Q_EXPERIENCE,
+};

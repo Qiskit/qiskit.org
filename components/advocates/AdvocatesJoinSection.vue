@@ -22,39 +22,42 @@
 </template>
 
 <script setup lang="ts">
-import CompactFeature from '~/components/ui/CompactFeature.vue'
-import { GeneralLink } from '~/constants/appLinks'
+import CompactFeature from "~/components/ui/CompactFeature.vue";
+import { GeneralLink } from "~/constants/appLinks";
 
-type Benefit = Pick<CompactFeature, 'icon'|'title'|'description'>
+type Benefit = Pick<CompactFeature, "icon" | "title" | "description">;
 
 const advocateBenefits: Benefit[] = [
   {
-    icon: 'high-five.svg',
-    title: 'Network with experts and enthusiasts',
-    description: 'Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.'
+    icon: "high-five.svg",
+    title: "Network with experts and enthusiasts",
+    description:
+      "Advocates will be added to a group of quantum experts and will be a part of regular information sharing sessions.",
   },
   {
-    icon: 'global-network.svg',
-    title: 'Access to Qiskit core members and projects',
-    description: 'Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.'
+    icon: "global-network.svg",
+    title: "Access to Qiskit core members and projects",
+    description:
+      "Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas.",
   },
   {
-    icon: 'location.svg',
-    title: 'Invitation to events',
-    description: 'Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.'
-  }
-]
+    icon: "location.svg",
+    title: "Invitation to events",
+    description:
+      "Active Qiskit Advocates will be invited to attend global events created for the quantum computing community.",
+  },
+];
 
 const joinAction: GeneralLink = {
-  url: 'https://qisk.it/advocateapplication',
-  label: 'Join the program',
-  segment: { cta: 'join-the-program', location: 'join-section' }
-}
+  url: "https://qisk.it/advocateapplication",
+  label: "Join the program",
+  segment: { cta: "join-the-program", location: "join-section" },
+};
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@import '~carbon-components/scss/globals/scss/typography';
+@import "~carbon-components/scss/globals/scss/typography";
 
 .join-section {
   &__feature {

@@ -1,11 +1,11 @@
 <template>
   <section class="early-access-section">
     <div class="early-access-section__container">
-      <h2>
-        Join Us
-      </h2>
+      <h2>Join Us</h2>
       <p class="early-access-section__description">
-        We are thrilled to ask you to join this journey to revolutionize quantum devices. We will work closely to develop Metal and design quantum devices with it.
+        We are thrilled to ask you to join this journey to revolutionize quantum
+        devices. We will work closely to develop Metal and design quantum
+        devices with it.
       </p>
       <AppCta v-bind="joinSlackLink" theme="dark" />
     </div>
@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 const joinSlackLink = {
-  url: 'https://ibm.co/joinqiskitslack',
-  label: 'Stay in touch through Slack'
-}
+  url: "https://ibm.co/joinqiskitslack",
+  label: "Stay in touch through Slack",
+};
 </script>
 
 <style lang="scss" scoped>

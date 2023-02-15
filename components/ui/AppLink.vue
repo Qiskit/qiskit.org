@@ -1,21 +1,17 @@
 <template>
-  <UiBasicLink
-    class="app-link"
-    :class="`app-link_${kind}`"
-    v-bind="$attrs"
-  >
+  <UiBasicLink class="app-link" :class="`app-link_${kind}`" v-bind="$attrs">
     <slot />
   </UiBasicLink>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  kind?: 'primary'|'secondary'
+  kind?: "primary" | "secondary";
 }
 
 withDefaults(defineProps<Props>(), {
-  kind: 'primary'
-})
+  kind: "primary",
+});
 </script>
 
 <style lang="scss" scoped>
@@ -57,7 +53,5 @@ withDefaults(defineProps<Props>(), {
       color: qiskit.$link-visited-color-secondary;
     }
   }
-
 }
-
 </style>

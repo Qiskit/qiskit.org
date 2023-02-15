@@ -1,10 +1,6 @@
 <template>
   <article class="compact-feature">
-    <img
-      class="compact-feature__icon"
-      :src="`/images/icons/${icon}`"
-      alt=""
-    >
+    <img class="compact-feature__icon" :src="`/images/icons/${icon}`" alt="" />
     <h3 class="h4 compact-feature__title">
       {{ title }}
     </h3>
@@ -16,16 +12,16 @@
 
 <script setup lang="ts">
 interface Props {
-  description?: string
-  icon?: string
-  title?: string
+  description?: string;
+  icon?: string;
+  title?: string;
 }
 
 withDefaults(defineProps<Props>(), {
-  description: '',
-  icon: '',
-  title: ''
-})
+  description: "",
+  icon: "",
+  title: "",
+});
 </script>
 
 <style lang="scss" scoped>

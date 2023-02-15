@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import "@qiskit/web-components/ui-shell";
 
-const { trackClickEvent } = useSegment()
+const { trackClickEvent } = useSegment();
 
 function onClick(e: CustomEvent) {
   trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");

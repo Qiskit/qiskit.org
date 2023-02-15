@@ -25,65 +25,65 @@ const props = withDefaults(defineProps<Props>(), {
   persistence: 2000,
   startingIndex: 0,
   typingDelay: 100,
-  values: () => []
-})
+  values: () => [],
+});
 
-const content = ref('')
-const currentValueIdx = ref(0)
-const showCursor = ref(false)
+const content = ref("");
+const currentValueIdx = ref(0);
+const showCursor = ref(false);
 
-const targetValue = computed(() => props.values[currentValueIdx.value])
+const targetValue = computed(() => props.values[currentValueIdx.value]);
 
-const contentLength = computed(() => content.value.length)
+const contentLength = computed(() => content.value.length);
 
-function typeText () {
-  const targetCompleted = contentLength.value === targetValue.value.length
+function typeText() {
+  const targetCompleted = contentLength.value === targetValue.value.length;
 
   if (targetCompleted) {
-    eraseCurrentValue()
+    eraseCurrentValue();
   } else {
-    content.value = targetValue.value.substring(0, contentLength.value + 1)
-    typeNextCharacter()
+    content.value = targetValue.value.substring(0, contentLength.value + 1);
+    typeNextCharacter();
   }
 }
 
-function eraseText () {
-  const noContent = contentLength.value === 0
+function eraseText() {
+  const noContent = contentLength.value === 0;
 
   if (noContent) {
-    typeNextValue()
+    typeNextValue();
   } else {
-    content.value = content.value.substring(0, contentLength.value - 1)
-    eraseNextCharacter()
+    content.value = content.value.substring(0, contentLength.value - 1);
+    eraseNextCharacter();
   }
 }
 
-function typeNextValue () {
-  showCursor.value = true
-  currentValueIdx.value = (currentValueIdx.value + 1) % props.values.length
+function typeNextValue() {
+  showCursor.value = true;
+  currentValueIdx.value = (currentValueIdx.value + 1) % props.values.length;
   setTimeout(() => {
-    showCursor.value = false
-    typeText()
-  }, props.newValueDelay)
+    showCursor.value = false;
+    typeText();
+  }, props.newValueDelay);
 }
 
-function typeNextCharacter () {
-  setTimeout(typeText, props.typingDelay)
+function typeNextCharacter() {
+  setTimeout(typeText, props.typingDelay);
 }
 
-function eraseCurrentValue () {
-  setTimeout(eraseText, props.persistence)
+function eraseCurrentValue() {
+  setTimeout(eraseText, props.persistence);
 }
 
-function eraseNextCharacter () {
-  setTimeout(eraseText, props.erasingDelay)
+function eraseNextCharacter() {
+  setTimeout(eraseText, props.erasingDelay);
 }
 
 onMounted(() => {
-  content.value = props.values[props.startingIndex] || ''
-  currentValueIdx.value = props.startingIndex
-  eraseCurrentValue()
-})
+  content.value = props.values[props.startingIndex] || "";
+  currentValueIdx.value = props.startingIndex;
+  eraseCurrentValue();
+});
 </script>
 
 <style lang="scss" scoped>

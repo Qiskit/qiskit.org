@@ -4,9 +4,9 @@
  * https://segment-standards.prod.ddp.cis.ibm.net/events/performed-search#IBM%20Cloud%20Common
  */
 interface IbmCloudCommonEventSegmentSchema {
-    category: string;
-    productTitle: string;
-    uiElement?: string;
+  category: string;
+  productTitle: string;
+  uiElement?: string;
 }
 
 /**
@@ -15,9 +15,9 @@ interface IbmCloudCommonEventSegmentSchema {
  * https://segment-standards.prod.ddp.cis.ibm.net/events/cta-clicked
  */
 export interface CtaClickedEventSegmentSchema
-extends IbmCloudCommonEventSegmentSchema {
-    CTA: string;
-    location: string;
+  extends IbmCloudCommonEventSegmentSchema {
+  CTA: string;
+  location: string;
 }
 
 /**
@@ -25,8 +25,8 @@ extends IbmCloudCommonEventSegmentSchema {
  * Based on the interface CtaClickedEventSegmentSchema.
  */
 export interface CtaClickedEventProp {
-    cta: string;
-    location: string;
+  cta: string;
+  location: string;
 }
 
 /**
@@ -35,6 +35,6 @@ export interface CtaClickedEventProp {
  * https://segment-standards.prod.ddp.cis.ibm.net/events/performed-search
  */
 export interface PerformedSearchEventSegmentSchema
-extends IbmCloudCommonEventSegmentSchema {
-    field: string;
+  extends IbmCloudCommonEventSegmentSchema {
+  field: string;
 }

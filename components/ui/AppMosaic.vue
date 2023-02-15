@@ -39,21 +39,21 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 export type MosaicElement = {
-  position: string,
-  title: string,
-  description: string,
-  image: string,
-  cta?: GeneralLink
-}
+  position: string;
+  title: string;
+  description: string;
+  image: string;
+  cta?: GeneralLink;
+};
 
 interface Props {
-  mosaicElements: MosaicElement[]
+  mosaicElements: MosaicElement[];
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -68,18 +68,19 @@ defineProps<Props>()
     grid-template-rows: 29.5rem minmax(16rem, auto);
     grid-template-areas:
       "a b c"
-      "d d c"
-    ;
+      "d d c";
     justify-items: stretch;
 
     @include carbon.breakpoint-between(md, lg) {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: minmax(26rem, auto) minmax(12rem, auto) minmax(12rem, auto);
+      grid-template-rows: minmax(26rem, auto) minmax(12rem, auto) minmax(
+          12rem,
+          auto
+        );
       grid-template-areas:
         "a b"
         "c c"
-        "d d"
-      ;
+        "d d";
     }
 
     @include carbon.breakpoint-down(md) {
@@ -89,8 +90,7 @@ defineProps<Props>()
         "a"
         "b"
         "c"
-        "d"
-      ;
+        "d";
     }
   }
 
@@ -172,7 +172,8 @@ defineProps<Props>()
       @include carbon.breakpoint-down(lg) {
         padding: carbon.$spacing-05;
 
-        &_third, &_fourth {
+        &_third,
+        &_fourth {
           flex: 1 0 0;
         }
       }

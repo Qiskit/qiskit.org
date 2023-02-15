@@ -9,8 +9,8 @@
 // import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 useHead({
-  title: 'Prerequisites'
-})
+  title: "Prerequisites",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Prerequisites'

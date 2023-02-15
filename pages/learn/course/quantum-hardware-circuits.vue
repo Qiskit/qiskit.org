@@ -8,8 +8,8 @@
 // import { GeneralLink, QuantumHardwareCircuitsUrl } from '~/constants/appLinks'
 
 useHead({
-  title: 'Investigating Quantum Hardware Using Quantum Circuits'
-})
+  title: "Investigating Quantum Hardware Using Quantum Circuits",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Investigating Quantum Hardware Using Quantum Circuits'

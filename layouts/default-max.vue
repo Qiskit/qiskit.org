@@ -13,7 +13,7 @@
 import "@qiskit/web-components/ui-shell";
 
 const route = useRoute();
-const { trackClickEvent } = useSegment()
+const { trackClickEvent } = useSegment();
 
 function onClick(e: CustomEvent) {
   trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");

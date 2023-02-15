@@ -1,13 +1,10 @@
 <template>
   <article class="accordion-layout">
-    <img :src="image" class="accordion-layout__image">
+    <img :src="image" class="accordion-layout__image" />
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <AppCta
-      kind="ghost"
-      v-bind="cta"
-    />
+    <AppCta kind="ghost" v-bind="cta" />
   </article>
 </template>
 
@@ -17,15 +14,15 @@
 // removing the @Prop decorator in favour of:
 // https://class-component.vuejs.org/guide/props-definition.html
 export interface AccordionLayoutProps {
-  image: string,
-  description: string,
+  image: string;
+  description: string;
   cta: {
-    url: string,
-    label: string
-  }
+    url: string;
+    label: string;
+  };
 }
 
-defineProps<AccordionLayoutProps>()
+defineProps<AccordionLayoutProps>();
 </script>
 
 <style lang="scss" scoped>

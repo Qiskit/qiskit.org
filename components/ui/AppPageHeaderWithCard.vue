@@ -16,10 +16,7 @@
         <aside class="bx--col-lg-5 bx--col-md-4 app-page-header__aside">
           <div>
             <div class="app-page-header__card-title-wrapper">
-              <div
-                class="app-page-header__card-title"
-                v-text="cardTitle"
-              />
+              <div class="app-page-header__card-title" v-text="cardTitle" />
             </div>
             <slot name="card" />
           </div>
@@ -30,14 +27,14 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 interface Props {
-  cardTitle: string
-  cta: GeneralLink
+  cardTitle: string;
+  cta: GeneralLink;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -45,7 +42,11 @@ defineProps<Props>()
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-page-header {
-  @include responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg", auto, 28rem);
+  @include responsive-grid-bg-strip(
+    "/images/grid/grid-hero-learn.svg",
+    auto,
+    28rem
+  );
 
   padding-top: carbon.$spacing-12;
 
@@ -84,7 +85,10 @@ defineProps<Props>()
     }
 
     @include carbon.breakpoint-up(lg) {
-      $grid-columns: math.div(6, 11); // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(
+        6,
+        11
+      ); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }

@@ -1,15 +1,13 @@
 <template>
   <section class="prerequisite-material-section">
-    <h2>
-      Prerequisite material
-    </h2>
+    <h2>Prerequisite material</h2>
     <div class="prerequisite-material-section__cards">
       <AppDescriptionCard
         v-for="{ title, description, segment, url } in data"
         :key="title"
         :description="description"
         class="prerequisite-material-section__card"
-        :cta="{ label: 'Go to page', segment, url}"
+        :cta="{ label: 'Go to page', segment, url }"
         :title="title"
       />
     </div>
@@ -17,13 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { Prerequisite } from 'constants/learnContent'
+import { Prerequisite } from "constants/learnContent";
 
 interface Props {
-  data: Prerequisite[]
+  data: Prerequisite[];
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>

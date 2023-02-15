@@ -98,11 +98,11 @@ const description =
 const image = "/images/events/fall-fest/fall-fest.png";
 
 definePageMeta({
-  layout: 'default-max'
+  layout: "default-max",
 });
 
 useHead({
-  title: title,
+  title,
   meta: [
     {
       name: "description",

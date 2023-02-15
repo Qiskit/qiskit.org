@@ -1,11 +1,10 @@
 <template>
   <section class="building-section">
     <div class="building-section__container">
-      <h2>
-        Building together
-      </h2>
+      <h2>Building together</h2>
       <p class="building-section__text">
-        Whether you are learning, teaching, or performing scientific research, we hope Metal will get you there faster.
+        Whether you are learning, teaching, or performing scientific research,
+        we hope Metal will get you there faster.
       </p>
       <div class="building-section__content">
         <div class="building-section__copy">
@@ -13,28 +12,43 @@
             Call for community participation
           </h3>
           <p class="building-section__text">
-            This may just be the beginning, but we think Qiskit Metal has immense potential. We hope to form this software into something that is usable by superconducting quantum hardware designers across industry and academia, and perhaps even for other qubit architectures. Over time, we hope this project will become the gateway for conventional microchip designers to get their feet wet designing quantum processors. And we hope that soon, quantum hardware experts will be able to write their own quantum analysis plugins and run them as their own Qiskit Metal backends.
+            This may just be the beginning, but we think Qiskit Metal has
+            immense potential. We hope to form this software into something that
+            is usable by superconducting quantum hardware designers across
+            industry and academia, and perhaps even for other qubit
+            architectures. Over time, we hope this project will become the
+            gateway for conventional microchip designers to get their feet wet
+            designing quantum processors. And we hope that soon, quantum
+            hardware experts will be able to write their own quantum analysis
+            plugins and run them as their own Qiskit Metal backends.
           </p>
-          <h3 class="building-section__subtitle">
-            Open source
-          </h3>
+          <h3 class="building-section__subtitle">Open source</h3>
           <p class="building-section__text">
-            Qiskit Metal is a visionary work in progress in its early development stages. We're working toward a vision—a quantum design and analysis platform built from the ground up specifically for quantum hardware. It is crucial that we keep this project open source in order to grow Qiskit Metal into the software that will be most useful for quantum hardware engineers around the world and for the innovation in and growth of the field as a whole. If Qiskit Metal doesn't have what you want, then you extend Metal to build it!
+            Qiskit Metal is a visionary work in progress in its early
+            development stages. We're working toward a vision—a quantum design
+            and analysis platform built from the ground up specifically for
+            quantum hardware. It is crucial that we keep this project open
+            source in order to grow Qiskit Metal into the software that will be
+            most useful for quantum hardware engineers around the world and for
+            the innovation in and growth of the field as a whole. If Qiskit
+            Metal doesn't have what you want, then you extend Metal to build it!
           </p>
-          <h3 class="building-section__subtitle">
-            Education
-          </h3>
+          <h3 class="building-section__subtitle">Education</h3>
           <!-- Disabling linter to keep the quotations and phrasing content together. -->
           <!-- eslint-disable vue/multiline-html-element-content-newline -->
           <p class="building-section__text">
-            Learn more about the physics behind Qiskit Metal and qubit design from the
+            Learn more about the physics behind Qiskit Metal and qubit design
+            from the
             <UiAppLink
               url="/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020"
-            >Introduction to Quantum Computing and Quantum Hardware</UiAppLink>
-            summer school lectures series by Zlatko Minev on superconducting qubits. Also, check out the open source
+              >Introduction to Quantum Computing and Quantum Hardware</UiAppLink
+            >
+            summer school lectures series by Zlatko Minev on superconducting
+            qubits. Also, check out the open source
             <UiAppLink
               url="https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics"
-            >Qiskit textbook</UiAppLink>
+              >Qiskit textbook</UiAppLink
+            >
             chapters on quantum devices and their control.
           </p>
           <AppCta v-bind="stayInTouchLink" theme="dark" />
@@ -45,7 +59,7 @@
             class="building-section__media-img"
             src="/images/metal/whiteboard-dark.png"
             alt="Sketched illustration of a group standing in front of a whiteboard."
-          >
+          />
         </div>
       </div>
     </div>
@@ -54,23 +68,23 @@
 
 <script setup lang="ts">
 const stayInTouchLink = {
-  url: 'http://qisk.it/metal',
-  label: 'Join tutorials'
-}
+  url: "http://qisk.it/metal",
+  label: "Join tutorials",
+};
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
 .building-section {
-  @include responsive-grid-bg('/images/grid/grid-right-dark.svg', 36rem);
+  @include responsive-grid-bg("/images/grid/grid-right-dark.svg", 36rem);
 
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;
   padding-bottom: carbon.$spacing-10;
 
   @include carbon.breakpoint-down(lg) {
-    background-position: right -.5rem bottom -2px;
+    background-position: right -0.5rem bottom -2px;
   }
 
   @include carbon.breakpoint-down(md) {

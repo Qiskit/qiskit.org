@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
   title: string;
@@ -25,8 +25,8 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  segment: undefined
-})
+  segment: undefined,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -40,7 +40,8 @@ withDefaults(defineProps<Props>(), {
   flex-direction: column;
 
   &__body {
-    padding: carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-07 carbon.$spacing-05;
+    padding: carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-07
+      carbon.$spacing-05;
   }
 
   &__footer {
@@ -51,10 +52,10 @@ withDefaults(defineProps<Props>(), {
 </style>
 
 <style lang="scss" scoped>
-  .syllabus-card {
-    .app-cta {
-      width: 100%;
-      max-width: 50%;
-    }
+.syllabus-card {
+  .app-cta {
+    width: 100%;
+    max-width: 50%;
   }
-  </style>
+}
+</style>

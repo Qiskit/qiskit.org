@@ -14,26 +14,30 @@
 
 <script setup lang="ts">
 type multiSelectOption = {
-  label: string,
-  value: string,
-  name: string
-}
+  label: string;
+  value: string;
+  name: string;
+};
 
 interface Props {
-  label: string,
-  options: string[],
-  value: string[]
+  label: string;
+  options: string[];
+  value: string[];
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const formatedOptions = computed(() => formatOptions(props.options))
+const formatedOptions = computed(() => formatOptions(props.options));
 
-const theme = ref('light')
-const feedback = ref('fixed')
+const theme = ref("light");
+const feedback = ref("fixed");
 
-function formatOptions (optionsList: any): Array<multiSelectOption> {
-  return optionsList.map((item: string) => ({ label: item, value: item, name: item }))
+function formatOptions(optionsList: any): Array<multiSelectOption> {
+  return optionsList.map((item: string) => ({
+    label: item,
+    value: item,
+    name: item,
+  }));
 }
 </script>
 
@@ -41,46 +45,46 @@ function formatOptions (optionsList: any): Array<multiSelectOption> {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-  .app-multi-select {
-    & .bx--list-box--light,
-    & .bx--list-box__menu {
-      background-color: qiskit.$background-color-white;
-      border-bottom-color: $cool-gray-20;
-    }
-
-    .bx--list-box__menu-item {
-      background-color: qiskit.$background-color-lighter;
-    }
-
-    .bx--list-box__menu-icon {
-      right: 0.8rem;
-    }
-
-    .bx--list-box__menu-icon > svg {
-      fill: $black-100;
-    }
-
-    .bx--list-box--expanded:hover.bx--list-box--light:hover {
-      background-color: qiskit.$background-color-lighter;
-    }
-
-    .bx--list-box__menu-item--highlighted {
-      background-color: qiskit.$background-color-light;
-    }
-
-    .bx--tag--filter {
-      background-color: qiskit.$tag-background-color;
-      color: qiskit.$tag-text-color;
-      margin-left: 0;
-      margin-right: carbon.$spacing-05;
-    }
-
-    .bx--tag--high-contrast .bx--tag__close-icon:hover {
-      background-color: qiskit.$tag-background-color;
-    }
-
-    .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
-      color: $black-100;
-    }
+.app-multi-select {
+  & .bx--list-box--light,
+  & .bx--list-box__menu {
+    background-color: qiskit.$background-color-white;
+    border-bottom-color: $cool-gray-20;
   }
+
+  .bx--list-box__menu-item {
+    background-color: qiskit.$background-color-lighter;
+  }
+
+  .bx--list-box__menu-icon {
+    right: 0.8rem;
+  }
+
+  .bx--list-box__menu-icon > svg {
+    fill: $black-100;
+  }
+
+  .bx--list-box--expanded:hover.bx--list-box--light:hover {
+    background-color: qiskit.$background-color-lighter;
+  }
+
+  .bx--list-box__menu-item--highlighted {
+    background-color: qiskit.$background-color-light;
+  }
+
+  .bx--tag--filter {
+    background-color: qiskit.$tag-background-color;
+    color: qiskit.$tag-text-color;
+    margin-left: 0;
+    margin-right: carbon.$spacing-05;
+  }
+
+  .bx--tag--high-contrast .bx--tag__close-icon:hover {
+    background-color: qiskit.$tag-background-color;
+  }
+
+  .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
+    color: $black-100;
+  }
+}
 </style>

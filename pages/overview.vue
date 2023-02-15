@@ -52,14 +52,14 @@
 </template>
 
 <script setup lang="ts">
-import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
+import QiskitPage from "~/components/logic/QiskitPage.vue";
+import { ContentAccordionTab } from "~/components/overview/ContentAccordion.vue";
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  OverviewSubSection
-} from '~/constants/overviewContent'
-import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections';
+  OverviewSubSection,
+} from "~/constants/overviewContent";
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({
   layout: "default-max",
@@ -75,12 +75,12 @@ useHead({
 // const contentSections = CONTENT_SECTIONS;
 
 // TODO: Check if this is working correctly
-const { activeSection } = useScrollBetweenSections()
+const { activeSection } = useScrollBetweenSections();
 
 const quickStartLink = {
-  url: '#quick-start',
-  label: 'Get Started'
-}
+  url: "#quick-start",
+  label: "Get Started",
+};
 
 // function asTabs(
 //   subsections: Array<OverviewSubSection>

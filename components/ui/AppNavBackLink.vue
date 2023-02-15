@@ -13,13 +13,13 @@
 <script setup lang="ts">
 interface Props {
   label: string;
-  theme?: 'light'|'dark';
+  theme?: "light" | "dark";
   url: string;
 }
 
 withDefaults(defineProps<Props>(), {
-  theme: 'light'
-})
+  theme: "light",
+});
 </script>
 
 <style lang="scss" scoped>

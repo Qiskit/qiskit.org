@@ -5,11 +5,7 @@
     </UiAppLink>
     <div class="qiskit-version-info__content">
       <div class="qiskit-version-info__version-string">
-        <UiAppLink
-          class="code"
-          kind="secondary"
-          v-bind="githubRepoLink"
-        >
+        <UiAppLink class="code" kind="secondary" v-bind="githubRepoLink">
           qiskit {{ version }}
         </UiAppLink>
       </div>
@@ -28,15 +24,15 @@
 </template>
 
 <script setup lang="ts">
-import { GITHUB_REPOSITORY } from '~/constants/menuLinks'
+import { GITHUB_REPOSITORY } from "~/constants/menuLinks";
 
 interface Props {
-  version: string
+  version: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 
-const githubRepoLink = GITHUB_REPOSITORY
+const githubRepoLink = GITHUB_REPOSITORY;
 </script>
 
 <style lang="scss" scoped>

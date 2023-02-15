@@ -7,8 +7,8 @@
 // import { GeneralLink, StartLearningUrl } from '~/constants/appLinks'
 
 useHead({
-  title: 'Quantum machine learning course'
-})
+  title: "Quantum machine learning course",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Quantum machine learning'

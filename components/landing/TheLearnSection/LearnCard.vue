@@ -1,17 +1,17 @@
 <template>
   <article class="learn-card">
     <div class="bx--col-max-3 bx--col-lg-4 bx--col-md-3 learn-card__content">
-      <div class="bx--aspect-ratio bx--aspect-ratio--4x3 learn-card__content__aspect-ratio">
-        <div class="bx--aspect-ratio--object learn-card__content__aspect-ratio__object">
+      <div
+        class="bx--aspect-ratio bx--aspect-ratio--4x3 learn-card__content__aspect-ratio"
+      >
+        <div
+          class="bx--aspect-ratio--object learn-card__content__aspect-ratio__object"
+        >
           <p class="learn-card__description">
-            Gain access to a free, digital textbook to study the concepts of quantum
-            computing using Qiskit.
+            Gain access to a free, digital textbook to study the concepts of
+            quantum computing using Qiskit.
           </p>
-          <AppCta
-            class="learn-card__cta"
-            kind="ghost"
-            v-bind="learnLink"
-          />
+          <AppCta class="learn-card__cta" kind="ghost" v-bind="learnLink" />
         </div>
       </div>
     </div>
@@ -23,13 +23,13 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 const learnLink: GeneralLink = {
-  url: '/learn',
-  label: 'Get learning',
-  segment: { cta: 'get-learning', location: 'learn-card' }
-}
+  url: "/learn",
+  label: "Get learning",
+  segment: { cta: "get-learning", location: "learn-card" },
+};
 </script>
 
 <style lang="scss" scoped>

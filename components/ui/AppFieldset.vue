@@ -9,10 +9,10 @@
 
 <script setup lang="ts">
 interface Props {
-  label: string
+  label: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss">

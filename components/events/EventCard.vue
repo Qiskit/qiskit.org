@@ -34,29 +34,29 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
-  types?: string[]
-  title: string
-  image: string
-  institution?: string
-  location: string
-  date: string
-  time: string
-  to: string
-  ctaLabel?: string
-  segment?: CtaClickedEventProp | undefined
-  verticalLayout?: boolean
+  types?: string[];
+  title: string;
+  image: string;
+  institution?: string;
+  location: string;
+  date: string;
+  time: string;
+  to: string;
+  ctaLabel?: string;
+  segment?: CtaClickedEventProp | undefined;
+  verticalLayout?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
   types: () => [],
-  institution: '',
-  ctaLabel: 'Join the event',
+  institution: "",
+  ctaLabel: "Join the event",
   segment: undefined,
-  verticalLayout: false
-})
+  verticalLayout: false,
+});
 </script>
 
 <style lang="scss" scoped>
