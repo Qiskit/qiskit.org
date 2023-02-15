@@ -135,7 +135,6 @@
 // import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
 // import OutlookCalendarInstructions from '~/components/events/calendars/OutlookInstructions.vue'
 // import AppleCalendarInstructions from '~/components/events/calendars/AppleInstructions.vue'
-// import QiskitPage from '~/components/logic/QiskitPage.vue'
 // import {
 //   CommunityEvent,
 //   WORLD_REGION_OPTIONS,
@@ -309,8 +308,8 @@ useHead({
 //   activeSet.value = selectedTab === 0 ? 'upcoming' : 'past'
 // }
 
-// TODO: Refactor "logic" pages
-// export default class EventsPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class EventsPage {
 //   const routeName = 'events'
 // }
 </script>

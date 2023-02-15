@@ -118,7 +118,6 @@
 <script setup lang="ts">
 // TODO: Integrate old code
 // import { Component } from "vue-property-decorator";
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
 // import { GeneralLink } from "~/constants/appLinks";
 
 definePageMeta({
@@ -210,8 +209,8 @@ useHead({
 //   return tierFilters.value.includes(filterValue);
 // }
 
-// TODO: Refactor "logic" pages
-// export default class EcosystemPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class EcosystemPage {
 //   routeName: string = 'ecosystem';
 
 //   joinAction: GeneralLink = {

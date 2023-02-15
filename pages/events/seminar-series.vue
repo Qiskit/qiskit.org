@@ -93,7 +93,6 @@
 
 <script setup lang="ts">
 // TODO: Integrate old code
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
 // import { MosaicElement } from "~/components/ui/AppMosaic.vue";
 // import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 // import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
@@ -303,8 +302,8 @@ useHead({
 //   ]);
 // }
 
-// TODO: Refactor "logic" pages
-// export default class SeminarSeriesPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class SeminarSeriesPage {
 //   routeName = 'seminar-series'
 // }
 </script>

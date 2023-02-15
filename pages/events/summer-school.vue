@@ -86,7 +86,6 @@
 
 <script setup lang="ts">
 // TODO: Integrate old code
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
 // import {
 //   header,
 //   mosaic,
@@ -162,8 +161,8 @@ useHead({
 // const agendaData = agenda;
 // const helpfulResourcesData = helpfulResources;
 
-// TODO: Refactor "logic" pages
-// export default class SummerSchoolPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class SummerSchoolPage {
 //   routeName = 'summer-school'
 // }
 </script>

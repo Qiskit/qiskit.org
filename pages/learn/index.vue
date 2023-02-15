@@ -25,7 +25,6 @@
 <script setup lang="ts">
 // TODO: Integrate old code
 // import "@qiskit/web-components/components/banner";
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
 // import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 // import { SOCIAL_MEDIA } from "~/constants/menuLinks";
 
@@ -84,8 +83,8 @@ useHead({
 //   },
 // ];
 
-// TODO: Refactor "logic" pages
-// export default class LearnPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class LearnPage {
 //   routeName: string = 'learn'
 // }
 </script>

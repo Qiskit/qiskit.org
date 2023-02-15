@@ -40,7 +40,6 @@
 </template>
 
 <script setup lang="ts">
-import QiskitPage from "./QiskitPage.vue";
 import { GeneralLink } from "~/constants/appLinks";
 import { Course, Prerequisite } from "~/constants/learnContent";
 
@@ -48,7 +47,7 @@ definePageMeta({
   layout: "default-max",
 });
 
-export default abstract class CourseOverviewPage extends QiskitPage {
+export default abstract class CourseOverviewPage {
   abstract routeName: string;
 
   abstract headerTitle: string;

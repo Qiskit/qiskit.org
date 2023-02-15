@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 // TODO: Integrate old code
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
 
 definePageMeta({
   layout: "metal",
@@ -24,8 +23,8 @@ useHead({
   title: "Metal",
 });
 
-// TODO: Refactor "logic" pages
-// export default class MetalPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class MetalPage {
 //   routeName = 'metal'
 // }
 </script>
