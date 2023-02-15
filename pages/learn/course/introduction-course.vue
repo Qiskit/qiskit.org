@@ -31,7 +31,7 @@ useHead({
 });
 
 // TODO: Refactor tracking
-const routeName: string = "introduction-course";
+const routeName = "introduction-course";
 
 const headerTitle = "Introduction to Quantum Computing";
 const headerDescription = [
@@ -60,7 +60,7 @@ const startLearningCTA: GeneralLink = {
 };
 
 const references: string[] = [];
-const externalRecommendedReadingsPreamble: string = "";
+const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
     url: "https://math.mit.edu/~gs/linearalgebra/",

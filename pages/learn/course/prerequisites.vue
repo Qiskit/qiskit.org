@@ -50,7 +50,7 @@ const startLearningCTA: GeneralLink = {
 };
 
 const references: string[] = [];
-const externalRecommendedReadingsPreamble: string = "";
+const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
     url: "https://math.mit.edu/~gs/linearalgebra/",

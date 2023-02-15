@@ -50,7 +50,7 @@ const startLearningCTA: GeneralLink = {
 };
 
 const references: string[] = [];
-const externalRecommendedReadingsPreamble: string = "";
+const externalRecommendedReadingsPreamble = "";
 const links: GeneralLink[] = [];
 
 const courses: Course[] = [
