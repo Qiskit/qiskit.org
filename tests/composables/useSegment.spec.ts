@@ -159,7 +159,7 @@ describe("trackPage", () => {
   });
 });
 
-//TODO: Commented until decide if we want it
+// TODO: Commented until decide if we want it
 
 // describe('trackPerformedSearch', () => {
 //   beforeEach(() => {

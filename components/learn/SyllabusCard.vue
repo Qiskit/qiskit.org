@@ -5,7 +5,7 @@
       <slot />
     </div>
     <div class="syllabus-card__footer">
-      <AppCta
+      <UiAppCta
         class="syllabus-card__footer__cta"
         label="View syllabus"
         :segment="segment"

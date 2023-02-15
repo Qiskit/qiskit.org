@@ -15,7 +15,12 @@
             :track-performed-search="trackPerformedSearch"
           />
         </div>
-        <AppCta v-bind="startLearningCTA" class="learn-header__cta" />
+        <UiAppCta
+          class="learn-header__cta"
+          :label="startLearningCTA.label"
+          :segment="startLearningCTA.segment"
+          :url="startLearningCTA.url"
+        />
       </div>
     </div>
     <transition name="scroll-in">
@@ -78,7 +83,7 @@ function updateAppMegaDropdownMenuLayout(
 
 function trackPerformedSearch(uiElement: string, field: string) {
   // TODO: Refactor tracking
-  this.$trackPerformedSearch(uiElement, field);
+  // this.$trackPerformedSearch(uiElement, field);
 }
 </script>
 
@@ -89,9 +94,9 @@ function trackPerformedSearch(uiElement: string, field: string) {
 .learn-header {
   background: linear-gradient(
     315deg,
-    $cool-gray-10 0%,
+    carbon.$cool-gray-10 0%,
     $blue-40 25%,
-    $purple-70 100%
+    carbon.$purple-70 100%
   );
   height: 37.5rem;
 
@@ -101,9 +106,9 @@ function trackPerformedSearch(uiElement: string, field: string) {
   }
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
-    max-width: $max-size;
+    max-width: qiskit.$max-size;
     position: relative;
     flex: 1;
     display: flex;

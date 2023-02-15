@@ -19,7 +19,12 @@
             application modules.
           </p>
         </div>
-        <AppCta class="the-hero-moment__cta" v-bind="getStartedLink" />
+        <UiAppCta
+          class="the-hero-moment__cta"
+          v-bind="getStartedLink"
+          :label="getStartedLink.label"
+          :url="getStartedLink.url"
+        />
       </div>
     </MetalGrid>
   </article>

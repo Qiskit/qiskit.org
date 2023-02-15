@@ -64,7 +64,7 @@ withDefaults(defineProps<Props>(), {
     opacity: 0.4;
     border-left: 0.125rem solid transparent;
     padding: carbon.$spacing-04 carbon.$spacing-05;
-    margin: -$spacing-03 0;
+    margin: -(carbon.$spacing-03) 0;
     transition: all 0.2s ease-in;
 
     &_active {

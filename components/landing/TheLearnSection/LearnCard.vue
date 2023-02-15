@@ -11,7 +11,13 @@
             Gain access to a free, digital textbook to study the concepts of
             quantum computing using Qiskit.
           </p>
-          <AppCta class="learn-card__cta" kind="ghost" v-bind="learnLink" />
+          <UiAppCta
+            class="learn-card__cta"
+            kind="ghost"
+            :label="learnLink.label"
+            :segment="learnLink.segment"
+            :url="learnLink.url"
+          />
         </div>
       </div>
     </div>

@@ -49,7 +49,7 @@ function formatOptions(optionsList: any): Array<multiSelectOption> {
   & .bx--list-box--light,
   & .bx--list-box__menu {
     background-color: qiskit.$background-color-white;
-    border-bottom-color: $cool-gray-20;
+    border-bottom-color: carbon.$cool-gray-20;
   }
 
   .bx--list-box__menu-item {

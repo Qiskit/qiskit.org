@@ -5,9 +5,9 @@
       <p class="app-introductory-content__description">
         {{ description }}
       </p>
-      <AppCta v-if="link" v-bind="link" kind="ghost" />
+      <UiAppCta v-if="link" v-bind="link" kind="ghost" />
       <template v-if="linkset">
-        <AppCta
+        <UiAppCta
           v-for="link in linkset"
           v-bind="link"
           :key="link.index"

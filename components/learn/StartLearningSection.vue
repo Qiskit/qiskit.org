@@ -61,7 +61,7 @@
               </p>
               <div class="start-learning-section__teach-section-cta">
                 <h3>Want to create your own?</h3>
-                <AppCta
+                <UiAppCta
                   kind="ghost"
                   label="Go to the syllabus tool"
                   url="https://learn.qiskit.org/syllabus/create"

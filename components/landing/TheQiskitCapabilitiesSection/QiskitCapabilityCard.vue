@@ -17,7 +17,7 @@
         />
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
-          <AppCta v-if="link" v-bind="link" kind="ghost" />
+          <UiAppCta v-if="link" v-bind="link" kind="ghost" />
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="bx-row">
-        <!-- <AppCta class="ecosystem-header__cta" v-bind="joinAction" /> -->
+        <!-- <UiAppCta class="ecosystem-header__cta" :label="joinAction.label" :url="joinAction.url" /> -->
       </div>
       <!-- <AppFiltersResultsLayout class="ecosystem__filters-result-section">
         <template slot="filters-on-m-l-screen">
@@ -271,7 +271,7 @@ useHead({
 // }
 
 // .bx--accordion__item {
-//   background-color: $cool-gray-20;
+//   background-color:carbon.$cool-gray-20;
 //   border-bottom: none;
 // }
 
@@ -300,7 +300,7 @@ useHead({
 //     svg {
 //       margin-top: calc($spacing-01 / 2);
 //       margin-right: carbon.$spacing-01;
-//       fill: $cool-gray-60;
+//       fill:carbon.$cool-gray-60;
 //     }
 
 //   }

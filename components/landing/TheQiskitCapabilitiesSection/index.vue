@@ -25,10 +25,12 @@
       </div>
     </div>
     <div class="qiskit-capabilities-section__ctas">
-      <AppCta
+      <UiAppCta
         class="qiskit-capabilities-section__ctas__link"
-        v-bind="quantumLabCTA"
         kind="ghost"
+        :label="quantumLabCTA.label"
+        :segment="quantumLabCTA.segment"
+        :url="quantumLabCTA.url"
       />
       <cv-button
         :title="copyCodeCTA.label"

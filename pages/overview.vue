@@ -16,7 +16,7 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <AppCta v-bind="quickStartLink" kind="ghost" />
+            <UiAppCta kind="ghost" :label="quickStartLink.label" :url="quickStartLink.url" />
           </div>
         </div>
         <div class="bx--col-lg-13 bx--col-md-6">

@@ -42,12 +42,14 @@
         <div class="app-card__description">
           <slot />
         </div>
-        <AppCta
+        <UiAppCta
           v-if="to"
           class="app-card__cta"
-          v-bind="ctaLink"
           is-wider
           kind="ghost"
+          :label="ctaLink.label"
+          :segment="ctaLink.segment"
+          :url="ctaLink.url"
         />
       </div>
     </div>
@@ -190,14 +192,14 @@ function hasTags(tags: string[] | TagTooltip[]) {
     }
 
     &__image {
-      min-height: 4 * $column-size-large;
+      min-height: 4 * qiskit.$column-size-large;
 
       @include carbon.breakpoint-down(lg) {
-        min-height: 5 * $column-size-large;
+        min-height: 5 * qiskit.$column-size-large;
       }
 
       @include carbon.breakpoint-between(sm, md) {
-        min-height: 6 * $column-size-large;
+        min-height: 6 * qiskit.$column-size-large;
       }
     }
   }
@@ -241,7 +243,7 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 
   &__custom-pill {
-    @include type-style("caption-01");
+    @include carbon.$type-style("caption-01");
 
     background-color: qiskit.$tag-background-color;
     color: qiskit.$tag-text-color;

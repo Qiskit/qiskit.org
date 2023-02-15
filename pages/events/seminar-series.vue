@@ -42,7 +42,7 @@
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
-              <AppCta
+              <UiAppCta
                 v-if="isAppCtaComponent(component)"
                 kind="ghost"
                 v-bind="data"
@@ -67,7 +67,7 @@
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
-              <AppCta
+              <UiAppCta
                 v-if="isAppCtaComponent(component)"
                 kind="ghost"
                 v-bind="data"
@@ -77,7 +77,7 @@
             </cv-data-table-cell>
           </cv-data-table-row>
         </template>
-        <AppCta
+        <UiAppCta
           class="seminar-series-page__past-events-cta"
           kind="ghost"
           v-bind="showMorePastEventsCta"

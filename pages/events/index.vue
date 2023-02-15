@@ -121,7 +121,7 @@
               We can help you bring Qiskit experts to your campus for guest
               lectures, hackathons, and other events.
             </p>
-            <AppCta v-bind="eventRequestLink" />
+            <UiAppCta :label="eventRequestLink.label" :url="eventRequestLink.url" />
           </div>
         </template>
       </AppFiltersResultsLayout> -->

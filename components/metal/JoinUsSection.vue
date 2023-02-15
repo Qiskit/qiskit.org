@@ -7,7 +7,11 @@
         devices. We will work closely to develop Metal and design quantum
         devices with it.
       </p>
-      <AppCta v-bind="joinSlackLink" theme="dark" />
+      <UiAppCta
+        :label="joinSlackLink.label"
+        theme="dark"
+        :url="joinSlackLink.url"
+      />
     </div>
   </section>
 </template>
@@ -27,7 +31,7 @@ const joinSlackLink = {
   background-color: qiskit.$background-color-dark;
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-12;
@@ -39,7 +43,7 @@ const joinSlackLink = {
   }
 
   &__description {
-    max-width: 7 * $column-size-large;
+    max-width: 7 * qiskit.$column-size-large;
     margin-bottom: 3.25rem;
 
     @include carbon.breakpoint-down(lg) {
@@ -47,7 +51,7 @@ const joinSlackLink = {
     }
 
     @include carbon.breakpoint-between(md, lg) {
-      max-width: 5.5 * $column-size-medium;
+      max-width: 5.5 * qiskit.$column-size-medium;
     }
 
     @include carbon.breakpoint-down(md) {

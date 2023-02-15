@@ -49,14 +49,14 @@ export default class AppCard extends Vue {
 @import "~carbon-components/scss/globals/scss/typography";
 
 .app-card {
-  background-color: $cool-gray-10;
+  background-color:carbon.$cool-gray-10;
 
   &__title {
-    @include type-style("productive-heading-02");
+    @include carbon.$type-style("productive-heading-02");
   }
 
   &__description {
-    @include type-style("body-long-01");
+    @include carbon.$type-style("body-long-01");
   }
 }
 </style>
