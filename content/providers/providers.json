@@ -65,5 +65,34 @@
       "counts = job.result().get_counts()\n",
       "print(counts)"
     ]
+  },
+  {
+    "name": "IonQ",
+    "image": null,
+    "installation": "pip install qiskit-ionq",
+    "description": "Qiskit provider for IonQ backends.",
+    "websiteUrl": "https://ionq.com/",
+    "docUrl": "https://qiskit.org/documentation/partners/ionq/",
+    "sourceUrl": "https://github.com/Qiskit-Partners/qiskit-ionq",
+    "sourceLabel": "GitHub",
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit\n",
+      "from qiskit_ionq import IonQProvider\n",
+      "\n",
+      "# Select a backend\n",
+      "provider = IonQProvider(\"MY_IONQ_TOKEN\")\n",
+      "backend = provider.get_backend(\"ionq_simulator\")\n",
+      "\n",
+      "# Build a circuit\n",
+      "circuit = QuantumCircuit(2, 2)\n",
+      "circuit.h(0)\n",
+      "circuit.cx(0,1)\n",
+      "circuit.measure([0,1], [0,1])\n",
+      "\n",
+      "# Run the circuit and get result counts\n",
+      "job = backend.run(circuit)\n",
+      "counts = job.get_counts()\n",
+      "print(counts)"
+    ]
   }
 ]
