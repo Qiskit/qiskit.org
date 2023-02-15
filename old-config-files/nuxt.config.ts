@@ -1,8 +1,8 @@
 /// <reference path="types/index.d.ts" />
 
-import path from 'path'
-import fs from 'fs'
-import consola from 'consola'
+import path from "path";
+import fs from "fs";
+import consola from "consola";
 
 // TODO: Deletes markdown references. We are not using md as content anymore
 // import markdownIt from 'markdown-it'
@@ -11,19 +11,15 @@ import consola from 'consola'
 // import uslug from 'uslug'
 // import Mode from 'frontmatter-markdown-loader/mode'
 
-import pkg from './package.json'
-import fetchEvents from './hooks/update-events'
-import fetchAdvocates from './hooks/update-advocates'
-import fetchEcosystemMembers from './hooks/update-ecosystem'
+import pkg from "./package.json";
+import fetchEvents from "./hooks/update-events";
+import fetchAdvocates from "./hooks/update-advocates";
+import fetchEcosystemMembers from "./hooks/update-ecosystem";
 
-const {
-  NODE_ENV,
-  ENABLE_ANALYTICS,
-  GENERATE_CONTENT,
-  AIRTABLE_API_KEY
-} = process.env
+const { NODE_ENV, ENABLE_ANALYTICS, GENERATE_CONTENT, AIRTABLE_API_KEY } =
+  process.env;
 
-const IS_PRODUCTION = NODE_ENV === 'production'
+const IS_PRODUCTION = NODE_ENV === "production";
 
 // const md = markdownIt({
 //   linkify: true,
@@ -55,44 +51,40 @@ export default defineNuxtConfig({
     // Keys within public are also exposed client-side
     public: {
       analyticsScriptUrl: IS_PRODUCTION
-        ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
-        : 'https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js',
+        ? "https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"
+        : "https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js",
       analyticsKey: IS_PRODUCTION
-        ? 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw'
-        : 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
-    }
+        ? "ffdYLviQze3kzomaINXNk6NwpY9LlXcw"
+        : "zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H",
+    },
   },
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   app: {
     head: {
       title: pkg.name,
       meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: pkg.description }
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { hid: "description", name: "description", content: pkg.description },
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
-    }
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    },
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   // loading: { color: '#fff' },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '~/assets/scss/main.scss'
-  ],
+  css: ["~/assets/scss/main.scss"],
 
   /*
-  ** Plugins to load before mounting the App.
-  */
+   ** Plugins to load before mounting the App.
+   */
   plugins: [
     // '~/plugins/router-hooks.ts',
     // '~/plugins/carbon.ts',
@@ -105,15 +97,13 @@ export default defineNuxtConfig({
   ],
 
   /*
-  ** Nuxt.js modules
-  */
-  modules: [
-    '@nuxt/content'
-  ],
+   ** Nuxt.js modules
+   */
+  modules: ["@nuxt/content"],
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     // TODO: Workaround for dealing with. Remove once its solved:
     // https://github.com/nuxt/nuxt.js/issues/3877
@@ -125,24 +115,19 @@ export default defineNuxtConfig({
   generate: {
     // TODO It is preferred to use nitro.prerender.routes
     // https://nuxt.com/docs/api/configuration/nuxt-config#routes
-
-    //TODO: This is the code for the old events
+    // TODO: This is the code for the old events
     // routes: (function () {
     //   const events = getContentUrls('events')
-
     //   return [...events]
-
     //   function getContentUrls (contentRoot: string): string[] {
     //     return fs.readdirSync(path.resolve(__dirname, 'content', contentRoot))
     //       .filter(isContentAndNotReadme)
     //       .map(toContentUrl(contentRoot))
     //   }
-
     //   function isContentAndNotReadme (filename: string): boolean {
     //     return path.extname(filename) === '.md' &&
     //            path.parse(filename).name.toUpperCase() !== 'README'
     //   }
-
     //   function toContentUrl (contentRoot: string): (s: string) => string {
     //     return (filename: string): string => {
     //       return `/${contentRoot}/${path.parse(filename).name}`
@@ -161,8 +146,8 @@ export default defineNuxtConfig({
     //     await generateContent()
     //   }
     // }
-  }
-})
+  },
+});
 
 // function optional<T> (test: any, ...plugins: T[]): T[] {
 //   return test ? plugins : []

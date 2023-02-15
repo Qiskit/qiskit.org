@@ -8,8 +8,8 @@
 // import { GeneralLink, QuantumHardwarePulsesUrl } from '~/constants/appLinks'
 
 useHead({
-  title: 'Investigating Quantum Hardware Using Microwave Pulses'
-})
+  title: "Investigating Quantum Hardware Using Microwave Pulses",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Investigating Quantum Hardware Using Microwave Pulses'

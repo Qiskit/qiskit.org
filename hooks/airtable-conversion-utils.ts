@@ -1,25 +1,25 @@
-import { promises as fsPromises } from 'fs'
-import Airtable from 'airtable'
-import axios from 'axios'
+import { promises as fsPromises } from "fs";
+import Airtable from "airtable";
+import axios from "axios";
 
-function getImageUrl (imageAttachment: any): string {
-  return getThumbnailUrl(imageAttachment) || imageAttachment.url
+function getImageUrl(imageAttachment: any): string {
+  return getThumbnailUrl(imageAttachment) || imageAttachment.url;
 }
 
-function findImageAttachment (attachments: any[]): any|null {
+function findImageAttachment(attachments: any[]): any | null {
   for (const oneAttachment of attachments) {
-    const isImage = oneAttachment.type.startsWith('image')
+    const isImage = oneAttachment.type.startsWith("image");
     if (isImage) {
-      return oneAttachment
+      return oneAttachment;
     }
   }
-  return null
+  return null;
 }
 
-function getThumbnailUrl (imageAttachment: any): string|null {
-  const { thumbnails } = imageAttachment
-  const { large: largeThumbnail } = thumbnails || {}
-  return largeThumbnail ? largeThumbnail.url : null
+function getThumbnailUrl(imageAttachment: any): string | null {
+  const { thumbnails } = imageAttachment;
+  const { large: largeThumbnail } = thumbnails || {};
+  return largeThumbnail ? largeThumbnail.url : null;
 }
 
 class AirtableRecords {
@@ -30,13 +30,20 @@ class AirtableRecords {
   protected recordFields?: Record<string, any>;
   private view: string;
 
-  constructor (apiKey: string, baseId: string, tableId: string, view: string, id?: string, recordFields?: Record<string, any>) {
-    this.apiKey = apiKey
-    this.baseId = baseId
-    this.tableId = tableId
-    this.recordFields = recordFields
-    this.view = view
-    this.id = id || ''
+  constructor(
+    apiKey: string,
+    baseId: string,
+    tableId: string,
+    view: string,
+    id?: string,
+    recordFields?: Record<string, any>
+  ) {
+    this.apiKey = apiKey;
+    this.baseId = baseId;
+    this.tableId = tableId;
+    this.recordFields = recordFields;
+    this.view = view;
+    this.id = id || "";
   }
 
   /**
@@ -45,35 +52,35 @@ class AirtableRecords {
    * @param fieldId Field ID
    * @returns {Promise<string | null>} Field name
    */
-  private getFieldName (fieldId: string): Promise<string | null> {
-    const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId)
-    let fieldName: string | undefined
+  private getFieldName(fieldId: string): Promise<string | null> {
+    const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId);
+    let fieldName: string | undefined;
 
     try {
       return base(this.tableId)
         .select({
           fields: [fieldId],
-          view: this.view
+          view: this.view,
         })
         .eachPage((records, nextPage) => {
           for (const record of records) {
             if (fieldName) {
-              break
+              break;
             }
 
-            const recordFields = Object.keys(record.fields)
+            const recordFields = Object.keys(record.fields);
 
             if (recordFields.length > 0) {
-              fieldName = recordFields[0]
+              fieldName = recordFields[0];
             }
           }
 
-          nextPage()
+          nextPage();
         })
-        .then(() => fieldName || '')
+        .then(() => fieldName || "");
     } catch (error) {
-      console.error(`Error in getFieldName: ${error}`)
-      return Promise.resolve(null)
+      console.error(`Error in getFieldName: ${error}`);
+      return Promise.resolve(null);
     }
   }
 
@@ -85,7 +92,7 @@ class AirtableRecords {
    * @param fieldIds Field IDs
    * @returns {Promise<Record<string, string | null>>} Field names mapped to keys
    */
-  public getAllFieldNames (
+  public getAllFieldNames(
     fieldIds: Record<string, string>
   ): Promise<Record<string, string | null>> {
     const fieldNamesPromises = Object.entries(fieldIds).map(
@@ -93,23 +100,23 @@ class AirtableRecords {
         return this.getFieldName(fieldId)
           .then((fieldName) => {
             if (fieldName) {
-              return { [field]: fieldName }
+              return { [field]: fieldName };
             } else {
-              console.warn(`Field name not found for field ID ${fieldId}`)
+              console.warn(`Field name not found for field ID ${fieldId}`);
             }
-          }).catch((error) => {
-            console.error(`Error in setAllFieldNames: ${error}`)
-            return { [field]: null }
           })
+          .catch((error) => {
+            console.error(`Error in setAllFieldNames: ${error}`);
+            return { [field]: null };
+          });
       }
-    )
+    );
 
-    return Promise.all(fieldNamesPromises)
-      .then((results) => {
-        return results.reduce((acc, result) => {
-          return { ...acc, ...result }
-        }, {} as Record<string, string | null>)
-      })
+    return Promise.all(fieldNamesPromises).then((results) => {
+      return results.reduce((acc, result) => {
+        return { ...acc, ...result };
+      }, {} as Record<string, string | null>);
+    });
   }
 
   /**
@@ -119,21 +126,17 @@ class AirtableRecords {
    * @param {string} filePath - The path to store the image
    * @returns {Promise<void>} - A promise that resolves when the image is stored
    */
-  public async storeImage (url: string, filePath: string): Promise<void> {
+  public async storeImage(url: string, filePath: string): Promise<void> {
     try {
-      const response = await axios.get(url, { responseType: 'arraybuffer' })
-      const imageBuffer = Buffer.from(response.data, 'binary')
-      await fsPromises.writeFile(filePath, imageBuffer)
-      return Promise.resolve()
+      const response = await axios.get(url, { responseType: "arraybuffer" });
+      const imageBuffer = Buffer.from(response.data, "binary");
+      await fsPromises.writeFile(filePath, imageBuffer);
+      return Promise.resolve();
     } catch (error) {
-      console.error(error)
-      return Promise.reject(error)
+      console.error(error);
+      return Promise.reject(error);
     }
   }
 }
 
-export {
-  AirtableRecords,
-  getImageUrl,
-  findImageAttachment
-}
+export { AirtableRecords, getImageUrl, findImageAttachment };

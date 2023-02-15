@@ -4,10 +4,7 @@
       {{ title }}
     </h3>
     <div class="feature-card__content">
-      <div
-        class="feature-card__image"
-        :lazy-background="image"
-      />
+      <div class="feature-card__image" :lazy-background="image" />
       <!-- TODO: HTML content should not be in strings but in components
       but lacking of a better solution given time constraints. -->
       <!-- eslint-disable vue/no-v-html -->
@@ -24,7 +21,7 @@ interface Props {
   description: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -72,7 +69,8 @@ defineProps<Props>()
   }
 
   &__description {
-    padding: carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-07;
+    padding: carbon.$spacing-05 carbon.$spacing-05 carbon.$spacing-05
+      carbon.$spacing-07;
 
     @include carbon.breakpoint-down(md) {
       padding: carbon.$spacing-06 0 0 0;

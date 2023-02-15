@@ -20,27 +20,29 @@
 
 <script setup lang="ts">
 interface Props {
-  name: string,
-  image: string,
-  city?: string,
-  country?: string,
-  region?: string,
-  slackId?: string,
-  slackUsername?: string
+  name: string;
+  image: string;
+  city?: string;
+  country?: string;
+  region?: string;
+  slackId?: string;
+  slackUsername?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  city: '',
-  country: '',
-  region: '',
-  slackId: '',
-  slackUsername: ''
-})
+  city: "",
+  country: "",
+  region: "",
+  slackId: "",
+  slackUsername: "",
+});
 
 // Tags on AppCard is an Array
-const formattedRegion = computed(() => props.region ? [props.region] : [])
+const formattedRegion = computed(() => (props.region ? [props.region] : []));
 
-const location = computed(() => [props.city, props.country].filter(e => !!e).join(', '))
+const location = computed(() =>
+  [props.city, props.country].filter((e) => !!e).join(", ")
+);
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +55,8 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
     margin-bottom: carbon.$spacing-05;
   }
 
-  &__location, &__contact {
+  &__location,
+  &__contact {
     display: flex;
     align-items: center;
   }
@@ -64,14 +67,13 @@ const location = computed(() => [props.city, props.country].filter(e => !!e).joi
 
   &__icon {
     margin-right: carbon.$spacing-03;
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 </style>
 
 <style lang="scss">
 .advocate-card {
-
   @include carbon.breakpoint-down(md) {
     .app-card__image {
       background-size: contain;

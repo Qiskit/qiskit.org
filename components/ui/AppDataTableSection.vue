@@ -10,9 +10,9 @@
 
 <script setup lang="ts">
 interface Props {
-  dataTableColumns: string[]
-  sectionTitle: string
+  dataTableColumns: string[];
+  sectionTitle: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>

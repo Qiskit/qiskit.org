@@ -1,9 +1,7 @@
 <template>
   <section class="course-pages-section">
     <div>
-      <h2>
-        Pages
-      </h2>
+      <h2>Pages</h2>
       <nav class="course-pages-section__nav">
         <ul class="courses">
           <li
@@ -35,7 +33,7 @@
           <img
             class="course-pages-section__main__preview__image"
             :src="activeCoursePreviewImage"
-          >
+          />
         </UiBasicLink>
         <AppCta
           v-bind="activeCourse"
@@ -48,41 +46,41 @@
 </template>
 
 <script setup lang="ts">
-import { Course } from 'constants/learnContent'
+import { Course } from "constants/learnContent";
 
 interface Props {
-  courses: Course[]
-  imgBase: string
+  courses: Course[];
+  imgBase: string;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const activeCourseLabel = ref('')
+const activeCourseLabel = ref("");
 
 const activeCourse = computed(() => {
   const activeCourse = props.courses.find(
     ({ label }) => label === activeCourseLabel.value
-  )
-  return activeCourse || null
-})
+  );
+  return activeCourse || null;
+});
 
 const activeCoursePreviewImage = computed(() => {
   if (!activeCourse.value) {
-    return ''
+    return "";
   }
 
-  const imageUrlBase = props.imgBase
+  const imageUrlBase = props.imgBase;
 
-  return `${imageUrlBase}/${activeCourse.value.image}`
-})
+  return `${imageUrlBase}/${activeCourse.value.image}`;
+});
 
 const selectCourse = (courseLabel: string) => {
-  activeCourseLabel.value = courseLabel
-}
+  activeCourseLabel.value = courseLabel;
+};
 
 onMounted(() => {
-  selectCourse(props.courses[0].label)
-})
+  selectCourse(props.courses[0].label);
+});
 </script>
 
 <style lang="scss" scoped>

@@ -3,17 +3,12 @@
     <div class="bx--grid bx--no-gutter">
       <div class="bx--row">
         <div class="bx--col-lg-12">
-          <h2>
-            External recommended readings
-          </h2>
+          <h2>External recommended readings</h2>
           <p v-if="preamble">
             {{ preamble }}
           </p>
           <ol class="external-recommended-readings__list">
-            <li
-              v-for="reference in references"
-              :key="reference.label"
-            >
+            <li v-for="reference in references" :key="reference.label">
               <span class="external-recommended-readings__reference">
                 {{ reference }}
               </span>
@@ -31,7 +26,11 @@
                 <span v-if="link.author">
                   {{ link.author }}
                 </span>
-                <span :class="link.author ? 'external-recommended-readings__title' : ''">
+                <span
+                  :class="
+                    link.author ? 'external-recommended-readings__title' : ''
+                  "
+                >
                   {{ link.label }}
                 </span>
               </UiAppLink>
@@ -45,12 +44,12 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 export type RecommendedReading = GeneralLink & {
   description?: string;
   author?: string;
-}
+};
 
 interface Props {
   links: RecommendedReading[];
@@ -60,13 +59,13 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   references: () => [],
-  preamble: ''
-})
+  preamble: "",
+});
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@import '~carbon-components/scss/globals/scss/typography';
+@import "~carbon-components/scss/globals/scss/typography";
 
 .external-recommended-readings {
   &__list {
@@ -87,7 +86,7 @@ withDefaults(defineProps<Props>(), {
   }
 
   &__reference {
-    @include type-style('code-01');
+    @include type-style("code-01");
 
     margin-bottom: carbon.$spacing-01;
   }

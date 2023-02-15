@@ -9,8 +9,8 @@
 // import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 useHead({
-  title: 'Quantum Protocols and Quantum Algorithms'
-})
+  title: "Quantum Protocols and Quantum Algorithms",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Quantum Protocols and Quantum Algorithms'

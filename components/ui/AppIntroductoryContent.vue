@@ -5,11 +5,7 @@
       <p class="app-introductory-content__description">
         {{ description }}
       </p>
-      <AppCta
-        v-if="link"
-        v-bind="link"
-        kind="ghost"
-      />
+      <AppCta v-if="link" v-bind="link" kind="ghost" />
       <template v-if="linkset">
         <AppCta
           v-for="link in linkset"
@@ -26,16 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { NavLink } from '~/constants/menuLinks'
+import { NavLink } from "~/constants/menuLinks";
 
 interface Props {
-  description: string
-  link: NavLink
-  linkset: NavLink[]
-  title: string
+  description: string;
+  link: NavLink;
+  linkset: NavLink[];
+  title: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -52,14 +48,20 @@ defineProps<Props>()
     margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-up(lg) {
-      $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(
+        5,
+        13
+      ); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
       padding-right: carbon.$spacing-07;
     }
 
     @include carbon.breakpoint-up(max) {
-      $grid-columns: math.div(4, 13); // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(
+        4,
+        13
+      ); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }

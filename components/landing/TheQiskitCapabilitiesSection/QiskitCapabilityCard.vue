@@ -2,20 +2,22 @@
   <article>
     <div class="qiskit-capability-card__container">
       <div class="qiskit-capability-card__thumbnail">
-        <img class="qiskit-capability-card__thumbnail__media" :src="thumbnailResource">
+        <img
+          class="qiskit-capability-card__thumbnail__media"
+          :src="thumbnailResource"
+        />
       </div>
       <div class="qiskit-capability-card__copy">
         <h3 class="qiskit-capability-card__title">
           {{ title }}
         </h3>
-        <img class="qiskit-capability-card__thumbnail__mobile" :src="thumbnailResource">
+        <img
+          class="qiskit-capability-card__thumbnail__mobile"
+          :src="thumbnailResource"
+        />
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
-          <AppCta
-            v-if="link"
-            v-bind="link"
-            kind="ghost"
-          />
+          <AppCta v-if="link" v-bind="link" kind="ghost" />
         </div>
       </div>
     </div>
@@ -23,18 +25,18 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 interface Props {
-  thumbnailResource: string
-  title: string
-  description: string
-  link?: GeneralLink | undefined
+  thumbnailResource: string;
+  title: string;
+  description: string;
+  link?: GeneralLink | undefined;
 }
 
 withDefaults(defineProps<Props>(), {
-  link: undefined
-})
+  link: undefined,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -75,6 +77,7 @@ $card-img-width: 10rem;
 
     &__mobile {
       display: none;
+
       @include carbon.breakpoint-down(lg) {
         display: block;
         width: $card-img-width;

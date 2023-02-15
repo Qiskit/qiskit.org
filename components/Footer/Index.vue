@@ -110,7 +110,7 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
   }
 
   &__primary-container {
-    @include qiskit.contained();
+    @include qiskit.contained;
   }
 
   &__logo {
@@ -155,7 +155,7 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     justify-content: space-between;
 
     &:not(.bx--grid) {
-      @include qiskit.contained();
+      @include qiskit.contained;
     }
   }
 

@@ -8,27 +8,28 @@
       class="the-table-of-contents__entry"
       :class="{
         'the-table-of-contents__entry_active': isActive(entry),
-        'the-table-of-contents__entry_second-level': entry.isSecondary
+        'the-table-of-contents__entry_second-level': entry.isSecondary,
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
-    >{{ entry.label }}</UiBasicLink>
+      >{{ entry.label }}</UiBasicLink
+    >
     <!-- eslint-enable -->
   </nav>
 </template>
 
 <script setup lang="ts">
-import { TableOfContentEntry } from '~/constants/overviewContent'
+import { TableOfContentEntry } from "~/constants/overviewContent";
 
 interface Props {
-  entries: Array<TableOfContentEntry>
-  activeSection: string
+  entries: Array<TableOfContentEntry>;
+  activeSection: string;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
-  return !!(entry.sectionId && (entry.sectionId === props.activeSection))
-})
+  return !!(entry.sectionId && entry.sectionId === props.activeSection);
+});
 </script>
 
 <style lang="scss" scoped>

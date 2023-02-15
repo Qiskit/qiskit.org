@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-const today = new Date()
-const currentYear = today.getFullYear()
+const today = new Date();
+const currentYear = today.getFullYear();
 </script>
 
 <style lang="scss" scoped>

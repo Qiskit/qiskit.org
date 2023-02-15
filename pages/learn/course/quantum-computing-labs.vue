@@ -8,8 +8,8 @@
 // import { GeneralLink, QuantumComputingLabs } from '~/constants/appLinks'
 
 useHead({
-  title: 'Quantum Computing Labs'
-})
+  title: "Quantum Computing Labs",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Quantum Computing Labs'

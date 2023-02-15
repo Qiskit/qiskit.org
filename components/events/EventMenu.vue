@@ -1,15 +1,16 @@
 <template>
   <nav>
     <section class="ibm-research">
-      <UiAppLink
-        class="text-logo"
-        url="/"
-      >
-        <img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit
+      <UiAppLink class="text-logo" url="/">
+        <img
+          class="logo"
+          alt="Qiskit logo"
+          src="https://qiskit.camp/img/qiskit-logo.png"
+        />&nbsp;Qiskit
       </UiAppLink>
     </section>
     <div class="convertible-menu">
-      <input class="hamburger" type="checkbox">
+      <input class="hamburger" type="checkbox" />
       <span class="hamburger" />
       <span class="hamburger" />
       <span class="hamburger" />
@@ -56,7 +57,7 @@ nav {
   position: fixed;
   top: 0;
   z-index: 100;
-  box-shadow: 0 0 16px rgba(qiskit.$shadow-color, 0.3);
+  box-shadow: 0 0 16px rgb(qiskit.$shadow-color 0.3);
   background-color: $inverse-02;
   flex-wrap: wrap;
   min-height: 63px;
@@ -132,15 +133,13 @@ nav li.active:hover a {
   z-index: 1;
   background-color: $inverse-01;
   transform-origin: 4px 0;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
 }
 
 .convertible-menu input:checked ~ span {
   opacity: 1;
-  transform: rotate(45deg)
-             translate(0, -1px);
+  transform: rotate(45deg) translate(0, -1px);
   background: $inverse-01;
 }
 
@@ -151,8 +150,7 @@ nav li.active:hover a {
 
 .convertible-menu input:checked ~ span:nth-last-child(2) {
   opacity: 1;
-  transform: rotate(-45deg)
-             translate(-1px, -2px);
+  transform: rotate(-45deg) translate(-1px, -2px);
   background: $inverse-01;
 }
 
@@ -169,7 +167,7 @@ nav li.active:hover a {
     display: block;
     height: auto;
     border-bottom: 1px solid $ibm-blue;
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     transform: translateX(100%);
   }
 

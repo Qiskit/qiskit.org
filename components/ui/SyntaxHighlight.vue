@@ -13,26 +13,26 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
-  code?: string
-  label: string
+  code?: string;
+  label: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  code: ''
-})
+  code: "",
+});
 
-const { trackClickEvent } = useSegment()
+const { trackClickEvent } = useSegment();
 
-const segmentAction : CtaClickedEventProp = computed(() => ({
+const segmentAction: CtaClickedEventProp = computed(() => ({
   cta: `${props.label}: Copy Code Sample`,
-  location: 'syntax-highlight'
-}))
+  location: "syntax-highlight",
+}));
 
-function copyToClipboard (code: string) {
-  navigator.clipboard.writeText(code)
+function copyToClipboard(code: string) {
+  navigator.clipboard.writeText(code);
 }
 </script>
 
@@ -58,7 +58,13 @@ function copyToClipboard (code: string) {
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, qiskit.$button-background-color-light 0%, qiskit.$button-background-color-light 50%, qiskit.$background-color-secondary 50%, qiskit.$background-color-secondary 100%);
+    background-image: linear-gradient(
+      90deg,
+      qiskit.$button-background-color-light 0%,
+      qiskit.$button-background-color-light 50%,
+      qiskit.$background-color-secondary 50%,
+      qiskit.$background-color-secondary 100%
+    );
     transition: background-position-x 0.3s ease-out;
 
     &:hover,

@@ -6,9 +6,7 @@
           <DynamicBackgroundLogo class="learn-header__logo" />
         </div>
         <div>
-          <h1 class="learn-header__headline">
-            Qiskit Textbook (beta)
-          </h1>
+          <h1 class="learn-header__headline">Qiskit Textbook (beta)</h1>
           <qiskit-mega-menu-dropdown
             :id="appMegaDropdownMenuId"
             class="learn-header__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
@@ -30,49 +28,57 @@
 </template>
 
 <script setup lang="ts">
-import { LEARN_START_LEARNING } from '~/constants/appLinks'
-import { LEARN_MEGA_MENU } from '~/constants/megaMenuLinks'
+import { LEARN_START_LEARNING } from "~/constants/appLinks";
+import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
 
-const startLearningCTA = LEARN_START_LEARNING
-const dropdownMenuContent = LEARN_MEGA_MENU
+const startLearningCTA = LEARN_START_LEARNING;
+const dropdownMenuContent = LEARN_MEGA_MENU;
 
-const appMegaDropdownMenuIsVisible = ref(true)
-let appMegaDropdownMenuObserver: IntersectionObserver | undefined
+const appMegaDropdownMenuIsVisible = ref(true);
+let appMegaDropdownMenuObserver: IntersectionObserver | undefined;
 
-const appMegaDropdownMenuId = computed(() => `app-mega-dropdown-menu-${this._uid}`)
+const appMegaDropdownMenuId = computed(
+  () => `app-mega-dropdown-menu-${this._uid}`
+);
 
 onMounted(() => {
-  connectAppMegaDropdownMenuObserver()
-})
+  connectAppMegaDropdownMenuObserver();
+});
 
 onBeforeUnmount(() => {
-  disconnectAppMegaDropdownMenuObserver()
-})
+  disconnectAppMegaDropdownMenuObserver();
+});
 
-function connectAppMegaDropdownMenuObserver () {
-  const appMegaDropdownMenuElement = this.$el.querySelector(`#${appMegaDropdownMenuId}`)
+function connectAppMegaDropdownMenuObserver() {
+  const appMegaDropdownMenuElement = this.$el.querySelector(
+    `#${appMegaDropdownMenuId}`
+  );
 
   if (appMegaDropdownMenuElement) {
-    appMegaDropdownMenuObserver = new IntersectionObserver(updateAppMegaDropdownMenuLayout)
-    appMegaDropdownMenuObserver.observe(appMegaDropdownMenuElement)
+    appMegaDropdownMenuObserver = new IntersectionObserver(
+      updateAppMegaDropdownMenuLayout
+    );
+    appMegaDropdownMenuObserver.observe(appMegaDropdownMenuElement);
   }
 }
 
-function disconnectAppMegaDropdownMenuObserver () {
+function disconnectAppMegaDropdownMenuObserver() {
   if (appMegaDropdownMenuObserver) {
-    appMegaDropdownMenuObserver.disconnect()
+    appMegaDropdownMenuObserver.disconnect();
   }
 }
 
-function updateAppMegaDropdownMenuLayout (entries: Array<IntersectionObserverEntry>) {
+function updateAppMegaDropdownMenuLayout(
+  entries: Array<IntersectionObserverEntry>
+) {
   entries.forEach(({ isIntersecting }) => {
-    appMegaDropdownMenuIsVisible.value = isIntersecting
-  })
+    appMegaDropdownMenuIsVisible.value = isIntersecting;
+  });
 }
 
-function trackPerformedSearch (uiElement: string, field: string) {
+function trackPerformedSearch(uiElement: string, field: string) {
   // TODO: Refactor tracking
-  this.$trackPerformedSearch(uiElement, field)
+  this.$trackPerformedSearch(uiElement, field);
 }
 </script>
 
@@ -81,7 +87,12 @@ function trackPerformedSearch (uiElement: string, field: string) {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .learn-header {
-  background: linear-gradient(315deg, $cool-gray-10 0%, $blue-40 25%, $purple-70 100%);
+  background: linear-gradient(
+    315deg,
+    $cool-gray-10 0%,
+    $blue-40 25%,
+    $purple-70 100%
+  );
   height: 37.5rem;
 
   &__headline {
@@ -90,7 +101,7 @@ function trackPerformedSearch (uiElement: string, field: string) {
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     max-width: $max-size;
     position: relative;
@@ -106,7 +117,11 @@ function trackPerformedSearch (uiElement: string, field: string) {
     }
 
     &-wrapper {
-      @include responsive-grid-bg-strip("/images/grid/grid-hero-textbook.svg", auto, 95%);
+      @include responsive-grid-bg-strip(
+        "/images/grid/grid-hero-textbook.svg",
+        auto,
+        95%
+      );
 
       display: flex;
       height: 100%;
@@ -135,6 +150,7 @@ function trackPerformedSearch (uiElement: string, field: string) {
       @include carbon.breakpoint-between(md, lg) {
         width: calc(50% + var(--additional-width));
       }
+
       @include carbon.breakpoint-down(md) {
         width: calc(80% + var(--additional-width));
         height: 80%;
@@ -150,13 +166,14 @@ function trackPerformedSearch (uiElement: string, field: string) {
   &__dropdown-fixed {
     position: fixed;
     top: 0;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
     width: 100%;
     z-index: 100;
   }
 
   &__cta {
     align-self: flex-end;
+
     // this is necessary to respect z ordering with the absolute elements.
     position: relative;
   }

@@ -1,29 +1,25 @@
 <template>
-  <cv-data-table
-    class="app-data-table"
-    :columns="columns"
-    :sortable="false"
-  >
-    <template slot="data">
+  <cv-data-table class="app-data-table" :columns="columns" :sortable="false">
+    <template #data>
       <slot />
     </template>
   </cv-data-table>
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 export interface TableRowElement {
-  component?: string,
-  styles?: string,
-  data: string | GeneralLink,
+  component?: string;
+  styles?: string;
+  data: string | GeneralLink;
 }
 
 interface Props {
-  columns: string[]
+  columns: string[];
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -31,7 +27,6 @@ defineProps<Props>()
   overflow-x: scroll;
   max-width: 100%;
 }
-
 </style>
 
 <style lang="scss">
@@ -49,7 +44,8 @@ defineProps<Props>()
   }
 }
 
-.bx--data-table tbody tr td, .bx--data-table tbody tr:hover td {
+.bx--data-table tbody tr td,
+.bx--data-table tbody tr:hover td {
   background-color: qiskit.$background-color-white;
   border-top: none;
   border-bottom: 1px solid qiskit.$border-color;

@@ -5,7 +5,7 @@
     :class="[
       `app-cta_${kind}`,
       `app-cta_${kind}_theme_${theme}`,
-      { 'app-cta_wider': isWider }
+      { 'app-cta_wider': isWider },
     ]"
     v-bind="$attrs"
     @click="$emit('click')"
@@ -22,30 +22,36 @@
 </template>
 
 <script setup lang="ts">
-import UiBasicLink from '~/components/ui/UiBasicLink.vue'
+import UiBasicLink from "~/components/ui/UiBasicLink.vue";
 
 interface Props {
-  isWider?: boolean
-  kind?: 'primary'|'secondary'|'ghost'
-  label?: string
-  theme?: 'light'|'dark'
+  isWider?: boolean;
+  kind?: "primary" | "secondary" | "ghost";
+  label?: string;
+  theme?: "light" | "dark";
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isWider: false,
-  kind: 'primary',
-  label: '',
-  theme: 'light'
-})
+  kind: "primary",
+  label: "",
+  theme: "light",
+});
 
 const iconPerLinkType = computed(() => {
-  const url = this.$attrs.url
+  const url = this.$attrs.url;
 
-  if (props.label === 'Under construction') { return 'error-outline-16' }
-  if (UiBasicLink.isExternal(url)) { return 'launch-16' }
-  if (UiBasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
-  return 'arrow-right-16'
-})
+  if (props.label === "Under construction") {
+    return "error-outline-16";
+  }
+  if (UiBasicLink.isExternal(url)) {
+    return "launch-16";
+  }
+  if (UiBasicLink.isIdAnchor(url)) {
+    return "arrow-down-16";
+  }
+  return "arrow-right-16";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +59,13 @@ const iconPerLinkType = computed(() => {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 @mixin bicolor-background($colorLeft, $colorRight) {
-    background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
+  background-image: linear-gradient(
+    90deg,
+    $colorLeft 0%,
+    $colorLeft 50%,
+    $colorRight 50%,
+    $colorRight 100%
+  );
 }
 
 .app-cta {
@@ -68,6 +80,7 @@ const iconPerLinkType = computed(() => {
   @include carbon.breakpoint-between(md, lg) {
     width: 3 * $column-size-medium;
   }
+
   @include carbon.breakpoint-down(md) {
     width: 100%;
   }
@@ -77,7 +90,7 @@ const iconPerLinkType = computed(() => {
   transition: background-position-x 0.3s ease-out, color 0.3s ease-out;
 
   &_wider {
-    width: 100%
+    width: 100%;
   }
 
   /*
@@ -85,7 +98,10 @@ const iconPerLinkType = computed(() => {
   */
   &,
   &_primary {
-    @include bicolor-background(qiskit.$button-background-color-dark, qiskit.$button-background-color);
+    @include bicolor-background(
+      qiskit.$button-background-color-dark,
+      qiskit.$button-background-color
+    );
 
     color: qiskit.$button-text-color;
   }
@@ -97,7 +113,10 @@ const iconPerLinkType = computed(() => {
   }
 
   &_secondary {
-    @include bicolor-background(qiskit.$button-background-color-secondary-dark, qiskit.$button-background-color-secondary);
+    @include bicolor-background(
+      qiskit.$button-background-color-secondary-dark,
+      qiskit.$button-background-color-secondary
+    );
 
     color: qiskit.$button-text-color-secondary;
 
@@ -108,7 +127,10 @@ const iconPerLinkType = computed(() => {
     }
 
     &_theme_dark {
-      @include bicolor-background(qiskit.$button-background-color-tertiary-dark, qiskit.$button-background-color-tertiary);
+      @include bicolor-background(
+        qiskit.$button-background-color-tertiary-dark,
+        qiskit.$button-background-color-tertiary
+      );
 
       color: qiskit.$button-text-color-tertiary;
     }
@@ -147,7 +169,7 @@ const iconPerLinkType = computed(() => {
   $launch_path: "_launch-16 path:nth-child(2)";
 
   &__icon {
-    fill: currentColor;
+    fill: currentcolor;
     margin-left: carbon.$spacing-05;
     overflow: visible;
 

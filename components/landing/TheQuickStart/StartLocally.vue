@@ -3,23 +3,16 @@
     <h3>Start locally</h3>
     <p class="start-locally__introduction">
       To install Qiskit locally, you will need
-      <UiAppLink
-        url="https://www.python.org/downloads/"
-      >
+      <UiAppLink url="https://www.python.org/downloads/">
         Python 3.7+.
       </UiAppLink>
       Although it is not required, we recommend using a
-      <UiAppLink
-        url="https://www.anaconda.com/products/individual"
-      >
+      <UiAppLink url="https://www.anaconda.com/products/individual">
         virtual environment with Anaconda.
       </UiAppLink>
     </p>
     <div class="start-locally__options">
-      <div
-        v-for="choicesGroup in installChoices"
-        :key="choicesGroup.id"
-      >
+      <div v-for="choicesGroup in installChoices" :key="choicesGroup.id">
         <h4>
           {{ choicesGroup.title }}
         </h4>
@@ -29,7 +22,9 @@
             :key="option"
             :title="option"
             class="start-locally__option"
-            :class="{ 'start-locally__option_active': isActive (choicesGroup, option) }"
+            :class="{
+              'start-locally__option_active': isActive(choicesGroup, option),
+            }"
             @click="selectOption(choicesGroup, option)"
           >
             {{ option }}
@@ -38,26 +33,24 @@
       </div>
       <div>
         <cv-accordion
-          v-if="prerequisitesToInstallQiskit ()"
+          v-if="prerequisitesToInstallQiskit()"
           class="start-locally__prerequisites-section"
         >
           <cv-accordion-item>
             <template #title>
-              Installing from source requires that you have the Rust compiler on your system
+              Installing from source requires that you have the Rust compiler on
+              your system
             </template>
             <template #content>
-              <lazy-prerequisites-for-windows v-if="selectedOs === OPERATING_SYSTEMS.windows" />
+              <lazy-prerequisites-for-windows
+                v-if="selectedOs === OPERATING_SYSTEMS.windows"
+              />
               <lazy-prerequisites-for-linux-mac v-else />
             </template>
           </cv-accordion-item>
         </cv-accordion>
-        <h4>
-          Terminal
-        </h4>
-        <SyntaxHighlight
-          :label="segmentLabel"
-          :code="codeToInstallQiskit()"
-        />
+        <h4>Terminal</h4>
+        <SyntaxHighlight :label="segmentLabel" :code="codeToInstallQiskit()" />
       </div>
     </div>
   </section>
@@ -65,96 +58,99 @@
 
 <script setup lang="ts">
 type ChoicesGroup = {
-  title: string,
-  id: string,
-  options: Array<string>
-}
+  title: string;
+  id: string;
+  options: Array<string>;
+};
 
-type InstallChoices = Array<ChoicesGroup>
+type InstallChoices = Array<ChoicesGroup>;
 
 const OPERATING_SYSTEMS = {
-  linux: 'Linux',
-  mac: 'Mac',
-  windows: 'Windows'
-}
+  linux: "Linux",
+  mac: "Mac",
+  windows: "Windows",
+};
 
 const QISKIT_INSTALL = {
-  stable: 'Stable (recommended)',
-  master: 'Unstable'
-}
+  stable: "Stable (recommended)",
+  master: "Unstable",
+};
 
 const installChoices: InstallChoices = [
   {
-    title: 'Qiskit Install',
-    id: 'qiskit-install',
-    options: Object.values(QISKIT_INSTALL)
+    title: "Qiskit Install",
+    id: "qiskit-install",
+    options: Object.values(QISKIT_INSTALL),
   },
   {
-    title: 'Operating System',
-    id: 'os',
-    options: Object.values(OPERATING_SYSTEMS)
-  }
-]
+    title: "Operating System",
+    id: "os",
+    options: Object.values(OPERATING_SYSTEMS),
+  },
+];
 
 const selectedOptions = reactive({
-  'qiskit-install': QISKIT_INSTALL.stable,
-  os: OPERATING_SYSTEMS.mac
-})
+  "qiskit-install": QISKIT_INSTALL.stable,
+  os: OPERATING_SYSTEMS.mac,
+});
 
-const segmentLabel = 'Qiskit Install'
+const segmentLabel = "Qiskit Install";
 
-const codeToInstallStableOnLinux = 'pip install -U pip && pip install qiskit'
-const codeToInstallStableOnMac = 'pip install qiskit'
-const codeToInstallStableOnWindows = 'pip install qiskit'
+const codeToInstallStableOnLinux = "pip install -U pip && pip install qiskit";
+const codeToInstallStableOnMac = "pip install qiskit";
+const codeToInstallStableOnWindows = "pip install qiskit";
 
-const codeToInstallAllSystems = 'pip install git+https://github.com/Qiskit/qiskit-terra'
+const codeToInstallAllSystems =
+  "pip install git+https://github.com/Qiskit/qiskit-terra";
 
 const prerequisites = {
   [QISKIT_INSTALL.stable]: {
     [OPERATING_SYSTEMS.linux]: null,
     [OPERATING_SYSTEMS.mac]: null,
-    [OPERATING_SYSTEMS.windows]: null
+    [OPERATING_SYSTEMS.windows]: null,
   },
   [QISKIT_INSTALL.master]: {
-    [OPERATING_SYSTEMS.linux]: 'PrerequisitesForLinuxMac',
-    [OPERATING_SYSTEMS.mac]: 'PrerequisitesForLinuxMac',
-    [OPERATING_SYSTEMS.windows]: 'PrerequisitesForWindows'
-  }
-}
+    [OPERATING_SYSTEMS.linux]: "PrerequisitesForLinuxMac",
+    [OPERATING_SYSTEMS.mac]: "PrerequisitesForLinuxMac",
+    [OPERATING_SYSTEMS.windows]: "PrerequisitesForWindows",
+  },
+};
 
 const codeToInstall = {
   [QISKIT_INSTALL.stable]: {
     [OPERATING_SYSTEMS.linux]: codeToInstallStableOnLinux,
     [OPERATING_SYSTEMS.mac]: codeToInstallStableOnMac,
-    [OPERATING_SYSTEMS.windows]: codeToInstallStableOnWindows
+    [OPERATING_SYSTEMS.windows]: codeToInstallStableOnWindows,
   },
   [QISKIT_INSTALL.master]: {
     [OPERATING_SYSTEMS.linux]: codeToInstallAllSystems,
     [OPERATING_SYSTEMS.mac]: codeToInstallAllSystems,
-    [OPERATING_SYSTEMS.windows]: codeToInstallAllSystems
-  }
-}
+    [OPERATING_SYSTEMS.windows]: codeToInstallAllSystems,
+  },
+};
 
-const selectedOs = computed<string>(() => selectedOptions.os)
+const selectedOs = computed<string>(() => selectedOptions.os);
 
 const prerequisitesToInstallQiskit = computed<string | null>(() => {
-  const { 'qiskit-install': qiskitInstall, os } = selectedOptions
+  const { "qiskit-install": qiskitInstall, os } = selectedOptions;
 
-  return prerequisites[qiskitInstall][os]
-})
+  return prerequisites[qiskitInstall][os];
+});
 
 const codeToInstallQiskit = computed<string>(() => {
-  const { 'qiskit-install': qiskitInstall, os } = selectedOptions
+  const { "qiskit-install": qiskitInstall, os } = selectedOptions;
 
-  return codeToInstall[qiskitInstall][os]
-})
+  return codeToInstall[qiskitInstall][os];
+});
 
-const isActive = computed<boolean>((choicesGroup: ChoicesGroup, option: string) => {
-  return (selectedOptions as any)[choicesGroup.id] === option
-})
+const isActive = computed<boolean>(
+  (choicesGroup: ChoicesGroup, option: string) => {
+    return (selectedOptions as any)[choicesGroup.id] === option;
+  }
+);
 
-function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
-  (selectedOptions as any)[choicesGroup.id] = selectedOption
+function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
+  (selectedOptions as any)[choicesGroup.id] = selectedOption;
 }
 </script>
 
@@ -175,20 +171,29 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
     margin-bottom: carbon.$spacing-08;
 
     @include carbon.breakpoint-up(lg) {
-      $grid-columns: math.div(9, 10); // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(
+        9,
+        10
+      ); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
       padding-right: carbon.$spacing-05;
     }
 
     @include carbon.breakpoint-up(xlg) {
-      $grid-columns: math.div(7, 11); // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(
+        7,
+        11
+      ); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }
 
     @include carbon.breakpoint-up(max) {
-      $grid-columns: math.div(6, 12); // Number of columns that the element will use at this breakpoint.
+      $grid-columns: math.div(
+        6,
+        12
+      ); // Number of columns that the element will use at this breakpoint.
 
       max-width: 100% * $grid-columns;
     }
@@ -231,7 +236,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
 </style>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
+@import "~carbon-components/scss/globals/scss/typography";
 
 .start-locally {
   /**
@@ -259,7 +264,7 @@ function selectOption (choicesGroup: ChoicesGroup, selectedOption: string) {
     }
 
     & .bx--accordion__arrow {
-      fill: currentColor;
+      fill: currentcolor;
     }
   }
 }

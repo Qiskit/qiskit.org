@@ -21,14 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 interface Props {
-  backLink?: GeneralLink
-  cta: GeneralLink
+  backLink?: GeneralLink;
+  cta: GeneralLink;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +38,7 @@ defineProps<Props>()
   &__back-link {
     height: 0;
 
-    ::v-deep .app-nav-back-link{
+    ::v-deep .app-nav-back-link {
       padding-left: carbon.$spacing-05;
       margin: 0;
     }
@@ -48,15 +48,13 @@ defineProps<Props>()
     display: grid;
     padding: carbon.$spacing-12 carbon.$spacing-05 0;
     gap: carbon.$spacing-05;
-    grid-template-columns: repeat(4, 1fr);
-    // Set last row to 52px to not modify the height of the cta
-    grid-template-rows: repeat(3, auto) 52px;
-    grid-template-areas:
-      "headline headline img img"
+    grid-template:
+      repeat(4, 1fr) repeat(3, auto) 52px "headline headline img img"
       "description description img img"
       ". . img img"
-      "cta . img img"
-    ;
+      "cta . img img";
+
+    // Set last row to 52px to not modify the height of the cta
 
     @include carbon.breakpoint-down(md) {
       padding-top: carbon.$spacing-09;
@@ -65,8 +63,7 @@ defineProps<Props>()
         "headline"
         "img"
         "description"
-        "cta"
-      ;
+        "cta";
     }
   }
 

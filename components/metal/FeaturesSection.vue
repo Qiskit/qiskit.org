@@ -1,13 +1,16 @@
 <template>
   <section class="features-section">
     <div class="features-section__container">
-      <h2>
-        Why Qiskit Metal
-      </h2>
+      <h2>Why Qiskit Metal</h2>
       <p class="features-section__description">
-        Designing quantum devices is the bedrock of the quantum ecosystem, but it is a difficult, multi-step process that connects traditionally disparate worlds.
-        <br><br>
-        Metal is automating and streamlining this process. Our vision is to develop a community-driven universal platform capable of orchestrating quantum chip development from concept to fabrication in a simple and open framework.
+        Designing quantum devices is the bedrock of the quantum ecosystem, but
+        it is a difficult, multi-step process that connects traditionally
+        disparate worlds.
+        <br /><br />
+        Metal is automating and streamlining this process. Our vision is to
+        develop a community-driven universal platform capable of orchestrating
+        quantum chip development from concept to fabrication in a simple and
+        open framework.
       </p>
       <FeatureCard
         v-for="feature in metalFeatures"
@@ -22,9 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import { METAL_FEATURES } from '~/constants/metalContent'
+import { METAL_FEATURES } from "~/constants/metalContent";
 
-const metalFeatures = METAL_FEATURES
+const metalFeatures = METAL_FEATURES;
 </script>
 
 <style lang="scss" scoped>
@@ -35,7 +38,7 @@ const metalFeatures = METAL_FEATURES
   background-color: qiskit.$background-color-dark;
 
   &__container {
-    @include contained();
+    @include contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-12;

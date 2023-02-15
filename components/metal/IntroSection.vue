@@ -8,9 +8,12 @@
       </div>
       <div class="intro-section__content">
         <p class="intro-section__description">
-          Our vision is to develop a community-driven universal toolkit capable of orchestrating quantum chip development from concept to fabrication in a simple, scalable, and open framework.
-          <br><br>
-          A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum devices with ease: Qiskit Metal.
+          Our vision is to develop a community-driven universal toolkit capable
+          of orchestrating quantum chip development from concept to fabrication
+          in a simple, scalable, and open framework.
+          <br /><br />
+          A first-of-its-kind, open-source project for engineers and scientists
+          to design superconducting quantum devices with ease: Qiskit Metal.
         </p>
         <iframe
           class="intro-section__video"
@@ -33,9 +36,9 @@
 
 <script setup lang="ts">
 const joinWaitingListLink = {
-  url: 'https://qiskit.org/documentation/metal',
-  label: 'Get started now'
-}
+  url: "https://qiskit.org/documentation/metal",
+  label: "Get started now",
+};
 </script>
 
 <style lang="scss" scoped>
@@ -48,12 +51,13 @@ const joinWaitingListLink = {
   @include carbon.breakpoint-down(lg) {
     margin-top: -8rem;
   }
+
   @include carbon.breakpoint-down(md) {
     margin-top: -5rem;
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: 0;

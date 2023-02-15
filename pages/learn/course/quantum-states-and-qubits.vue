@@ -8,8 +8,8 @@
 // import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadings.vue'
 
 useHead({
-  title: 'Quantum States and Qubits'
-})
+  title: "Quantum States and Qubits",
+});
 
 // TODO: Integrate old code
 // const headerTitle = 'Quantum States and Qubits'

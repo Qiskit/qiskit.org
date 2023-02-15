@@ -14,17 +14,17 @@
 </template>
 
 <script setup lang="ts">
-import { MosaicElement } from '~/components/ui/AppMosaic.vue'
+import { MosaicElement } from "~/components/ui/AppMosaic.vue";
 
 interface Props {
-  description?: string
-  elements: MosaicElement[]
-  title: string
+  description?: string;
+  elements: MosaicElement[];
+  title: string;
 }
 
 withDefaults(defineProps<Props>(), {
-  description: ''
-})
+  description: "",
+});
 </script>
 
 <style lang="scss">

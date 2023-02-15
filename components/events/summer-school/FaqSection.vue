@@ -1,8 +1,6 @@
 <template>
   <section class="faq-section">
-    <h2>
-      Frequently asked questions
-    </h2>
+    <h2>Frequently asked questions</h2>
     <cv-accordion align="end">
       <cv-accordion-item>
         <template #title>
@@ -10,18 +8,22 @@
         </template>
         <template #content>
           <p>
-            Minimal prerequisites are required for the Qiskit Global Summer School. If you know
+            Minimal prerequisites are required for the Qiskit Global Summer
+            School. If you know
             <UiAppLink v-bind="khanAcademy">
               how to multiply two matrices
             </UiAppLink>
-            , and have some programming experience in Python, you are ready for the Summer School.
+            , and have some programming experience in Python, you are ready for
+            the Summer School.
           </p>
           <p>
             You can
             <UiAppLink v-bind="pythonAndJupyter">
               brush up on Python programming
             </UiAppLink>
-            before attending the lectures by using the Qiskit Textbook. To make the most out of these lectures, you may also consider looking through the
+            before attending the lectures by using the Qiskit Textbook. To make
+            the most out of these lectures, you may also consider looking
+            through the
             <UiAppLink v-bind="linearAlgebra">
               linear algebra prerequisites
             </UiAppLink>
@@ -36,40 +38,63 @@
         </template>
         <template #content>
           <p>
-            There is no application or pre-registration for the Qiskit Global Summer School 2022. Registration will be on a first come, first served basis, with scheduled global availability. Once the Summer School registration reaches capacity, unfortunately we will not be able to register any additional students.
+            There is no application or pre-registration for the Qiskit Global
+            Summer School 2022. Registration will be on a first come, first
+            served basis, with scheduled global availability. Once the Summer
+            School registration reaches capacity, unfortunately we will not be
+            able to register any additional students.
           </p>
         </template>
       </cv-accordion-item>
 
       <cv-accordion-item>
         <template #title>
-          What is the time requirement for the Summer School? Is the scheduled fixed or flexible?
+          What is the time requirement for the Summer School? Is the scheduled
+          fixed or flexible?
         </template>
         <template #content>
           <p>
-            The summer school is made up of a total of 20 lectures, 3 lab sessions &amp; application exercises, in addition to the daily Live Q&amp;A Sessions and final Commencement Celebration. Participation and completion of all labs and lectures are required in order to receive a certificate of completion from the Summer School, with the optional Q&A Sessions and Commencement activities to enhance your Summer School experience. The schedule is not fixed, aside from final lab submission deadlines, and all students can participate on the schedule that works best for them. Students should anticipate a minimum time commitment of 30 hours for the full Summer School, but we recommend planning on 41 hours of participation, with additional time for discussion and collaboration with other students.
+            The summer school is made up of a total of 20 lectures, 3 lab
+            sessions &amp; application exercises, in addition to the daily Live
+            Q&amp;A Sessions and final Commencement Celebration. Participation
+            and completion of all labs and lectures are required in order to
+            receive a certificate of completion from the Summer School, with the
+            optional Q&A Sessions and Commencement activities to enhance your
+            Summer School experience. The schedule is not fixed, aside from
+            final lab submission deadlines, and all students can participate on
+            the schedule that works best for them. Students should anticipate a
+            minimum time commitment of 30 hours for the full Summer School, but
+            we recommend planning on 41 hours of participation, with additional
+            time for discussion and collaboration with other students.
           </p>
         </template>
       </cv-accordion-item>
 
       <cv-accordion-item>
         <template #title>
-          I was a student at the Qiskit Global Summer School 2020/2021 - should I enroll in the 2022 Summer School as well?
+          I was a student at the Qiskit Global Summer School 2020/2021 - should
+          I enroll in the 2022 Summer School as well?
         </template>
         <template #content>
           <p>
-            The 2022 Summer School will cover briefly introduce quantum computing before diving into quantum simulations and chemistry, which was not covered in the 2020 or 2021 Summer School, so you should enroll if you are interested!
+            The 2022 Summer School will cover briefly introduce quantum
+            computing before diving into quantum simulations and chemistry,
+            which was not covered in the 2020 or 2021 Summer School, so you
+            should enroll if you are interested!
           </p>
         </template>
       </cv-accordion-item>
 
       <cv-accordion-item>
         <template #title>
-          Will the lectures and labs be recorded? Or will they only be accessible live?
+          Will the lectures and labs be recorded? Or will they only be
+          accessible live?
         </template>
         <template #content>
           <p>
-            Lectures and labs sessions will all be recorded and available for live participation and post viewing, as well as the daily Q&A sessions.
+            Lectures and labs sessions will all be recorded and available for
+            live participation and post viewing, as well as the daily Q&A
+            sessions.
           </p>
         </template>
       </cv-accordion-item>
@@ -79,9 +104,7 @@
           Do I need to download anything in order to participate?
         </template>
         <template #content>
-          <p>
-            Nope! Everything can be done in-browser.
-          </p>
+          <p>Nope! Everything can be done in-browser.</p>
         </template>
       </cv-accordion-item>
 
@@ -90,9 +113,7 @@
           What is the cost to enroll in the Summer School?
         </template>
         <template #content>
-          <p>
-            There is no cost to participate in the summer school!
-          </p>
+          <p>There is no cost to participate in the summer school!</p>
         </template>
       </cv-accordion-item>
 
@@ -102,7 +123,11 @@
         </template>
         <template #content>
           <p>
-            You will need a computer with a reliable internet connection and either a mobile device or webcam/microphone on your computer to communicate with mentors and other students. You will need to be able to view seminars and connect virtually. Other than that, you just need to bring yourself
+            You will need a computer with a reliable internet connection and
+            either a mobile device or webcam/microphone on your computer to
+            communicate with mentors and other students. You will need to be
+            able to view seminars and connect virtually. Other than that, you
+            just need to bring yourself
           </p>
         </template>
       </cv-accordion-item>
@@ -113,26 +138,29 @@
         </template>
         <template #content>
           <p>
-            The age limit for Qiskit Global Summer School 2022 is 14. If you are under the age limit, but still want to be part of the community, please check out other ways you can get connected, and other events that may be available in your area!
+            The age limit for Qiskit Global Summer School 2022 is 14. If you are
+            under the age limit, but still want to be part of the community,
+            please check out other ways you can get connected, and other events
+            that may be available in your area!
           </p>
         </template>
       </cv-accordion-item>
 
       <cv-accordion-item>
         <template #title>
-          I'm interested in hosting my own summer school or implementing Qiskit into my coursework - Where can I learn more?
+          I'm interested in hosting my own summer school or implementing Qiskit
+          into my coursework - Where can I learn more?
         </template>
         <template #content>
           <p>
             Explore IBM Quantums Educators Program
-            <UiAppLink v-bind="qCEducators">
-              online here
-            </UiAppLink>
+            <UiAppLink v-bind="qCEducators"> online here </UiAppLink>
             , or email
             <UiAppLink v-bind="mailtoQCEducators">
               quantum.education@us.ibm.com
             </UiAppLink>
-            to connect with the latest coursework and classroom resources for educators and students alike.
+            to connect with the latest coursework and classroom resources for
+            educators and students alike.
           </p>
         </template>
       </cv-accordion-item>
@@ -143,18 +171,14 @@
         </template>
         <template #content>
           <p>
-            There are several different ways you can connect with the IBM Quantum Community - depending on your preference. You can
-            <UiAppLink v-bind="twitterQiskit">
-              follow Qiskit
-            </UiAppLink>
+            There are several different ways you can connect with the IBM
+            Quantum Community - depending on your preference. You can
+            <UiAppLink v-bind="twitterQiskit"> follow Qiskit </UiAppLink>
             and
-            <UiAppLink v-bind="twitterIBMResearch">
-              IBM Research
-            </UiAppLink>
-            on Twitter for the latest updates on new events, activities, and features on what is going on with the community. There is also a
-            <UiAppLink v-bind="githubQiskit">
-              community Github
-            </UiAppLink>
+            <UiAppLink v-bind="twitterIBMResearch"> IBM Research </UiAppLink>
+            on Twitter for the latest updates on new events, activities, and
+            features on what is going on with the community. There is also a
+            <UiAppLink v-bind="githubQiskit"> community Github </UiAppLink>
             that you can explore and contribute to, and you can read regular
             <UiAppLink v-bind="mediumQiskit">
               blog posts from our team and community members on Medium
@@ -167,11 +191,15 @@
           </p>
 
           <p>
-            If you want to collaborate and connect with other members of the community, and participate in some of the ongoing conversations about quantum computing, you will want to
+            If you want to collaborate and connect with other members of the
+            community, and participate in some of the ongoing conversations
+            about quantum computing, you will want to
             <UiAppLink v-bind="joinqiskitslack">
               check out our ever-growing Slack Community
             </UiAppLink>
-            . From there you can connect with current and past interns, IBM researchers, Qiskit advocates, and fellow community members directly.
+            . From there you can connect with current and past interns, IBM
+            researchers, Qiskit advocates, and fellow community members
+            directly.
           </p>
         </template>
       </cv-accordion-item>
@@ -186,7 +214,8 @@
             <UiAppLink v-bind="qiskitEvents">
               upcoming events are listed on qiskit.org
             </UiAppLink>
-            , which is continually updated as we roll out more events throughout the year. You can also
+            , which is continually updated as we roll out more events throughout
+            the year. You can also
             <UiAppLink v-bind="twitterQiskit">
               follow Qiskit on Twitter
             </UiAppLink>
@@ -196,15 +225,15 @@
       </cv-accordion-item>
 
       <cv-accordion-item>
-        <template #title>
-          Still have more questions?
-        </template>
+        <template #title> Still have more questions? </template>
         <template #content>
           <p>
-            For any questions about the summer school, please submit your questions using the form below. For all other enquiries, feel free to email us directly at
+            For any questions about the summer school, please submit your
+            questions using the form below. For all other enquiries, feel free
+            to email us directly at
             <UiAppLink v-bind="mailtoQiskit">
-              qiskit.events@us.ibm.com
-            </UiAppLink>.
+              qiskit.events@us.ibm.com </UiAppLink
+            >.
           </p>
         </template>
       </cv-accordion-item>
@@ -213,77 +242,77 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 interface TrackedLink {
-  url: string,
-  segment: CtaClickedEventProp
+  url: string;
+  segment: CtaClickedEventProp;
 }
 
 const khanAcademy: TrackedLink = {
-  url: 'https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro',
-  segment: { cta: 'khanacademy-matrix-multiplication-intro', location: 'faq' }
-}
+  url: "https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro",
+  segment: { cta: "khanacademy-matrix-multiplication-intro", location: "faq" },
+};
 
 const pythonAndJupyter: TrackedLink = {
-  url: 'https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks',
-  segment: { cta: 'textbook-python-and-jupyter-notebooks', location: 'faq' }
-}
+  url: "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
+  segment: { cta: "textbook-python-and-jupyter-notebooks", location: "faq" },
+};
 
 const linearAlgebra: TrackedLink = {
-  url: 'https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing',
-  segment: { cta: 'qiskit-linear-algebra', location: 'faq' }
-}
+  url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
+  segment: { cta: "qiskit-linear-algebra", location: "faq" },
+};
 
 const qCEducators: TrackedLink = {
-  url: 'https://quantum-computing.ibm.com/programs/educators',
-  segment: { cta: 'ibm-quantum-educators-program', location: 'faq' }
-}
+  url: "https://quantum-computing.ibm.com/programs/educators",
+  segment: { cta: "ibm-quantum-educators-program", location: "faq" },
+};
 
 const mailtoQCEducators: TrackedLink = {
-  url: 'mailto:quantum.education@us.ibm.com',
-  segment: { cta: 'mailto-quantum-educators-program', location: 'faq' }
-}
+  url: "mailto:quantum.education@us.ibm.com",
+  segment: { cta: "mailto-quantum-educators-program", location: "faq" },
+};
 
 const twitterQiskit: TrackedLink = {
-  url: 'https://twitter.com/qiskit',
-  segment: { cta: 'qiskit-twitter', location: 'faq' }
-}
+  url: "https://twitter.com/qiskit",
+  segment: { cta: "qiskit-twitter", location: "faq" },
+};
 
 const twitterIBMResearch: TrackedLink = {
-  url: 'https://twitter.com/IBMResearch',
-  segment: { cta: 'ibmresearch-twitter', location: 'faq' }
-}
+  url: "https://twitter.com/IBMResearch",
+  segment: { cta: "ibmresearch-twitter", location: "faq" },
+};
 
 const githubQiskit: TrackedLink = {
-  url: 'https://github.com/Qiskit',
-  segment: { cta: 'qiskit-github', location: 'faq' }
-}
+  url: "https://github.com/Qiskit",
+  segment: { cta: "qiskit-github", location: "faq" },
+};
 
 const mediumQiskit: TrackedLink = {
-  url: 'https://medium.com/qiskit',
-  segment: { cta: 'qiskit-medium', location: 'faq' }
-}
+  url: "https://medium.com/qiskit",
+  segment: { cta: "qiskit-medium", location: "faq" },
+};
 
 const qiskitSubscribe: TrackedLink = {
-  url: 'https://qisk.it/sub',
-  segment: { cta: 'qiskit-youtube-subscribe', location: 'faq' }
-}
+  url: "https://qisk.it/sub",
+  segment: { cta: "qiskit-youtube-subscribe", location: "faq" },
+};
 
 const joinqiskitslack: TrackedLink = {
-  url: 'https://ibm.co/joinqiskitslack',
-  segment: { cta: 'qiskit-slack-join', location: 'faq' }
-}
+  url: "https://ibm.co/joinqiskitslack",
+  segment: { cta: "qiskit-slack-join", location: "faq" },
+};
 
 const qiskitEvents: TrackedLink = {
-  url: 'https://qiskit.org/events',
-  segment: { cta: 'qiskit-org-events', location: 'faq' }
-}
+  url: "https://qiskit.org/events",
+  segment: { cta: "qiskit-org-events", location: "faq" },
+};
 
 const mailtoQiskit: TrackedLink = {
-  url: 'mailto:qiskit.events@us.ibm.com',
-  segment: { cta: 'mailto-qiskit-events', location: 'faq' }
-}
+  url: "mailto:qiskit.events@us.ibm.com",
+  segment: { cta: "mailto-qiskit-events", location: "faq" },
+};
 </script>
 
 <style lang="scss" scoped>

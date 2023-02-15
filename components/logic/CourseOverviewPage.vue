@@ -1,21 +1,22 @@
 <template>
   <main class="course-overview-page">
-    <LearnContentMenuSection
-      class="course-overview-page__content-menu"
-    />
-    <AppPageHeaderWithImage :cta="startLearningCTA" :back-link="backToTextbookHomeLink">
-      <template slot="title">
+    <LearnContentMenuSection class="course-overview-page__content-menu" />
+    <AppPageHeaderWithImage
+      :cta="startLearningCTA"
+      :back-link="backToTextbookHomeLink"
+    >
+      <template #title>
         {{ headerTitle }}
       </template>
-      <template slot="description">
+      <template #description>
         <p
           v-for="(paragraph, index) in headerDescription"
           :key="index"
           v-text="paragraph"
         />
       </template>
-      <template slot="image">
-        <img class="app-page-header-with-img__image" :src="headerImg">
+      <template #image>
+        <img class="app-page-header-with-img__image" :src="headerImg" />
       </template>
     </AppPageHeaderWithImage>
     <PrerequisiteMaterialSection
@@ -30,47 +31,52 @@
       :references="references"
       :preamble="externalRecommendedReadingsPreamble"
     />
-    <CoursePagesSection class="course-overview-page__section" :courses="courses" :img-base="imageUrlBase" />
+    <CoursePagesSection
+      class="course-overview-page__section"
+      :courses="courses"
+      :img-base="imageUrlBase"
+    />
   </main>
 </template>
 
 <script setup lang="ts">
-import QiskitPage from './QiskitPage.vue'
-import { GeneralLink } from '~/constants/appLinks'
-import { Course, Prerequisite } from '~/constants/learnContent'
+import QiskitPage from "./QiskitPage.vue";
+import { GeneralLink } from "~/constants/appLinks";
+import { Course, Prerequisite } from "~/constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
 });
 
 export default abstract class CourseOverviewPage extends QiskitPage {
-  abstract routeName: string
+  abstract routeName: string;
 
-  abstract headerTitle: string
-  abstract headerDescription: string[]
-  abstract headerImg: string
+  abstract headerTitle: string;
+  abstract headerDescription: string[];
+  abstract headerImg: string;
 
-  abstract startLearningCTA: GeneralLink
+  abstract startLearningCTA: GeneralLink;
 
-  abstract links: GeneralLink[]
+  abstract links: GeneralLink[];
 
-  abstract references: string[]
+  abstract references: string[];
 
-  abstract externalRecommendedReadingsPreamble: string
+  abstract externalRecommendedReadingsPreamble: string;
 
-  abstract courses: Course[]
+  abstract courses: Course[];
 
-  abstract prerequisites: Prerequisite[]
+  abstract prerequisites: Prerequisite[];
 
-  abstract imageUrlBase: string
+  abstract imageUrlBase: string;
 
   backToTextbookHomeLink: GeneralLink = {
-    url: '/learn',
-    label: 'Home',
+    url: "/learn",
+    label: "Home",
     segment: {
-      cta: 'back-to-textbook-home', location: 'header'
-    }
-  }
+      cta: "back-to-textbook-home",
+      location: "header",
+    },
+  };
 }
 </script>
 
@@ -79,7 +85,7 @@ export default abstract class CourseOverviewPage extends QiskitPage {
 
 .course-overview-page {
   &__section {
-    @include contained();
+    @include contained;
 
     max-width: $max-size;
     margin-bottom: carbon.$spacing-07;

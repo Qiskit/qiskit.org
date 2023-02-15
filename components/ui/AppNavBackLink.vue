@@ -13,13 +13,13 @@
 <script setup lang="ts">
 interface Props {
   label: string;
-  theme?: 'light'|'dark';
+  theme?: "light" | "dark";
   url: string;
 }
 
 withDefaults(defineProps<Props>(), {
-  theme: 'light'
-})
+  theme: "light",
+});
 </script>
 
 <style lang="scss" scoped>
@@ -27,7 +27,7 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-nav-back-link {
-  @include contained();
+  @include contained;
 
   padding-bottom: carbon.$spacing-06;
   padding-top: carbon.$spacing-06;

@@ -33,10 +33,7 @@
               class="app-card__custom-pill"
             >
               {{ tag.label }}
-              <cv-tooltip
-                :tip="tag.message"
-                direction="bottom"
-              />
+              <cv-tooltip :tip="tag.message" direction="bottom" />
             </div>
           </div>
         </div>
@@ -58,51 +55,51 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 export interface TagTooltip {
   // the short string label for inside the tag
-  label: string,
+  label: string;
   // the description for the tooltip
-  description: string,
+  description: string;
 }
 
 interface Props {
-  descriptionWholeSize?: boolean
-  ctaLabel?: string
-  image?: string
-  imageContain?: boolean
-  segment?: CtaClickedEventProp | undefined
-  subtitle?: string
-  tags?: string[]
-  title: string
-  to?: string
-  tooltipTags?: TagTooltip[]
-  verticalLayout?: boolean
+  descriptionWholeSize?: boolean;
+  ctaLabel?: string;
+  image?: string;
+  imageContain?: boolean;
+  segment?: CtaClickedEventProp | undefined;
+  subtitle?: string;
+  tags?: string[];
+  title: string;
+  to?: string;
+  tooltipTags?: TagTooltip[];
+  verticalLayout?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   descriptionWholeSize: false,
-  ctaLabel: '',
-  image: '',
+  ctaLabel: "",
+  image: "",
   imageContain: false,
   segment: undefined,
-  subtitle: '',
+  subtitle: "",
   tags: () => [],
-  to: '',
+  to: "",
   tooltipTags: () => [],
   verticalLayout: false,
-})
+});
 
 const ctaLink = computed(() => ({
   url: props.to,
   label: props.ctaLabel,
   segment: props.segment,
-}))
+}));
 
 // TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
-function hasTags (tags: string[] | TagTooltip[]) {
-  return Array.isArray(tags) && tags.length > 0
+function hasTags(tags: string[] | TagTooltip[]) {
+  return Array.isArray(tags) && tags.length > 0;
 }
 </script>
 
@@ -223,10 +220,10 @@ function hasTags (tags: string[] | TagTooltip[]) {
 </style>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
+@import "~carbon-components/scss/globals/scss/typography";
 
 .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
-.bx--assistive-text {
+  .bx--assistive-text {
   width: 10rem;
 }
 
@@ -244,7 +241,7 @@ function hasTags (tags: string[] | TagTooltip[]) {
   }
 
   &__custom-pill {
-    @include type-style('caption-01');
+    @include type-style("caption-01");
 
     background-color: qiskit.$tag-background-color;
     color: qiskit.$tag-text-color;
@@ -255,10 +252,8 @@ function hasTags (tags: string[] | TagTooltip[]) {
     align-items: center;
     justify-content: center;
     padding: carbon.$spacing-02 carbon.$spacing-03;
-    margin-top: carbon.$spacing-02;
-    margin-bottom: carbon.$spacing-02;
-    margin-right: carbon.$spacing-03;
-    margin-left: carbon.$spacing-03;
+    margin: carbon.$spacing-02 carbon.$spacing-03 carbon.$spacing-02
+      carbon.$spacing-03;
     border-radius: 6.9375rem;
     cursor: default;
     vertical-align: middle;

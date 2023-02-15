@@ -1,15 +1,23 @@
 <template>
   <code class="code-cell">
-    <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[0]}">
+    <div
+      class="code-cell__block"
+      :class="{ 'code-cell__block_active': activeBlocks[0] }"
+    >
       <pre>import qiskit</pre>
       <pre>&nbsp;</pre>
       <pre><span class="code-cell__comment"># create circuit with Qiskit quantum circuit libraries</span></pre>
-      <pre class="code-cell__line">quantum_circuit = qiskit.circuit.library.QuantumVolume(5)</pre>
+      <pre class="code-cell__line">
+quantum_circuit = qiskit.circuit.library.QuantumVolume(5)</pre
+      >
       <pre class="code-cell__line">quantum_circuit.measure_all()</pre>
       <pre class="code-cell__line">quantum_circuit.draw()</pre>
       <pre>&nbsp;</pre>
     </div>
-    <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[1]}">
+    <div
+      class="code-cell__block"
+      :class="{ 'code-cell__block_active': activeBlocks[1] }"
+    >
       <pre><span class="code-cell__comment"># select simulator backend</span></pre>
       <pre>from qiskit import BasicAer</pre>
       <pre>&nbsp;</pre>
@@ -20,7 +28,10 @@
       <pre>optimized_circuit.draw()</pre>
       <pre>&nbsp;</pre>
     </div>
-    <div class="code-cell__block" :class="{'code-cell__block_active' : activeBlocks[2]}">
+    <div
+      class="code-cell__block"
+      :class="{ 'code-cell__block_active': activeBlocks[2] }"
+    >
       <pre><span class="code-cell__comment"># run on simulator</span></pre>
       <pre class="code-cell__line">job = backend.run(optimized_circuit)</pre>
       <pre class="code-cell__line">result = job.result()</pre>
@@ -31,12 +42,12 @@
 
 <script setup lang="ts">
 interface Props {
-  activeBlocks?: boolean[]
+  activeBlocks?: boolean[];
 }
 
 withDefaults(defineProps<Props>(), {
-  activeBlocks: () => [true, false, false]
-})
+  activeBlocks: () => [true, false, false],
+});
 </script>
 
 <style lang="scss" scoped>

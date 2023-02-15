@@ -1,9 +1,7 @@
 <template>
   <section class="capabilities-section">
     <div class="capabilities-section__container">
-      <h2>
-        Our vision
-      </h2>
+      <h2>Our vision</h2>
       <div class="capabilities-section__capabilities">
         <div class="capabilities-section__content">
           <CapabilityCard
@@ -22,29 +20,25 @@
             :key="item.visualResource"
             class="capabilities-section__visual-resource-container"
             :class="{
-              'capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
+              'capabilities-section__visual-resource-container_active':
+                isActiveImage(item, index),
             }"
           >
             <video
               v-if="isVideo(item.visualResource)"
-              class="
-                capabilities-section__visual-resource
-                capabilities-section__visual-resource_type_video"
+              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_video"
               loop
               autoplay
               muted
               playsinline
             >
-              <source :src="item.visualResource" type="video/mp4">
-              <source :src="item.visualResource" type="video/ogg">
+              <source :src="item.visualResource" type="video/mp4" />
+              <source :src="item.visualResource" type="video/ogg" />
               Your browser does not support video.
             </video>
             <div
               v-else
-              class="
-                capabilities-section__visual-resource
-                capabilities-section__visual-resource_type_image
-              "
+              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
               :lazy-background="item.visualResource"
             />
           </div>
@@ -56,35 +50,39 @@
 
 <!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script lang="ts">
-import { Component } from 'vue-property-decorator'
-import { MetalCapability, METAL_CAPABILITIES } from '~/constants/metalContent'
-import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections'
+import { Component } from "vue-property-decorator";
+import { MetalCapability, METAL_CAPABILITIES } from "~/constants/metalContent";
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 // TODO: Review how this work
-const { activeSection } = useScrollBetweenSections()
+const { activeSection } = useScrollBetweenSections();
 
 @Component
 export default class CapabilitiesSection {
-  capabilities = METAL_CAPABILITIES
+  capabilities = METAL_CAPABILITIES;
 
-  isActiveImage (item: MetalCapability, index: number): boolean {
-    return item.title === this.activeSection || (this.activeSection === '' && index === 0)
+  isActiveImage(item: MetalCapability, index: number): boolean {
+    return (
+      item.title === this.activeSection ||
+      (this.activeSection === "" && index === 0)
+    );
   }
 
-  isVideo (url: string): boolean {
-    const extension = url.substring(url.length - 4)
-    return extension === '.mp4'
+  isVideo(url: string): boolean {
+    const extension = url.substring(url.length - 4);
+    return extension === ".mp4";
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@import '~carbon-components/scss/globals/scss/typography';
+@import "~carbon-components/scss/globals/scss/typography";
 
 .capabilities-section {
   // multiple backgrounds in one section
-  background-image: url('/images/grid/grid-right-dark.svg'), url('/images/grid/grid-left-dark.svg');
+  background-image: url("/images/grid/grid-right-dark.svg"),
+    url("/images/grid/grid-left-dark.svg");
   background-size: 36rem auto, 36rem auto;
   background-position: right -1rem top, left 0 bottom 16rem;
   background-repeat: no-repeat, no-repeat;
@@ -92,11 +90,11 @@ export default class CapabilitiesSection {
 
   @include carbon.breakpoint-down(lg) {
     background-size: 22.5rem auto;
-    background-position: right -.5rem top, left 0 bottom 16rem;
+    background-position: right -0.5rem top, left 0 bottom 16rem;
   }
 
   &__container {
-    @include contained();
+    @include contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-09;

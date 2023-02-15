@@ -13,16 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
+import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 
 interface Props {
-  resources: DescriptionCard[]
-  title?: string
+  resources: DescriptionCard[];
+  title?: string;
 }
 
 withDefaults(defineProps<Props>(), {
-  title: 'Helpful Resources'
-})
+  title: "Helpful Resources",
+});
 </script>
 
 <style lang="scss" scoped>

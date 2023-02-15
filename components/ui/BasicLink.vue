@@ -14,52 +14,54 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from '~/types/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
-  isStatic?: boolean
-  segment?: CtaClickedEventProp | undefined
-  url?: string
+  isStatic?: boolean;
+  segment?: CtaClickedEventProp | undefined;
+  url?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isStatic: false,
   segment: undefined,
-  url: ''
-})
+  url: "",
+});
 
-const { trackClickEvent } = useSegment()
+const { trackClickEvent } = useSegment();
 
-function handleClick () {
-  emit('click')
-  props.segment && trackClickEvent(props.segment.cta, props.segment.location)
+function handleClick() {
+  emit("click");
+  props.segment && trackClickEvent(props.segment.cta, props.segment.location);
 }
 
 const isExternal = computed(() => {
-  return !!props.url && props.url.startsWith('http')
-})
+  return !!props.url && props.url.startsWith("http");
+});
 
 const isInternal = computed(() => {
-  return !!props.url && props.url.startsWith('/')
-})
+  return !!props.url && props.url.startsWith("/");
+});
 
 const isMail = computed(() => {
-  return !!props.url && props.url.startsWith('mailto')
-})
+  return !!props.url && props.url.startsWith("mailto");
+});
 
 const isIdAnchor = computed(() => {
-  return !!props.url && props.url.startsWith('#')
-})
+  return !!props.url && props.url.startsWith("#");
+});
 
-const hasLink = computed(() => !!props.url)
+const hasLink = computed(() => !!props.url);
 
 const isAnchor = computed(() => {
-  return isExternal.value ||
+  return (
+    isExternal.value ||
     isMail.value ||
     isIdAnchor.value ||
     isInternal.value ||
     props.isStatic
-})
+  );
+});
 
-const isNuxtLink = computed(() => !isAnchor.value)
+const isNuxtLink = computed(() => !isAnchor.value);
 </script>

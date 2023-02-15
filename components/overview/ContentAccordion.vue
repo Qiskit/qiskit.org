@@ -5,14 +5,11 @@
       :key="tab.title"
       @click.capture="preventFromClosing(index, $event)"
     >
-      <cv-accordion-item
-        :key="tab.title"
-        :open="index === expandedItem"
-      >
-        <template slot="title">
+      <cv-accordion-item :key="tab.title" :open="index === expandedItem">
+        <template #title>
           {{ tab.title }}
         </template>
-        <template slot="content">
+        <template #content>
           <AccordionLayout
             :image="tab.content.image"
             :description="tab.content.description"
@@ -25,29 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { AccordionLayoutProps } from '~/components/overview/AccordionLayout.vue'
+import { AccordionLayoutProps } from "~/components/overview/AccordionLayout.vue";
 
 export type ContentAccordionTab = {
-  title: string,
-  content: AccordionLayoutProps
-}
+  title: string;
+  content: AccordionLayoutProps;
+};
 
 interface Props {
-  tabs: Array<ContentAccordionTab>
+  tabs: Array<ContentAccordionTab>;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 
-const expandedItem = ref(0)
+const expandedItem = ref(0);
 
-function preventFromClosing (index: number, event: MouseEvent) {
+function preventFromClosing(index: number, event: MouseEvent) {
   if (index === expandedItem.value) {
-    event.stopPropagation()
+    event.stopPropagation();
   }
 }
 
-function actionChange ({ changedIndex }: { changedIndex: number }) {
-  expandedItem.value = changedIndex
+function actionChange({ changedIndex }: { changedIndex: number }) {
+  expandedItem.value = changedIndex;
 }
 </script>
 
@@ -80,7 +77,7 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
     fill: qiskit.$text-color-light;
   }
 
-  & button[aria-expanded="true"]{
+  & button[aria-expanded="true"] {
     color: qiskit.$text-color-white;
     background-color: qiskit.$button-background-color;
 
@@ -89,11 +86,11 @@ function actionChange ({ changedIndex }: { changedIndex: number }) {
     }
   }
 
-  & button[aria-expanded="true"] > .bx--accordion__title{
+  & button[aria-expanded="true"] > .bx--accordion__title {
     color: qiskit.$text-color-white;
   }
 
-  & button[aria-expanded="true"] > .bx--accordion__arrow{
+  & button[aria-expanded="true"] > .bx--accordion__arrow {
     fill: qiskit.$text-color-white;
   }
 
