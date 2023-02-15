@@ -28,14 +28,14 @@
           Page preview
         </div>
       </div>
-      <div class="course-pages-section__main__preview">
+      <div v-if="activeCourse" class="course-pages-section__main__preview">
         <UiBasicLink :url="activeCourse.url">
           <img
             class="course-pages-section__main__preview__image"
             :src="activeCoursePreviewImage"
           />
         </UiBasicLink>
-        <AppCta
+        <UiAppCta
           v-bind="activeCourse"
           label="Go to page"
           class="course-pages-section__main__preview__cta"
@@ -106,14 +106,14 @@ onMounted(() => {
     grid-area: main;
     grid-template-rows: auto 1fr;
     position: sticky;
-    top: -$spacing-03;
+    top: -(carbon.$spacing-03);
 
     @include carbon.breakpoint-down(md) {
       display: none;
     }
 
     &__title {
-      border-bottom: 4px solid $purple-60;
+      border-bottom: 4px solid carbon.$purple-60;
       display: inline;
       padding-bottom: carbon.$spacing-02;
       padding-right: carbon.$spacing-03;
@@ -128,7 +128,7 @@ onMounted(() => {
     }
 
     &__preview {
-      background: $cool-gray-10;
+      background: carbon.$cool-gray-10;
       padding: carbon.$spacing-05;
       position: relative;
 
@@ -145,7 +145,7 @@ onMounted(() => {
   }
 
   &__nav {
-    margin-right: -$spacing-10;
+    margin-right: -(carbon.$spacing-10);
 
     @include carbon.breakpoint-down(md) {
       margin-right: initial;
@@ -159,7 +159,7 @@ onMounted(() => {
     position: relative;
 
     &__entry {
-      color: $cool-gray-80;
+      color: carbon.$cool-gray-80;
       display: inline-block;
       max-width: calc(100% - 25px);
       padding: carbon.$spacing-02 carbon.$spacing-03;
@@ -167,7 +167,7 @@ onMounted(() => {
       width: 100%;
 
       &.active {
-        background: $cool-gray-10;
+        background: carbon.$cool-gray-10;
         font-weight: 600;
 
         @include carbon.breakpoint-down(md) {

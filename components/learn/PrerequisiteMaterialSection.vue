@@ -2,7 +2,7 @@
   <section class="prerequisite-material-section">
     <h2>Prerequisite material</h2>
     <div class="prerequisite-material-section__cards">
-      <AppDescriptionCard
+      <UiAppDescriptionCard
         v-for="{ title, description, segment, url } in data"
         :key="title"
         :description="description"
@@ -30,8 +30,8 @@ defineProps<Props>();
 .prerequisite-material-section {
   &__card {
     align-items: strech;
-    background: $cool-gray-10;
-    color: $cool-gray-80;
+    background: carbon.$cool-gray-10;
+    color: carbon.$cool-gray-80;
     display: flex;
     padding: carbon.$spacing-05 carbon.$spacing-05 0;
   }
