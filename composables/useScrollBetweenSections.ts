@@ -38,10 +38,10 @@ export function useScrollBetweenSections () {
   //   next()
   // }
 
-  onBeforeRouteUpdate (route: any, _: any, next: any) {
+  onBeforeRouteUpdate ((route: any, _: any, next: any) => {
     this._parseSectionFromUrl(route)
     next()
-  }
+  })
 
   function updateObserved () {
     (this.$el as HTMLElement)
