@@ -129,5 +129,35 @@
       "counts = job.result().get_counts()\n",
       "print(counts)"
     ]
+  },
+  {
+    "name": "Amazon Braket",
+    "image": null,
+    "installation": "pip install qiskit_braket_provider",
+    "description": "Execute Qiskit programs on AWS quantum computing hardware devices through Amazon Braket",
+    "websiteUrl": "https://aws.amazon.com/braket/",
+    "docUrl": "https://qiskit-community.github.io/qiskit-braket-provider/",
+    "sourceUrl": "https://github.com/qiskit-community/qiskit-braket-provider",
+    "sourceLabel": "GitHub",
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit, transpile\n",
+      "from qiskit_braket_provider import AWSBraketProvider\n",
+      "\n",
+      "# Select a backend\n",
+      "provider = AWSBraketProvider()\n",
+      "backend = provider.backends(\"SV1\")\n",
+      "\n",
+      "# Build and transpile a circuit\n",
+      "circuit = QuantumCircuit(2, 2)\n",
+      "circuit.h(0)\n",
+      "circuit.cx(0,1)\n",
+      "circuit.measure([0,1], [0,1])\n",
+      "transpiled_circuit = transpile(circuit, backend)\n",
+      "\n",
+      "# Run the circuit and get result counts\n",
+      "job = backend.run(transpiled_circuit)\n",
+      "counts = job.result().get_counts()\n",
+      "print(counts)"
+    ]
   }
 ]
