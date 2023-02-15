@@ -94,5 +94,40 @@
       "counts = job.get_counts()\n",
       "print(counts)"
     ]
+  },
+  {
+    "name": "Azure Quantum",
+    "image": null,
+    "installation": "pip install \"azure-quantum[qiskit]\"",
+    "description": "Qiskit provider for IonQ backends.",
+    "websiteUrl": "https://aka.ms/aq",
+    "docUrl": "https://aka.ms/AQ/Qiskit/QuickStart",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit\n",
+      "from azure.quantum.qiskit import AzureQuantumProvider\n",
+      "\n",
+      "# Connect to Azure Quantum service\n",
+      "provider = AzureQuantumProvider(\n",
+      "  resource_id=\"MY_RESOURCE_ID\",\n",
+      "  location=\"MY_LOCATION\"\n",
+      ")\n",
+      "\n",
+      "# select a backend\n",
+      "backend = provider.get_backend(\"ionq.simulator\")\n",
+      "\n",
+      "# Build and transpile a circuit\n",
+      "circuit = QuantumCircuit(2, 2)\n",
+      "circuit.h(0)\n",
+      "circuit.cx(0,1)\n",
+      "circuit.measure([0,1], [0,1])\n",
+      "transpiled_circuit = transpile(circuit, backend)\n",
+      "\n",
+      "# Run the circuit and get result counts\n",
+      "job = backend.run(transpiled_circuit)\n",
+      "counts = job.result().get_counts()\n",
+      "print(counts)"
+    ]
   }
 ]
