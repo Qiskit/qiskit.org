@@ -36,9 +36,10 @@
           />
         </UiBasicLink>
         <UiAppCta
-          v-bind="activeCourse"
           label="Go to page"
           class="course-pages-section__main__preview__cta"
+          :segment="activeCourse.segment"
+          :url="activeCourse.url"
         />
       </div>
     </main>

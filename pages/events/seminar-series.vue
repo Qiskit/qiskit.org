@@ -45,8 +45,10 @@
               <UiAppCta
                 v-if="isAppCtaComponent(component)"
                 kind="ghost"
-                v-bind="data"
+                :label="data.label"
+                :segment="data.segment"
                 :style="styles"
+                :url="data.url"
               />
               <span v-else :style="styles">{{ data }}</span>
             </cv-data-table-cell>
@@ -70,8 +72,10 @@
               <UiAppCta
                 v-if="isAppCtaComponent(component)"
                 kind="ghost"
-                v-bind="data"
+                :label="data.label"
+                :segment="data.segment"
                 :style="styles"
+                :url="data.url"
               />
               <span v-else :style="styles">{{ data }}</span>
             </cv-data-table-cell>
@@ -80,7 +84,9 @@
         <UiAppCta
           class="seminar-series-page__past-events-cta"
           kind="ghost"
-          v-bind="showMorePastEventsCta"
+          :label="showMorePastEventsCta.label"
+          :segment="showMorePastEventsCta.segment"
+          :url="showMorePastEventsCta.url"
         />
       </AppDataTableSection> -->
       <!-- <AppHelpfulResourcesSection

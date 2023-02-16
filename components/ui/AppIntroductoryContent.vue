@@ -5,13 +5,21 @@
       <p class="app-introductory-content__description">
         {{ description }}
       </p>
-      <UiAppCta v-if="link" v-bind="link" kind="ghost" />
+      <UiAppCta
+        v-if="link"
+        kind="ghost"
+        :label="link.label"
+        :segment="link.segment"
+        :url="link.url"
+      />
       <template v-if="linkset">
         <UiAppCta
           v-for="link in linkset"
-          v-bind="link"
-          :key="link.index"
+          :key="link.label"
           kind="ghost"
+          :label="link.label"
+          :segment="link.segment"
+          :url="link.url"
         />
       </template>
     </div>

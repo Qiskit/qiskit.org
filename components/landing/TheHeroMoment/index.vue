@@ -21,8 +21,8 @@
         </div>
         <UiAppCta
           class="the-hero-moment__cta"
-          v-bind="getStartedLink"
           :label="getStartedLink.label"
+          :segment="getStartedLink.segment"
           :url="getStartedLink.url"
         />
       </div>

@@ -9,9 +9,9 @@
           to the individuals who actively contribute to the Qiskit Community.
         </p>
         <UiAppCta
-          v-bind="joinAction"
           is-wider
           :label="joinAction.label"
+          :segment="joinAction.segment"
           :url="joinAction.url"
         />
       </article>

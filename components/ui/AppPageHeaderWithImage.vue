@@ -2,7 +2,11 @@
   <header class="app-page-header-with-img">
     <div class="bx--grid">
       <div v-if="backLink" class="bx--row app-page-header-with-img__back-link">
-        <UiAppNavBackLink v-bind="backLink" />
+        <UiAppNavBackLink
+          :label="backLink.label"
+          :segment="backLink.segment"
+          :url="backLink.url"
+        />
       </div>
       <div class="bx--row app-page-header-with-img__content">
         <h1 class="app-page-header-with-img__headline">
