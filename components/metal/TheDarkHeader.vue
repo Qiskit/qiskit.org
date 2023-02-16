@@ -151,11 +151,12 @@
 </template>
 
 <style lang="scss">
+@use "sass:math";
+@use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
-@import "~carbon-components/scss/globals/scss/typography";
 
 .the-dark-header {
-  @include responsive-grid-bg-strip(
+  @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-dark.svg",
     auto,
     56rem

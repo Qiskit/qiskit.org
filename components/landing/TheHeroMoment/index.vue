@@ -2,7 +2,10 @@
   <article class="the-hero-moment">
     <MetalGrid>
       <div class="bx--grid the-hero-moment__container">
-        <VersionInfo class="the-hero-moment__version-info" :version="version" />
+        <LandingTheHeroMomentVersionInfo
+          class="the-hero-moment__version-info"
+          :version="version"
+        />
         <div class="bx--row">
           <h1
             class="bx--col-md-4 bx--col-lg-9 bx--col-xlg-7 bx--col-max-7 the-hero-moment__title"
@@ -49,6 +52,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 </script>
 
 <style lang="scss">
+@use "sass:math";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 

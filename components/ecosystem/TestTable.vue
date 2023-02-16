@@ -109,13 +109,13 @@ function dataPerRow(filteredData: Object[]): TableRowElement[][] {
 
   .bx--data-table th[aria-sort] {
     background-color: carbon.$cool-gray-10;
-    border-bottom: 1px solidcarbon.$cool-gray-30;
+    border-bottom: 1px solid carbon.$cool-gray-30;
   }
 
   .bx--data-table tbody tr td,
   .bx--data-table tbody tr:hover td {
     background-color: carbon.$cool-gray-10;
-    border-bottom: 1px solidcarbon.$cool-gray-30;
+    border-bottom: 1px solid carbon.$cool-gray-30;
     color: $black-100;
   }
 }
