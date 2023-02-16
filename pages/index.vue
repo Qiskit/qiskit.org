@@ -11,30 +11,26 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import axios from 'axios'
+interface PackageInfo {
+  info: {
+    version: string;
+  };
+}
 
 definePageMeta({
   layout: "default-max",
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit",
 });
 
-// TODO: Refactor async data fetching in pages
-// @Component({
-//   async asyncData () {
-//     const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
-//     const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
-//     return {
-//       qiskitVersion: packageInfo.info.version
-//     }
-//   }
-// })
 // TODO: Refactor tracking
-// export default class LandingPage {
-//   routeName = 'qiskit-landing-page'
-// }
+const routeName = "qiskit-landing-page";
+
+const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
+  $fetch("https://pypi.org/pypi/qiskit/json")
+);
+
+const qiskitVersion = packageInfo.value?.info.version ?? "";
 </script>
