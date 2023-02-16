@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Qiskit.org only supports the online version at a time both for bug and security fixes, which covers `https://*.qiskit.org/*` and `https://qiskit.org/*`.
+Qiskit.org only supports the online version at a time, both for bug and security fixes, which covers `https://*.qiskit.org/*` and `https://qiskit.org/*`.
 
 ## Reporting a Vulnerability
 
