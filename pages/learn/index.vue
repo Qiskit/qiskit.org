@@ -24,8 +24,7 @@
 
 <script setup lang="ts">
 // TODO: Integrate old code
-// import "@qiskit/web-components/components/banner";
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
+// import "@qiskit/web-components/banner";
 // import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 // import { SOCIAL_MEDIA } from "~/constants/menuLinks";
 
@@ -84,28 +83,29 @@ useHead({
 //   },
 // ];
 
-// TODO: Refactor "logic" pages
-// export default class LearnPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class LearnPage {
 //   routeName: string = 'learn'
 // }
 </script>
 
 <style lang="scss" scoped>
 // TODO: Review old CSS
+// @use "~/assets/scss/helpers/index.scss" as qiskit;
 // .learn-page {
 //   &__section {
-//     @include contained();
+//     @include qiskit.contained();
 
-//     max-width: $max-size;
+//     max-width: qiskit.$max-size;
 //     margin-bottom: carbon.$spacing-07;
 //     margin-top: carbon.$spacing-10;
 //   }
 
 //   qiskit-banner {
 //     .content {
-//       @include contained();
+//       @include qiskit.contained();
 
-//       max-width: $max-size;
+//       max-width: qiskit.$max-size;
 //       padding: carbon.$spacing-04 carbon.$spacing-06;
 //       display: flex;
 //       flex: 1;

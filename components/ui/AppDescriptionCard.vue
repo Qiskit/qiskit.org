@@ -5,11 +5,13 @@
       <p v-text="description" />
     </div>
     <div class="app-description-card__footer">
-      <AppCta
+      <UiAppCta
         v-if="cta && cta.url"
-        v-bind="cta"
-        kind="ghost"
         class="app-description-card__cta"
+        kind="ghost"
+        :label="cta.label"
+        :segment="cta.segment"
+        :url="cta.url"
       />
     </div>
   </article>

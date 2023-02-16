@@ -16,7 +16,7 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <AppCta v-bind="quickStartLink" kind="ghost" />
+            <UiAppCta kind="ghost" :label="quickStartLink.label" :url="quickStartLink.url" />
           </div>
         </div>
         <div class="bx--col-lg-13 bx--col-md-6">
@@ -52,7 +52,6 @@
 </template>
 
 <script setup lang="ts">
-import QiskitPage from "~/components/logic/QiskitPage.vue";
 import { ContentAccordionTab } from "~/components/overview/ContentAccordion.vue";
 import {
   TABLE_OF_CONTENTS,
@@ -88,8 +87,8 @@ const quickStartLink = {
 //   return subsections.map((subsection) => subsection as ContentAccordionTab);
 // }
 
-// TODO: Refactor "logic" pages
-// export default class OverviewPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class OverviewPage {
 //   routeName = 'overview'
 // }
 </script>

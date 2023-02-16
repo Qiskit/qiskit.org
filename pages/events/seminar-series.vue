@@ -42,11 +42,13 @@
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
-              <AppCta
+              <UiAppCta
                 v-if="isAppCtaComponent(component)"
                 kind="ghost"
-                v-bind="data"
+                :label="data.label"
+                :segment="data.segment"
                 :style="styles"
+                :url="data.url"
               />
               <span v-else :style="styles">{{ data }}</span>
             </cv-data-table-cell>
@@ -67,20 +69,24 @@
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
-              <AppCta
+              <UiAppCta
                 v-if="isAppCtaComponent(component)"
                 kind="ghost"
-                v-bind="data"
+                :label="data.label"
+                :segment="data.segment"
                 :style="styles"
+                :url="data.url"
               />
               <span v-else :style="styles">{{ data }}</span>
             </cv-data-table-cell>
           </cv-data-table-row>
         </template>
-        <AppCta
+        <UiAppCta
           class="seminar-series-page__past-events-cta"
           kind="ghost"
-          v-bind="showMorePastEventsCta"
+          :label="showMorePastEventsCta.label"
+          :segment="showMorePastEventsCta.segment"
+          :url="showMorePastEventsCta.url"
         />
       </AppDataTableSection> -->
       <!-- <AppHelpfulResourcesSection
@@ -93,7 +99,6 @@
 
 <script setup lang="ts">
 // TODO: Integrate old code
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
 // import { MosaicElement } from "~/components/ui/AppMosaic.vue";
 // import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 // import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
@@ -303,8 +308,8 @@ useHead({
 //   ]);
 // }
 
-// TODO: Refactor "logic" pages
-// export default class SeminarSeriesPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class SeminarSeriesPage {
 //   routeName = 'seminar-series'
 // }
 </script>

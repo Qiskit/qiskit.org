@@ -20,9 +20,6 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import QiskitPage from "~/components/logic/QiskitPage.vue";
-
 definePageMeta({
   layout: "default-max",
 });
@@ -39,8 +36,8 @@ useHead({
   ],
 });
 
-// TODO: Refactor "logic" pages
-// export default class AdvocatesPage extends QiskitPage {
+// TODO: Refactor tracking
+// export default class AdvocatesPage {
 //   routeName: string = 'advocates'
 // }
 </script>

@@ -24,12 +24,13 @@
             direction="bottom"
           />
         </span>
-        <AppCta
+        <UiAppCta
           v-else-if="component === 'link'"
           class="app-card__cta"
-          v-bind="{ url: data, label: 'see test logs' }"
           is-wider
+          label="see test logs"
           kind="ghost"
+          :url="data"
         />
         <CheckmarkFilled16
           v-else-if="component === true"
@@ -107,14 +108,14 @@ function dataPerRow(filteredData: Object[]): TableRowElement[][] {
   overflow-x: unset !important;
 
   .bx--data-table th[aria-sort] {
-    background-color: $cool-gray-10;
-    border-bottom: 1px solid $cool-gray-30;
+    background-color: carbon.$cool-gray-10;
+    border-bottom: 1px solidcarbon.$cool-gray-30;
   }
 
   .bx--data-table tbody tr td,
   .bx--data-table tbody tr:hover td {
-    background-color: $cool-gray-10;
-    border-bottom: 1px solid $cool-gray-30;
+    background-color: carbon.$cool-gray-10;
+    border-bottom: 1px solidcarbon.$cool-gray-30;
     color: $black-100;
   }
 }

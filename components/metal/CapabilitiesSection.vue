@@ -94,7 +94,7 @@ export default class CapabilitiesSection {
   }
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-09;

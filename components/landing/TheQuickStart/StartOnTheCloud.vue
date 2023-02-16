@@ -7,7 +7,11 @@
           Get started in the cloud without installing anything with IBM Quantum
           Lab.
         </p>
-        <AppCta kind="ghost" v-bind="ibmQExperienceLink" />
+        <UiAppCta
+          kind="ghost"
+          :label="ibmQExperienceLink.label"
+          :url="ibmQExperienceLink.url"
+        />
       </div>
     </div>
   </section>

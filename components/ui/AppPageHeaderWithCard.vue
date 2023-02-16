@@ -11,7 +11,12 @@
               <slot name="description" />
             </div>
           </div>
-          <AppCta v-if="cta" v-bind="cta" />
+          <UiAppCta
+            v-if="cta"
+            :label="cta.label"
+            :segment="cta.segment"
+            :url="cta.url"
+          />
         </main>
         <aside class="bx--col-lg-5 bx--col-md-4 app-page-header__aside">
           <div>

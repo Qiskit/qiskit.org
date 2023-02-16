@@ -8,7 +8,7 @@
             {{ preamble }}
           </p>
           <ol class="external-recommended-readings__list">
-            <li v-for="reference in references" :key="reference.label">
+            <li v-for="reference in references" :key="reference">
               <span class="external-recommended-readings__reference">
                 {{ reference }}
               </span>
@@ -53,7 +53,7 @@ export type RecommendedReading = GeneralLink & {
 
 interface Props {
   links: RecommendedReading[];
-  references?: GeneralLink[];
+  references?: string[];
   preamble?: string;
 }
 
@@ -65,7 +65,6 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@import "~carbon-components/scss/globals/scss/typography";
 
 .external-recommended-readings {
   &__list {
@@ -86,7 +85,7 @@ withDefaults(defineProps<Props>(), {
   }
 
   &__reference {
-    @include type-style("code-01");
+    @include carbon.type-style("code-01");
 
     margin-bottom: carbon.$spacing-01;
   }

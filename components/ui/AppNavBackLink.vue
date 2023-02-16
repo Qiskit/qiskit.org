@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+import ArrowLeft16 from "@carbon/icons-vue/lib/arrow--left/16";
+
 interface Props {
   label: string;
   theme?: "light" | "dark";
@@ -27,7 +29,7 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-nav-back-link {
-  @include contained;
+  @include qiskit.contained;
 
   padding-bottom: carbon.$spacing-06;
   padding-top: carbon.$spacing-06;

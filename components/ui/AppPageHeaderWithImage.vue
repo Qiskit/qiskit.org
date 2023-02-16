@@ -2,7 +2,11 @@
   <header class="app-page-header-with-img">
     <div class="bx--grid">
       <div v-if="backLink" class="bx--row app-page-header-with-img__back-link">
-        <AppNavBackLink v-bind="backLink" />
+        <UiAppNavBackLink
+          :label="backLink.label"
+          :segment="backLink.segment"
+          :url="backLink.url"
+        />
       </div>
       <div class="bx--row app-page-header-with-img__content">
         <h1 class="app-page-header-with-img__headline">
@@ -14,7 +18,14 @@
         <div class="app-page-header-with-img__description">
           <slot name="description" />
         </div>
-        <AppCta v-if="cta" v-bind="cta" class="app-page-header-with-img__cta" />
+        <UiAppCta
+          v-if="cta"
+          class="app-page-header-with-img__cta"
+          :label="cta.label"
+          :segment="cta.segment"
+          :title="cta.title"
+          :url="cta.url"
+        />
       </div>
     </div>
   </header>

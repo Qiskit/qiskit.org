@@ -1,6 +1,6 @@
 <template>
   <header class="the-dark-header">
-    <AppNavBackLink label="Back to Qiskit.org" theme="dark" url="/" />
+    <UiAppNavBackLink label="Back to Qiskit.org" theme="dark" url="/" />
 
     <div class="the-dark-header__container">
       <svg
@@ -151,6 +151,7 @@
 </template>
 
 <style lang="scss">
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 @import "~carbon-components/scss/globals/scss/typography";
 
 .the-dark-header {
@@ -184,7 +185,7 @@
   }
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
     position: relative;
     display: flex;

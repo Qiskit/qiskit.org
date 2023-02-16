@@ -1,8 +1,8 @@
 <template>
   <main class="course-overview-page">
     <LearnContentMenuSection class="course-overview-page__content-menu" />
-    <AppPageHeaderWithImage
-      :cta="startLearningCTA"
+    <UiAppPageHeaderWithImage
+      :cta="startLearningCta"
       :back-link="backToTextbookHomeLink"
     >
       <template #title>
@@ -18,20 +18,20 @@
       <template #image>
         <img class="app-page-header-with-img__image" :src="headerImg" />
       </template>
-    </AppPageHeaderWithImage>
-    <PrerequisiteMaterialSection
+    </UiAppPageHeaderWithImage>
+    <LearnPrerequisiteMaterialSection
       v-if="prerequisites.length > 0"
       class="course-overview-page__section"
       :data="prerequisites"
     />
-    <ExternalRecommendedReadings
+    <LearnExternalRecommendedReadings
       v-if="links.length > 0 || references.length > 0"
       class="course-overview-page__section"
       :links="links"
       :references="references"
       :preamble="externalRecommendedReadingsPreamble"
     />
-    <CoursePagesSection
+    <LearnCoursePagesSection
       class="course-overview-page__section"
       :courses="courses"
       :img-base="imageUrlBase"
@@ -40,58 +40,48 @@
 </template>
 
 <script setup lang="ts">
-import QiskitPage from "./QiskitPage.vue";
-import { GeneralLink } from "~/constants/appLinks";
-import { Course, Prerequisite } from "~/constants/learnContent";
+import type { GeneralLink } from "~/constants/appLinks";
+import type { Course, Prerequisite } from "~/constants/learnContent";
 
-definePageMeta({
-  layout: "default-max",
-});
-
-export default abstract class CourseOverviewPage extends QiskitPage {
-  abstract routeName: string;
-
-  abstract headerTitle: string;
-  abstract headerDescription: string[];
-  abstract headerImg: string;
-
-  abstract startLearningCTA: GeneralLink;
-
-  abstract links: GeneralLink[];
-
-  abstract references: string[];
-
-  abstract externalRecommendedReadingsPreamble: string;
-
-  abstract courses: Course[];
-
-  abstract prerequisites: Prerequisite[];
-
-  abstract imageUrlBase: string;
-
-  backToTextbookHomeLink: GeneralLink = {
-    url: "/learn",
-    label: "Home",
-    segment: {
-      cta: "back-to-textbook-home",
-      location: "header",
-    },
-  };
+interface Props {
+  routeName: string; // TODO: Refactor tracking
+  headerTitle: string;
+  headerDescription: string[];
+  headerImg: string;
+  startLearningCta: GeneralLink;
+  links: GeneralLink[];
+  references: string[];
+  externalRecommendedReadingsPreamble: string;
+  courses: Course[];
+  prerequisites: Prerequisite[];
+  imageUrlBase: string;
 }
+
+defineProps<Props>();
+
+const backToTextbookHomeLink: GeneralLink = {
+  url: "/learn",
+  label: "Home",
+  segment: {
+    cta: "back-to-textbook-home",
+    location: "header",
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .course-overview-page {
   &__section {
-    @include contained;
+    @include qiskit.contained;
 
-    max-width: $max-size;
+    max-width: qiskit.$max-size;
     margin-bottom: carbon.$spacing-07;
     margin-top: carbon.$spacing-10;
 
-    ::v-deep .course-pages-section__main {
+    :deep(.course-pages-section__main) {
       min-height: 20rem;
       height: max-content;
     }

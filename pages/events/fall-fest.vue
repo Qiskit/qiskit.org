@@ -85,7 +85,6 @@
 <script setup lang="ts">
 // TODO: Integrate old code
 // import UniversityDirectorySection from '../../components/events/fall-fest/UniversityDirectorySection.vue'
-// import QiskitPage from '~/components/logic/QiskitPage.vue'
 // import {
 //   header,
 //   agenda,
@@ -156,9 +155,9 @@ useHead({
   ],
 });
 
-// TODO: Refactor "logic" pages
+// TODO: Refactor tracking
 // @Component({
-// export default class FallFestPage extends QiskitPage {
+// export default class FallFestPage {
 //   routeName = 'fall-fest'
 //   agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
 //   headerData = header

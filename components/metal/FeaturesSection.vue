@@ -38,7 +38,7 @@ const metalFeatures = METAL_FEATURES;
   background-color: qiskit.$background-color-dark;
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: carbon.$spacing-12;
@@ -50,7 +50,7 @@ const metalFeatures = METAL_FEATURES;
   }
 
   &__description {
-    max-width: 9 * $column-size-large;
+    max-width: 9 * qiskit.$column-size-large;
     margin-bottom: carbon.$spacing-12;
 
     @include carbon.breakpoint-down(lg) {
@@ -58,7 +58,7 @@ const metalFeatures = METAL_FEATURES;
     }
 
     @include carbon.breakpoint-between(md, lg) {
-      max-width: 6 * $column-size-medium;
+      max-width: 6 * qiskit.$column-size-medium;
     }
 
     @include carbon.breakpoint-down(md) {

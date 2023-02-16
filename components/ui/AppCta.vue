@@ -22,32 +22,35 @@
 </template>
 
 <script setup lang="ts">
-import UiBasicLink from "~/components/ui/UiBasicLink.vue";
+import type { GeneralLink } from "~~/constants/appLinks";
+import UiBasicLink from "~/components/ui/BasicLink.vue";
 
 interface Props {
   isWider?: boolean;
   kind?: "primary" | "secondary" | "ghost";
-  label?: string;
+  label: string;
   theme?: "light" | "dark";
+  url: string | GeneralLink;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isWider: false,
   kind: "primary",
-  label: "",
   theme: "light",
 });
 
 const iconPerLinkType = computed(() => {
-  const url = this.$attrs.url;
+  const url = props.url;
 
   if (props.label === "Under construction") {
     return "error-outline-16";
   }
-  if (UiBasicLink.isExternal(url)) {
+  // TODO: Fix how we're using this function and what params it accepts
+  if (UiBasicLink.isExternal(url as string)) {
     return "launch-16";
   }
-  if (UiBasicLink.isIdAnchor(url)) {
+  // TODO: Fix how we're using this function and what params it accepts
+  if (UiBasicLink.isIdAnchor(url as string)) {
     return "arrow-down-16";
   }
   return "arrow-right-16";
@@ -74,11 +77,11 @@ const iconPerLinkType = computed(() => {
   text-decoration: none;
   align-items: center;
   padding: carbon.$spacing-05;
-  width: 4 * $column-size-large;
+  width: 4 * qiskit.$column-size-large;
   max-width: 100%;
 
   @include carbon.breakpoint-between(md, lg) {
-    width: 3 * $column-size-medium;
+    width: 3 * qiskit.$column-size-medium;
   }
 
   @include carbon.breakpoint-down(md) {

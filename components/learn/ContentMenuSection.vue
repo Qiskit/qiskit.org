@@ -12,14 +12,14 @@
 </template>
 
 <script setup lang="ts">
-import "@qiskit/web-components/components/mega-menu-dropdown";
+import "@qiskit/web-components/mega-menu-dropdown";
 import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
 
 const dropdownMenuContent = LEARN_MEGA_MENU;
 
 function trackPerformedSearch(uiElement: string, field: string) {
   // TODO: Refactor tracking
-  this.$trackPerformedSearch(uiElement, field);
+  // this.$trackPerformedSearch(uiElement, field);
 }
 </script>
 
@@ -32,9 +32,9 @@ function trackPerformedSearch(uiElement: string, field: string) {
   border-bottom: 1px solid qiskit.$border-color;
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
-    max-width: $max-size;
+    max-width: qiskit.$max-size;
   }
 
   qiskit-mega-menu-dropdown {

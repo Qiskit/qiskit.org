@@ -51,7 +51,11 @@
             >
             chapters on quantum devices and their control.
           </p>
-          <AppCta v-bind="stayInTouchLink" theme="dark" />
+          <UiAppCta
+            :label="stayInTouchLink.label"
+            :url="stayInTouchLink.url"
+            theme="dark"
+          />
           <!-- eslint-enable -->
         </div>
         <div class="building-section__media">
@@ -75,6 +79,7 @@ const stayInTouchLink = {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .building-section {
   @include responsive-grid-bg("/images/grid/grid-right-dark.svg", 36rem);
@@ -92,7 +97,7 @@ const stayInTouchLink = {
   }
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
     padding-top: carbon.$spacing-10;
   }
@@ -104,7 +109,7 @@ const stayInTouchLink = {
   }
 
   &__text {
-    max-width: 7.5 * $column-size-large;
+    max-width: 7.5 * qiskit.$column-size-large;
     margin-bottom: carbon.$spacing-09;
 
     @include carbon.breakpoint-down(lg) {
@@ -112,7 +117,7 @@ const stayInTouchLink = {
     }
 
     @include carbon.breakpoint-between(md, lg) {
-      max-width: 6 * $column-size-medium;
+      max-width: 6 * qiskit.$column-size-medium;
     }
 
     @include carbon.breakpoint-down(md) {

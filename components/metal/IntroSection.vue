@@ -25,10 +25,11 @@
           allowfullscreen
         />
       </div>
-      <AppCta
+      <UiAppCta
         class="intro-section__cta"
-        v-bind="joinWaitingListLink"
+        :label="joinWaitingListLink.label"
         theme="dark"
+        :url="joinWaitingListLink.url"
       />
     </div>
   </section>
@@ -43,6 +44,7 @@ const joinWaitingListLink = {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .intro-section {
   position: relative;
@@ -57,7 +59,7 @@ const joinWaitingListLink = {
   }
 
   &__container {
-    @include contained;
+    @include qiskit.contained;
 
     padding-top: carbon.$spacing-10;
     padding-bottom: 0;
@@ -73,7 +75,7 @@ const joinWaitingListLink = {
   }
 
   &__description {
-    max-width: 6 * $column-size-large;
+    max-width: 6 * qiskit.$column-size-large;
     margin-bottom: carbon.$spacing-12;
     padding-right: carbon.$spacing-07;
 
@@ -82,7 +84,7 @@ const joinWaitingListLink = {
     }
 
     @include carbon.breakpoint-between(md, lg) {
-      max-width: 4 * $column-size-medium;
+      max-width: 4 * qiskit.$column-size-medium;
     }
 
     @include carbon.breakpoint-down(md) {

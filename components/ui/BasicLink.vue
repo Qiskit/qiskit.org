@@ -28,6 +28,8 @@ const props = withDefaults(defineProps<Props>(), {
   url: "",
 });
 
+const emit = defineEmits(["click", "mouseenter"]);
+
 const { trackClickEvent } = useSegment();
 
 function handleClick() {
