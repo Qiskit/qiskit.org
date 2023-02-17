@@ -19,13 +19,13 @@
 @use "~/assets/scss/carbon.scss";
 
 .app-filters-results-layout {
-  ::v-deep &__main-section {
+  :deep(&__main-section) {
     @include carbon.breakpoint-down(md) {
       margin-top: carbon.$spacing-09;
     }
   }
 
-  ::v-deep &__results-item {
+  :deep(&__results-item) {
     margin-bottom: carbon.$spacing-06;
 
     @include carbon.breakpoint-down(lg) {

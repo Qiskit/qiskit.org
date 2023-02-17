@@ -49,7 +49,7 @@ defineProps<Props>();
   &__back-link {
     height: 0;
 
-    ::v-deep .app-nav-back-link {
+    :deep(.app-nav-back-link) {
       padding-left: carbon.$spacing-05;
       margin: 0;
     }

@@ -175,7 +175,7 @@ defineProps<Props>();
       }
 
       &-description {
-        ::v-deep li {
+        :deep(li) {
           list-style-type: disc;
           margin-left: carbon.$spacing-06;
         }

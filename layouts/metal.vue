@@ -14,14 +14,12 @@
   color: qiskit.$text-color-lighter-2;
 }
 
-::v-deep {
-  h2,
-  p {
-    color: qiskit.$text-color-lighter-2;
-  }
+:deep(h2),
+:deep(p) {
+  color: qiskit.$text-color-lighter-2;
+}
 
-  h3 {
-    color: qiskit.$text-color-white;
-  }
+:deep(h3) {
+  color: qiskit.$text-color-white;
 }
 </style>
