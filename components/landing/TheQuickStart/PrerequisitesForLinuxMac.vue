@@ -22,23 +22,18 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+<script setup lang="ts">
 import { GeneralLink } from "~/constants/appLinks";
 
-@Component
-export default class PrerequisitesForLinuxMac extends Vue {
-  rustupLink: GeneralLink = {
-    url: "https://rustup.rs/",
-    label: "https://rustup.rs/",
-    segment: { cta: "rustup-installer", location: "quick-start" },
-  };
+const rustupLink: GeneralLink = {
+  url: "https://rustup.rs/",
+  label: "https://rustup.rs/",
+  segment: { cta: "rustup-installer", location: "quick-start" },
+};
 
-  rustLangInstallLink: GeneralLink = {
-    label: "other installation methods",
-    url: "https://forge.rust-lang.org/infra/other-installation-methods.html",
-    segment: { cta: "rust-lang-install-methods", location: "quick-start" },
-  };
-}
+const rustLangInstallLink: GeneralLink = {
+  label: "other installation methods",
+  url: "https://forge.rust-lang.org/infra/other-installation-methods.html",
+  segment: { cta: "rust-lang-install-methods", location: "quick-start" },
+};
 </script>

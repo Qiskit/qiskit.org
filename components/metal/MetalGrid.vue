@@ -213,7 +213,7 @@ function getRowId(index: number): string {
     overflow: hidden;
     background-color: carbon.$cool-gray-100;
     height: 42rem;
-    margin-top: 1px;
+    margin-top: -1px;
 
     @include carbon.breakpoint-down(lg) {
       height: 26.5rem;

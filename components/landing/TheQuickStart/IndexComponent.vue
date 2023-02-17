@@ -11,10 +11,10 @@
       </div>
     </div>
     <div class="cds--row">
-      <StartLocally
+      <LandingTheQuickStartLocally
         class="cds--col-md-5 cds--col-lg-10 cds--col-xlg-11 cds--col-max-12"
       />
-      <StartOnTheCloud
+      <LandingTheQuickStartOnTheCloud
         class="cds--col-md-3 cds--col-lg-6 cds--col-xlg-5 cds--col-max-4"
       />
     </div>

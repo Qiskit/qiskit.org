@@ -8,8 +8,10 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .the-learn-section {
-  @include responsive-grid-bg("~/assets/img/grid/grid-left.svg", 36rem);
+  @include qiskit.responsive-grid-bg("~/assets/img/grid/grid-left.svg", 36rem);
 
   background-repeat: no-repeat;
   background-position: left bottom -2px;

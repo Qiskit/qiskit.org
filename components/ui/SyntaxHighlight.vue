@@ -1,18 +1,19 @@
 <template>
   <div class="syntax-highlight">
-    <cv-button
+    <bx-btn
       size="small"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
       @click="[copyToClipboard(code), trackClickEvent(segmentAction)]"
     >
       Copy
-    </cv-button>
+    </bx-btn>
     <code class="syntax-highlight__code" v-text="code" />
   </div>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/button/index.js";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {

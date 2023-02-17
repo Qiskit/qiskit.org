@@ -8,6 +8,7 @@
       { 'app-cta_wider': isWider },
     ]"
     v-bind="$attrs"
+    :url="urlString"
     @click="$emit('click')"
   >
     <span class="app-cta__content">
@@ -36,6 +37,13 @@ const props = withDefaults(defineProps<Props>(), {
   isWider: false,
   kind: "primary",
   theme: "light",
+});
+
+const urlString = computed(() => {
+  if (typeof props.url === "string") {
+    return props.url;
+  }
+  return props.url.url;
 });
 
 const iconPerLinkType = computed(() => {

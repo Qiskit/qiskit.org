@@ -11,8 +11,10 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .app-page-header-fixed {
-  @include responsive-grid-bg-strip(
+  @include qiskit.responsive-grid-bg-strip(
     "~/assets/img/grid/grid-hero-learn.svg",
     auto,
     28rem

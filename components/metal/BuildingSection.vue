@@ -82,7 +82,7 @@ const stayInTouchLink = {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .building-section {
-  @include responsive-grid-bg("~/assets/img/grid/grid-right-dark.svg", 36rem);
+  @include qiskit.responsive-grid-bg("~/assets/img/grid/grid-right-dark.svg", 36rem);
 
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;

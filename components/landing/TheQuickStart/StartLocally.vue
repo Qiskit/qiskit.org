@@ -16,8 +16,8 @@
         <h4>
           {{ choicesGroup.title }}
         </h4>
-        <cv-button-set class="start-locally__options-group">
-          <cv-button
+        <div class="start-locally__options-group">
+          <bx-btn
             v-for="option in choicesGroup.options"
             :key="option"
             :title="option"
@@ -28,42 +28,39 @@
             @click="selectOption(choicesGroup, option)"
           >
             {{ option }}
-          </cv-button>
-        </cv-button-set>
+          </bx-btn>
+        </div>
       </div>
       <div>
-        <cv-accordion
-          v-if="prerequisitesToInstallQiskit()"
+        <bx-accordion
+          v-if="prerequisitesToInstallQiskit"
           class="start-locally__prerequisites-section"
         >
-          <cv-accordion-item>
-            <template #title>
-              Installing from source requires that you have the Rust compiler on
-              your system
-            </template>
-            <template #content>
-              <lazy-prerequisites-for-windows
-                v-if="selectedOs === OPERATING_SYSTEMS.windows"
-              />
-              <lazy-prerequisites-for-linux-mac v-else />
-            </template>
-          </cv-accordion-item>
-        </cv-accordion>
+          <bx-accordion-item
+            title-text="Installing from source requires that you have the Rust compiler on your system"
+          >
+            <LazyLandingTheQuickStartPrerequisitesForWindows
+              v-if="selectedOs === OPERATING_SYSTEMS.windows"
+            />
+            <LazyLandingTheQuickStartPrerequisitesForLinuxMac v-else />
+          </bx-accordion-item>
+        </bx-accordion>
         <h4>Terminal</h4>
-        <SyntaxHighlight :label="segmentLabel" :code="codeToInstallQiskit()" />
+        <UiSyntaxHighlight :label="segmentLabel" :code="codeToInstallQiskit" />
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-type ChoicesGroup = {
+import "@carbon/web-components/es/components/accordion/index.js";
+import "@carbon/web-components/es/components/button/index.js";
+
+interface ChoicesGroup {
   title: string;
   id: string;
   options: Array<string>;
-};
-
-type InstallChoices = Array<ChoicesGroup>;
+}
 
 const OPERATING_SYSTEMS = {
   linux: "Linux",
@@ -76,7 +73,7 @@ const QISKIT_INSTALL = {
   master: "Unstable",
 };
 
-const installChoices: InstallChoices = [
+const installChoices: ChoicesGroup[] = [
   {
     title: "Qiskit Install",
     id: "qiskit-install",
@@ -143,18 +140,16 @@ const codeToInstallQiskit = computed<string>(() => {
   return codeToInstall[qiskitInstall][os];
 });
 
-const isActive = computed<boolean>(
-  (choicesGroup: ChoicesGroup, option: string) => {
-    return (selectedOptions as any)[choicesGroup.id] === option;
-  }
-);
-
+function isActive(choicesGroup: ChoicesGroup, option: string): boolean {
+  return (selectedOptions as any)[choicesGroup.id] === option;
+}
 function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
   (selectedOptions as any)[choicesGroup.id] = selectedOption;
 }
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
@@ -236,7 +231,8 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
 </style>
 
 <style lang="scss">
-@import "~carbon-components/scss/globals/scss/typography";
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .start-locally {
   /**

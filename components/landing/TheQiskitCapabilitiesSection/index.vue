@@ -32,7 +32,7 @@
         :segment="quantumLabCTA.segment"
         :url="quantumLabCTA.url"
       />
-      <cv-button
+      <bx-btn
         :title="copyCodeCTA.label"
         class="qiskit-capabilities-section__copy-button"
         @click="[copyToClipboard(), trackClickEvent(copyCodeCTA.segment)]"
@@ -41,13 +41,14 @@
           copyCodeCTA.label
         }}</span>
         <Copy16 class="qiskit-capabilities-section__copy-button__icon" />
-      </cv-button>
+      </bx-btn>
     </div>
   </article>
 </template>
 
 <!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script lang="ts">
+import "@carbon/web-components/es/components/button/index.js";
 import { Component, Mixins } from 'vue-property-decorator'
 import { CtaClickedEventProp } from '~/types/segment'
 import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections'

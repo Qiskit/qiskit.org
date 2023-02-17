@@ -1,7 +1,7 @@
 <template>
   <main>
     <LandingTheHeroMoment :version="qiskitVersion" />
-    <LandingTheQuickStart />
+    <LandingTheQuickStartIndexComponent />
     <!-- <TheQiskitCapabilitiesSection /> -->
     <!-- <TheLearnSection /> -->
   </main>
@@ -23,7 +23,7 @@ useHead({
 });
 
 // TODO: Refactor tracking
-const routeName = "qiskit-landing-page";
+// const routeName = "qiskit-landing-page";
 
 const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
   $fetch("https://pypi.org/pypi/qiskit/json")
