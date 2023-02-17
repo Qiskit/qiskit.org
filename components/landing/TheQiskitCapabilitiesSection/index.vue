@@ -1,5 +1,5 @@
 <template>
-  <article class="bx--grid page-section qiskit-capabilities-section">
+  <article class="cds--grid page-section qiskit-capabilities-section">
     <h2>What Can Qiskit Do</h2>
     <div class="qiskit-capabilities-section__container">
       <div class="qiskit-capabilities-section__capabilities">

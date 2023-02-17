@@ -5,10 +5,10 @@
       :class="`page-footer__primary_theme_${theme}`"
     >
       <div
-        :class="oldContainer ? 'page-footer__primary-container' : 'bx--grid'"
+        :class="oldContainer ? 'page-footer__primary-container' : 'cds--grid'"
       >
-        <div class="bx--row">
-          <div class="bx--col-lg-4 bx--col-md">
+        <div class="cds--row">
+          <div class="cds--col-lg-4 cds--col-md">
             <UiAppLogo
               class="page-footer__logo"
               :class="`page-footer__logo_theme_${theme}`"
@@ -17,12 +17,12 @@
           <FooterSection
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
-            class="bx--col-lg-3 bx--col-sm"
+            class="cds--col-lg-3 cds--col-sm"
             v-bind="sectionElements"
             :theme="theme"
           />
           <FooterSection
-            class="bx--col-lg-3 bx--col-md page-footer__stay-connected"
+            class="cds--col-lg-3 cds--col-md page-footer__stay-connected"
             v-bind="stayConnectedElements"
             icons-only
             :theme="theme"
@@ -36,7 +36,7 @@
     >
       <div
         class="page-footer__secondary-container"
-        :class="{ 'bx--grid': !oldContainer }"
+        :class="{ 'cds--grid': !oldContainer }"
       >
         <div class="caption" :class="`page-footer__copyright_theme_${theme}`">
           ©Qiskit | All Rights Reserved
@@ -154,7 +154,7 @@ const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
     display: flex;
     justify-content: space-between;
 
-    &:not(.bx--grid) {
+    &:not(.cds--grid) {
       @include qiskit.contained;
     }
   }

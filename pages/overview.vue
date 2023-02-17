@@ -8,9 +8,9 @@
       />
       quantum computing SDK
     </AppPageHeaderFixed> -->
-    <!-- <section id="contentContainer" class="bx--grid page-section">
-      <div class="bx--row">
-        <div class="bx--col-sm-0 bx--col-md-2 bx--col-lg-3">
+    <!-- <section id="contentContainer" class="cds--grid page-section">
+      <div class="cds--row">
+        <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
           <div class="overview-page__table-of-contents">
             <TheTableOfContents
               :entries="tocEntries"
@@ -19,7 +19,7 @@
             <UiAppCta kind="ghost" :label="quickStartLink.label" :url="quickStartLink.url" />
           </div>
         </div>
-        <div class="bx--col-lg-13 bx--col-md-6">
+        <div class="cds--col-lg-13 cds--col-md-6">
           <AppIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"

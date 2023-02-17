@@ -1,8 +1,8 @@
 <template>
-  <section class="bx--grid">
-    <div class="bx--row">
+  <section class="cds--grid">
+    <div class="cds--row">
       <article
-        class="bx--col-lg-4 bx--col-md-4 join-section__feature join-section__intro"
+        class="cds--col-lg-4 cds--col-md-4 join-section__feature join-section__intro"
       >
         <p>
           The Qiskit advocate program is a global program that provides support
@@ -18,7 +18,7 @@
       <div
         v-for="benefit in advocateBenefits"
         :key="`benefit-${benefit.icon}`"
-        class="bx--col-lg-4 bx--col-md-4 join-section__feature"
+        class="cds--col-lg-4 cds--col-md-4 join-section__feature"
       >
         <CompactFeature v-bind="benefit" />
       </div>

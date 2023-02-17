@@ -1,6 +1,6 @@
 <template>
   <article class="page-section the-learn-section">
-    <div class="bx--grid">
+    <div class="cds--grid">
       <h2>Learn with Qiskit</h2>
       <LearnCard />
     </div>

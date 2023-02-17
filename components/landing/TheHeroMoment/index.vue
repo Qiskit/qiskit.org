@@ -1,21 +1,21 @@
 <template>
   <article class="the-hero-moment">
     <MetalGrid>
-      <div class="bx--grid the-hero-moment__container">
+      <div class="cds--grid the-hero-moment__container">
         <LandingTheHeroMomentVersionInfo
           class="the-hero-moment__version-info"
           :version="version"
         />
-        <div class="bx--row">
+        <div class="cds--row">
           <h1
-            class="bx--col-md-4 bx--col-lg-9 bx--col-xlg-7 bx--col-max-7 the-hero-moment__title"
+            class="cds--col-md-4 cds--col-lg-9 cds--col-xlg-7 cds--col-max-7 the-hero-moment__title"
           >
             Open-Source Quantum Development
           </h1>
         </div>
-        <div class="bx--row">
+        <div class="cds--row">
           <p
-            class="bx--col-sm bx--col-md-4 bx--col-lg-6 bx--col-xlg-4 the-hero-moment__description"
+            class="cds--col-sm cds--col-md-4 cds--col-lg-6 cds--col-xlg-4 the-hero-moment__description"
           >
             Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
             with quantum computers at the level of pulses, circuits, and

@@ -11,10 +11,10 @@
       <br />
       and the Qiskit community
     </AppPageHeaderFixed> -->
-    <section id="ecosystem" class="bx--grid ecosystem">
+    <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
-      <div class="bx--row">
-        <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
+      <div class="cds--row">
+        <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
           <p>
             The Ecosystem consists of projects, tools, utilities, libraries and
             tutorials from a broad community of developers and researchers. The
@@ -51,11 +51,11 @@
           />
         </template>
         <template slot="results">
-          <div class="bx--row">
+          <div class="cds--row">
             <div
               v-for="(member, index) in filteredMembers"
               :key="index"
-              class="bx--col-sm-4 bx--col-xlg-8"
+              class="cds--col-sm-4 cds--col-xlg-8"
             >
               <AppCard
                 class="project-card"
@@ -74,7 +74,7 @@
                 }"
                 :to="member.url"
               >
-                <div class="bx--row">
+                <div class="cds--row">
                   <p class="project-card__license">
                     {{ member.licence }}
                   </p>
@@ -224,7 +224,7 @@ useHead({
 // TODO: Review old CSS
 // .ecosystem-header {
 //   &__hero {
-//     .bx--col-max-8 {
+//     .cds--col-max-8 {
 //       max-width: 100%;
 //       flex: 0 0 100%;
 //     }
@@ -243,13 +243,13 @@ useHead({
 //   }
 // }
 
-// .bx--col-sm-4 {
+// .cds--col-sm-4 {
 //   padding-bottom: carbon.$spacing-08;
 // }
 
 // .app-card {
 //   &__description {
-//     .bx--row {
+//     .cds--row {
 //       margin-left: 0;
 //     }
 //   }

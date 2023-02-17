@@ -1,7 +1,7 @@
 <template>
   <section class="university-directory-section">
-    <article class="bx--row">
-      <div class="bx--col-lg-4">
+    <article class="cds--row">
+      <div class="cds--col-lg-4">
         <h2>University directory</h2>
         <p>
           See your local community listed here? Click through and join the
@@ -11,12 +11,12 @@
           Quantum internship!
         </p>
       </div>
-      <div class="bx--col-xlg-12 bx--col-lg-12">
-        <div class="bx--row">
+      <div class="cds--col-xlg-12 cds--col-lg-12">
+        <div class="cds--row">
           <div
             v-for="{ image, title, startDate, cta, detail } in universities"
             :key="title"
-            class="bx--col-xlg-8"
+            class="cds--col-xlg-8"
           >
             <AppCard
               :cta-label="cta.label"

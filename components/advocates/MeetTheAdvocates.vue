@@ -1,8 +1,8 @@
 <template>
-  <section id="meet-the-advocates" class="bx--grid meet-the-advocates">
+  <section id="meet-the-advocates" class="cds--grid meet-the-advocates">
     <h2>Meet the Advocates</h2>
-    <div class="bx--row">
-      <div class="bx--col-md-5 bx--col-lg-8 bx--col-xlg-7 bx--col-max-6">
+    <div class="cds--row">
+      <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
         <p>
           Qiskit advocates are some of the finest minds in quantum computing,
           all over the world. If you are interested in getting involved with the
@@ -41,11 +41,11 @@
         />
       </template>
       <template #results>
-        <div class="bx--row">
+        <div class="cds--row">
           <div
             v-for="advocate in filteredAdvocates"
             :key="advocate.name"
-            class="bx--col-max-8"
+            class="cds--col-max-8"
           >
             <AdvocateCard v-bind="advocate" />
           </div>

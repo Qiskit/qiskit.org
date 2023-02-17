@@ -22,7 +22,7 @@
             {{ subtitle }}
           </h5>
         </div>
-        <div class="bx--row">
+        <div class="cds--row">
           <div v-if="hasTags(tags)" class="app-card__tags">
             <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
           </div>
@@ -161,7 +161,7 @@ function hasTags(tags: string[] | TagTooltip[]) {
       flex-direction: column;
     }
 
-    .bx--row {
+    .cds--row {
       margin-right: 0;
       margin-left: 0;
       margin-bottom: carbon.$spacing-03;

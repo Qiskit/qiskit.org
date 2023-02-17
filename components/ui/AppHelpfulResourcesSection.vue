@@ -1,11 +1,11 @@
 <template>
   <section class="app-helpful-resources-section">
     <h2 v-text="title" />
-    <div class="bx--row">
+    <div class="cds--row">
       <AppDescriptionCard
         v-for="resource in resources"
         :key="resource.title"
-        class="bx--col-lg-4 bx--col-md-4 app-helpful-resources-section__card"
+        class="cds--col-lg-4 cds--col-md-4 app-helpful-resources-section__card"
         v-bind="resource"
       />
     </div>

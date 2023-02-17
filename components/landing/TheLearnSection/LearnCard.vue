@@ -1,6 +1,6 @@
 <template>
   <article class="learn-card">
-    <div class="bx--col-max-3 bx--col-lg-4 bx--col-md-3 learn-card__content">
+    <div class="cds--col-max-3 cds--col-lg-4 cds--col-md-3 learn-card__content">
       <div
         class="bx--aspect-ratio bx--aspect-ratio--4x3 learn-card__content__aspect-ratio"
       >
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div
-      class="bx--col-md learn-card__media"
+      class="cds--col-md learn-card__media"
       lazy-background="/images/landing-page/learn-image.jpg"
     />
   </article>
