@@ -39,7 +39,7 @@ const headerDescription = [
 ];
 
 const headerImg =
-  "~/assets/img/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
+  "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
 
 const startLearningCTA: GeneralLink = {
   url: MultipleQubitsAndEntanglementUrl.Introduction,
@@ -159,5 +159,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "~/assets/img/learn/course/multiple-qubits-and-entanglement";
+const imageUrlBase = "/images/learn/course/multiple-qubits-and-entanglement";
 </script>

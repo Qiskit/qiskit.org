@@ -78,7 +78,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
   }
 
   &__container {
-    background-image: url("~/assets/img/landing-page/hero-illustration.png");
+    background-image: url("/images/landing-page/hero-illustration.png");
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;

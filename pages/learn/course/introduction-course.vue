@@ -48,7 +48,7 @@ const headerDescription = [
   learning.`,
 ];
 
-const headerImg = "~/assets/img/learn/course/introduction-course/header.png";
+const headerImg = "/images/learn/course/introduction-course/header.png";
 
 const startLearningCTA: GeneralLink = {
   url: StartLearningUrl.Introduction,
@@ -156,5 +156,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "~/assets/img/learn/course/introduction-course";
+const imageUrlBase = "/images/learn/course/introduction-course";
 </script>

@@ -361,7 +361,7 @@ class EventsAirtableRecords extends AirtableRecords {
    * @returns Promise resolving to the event's image URL.
    */
   public async getImage(record: Record<string, any>): Promise<string> {
-    const fallbackImage = "~/assets/img/events/no-picture.jpg";
+    const fallbackImage = "/images/events/no-picture.jpg";
     const attachments = record.get(this.recordFields!.image);
     const imageAttachment = attachments && findImageAttachment(attachments);
     const imageUrl = imageAttachment && getImageUrl(imageAttachment);
@@ -370,7 +370,7 @@ class EventsAirtableRecords extends AirtableRecords {
       return fallbackImage;
     }
 
-    const imagePublicPath = `~/assets/img/events/downloaded/${this.id}.jpg`;
+    const imagePublicPath = `/images/events/downloaded/${this.id}.jpg`;
 
     return await this.storeImage(imageUrl, `public/${imagePublicPath}`)
       .then(() => imagePublicPath)

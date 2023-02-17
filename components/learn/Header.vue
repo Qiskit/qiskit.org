@@ -123,7 +123,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
 
     &-wrapper {
       @include qiskit.responsive-grid-bg-strip(
-        "~/assets/img/grid/grid-hero-textbook.svg",
+        "/images/grid/grid-hero-textbook.svg",
         auto,
         95%
       );

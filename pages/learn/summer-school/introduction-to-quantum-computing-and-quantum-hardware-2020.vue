@@ -23,7 +23,7 @@ useHead({
 //   material in 9 lecture notes and 9 associated labs.`
 // ]
 
-// const headerImg = '~/assets/img/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png'
+// const headerImg = '/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png'
 
 // const backToTextbookHomeLink: GeneralLink = {
 //   url: '/learn',
@@ -141,7 +141,7 @@ useHead({
 //   }
 // ]
 
-// const imageUrlBase = '~/assets/img/learn/summer-school/intro-quantum-computing-quantum-hardware-2020'
+// const imageUrlBase = '/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020'
 
 // TODO: Refactor "logic" pages
 // export default class SummerSchoolCoursePage extends CourseOverviewPage {

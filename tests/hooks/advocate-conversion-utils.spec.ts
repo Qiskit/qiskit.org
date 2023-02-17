@@ -107,7 +107,7 @@ describe("convertToAdvocate", () => {
 
     expect(advocate).toEqual({
       name: "Nova",
-      image: "~/assets/img/advocates/no-advocate-photo.png",
+      image: "/images/advocates/no-advocate-photo.png",
       region: "South America",
       city: "Gotham City",
       country: "Canada",
@@ -140,7 +140,7 @@ describe("getImage", () => {
       },
     };
     const result = await advocatesAirtableRecords.getImage(fakeRecord);
-    expect(result).toBe("~/assets/img/advocates/no-advocate-photo.png");
+    expect(result).toBe("/images/advocates/no-advocate-photo.png");
   });
 
   it("defaults in a no-advocate-photo.png value if the attachment is of no image type", async () => {
@@ -156,7 +156,7 @@ describe("getImage", () => {
       },
     };
     const result = await advocatesAirtableRecords.getImage(fakeRecord);
-    expect(result).toBe("~/assets/img/advocates/no-advocate-photo.png");
+    expect(result).toBe("/images/advocates/no-advocate-photo.png");
   });
 
   it("stores the attachment URL if there are no thumbnails", async () => {

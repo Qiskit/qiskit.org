@@ -21,7 +21,7 @@ const header = {
   },
   cardSectionHeading: "About the event:",
   card: {
-    image: "~/assets/img/events/summer-school/summer-school-logo.png",
+    image: "/images/events/summer-school/summer-school-logo.png",
     title: "Qiskit Global Summer School 2022: Quantum Simulations",
     description:
       "The Qiskit Global Summer School returns as a two-week intensive course focused on Quantum Simulations and more!",
@@ -50,7 +50,7 @@ const mosaic: MosaicSection = {
       title: "Qiskit Textbook",
       description:
         "The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
-      image: "~/assets/img/events/seminar-series/mosaic-experts.png",
+      image: "/images/events/seminar-series/mosaic-experts.png",
       cta: {
         url: "/learn",
         label: "Read the textbook",
@@ -65,7 +65,7 @@ const mosaic: MosaicSection = {
       title: "IBM Quantum",
       description:
         "IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.",
-      image: "~/assets/img/events/summer-school/ibm-system-one-display.jpg",
+      image: "/images/events/summer-school/ibm-system-one-display.jpg",
       cta: {
         url: "https://quantum-computing.ibm.com/login",
         label: "Explore IBM Quantum",
@@ -80,7 +80,7 @@ const mosaic: MosaicSection = {
       title: "Introduction to Quantum Computing and Quantum Hardware",
       description:
         "The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.",
-      image: "~/assets/img/events/summer-school/chip.png",
+      image: "/images/events/summer-school/chip.png",
       cta: {
         url: "/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020",
         label: "Start the course",
@@ -95,7 +95,7 @@ const mosaic: MosaicSection = {
       title: "Quantum Computing & Quantum Machine Learning (2021)",
       description:
         "The Qiskit Global Summer School 2021 coursework, lab, and lecture materials are now available online.",
-      image: "~/assets/img/events/summer-school/quantum-composer-screen.png",
+      image: "/images/events/summer-school/quantum-composer-screen.png",
       cta: {
         url: "https://qiskit.org/learn/summer-school/quantum-computing-and-quantum-learning-2021",
         label: "Start the course",

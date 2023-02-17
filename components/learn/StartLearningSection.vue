@@ -144,7 +144,7 @@ const learningSections: LearningSection[] = [
     community on Slack.`,
     courses: [
       {
-        image: "~/assets/img/learn/course/basics-quantum-information/atom.png",
+        image: "/images/learn/course/basics-quantum-information/atom.png",
         title: "Understanding quantum information and computation",
         subtitle: "Unit 1: Basics of quantum information",
         description:
@@ -156,7 +156,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/introduction-course.png",
+        image: "/images/learn/introduction-course.png",
         title: "Introduction course",
         description: `Not sure where to start? This path is for you.
         This introduction is aimed at audiences from all backgrounds.
@@ -170,7 +170,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/machine-learning.png",
+        image: "/images/learn/machine-learning.png",
         title: "Quantum machine learning",
         description: `Want to learn about this exciting, developing field? If
         you're familiar with quantum computing basics, this course will give
@@ -190,7 +190,7 @@ const learningSections: LearningSection[] = [
       "These pages are not part of a course, but contain useful reference material.",
     courses: [
       {
-        image: "~/assets/img/learn/course/prerequisites/prerequisites.png",
+        image: "/images/learn/course/prerequisites/prerequisites.png",
         title: "Prerequisites",
         description:
           "Learn about the software used to write the Qiskit textbook (Python and Jupyter Notebooks), and set up your environment to reproduce the experiments.",
@@ -202,7 +202,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/course/quantum-states-and-qubits/bloch-sphere.png",
+          "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png",
         title: "Quantum States and Qubits",
         description:
           "This chapter introduces the computing concepts that we'll explore in later chapters, then introduces basic quantum concepts.",
@@ -214,7 +214,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png",
+          "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png",
         title: "Multiple Qubits and Entanglement",
         description:
           "With the basics down, this chapter explores the consequences of these new quantum effects, and sets us up with tools to understand quantum algorithms.",
@@ -229,7 +229,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png",
+          "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png",
         title: "Quantum Protocols and Quantum Algorithms",
         description:
           "In this chapter, we use quantum effects to build powerful algorithms, starting from simple proof-of-concept algorithms, through to Shor's famous factoring algorithm (and beyond).",
@@ -244,7 +244,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png",
+          "/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png",
         title: "Investigating Quantum Hardware Using Microwave Pulses",
         description:
           "In this chapter, we get a level closer to the real quantum machines. Learn about the physics of these devices, and how to program them at the level of microwave pulses.",
@@ -256,7 +256,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png",
+          "/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png",
         title: "Quantum Algorithms for Applications",
         description:
           "If algorithms are the solution, then what is the problem? In this chapter, we look at how we can take general algorithms and apply them to more specific situations.",
@@ -271,7 +271,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png",
+          "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png",
         title: "Investigating Quantum Hardware Using Quantum Circuits",
         description:
           "All circuit-based quantum devices share some similar characteristics and challenges. In this chapter, we explore how quantum circuits perform on modern quantum computers, and ways to improve performance.",
@@ -282,7 +282,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/course/quantum-computing-labs/quantum-lab.png",
+        image: "/images/learn/course/quantum-computing-labs/quantum-lab.png",
         title: "Quantum Computing Labs",
         description: `This set of labs provides 7 different exercises
         you (or your students) can use to investigate the behaviour of
@@ -294,7 +294,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/course/games-and-demos/games-and-demos.png",
+        image: "/images/learn/course/games-and-demos/games-and-demos.png",
         title: "Games and Demos",
         description:
           "Check out games and demonstrations created in this textbook's environment; great for teaching, or just for fun!",
@@ -312,7 +312,7 @@ const learningSections: LearningSection[] = [
       "Already understand quantum computing? These tutorials will show you how to use qiskit to do the thing you want to do.",
     courses: [
       {
-        image: "~/assets/img/learn/tutorials/quantum-circuits.png",
+        image: "/images/learn/tutorials/quantum-circuits.png",
         title: "Quantum Circuits",
         description:
           "Comfortable with quantum computing, but new to Qiskit? Learn how to create simple quantum circuits, and visualize quantum states.",
@@ -323,7 +323,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/tutorials/advanced-circuits.png",
+        image: "/images/learn/tutorials/advanced-circuits.png",
         title: "Advanced Circuits",
         description:
           "Learn about the more advanced features of Qiskit's QuantumCircuit class, including how to create custom gates and how to use the transpiler to optimize your circuits and target different devices.",
@@ -334,7 +334,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/tutorials/classical-simulators.png",
+        image: "/images/learn/tutorials/classical-simulators.png",
         title: "Classical Simulators",
         description:
           "Qiskit includes powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. These tutorials show you how to use advanced features of these simulators.",
@@ -345,7 +345,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/tutorials/algorithms.png",
+        image: "/images/learn/tutorials/algorithms.png",
         title: "Algorithms",
         description:
           "These tutorials show you how to use Qiskit's built-in algorithms. Qiskit supports classic algorithms such as Shor's and Grover's, as well as more recent developments such as VQE and QAOA.",
@@ -356,7 +356,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/tutorials/operators.png",
+        image: "/images/learn/tutorials/operators.png",
         title: "Operators",
         description:
           "Learn how Qiskit represents quantum operators, and how we can use these to build sophisticated quantum programs.",
@@ -367,7 +367,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/tutorials/sample-algorithms-in-qiskit.png",
+        image: "/images/learn/tutorials/sample-algorithms-in-qiskit.png",
         title: "Sample algorithms in Qiskit",
         description:
           "Learn about the Iterative Quantum Phase Estimation Algorithm and how you can program it in Qiskit.",
@@ -389,7 +389,7 @@ const learningSections: LearningSection[] = [
     courses: [
       {
         image:
-          "~/assets/img/learn/summer-school/quantum-simulation-summer-school-2022/header.png",
+          "/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png",
         title: "Quantum Simulations (2022)",
         description:
           "This summer school provides a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry. These lectures were first released as part of a two-week intensive summer school in July 2022.",
@@ -404,7 +404,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png",
+          "/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png",
         title: "Quantum Computing & Quantum Machine Learning (2021)",
         description:
           'Designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own. Starting with an introductory "crash course" on quantum computing, the materials continue to dive into and explore one key area: quantum machine learning.',
@@ -419,7 +419,7 @@ const learningSections: LearningSection[] = [
       },
       {
         image:
-          "~/assets/img/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png",
+          "/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png",
         title: "Introduction to Quantum Computing and Quantum Hardware (2020)",
         description:
           "This introduction to the world of quantum computing explores key quantum algorithms, as well as the quantum hardware designed to run these algorithms. These lectures were first released as part of a two-week intensive summer school in July 2020.",
@@ -439,7 +439,7 @@ const learningSections: LearningSection[] = [
     description: "Check out Qiskit on other platforms.",
     courses: [
       {
-        image: "~/assets/img/learn/other-platforms/youtube.png",
+        image: "/images/learn/other-platforms/youtube.png",
         title: "Qiskit YouTube",
         description:
           "Check out our YouTube channel for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!",
@@ -450,7 +450,7 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "~/assets/img/learn/other-platforms/medium.png",
+        image: "/images/learn/other-platforms/medium.png",
         title: "Qiskit Medium Blog",
         description:
           "Visit the Medium blog to read about Qiskit, programming quantum computers, and anything else related to quantum computing.",

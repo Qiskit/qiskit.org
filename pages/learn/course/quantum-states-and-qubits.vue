@@ -39,7 +39,7 @@ const headerDescription = [
 ];
 
 const headerImg =
-  "~/assets/img/learn/course/quantum-states-and-qubits/bloch-sphere.png";
+  "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png";
 
 const startLearningCTA: GeneralLink = {
   url: QuantumStatesAndQubitsUrl.Introduction,
@@ -137,5 +137,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "~/assets/img/learn/course/quantum-states-and-qubits";
+const imageUrlBase = "/images/learn/course/quantum-states-and-qubits";
 </script>

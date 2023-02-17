@@ -55,7 +55,7 @@ type University = {
 const universities: University[] = [
   {
     title: "Qiskit Fall Fest Algiers",
-    image: "~/assets/img/events/fall-fest/algiers.png",
+    image: "/images/events/fall-fest/algiers.png",
     startDate: "October 21, 2022",
     detail: "In Person",
     cta: {
@@ -69,7 +69,7 @@ const universities: University[] = [
   },
   {
     title: "RV PU College",
-    image: "~/assets/img/events/fall-fest/bengalaru.png",
+    image: "/images/events/fall-fest/bengalaru.png",
     startDate: "November 6, 2022",
     detail: "In Person",
     cta: {
@@ -80,7 +80,7 @@ const universities: University[] = [
   },
   {
     title: "University of Victoria",
-    image: "~/assets/img/events/fall-fest/british_columbia.png",
+    image: "/images/events/fall-fest/british_columbia.png",
     startDate: "November 26, 2022",
     detail: "Hybrid",
     cta: {
@@ -91,7 +91,7 @@ const universities: University[] = [
   },
   {
     title: "AUC (American University in Cairo)",
-    image: "~/assets/img/events/fall-fest/cairo.png",
+    image: "/images/events/fall-fest/cairo.png",
     startDate: "October 28, 2022",
     detail: "In Person",
     cta: {
@@ -105,7 +105,7 @@ const universities: University[] = [
   },
   {
     title: "UCLA",
-    image: "~/assets/img/events/fall-fest/california.png",
+    image: "/images/events/fall-fest/california.png",
     startDate: "October 31, 2022",
     detail: "Online",
     cta: {
@@ -119,7 +119,7 @@ const universities: University[] = [
   },
   {
     title: "Universidad Simón Bolívar",
-    image: "~/assets/img/events/fall-fest/caracas.png",
+    image: "/images/events/fall-fest/caracas.png",
     startDate: "October 21, 2022",
     detail: "Online",
     cta: {
@@ -130,7 +130,7 @@ const universities: University[] = [
   },
   {
     title: "Coimbatore Institute of Technology, India",
-    image: "~/assets/img/events/fall-fest/coimbatore.png",
+    image: "/images/events/fall-fest/coimbatore.png",
     startDate: "October 6, 2022",
     detail: "Online",
     cta: {
@@ -144,7 +144,7 @@ const universities: University[] = [
   },
   {
     title: "Quantum Fall Fest QColombia",
-    image: "~/assets/img/events/fall-fest/colombia.png",
+    image: "/images/events/fall-fest/colombia.png",
     startDate: "October 10, 2022",
     detail: "Online",
     cta: {
@@ -158,7 +158,7 @@ const universities: University[] = [
   },
   {
     title: "Yale University",
-    image: "~/assets/img/events/fall-fest/connecticut.png",
+    image: "/images/events/fall-fest/connecticut.png",
     startDate: "October 3, 2022",
     detail: "In Person",
     cta: {
@@ -169,7 +169,7 @@ const universities: University[] = [
   },
   {
     title: "QickStart : A Qiskit Powered Intro to Quantum Computing",
-    image: "~/assets/img/events/fall-fest/delhi.png",
+    image: "/images/events/fall-fest/delhi.png",
     startDate: "October 3, 2022",
     detail: "In Person",
     cta: {
@@ -183,7 +183,7 @@ const universities: University[] = [
   },
   {
     title: "The University of Hong Kong",
-    image: "~/assets/img/events/fall-fest/hong_kong.png",
+    image: "/images/events/fall-fest/hong_kong.png",
     startDate: "October 25, 2022",
     detail: "In Person",
     cta: {
@@ -197,7 +197,7 @@ const universities: University[] = [
   },
   {
     title: "Purdue University",
-    image: "~/assets/img/events/fall-fest/indiana.png",
+    image: "/images/events/fall-fest/indiana.png",
     startDate: "October 3, 2022",
     detail: "In Person",
     cta: {
@@ -208,7 +208,7 @@ const universities: University[] = [
   },
   {
     title: "Qiskit Fall Fest Kolkata Chapter",
-    image: "~/assets/img/events/fall-fest/kolkata.png",
+    image: "/images/events/fall-fest/kolkata.png",
     startDate: "October 17, 2022",
     detail: "Online",
     cta: {
@@ -222,7 +222,7 @@ const universities: University[] = [
   },
   {
     title: "Qiskit Fall Fest Mexico-IPN",
-    image: "~/assets/img/events/fall-fest/mexico_city.png",
+    image: "/images/events/fall-fest/mexico_city.png",
     startDate: "October 17, 2022",
     detail: "Online",
     cta: {
@@ -236,7 +236,7 @@ const universities: University[] = [
   },
   {
     title: "University of Maryland",
-    image: "~/assets/img/events/fall-fest/maryland.png",
+    image: "/images/events/fall-fest/maryland.png",
     startDate: "October 28, 2022",
     detail: "In Person",
     cta: {
@@ -247,7 +247,7 @@ const universities: University[] = [
   },
   {
     title: "Case Western Reserve University",
-    image: "~/assets/img/events/fall-fest/ohio.png",
+    image: "/images/events/fall-fest/ohio.png",
     startDate: "October 10, 2022",
     detail: "In Person",
     cta: {
@@ -261,7 +261,7 @@ const universities: University[] = [
   },
   {
     title: "University of Chicago",
-    image: "~/assets/img/events/fall-fest/illinois.png",
+    image: "/images/events/fall-fest/illinois.png",
     startDate: "October 10, 2022",
     detail: "In Person",
     cta: {
@@ -272,7 +272,7 @@ const universities: University[] = [
   },
   {
     title: "Fundamentals of Quantum Computing (Thapar University)",
-    image: "~/assets/img/events/fall-fest/patiala.png",
+    image: "/images/events/fall-fest/patiala.png",
     startDate: "October 15, 2022",
     detail: "Hybrid",
     cta: {
@@ -283,7 +283,7 @@ const universities: University[] = [
   },
   {
     title: "Penn State",
-    image: "~/assets/img/events/fall-fest/pennsylvania.png",
+    image: "/images/events/fall-fest/pennsylvania.png",
     startDate: "November 5, 2022",
     detail: "In Person",
     cta: {
@@ -294,7 +294,7 @@ const universities: University[] = [
   },
   {
     title: "Quest - Qiskit Fall Fest, BITS Goa Chapter",
-    image: "~/assets/img/events/fall-fest/goa.png",
+    image: "/images/events/fall-fest/goa.png",
     startDate: "November 25, 2022",
     detail: "In Person",
     cta: {
@@ -308,7 +308,7 @@ const universities: University[] = [
   },
   {
     title: "Qiskit Fall Fest Morocco",
-    image: "~/assets/img/events/fall-fest/morocco.png",
+    image: "/images/events/fall-fest/morocco.png",
     startDate: "October 27, 2022",
     detail: "In Person",
     cta: {
@@ -319,7 +319,7 @@ const universities: University[] = [
   },
   {
     title: "Indian Institute of Technology Roorkee",
-    image: "~/assets/img/events/fall-fest/roorkee.png",
+    image: "/images/events/fall-fest/roorkee.png",
     startDate: "October 28, 2022",
     detail: "In Person",
     cta: {
@@ -333,7 +333,7 @@ const universities: University[] = [
   },
   {
     title: "Escuela de Computación Cuántica",
-    image: "~/assets/img/events/fall-fest/lima.png",
+    image: "/images/events/fall-fest/lima.png",
     startDate: "October 17, 2022",
     detail: "Online",
     cta: {
@@ -347,7 +347,7 @@ const universities: University[] = [
   },
   {
     title: "Princeton University",
-    image: "~/assets/img/events/fall-fest/new_jersey.png",
+    image: "/images/events/fall-fest/new_jersey.png",
     startDate: "October 28, 2022",
     detail: "In Person",
     cta: {
@@ -358,7 +358,7 @@ const universities: University[] = [
   },
   {
     title: "University of Santiago de Compostela, Spain",
-    image: "~/assets/img/events/fall-fest/santiago.png",
+    image: "/images/events/fall-fest/santiago.png",
     startDate: "October 21, 2022",
     detail: "In Person",
     cta: {
@@ -372,7 +372,7 @@ const universities: University[] = [
   },
   {
     title: "University of Texas at Austin",
-    image: "~/assets/img/events/fall-fest/texas.png",
+    image: "/images/events/fall-fest/texas.png",
     startDate: "October 10, 2022",
     detail: "In Person",
     cta: {
@@ -386,7 +386,7 @@ const universities: University[] = [
   },
   {
     title: "Izmir Institute of Technology",
-    image: "~/assets/img/events/fall-fest/urla.png",
+    image: "/images/events/fall-fest/urla.png",
     startDate: "October 28, 2022",
     detail: "In Person",
     cta: {
@@ -400,7 +400,7 @@ const universities: University[] = [
   },
   {
     title: "Start Innovation hub",
-    image: "~/assets/img/events/fall-fest/uyo.png",
+    image: "/images/events/fall-fest/uyo.png",
     startDate: "October 15, 2022",
     detail: "In Person",
     cta: {
@@ -411,7 +411,7 @@ const universities: University[] = [
   },
   {
     title: "Quantum Fall Fest TU Wien",
-    image: "~/assets/img/events/fall-fest/vienna.png",
+    image: "/images/events/fall-fest/vienna.png",
     startDate: "November 19, 2022",
     detail: "In Person",
     cta: {

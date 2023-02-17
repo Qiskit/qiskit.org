@@ -474,7 +474,7 @@ describe("getImage", () => {
     };
 
     const result = await eventsAirtableRecords.getImage(fakeRecord);
-    expect(result).toBe("~/assets/img/events/no-picture.jpg");
+    expect(result).toBe("/images/events/no-picture.jpg");
   });
 
   it("defaults in a no-picture.jpg value if the attachment is of no image type", async () => {
@@ -494,7 +494,7 @@ describe("getImage", () => {
     };
 
     const result = await eventsAirtableRecords.getImage(fakeRecord);
-    expect(result).toBe("~/assets/img/events/no-picture.jpg");
+    expect(result).toBe("/images/events/no-picture.jpg");
   });
 
   it("stores the attachment URL if there are no thumbnails", async () => {

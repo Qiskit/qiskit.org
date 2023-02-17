@@ -15,7 +15,7 @@
 
 .app-page-header-fixed {
   @include qiskit.responsive-grid-bg-strip(
-    "~/assets/img/grid/grid-hero-learn.svg",
+    "/images/grid/grid-hero-learn.svg",
     auto,
     28rem
   );

@@ -30,7 +30,7 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE;
 .start-on-the-cloud {
   &__wrapper {
     @include qiskit.responsive-grid-bg(
-      "~/assets/img/grid/grid-white.svg",
+      "/images/grid/grid-white.svg",
       36rem
     );
 

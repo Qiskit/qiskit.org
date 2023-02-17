@@ -38,7 +38,7 @@ const headerDescription = [
 ];
 
 const headerImg =
-  "~/assets/img/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
+  "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
 
 const startLearningCTA: GeneralLink = {
   url: QuantumHardwareCircuitsUrl.Introduction,
@@ -96,5 +96,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "~/assets/img/learn/course/quantum-hardware-circuits";
+const imageUrlBase = "/images/learn/course/quantum-hardware-circuits";
 </script>

@@ -36,7 +36,7 @@ const headerTitle = "Games and demos";
 const headerDescription = [
   "Qiskit, and the Qiskit Textbook website, are interactive learning environments. Unlike with traditional, ink-and-paper textbooks, you can mess around with quantum effects to strengthen your knowledge. These pages contain cool experiments with Qiskit that don't belong in a course.",
 ];
-const headerImg = "~/assets/img/learn/course/games-and-demos/games-and-demos.png";
+const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
 const startLearningCTA: GeneralLink = {
   url: GamesAndDemos.BonusLevelSandbox,
@@ -121,5 +121,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "~/assets/img/learn/course/games-and-demos";
+const imageUrlBase = "/images/learn/course/games-and-demos";
 </script>

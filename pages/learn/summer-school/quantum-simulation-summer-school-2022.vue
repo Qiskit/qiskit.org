@@ -21,7 +21,7 @@ useHead({
 // ];
 
 // const headerImg =
-//   "~/assets/img/learn/summer-school/quantum-simulation-summer-school-2022/header.png";
+//   "/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png";
 
 // const backToTextbookHomeLink: GeneralLink = {
 //   url: "/learn",
@@ -162,7 +162,7 @@ useHead({
 // ];
 
 // const imageUrlBase =
-//   "~/assets/img/learn/summer-school/quantum-simulation-summer-school-2022";
+//   "/images/learn/summer-school/quantum-simulation-summer-school-2022";
 
 // TODO: Refactor "logic" pages
 // export default class SummerSchoolCoursePage extends CourseOverviewPage {

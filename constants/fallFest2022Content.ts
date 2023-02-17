@@ -12,7 +12,7 @@ const header = {
   },
   cardSectionHeading: "About the event:",
   card: {
-    image: "~/assets/img/events/fall-fest/fall-fest-logo.png",
+    image: "/images/events/fall-fest/fall-fest-logo.png",
     title: "Qiskit Fall Fest 2022",
     description:
       "The Qiskit Fall Fest is a collection of quantum computing events each held by a university!",
