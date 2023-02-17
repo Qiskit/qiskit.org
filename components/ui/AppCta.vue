@@ -23,7 +23,6 @@
 
 <script setup lang="ts">
 import type { GeneralLink } from "~~/constants/appLinks";
-import UiBasicLink from "~/components/ui/BasicLink.vue";
 
 interface Props {
   isWider?: boolean;
@@ -45,16 +44,22 @@ const iconPerLinkType = computed(() => {
   if (props.label === "Under construction") {
     return "error-outline-16";
   }
-  // TODO: Fix how we're using this function and what params it accepts
-  if (UiBasicLink.isExternal(url as string)) {
+  if (isExternal(url as string)) {
     return "launch-16";
   }
-  // TODO: Fix how we're using this function and what params it accepts
-  if (UiBasicLink.isIdAnchor(url as string)) {
+  if (isIdAnchor(url as string)) {
     return "arrow-down-16";
   }
   return "arrow-right-16";
 });
+
+function isExternal(url: string) {
+  return !!url && url.startsWith("http");
+}
+
+function isIdAnchor(url: string) {
+  return !!url && url.startsWith("#");
+}
 </script>
 
 <style lang="scss" scoped>
