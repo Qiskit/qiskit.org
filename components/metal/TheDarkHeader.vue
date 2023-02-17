@@ -132,17 +132,17 @@
       <div class="the-dark-header__media">
         <img
           class="the-dark-header__media-cryo"
-          src="/images/metal/hero/cryo.png"
+          src="~/assets/img/metal/hero/cryo.png"
           alt=""
         />
         <img
           class="the-dark-header__media-transmon-outline"
-          src="/images/metal/hero/transmon.svg"
+          src="~/assets/img/metal/hero/transmon.svg"
           alt=""
         />
         <img
           class="the-dark-header__media-transmon"
-          src="/images/metal/hero/transmon.png"
+          src="~/assets/img/metal/hero/transmon.png"
           alt=""
         />
       </div>
@@ -157,7 +157,7 @@
 
 .the-dark-header {
   @include qiskit.responsive-grid-bg-strip(
-    "/images/grid/grid-hero-dark.svg",
+    "~/assets/img/grid/grid-hero-dark.svg",
     auto,
     56rem
   );

@@ -23,7 +23,7 @@
     </div>
     <div
       class="cds--col-md learn-card__media"
-      lazy-background="/images/landing-page/learn-image.jpg"
+      lazy-background="~/assets/img/landing-page/learn-image.jpg"
     />
   </article>
 </template>

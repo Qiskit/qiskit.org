@@ -38,7 +38,7 @@ const headerDescription = [
 ];
 
 const headerImg =
-  "/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png";
+  "~/assets/img/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png";
 
 const startLearningCTA: GeneralLink = {
   url: QuantumAlgorithmsForApplications.SolvingLinearSystemsOfEquationsUsingHHL,
@@ -136,5 +136,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "/images/learn/course/quantum-algorithms-for-applications";
+const imageUrlBase = "~/assets/img/learn/course/quantum-algorithms-for-applications";
 </script>

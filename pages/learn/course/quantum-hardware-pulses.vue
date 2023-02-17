@@ -38,7 +38,7 @@ const headerDescription = [
 ];
 
 const headerImg =
-  "/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png";
+  "~/assets/img/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png";
 
 const startLearningCTA: GeneralLink = {
   url: QuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
@@ -127,5 +127,5 @@ const prerequisites: Prerequisite[] = [
   },
 ];
 
-const imageUrlBase = "/images/learn/course/quantum-hardware-pulses";
+const imageUrlBase = "~/assets/img/learn/course/quantum-hardware-pulses";
 </script>

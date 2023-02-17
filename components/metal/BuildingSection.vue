@@ -61,7 +61,7 @@
         <div class="building-section__media">
           <img
             class="building-section__media-img"
-            src="/images/metal/whiteboard-dark.png"
+            src="~/assets/img/metal/whiteboard-dark.png"
             alt="Sketched illustration of a group standing in front of a whiteboard."
           />
         </div>
@@ -82,7 +82,7 @@ const stayInTouchLink = {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .building-section {
-  @include responsive-grid-bg("/images/grid/grid-right-dark.svg", 36rem);
+  @include responsive-grid-bg("~/assets/img/grid/grid-right-dark.svg", 36rem);
 
   background-position: right -1rem bottom -2px;
   background-repeat: no-repeat;

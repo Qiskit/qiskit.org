@@ -83,7 +83,7 @@
         class="st1"
       />
     </svg>
-    <img class="logo__sketch" src="/images/learn/logo-sketch-lines.png" />
+    <img class="logo__sketch" src="~/assets/img/learn/logo-sketch-lines.png" />
   </div>
 </template>
 

@@ -38,7 +38,7 @@ const headerDescription = [
   "This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook. This will help you reproduce the results as you see them on the textbook website. The Qiskit Textbook is written in Jupyter Notebooks.",
 ];
 
-const headerImg = "/images/learn/course/prerequisites/prerequisites.png";
+const headerImg = "~/assets/img/learn/course/prerequisites/prerequisites.png";
 
 const startLearningCTA: GeneralLink = {
   url: PrerequisitesUrl.Introduction,
@@ -89,5 +89,5 @@ const courses: Course[] = [
 
 const prerequisites: Prerequisite[] = [];
 
-const imageUrlBase = "/images/learn/course/prerequisites";
+const imageUrlBase = "~/assets/img/learn/course/prerequisites";
 </script>

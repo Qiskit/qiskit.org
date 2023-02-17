@@ -39,7 +39,7 @@ const headerDescription = [
 ];
 
 const headerImg =
-  "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
+  "~/assets/img/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
 
 const startLearningCTA: GeneralLink = {
   url: QuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
@@ -199,5 +199,5 @@ const prerequisites: Prerequisite[] = [
 ];
 
 const imageUrlBase =
-  "/images/learn/course/quantum-protocols-and-quantum-algorithms";
+  "~/assets/img/learn/course/quantum-protocols-and-quantum-algorithms";
 </script>

@@ -75,7 +75,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
   }
 
   public async getImage(record: any): Promise<string> {
-    const fallbackImage = "/images/advocates/no-advocate-photo.png";
+    const fallbackImage = "~/assets/img/advocates/no-advocate-photo.png";
     const attachments = record.get(this.recordFields!.image);
     const imageAttachment = attachments && findImageAttachment(attachments);
     const imageUrl = imageAttachment && getImageUrl(imageAttachment);
@@ -84,9 +84,9 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       return fallbackImage;
     }
 
-    const imagePublicPath = `/images/advocates/downloaded/${this.id}.jpg`;
+    const imagePublicPath = `~/assets/img/advocates/downloaded/${this.id}.jpg`;
 
-    return await this.storeImage(imageUrl, `static/${imagePublicPath}`)
+    return await this.storeImage(imageUrl, `public/${imagePublicPath}`)
       .then(() => imagePublicPath)
       .catch(() => fallbackImage);
   }

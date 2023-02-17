@@ -48,7 +48,7 @@ defineProps<Props>();
 
 .app-page-header {
   @include responsive-grid-bg-strip(
-    "/images/grid/grid-hero-learn.svg",
+    "~/assets/img/grid/grid-hero-learn.svg",
     auto,
     28rem
   );

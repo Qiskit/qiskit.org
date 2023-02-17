@@ -81,8 +81,8 @@ export default class CapabilitiesSection {
 
 .capabilities-section {
   // multiple backgrounds in one section
-  background-image: url("/images/grid/grid-right-dark.svg"),
-    url("/images/grid/grid-left-dark.svg");
+  background-image: url("~/assets/img/grid/grid-right-dark.svg"),
+    url("~/assets/img/grid/grid-left-dark.svg");
   background-size: 36rem auto, 36rem auto;
   background-position: right -1rem top, left 0 bottom 16rem;
   background-repeat: no-repeat, no-repeat;

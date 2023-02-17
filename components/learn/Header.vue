@@ -123,7 +123,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
 
     &-wrapper {
       @include responsive-grid-bg-strip(
-        "/images/grid/grid-hero-textbook.svg",
+        "~/assets/img/grid/grid-hero-textbook.svg",
         auto,
         95%
       );

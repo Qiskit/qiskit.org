@@ -20,7 +20,7 @@ useHead({
 //   of quantum machine learning algorithms in Qiskit.`
 // ]
 
-// const headerImg = '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
+// const headerImg = '~/assets/img/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png'
 
 // const backToTextbookHomeLink: GeneralLink = {
 //   url: '/learn',
@@ -251,7 +251,7 @@ useHead({
 //   }
 // ]
 
-// const imageUrlBase = '/images/learn/summer-school/quantum-computing-and-quantum-learning-2021'
+// const imageUrlBase = '~/assets/img/learn/summer-school/quantum-computing-and-quantum-learning-2021'
 
 // TODO: Refactor "logic" pages
 // export default class SummerSchoolCoursePage extends CourseOverviewPage {

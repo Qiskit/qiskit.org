@@ -70,7 +70,7 @@ export default class TheQiskitCapabilitiesSection {
     {
       title: 'Circuit Library',
       description: 'Qiskit includes a comprehensive set of quantum gates and a variety of pre-built circuits so users at all levels can use Qiskit for research and application development.',
-      thumbnailResource: '/images/landing-page/feature-circuit.png',
+      thumbnailResource: '~/assets/img/landing-page/feature-circuit.png',
       link: {
         url: 'https://qiskit.org/documentation/apidoc/circuit_library.html',
         label: 'Learn more',
@@ -80,7 +80,7 @@ export default class TheQiskitCapabilitiesSection {
     {
       title: 'Transpiler',
       description: 'The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.',
-      thumbnailResource: '/images/landing-page/transpiler.png',
+      thumbnailResource: '~/assets/img/landing-page/transpiler.png',
       link: {
         url: 'https://qiskit.org/documentation/apidoc/transpiler.html',
         label: 'Learn more',
@@ -90,7 +90,7 @@ export default class TheQiskitCapabilitiesSection {
     {
       title: 'Run on real hardware',
       description: 'Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.',
-      thumbnailResource: '/images/library/chip-01.png',
+      thumbnailResource: '~/assets/img/library/chip-01.png',
       link: {
         url: 'https://qiskit.org/documentation/apidoc/ibmq_provider.html',
         label: 'Learn more',
@@ -100,7 +100,7 @@ export default class TheQiskitCapabilitiesSection {
     {
       title: 'Try it yourself',
       description: 'Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.',
-      thumbnailResource: '/images/landing-page/med_02_1.png',
+      thumbnailResource: '~/assets/img/landing-page/med_02_1.png',
       segment: { cta: 'try-it-yourself', location: 'homepage-capabilities' }
     }
   ]

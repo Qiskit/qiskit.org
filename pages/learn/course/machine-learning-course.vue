@@ -48,7 +48,7 @@ learnt.`,
 through the Qiskit Advocate Mentoring Program.`,
 ];
 
-const headerImg = "/images/learn/course/machine-learning-course/header.png";
+const headerImg = "~/assets/img/learn/course/machine-learning-course/header.png";
 
 const startLearningCTA: GeneralLink = {
   url: StartLearningUrl.QML,
@@ -131,5 +131,5 @@ const courses: Course[] = [
   },
 ];
 
-const imageUrlBase = "/images/learn/course/machine-learning-course";
+const imageUrlBase = "~/assets/img/learn/course/machine-learning-course";
 </script>

@@ -42,7 +42,7 @@ const headerDescription = [
   to understand and mitigate noise.`,
 ];
 
-const headerImg = "/images/learn/course/basics-quantum-information/atom.png";
+const headerImg = "~/assets/img/learn/course/basics-quantum-information/atom.png";
 
 const startLearningCTA: GeneralLink = {
   url: StartLearningUrl.BasicsQuantumInformation,
@@ -159,5 +159,5 @@ const courses: Course[] = [
 
 const prerequisites: Prerequisite[] = [];
 
-const imageUrlBase = "/images/learn/course/basics-quantum-information";
+const imageUrlBase = "~/assets/img/learn/course/basics-quantum-information";
 </script>

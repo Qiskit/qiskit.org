@@ -202,7 +202,7 @@ useHead({
 // const emptyCard = {
 //   title: 'No events found',
 //   description: 'Trying doing a wider search criteria, or consider starting your own event.',
-//   img: '/images/events/no-events.svg'
+//   img: '~/assets/img/events/no-events.svg'
 // }
 // const extraFilters = [
 //   {
