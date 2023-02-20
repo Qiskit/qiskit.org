@@ -14,9 +14,9 @@ type ProvidersSubSection = {
   image: string | null
   installation: string
   description: string
-  websiteCta?: NavLink
-  docCta: NavLink
-  sourceCta: NavLink
+  websiteCta?: NavLink | null
+  docCta: NavLink | null
+  sourceCta: NavLink | null
   helloWorldExample: string[]
 }
 
@@ -52,28 +52,10 @@ const REAL_HARDWARE: ProvidersSection = {
   id: realHardware,
   title: 'Run With Real Hardware',
   description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
-  // linkset: [
-  //   {
-  //     label: 'See machine learning docs',
-  //     url: 'https://qiskit.org/documentation/machine-learning/'
-  //   },
-  //   {
-  //     label: 'See nature docs',
-  //     url: 'https://qiskit.org/documentation/nature/'
-  //   },
-  //   {
-  //     label: 'See finance docs',
-  //     url: 'https://qiskit.org/documentation/finance/'
-  //   },
-  //   {
-  //     label: 'See optimization docs',
-  //     url: 'https://qiskit.org/documentation/optimization/'
-  //   }
-  // ],
   subSections: [
     {
       title: 'IBM Qiskit Runtime',
-      image: './images/providers/qiskit-ibm-runtime.png',
+      image: '/images/providers/qiskit-ibm-runtime.png',
       description: 'Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.',
       installation: 'pip install qiskit-ibm-runtime',
       websiteCta: {
@@ -114,7 +96,7 @@ const REAL_HARDWARE: ProvidersSection = {
     },
     {
       title: 'IBM Quantum Platform',
-      image: './images/providers/qiskit-ibm-provider.png',
+      image: '/images/providers/qiskit-ibm-provider.png',
       description: 'IBM Quantum platform offers access to IBM Quantum systems and simulators.',
       installation: 'pip install qiskit-ibm-provider',
       websiteCta: {
@@ -234,7 +216,7 @@ const REAL_HARDWARE: ProvidersSection = {
   ]
 }
 
-const simulatorsId: string = 'algorithms'
+const simulatorsId: string = 'simulators'
 
 const SIMULATORS_IN_MENU: TableOfContentEntry = {
   sectionId: simulatorsId,
@@ -324,17 +306,118 @@ const SIMULATORS_COLLECTION: ProvidersSection = {
   ]
 }
 
+const multiplatformsId: string = 'multiplatforms'
+
+const MULTIPLATFORMS_IN_MENU: TableOfContentEntry = {
+  sectionId: multiplatformsId,
+  label: 'With Multiplatforms',
+  isSecondary: true
+}
+
+const MULTIPLATFORM_COLLECTION: ProvidersSection = {
+  id: multiplatformsId,
+  title: 'Run With Multiplatforms',
+  description: 'Lorem ipsum description for multiplatforms',
+  link: {
+    label: 'See docs',
+    url: 'https://todo-add-docs-link-for-multiplatforms'
+  },
+  subSections: [
+    {
+      title: 'Azure Quantum',
+      image: null,
+      description: 'Qiskit provider for IonQ backends.',
+      installation: 'pip install "azure-quantum[qiskit]"',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://aka.ms/aq'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://aka.ms/AQ/Qiskit/QuickStart'
+      },
+      sourceCta: null,
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit\n',
+        'from azure.quantum.qiskit import AzureQuantumProvider\n',
+        '\n',
+        '# Connect to Azure Quantum service\n',
+        'provider = AzureQuantumProvider(\n',
+        '  resource_id="MY_RESOURCE_ID",\n',
+        '  location="MY_LOCATION"\n',
+        ')\n',
+        '\n',
+        '# select a backend\n',
+        'backend = provider.get_backend("ionq.simulator")\n',
+        '\n',
+        '# Build and transpile a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        'transpiled_circuit = transpile(circuit, backend)\n',
+        '\n',
+        '# Run the circuit and get result counts\n',
+        'job = backend.run(transpiled_circuit)\n',
+        'counts = job.result().get_counts()\n',
+        'print(counts)'
+      ]
+    },
+    {
+      title: 'Amazon Braket',
+      image: null,
+      description: 'Execute Qiskit programs on AWS quantum computing hardware devices through Amazon Braket',
+      installation: 'pip install qiskit_braket_provider',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://aws.amazon.com/braket/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit-community.github.io/qiskit-braket-provider/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/qiskit-community/qiskit-braket-provider'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit, transpile\n',
+        'from qiskit_braket_provider import AWSBraketProvider\n',
+        '\n',
+        '# Select a backend\n',
+        'provider = AWSBraketProvider()\n',
+        'backend = provider.backends("SV1")\n',
+        '\n',
+        '# Build and transpile a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        'transpiled_circuit = transpile(circuit, backend)\n',
+        '\n',
+        '# Run the circuit and get result counts\n',
+        'job = backend.run(transpiled_circuit)\n',
+        'counts = job.result().get_counts()\n',
+        'print(counts)'
+      ]
+    }
+  ]
+
+}
+
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
     label: 'Run Qiskit circuits'
   },
   REAL_HARDWARE_IN_MENU,
-  SIMULATORS_IN_MENU
+  SIMULATORS_IN_MENU,
+  MULTIPLATFORMS_IN_MENU
 ]
 
 const CONTENT_SECTIONS: ProvidersSection[] = [
   REAL_HARDWARE,
-  SIMULATORS_COLLECTION
+  SIMULATORS_COLLECTION,
+  MULTIPLATFORM_COLLECTION
 ]
 
 export {

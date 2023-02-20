@@ -6,6 +6,7 @@
         :values="[
           'real hardware',
           'simulators',
+          'multiplatforms'
         ]"
       />
     </AppPageHeaderFixed>

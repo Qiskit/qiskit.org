@@ -51,17 +51,13 @@ export default class AppIntroductoryContent extends Vue {
     margin-bottom: $spacing-07;
 
     @include mq($from: large) {
-      $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
-
-      max-width: 100% * $grid-columns;
+      max-width: 16rem;
       width: 100%;
       padding-right: $spacing-07;
     }
 
     @include mq($from: max-size) {
-      $grid-columns: math.div(4, 13); // Number of columns that the element will use at this breakpoint.
-
-      max-width: 100% * $grid-columns;
+      max-width: 24rem;
     }
   }
 

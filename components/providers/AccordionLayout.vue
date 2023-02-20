@@ -20,11 +20,13 @@
         v-bind="websiteCta"
       />
       <AppCta
+        v-if="docCta"
         class="accordion-layout__cta-group__item"
         kind="ghost"
         v-bind="docCta"
       />
       <AppCta
+        v-if="sourceCta"
         class="accordion-layout__cta-group__item"
         kind="ghost"
         v-bind="sourceCta"
@@ -34,6 +36,7 @@
     <cv-code-snippet
       kind="multiline"
       light
+      wrap-text
       feedback-aria-label="Copy code snippet"
       class="accordion-layout__code-snippet"
     >
