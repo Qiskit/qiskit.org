@@ -11,11 +11,13 @@ type TableOfContentEntry = {
 
 type ProvidersSubSection = {
   title: string
-  content: {
-    image: string
-    description: string
-    cta: NavLink
-  }
+  image: string | null
+  installation: string
+  description: string
+  websiteCta?: NavLink
+  docCta: NavLink
+  sourceCta: NavLink
+  helloWorldExample: string[]
 }
 
 /**
@@ -70,59 +72,164 @@ const REAL_HARDWARE: ProvidersSection = {
   // ],
   subSections: [
     {
-      title: 'IBM Quantum Qiskit Runtime',
-      content: {
-        image: '/images/providers/applications/optimization.png',
-        description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.',
-        cta: {
-          label: 'Solve the Max Cut Problem',
-          url: 'https://qiskit.org/documentation/optimization/tutorials/01_quadratic_program.html'
-        }
-      }
+      title: 'IBM Qiskit Runtime',
+      image: './images/providers/qiskit-ibm-runtime.png',
+      description: 'Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.',
+      installation: 'pip install qiskit-ibm-runtime',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://quantum-computing.ibm.com/lab/docs/iql/runtime/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/partners/qiskit_ibm_runtime/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit/qiskit-ibm-runtime'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit\n',
+        'from qiskit_ibm_runtime import QiskitRuntimeService, Sampler\n',
+        '\n',
+        '# Save an IBM Quantum account\n',
+        'QiskitRuntimeService.save_account(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")\n',
+        '\n',
+        '# Select a backend\n',
+        'service = QiskitRuntimeService()\n',
+        'backend = service.backend("ibmq_qasm_simulator")\n',
+        '\n',
+        '# Build a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        '\n',
+        '# Run the circuit and get result distribution\n',
+        'sampler = Sampler(session=backend)\n',
+        'job = sampler.run(circuit)\n',
+        'quasi_dist = job.result().quasi_dists[0]\n',
+        'print(quasi_dist)'
+      ]
     },
     {
-      title: 'IBM Quantum Systems',
-      content: {
-        image: '/images/providers/applications/finance.png',
-        description: 'The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.',
-        cta: {
-          label: 'Perform Option Pricing with qGans',
-          url: 'https://qiskit.org/documentation/finance/tutorials/10_qgan_option_pricing.html'
-        }
-      }
+      title: 'IBM Quantum Platform',
+      image: './images/providers/qiskit-ibm-provider.png',
+      description: 'IBM Quantum platform offers access to IBM Quantum systems and simulators.',
+      installation: 'pip install qiskit-ibm-provider',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://www.ibm.com/quantum/systems'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/partners/qiskit_ibm_provider/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit/qiskit-ibm-provider'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit, transpile\n',
+        'from qiskit_ibm_provider import IBMProvider\n',
+        '\n',
+        '\n',
+        '# Save an IBM Quantum account\n',
+        'IBMProvider.save_account("MY_IBM_QUANTUM_TOKEN")\n',
+        '\n',
+        '# Select a backend\n',
+        'provider = IBMProvider()\n',
+        'backend = provider.get_backend("ibmq_qasm_simulator")\n',
+        '\n',
+        '# Build and transpile a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        'transpiled_circuit = transpile(circuit, backend)\n',
+        '\n',
+        '# Run the circuit and get result counts\n',
+        'job = backend.run(transpiled_circuit)\n',
+        'counts = job.result().get_counts()\n',
+        'print(counts)'
+      ]
     },
     {
       title: 'IonQ',
-      content: {
-        image: '/images/providers/applications/machine-learning.png',
-        description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
-        cta: {
-          label: 'Classify data with a VQC',
-          url: 'https://qiskit.org/documentation/machine-learning/tutorials/01_neural_networks.html'
-        }
-      }
+      image: null,
+      description: 'Qiskit provider for IonQ backends.',
+      installation: 'pip install qiskit-ionq',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://ionq.com/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/partners/ionq/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit-Partners/qiskit-ionq'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit\n',
+        'from qiskit_ionq import IonQProvider\n',
+        '\n',
+        '# Select a backend\n',
+        'provider = IonQProvider("MY_IONQ_TOKEN")\n',
+        'backend = provider.get_backend("ionq_simulator")\n',
+        '\n',
+        '# Build a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        '\n',
+        '# Run the circuit and get result counts\n',
+        'job = backend.run(circuit)\n',
+        'counts = job.get_counts()\n',
+        'print(counts)'
+      ]
     },
     {
-      title: 'Azure Quantum',
-      content: {
-        image: '/images/providers/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
-        cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
-    },
-    {
-      title: 'Other community-supported providers',
-      content: {
-        image: '/images/providers/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
-        cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
+      title: 'Quantinuum',
+      image: null,
+      description: 'Qiskit provider for Quantinuum backends.',
+      installation: 'pip install qiskit-quantinuum-provider',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://www.quantinuum.com/'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://github.com/qiskit-community/qiskit-quantinuum-provider/blob/master/examples/QuantinuumExample.ipynb'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/qiskit-community/qiskit-quantinuum-provider'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit, transpile\n',
+        'from qiskit_quantinuum import Quantinuum\n',
+        '\n',
+        '# Save account\n',
+        'Quantinuum.save_account("username@company.com")\n',
+        '\n',
+        '# Select backend\n',
+        'backend = Quantinuum.backends("DEVICE_NAME")\n',
+        '\n',
+        '# Build and transpile circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        'transpiled_circuit = transpile(circuit, backend)\n',
+        '\n',
+        '# Run the circuit and get result\n',
+        'job = backend.run(transpiled_circuit)\n',
+        'counts = job.result().get_counts()\n',
+        'print(counts)'
+      ]
     }
   ]
 }
@@ -146,36 +253,73 @@ const SIMULATORS_COLLECTION: ProvidersSection = {
   subSections: [
     {
       title: 'Qiskit Aer',
-      content: {
-        image: '/images/providers/algorithms/grover.png',
-        description: 'Grover\'s algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
-        cta: {
-          label: 'Try out Grover’s',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover'
-        }
-      }
+      image: null,
+      description: 'Qiskit Aer is a high performance simulator for quantum circuits that includes noise models.',
+      installation: 'pip install qiskit-aer',
+      docCta: {
+        label: 'Docs',
+        url: 'https://qiskit.org/documentation/aer/'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/Qiskit/qiskit-aer'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit, transpile\n',
+        'from qiskit_aer import AerSimulator\n',
+        '\n',
+        '# Select a backend\n',
+        'backend = AerSimulator()\n',
+        '\n',
+        '# Build and transpile a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        'transpiled_circuit = transpile(circuit, backend)\n',
+        '\n',
+        '# Run the circuit and get result\n',
+        'job = backend.run(transpiled_circuit)\n',
+        'counts = job.result().get_counts()\n',
+        'print(counts)'
+      ]
     },
     {
-      title: 'Other simulator',
-      content: {
-        image: '/images/providers/algorithms/vqe.png',
-        description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
-        cta: {
-          label: 'Try out VQE',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html#qiskit.algorithms.VQE'
-        }
-      }
-    },
-    {
-      title: 'Yet another one',
-      content: {
-        image: '/images/providers/algorithms/qaoa.png',
-        description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
-        cta: {
-          label: 'Try out QAOA',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html#qiskit.algorithms.QAOA'
-        }
-      }
+      title: 'NVIDIA cuQuantum Appliance',
+      image: null,
+      description: 'The NVIDIA cuQuantum Appliance is a highly performant multi-GPU multi-node solution for quantum circuit simulation.',
+      installation: 'docker pull nvcr.io/nvidia/cuquantum-appliance',
+      websiteCta: {
+        label: 'Website',
+        url: 'https://developer.nvidia.com/cuquantum-sdk'
+      },
+      docCta: {
+        label: 'Docs',
+        url: 'https://docs.nvidia.com/cuda/cuquantum/index.html'
+      },
+      sourceCta: {
+        label: 'GitHub',
+        url: 'https://github.com/NVIDIA/cuQuantum'
+      },
+      helloWorldExample: [
+        'from qiskit import QuantumCircuit, transpile\n',
+        'from cusvaer.backends import StatevectorSimulator\n',
+        '\n',
+        '# Select a backend\n',
+        'backend = StatevectorSimulator()\n',
+        '\n',
+        '# Build and transpile a circuit\n',
+        'circuit = QuantumCircuit(2, 2)\n',
+        'circuit.h(0)\n',
+        'circuit.cx(0,1)\n',
+        'circuit.measure([0,1], [0,1])\n',
+        'transpiled_circuit = transpile(circuit, backend)\n',
+        '\n',
+        '# Run the circuit and get result\n',
+        'job = backend.run(transpiled_circuit)\n',
+        'counts = job.result().get_counts()\n',
+        'print(counts)'
+      ]
     }
   ]
 }

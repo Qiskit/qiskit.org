@@ -8,30 +8,36 @@
       <!-- TODO: replace w/ dynamic code snippet -->
       <span>pip install something</span>
     </cv-code-snippet>
-    <img :src="image" class="accordion-layout__image">
+    <img v-if="image" :src="image" class="accordion-layout__image">
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <AppCta
-      kind="ghost"
-      v-bind="cta"
-    />
+    <div class="accordion-layout__cta-group">
+      <AppCta
+        v-if="websiteCta"
+        class="accordion-layout__cta-group__item"
+        kind="ghost"
+        v-bind="websiteCta"
+      />
+      <AppCta
+        class="accordion-layout__cta-group__item"
+        kind="ghost"
+        v-bind="docCta"
+      />
+      <AppCta
+        class="accordion-layout__cta-group__item"
+        kind="ghost"
+        v-bind="sourceCta"
+      />
+    </div>
     <!-- TODO: replace w/ dynamic code sample -->
     <cv-code-snippet
       kind="multiline"
       light
       feedback-aria-label="Copy code snippet"
+      class="accordion-layout__code-snippet"
     >
-      import qiskit
-      from qiskit_runtime import ...
-
-      (very) short code example
-      Lorem ipsum dolor sit amet
-      consectetur adipiscing elit
-      Suspendisse id laoreet urna
-      nec egestas lorem
-      Donec porta
-      mauris sed facilisis pulvinar
+      <span v-for="line in helloWorldExample" :key="line">{{ line }}</span>
     </cv-code-snippet>
   </article>
 </template>
@@ -39,30 +45,35 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { NavLink } from '~/constants/menuLinks'
 
 // TODO: It is not possible to extract the interface of the component props
 // so we need this redundant interface to do it. Explore if it is worth
 // removing the @Prop decorator in favour of:
 // https://class-component.vuejs.org/guide/props-definition.html
 interface AccordionLayoutProps {
-  image: string,
-  description: string,
-  cta: {
-    url: string,
-    label: string
-  }
+  title: string
+  image: string | null
+  installation: string
+  description: string
+  websiteCta?: NavLink
+  docCta: NavLink
+  sourceCta: NavLink
+  helloWorldExample: string[]
 }
 
 export { AccordionLayoutProps }
 
 @Component
 export default class AccordionLayout extends Vue implements AccordionLayoutProps {
+  @Prop(String) title!: string
+  @Prop(String) installation!: string
   @Prop(String) image!: string
   @Prop(String) description!: string
-  @Prop(Object) cta!: {
-    url: string,
-    label: string
-  }
+  @Prop(Object) websiteCta!: { url: string, label: string }
+  @Prop(Object) docCta!: { url: string, label: string }
+  @Prop(Object) sourceCta!: { url: string, label: string }
+  @Prop(Array) helloWorldExample!: string[]
 }
 </script>
 
@@ -73,14 +84,28 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 
   &__image {
     align-self: center;
-    height: auto;
     width: 100%;
-    max-width: 26rem;
-    margin-bottom: $spacing-05;
+    margin: $spacing-06 0;
   }
 
   &__description {
-    margin-bottom: $spacing-06;
+    margin: $spacing-06 0;
+  }
+
+  &__cta-group {
+    display: flex;
+
+    .app-cta {
+      max-width: 10rem;
+    }
+  }
+
+  &__code-snippet {
+    ::v-deep {
+      .bx--snippet-btn--expand {
+        display: none;
+      }
+    }
   }
 }
 </style>
