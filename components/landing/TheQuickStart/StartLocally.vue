@@ -212,6 +212,7 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
 
   &__option {
     --cds-interactive-03: #{carbon.$cool-gray-60};
+
     max-width: 100%;
     margin-bottom: carbon.$spacing-07;
 

@@ -29,10 +29,7 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE;
 
 .start-on-the-cloud {
   &__wrapper {
-    @include qiskit.responsive-grid-bg(
-      "/images/grid/grid-white.svg",
-      36rem
-    );
+    @include qiskit.responsive-grid-bg("/images/grid/grid-white.svg", 36rem);
 
     background-color: qiskit.$background-color-lighter;
     background-position: bottom left;
