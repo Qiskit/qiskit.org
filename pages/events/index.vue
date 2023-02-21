@@ -22,7 +22,6 @@
           </cv-tabs>
         </client-only>
       </div>
-      {{ isCalendar }}
       <div v-if="isCalendar">
         <iframe
           class="airtable-embed"
@@ -272,7 +271,6 @@ export default class EventsPage extends QiskitPage {
     }
 
     selectTab (selectedTab: number) {
-      console.log(selectedTab)
       switch (selectedTab) {
         case 0:
           this.$store.commit('events/setActiveSet', 'upcoming')
