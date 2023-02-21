@@ -2,7 +2,7 @@
   <article class="page-section the-learn-section">
     <div class="cds--grid">
       <h2>Learn with Qiskit</h2>
-      <LearnCard />
+      <LandingTheLearnSectionCard />
     </div>
   </article>
 </template>

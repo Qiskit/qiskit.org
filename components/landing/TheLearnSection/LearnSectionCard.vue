@@ -21,10 +21,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="cds--col-md learn-card__media"
-      lazy-background="/images/landing-page/learn-image.jpg"
-    />
+    <div class="cds--col-md learn-card__media" />
   </article>
 </template>
 
@@ -98,6 +95,7 @@ const learnLink: GeneralLink = {
   }
 
   &__media {
+    background-image: url("/images/landing-page/learn-image.jpg");
     background-position: center 25%;
     background-size: cover;
     flex: 1;
