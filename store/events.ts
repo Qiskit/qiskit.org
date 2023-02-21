@@ -102,6 +102,9 @@ export default {
     regionFilters (state: State) {
       return state.regionFilters
     },
+    activeSet (state: State) {
+      return state.activeSet
+    },
     filteredEvents (state: State) {
       const {
         activeSet,
