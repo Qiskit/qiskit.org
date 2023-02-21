@@ -23,6 +23,10 @@
 </template>
 
 <script setup lang="ts">
+import ArrowDown16 from "@carbon/icons-vue/lib/arrow--down/16";
+import ArrowRight16 from "@carbon/icons-vue/lib/arrow--right/16";
+import ErrorOutline16 from "@carbon/icons-vue/lib/error--outline/16";
+import Launch16 from "@carbon/icons-vue/lib/launch/16";
 import type { GeneralLink } from "~~/constants/appLinks";
 
 interface Props {
@@ -39,6 +43,8 @@ const props = withDefaults(defineProps<Props>(), {
   theme: "light",
 });
 
+defineEmits(["click"]);
+
 const urlString = computed(() => {
   if (typeof props.url === "string") {
     return props.url;
@@ -50,15 +56,15 @@ const iconPerLinkType = computed(() => {
   const url = props.url;
 
   if (props.label === "Under construction") {
-    return "error-outline-16";
+    return ErrorOutline16;
   }
   if (isExternal(url as string)) {
-    return "launch-16";
+    return Launch16;
   }
   if (isIdAnchor(url as string)) {
-    return "arrow-down-16";
+    return ArrowDown16;
   }
-  return "arrow-right-16";
+  return ArrowRight16;
 });
 
 function isExternal(url: string) {
