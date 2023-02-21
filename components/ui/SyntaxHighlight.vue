@@ -1,12 +1,12 @@
 <template>
   <div class="syntax-highlight">
     <bx-btn
-      size="small"
+      size="sm"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
       @click="[copyToClipboard(code), trackClickEvent(segmentAction)]"
     >
-      Copy
+      copy
     </bx-btn>
     <code class="syntax-highlight__code" v-text="code" />
   </div>
@@ -55,7 +55,6 @@ function copyToClipboard(code: string) {
     right: 0;
     bottom: 0;
     border: none;
-    padding: carbon.$spacing-03 carbon.$spacing-05;
     text-transform: lowercase;
     background-size: 200% 100%;
     background-position-x: 100%;

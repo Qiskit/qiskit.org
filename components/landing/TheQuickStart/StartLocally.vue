@@ -20,6 +20,7 @@
           <bx-btn
             v-for="option in choicesGroup.options"
             :key="option"
+            kind="tertiary"
             :title="option"
             class="start-locally__option"
             :class="{
@@ -210,10 +211,8 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
   }
 
   &__option {
-    background-color: qiskit.$background-color-lighter;
+    --cds-interactive-03: #{carbon.$cool-gray-60};
     max-width: 100%;
-    color: qiskit.$text-color-light;
-    padding-left: carbon.$spacing-07;
     margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-down(lg) {
@@ -222,9 +221,7 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
     }
 
     &_active {
-      border-color: qiskit.$border-active-color;
-      border-width: 2px;
-      color: qiskit.$text-active-color;
+      --cds-interactive-03: #{carbon.$purple-70};
     }
   }
 }
