@@ -4,7 +4,7 @@
     <div class="qiskit-capabilities-section__container">
       <div class="qiskit-capabilities-section__capabilities">
         <div class="qiskit-capabilities-section__content">
-          <QiskitCapabilityCard
+          <LandingTheQiskitCapabilityCard
             v-for="item in capabilities"
             :id="item.title"
             :key="item.title"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <CodeCell
+          <LandingTheQiskitCapabilitiesSectionCodeCell
             :active-blocks="
               capabilities.map((item, index) => isActiveSection(item, index))
             "
@@ -46,92 +46,101 @@
   </article>
 </template>
 
-<!-- TODO: Refactor using Composition API once Mixins are refactored -->
-<script lang="ts">
+<script setup lang="ts">
 import "@carbon/web-components/es/components/button/index.js";
-import { Component, Mixins } from 'vue-property-decorator'
-import { CtaClickedEventProp } from '~/types/segment'
-import { useScrollBetweenSections } from '~/composables/useScrollBetweenSections'
+import Copy16 from "@carbon/icons-vue/lib/copy/16";
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
+import type { CtaClickedEventProp } from "~/types/segment";
 
 interface QiskitCapability {
-  title: string
-  description: string
-  thumbnailResource: string
-  segment: CtaClickedEventProp
+  title: string;
+  description: string;
+  thumbnailResource: string;
+  link?: {
+    url: string;
+    label: string;
+    segment: CtaClickedEventProp;
+  };
+  segment?: CtaClickedEventProp;
 }
 
-@Component
-export default class TheQiskitCapabilitiesSection {
-  const { trackClickEvent } = useSegment()
+const { trackClickEvent } = useSegment();
 
-  // TODO: Review how this work
-  const { activeSection } = useScrollBetweenSections()
+const { activeSection } = useScrollBetweenSections();
 
-  capabilities = [
-    {
-      title: 'Circuit Library',
-      description: 'Qiskit includes a comprehensive set of quantum gates and a variety of pre-built circuits so users at all levels can use Qiskit for research and application development.',
-      thumbnailResource: '~/assets/img/landing-page/feature-circuit.png',
-      link: {
-        url: 'https://qiskit.org/documentation/apidoc/circuit_library.html',
-        label: 'Learn more',
-        segment: { cta: 'circuit-library', location: 'homepage-capabilities' }
-      }
+const capabilities: QiskitCapability[] = [
+  {
+    title: "Circuit Library",
+    description:
+      "Qiskit includes a comprehensive set of quantum gates and a variety of pre-built circuits so users at all levels can use Qiskit for research and application development.",
+    thumbnailResource: "/images/landing-page/feature-circuit.png",
+    link: {
+      url: "https://qiskit.org/documentation/apidoc/circuit_library.html",
+      label: "Learn more",
+      segment: { cta: "circuit-library", location: "homepage-capabilities" },
     },
-    {
-      title: 'Transpiler',
-      description: 'The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.',
-      thumbnailResource: '~/assets/img/landing-page/transpiler.png',
-      link: {
-        url: 'https://qiskit.org/documentation/apidoc/transpiler.html',
-        label: 'Learn more',
-        segment: { cta: 'transpiler', location: 'homepage-capabilities' }
-      }
+  },
+  {
+    title: "Transpiler",
+    description:
+      "The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.",
+    thumbnailResource: "/images/landing-page/transpiler.png",
+    link: {
+      url: "https://qiskit.org/documentation/apidoc/transpiler.html",
+      label: "Learn more",
+      segment: { cta: "transpiler", location: "homepage-capabilities" },
     },
-    {
-      title: 'Run on real hardware',
-      description: 'Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.',
-      thumbnailResource: '~/assets/img/library/chip-01.png',
-      link: {
-        url: 'https://qiskit.org/documentation/apidoc/ibmq_provider.html',
-        label: 'Learn more',
-        segment: { cta: 'run-on-hardware', location: 'homepage-capabilities' }
-      }
+  },
+  {
+    title: "Run on real hardware",
+    description:
+      "Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.",
+    thumbnailResource: "/images/library/chip-01.png",
+    link: {
+      url: "https://qiskit.org/documentation/apidoc/ibmq_provider.html",
+      label: "Learn more",
+      segment: { cta: "run-on-hardware", location: "homepage-capabilities" },
     },
-    {
-      title: 'Try it yourself',
-      description: 'Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.',
-      thumbnailResource: '~/assets/img/landing-page/med_02_1.png',
-      segment: { cta: 'try-it-yourself', location: 'homepage-capabilities' }
-    }
-  ]
+  },
+  {
+    title: "Try it yourself",
+    description:
+      "Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.",
+    thumbnailResource: "/images/landing-page/med_02_1.png",
+    segment: { cta: "try-it-yourself", location: "homepage-capabilities" },
+  },
+];
 
-  quantumLabCTA = {
-    url: 'https://quantum-computing.ibm.com/lab/files/qiskit-textbook/getting-started/example.ipynb',
-    label: 'Open in Quantum Lab',
-    segment: { cta: 'open-in-quantum-lab', location: 'homepage-capabilities' }
+const quantumLabCTA = {
+  url: "https://quantum-computing.ibm.com/lab/files/qiskit-textbook/getting-started/example.ipynb",
+  label: "Open in Quantum Lab",
+  segment: { cta: "open-in-quantum-lab", location: "homepage-capabilities" },
+};
+
+const copyCodeCTA = {
+  url: "",
+  label: "Copy code",
+  segment: { cta: "copy-code", location: "homepage-capabilities" },
+};
+
+function isActiveSection(item: QiskitCapability, index: number): boolean {
+  if (capabilities[capabilities.length - 1].title === activeSection.value) {
+    return true;
   }
 
-  copyCodeCTA = {
-    url: '',
-    label: 'Copy code',
-    segment: { cta: 'copy-code', location: 'homepage-capabilities' }
-  }
+  return (
+    item.title === activeSection.value ||
+    (activeSection.value === "" && index === 0)
+  );
+}
 
-  isActiveSection (item: QiskitCapability, index: number): boolean {
-    if (this.capabilities[this.capabilities.length - 1].title === this.activeSection) {
-      return true
-    }
+function copyToClipboard(): void {
+  const codeSnippet = document.querySelector(
+    ".code-cell"
+  ) as HTMLElement | null;
 
-    return item.title === this.activeSection || (this.activeSection === '' && index === 0)
-  }
-
-  copyToClipboard (): void {
-    const codeSnippet = document.querySelector('.code-cell') as HTMLElement | null
-
-    if (codeSnippet !== null) {
-      navigator.clipboard.writeText(codeSnippet.innerText)
-    }
+  if (codeSnippet !== null) {
+    navigator.clipboard.writeText(codeSnippet.innerText);
   }
 }
 </script>

@@ -42,12 +42,10 @@ quantum_circuit = qiskit.circuit.library.QuantumVolume(5)</pre
 
 <script setup lang="ts">
 interface Props {
-  activeBlocks?: boolean[];
+  activeBlocks: boolean[];
 }
 
-withDefaults(defineProps<Props>(), {
-  activeBlocks: () => [true, false, false],
-});
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
