@@ -1,19 +1,13 @@
 <template>
   <main>
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderFixed>
-      Connect with the<br>
-      <TypewriterEffect
-        :values="[
-          'enthusiasts',
-          'advocates',
-          'mentors',
-          'experts'
-        ]"
+    <UiAppPageHeaderFixed>
+      Connect with the<br />
+      <UiTypewriterEffect
+        :values="['enthusiasts', 'advocates', 'mentors', 'experts']"
       />
-      from within<br>
+      from within<br />
       the Qiskit community
-    </AppPageHeaderFixed> -->
+    </UiAppPageHeaderFixed>
     <!-- <AdvocatesJoinSection /> -->
     <!-- <MeetTheAdvocates /> -->
   </main>

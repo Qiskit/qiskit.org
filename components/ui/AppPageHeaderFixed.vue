@@ -11,6 +11,7 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-page-header-fixed {
