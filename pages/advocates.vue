@@ -8,7 +8,7 @@
       from within<br />
       the Qiskit community
     </UiAppPageHeaderFixed>
-    <!-- <AdvocatesJoinSection /> -->
+    <AdvocatesJoinSection />
     <!-- <MeetTheAdvocates /> -->
   </main>
 </template>

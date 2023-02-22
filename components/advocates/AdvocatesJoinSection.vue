@@ -20,17 +20,20 @@
         :key="`benefit-${benefit.icon}`"
         class="cds--col-lg-4 cds--col-md-4 join-section__feature"
       >
-        <CompactFeature v-bind="benefit" />
+        <UiCompactFeature v-bind="benefit" />
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import CompactFeature from "~/components/ui/CompactFeature.vue";
 import { GeneralLink } from "~/constants/appLinks";
 
-type Benefit = Pick<CompactFeature, "icon" | "title" | "description">;
+interface Benefit {
+  icon: string;
+  title: string;
+  description: string;
+}
 
 const advocateBenefits: Benefit[] = [
   {
@@ -62,7 +65,6 @@ const joinAction: GeneralLink = {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@import "~carbon-components/scss/globals/scss/typography";
 
 .join-section {
   &__feature {
