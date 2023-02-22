@@ -9,7 +9,7 @@
       the Qiskit community
     </UiAppPageHeaderFixed>
     <AdvocatesJoinSection />
-    <!-- <MeetTheAdvocates /> -->
+    <AdvocatesMeetTheAdvocates />
   </main>
 </template>
 
@@ -19,7 +19,6 @@ definePageMeta({
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Advocates",
   meta: [
     {

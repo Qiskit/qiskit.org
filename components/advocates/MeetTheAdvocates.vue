@@ -17,30 +17,34 @@
         </p>
       </div>
     </div>
-    <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
+    <UiAppFiltersResultsLayout
+      class="meet-the-advocates__filters-result-section"
+    >
       <template #filters-on-m-l-screen>
-        <AppFieldset :label="filter.label">
+        <UiAppFieldset :label="filter.label">
           <client-only>
-            <cv-checkbox
+            <bx-checkbox
               v-for="option in filter.options"
               :key="option"
               :checked="isRegionFilterChecked(option)"
-              :label="option"
+              :label-text="option"
               :value="option"
-              @change="updateRegionFilter(option, $event)"
+              @bx-checkbox-changed="
+                updateRegionFilter(option, $event.target.checked)
+              "
             />
           </client-only>
-        </AppFieldset>
+        </UiAppFieldset>
       </template>
       <template #filters-on-s-screen>
-        <AppMultiSelect
+        <UiAppMultiSelect
           :label="filter.label"
           :options="filter.options"
-          :value="regionFilters"
+          :value="regionFiltersAsString"
           @change-selection="updateRegionFilters($event)"
         />
       </template>
-      <template #results>
+      <!-- <template #results>
         <div class="cds--row">
           <div
             v-for="advocate in filteredAdvocates"
@@ -50,13 +54,14 @@
             <AdvocateCard v-bind="advocate" />
           </div>
         </div>
-      </template>
-    </AppFiltersResultsLayout>
+      </template> -->
+    </UiAppFiltersResultsLayout>
   </section>
 </template>
 
 <script setup lang="ts">
 import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
+import "@carbon/web-components/es/components/checkbox/index.js";
 
 const filter = {
   label: "Locations",
@@ -68,7 +73,9 @@ const { data: advocates } = useLazyAsyncData(
   async () => (await import("~/content/advocates/advocates.json")) as Advocate[]
 );
 
-const regionFilters = ref([] as string[]);
+const regionFilters = ref<string[]>([]);
+
+const regionFiltersAsString = computed(() => regionFilters.value.join(","));
 
 const filteredAdvocates = computed(() => {
   const noRegionFilters = regionFilters.value.length === 0;
@@ -93,6 +100,11 @@ function updateRegionFilter(option: string, isChecked: boolean) {
   }
 
   regionFilters.value = filteredRegionFilters;
+}
+
+function updateRegionFilters(newRegionFilters: string) {
+  const newRegionFiltersAsArray = newRegionFilters.split(",");
+  regionFilters.value = newRegionFiltersAsArray;
 }
 
 const joinSlackLink = "https://ibm.co/joinqiskitslack";

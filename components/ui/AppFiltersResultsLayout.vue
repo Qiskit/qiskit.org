@@ -33,7 +33,7 @@
     }
 
     @include carbon.breakpoint-up(xlg) {
-      height: calc(100% - #{$spacing-06});
+      height: calc(100% - #{carbon.$spacing-06});
     }
   }
 }

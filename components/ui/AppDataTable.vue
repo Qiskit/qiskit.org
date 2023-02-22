@@ -34,7 +34,7 @@ defineProps<Props>();
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .bx--data-table th {
-  color: $black-100;
+  color: carbon.$black-100;
   background-color: qiskit.$background-color-light;
 
   // TODO: remove this override once issue is fixed
