@@ -10,7 +10,9 @@
       v-if="image"
       class="app-card__image"
       :class="imageContain ? 'app-card__image_contain' : null"
-      :lazy-background="image"
+      :style="{
+        'background-image': `url(${image})`,
+      }"
     />
     <div class="app-card__content">
       <header class="app-card__header">
@@ -24,16 +26,22 @@
         </div>
         <div class="cds--row">
           <div v-if="hasTags(tags)" class="app-card__tags">
-            <cv-tag v-for="tag in tags" :key="tag" :label="tag" kind="purple" />
+            <bx-tag v-for="tag in tags" :key="tag" type="purple">
+              {{ tag }}
+            </bx-tag>
           </div>
           <div v-if="hasTags(tooltipTags)" class="app-card__tags">
             <div
               v-for="tag in tooltipTags"
-              :key="tag.index"
+              :key="tag.label"
               class="app-card__custom-pill"
             >
               {{ tag.label }}
-              <cv-tooltip :tip="tag.message" direction="bottom" />
+              <bx-tooltip direction="bottom">
+                <bx-tooltip-body>
+                  {{ tag.description }}
+                </bx-tooltip-body>
+              </bx-tooltip>
             </div>
           </div>
         </div>
@@ -57,6 +65,8 @@
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/tag/tag.js";
+import "@carbon/web-components/es/components/tooltip/tooltip.js";
 import { CtaClickedEventProp } from "~/types/segment";
 
 export interface TagTooltip {
@@ -219,10 +229,23 @@ function hasTags(tags: string[] | TagTooltip[]) {
     }
   }
 }
+
+bx-tag {
+  background-color: qiskit.$tag-background-color;
+  color: qiskit.$tag-text-color;
+  margin-right: carbon.$spacing-03;
+  margin-left: 0;
+  min-width: 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
 </style>
 
 <style lang="scss">
-@import "~carbon-components/scss/globals/scss/typography";
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
   .bx--assistive-text {
@@ -230,20 +253,8 @@ function hasTags(tags: string[] | TagTooltip[]) {
 }
 
 .app-card {
-  .bx--tag--purple {
-    background-color: qiskit.$tag-background-color;
-    color: qiskit.$tag-text-color;
-    margin-right: carbon.$spacing-03;
-    margin-left: 0;
-    min-width: 0;
-  }
-
-  .bx--tag--purple:last-child {
-    margin-right: 0;
-  }
-
   &__custom-pill {
-    @include carbon.$type-style("caption-01");
+    @include carbon.type-style("label-01");
 
     background-color: qiskit.$tag-background-color;
     color: qiskit.$tag-text-color;
