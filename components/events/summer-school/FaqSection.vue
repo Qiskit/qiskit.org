@@ -319,19 +319,17 @@ const mailtoQiskit: TrackedLink = {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .faq-section {
-  ::v-deep {
-    .bx--accordion__title {
-      color: qiskit.$text-color;
-    }
+  :deep(.bx--accordion__title) {
+    color: qiskit.$text-color;
+  }
 
-    .bx--accordion__heading:hover,
-    .bx--accordion__heading:hover::before {
-      background-color: qiskit.$background-color-lighter;
-    }
+  :deep(.bx--accordion__heading:hover),
+  :deep(.bx--accordion__heading:hover::before) {
+    background-color: qiskit.$background-color-lighter;
+  }
 
-    .bx--accordion__arrow {
-      fill: qiskit.$text-color;
-    }
+  :deep(.bx--accordion__arrow) {
+    fill: qiskit.$text-color;
   }
 }
 </style>

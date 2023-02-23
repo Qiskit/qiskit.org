@@ -1,8 +1,8 @@
 <template>
   <header class="app-page-header">
-    <div class="bx--grid">
-      <div class="bx--row">
-        <main class="bx--col app-page-header__main">
+    <div class="cds--grid">
+      <div class="cds--row">
+        <main class="cds--col app-page-header__main">
           <div>
             <h1 class="app-page-header__headline">
               <slot name="title" />
@@ -18,7 +18,7 @@
             :url="cta.url"
           />
         </main>
-        <aside class="bx--col-lg-5 bx--col-md-4 app-page-header__aside">
+        <aside class="cds--col-lg-5 cds--col-md-4 app-page-header__aside">
           <div>
             <div class="app-page-header__card-title-wrapper">
               <div class="app-page-header__card-title" v-text="cardTitle" />
@@ -47,7 +47,7 @@ defineProps<Props>();
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .app-page-header {
-  @include responsive-grid-bg-strip(
+  @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-learn.svg",
     auto,
     28rem

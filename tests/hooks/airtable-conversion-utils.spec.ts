@@ -4,7 +4,7 @@ import { AirtableRecords } from "~/hooks/airtable-conversion-utils";
 
 const id = "TESTID";
 const imageUrl = "https://example.com/image.jpg";
-const imageFilePath = `static/test/target-dir/${id}.jpg`;
+const imageFilePath = `public/test/target-dir/${id}.jpg`;
 
 jest.mock("fs", () => {
   return {

@@ -1,27 +1,29 @@
+// TODO: Fix this composable to work with Vue 3
 import { ref, onMounted, onUpdated, onBeforeUnmount } from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
 
 export function useScrollBetweenSections() {
   const activeSection = ref("");
-  const _observer: IntersectionObserver | null = ref(null);
+  const _observer: Ref<IntersectionObserver | null> = ref(null);
+  // const root: Ref<HTMLElement | null> = ref(null);
 
   onMounted(() => {
     const threshold = [...Array(25).keys()].map((x) => (4 * x) / 100);
     const windowTriggerMargins = "-16px 0px -80% 0px";
-    this._observer = new IntersectionObserver(this._onSectionAppearing, {
+    _observer.value = new IntersectionObserver(_onSectionAppearing, {
       root: null, // the viewport
       rootMargin: windowTriggerMargins,
       threshold,
     });
-    this.updateObserved();
+    // updateObserved();
   });
 
   onUpdated(() => {
-    this.$nextTick(() => this.updateObserved());
+    // nextTick(() => updateObserved());
   });
 
   onBeforeUnmount(() => {
-    this._observer && this._observer.disconnect();
+    _observer.value && _observer.value.disconnect();
   });
 
   // TODO: This is the original code. The onBeforeRouteEnter doesn't
@@ -36,17 +38,17 @@ export function useScrollBetweenSections() {
   // }
 
   onBeforeRouteUpdate((route: any, _: any, next: any) => {
-    this._parseSectionFromUrl(route);
+    _parseSectionFromUrl(route);
     next();
   });
 
-  function updateObserved() {
-    (this.$el as HTMLElement)
-      .querySelectorAll(".scrollable")
-      .forEach((section) => {
-        (this._observer as IntersectionObserver).observe(section);
-      });
-  }
+  // function updateObserved() {
+  //   (root!.value as HTMLElement)
+  //     .querySelectorAll(".scrollable")
+  //     .forEach((section) => {
+  //       (_observer.value as IntersectionObserver).observe(section);
+  //     });
+  // }
 
   function _onSectionAppearing(entries: Array<IntersectionObserverEntry>) {
     let highestTopValue = Infinity;
@@ -59,9 +61,9 @@ export function useScrollBetweenSections() {
       const triggerWindowBottom = rootBounds.bottom;
       const onTop = targetTop >= 0 && targetTop <= triggerWindowBottom;
       if (onTop && targetTop < highestTopValue) {
-        if (this.activeSection !== target.id) {
-          this.activeSection = target.id;
-          this.activeSectionChanged();
+        if (activeSection.value !== target.id) {
+          activeSection.value = target.id;
+          activeSectionChanged();
         }
         highestTopValue = targetTop;
       }
@@ -74,7 +76,7 @@ export function useScrollBetweenSections() {
   function activeSectionChanged() {}
 
   function _parseSectionFromUrl(route: any) {
-    this.activeSection = route.hash.substr(1);
+    activeSection.value = route.hash.substr(1);
   }
 
   return { activeSection };

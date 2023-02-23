@@ -3,7 +3,7 @@
     <div class="content-menu-section__container">
       <qiskit-mega-menu-dropdown
         :content.prop="dropdownMenuContent"
-        class="content-menu-section__dropdown bx--col-md-4 bx--col-lg-4 bx--no-gutter"
+        class="content-menu-section__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
         segment-component-name="Textbook mega menu"
         :track-performed-search="trackPerformedSearch"
       />

@@ -21,7 +21,7 @@
         </EventCard>
       </template>
     </AppPageHeaderWithCard> -->
-    <div class="bx--grid">
+    <div class="cds--grid">
       <!-- <AppMosaicSection
         class="seminar-series-page__section"
         :title="mosaicSectionTitle"

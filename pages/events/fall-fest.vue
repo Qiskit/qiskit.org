@@ -29,13 +29,13 @@
       </template>
     </AppPageHeaderWithCard> -->
 
-    <div class="bx--grid fall-fest-page__content">
+    <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
         <!-- <UniversityDirectorySection /> -->
       </section>
     </div>
 
-    <div class="bx--grid fall-fest-page__content">
+    <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
         <!-- <h2 v-text="agendaData.title" /> -->
         <!-- <p v-text="agendaData.subtitle" /> -->

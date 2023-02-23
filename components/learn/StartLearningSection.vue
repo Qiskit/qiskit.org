@@ -7,16 +7,16 @@
           <article
             v-for="{ title, description, courses } in learningSections"
             :key="title"
-            class="bx--row"
+            class="cds--row"
           >
-            <div class="bx--col-xlg-4 bx--col-lg-4">
+            <div class="cds--col-xlg-4 cds--col-lg-4">
               <h3 v-text="title" />
               <!-- eslint-disable vue/no-v-html -->
               <p v-html="description" />
               <!-- eslint-enable -->
             </div>
-            <div class="bx--col-xlg-12 bx--col-lg-12">
-              <div class="bx--row">
+            <div class="cds--col-xlg-12 cds--col-lg-12">
+              <div class="cds--row">
                 <div
                   v-for="{
                     description: courseDescription,
@@ -26,7 +26,7 @@
                     cta,
                   } in courses"
                   :key="courseTitle"
-                  class="bx--col-xlg-8"
+                  class="cds--col-xlg-8"
                 >
                   <AppCard
                     :cta-label="cta.label"
@@ -50,9 +50,9 @@
           <article
             v-for="{ title, syllabi } in teachingSections"
             :key="title"
-            class="bx--row"
+            class="cds--row"
           >
-            <div class="bx--col-xlg-4 bx--col-lg-4">
+            <div class="cds--col-xlg-4 cds--col-lg-4">
               <h3>Community Syllabi</h3>
               <p>
                 You can add any of these pre made curated syllabi to your
@@ -68,8 +68,8 @@
                 />
               </div>
             </div>
-            <div class="bx--col-xlg-12 bx--col-lg-12">
-              <div class="bx--row">
+            <div class="cds--col-xlg-12 cds--col-lg-12">
+              <div class="cds--row">
                 <div
                   v-for="{
                     title: syllabusTitle,
@@ -78,7 +78,7 @@
                     university,
                   } in syllabi"
                   :key="syllabusTitle"
-                  class="bx--col-xlg-8"
+                  class="cds--col-xlg-8"
                 >
                   <SyllabusCard
                     :url="cta.url"

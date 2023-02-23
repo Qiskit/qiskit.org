@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import LogoGitHub32 from "@carbon/icons-vue/lib/logo--github/32";
 import { GITHUB_REPOSITORY } from "~/constants/menuLinks";
 
 interface Props {

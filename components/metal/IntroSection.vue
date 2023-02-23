@@ -1,8 +1,8 @@
 <template>
   <section class="intro-section">
     <div class="intro-section__container">
-      <div class="bx--row">
-        <h2 class="bx--col-md-6 bx--col-lg-8">
+      <div class="cds--row">
+        <h2 class="cds--col-md-6 cds--col-lg-8">
           Qiskit Metal | quantum device design is now open
         </h2>
       </div>

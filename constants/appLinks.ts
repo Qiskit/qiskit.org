@@ -144,11 +144,6 @@ enum QuantumComputingLabs {
   Lab9 = "https://learn.qiskit.org/course/ch-labs/lab-9-quantum-simulation-as-a-search-algorithm",
 }
 
-const IBM_Q_EXPERIENCE: GeneralLink = {
-  url: "https://quantum-computing.ibm.com/lab",
-  label: "IBM Quantum Lab",
-};
-
 export {
   GeneralLink,
   EVENT_REQUEST_LINK,
@@ -165,5 +160,4 @@ export {
   QuantumHardwareCircuitsUrl,
   QuantumComputingLabs,
   GamesAndDemos,
-  IBM_Q_EXPERIENCE,
 };

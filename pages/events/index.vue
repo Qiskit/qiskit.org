@@ -8,7 +8,7 @@
       />
       from the world&rsquo;s largest quantum computing community
     </AppPageHeaderFixed> -->
-    <div class="bx--grid">
+    <div class="cds--grid">
       <div class="event-page__tabs">
         <!-- <client-only>
           <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
@@ -57,11 +57,11 @@
               {{ emptyCard.description }}
             </div>
           </AppCard>
-          <div v-else class="bx--row">
+          <div v-else class="cds--row">
             <div
               v-for="event in filteredEvents"
               :key="`${event.title}-${event.place}-${event.date}`"
-              class="bx--col-sm-4 bx--col-xlg-8"
+              class="cds--col-sm-4 cds--col-xlg-8"
             >
               <EventCard
                 class="app-filters-results-layout__results-item"

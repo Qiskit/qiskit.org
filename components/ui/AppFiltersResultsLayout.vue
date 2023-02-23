@@ -1,13 +1,13 @@
 <template>
-  <div class="bx--row app-filters-results-layout">
-    <div class="bx--col-xlg-2 bx--col-lg-4 bx--col-md-2 bx--col-sm-0">
+  <div class="cds--row app-filters-results-layout">
+    <div class="cds--col-xlg-2 cds--col-lg-4 cds--col-md-2 cds--col-sm-0">
       <slot name="filters-on-m-l-screen" />
     </div>
-    <div class="bx--col-sm-4 bx--col-md-0">
+    <div class="cds--col-sm-4 cds--col-md-0">
       <slot name="filters-on-s-screen" />
     </div>
     <div
-      class="bx--col-xlg-14 bx--col-lg-12 bx--col-md-6 app-filters-results-layout__main-section"
+      class="cds--col-xlg-14 cds--col-lg-12 cds--col-md-6 app-filters-results-layout__main-section"
     >
       <slot name="results" />
       <slot name="extra-info" />
@@ -19,13 +19,13 @@
 @use "~/assets/scss/carbon.scss";
 
 .app-filters-results-layout {
-  ::v-deep &__main-section {
+  :deep(&__main-section) {
     @include carbon.breakpoint-down(md) {
       margin-top: carbon.$spacing-09;
     }
   }
 
-  ::v-deep &__results-item {
+  :deep(&__results-item) {
     margin-bottom: carbon.$spacing-06;
 
     @include carbon.breakpoint-down(lg) {

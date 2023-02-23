@@ -1,7 +1,7 @@
 <template>
   <section class="metal-grid">
     <div class="metal-grid__underlayer">
-      <TheDarkHeader class="metal-grid__header" />
+      <MetalTheDarkHeader class="metal-grid__header" />
     </div>
     <div class="metal-grid__container">
       <div
@@ -38,6 +38,8 @@
 type CellCoordinates = { x: number; y: number };
 type CellSpecification = { c: number; r: number; isDecoherent?: boolean };
 type Decoherences = { [key: number]: number };
+
+const router = useRouter();
 
 const timeToRemoveNextCell = 5; // in ms
 const timeToLoadMetal = 50; // in ms
@@ -119,7 +121,6 @@ const positions = computed<CellSpecification[][]>(() =>
 const fallingCells = computed<string[]>(() =>
   Array.from(
     (() => {
-      const self = this;
       const centralColumn = Math.floor(noDecoherenceColumnCount / 2);
       const [rowStart, rowEnd] = [1, pattern.length + 1];
       const [columnStart, columnEnd] = [
@@ -135,7 +136,7 @@ const fallingCells = computed<string[]>(() =>
             if (cellIsAlwaysVisible) {
               continue;
             }
-            yield self.getPosId({ c, r });
+            yield getPosId({ c, r });
           }
         }
       }
@@ -145,19 +146,19 @@ const fallingCells = computed<string[]>(() =>
   )
 );
 
-const isHidden = computed((pos: CellSpecification) => {
+function isHidden(pos: CellSpecification): boolean {
   return hiddenCells.includes(getPosId(pos));
-});
+}
 
-const isTrigger = computed((pos: CellSpecification) => {
+function isTrigger(pos: CellSpecification): boolean {
   const centralColumn = Math.floor(noDecoherenceColumnCount / 2);
   const { x: triggerX, y: triggerY } = triggerPositionFromTopCenter;
   const { c, r } = pos;
   return c === centralColumn + triggerX && r === triggerY;
-});
+}
 
 function triggerAnimation(pos: CellSpecification) {
-  if (!isTrigger.value(pos)) {
+  if (!isTrigger(pos)) {
     return;
   }
   slotContainerIsHidden.value = true;
@@ -170,7 +171,7 @@ function removeCell() {
 
   if (noMoreCells) {
     setTimeout(() => {
-      this.$router.push({ path: "/metal" });
+      router.push({ path: "/metal" });
     }, timeToLoadMetal);
     return;
   }
@@ -192,9 +193,9 @@ function getRowId(index: number): string {
 </script>
 
 <style lang="scss">
+@use "sass:math";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
-@import "~carbon-components/scss/globals/scss/typography";
 
 .metal-grid {
   position: relative;
@@ -212,7 +213,7 @@ function getRowId(index: number): string {
     overflow: hidden;
     background-color: carbon.$cool-gray-100;
     height: 42rem;
-    margin-top: 1px;
+    margin-top: -1px;
 
     @include carbon.breakpoint-down(lg) {
       height: 26.5rem;
@@ -269,7 +270,7 @@ function getRowId(index: number): string {
 
     &::before {
       content: "";
-      border: 1px solidcarbon.$cool-gray-20;
+      border: 1px solid carbon.$cool-gray-20;
       position: absolute;
       width: $large-cell - 1px;
       height: $large-cell - 1px;
@@ -319,98 +320,98 @@ function getRowId(index: number): string {
 
       @keyframes anxious-tile {
         0% {
-          box-shadow: 0 0 0 0carbon.$cool-gray-70;
+          box-shadow: 0 0 0 0 carbon.$cool-gray-70;
           transform: rotate(0deg);
         }
 
         10% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(0deg);
         }
 
         18% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(-3deg * $rotation-multiplier);
         }
 
         26% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(4deg * $rotation-multiplier);
         }
 
         34% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(-3deg * $rotation-multiplier);
           background-color: white;
         }
 
         45% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(1deg * $rotation-multiplier);
         }
 
         55% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(0deg);
         }
 
         65% {
-          box-shadow: 0 0 0 0carbon.$cool-gray-60;
+          box-shadow: 0 0 0 0 carbon.$cool-gray-60;
           transform: rotate(0deg);
         }
 
         100% {
-          box-shadow: 0 0 0 0carbon.$cool-gray-70;
+          box-shadow: 0 0 0 0 carbon.$cool-gray-70;
           transform: rotate(0deg);
         }
       }
 
       @keyframes very-anxious-tile {
         0% {
-          box-shadow: 0 0 0 0carbon.$cool-gray-70;
+          box-shadow: 0 0 0 0 carbon.$cool-gray-70;
           transform: rotate(0deg) scale(1);
           background-color: white;
         }
 
         10% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(0deg) scale($magnification);
           background-color: white;
         }
 
         18% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(-5deg * $rotation-multiplier) scale($magnification);
         }
 
         26% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(7deg * $rotation-multiplier) scale($magnification);
         }
 
         34% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(-5deg * $rotation-multiplier) scale($magnification);
         }
 
         45% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(3deg * $rotation-multiplier) scale($magnification);
         }
 
         55% {
-          box-shadow: 0 1px 5px 0carbon.$cool-gray-20;
+          box-shadow: 0 1px 5px 0 carbon.$cool-gray-20;
           transform: rotate(0deg) scale($magnification);
         }
 
         65% {
-          box-shadow: 0 0 0 0carbon.$cool-gray-60;
+          box-shadow: 0 0 0 0 carbon.$cool-gray-60;
           transform: rotate(0deg) scale($magnification);
           background-color: white;
         }
 
         100% {
-          box-shadow: 0 0 0 0carbon.$cool-gray-70;
+          box-shadow: 0 0 0 0 carbon.$cool-gray-70;
           transform: rotate(0deg) scale(1);
           background-color: white;
         }

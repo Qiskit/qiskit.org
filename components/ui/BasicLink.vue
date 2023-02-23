@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="isNuxtLink ? 'nuxt-link' : 'a'"
+    :is="isNuxtLink ? 'NuxtLink' : 'a'"
     :href="isAnchor && url"
     :to="isNuxtLink && url"
     :style="hasLink && 'cursor:pointer'"

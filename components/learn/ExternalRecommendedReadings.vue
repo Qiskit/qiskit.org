@@ -1,8 +1,8 @@
 <template>
   <section class="external-recommended-readings">
-    <div class="bx--grid bx--no-gutter">
-      <div class="bx--row">
-        <div class="bx--col-lg-12">
+    <div class="cds--grid cds--no-gutter">
+      <div class="cds--row">
+        <div class="cds--col-lg-12">
           <h2>External recommended readings</h2>
           <p v-if="preamble">
             {{ preamble }}

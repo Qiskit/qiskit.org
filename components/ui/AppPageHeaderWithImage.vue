@@ -1,14 +1,14 @@
 <template>
   <header class="app-page-header-with-img">
-    <div class="bx--grid">
-      <div v-if="backLink" class="bx--row app-page-header-with-img__back-link">
+    <div class="cds--grid">
+      <div v-if="backLink" class="cds--row app-page-header-with-img__back-link">
         <UiAppNavBackLink
           :label="backLink.label"
           :segment="backLink.segment"
           :url="backLink.url"
         />
       </div>
-      <div class="bx--row app-page-header-with-img__content">
+      <div class="cds--row app-page-header-with-img__content">
         <h1 class="app-page-header-with-img__headline">
           <slot name="title" />
         </h1>
@@ -49,7 +49,7 @@ defineProps<Props>();
   &__back-link {
     height: 0;
 
-    ::v-deep .app-nav-back-link {
+    :deep(.app-nav-back-link) {
       padding-left: carbon.$spacing-05;
       margin: 0;
     }

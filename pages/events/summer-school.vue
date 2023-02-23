@@ -37,7 +37,7 @@
       </template>
     </AppPageHeaderWithCard> -->
 
-    <div class="bx--grid summer-school-page__content">
+    <div class="cds--grid summer-school-page__content">
       <!-- <AppMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"

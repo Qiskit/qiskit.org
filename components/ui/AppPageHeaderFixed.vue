@@ -1,8 +1,8 @@
 <template>
   <header class="app-page-header-fixed">
-    <div class="bx--grid app-page-header-fixed__container">
-      <div class="bx--row">
-        <h1 class="bx--col-sm bx--col-md-6 bx--col-lg-10 bx--col-max-8">
+    <div class="cds--grid app-page-header-fixed__container">
+      <div class="cds--row">
+        <h1 class="cds--col-sm cds--col-md-6 cds--col-lg-10 cds--col-max-8">
           <slot />
         </h1>
       </div>
@@ -11,8 +11,10 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .app-page-header-fixed {
-  @include responsive-grid-bg-strip(
+  @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-learn.svg",
     auto,
     28rem

@@ -86,7 +86,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
 
     const imagePublicPath = `/images/advocates/downloaded/${this.id}.jpg`;
 
-    return await this.storeImage(imageUrl, `static/${imagePublicPath}`)
+    return await this.storeImage(imageUrl, `public/${imagePublicPath}`)
       .then(() => imagePublicPath)
       .catch(() => fallbackImage);
   }
