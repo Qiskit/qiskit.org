@@ -22,15 +22,13 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div v-if="isCalendar">
+      <div v-if="isCalendar" class="event-page__calendar">
         <iframe
           class="airtable-embed"
           src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
-          frameborder="0"
-          onmousewheel=""
           width="100%"
-          height="533"
-          style="background: transparent; border: 1px solid #ccc;"
+          height="560"
+          allowtransparency="true"
         />
       </div>
       <AppFiltersResultsLayout v-else>
@@ -359,6 +357,12 @@ export default class EventsPage extends QiskitPage {
     @include mq($until: medium) {
       height: auto;
     }
+  }
+
+  &__calendar{
+    margin-bottom: $spacing-06;
+    border: 1px solid #8d8d8d;
+    margin-top: $spacing-06;
   }
 
   &__section {
