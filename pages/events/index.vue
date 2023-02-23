@@ -87,6 +87,7 @@
         </template>
         <template slot="extra-info">
           <div id="follow-our-event-calendar" class="event-page__link">
+            <a href="#follow-our-event-calendar" />
             <div class="event-page__section">
               <h3>Follow our event calendar</h3>
               <p class="event-page__section__description">
