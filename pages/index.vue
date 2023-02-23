@@ -1,7 +1,7 @@
 <template>
   <main>
     <LandingTheHeroMoment :version="qiskitVersion" />
-    <LandingTheQuickStartIndexComponent />
+    <LandingTheQuickStart />
     <LandingTheQiskitCapabilitiesSectionIndexComponent />
     <LandingTheLearnSectionIndexComponent />
   </main>
