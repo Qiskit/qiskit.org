@@ -9,7 +9,7 @@
           <h1 class="learn-header__headline">Qiskit Textbook (beta)</h1>
           <qiskit-mega-menu-dropdown
             :id="appMegaDropdownMenuId"
-            class="learn-header__dropdown cds--col-md-4 cds--col-lg-4 bx--no-gutter"
+            class="learn-header__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
             :content.prop="dropdownMenuContent"
             segment-component-name="Textbook mega menu"
             :track-performed-search="trackPerformedSearch"
