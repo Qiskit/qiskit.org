@@ -86,7 +86,7 @@
           </div>
         </template>
         <template slot="extra-info">
-          <div id="follow-our-event-calendar" class="event-page__link">
+          <div id="follow-our-event-calendar" class="event-page__anchor">
             <a href="#follow-our-event-calendar" />
             <div class="event-page__section">
               <h3>Follow our event calendar</h3>
@@ -361,6 +361,10 @@ export default class EventsPage extends QiskitPage {
       }
     }
 
+  }
+
+  &__anchor{
+    scroll-margin-top: 65px;
   }
 
   &__tab {
