@@ -2,10 +2,10 @@
   <article class="learn-card">
     <div class="cds--col-max-3 cds--col-lg-4 cds--col-md-3 learn-card__content">
       <div
-        class="bx--aspect-ratio bx--aspect-ratio--4x3 learn-card__content__aspect-ratio"
+        class="cds--aspect-ratio cds--aspect-ratio--4x3 learn-card__content__aspect-ratio"
       >
         <div
-          class="bx--aspect-ratio--object learn-card__content__aspect-ratio__object"
+          class="cds--aspect-ratio--object learn-card__content__aspect-ratio__object"
         >
           <p class="learn-card__description">
             Gain access to a free, digital textbook to study the concepts of

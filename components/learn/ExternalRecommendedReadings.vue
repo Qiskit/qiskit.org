@@ -1,6 +1,6 @@
 <template>
   <section class="external-recommended-readings">
-    <div class="cds--grid bx--no-gutter">
+    <div class="cds--grid cds--no-gutter">
       <div class="cds--row">
         <div class="cds--col-lg-12">
           <h2>External recommended readings</h2>
