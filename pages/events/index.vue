@@ -389,4 +389,3 @@ export default class EventsPage extends QiskitPage {
   }
 }
 </style>
-</iframe>
