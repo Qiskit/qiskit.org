@@ -361,7 +361,7 @@ export default class EventsPage extends QiskitPage {
 
   &__calendar{
     margin-bottom: $spacing-10;
-    border: 1px solid #8d8d8d;
+    border: 1px solid $border-color ;
     margin-top: $spacing-06;
   }
 
