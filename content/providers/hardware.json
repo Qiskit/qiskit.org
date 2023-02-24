@@ -1,0 +1,161 @@
+[
+  {
+    "title": "IBM Qiskit Runtime",
+    "image": "static/images/providers/qiskit-ibm-runtime.png",
+    "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
+    "installation": "pip install qiskit-ibm-runtime",
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/Qiskit/qiskit-ibm-runtime"
+    },
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit",
+      "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
+      "&nbsp;",
+      "# Save an IBM Quantum account",
+      "QiskitRuntimeService.save_account(channel=\"ibm_quantum\", token=\"MY_IBM_QUANTUM_TOKEN\")",
+      "&nbsp;",
+      "# Select a backend",
+      "service = QiskitRuntimeService()",
+      "backend = service.backend(\"ibmq_qasm_simulator\")",
+      "&nbsp;",
+      "# Build a circuit",
+      "circuit = QuantumCircuit(2, 2)",
+      "circuit.h(0)",
+      "circuit.cx(0,1)",
+      "circuit.measure([0,1], [0,1])",
+      "&nbsp;",
+      "# Run the circuit and get result distribution",
+      "sampler = Sampler(session=backend)",
+      "job = sampler.run(circuit)",
+      "quasi_dist = job.result().quasi_dists[0]",
+      "print(quasi_dist)"
+    ]
+  },
+  {
+    "title": "IBM Quantum Platform",
+    "image": "static/images/providers/qiskit-ibm-provider.png",
+    "description": "IBM Quantum platform offers access to IBM Quantum systems and simulators.",
+    "installation": "pip install qiskit-ibm-provider",
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://www.ibm.com/quantum/systems"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/Qiskit/qiskit-ibm-provider"
+    },
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit, transpile",
+      "from qiskit_ibm_provider import IBMProvider",
+      "&nbsp;",
+      "# Save an IBM Quantum account",
+      "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
+      "&nbsp;",
+      "# Select a backend",
+      "provider = IBMProvider()",
+      "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+      "&nbsp;",
+      "# Build and transpile a circuit",
+      "circuit = QuantumCircuit(2, 2)",
+      "circuit.h(0)",
+      "circuit.cx(0,1)",
+      "circuit.measure([0,1], [0,1])",
+      "transpiled_circuit = transpile(circuit, backend)",
+      "&nbsp;",
+      "# Run the circuit and get result counts",
+      "job = backend.run(transpiled_circuit)",
+      "counts = job.result().get_counts()",
+      "print(counts)"
+    ]
+  },
+  {
+    "title": "IonQ",
+    "image": null,
+    "description": "Qiskit provider for IonQ backends.",
+    "installation": "pip install qiskit-ionq",
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://ionq.com/"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://qiskit.org/documentation/partners/ionq/"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/Qiskit-Partners/qiskit-ionq"
+    },
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit",
+      "from qiskit_ionq import IonQProvider",
+      "&nbsp;",
+      "# Select a backend",
+      "provider = IonQProvider(\"MY_IONQ_TOKEN\")",
+      "backend = provider.get_backend(\"ionq_simulator\")",
+      "&nbsp;",
+      "# Build a circuit",
+      "circuit = QuantumCircuit(2, 2)",
+      "circuit.h(0)",
+      "circuit.cx(0,1)",
+      "circuit.measure([0,1], [0,1])",
+      "&nbsp;",
+      "# Run the circuit and get result counts",
+      "job = backend.run(circuit)",
+      "counts = job.get_counts()",
+      "print(counts)"
+    ]
+  },
+  {
+    "title": "Quantinuum",
+    "image": null,
+    "description": "Qiskit provider for Quantinuum backends.",
+    "installation": "pip install qiskit-quantinuum-provider",
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://www.quantinuum.com/"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://github.com/qiskit-community/qiskit-quantinuum-provider/blob/master/examples/QuantinuumExample.ipynb"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/qiskit-community/qiskit-quantinuum-provider"
+    },
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit, transpile",
+      "from qiskit_quantinuum import Quantinuum",
+      "&nbsp;",
+      "# Save account",
+      "Quantinuum.save_account(\"username@company.com\")",
+      "&nbsp;",
+      "# Select backend",
+      "backend = Quantinuum.backends(\"DEVICE_NAME\")",
+      "&nbsp;",
+      "# Build and transpile circuit",
+      "circuit = QuantumCircuit(2, 2)",
+      "circuit.h(0)",
+      "circuit.cx(0,1)",
+      "circuit.measure([0,1], [0,1])",
+      "transpiled_circuit = transpile(circuit, backend)",
+      "&nbsp;",
+      "# Run the circuit and get result",
+      "job = backend.run(transpiled_circuit)",
+      "counts = job.result().get_counts()",
+      "print(counts)"
+    ]
+  }
+]

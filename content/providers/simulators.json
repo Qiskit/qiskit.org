@@ -1,0 +1,76 @@
+[
+  {
+    "title": "Qiskit Aer",
+    "image": null,
+    "description": "Qiskit Aer is a high performance simulator for quantum circuits that includes noise models.",
+    "installation": "pip install qiskit-aer",
+    "websiteCta": {
+      "label": null,
+      "url": null
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://qiskit.org/documentation/aer/"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/Qiskit/qiskit-aer"
+    },
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit, transpile",
+      "from qiskit_aer import AerSimulator",
+      "&nbsp;",
+      "# Select a backend",
+      "backend = AerSimulator()",
+      "&nbsp;",
+      "# Build and transpile a circuit",
+      "circuit = QuantumCircuit(2, 2)",
+      "circuit.h(0)",
+      "circuit.cx(0,1)",
+      "circuit.measure([0,1], [0,1])",
+      "transpiled_circuit = transpile(circuit, backend)",
+      "&nbsp;",
+      "# Run the circuit and get result",
+      "job = backend.run(transpiled_circuit)",
+      "counts = job.result().get_counts()",
+      "print(counts)"
+    ]
+  },
+  {
+    "title": "NVIDIA cuQuantum Appliance",
+    "image": null,
+    "description": "The NVIDIA cuQuantum Appliance is a highly performant multi-GPU multi-node solution for quantum circuit simulation.",
+    "installation": "docker pull nvcr.io/nvidia/cuquantum-appliance",
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://developer.nvidia.com/cuquantum-sdk"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://docs.nvidia.com/cuda/cuquantum/index.html"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/NVIDIA/cuQuantum"
+    },
+    "helloWorldExample": [
+      "from qiskit import QuantumCircuit, transpile",
+      "from cusvaer.backends import StatevectorSimulator",
+      "&nbsp;",
+      "# Select a backend",
+      "backend = StatevectorSimulator()",
+      "&nbsp;",
+      "# Build and transpile a circuit",
+      "circuit = QuantumCircuit(2, 2)",
+      "circuit.h(0)",
+      "circuit.cx(0,1)",
+      "circuit.measure([0,1], [0,1])",
+      "transpiled_circuit = transpile(circuit, backend)",
+      "&nbsp;",
+      "# Run the circuit and get result",
+      "job = backend.run(transpiled_circuit)",
+      "counts = job.result().get_counts()",
+      "print(counts)"
+    ]
+  }
+]
