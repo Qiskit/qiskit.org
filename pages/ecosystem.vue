@@ -1,16 +1,15 @@
 <template>
   <main>
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderFixed class="ecosystem-header__hero">
+    <UiAppPageHeaderFixed class="ecosystem-header__hero">
       <br />
       Explore
-      <TypewriterEffect
+      <UiTypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
       from Qiskit
       <br />
       and the Qiskit community
-    </AppPageHeaderFixed> -->
+    </UiAppPageHeaderFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
