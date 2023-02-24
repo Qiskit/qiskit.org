@@ -27,31 +27,33 @@
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <!-- <AppFiltersResultsLayout class="ecosystem__filters-result-section">
-        <template slot="filters-on-m-l-screen">
-          <AppFieldset label="Tier">
+      <UiAppFiltersResultsLayout class="ecosystem__filters-result-section">
+        <template #filters-on-m-l-screen>
+          <UiAppFieldset label="Tier">
             <client-only>
-              <cv-checkbox
+              <bx-checkbox
                 v-for="option in tiers"
                 :key="option.name"
                 class="ecosystem__filters-result-section__tiers"
-                :label="option.name"
-                :value="option.name"
                 :checked="isTierFilterChecked(option.name)"
-                @change="updateTierFilter(option.name, $event)"
+                :label-text="option.name"
+                :value="option.name"
+                @bx-checkbox-changed="
+                  updateTierFilter(option.name, $event.target.checked)
+                "
               />
             </client-only>
-          </AppFieldset>
+          </UiAppFieldset>
         </template>
-        <template slot="filters-on-s-screen">
-          <AppMultiSelect
+        <template #filters-on-s-screen>
+          <UiAppMultiSelect
             label="Tier"
             :options="tiersNames"
-            :value="tierFilters"
+            :value="tierFiltersAsString"
             @change-selection="updateTierFilters($event)"
           />
         </template>
-        <template slot="results">
+        <!-- <template slot="results">
           <div class="cds--row">
             <div
               v-for="(member, index) in filteredMembers"
@@ -110,14 +112,23 @@
               </cv-accordion>
             </div>
           </div>
-        </template>
-      </AppFiltersResultsLayout> -->
+        </template> -->
+      </UiAppFiltersResultsLayout>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/checkbox/index.js";
 import { GeneralLink } from "~/constants/appLinks";
+import rawTiers from "~/content/ecosystem/tiers.json";
+
+interface Tier {
+  name: string;
+  description: string;
+}
+
+const tiers = rawTiers as Tier[];
 
 definePageMeta({
   layout: "default-max",
@@ -139,12 +150,9 @@ useHead({
 //   async () => await import("~/content/ecosystem/members.json")
 // );
 
-// const { data: tiers } = useLazyAsyncData(
-//   "fetch-tiers",
-//   async () => await import("~/content/ecosystem/tiers.json")
-// );
+const tierFilters = ref<string[]>([]);
 
-// const tierFilters = ref<string[]>([]);
+const tierFiltersAsString = computed(() => tierFilters.value.join(","));
 
 // const noTierFiltersSelected = computed(() => tierFilters.value.length === 0);
 
@@ -154,7 +162,7 @@ useHead({
 //     : members.value.filter((member) => tierFilters.value.includes(member.tier));
 // });
 
-// const tiersNames = computed(() => tiers.value.map((tier: any) => tier.name));
+const tiersNames = computed(() => tiers.map((tier) => tier.name));
 
 // function getTestRows(member: any) {
 //   if (member.testsResults) {
@@ -190,21 +198,21 @@ useHead({
 //   return tier.description || "";
 // }
 
-// function updateTierFilter(filterValue: string, isChecked: boolean) {
-//   isChecked
-//     ? tierFilters.value.push(filterValue)
-//     : (tierFilters.value = tierFilters.value.filter(
-//         (tier: any) => tier !== filterValue
-//       ));
-// }
+function updateTierFilter(filterValue: string, isChecked: boolean) {
+  isChecked
+    ? tierFilters.value.push(filterValue)
+    : (tierFilters.value = tierFilters.value.filter(
+        (tier: any) => tier !== filterValue
+      ));
+}
 
-// const updateTierFilters = (filterValues: string[]) => {
-//   tierFilters.value = filterValues;
-// };
+function updateTierFilters(newTierFilters: string) {
+  const newTierFiltersAsArray = newTierFilters.split(",");
+  tierFilters.value = newTierFiltersAsArray;
+}
 
-// function isTierFilterChecked(filterValue: string): boolean {
-//   return tierFilters.value.includes(filterValue);
-// }
+const isTierFilterChecked = (filterValue: string): boolean =>
+  tierFilters.value.includes(filterValue);
 
 const joinAction: GeneralLink = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
