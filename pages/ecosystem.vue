@@ -22,9 +22,11 @@
           </p>
         </div>
       </div>
-      <div class="bx-row">
-        <!-- <UiAppCta class="ecosystem-header__cta" :label="joinAction.label" :url="joinAction.url" /> -->
-      </div>
+      <UiAppCta
+        class="ecosystem-header__cta"
+        :label="joinAction.label"
+        :url="joinAction.url"
+      />
       <!-- <AppFiltersResultsLayout class="ecosystem__filters-result-section">
         <template slot="filters-on-m-l-screen">
           <AppFieldset label="Tier">
@@ -115,16 +117,13 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import { Component } from "vue-property-decorator";
-// import { GeneralLink } from "~/constants/appLinks";
+import { GeneralLink } from "~/constants/appLinks";
 
 definePageMeta({
   layout: "default-max",
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Ecosystem",
   meta: [
     {
@@ -135,7 +134,6 @@ useHead({
   ],
 });
 
-// TODO: Integrate old code
 // const { data: members } = useLazyAsyncData(
 //   "fetch-members",
 //   async () => await import("~/content/ecosystem/members.json")
@@ -208,104 +206,104 @@ useHead({
 //   return tierFilters.value.includes(filterValue);
 // }
 
+const joinAction: GeneralLink = {
+  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
+  label: "Join the ecosystem",
+};
+
 // TODO: Refactor tracking
 // export default class EcosystemPage {
 //   routeName: string = 'ecosystem';
-
-//   joinAction: GeneralLink = {
-//     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
-//     label: 'Join the ecosystem'
-//   };
 // }
 </script>
 
 <style lang="scss">
-// TODO: Review old CSS
-// .ecosystem-header {
-//   &__hero {
-//     .cds--col-max-8 {
-//       max-width: 100%;
-//       flex: 0 0 100%;
-//     }
-//   }
+@use "~/assets/scss/carbon.scss";
 
-//   &__cta {
-//     height: 50%;
-//   }
-// }
+.ecosystem-header {
+  &__hero {
+    .cds--col-max-8 {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+  }
 
-// .ecosystem__filters-result-section {
-//   margin-top: 4rem;
+  &__cta {
+    height: 50%;
+  }
+}
 
-//   &__tiers {
-//     text-transform: capitalize;
-//   }
-// }
+.ecosystem__filters-result-section {
+  margin-top: 4rem;
 
-// .cds--col-sm-4 {
-//   padding-bottom: carbon.$spacing-08;
-// }
+  &__tiers {
+    text-transform: capitalize;
+  }
+}
 
-// .app-card {
-//   &__description {
-//     .cds--row {
-//       margin-left: 0;
-//     }
-//   }
+.cds--col-sm-4 {
+  padding-bottom: carbon.$spacing-08;
+}
 
-//   &__tags {
-//     flex-direction: row;
-//   }
-// }
+.app-card {
+  &__description {
+    .cds--row {
+      margin-left: 0;
+    }
+  }
 
-// .bx--accordion__title {
-//   display: flex;
-//   flex-direction: row;
-//   gap: 10px;
+  &__tags {
+    flex-direction: row;
+  }
+}
 
-//   p,
-//   .p {
-//     margin-bottom: 0;
-//   }
-// }
+.bx--accordion__title {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 
-// .bx--accordion__item {
-//   background-color:carbon.$cool-gray-20;
-//   border-bottom: none;
-// }
+  p,
+  .p {
+    margin-bottom: 0;
+  }
+}
 
-// .bx--accordion__item--active .bx--accordion__content {
-//   padding: 0;
-//   margin: 0;
-//   padding-top: 0;
-//   padding-bottom: 0;
-// }
+.bx--accordion__item {
+  background-color: carbon.$cool-gray-20;
+  border-bottom: none;
+}
 
-// .bx--accordion__item:last-child {
-//   border-bottom: none;
-// }
+.bx--accordion__item--active .bx--accordion__content {
+  padding: 0;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
-// .project-card {
-//   &__license {
-//     font-size: 12px;
-//     margin-right: carbon.$spacing-05;
-//     margin-top: calc($spacing-01 / 2);
-//   }
+.bx--accordion__item:last-child {
+  border-bottom: none;
+}
 
-//   &__star {
-//     display: flex;
-//     flex-direction: row;
+.project-card {
+  &__license {
+    font-size: 12px;
+    margin-right: carbon.$spacing-05;
+    margin-top: calc(carbon.$spacing-01 / 2);
+  }
 
-//     svg {
-//       margin-top: calc($spacing-01 / 2);
-//       margin-right: carbon.$spacing-01;
-//       fill:carbon.$cool-gray-60;
-//     }
+  &__star {
+    display: flex;
+    flex-direction: row;
 
-//   }
+    svg {
+      margin-top: calc(carbon.$spacing-01 / 2);
+      margin-right: carbon.$spacing-01;
+      fill: carbon.$cool-gray-60;
+    }
+  }
 
-//   .app-card__title {
-//     font-size: 20px;
-//   }
-// }
+  .app-card__title {
+    font-size: 20px;
+  }
+}
 </style>
