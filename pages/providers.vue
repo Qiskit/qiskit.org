@@ -56,11 +56,10 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { ContentAccordionTab } from '~/components/providers/ContentAccordion.vue'
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  ProvidersSubSection
+  ProviderObject
 } from '~/constants/providersContent'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
@@ -79,8 +78,8 @@ export default class ProvidersPage extends QiskitPage {
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
 
-  asTabs (subsections: Array<ProvidersSubSection>): Array<ContentAccordionTab> {
-    return subsections.map(subsection => subsection as ContentAccordionTab)
+  asTabs (subsections: Array<ProviderObject>): Array<ProviderObject> {
+    return subsections.map(subsection => subsection as ProviderObject)
   }
 }
 </script>
