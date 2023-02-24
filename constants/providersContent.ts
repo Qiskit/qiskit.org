@@ -1,4 +1,7 @@
 import { NavLink } from '~/constants/menuLinks'
+import hardwareJson from '~/content/providers/hardware.json'
+import simulatorsJson from '~/content/providers/simulators.json'
+import multiplatformsJson from '~/content/providers/multiplatforms.json'
 
 type TableOfContentEntry = {
   /** The visible name of the link */
@@ -9,13 +12,15 @@ type TableOfContentEntry = {
   isSecondary?: boolean
 }
 
-type ProvidersSubSection = {
+type ProviderObject = {
   title: string
-  content: {
-    image: string
-    description: string
-    cta: NavLink
-  }
+  image?: string | null
+  description: string
+  installation: string
+  websiteCta?: NavLink
+  docCta?: NavLink
+  sourceCta?: NavLink
+  helloWorldExample: string[]
 }
 
 /**
@@ -33,101 +38,47 @@ interface ProvidersSection {
   /** A set of links to get more information on the section */
   linkset?: NavLink[]
   /** The sub sections inside the section */
-  subSections?: ProvidersSubSection[]
+  subSections?: ProviderObject[]
   /** The image to show if the section doesn't have subsections */
   image?: string
 }
 
-const realHardware: string = 'real-hardware'
+const convertJsonToObjectData = (jsonData: ProviderObject[]) => {
+  const parsedData = jsonData.map((jsonObject) => {
+    return {
+      title: jsonObject.title,
+      image: jsonObject.image,
+      description: jsonObject.description,
+      installation: jsonObject.installation,
+      websiteLabel: jsonObject.websiteCta?.label,
+      websiteUrl: jsonObject.websiteCta?.url,
+      docLabel: jsonObject.docCta?.label,
+      docUrl: jsonObject.docCta?.url,
+      sourceLabel: jsonObject.sourceCta?.label,
+      sourceUrl: jsonObject.sourceCta?.url,
+      helloWorldExample: jsonObject.helloWorldExample
+    }
+  })
 
-const REAL_HARDWARE_IN_MENU: TableOfContentEntry = {
-  sectionId: realHardware,
-  label: 'With Real Hardware',
+  return parsedData
+}
+
+const runtimes: string = 'runtimes'
+
+const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
+  sectionId: runtimes,
+  label: 'With Quantum Runtimes',
   isSecondary: true
 }
 
-const REAL_HARDWARE: ProvidersSection = {
-  id: realHardware,
-  title: 'Run With Real Hardware',
-  description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
-  // linkset: [
-  //   {
-  //     label: 'See machine learning docs',
-  //     url: 'https://qiskit.org/documentation/machine-learning/'
-  //   },
-  //   {
-  //     label: 'See nature docs',
-  //     url: 'https://qiskit.org/documentation/nature/'
-  //   },
-  //   {
-  //     label: 'See finance docs',
-  //     url: 'https://qiskit.org/documentation/finance/'
-  //   },
-  //   {
-  //     label: 'See optimization docs',
-  //     url: 'https://qiskit.org/documentation/optimization/'
-  //   }
-  // ],
-  subSections: [
-    {
-      title: 'IBM Quantum Qiskit Runtime',
-      content: {
-        image: '/images/providers/applications/optimization.png',
-        description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.',
-        cta: {
-          label: 'Solve the Max Cut Problem',
-          url: 'https://qiskit.org/documentation/optimization/tutorials/01_quadratic_program.html'
-        }
-      }
-    },
-    {
-      title: 'IBM Quantum Systems',
-      content: {
-        image: '/images/providers/applications/finance.png',
-        description: 'The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.',
-        cta: {
-          label: 'Perform Option Pricing with qGans',
-          url: 'https://qiskit.org/documentation/finance/tutorials/10_qgan_option_pricing.html'
-        }
-      }
-    },
-    {
-      title: 'IonQ',
-      content: {
-        image: '/images/providers/applications/machine-learning.png',
-        description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
-        cta: {
-          label: 'Classify data with a VQC',
-          url: 'https://qiskit.org/documentation/machine-learning/tutorials/01_neural_networks.html'
-        }
-      }
-    },
-    {
-      title: 'Azure Quantum',
-      content: {
-        image: '/images/providers/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
-        cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
-    },
-    {
-      title: 'Other community-supported providers',
-      content: {
-        image: '/images/providers/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
-        cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
-    }
-  ]
+const QUANTUM_RUNTIMES: ProvidersSection = {
+  id: runtimes,
+  title: 'Quantum runtimes',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
+  subSections: convertJsonToObjectData(hardwareJson)
 }
 
-const simulatorsId: string = 'algorithms'
+const simulatorsId: string = 'simulators'
 
 const SIMULATORS_IN_MENU: TableOfContentEntry = {
   sectionId: simulatorsId,
@@ -137,66 +88,45 @@ const SIMULATORS_IN_MENU: TableOfContentEntry = {
 
 const SIMULATORS_COLLECTION: ProvidersSection = {
   id: simulatorsId,
-  title: 'Run With Simulators',
-  description: 'Connect Qiskit with high performance simulators.',
-  link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/algorithms.html'
-  },
-  subSections: [
-    {
-      title: 'Qiskit Aer',
-      content: {
-        image: '/images/providers/algorithms/grover.png',
-        description: 'Grover\'s algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
-        cta: {
-          label: 'Try out Grover’s',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover'
-        }
-      }
-    },
-    {
-      title: 'Other simulator',
-      content: {
-        image: '/images/providers/algorithms/vqe.png',
-        description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
-        cta: {
-          label: 'Try out VQE',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html#qiskit.algorithms.VQE'
-        }
-      }
-    },
-    {
-      title: 'Yet another one',
-      content: {
-        image: '/images/providers/algorithms/qaoa.png',
-        description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
-        cta: {
-          label: 'Try out QAOA',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html#qiskit.algorithms.QAOA'
-        }
-      }
-    }
-  ]
+  title: 'Simulators',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
+  subSections: convertJsonToObjectData(simulatorsJson)
+}
+
+const multiplatformsId: string = 'multiplatforms'
+
+const MULTIPLATFORMS_IN_MENU: TableOfContentEntry = {
+  sectionId: multiplatformsId,
+  label: 'With Multiplatforms',
+  isSecondary: true
+}
+
+const MULTIPLATFORMS_COLLECTION: ProvidersSection = {
+  id: multiplatformsId,
+  title: 'Multiplatforms',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
+  subSections: convertJsonToObjectData(multiplatformsJson)
 }
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
     label: 'Run Qiskit circuits'
   },
-  REAL_HARDWARE_IN_MENU,
-  SIMULATORS_IN_MENU
+  QUANTUM_RUNTIMES_IN_MENU,
+  SIMULATORS_IN_MENU,
+  MULTIPLATFORMS_IN_MENU
 ]
 
 const CONTENT_SECTIONS: ProvidersSection[] = [
-  REAL_HARDWARE,
-  SIMULATORS_COLLECTION
+  QUANTUM_RUNTIMES,
+  SIMULATORS_COLLECTION,
+  MULTIPLATFORMS_COLLECTION
 ]
 
 export {
   TableOfContentEntry,
   ProvidersSection,
-  ProvidersSubSection,
+  ProviderObject,
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS
 }

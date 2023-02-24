@@ -41,36 +41,21 @@ export default class AppIntroductoryContent extends Vue {
 
 <style lang="scss" scoped>
 .app-introductory-content {
-  display: flex;
 
   @include mq($until: large) {
     display: block;
   }
 
   &__overview {
+    $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
+
     margin-bottom: $spacing-07;
-
-    @include mq($from: large) {
-      $grid-columns: math.div(5, 13); // Number of columns that the element will use at this breakpoint.
-
-      max-width: 100% * $grid-columns;
-      width: 100%;
-      padding-right: $spacing-07;
-    }
-
-    @include mq($from: max-size) {
-      $grid-columns: math.div(4, 13); // Number of columns that the element will use at this breakpoint.
-
-      max-width: 100% * $grid-columns;
-    }
+    max-width: 100% * $grid-columns;
+    width: 100%;
   }
 
   &__description {
-    margin-bottom: $spacing-10;
-
-    @include mq($until: large) {
-      margin-bottom: $spacing-07;
-    }
+    margin-bottom: $spacing-07;
   }
 
   &__details {
