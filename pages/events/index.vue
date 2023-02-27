@@ -18,10 +18,20 @@
           <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
             <cv-tab id="tab-1" label="Upcoming events" />
             <cv-tab id="tab-2" label="Past events" />
+            <cv-tab id="tab-3" label="Calendar" />
           </cv-tabs>
         </client-only>
       </div>
-      <AppFiltersResultsLayout>
+      <div v-if="isCalendar" class="event-page__calendar">
+        <iframe
+          class="airtable-embed"
+          src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
+          width="100%"
+          height="560"
+          allowtransparency="true"
+        />
+      </div>
+      <AppFiltersResultsLayout v-else>
         <template slot="filters-on-m-l-screen">
           <AppFieldset
             v-for="filter in extraFilters"
@@ -158,7 +168,8 @@ import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
     ...mapGetters('events', [
       'filteredEvents',
       'typeFilters',
-      'regionFilters'
+      'regionFilters',
+      'activeSet'
     ])
   },
   components: {
@@ -227,6 +238,10 @@ export default class EventsPage extends QiskitPage {
       return (this as any).filteredEvents.length === 0
     }
 
+    get isCalendar (): boolean {
+      return (this as any).activeSet === 'calendar'
+    }
+
     getCheckedFilters (filter: string) {
       return (this as any)[filter]
     }
@@ -257,9 +272,17 @@ export default class EventsPage extends QiskitPage {
     }
 
     selectTab (selectedTab: number) {
-      const activeSet = selectedTab === 0 ? 'upcoming' : 'past'
-
-      this.$store.commit('events/setActiveSet', activeSet)
+      switch (selectedTab) {
+        case 0:
+          this.$store.commit('events/setActiveSet', 'upcoming')
+          break
+        case 1:
+          this.$store.commit('events/setActiveSet', 'past')
+          break
+        case 2:
+          this.$store.commit('events/setActiveSet', 'calendar')
+          break
+      }
     }
 }
 </script>
@@ -336,6 +359,15 @@ export default class EventsPage extends QiskitPage {
 
     @include mq($until: medium) {
       height: auto;
+    }
+  }
+
+  &__calendar{
+    margin-bottom: $spacing-10;
+    border: 1px solid $border-color ;
+
+    @include mq($until: medium) {
+      margin-top: $spacing-06;
     }
   }
 
