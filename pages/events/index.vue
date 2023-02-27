@@ -385,10 +385,6 @@ export default class EventsPage extends QiskitPage {
       }
     }
 
-    #follow-our-event-calendar{
-      scroll-margin-top: 65px;
-    }
-
   }
 
   &__tab {
