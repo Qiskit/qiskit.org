@@ -117,6 +117,7 @@ function updateRegionFilters(newRegionFilters: string) {
   regionFilters.value = newRegionFiltersAsArray;
 }
 
+// TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
 const joinSlackLink = "https://ibm.co/joinqiskitslack";
 </script>
 
