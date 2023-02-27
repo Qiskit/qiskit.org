@@ -392,6 +392,5 @@ export default class EventsPage extends QiskitPage {
   &__instructions {
     padding-left: $spacing-06;
   }
-
 }
 </style>
