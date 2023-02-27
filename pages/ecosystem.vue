@@ -99,9 +99,7 @@
                     member.updatedAt * 1000
                   ).toLocaleString('en-UK', { timeZone: 'UTC' })})`"
                 >
-                  <!-- <template #content>
-                    <TestTable :filtered-data="getTestRows(member)" />
-                  </template> -->
+                  <EcosystemTestTable :filtered-data="getTestRows(member)" />
                 </bx-accordion-item>
               </bx-accordion>
             </div>
@@ -157,34 +155,36 @@ const filteredMembers = computed(() => {
 
 const tiersNames = computed(() => tiers.map((tier) => tier.name));
 
-// function getTestRows(member: any) {
-//   if (member.testsResults) {
-//     return member.testsResults.map((res: any) => {
-//       // make tiemstamp human readable
-//       const timestamp = new Date(res.timestamp * 1000).toLocaleString("en-UK", {
-//         timeZone: "UTC",
-//       });
-//       // Convert package name to title case
-//       let packageName;
-//       if (res.package) {
-//         packageName = res.package
-//           .replaceAll("-", " ")
-//           .split(" ")
-//           .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-//           .join(" ");
-//       }
+function getTestRows(member: Member) {
+  if (member.testsResults) {
+    return member.testsResults.map((res) => {
+      // make timestamp human readable
+      const timestamp = new Date(res.timestamp * 1000).toLocaleString("en-UK", {
+        timeZone: "UTC",
+      });
+      // Convert package name to title case
+      let packageName;
+      if (res.package) {
+        packageName = res.package
+          .replaceAll("-", " ")
+          .split(" ")
+          .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+          .join(" ");
+      }
 
-//       return {
-//         packageName,
-//         packageVersion: res.packageVersion,
-//         pythonVersion: res.pythonVersion,
-//         qiskitVersion: res.qiskitVersion,
-//         status: res.status,
-//         timestamp,
-//       };
-//     });
-//   }
-// }
+      return {
+        packageName,
+        packageVersion: res.packageVersion,
+        testType: res.testType,
+        passed: res.passed,
+        timestamp,
+        logsLink: res.logsLink,
+      };
+    });
+  }
+
+  return [];
+}
 
 function getTierDescription(tierName: string): string {
   const tier = tiers.find((tier: any) => tier.name === tierName);
@@ -218,28 +218,11 @@ const joinAction: GeneralLink = {
 // }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-
-.ecosystem-header {
-  &__hero {
-    .cds--col-max-8 {
-      max-width: 100%;
-      flex: 0 0 100%;
-    }
-  }
-
-  &__cta {
-    height: 50%;
-  }
-}
 
 .ecosystem__filters-result-section {
   margin-top: 4rem;
-
-  &__tiers {
-    text-transform: capitalize;
-  }
 }
 
 .cds--col-sm-4 {
@@ -256,33 +239,6 @@ const joinAction: GeneralLink = {
   &__tags {
     flex-direction: row;
   }
-}
-
-.bx--accordion__title {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-
-  p,
-  .p {
-    margin-bottom: 0;
-  }
-}
-
-.bx--accordion__item {
-  background-color: carbon.$cool-gray-20;
-  border-bottom: none;
-}
-
-.bx--accordion__item--active .bx--accordion__content {
-  padding: 0;
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.bx--accordion__item:last-child {
-  border-bottom: none;
 }
 
 .project-card {
@@ -303,12 +259,19 @@ const joinAction: GeneralLink = {
     }
   }
 
-  .app-card__title {
+  :deep(.app-card__title) {
     font-size: 20px;
   }
 }
 
-.bx-accordion__item::part(expando) {
-  background-color: carbon.$cool-gray-20;
+.bx-accordion__item {
+  &::part(content) {
+    margin: 0;
+    padding: 0;
+  }
+
+  &::part(expando) {
+    background-color: carbon.$cool-gray-20;
+  }
 }
 </style>

@@ -1,3 +1,14 @@
+interface TestResult {
+  testType: string;
+  passed: boolean;
+  package: string;
+  packageVersion: string;
+  terraVersion: string;
+  timestamp: number;
+  logsLink: string;
+  packageCommitHash: string;
+}
+
 interface Member {
   name: string;
   url: string;
@@ -9,7 +20,7 @@ interface Member {
   labels: string[];
   createdAt: number;
   updatedAt: number;
-  testsResults: any[];
+  testsResults: TestResult[];
   stylesResults?: any[];
   coveragesResults?: any[];
   configuration?: {

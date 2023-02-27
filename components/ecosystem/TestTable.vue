@@ -1,5 +1,5 @@
 <template>
-  <AppDataTable
+  <UiAppDataTable
     class="test-table"
     :columns="[
       'Status',
@@ -8,21 +8,20 @@
       'Test Logs',
     ]"
   >
-    <cv-data-table-row
-      v-for="(row, rowIndex) in tableData"
-      :key="`${rowIndex}`"
-    >
-      <cv-data-table-cell
+    <bx-table-row v-for="(row, rowIndex) in tableData" :key="`${rowIndex}`">
+      <bx-table-cell
         v-for="({ component, styles, data, addTooltip }, elementIndex) in row"
         :key="`${elementIndex}`"
       >
         <span v-if="component === 'span'" :style="styles">
           {{ data }}
-          <cv-tooltip
+          <bx-tooltip-icon
             v-if="addTooltip"
-            :tip="testTypeTooltip[data]"
+            :body-text="testTypeTooltip[data as keyof typeof testTypeTooltip]"
             direction="bottom"
-          />
+          >
+            <Information16 class="bx-tooltip-icon__icon" />
+          </bx-tooltip-icon>
         </span>
         <UiAppCta
           v-else-if="component === 'link'"
@@ -47,21 +46,32 @@
           fill="#c6c6c6"
           aria-label="No test information"
         />
-      </cv-data-table-cell>
-    </cv-data-table-row>
-  </AppDataTable>
+      </bx-table-cell>
+    </bx-table-row>
+  </UiAppDataTable>
 </template>
 
 <script setup lang="ts">
-import { TableRowElement } from "~/components/ui/AppDataTable.vue";
+import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
+import Information16 from "@carbon/icons-vue/lib/information/16";
+import CheckmarkFilled16 from "@carbon/icons-vue/lib/checkmark--filled/16";
+import ErrorFilled16 from "@carbon/icons-vue/lib/error--filled/16";
+import PendingFilled16 from "@carbon/icons-vue/lib/pending--filled/16";
 
-interface Props {
-  filteredData?: Object[];
+interface filteredDataItem {
+  logsLink: string;
+  packageName: string | undefined;
+  packageVersion: string;
+  passed: boolean;
+  testType: string;
+  timestamp: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  filteredData: () => [["", "", ""]],
-});
+interface Props {
+  filteredData: filteredDataItem[];
+}
+
+const props = defineProps<Props>();
 
 const testTypeTooltip = {
   development:
@@ -74,11 +84,9 @@ const testTypeTooltip = {
     "This test type means the results in this row show the latest version of Qiskit for which the ecosystem tests pass for this package",
 };
 
-const tableData = computed(() => dataPerRow(props.filteredData));
-
-function dataPerRow(filteredData: Object[]): TableRowElement[][] {
-  return filteredData.map(
-    ({ passed, testType, packageVersion, logsLink, packageName }: any) => [
+const tableData = computed(() => {
+  return props.filteredData.map(
+    ({ passed, testType, packageVersion, logsLink, packageName }) => [
       {
         component: passed,
         styles: passed ? "#42be65" : "#da1e28",
@@ -100,23 +108,21 @@ function dataPerRow(filteredData: Object[]): TableRowElement[][] {
       },
     ]
   );
-}
+});
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .test-table {
   overflow-x: unset !important;
+}
 
-  .bx--data-table th[aria-sort] {
-    background-color: carbon.$cool-gray-10;
-    border-bottom: 1px solid carbon.$cool-gray-30;
-  }
+bx-table-cell {
+  --cds-hover-field: #{carbon.$cool-gray-10};
+  --cds-text-02: #{carbon.$black-100};
 
-  .bx--data-table tbody tr td,
-  .bx--data-table tbody tr:hover td {
-    background-color: carbon.$cool-gray-10;
-    border-bottom: 1px solid carbon.$cool-gray-30;
-    color: carbon.$black-100;
-  }
+  background-color: carbon.$cool-gray-10;
+  border-bottom: 1px solid carbon.$cool-gray-30;
 }
 </style>
