@@ -88,7 +88,9 @@
         <template slot="extra-info">
           <div class="event-page__section">
             <a href="#follow-our-event-calendar" />
-            <h3 id="follow-our-event-calendar">Follow our event calendar</h3>
+            <h3 id="follow-our-event-calendar">
+              Follow our event calendar
+            </h3>
             <p class="event-page__section__description">
               <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
               Stay up to date with all of our scheduled events by following our calendar. You can view the calendar by visiting <AppLink v-bind="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</AppLink>, or subscribe to it by adding to the calendar app of your choice.
