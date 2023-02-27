@@ -68,8 +68,8 @@
 </template>
 
 <script setup lang="ts">
-import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
 import "@carbon/web-components/es/components/checkbox/index.js";
+import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
 import rawAdvocates from "~/content/advocates/advocates.json";
 
 const advocates = rawAdvocates as Advocate[];

@@ -53,21 +53,21 @@
             @change-selection="updateTierFilters($event)"
           />
         </template>
-        <!-- <template slot="results">
+        <template #results>
           <div class="cds--row">
             <div
               v-for="(member, index) in filteredMembers"
               :key="index"
               class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <AppCard
+              <UiAppCard
                 class="project-card"
                 :title="member.name"
                 :tags="member.labels"
                 :tooltip-tags="[
                   {
                     label: member.tier,
-                    message: getTierDescription(member.tier),
+                    description: getTierDescription(member.tier),
                   },
                 ]"
                 cta-label="Go to repo"
@@ -91,43 +91,37 @@
                 <p>
                   {{ member.description }}
                 </p>
-              </AppCard>
-              <cv-accordion v-if="member.testsResults.length != 0">
-                <cv-accordion-item>
-                  <template slot="title">
-                    <span style="font-weight: bold">Test Results</span>
-                    <span
-                      >({{
-                        new Date(member.updatedAt * 1000).toLocaleString(
-                          "en-UK",
-                          { timeZone: "UTC" }
-                        )
-                      }})</span
-                    >
-                  </template>
-                  <template slot="content">
+              </UiAppCard>
+              <bx-accordion v-if="member.testsResults.length != 0">
+                <bx-accordion-item
+                  class="bx-accordion__item"
+                  :title-text="`Test Results (${new Date(
+                    member.updatedAt * 1000
+                  ).toLocaleString('en-UK', { timeZone: 'UTC' })})`"
+                >
+                  <!-- <template #content>
                     <TestTable :filtered-data="getTestRows(member)" />
-                  </template>
-                </cv-accordion-item>
-              </cv-accordion>
+                  </template> -->
+                </bx-accordion-item>
+              </bx-accordion>
             </div>
           </div>
-        </template> -->
+        </template>
       </UiAppFiltersResultsLayout>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/accordion/index.js";
 import "@carbon/web-components/es/components/checkbox/index.js";
+import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { GeneralLink } from "~/constants/appLinks";
+import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
+import type { Member, Tier } from "~/types/ecosystem";
 
-interface Tier {
-  name: string;
-  description: string;
-}
-
+const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
 
 definePageMeta({
@@ -145,22 +139,21 @@ useHead({
   ],
 });
 
-// const { data: members } = useLazyAsyncData(
-//   "fetch-members",
-//   async () => await import("~/content/ecosystem/members.json")
-// );
-
 const tierFilters = ref<string[]>([]);
 
 const tierFiltersAsString = computed(() => tierFilters.value.join(","));
 
-// const noTierFiltersSelected = computed(() => tierFilters.value.length === 0);
+const filteredMembers = computed(() => {
+  if (!members) {
+    return [];
+  }
 
-// const filteredMembers = computed(() => {
-//   return noTierFiltersSelected
-//     ? members.value
-//     : members.value.filter((member) => tierFilters.value.includes(member.tier));
-// });
+  const noTierFilters = tierFilters.value.length === 0;
+
+  return noTierFilters
+    ? members
+    : members.filter((member) => tierFilters.value.includes(member.tier));
+});
 
 const tiersNames = computed(() => tiers.map((tier) => tier.name));
 
@@ -193,10 +186,10 @@ const tiersNames = computed(() => tiers.map((tier) => tier.name));
 //   }
 // }
 
-// function getTierDescription(tierName: string): string {
-//   const tier = tiers.value.find((tier: any) => tier.name === tierName);
-//   return tier.description || "";
-// }
+function getTierDescription(tierName: string): string {
+  const tier = tiers.find((tier: any) => tier.name === tierName);
+  return tier!.description || "";
+}
 
 function updateTierFilter(filterValue: string, isChecked: boolean) {
   isChecked
@@ -313,5 +306,9 @@ const joinAction: GeneralLink = {
   .app-card__title {
     font-size: 20px;
   }
+}
+
+.bx-accordion__item::part(expando) {
+  background-color: carbon.$cool-gray-20;
 }
 </style>

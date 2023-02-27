@@ -37,11 +37,9 @@
               class="app-card__custom-pill"
             >
               {{ tag.label }}
-              <bx-tooltip direction="bottom">
-                <bx-tooltip-body>
-                  {{ tag.description }}
-                </bx-tooltip-body>
-              </bx-tooltip>
+              <bx-tooltip-icon :body-text="tag.description" direction="bottom">
+                <Information16 class="bx-tooltip-icon__icon" />
+              </bx-tooltip-icon>
             </div>
           </div>
         </div>
@@ -66,7 +64,8 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/tag/tag.js";
-import "@carbon/web-components/es/components/tooltip/tooltip.js";
+import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
+import Information16 from "@carbon/icons-vue/lib/information/16";
 import { CtaClickedEventProp } from "~/types/segment";
 
 export interface TagTooltip {
@@ -241,16 +240,22 @@ bx-tag {
     margin-right: 0;
   }
 }
+
+bx-tooltip-icon {
+  line-height: 0;
+}
+
+.bx-tooltip-icon {
+  &__icon {
+    fill: carbon.$white;
+    margin-left: carbon.$spacing-02;
+  }
+}
 </style>
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
-
-.bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center
-  .bx--assistive-text {
-  width: 10rem;
-}
 
 .app-card {
   &__custom-pill {
@@ -271,15 +276,6 @@ bx-tag {
     cursor: default;
     vertical-align: middle;
     word-break: break-word;
-
-    .bx--tooltip__trigger svg {
-      fill: white;
-      margin-left: carbon.$spacing-02;
-
-      :hover svg {
-        fill: white;
-      }
-    }
   }
 
   &__custom-pill:last-child {
