@@ -51,7 +51,7 @@
             :key="advocate.name"
             class="cds--col-max-8"
           >
-            <AdvocatesAdvocateCard
+            <AdvocatesItemCard
               :name="advocate.name"
               :image="advocate.image"
               :city="advocate.city"
