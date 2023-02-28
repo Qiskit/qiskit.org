@@ -97,7 +97,6 @@
         </template>
         <template slot="extra-info">
           <div id="follow-our-event-calendar" class="event-page__section">
-            <a href="#follow-our-event-calendar" />
             <h3>Follow our event calendar</h3>
             <p class="event-page__section__description">
               <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
