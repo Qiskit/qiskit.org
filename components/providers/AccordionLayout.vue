@@ -12,14 +12,6 @@
     >
       <span>{{ installation }}</span>
     </cv-code-snippet>
-    <div class="accordion-layout__cta-group">
-      <AppCta
-        v-for="cta in validCtas"
-        :key="cta.label"
-        kind="ghost"
-        v-bind="cta"
-      />
-    </div>
     <cv-code-snippet
       class="accordion-layout__code-snippet__block"
       kind="multiline"
@@ -29,6 +21,14 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <span v-for="(line, index) in helloWorldExample" :key="index" class="accordion-layout__code-snippet__line" v-html="line" />
     </cv-code-snippet>
+    <div class="accordion-layout__cta-group">
+      <AppCta
+        v-for="cta in validCtas"
+        :key="cta.label"
+        kind="ghost"
+        v-bind="cta"
+      />
+    </div>
   </article>
 </template>
 
