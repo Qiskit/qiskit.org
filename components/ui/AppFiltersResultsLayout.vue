@@ -19,7 +19,7 @@
 @use "~/assets/scss/carbon.scss";
 
 .app-filters-results-layout {
-  :deep(&__main-section) {
+  &__main-section {
     @include carbon.breakpoint-down(md) {
       margin-top: carbon.$spacing-09;
     }
@@ -33,7 +33,7 @@
     }
 
     @include carbon.breakpoint-up(xlg) {
-      height: calc(100% - #{$spacing-06});
+      height: calc(100% - #{carbon.$spacing-06});
     }
   }
 }

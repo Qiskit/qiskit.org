@@ -17,26 +17,30 @@
         </p>
       </div>
     </div>
-    <AppFiltersResultsLayout class="meet-the-advocates__filters-result-section">
+    <UiAppFiltersResultsLayout
+      class="meet-the-advocates__filters-result-section"
+    >
       <template #filters-on-m-l-screen>
-        <AppFieldset :label="filter.label">
+        <UiAppFieldset :label="filter.label">
           <client-only>
-            <cv-checkbox
+            <bx-checkbox
               v-for="option in filter.options"
               :key="option"
               :checked="isRegionFilterChecked(option)"
-              :label="option"
+              :label-text="option"
               :value="option"
-              @change="updateRegionFilter(option, $event)"
+              @bx-checkbox-changed="
+                updateRegionFilter(option, $event.target.checked)
+              "
             />
           </client-only>
-        </AppFieldset>
+        </UiAppFieldset>
       </template>
       <template #filters-on-s-screen>
-        <AppMultiSelect
+        <UiAppMultiSelect
           :label="filter.label"
           :options="filter.options"
-          :value="regionFilters"
+          :value="regionFiltersAsString"
           @change-selection="updateRegionFilters($event)"
         />
       </template>
@@ -47,35 +51,48 @@
             :key="advocate.name"
             class="cds--col-max-8"
           >
-            <AdvocateCard v-bind="advocate" />
+            <AdvocatesItemCard
+              :name="advocate.name"
+              :image="advocate.image"
+              :city="advocate.city"
+              :country="advocate.country"
+              :region="advocate.region"
+              :slack-id="advocate.slackId"
+              :slack-username="advocate.slackUsername"
+            />
           </div>
         </div>
       </template>
-    </AppFiltersResultsLayout>
+    </UiAppFiltersResultsLayout>
   </section>
 </template>
 
 <script setup lang="ts">
 import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
+import "@carbon/web-components/es/components/checkbox/index.js";
+import rawAdvocates from "~/content/advocates/advocates.json";
+
+const advocates = rawAdvocates as Advocate[];
 
 const filter = {
   label: "Locations",
   options: ADVOCATES_WORLD_REGION_OPTIONS,
 };
 
-const { data: advocates } = useLazyAsyncData(
-  "fetch-advocates",
-  async () => (await import("~/content/advocates/advocates.json")) as Advocate[]
-);
+const regionFilters = ref<string[]>([]);
 
-const regionFilters = ref([] as string[]);
+const regionFiltersAsString = computed(() => regionFilters.value.join(","));
 
 const filteredAdvocates = computed(() => {
+  if (!advocates) {
+    return [];
+  }
+
   const noRegionFilters = regionFilters.value.length === 0;
 
   return noRegionFilters
     ? advocates
-    : advocates.value.filter((advocate) =>
+    : advocates.filter((advocate) =>
         regionFilters.value.includes(advocate.region)
       );
 });
@@ -95,6 +112,12 @@ function updateRegionFilter(option: string, isChecked: boolean) {
   regionFilters.value = filteredRegionFilters;
 }
 
+function updateRegionFilters(newRegionFilters: string) {
+  const newRegionFiltersAsArray = newRegionFilters.split(",");
+  regionFilters.value = newRegionFiltersAsArray;
+}
+
+// TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
 const joinSlackLink = "https://ibm.co/joinqiskitslack";
 </script>
 

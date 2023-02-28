@@ -7,10 +7,8 @@ import PendingFilled16 from "@carbon/icons-vue/lib/pending--filled/16";
 import ErrorFilled16 from "@carbon/icons-vue/lib/error--filled/16";
 import Time20 from "@carbon/icons-vue/lib/time/20";
 import Education20 from "@carbon/icons-vue/lib/education/20";
-import Map20 from "@carbon/icons-vue/lib/map/20";
 import ArrowLeft16 from "@carbon/icons-vue/lib/arrow--left/16";
 import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
-import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
 import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
 import LogoMedium20 from "@carbon/icons-vue/lib/logo--medium/20";
 import LogoGitHub32 from "@carbon/icons-vue/lib/logo--github/32";
@@ -24,10 +22,8 @@ Vue.use(CarbonIconsVue, {
     Copy16,
     Time20,
     Education20,
-    Map20,
     ArrowLeft16,
     LogoTwitter20,
-    LogoSlack20,
     LogoYouTube20,
     LogoMedium20,
     LogoGitHub32,

@@ -52,11 +52,11 @@ export default class AppCard extends Vue {
   background-color: carbon.$cool-gray-10;
 
   &__title {
-    @include carbon.$type-style("productive-heading-02");
+    @include carbon.type-style("productive-heading-02");
   }
 
   &__description {
-    @include carbon.$type-style("body-long-01");
+    @include carbon.type-style("body-long-01");
   }
 }
 </style>

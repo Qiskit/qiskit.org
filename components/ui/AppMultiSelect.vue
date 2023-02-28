@@ -1,18 +1,30 @@
 <template>
   <client-only>
-    <cv-multi-select
+    <bx-multi-select
       class="app-multi-select"
       :theme="theme"
-      :label="label"
-      :options="formatedOptions"
+      :label-text="label"
       :value="value"
       :selection-feedback="feedback"
-      @change="$emit('change-selection', $event)"
-    />
+      @bx-multi-select-selected="$emit('change-selection', $event.target.value)"
+    >
+      <bx-multi-select-item
+        v-for="option in formatedOptions"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.label }}
+      </bx-multi-select-item>
+    </bx-multi-select>
   </client-only>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/multi-select/index.js";
+import "@carbon/web-components/es/components/multi-select/multi-select-item.js";
+
+defineEmits(["change-selection"]);
+
 type multiSelectOption = {
   label: string;
   value: string;
@@ -22,7 +34,7 @@ type multiSelectOption = {
 interface Props {
   label: string;
   options: string[];
-  value: string[];
+  value: string;
 }
 
 const props = defineProps<Props>();
@@ -61,7 +73,7 @@ function formatOptions(optionsList: any): Array<multiSelectOption> {
   }
 
   .bx--list-box__menu-icon > svg {
-    fill: $black-100;
+    fill: carbon.$black-100;
   }
 
   .bx--list-box--expanded:hover.bx--list-box--light:hover {
@@ -84,7 +96,7 @@ function formatOptions(optionsList: any): Array<multiSelectOption> {
   }
 
   .bx--list-box__menu-item:hover .bx--list-box__menu-item__option {
-    color: $black-100;
+    color: carbon.$black-100;
   }
 }
 </style>

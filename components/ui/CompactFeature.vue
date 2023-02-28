@@ -12,16 +12,12 @@
 
 <script setup lang="ts">
 interface Props {
-  description?: string;
-  icon?: string;
-  title?: string;
+  description: string;
+  icon: string;
+  title: string;
 }
 
-withDefaults(defineProps<Props>(), {
-  description: "",
-  icon: "",
-  title: "",
-});
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>

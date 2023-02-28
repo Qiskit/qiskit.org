@@ -1,21 +1,15 @@
 <template>
   <main>
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderFixed>
-      Connect with the<br>
-      <TypewriterEffect
-        :values="[
-          'enthusiasts',
-          'advocates',
-          'mentors',
-          'experts'
-        ]"
+    <UiAppPageHeaderFixed>
+      Connect with the<br />
+      <UiTypewriterEffect
+        :values="['enthusiasts', 'advocates', 'mentors', 'experts']"
       />
-      from within<br>
+      from within<br />
       the Qiskit community
-    </AppPageHeaderFixed> -->
-    <!-- <AdvocatesJoinSection /> -->
-    <!-- <MeetTheAdvocates /> -->
+    </UiAppPageHeaderFixed>
+    <AdvocatesJoinSection />
+    <AdvocatesMeetTheAdvocates />
   </main>
 </template>
 
@@ -25,7 +19,6 @@ definePageMeta({
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Advocates",
   meta: [
     {

@@ -324,7 +324,7 @@ useHead({
 //     margin-bottom: carbon.$spacing-09;
 
 //     .bx--tabs--scrollable__nav-link {
-//       color: $black-100;
+//       color: carbon.$black-100;
 //       border-bottom-color: qiskit.$border-color;
 //     }
 
@@ -359,7 +359,7 @@ useHead({
 //       }
 
 //       .bx--tabs-trigger svg {
-//         fill: $black-100;
+//         fill: carbon.$black-100;
 //       }
 
 //       .bx--tabs-trigger-text {

@@ -1,5 +1,5 @@
 <template>
-  <AppCard
+  <UiAppCard
     class="advocate-card"
     :image="image"
     :title="name"
@@ -15,10 +15,13 @@
         @{{ slackUsername }}
       </UiAppLink>
     </div>
-  </AppCard>
+  </UiAppCard>
 </template>
 
 <script setup lang="ts">
+import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
+import Map20 from "@carbon/icons-vue/lib/map/20";
+
 interface Props {
   name: string;
   image: string;
@@ -68,16 +71,6 @@ const location = computed(() =>
   &__icon {
     margin-right: carbon.$spacing-03;
     fill: currentcolor;
-  }
-}
-</style>
-
-<style lang="scss">
-.advocate-card {
-  @include carbon.breakpoint-down(md) {
-    .app-card__image {
-      background-size: contain;
-    }
   }
 }
 </style>
