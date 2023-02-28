@@ -88,12 +88,11 @@ export default class ProvidersPage extends QiskitPage {
 .providers-page {
   &__table-of-contents {
     position: sticky;
-    top: $spacing-06;
+    top: $spacing-11;
   }
 
   &__content-section {
     margin-bottom: $spacing-10;
-    overflow: hidden;
   }
 
   &__content-section-details {
