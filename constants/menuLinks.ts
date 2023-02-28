@@ -34,6 +34,7 @@ type LabeledLinks = {
   [key: string]: NavLink;
 };
 
+// TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
 const SOCIAL_MEDIA: LabeledLinks = {
   github: {
     label: "GitHub",
