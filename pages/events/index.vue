@@ -1,21 +1,20 @@
 <template>
   <div>
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderFixed>
+    <UiAppPageHeaderFixed>
       Join
-      <TypewriterEffect
+      <UiTypewriterEffect
         :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
       />
       from the world&rsquo;s largest quantum computing community
-    </AppPageHeaderFixed> -->
+    </UiAppPageHeaderFixed>
     <div class="cds--grid">
       <div class="event-page__tabs">
-        <!-- <client-only>
-          <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
-            <cv-tab id="tab-1" label="Upcoming events" />
-            <cv-tab id="tab-2" label="Past events" />
-          </cv-tabs>
-        </client-only> -->
+        <client-only>
+          <bx-tabs value="upcoming">
+            <bx-tab id="tab-1" value="upcoming">Upcoming events</bx-tab>
+            <bx-tab id="tab-2" value="past">Past events</bx-tab>
+          </bx-tabs>
+        </client-only>
       </div>
       <!-- <AppFiltersResultsLayout>
         <template slot="filters-on-m-l-screen">
@@ -130,8 +129,7 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import { Component } from 'vue-property-decorator'
+import "@carbon/web-components/es/components/tabs/index.js";
 // import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
 // import OutlookCalendarInstructions from '~/components/events/calendars/OutlookInstructions.vue'
 // import AppleCalendarInstructions from '~/components/events/calendars/AppleInstructions.vue'
