@@ -12,15 +12,14 @@
     >
       <span>{{ installation }}</span>
     </cv-code-snippet>
-    <cv-code-snippet
-      class="accordion-layout__code-snippet__block"
-      kind="multiline"
-      light
-      feedback-aria-label="Copy code snippet"
-    >
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <span v-for="(line, index) in helloWorldExample" :key="index" class="accordion-layout__code-snippet__line" v-html="line" />
-    </cv-code-snippet>
+    <code class="accordion-layout__code-cell">
+      <template v-for="(line, index) in helloWorldExample">
+        <!-- eslint-disable vue/no-v-html -->
+        <pre v-if="line.startsWith('#')" :key="line" class="accordion-layout__code-cell__comment" v-html="line" />
+        <pre v-else :key="index" class="accordion-layout__code-cell__line" v-html="line" />
+        <!-- eslint-enable -->
+      </template>
+    </code>
     <div class="accordion-layout__cta-group">
       <AppCta
         v-for="cta in validCtas"
@@ -109,6 +108,23 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 
     .app-cta {
       max-width: 10rem;
+      padding-left: $spacing-05;
+    }
+  }
+
+  &__code-cell {
+    display: block;
+    background-color: $background-color-white;
+    color: $text-color;
+    padding: $spacing-05;
+
+    &__comment {
+      color: $text-active-color;
+    }
+
+    &__line {
+      word-break: break-word;
+      white-space: normal;
     }
   }
 }
