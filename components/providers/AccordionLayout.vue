@@ -5,21 +5,30 @@
     </p>
     <img v-if="image" :src="image" class="accordion-layout__image">
     <cv-code-snippet
-      class="accordion-layout__code-snippet__oneline"
+      class="accordion-layout__code-snippet"
       kind="oneline"
       light
       feedback-aria-label="Copy code snippet"
     >
       <span>{{ installation }}</span>
     </cv-code-snippet>
-    <code class="accordion-layout__code-cell">
-      <template v-for="(line, index) in helloWorldExample">
-        <!-- eslint-disable vue/no-v-html -->
-        <pre v-if="line.startsWith('#')" :key="line" class="accordion-layout__code-cell__comment" v-html="line" />
-        <pre v-else :key="index" class="accordion-layout__code-cell__line" v-html="line" />
-        <!-- eslint-enable -->
-      </template>
-    </code>
+    <div class="accordion-layout__code-block">
+      <code class="accordion-layout__code-cell">
+        <template v-for="(line, index) in helloWorldExample">
+          <!-- eslint-disable vue/no-v-html -->
+          <pre v-if="line.startsWith('#')" :key="line" class="accordion-layout__code-cell__comment" v-html="line" />
+          <pre v-else :key="index" class="accordion-layout__code-cell__line" v-html="line" />
+          <!-- eslint-enable -->
+        </template>
+      </code>
+      <cv-button
+        title="Copy"
+        class="accordion-layout__copy-button"
+        @click="[copyToClipboard($event), $trackClickEvent(`copy ${title} code`, 'providers')]"
+      >
+        Copy
+      </cv-button>
+    </div>
     <div class="accordion-layout__cta-group">
       <AppCta
         v-for="cta in validCtas"
@@ -72,10 +81,22 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   get validCtas () {
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
+
+  copyToClipboard (e: { target: any }): void {
+    const buttonElement = e.target
+    const codeBlock = buttonElement.parentNode
+    const codeSnippet = codeBlock.querySelector('.accordion-layout__code-cell')
+
+    if (codeSnippet !== null) {
+      navigator.clipboard.writeText(codeSnippet.innerText)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+$cta-max-width: 6rem;
+
 .accordion-layout {
   display: flex;
   flex-direction: column;
@@ -92,15 +113,8 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   }
 
   &__code-snippet {
-    &__oneline,
-    &__block {
-      margin-bottom: $spacing-05;
-      max-width: initial;
-    }
-
-    &__line {
-      display: block;
-    }
+    margin-bottom: $spacing-05;
+    max-width: initial;
   }
 
   &__cta-group {
@@ -110,6 +124,10 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
       max-width: 10rem;
       padding-left: $spacing-05;
     }
+  }
+
+  &__code-block {
+    position: relative;
   }
 
   &__code-cell {
@@ -125,6 +143,30 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
     &__line {
       word-break: break-word;
       white-space: normal;
+    }
+  }
+
+  &__copy-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: $cta-max-width;
+    padding-right: $spacing-05;
+    background-size: 200% 100%;
+    background-position-x: 100%;
+    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
+    transition: background-position-x 0.3s ease-out;
+    min-height: initial;
+
+    &:hover,
+    &:active {
+      background-position-x: 0;
+    }
+
+    &__label {
+      display: block;
+      width: 100%;
     }
   }
 }

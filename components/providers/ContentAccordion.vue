@@ -3,7 +3,6 @@
     <div
       v-for="(tab, index) in tabs"
       :key="tab.title"
-      @click.capture="preventFromClosing(index, $event)"
     >
       <cv-accordion-item
         :key="tab.title"
@@ -40,11 +39,11 @@ export default class ContentAccordion extends Vue {
 
   expandedItem: number = 0
 
-  preventFromClosing (index: number, event: MouseEvent) {
-    if (index === this.expandedItem) {
-      event.stopPropagation()
-    }
-  }
+  // preventFromClosing (index: number, event: MouseEvent) {
+  //   if (index === this.expandedItem) {
+  //     event.stopPropagation()
+  //   }
+  // }
 
   actionChange ({ changedIndex }: { changedIndex: number }) : void {
     this.expandedItem = changedIndex
