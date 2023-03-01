@@ -11,7 +11,7 @@
       <cv-button
         title="Copy"
         class="accordion-layout__copy-button"
-        @click="copyToClipboard($event)"
+        @click="[copyToClipboard($event), $trackClickEvent(`Copy ${title} install code`, 'providers')]"
       >
         Copy
       </cv-button>
@@ -28,7 +28,7 @@
       <cv-button
         title="Copy"
         class="accordion-layout__copy-button"
-        @click="copyToClipboard($event)"
+        @click="[copyToClipboard($event), $trackClickEvent(`Copy ${title} helloWorldExample`, 'providers')]"
       >
         {{ copyCodeCta }}
       </cv-button>
