@@ -24,9 +24,7 @@
           </div>
         </div>
         <div class="bx--col-lg-12">
-          <div class="app-introductory-content__details">
-            <slot />
-          </div>
+          <slot />
         </div>
       </div>
     </div>
@@ -61,10 +59,6 @@ export default class AppIntroductoryContent extends Vue {
 
   &__description {
     margin-bottom: $spacing-07;
-  }
-
-  &__details {
-    width: 100%;
   }
 }
 </style>

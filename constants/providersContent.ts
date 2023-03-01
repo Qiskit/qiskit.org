@@ -82,7 +82,7 @@ const runtimes: string = 'runtimes'
 
 const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
   sectionId: runtimes,
-  label: 'With Quantum Runtimes',
+  label: 'Quantum Runtimes',
   isSecondary: true
 }
 
@@ -97,7 +97,7 @@ const simulatorsId: string = 'simulators'
 
 const SIMULATORS_IN_MENU: TableOfContentEntry = {
   sectionId: simulatorsId,
-  label: 'With Simulators',
+  label: 'Simulators',
   isSecondary: true
 }
 
@@ -112,7 +112,7 @@ const multiplatformsId: string = 'multiplatforms'
 
 const MULTIPLATFORMS_IN_MENU: TableOfContentEntry = {
   sectionId: multiplatformsId,
-  label: 'With Multiplatforms',
+  label: 'Multiplatforms',
   isSecondary: true
 }
 
@@ -125,7 +125,7 @@ const MULTIPLATFORMS_COLLECTION: ProvidersSection = {
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
-    label: 'Run Qiskit circuits'
+    label: 'Run Qiskit circuits with'
   },
   QUANTUM_RUNTIMES_IN_MENU,
   SIMULATORS_IN_MENU,
