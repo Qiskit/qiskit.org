@@ -26,7 +26,7 @@
         class="accordion-layout__copy-button"
         @click="[copyToClipboard($event), $trackClickEvent(`copy ${title} code`, 'providers')]"
       >
-        Copy
+        {{ copyCtaLabel }}
       </cv-button>
     </div>
     <div class="accordion-layout__cta-group">
@@ -78,6 +78,8 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   @Prop(Object) sourceCta!: NavLink
   @Prop(Array) helloWorldExample!: string[]
 
+  copyCtaLabel = 'Copy'
+
   get validCtas () {
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
@@ -89,6 +91,11 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 
     if (codeSnippet !== null) {
       navigator.clipboard.writeText(codeSnippet.innerText)
+      this.copyCtaLabel = 'Copied'
+      setTimeout(() => {
+        buttonElement.blur()
+        this.copyCtaLabel = 'Copy'
+      }, 3000)
     }
   }
 }
@@ -161,6 +168,11 @@ $cta-max-width: 6rem;
     &:hover,
     &:active {
       background-position-x: 0;
+    }
+
+    &:focus {
+      border-color: $background-color-dark;
+      box-shadow: inset 0 0 0 1px $background-color-dark, inset 0 0 0 2px $white-0;
     }
 
     &__label {

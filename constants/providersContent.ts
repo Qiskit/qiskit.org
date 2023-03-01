@@ -88,7 +88,7 @@ const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
 
 const QUANTUM_RUNTIMES: ProvidersSection = {
   id: runtimes,
-  title: 'Quantum runtimes',
+  title: 'Quantum Runtimes',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
   subSections: convertJsonToObjectData(rawHardwareData)
 }
