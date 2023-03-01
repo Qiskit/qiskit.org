@@ -4,14 +4,18 @@
       {{ description }}
     </p>
     <img v-if="image" :src="image" class="accordion-layout__image">
-    <cv-code-snippet
-      class="accordion-layout__code-snippet"
-      kind="oneline"
-      light
-      feedback-aria-label="Copy code snippet"
-    >
-      <span>{{ installation }}</span>
-    </cv-code-snippet>
+    <div class="accordion-layout__code-snippet">
+      <code class="accordion-layout__code-cell">
+        <pre class="accordion-layout__code-cell__line">{{ installation }}</pre>
+      </code>
+      <cv-button
+        title="Copy"
+        class="accordion-layout__copy-button"
+        @click="copyToClipboard($event)"
+      >
+        Copy
+      </cv-button>
+    </div>
     <div class="accordion-layout__code-block">
       <code class="accordion-layout__code-cell">
         <template v-for="(line, index) in helloWorldExample">
@@ -24,9 +28,9 @@
       <cv-button
         title="Copy"
         class="accordion-layout__copy-button"
-        @click="[copyToClipboard($event), $trackClickEvent(`copy ${title} code`, 'providers')]"
+        @click="copyToClipboard($event)"
       >
-        {{ copyCtaLabel }}
+        Copy
       </cv-button>
     </div>
     <div class="accordion-layout__cta-group">
@@ -78,8 +82,6 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   @Prop(Object) sourceCta!: NavLink
   @Prop(Array) helloWorldExample!: string[]
 
-  copyCtaLabel = 'Copy'
-
   get validCtas () {
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
@@ -91,18 +93,13 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 
     if (codeSnippet !== null) {
       navigator.clipboard.writeText(codeSnippet.innerText)
-      this.copyCtaLabel = 'Copied'
-      setTimeout(() => {
-        buttonElement.blur()
-        this.copyCtaLabel = 'Copy'
-      }, 3000)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-$cta-max-width: 6rem;
+$cta-max-width: 4rem;
 
 .accordion-layout {
   display: flex;
@@ -120,6 +117,7 @@ $cta-max-width: 6rem;
   }
 
   &__code-snippet {
+    position: relative;
     margin-bottom: $spacing-05;
     max-width: initial;
   }
@@ -127,24 +125,37 @@ $cta-max-width: 6rem;
   &__cta-group {
     display: flex;
 
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
+
     .app-cta {
       max-width: 10rem;
       padding-left: $spacing-05;
+
+      @include mq($until: medium) {
+        max-width: initial;
+      }
     }
   }
 
   &__code-block {
     position: relative;
+    @include mq($until: medium) {
+      margin-bottom: $spacing-05;
+    }
   }
 
   &__code-cell {
     display: block;
     background-color: $background-color-white;
     color: $text-color;
-    padding: $spacing-05;
+    padding: $spacing-05 $spacing-12 $spacing-05 $spacing-05;
 
     &__comment {
       color: $text-active-color;
+      word-break: break-word;
+      white-space: normal;
     }
 
     &__line {
@@ -161,9 +172,8 @@ $cta-max-width: 6rem;
     max-width: $cta-max-width;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $background-color-dark 0%, $background-color-dark 50%, $button-background-color-tertiary 50%, $button-background-color-tertiary 100%);
+    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
     transition: background-position-x 0.3s ease-out;
-    min-height: initial;
 
     &:hover,
     &:active {
@@ -171,8 +181,8 @@ $cta-max-width: 6rem;
     }
 
     &:focus {
-      border-color: $background-color-dark;
-      box-shadow: inset 0 0 0 1px $background-color-dark, inset 0 0 0 2px $white-0;
+      border-color: $button-background-color-light;
+      box-shadow: inset 0 0 0 1px $button-background-color-light, inset 0 0 0 2px $white-0;
     }
 
     &__label {

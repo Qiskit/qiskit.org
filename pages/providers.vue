@@ -14,7 +14,7 @@
       class="bx--grid page-section"
     >
       <div class="bx--row">
-        <div class="bx--col-sm-0 bx--col-md-2 bx--col-lg-3">
+        <div class="bx--col-sm-0 bx--col-md-3 bx--col-lg-3">
           <div class="providers-page__table-of-contents">
             <TheTableOfContents
               :entries="tocEntries"
@@ -22,7 +22,7 @@
             />
           </div>
         </div>
-        <div class="bx--col-lg-13 bx--col-md-6">
+        <div class="bx--col-md-5 bx--col-lg-13">
           <AppIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"

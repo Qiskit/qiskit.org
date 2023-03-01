@@ -52,7 +52,7 @@ export default class TheTableOfContents extends Vue {
         color: $text-active-color;
         font-weight: bold;
         display: inline-block;
-        padding-right: $spacing-06;
+        padding-right: $spacing-04;
       }
     }
 

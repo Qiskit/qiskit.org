@@ -53,8 +53,10 @@ export default class AppIntroductoryContent extends Vue {
   }
 
   &__overview {
-    position: sticky;
-    top: 4.5rem;
+    @include mq($from: large) {
+      position: sticky;
+      top: 4.5rem;
+    }
   }
 
   &__description {
