@@ -152,10 +152,9 @@ $cta-max-width: 6rem;
     right: 0;
     width: 100%;
     max-width: $cta-max-width;
-    padding-right: $spacing-05;
     background-size: 200% 100%;
     background-position-x: 100%;
-    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
+    background-image: linear-gradient(90deg, $background-color-dark 0%, $background-color-dark 50%, $button-background-color-tertiary 50%, $button-background-color-tertiary 100%);
     transition: background-position-x 0.3s ease-out;
     min-height: initial;
 
