@@ -66,23 +66,6 @@ export default class ContentAccordion extends Vue {
     fill: $text-color-light;
   }
 
-  // ::part(expando)[aria-expanded="true"]{
-  //   color: $text-color-white;
-  //   background-color: $button-background-color;
-
-  //   &:hover::before {
-  //     background-color: $button-background-color;
-  //   }
-  // }
-
-  // ::part(expando)[aria-expanded="true"] > .bx--accordion__title{
-  //   color: $text-color-white;
-  // }
-
-  // ::part(expando)[aria-expanded="true"] > .bx--accordion__arrow{
-  //   fill: $text-color-white;
-  // }
-
   ::part(content) {
     padding: $spacing-06 $spacing-07;
     background-color: $background-color-lighter;
