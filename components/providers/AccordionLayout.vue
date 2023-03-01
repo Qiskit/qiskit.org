@@ -30,7 +30,7 @@
         class="accordion-layout__copy-button"
         @click="copyToClipboard($event)"
       >
-        Copy
+        {{ copyCodeCta }}
       </cv-button>
     </div>
     <div class="accordion-layout__cta-group">
@@ -86,6 +86,8 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
 
+  copyCodeCta = 'Copy'
+
   copyToClipboard (e: { target: any }): void {
     const buttonElement = e.target
     const codeBlock = buttonElement.parentNode
@@ -93,6 +95,11 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
 
     if (codeSnippet !== null) {
       navigator.clipboard.writeText(codeSnippet.innerText)
+      buttonElement.innerText = 'Copied!'
+      setTimeout(() => {
+        buttonElement.blur()
+        buttonElement.innerText = this.copyCodeCta
+      }, 3500)
     }
   }
 }
