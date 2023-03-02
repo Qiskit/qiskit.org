@@ -1,5 +1,5 @@
 <template>
-  <AppCard
+  <UiAppCard
     class="event-card"
     :image="image"
     :title="title"
@@ -30,14 +30,14 @@
         {{ institution }}
       </div>
     </div>
-  </AppCard>
+  </UiAppCard>
 </template>
 
 <script setup lang="ts">
 import Map20 from "@carbon/icons-vue/lib/map/20";
 import Calendar20 from "@carbon/icons-vue/lib/calendar/20";
-import Time20 from "@carbon/icons-vue/lib/time/2";
-import Education20 from "@carbon/icons-vue/lib/education/2";
+import Time20 from "@carbon/icons-vue/lib/time/20";
+import Education20 from "@carbon/icons-vue/lib/education/20";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
