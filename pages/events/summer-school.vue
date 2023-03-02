@@ -1,16 +1,15 @@
 <template>
   <main class="summer-school-page">
     <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderWithCard
-      :cta="null"
+    <UiAppPageHeaderWithCard
       :card-title="headerData.cardSectionHeading"
     >
-      <template slot="title">
+      <template #title>
         {{ headerData.titleLine1 }}
         <br />
         {{ headerData.titleLine2 }}
       </template>
-      <template slot="description">
+      <template #description>
         <p>
           The Qiskit Global Summer School 2022 is a two-week intensive summer
           program designed to empower the quantum researchers and developers of
@@ -30,12 +29,12 @@
         </p>
         <p>See you next year!</p>
       </template>
-      <template slot="card">
-        <EventCard v-bind="headerData.card" vertical-layout>
+      <template #card>
+        <EventsItemCard v-bind="headerData.card" vertical-layout>
           {{ headerData.card.description }}
-        </EventCard>
+        </EventsItemCard>
       </template>
-    </AppPageHeaderWithCard> -->
+    </UiAppPageHeaderWithCard>
 
     <div class="cds--grid summer-school-page__content">
       <!-- <AppMosaicSection
@@ -86,12 +85,12 @@
 
 <script setup lang="ts">
 // TODO: Integrate old code
-// import {
-//   header,
+import {
+  header,
 //   mosaic,
 //   agenda,
 //   helpfulResources,
-// } from "~/constants/summerSchool2022Content";
+} from "~/constants/summerSchool2022Content";
 
 definePageMeta({
   layout: "default-max",
@@ -156,7 +155,7 @@ useHead({
 
 // TODO: Integrate old code
 // const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
-// const headerData = header;
+const headerData = header;
 // const mosaicData = mosaic;
 // const agendaData = agenda;
 // const helpfulResourcesData = helpfulResources;
