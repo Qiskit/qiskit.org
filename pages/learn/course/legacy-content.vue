@@ -23,6 +23,7 @@ export default class LegacyContentPage extends CourseOverviewPage {
     Qiskit. See the bottom of each page for the package versions used at the
     time of writing.`
   ]
+
   headerImg = '/images/learn/course/legacy-content/legacy-content.png'
   backToTextbookHomeLink: GeneralLink = {
     url: '/learn',
@@ -103,7 +104,7 @@ export default class LegacyContentPage extends CourseOverviewPage {
       label: '9. Games & Demos',
       segment: { cta: 'games-and-demos', location: 'course' },
       url: LegacyContent.GamesAndDemos
-    },
+    }
   ]
 
   prerequisites: Prerequisite[] = []
