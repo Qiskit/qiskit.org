@@ -37,11 +37,11 @@
     </UiAppPageHeaderWithCard>
 
     <div class="cds--grid summer-school-page__content">
-      <!-- <AppMosaicSection
+      <UiAppMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
         :elements="mosaicData.tiles"
-      /> -->
+      />
 
       <section class="summer-school-page__section">
         <!-- <h2 v-text="agendaData.title" /> -->
@@ -87,7 +87,7 @@
 // TODO: Integrate old code
 import {
   header,
-//   mosaic,
+  mosaic,
 //   agenda,
 //   helpfulResources,
 } from "~/constants/summerSchool2022Content";
@@ -156,7 +156,7 @@ useHead({
 // TODO: Integrate old code
 // const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
-// const mosaicData = mosaic;
+const mosaicData = mosaic;
 // const agendaData = agenda;
 // const helpfulResourcesData = helpfulResources;
 
