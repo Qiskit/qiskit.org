@@ -268,18 +268,10 @@ export default class EventsPage extends QiskitPage {
         : commit('events/removeFilter', payload)
     }
 
+    tabs = ['upcoming', 'past', 'calendar']
+
     selectTab (selectedTab: number) {
-      switch (selectedTab) {
-        case 0:
-          this.$store.commit('events/setActiveSet', 'upcoming')
-          break
-        case 1:
-          this.$store.commit('events/setActiveSet', 'past')
-          break
-        case 2:
-          this.$store.commit('events/setActiveSet', 'calendar')
-          break
-      }
+      this.$store.commit('events/setActiveSet', this.tabs[selectedTab])
     }
 }
 </script>
