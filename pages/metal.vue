@@ -2,12 +2,12 @@
   <!-- TODO: review if class is needed or can be deleted -->
   <div class="metal-page">
     <!-- TODO: Integrate components -->
-    <!-- <TheDarkHeader /> -->
-    <!-- <IntroSection /> -->
-    <!-- <CapabilitiesSection /> -->
-    <!-- <FeaturesSection /> -->
-    <!-- <BuildingSection /> -->
-    <!-- <JoinUsSection /> -->
+    <MetalTheDarkHeader />
+    <MetalIntroSection />
+    <MetalCapabilitiesSection />
+    <MetalFeaturesSection />
+    <MetalBuildingSection />
+    <MetalJoinUsSection />
   </div>
 </template>
 

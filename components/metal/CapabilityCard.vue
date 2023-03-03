@@ -13,7 +13,7 @@
       </div>
     </div>
     <video
-      v-if="isVideo()"
+      v-if="isVideo"
       class="capability-card__visual-resource"
       loop
       autoplay

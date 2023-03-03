@@ -4,7 +4,7 @@
       <h2>Our vision</h2>
       <div class="capabilities-section__capabilities">
         <div class="capabilities-section__content">
-          <CapabilityCard
+          <MetalCapabilityCard
             v-for="item in capabilities"
             :id="item.title"
             :key="item.title"
@@ -24,6 +24,11 @@
                 isActiveImage(item, index),
             }"
           >
+          <div
+            v-for="(item) in capabilities"
+            :key="item.visualResource"
+            class="capabilities-section__visual-resource-container"
+          >
             <video
               v-if="isVideo(item.visualResource)"
               class="capabilities-section__visual-resource capabilities-section__visual-resource_type_video"
@@ -39,45 +44,43 @@
             <div
               v-else
               class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
-              :lazy-background="item.visualResource"
+              :style="{ 'background-image': `url(${item.visualResource})` }"
             />
           </div>
         </div>
+      </div>
       </div>
     </div>
   </section>
 </template>
 
 <!-- TODO: Refactor using Composition API once Mixins are refactored -->
-<script lang="ts">
-import { Component } from "vue-property-decorator";
+<script setup lang="ts">
 import { MetalCapability, METAL_CAPABILITIES } from "~/constants/metalContent";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 // TODO: Review how this work
 const { activeSection } = useScrollBetweenSections();
+const capabilities = METAL_CAPABILITIES;
 
-@Component
-export default class CapabilitiesSection {
-  capabilities = METAL_CAPABILITIES;
-
-  isActiveImage(item: MetalCapability, index: number): boolean {
-    return (
-      item.title === this.activeSection ||
-      (this.activeSection === "" && index === 0)
+const isActiveImage = (item: MetalCapability, index: number): boolean => {
+  console.log(activeSection.value, "activeSection")
+  return (
+    item.title === activeSection.value ||
+      (activeSection.value === "" && index === 0)
     );
-  }
+}
 
-  isVideo(url: string): boolean {
-    const extension = url.substring(url.length - 4);
-    return extension === ".mp4";
-  }
+const isVideo = (url: string): boolean => {
+  const extension = url.substring(url.length - 4);
+  return extension === ".mp4";
 }
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@import "~carbon-components/scss/globals/scss/typography";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+// @import "~carbon-components/scss/globals/scss/typography";
 
 .capabilities-section {
   // multiple backgrounds in one section
