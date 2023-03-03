@@ -115,8 +115,6 @@ import {
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/events'
-import FollowCalendar from '~/components/events/FollowCalendar.vue'
-import RequestEvent from '~/components/events/RequestEvent.vue'
 
 @Component({
   head () {
