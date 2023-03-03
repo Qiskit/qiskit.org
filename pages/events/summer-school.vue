@@ -1,9 +1,7 @@
 <template>
   <main class="summer-school-page">
     <!-- TODO: Integrate components -->
-    <UiAppPageHeaderWithCard
-      :card-title="headerData.cardSectionHeading"
-    >
+    <UiAppPageHeaderWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
         <br />
@@ -44,32 +42,42 @@
       />
 
       <section class="summer-school-page__section">
-        <!-- <h2 v-text="agendaData.title" /> -->
-        <!-- <p v-text="agendaData.subtitle" /> -->
-        <!-- <cv-tabs>
-          <cv-tab
+        <h2 v-text="agendaData.title" />
+        <p v-text="agendaData.subtitle" />
+        <bx-tabs trigger-content="Select an item" value="Week 1">
+          <bx-tab
             v-for="week in agendaData.weeks"
             :key="week.tabName"
-            :label="week.tabName"
+            :target="week.tabName"
+            :value="week.tabName"
           >
-            <AppDataTable
-              class="summer-school-page__section"
-              :columns="agendaColumnsDataTable"
-            >
-              <cv-data-table-row
+            {{ week.tabName }}
+          </bx-tab>
+        </bx-tabs>
+        <div class="summer-school-page__agenda">
+          <div
+            v-for="week in agendaData.weeks"
+            :id="week.tabName"
+            :key="week.tabName"
+            role="tabpanel"
+            :aria-labelledby="week.tabName"
+            hidden
+          >
+            <UiAppDataTable :columns="agendaColumnsDataTable">
+              <bx-table-row
                 v-for="(row, rowIndex) in week.tableData"
                 :key="`${rowIndex}`"
               >
-                <cv-data-table-cell
+                <bx-table-cell
                   v-for="({ styles, data }, elementIndex) in row"
                   :key="`${elementIndex}`"
                 >
                   <span :style="styles">{{ data }}</span>
-                </cv-data-table-cell>
-              </cv-data-table-row>
-            </AppDataTable>
-          </cv-tab>
-        </cv-tabs> -->
+                </bx-table-cell>
+              </bx-table-row>
+            </UiAppDataTable>
+          </div>
+        </div>
       </section>
 
       <!-- <FaqSection class="summer-school-page__section" /> -->
@@ -84,12 +92,13 @@
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/tabs/index.js";
 // TODO: Integrate old code
 import {
   header,
   mosaic,
-//   agenda,
-//   helpfulResources,
+  agenda,
+  //   helpfulResources,
 } from "~/constants/summerSchool2022Content";
 
 definePageMeta({
@@ -154,10 +163,10 @@ useHead({
 });
 
 // TODO: Integrate old code
-// const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
+const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
 const mosaicData = mosaic;
-// const agendaData = agenda;
+const agendaData = agenda;
 // const helpfulResourcesData = helpfulResources;
 
 // TODO: Refactor tracking
@@ -167,89 +176,34 @@ const mosaicData = mosaic;
 </script>
 
 <style lang="scss" scoped>
-// TODO: Review old CSS
-// .summer-school-page {
-//   display: flex;
-//   flex-direction: column;
+@use "~/assets/scss/carbon.scss";
 
-//   &__section {
-//     margin-top: carbon.$spacing-10;
-//     margin-bottom: carbon.$spacing-07;
+.summer-school-page {
+  display: flex;
+  flex-direction: column;
 
-//     @include carbon.breakpoint-down(lg) {
-//       margin-bottom: carbon.$spacing-05;
-//     }
-//   }
+  &__section {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-07;
 
-//   &__content {
-//     @include carbon.breakpoint-down(lg) {
-//       max-width: 100%;
-//     }
-//   }
-// }
-</style>
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+  }
 
-<style lang="scss" scoped>
-// TODO: Review old CSS
-// // overrides
-// .summer-school-page {
-//   ::v-deep {
-//     // TODO: Extract styles like "_checkbox" to be defined globally
-//     & a.bx--tabs--scrollable__nav-link {
-//       color: qiskit.$text-color-light;
-//       border-bottom-color: qiskit.$border-color;
+  &__agenda {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-07;
 
-//       &:focus,
-//       &:active {
-//         outline: none;
-//       }
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+  }
 
-//       &:not(.bx--tabs--scrollable__nav-item--disabled) {
-//         color: qiskit.$text-color-light;
-//       }
-//     }
-
-//     // TODO: Not sure if the order is important in these selectors.
-//     // So, disabling. Review the reule 'no-descending-specificity' here:
-//     // https://stylelint.io/user-guide/ignore-code
-//     // stylelint-disable no-descending-specificity
-//     & .bx--tabs--scrollable__nav-item {
-//       &:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link,
-//       &:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled):not(.bx--tabs--scrollable__nav-item--selected) .bx--tabs--scrollable__nav-link:focus,
-//       &:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled):not(.bx--tabs--scrollable__nav-item--selected) a.bx--tabs--scrollable__nav-link:active,
-//       &:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link, .bx--tabs--scrollable__nav-item--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link:focus {
-//         color: qiskit.$text-color-light;
-//       }
-
-//       &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-//         border-bottom-color: qiskit.$border-color-secondary;
-//       }
-//     }
-
-//     & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--disabled) {
-//         box-shadow: none;
-//       }
-
-//       & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled),
-//       & .bx--tabs--scrollable__nav-item,
-//       & .bx--tabs-trigger {
-//         background-color: qiskit.$background-color-white;
-
-//         svg {
-//           fill: $gray-100;
-//         }
-//       }
-
-//       & .bx--tabs--scrollable__nav-link,
-//       & .bx--tabs-trigger-text {
-//         color: qiskit.$text-color;
-//     }
-//     // stylelint-enable no-descending-specificity
-
-//     .app-data-table {
-//       margin-top: carbon.$spacing-07;
-//       padding: 0;
-//     }
-//   }
-// }
+  &__content {
+    @include carbon.breakpoint-down(lg) {
+      max-width: 100%;
+    }
+  }
+}
 </style>
