@@ -291,27 +291,9 @@ export default class EventsPage extends QiskitPage {
     }
   }
 
-  &__section {
-    margin-top: $spacing-10;
-    margin-bottom: $spacing-10;
-
-    &__description {
-      margin-top: $spacing-06;
-      margin-bottom: $spacing-07;
-      max-width: 20rem;
-
-      @include mq($from: large) {
-        max-width: 24rem;
-      }
-    }
-  }
-
   &__tab {
     padding-top: $spacing-06;
   }
 
-  &__instructions {
-    padding-left: $spacing-06;
-  }
 }
 </style>
