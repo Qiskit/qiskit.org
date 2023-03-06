@@ -1,7 +1,7 @@
 <template>
-  <div class="event-page__section">
+  <div class="request-event__section">
     <h3>Start an event</h3>
-    <p class="event-page__section__description">
+    <p class="request-event__section__description">
       We can help you bring Qiskit experts to your campus for guest
       lectures, hackathons, and other events.
     </p>
@@ -15,3 +15,22 @@ export default class RequestEvent extends Vue {
     eventRequestLink = EVENT_REQUEST_LINK
 }
 </script>
+<style lang="scss">
+.request-event{
+  &__section {
+    margin-top: $spacing-10;
+    margin-bottom: $spacing-10;
+
+    &__description {
+      margin-top: $spacing-06;
+      margin-bottom: $spacing-07;
+      max-width: 20rem;
+
+      @include mq($from: large) {
+        max-width: 24rem;
+      }
+    }
+  }
+}
+
+</style>
