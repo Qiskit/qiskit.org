@@ -19,16 +19,16 @@
       autoplay
       muted
       playsinline
+      v-lazy-load
     >
-      <source :src="visualResource" type="video/mp4" />
-      <source :src="visualResource" type="video/ogg" />
+      <source :data-src="visualResource" type="video/mp4" />
+      <source :data-src="visualResource" type="video/ogg" />
       Your browser does not support video.
     </video>
     <div
       v-else
       class="capability-card__visual-resource"
-      :lazy-background="visualResource"
-    />
+      :style="{ 'background-image': `url(${visualResource})` }" v-lazy-load />
   </article>
 </template>
 

@@ -1,7 +1,9 @@
 <template>
-  <section class="capabilities-section">
+  <section id="capabilities" class="capabilities-section">
     <div class="capabilities-section__container">
-      <h2>Our vision</h2>
+      <h2>
+        Our vision
+      </h2>
       <div class="capabilities-section__capabilities">
         <div class="capabilities-section__content">
           <MetalCapabilityCard
@@ -20,35 +22,35 @@
             :key="item.visualResource"
             class="capabilities-section__visual-resource-container"
             :class="{
-              'capabilities-section__visual-resource-container_active':
-                isActiveImage(item, index),
+              'capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
             }"
-          >
-          <div
-            v-for="(item) in capabilities"
-            :key="item.visualResource"
-            class="capabilities-section__visual-resource-container"
           >
             <video
               v-if="isVideo(item.visualResource)"
-              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_video"
+              class="
+                capabilities-section__visual-resource
+                capabilities-section__visual-resource_type_video"
               loop
               autoplay
               muted
               playsinline
+              v-lazy-load
             >
-              <source :src="item.visualResource" type="video/mp4" />
-              <source :src="item.visualResource" type="video/ogg" />
+              <source :data-src="item.visualResource" type="video/mp4">
+              <source :data-src="item.visualResource" type="video/ogg">
               Your browser does not support video.
             </video>
             <div
               v-else
-              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
-              :style="{ 'background-image': `url(${item.visualResource})` }"
+              class="
+                capabilities-section__visual-resource
+                capabilities-section__visual-resource_type_image
+              "
+              :style="{ 'background-image': `url(${item.visualResource})` }" 
+              v-lazy-load
             />
           </div>
         </div>
-      </div>
       </div>
     </div>
   </section>
@@ -64,7 +66,7 @@ const { activeSection } = useScrollBetweenSections();
 const capabilities = METAL_CAPABILITIES;
 
 const isActiveImage = (item: MetalCapability, index: number): boolean => {
-  console.log(activeSection.value, "activeSection")
+  console.log(item.title === activeSection.value, "TEST")
   return (
     item.title === activeSection.value ||
       (activeSection.value === "" && index === 0)
