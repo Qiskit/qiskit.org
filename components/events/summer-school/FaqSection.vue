@@ -275,7 +275,7 @@ export default class FaqSection extends Vue {
   }
 
   joinqiskitslack: TrackedLink = {
-    url: 'https://ibm.co/joinqiskitslack',
+    url: 'https://qisk.it/join-slack',
     segment: { cta: 'qiskit-slack-join', location: 'faq' }
   }
 
