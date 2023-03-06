@@ -1,6 +1,5 @@
 <template>
   <main class="summer-school-page">
-    <!-- TODO: Integrate components -->
     <UiAppPageHeaderWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
@@ -93,7 +92,6 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/tabs/index.js";
-// TODO: Integrate old code
 import {
   header,
   mosaic,
@@ -162,7 +160,6 @@ useHead({
   ],
 });
 
-// TODO: Integrate old code
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
 const mosaicData = mosaic;
