@@ -82,11 +82,11 @@
 
       <EventsSummerSchoolFaq class="summer-school-page__section" />
 
-      <!-- <AppHelpfulResourcesSection
+      <UiAppHelpfulResourcesSection
         class="summer-school-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"
-      /> -->
+      />
     </div>
   </main>
 </template>
@@ -98,7 +98,7 @@ import {
   header,
   mosaic,
   agenda,
-  //   helpfulResources,
+  helpfulResources,
 } from "~/constants/summerSchool2022Content";
 
 definePageMeta({
@@ -167,7 +167,7 @@ const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
 const mosaicData = mosaic;
 const agendaData = agenda;
-// const helpfulResourcesData = helpfulResources;
+const helpfulResourcesData = helpfulResources;
 
 // TODO: Refactor tracking
 // export default class SummerSchoolPage {

@@ -1,4 +1,4 @@
-import { GeneralLink } from '~/constants/appLinks'
+import { GeneralLink } from "~/constants/appLinks";
 
 type MosaicElement = {
   position: string;
@@ -8,6 +8,10 @@ type MosaicElement = {
   cta?: GeneralLink;
 };
 
-export {
-  MosaicElement
+type DescriptionCard = {
+  title: string;
+  description: string;
+  cta: GeneralLink;
 };
+
+export { MosaicElement, DescriptionCard };
