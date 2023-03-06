@@ -80,7 +80,7 @@
         </div>
       </section>
 
-      <!-- <FaqSection class="summer-school-page__section" /> -->
+      <EventsSummerSchoolFaq class="summer-school-page__section" />
 
       <!-- <AppHelpfulResourcesSection
         class="summer-school-page__section"
