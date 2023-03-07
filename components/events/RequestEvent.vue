@@ -18,6 +18,7 @@ export default class RequestEvent extends Vue {
     eventRequestLink = EVENT_REQUEST_LINK
 }
 </script>
+
 <style lang="scss">
 .request-event{
   &__section {
