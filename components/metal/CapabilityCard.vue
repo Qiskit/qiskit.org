@@ -14,12 +14,12 @@
     </div>
     <video
       v-if="isVideo"
+      v-lazy-load
       class="capability-card__visual-resource"
       loop
       autoplay
       muted
       playsinline
-      v-lazy-load
     >
       <source :data-src="visualResource" type="video/mp4" />
       <source :data-src="visualResource" type="video/ogg" />
@@ -27,8 +27,10 @@
     </video>
     <div
       v-else
+      v-lazy-load
       class="capability-card__visual-resource"
-      :style="{ 'background-image': `url(${visualResource})` }" v-lazy-load />
+      :style="{ 'background-image': `url(${visualResource})` }"
+    />
   </article>
 </template>
 

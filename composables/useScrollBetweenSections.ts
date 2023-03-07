@@ -4,12 +4,11 @@ import { onBeforeRouteUpdate } from "vue-router";
 
 export function useScrollBetweenSections() {
   const activeSection = ref("");
-  const _observer = ref<IntersectionObserver | null>(null)
-  const root = ref<HTMLElement | null>(null)
-
+  const _observer = ref<IntersectionObserver | null>(null);
+  const root = ref<HTMLElement | null>(null);
 
   onMounted(() => {
-    root.value = document.getElementById('capabilities')
+    root.value = document.getElementById("capabilities");
 
     const threshold = [...Array(25).keys()].map((x) => (4 * x) / 100);
     const windowTriggerMargins = "-16px 0px -80% 0px";
@@ -20,7 +19,6 @@ export function useScrollBetweenSections() {
     });
     updateObserved();
   });
-  
 
   onUpdated(() => {
     nextTick(() => updateObserved());

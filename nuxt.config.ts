@@ -9,9 +9,12 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    ['nuxt3-lazy-load', {
-      videos: true,
-      directiveOnly: true
-    }]
-  ]
+    [
+      "nuxt3-lazy-load",
+      {
+        videos: true,
+        directiveOnly: true,
+      },
+    ],
+  ],
 });

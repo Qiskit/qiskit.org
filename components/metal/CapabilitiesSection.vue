@@ -1,9 +1,7 @@
 <template>
   <section id="capabilities" class="capabilities-section">
     <div class="capabilities-section__container">
-      <h2>
-        Our vision
-      </h2>
+      <h2>Our vision</h2>
       <div class="capabilities-section__capabilities">
         <div class="capabilities-section__content">
           <MetalCapabilityCard
@@ -22,19 +20,18 @@
             :key="item.visualResource"
             class="capabilities-section__visual-resource-container"
             :class="{
-              'capabilities-section__visual-resource-container_active' : isActiveImage(item, index)
+              'capabilities-section__visual-resource-container_active':
+              isActiveImage(item, index),
             }"
           >
             <video
               v-if="isVideo(item.visualResource)"
-              class="
-                capabilities-section__visual-resource
-                capabilities-section__visual-resource_type_video"
+              v-lazy-load
+              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_video"
               loop
               autoplay
               muted
               playsinline
-              v-lazy-load
             >
               <source :data-src="item.visualResource" type="video/mp4">
               <source :data-src="item.visualResource" type="video/ogg">
@@ -42,12 +39,9 @@
             </video>
             <div
               v-else
-              class="
-                capabilities-section__visual-resource
-                capabilities-section__visual-resource_type_image
-              "
-              :style="{ 'background-image': `url(${item.visualResource})` }" 
               v-lazy-load
+              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
+              :style="{ 'background-image': `url(${item.visualResource})` }" 
             />
           </div>
         </div>
@@ -66,11 +60,10 @@ const { activeSection } = useScrollBetweenSections();
 const capabilities = METAL_CAPABILITIES;
 
 const isActiveImage = (item: MetalCapability, index: number): boolean => {
-  console.log(item.title === activeSection.value, "TEST")
   return (
-    item.title === activeSection.value ||
-      (activeSection.value === "" && index === 0)
-    );
+  item.title === activeSection.value ||
+    (activeSection.value === "" && index === 0)
+  );
 }
 
 const isVideo = (url: string): boolean => {

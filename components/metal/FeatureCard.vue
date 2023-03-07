@@ -4,7 +4,11 @@
       {{ title }}
     </h3>
     <div class="feature-card__content">
-      <div class="feature-card__image" :style="{ 'background-image': `url(${image})` }" v-lazy-load />
+      <div
+        v-lazy-load
+        class="feature-card__image"
+        :style="{ 'background-image': `url(${image})` }"
+      />
       <!-- TODO: HTML content should not be in strings but in components
       but lacking of a better solution given time constraints. -->
       <!-- eslint-disable vue/no-v-html -->
