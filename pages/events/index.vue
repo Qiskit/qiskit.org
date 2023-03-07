@@ -202,7 +202,7 @@ export default class EventsPage extends QiskitPage {
 
   selectTab (selectedTab: number) {
     const tabs = ['upcoming', 'past', 'calendar']
-    this.$store.commit('events/setActiveSet', this.tabs[selectedTab])
+    this.$store.commit('events/setActiveSet', tabs[selectedTab])
   }
 }
 </script>
