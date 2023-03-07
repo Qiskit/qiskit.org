@@ -165,11 +165,6 @@ const headerData = header;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
-
-// TODO: Refactor tracking
-// export default class SummerSchoolPage {
-//   routeName = 'summer-school'
-// }
 </script>
 
 <style lang="scss" scoped>
