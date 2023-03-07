@@ -8,6 +8,7 @@
     <AppCta v-bind="eventRequestLink" />
   </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
