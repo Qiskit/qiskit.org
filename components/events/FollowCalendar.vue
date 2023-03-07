@@ -72,6 +72,7 @@ export default class FollowCalendar extends Vue {
     }
 }
 </script>
+
 <style lang="scss">
 .follow-calendar {
   &__tabs {
