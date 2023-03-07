@@ -46,7 +46,6 @@ import { GeneralLink } from '~/constants/appLinks'
     OutlookCalendarInstructions
   }
 })
-
 export default class FollowCalendar extends Vue {
     calendarsInstructions = [
       {
