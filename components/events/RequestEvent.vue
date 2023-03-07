@@ -12,6 +12,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { EVENT_REQUEST_LINK } from '~/constants/appLinks'
+
+@Component
 export default class RequestEvent extends Vue {
     eventRequestLink = EVENT_REQUEST_LINK
 }
