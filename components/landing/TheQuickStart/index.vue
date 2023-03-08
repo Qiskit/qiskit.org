@@ -11,7 +11,7 @@
         <p class="quick-start__introduction__copy">
           Test some of the available providers and algorithms.
         </p>
-        <ProvidersList />
+        <ProvidersList :providers-list="providersData" />
       </div>
       <Algorithms class="bx--col-md-8 bx--col-lg-8" />
     </div>
@@ -21,9 +21,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import rawHardware from '~/content/providers/hardware.json'
+import rawSimulators from '~/content/providers/simulators.json'
+import rawMultiplatforms from '~/content/providers/multiplatforms.json'
 
 @Component
-export default class TheQuickStart extends Vue {}
+export default class TheQuickStart extends Vue {
+  providersData = [
+    ...rawHardware,
+    ...rawSimulators,
+    ...rawMultiplatforms
+  ].map(({ title, websiteCta: { url } }) => ({ title, link: url }));
+}
 </script>
 
 <style lang="scss" scoped>

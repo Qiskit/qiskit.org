@@ -193,10 +193,108 @@ const CONTENT_SECTIONS: ProvidersSection[] = [
   SIMULATORS_COLLECTION
 ]
 
+const AlgorithmsContent = [
+  {
+    title: 'Bell State',
+    codeSample: [
+      'import qiskit',
+      '&nbsp;',
+      '# Oiskit quantum circuits libraries',
+      'quantum_circuit = qiskit.circuit.library.QuantumVolume',
+      'quantum_circuit.measure_all()',
+      'quantum_circuit.draw()',
+      '&nbsp;',
+      '# prepare your circuit to run',
+      'from qiskit import IBMQ',
+      '&nbsp;',
+      '# Get the API token in',
+      '# https://quantum-computing.ibm.com/',
+      'IBMQ.save_account("YOUR TOKEN")',
+      '&nbsp;',
+      'provider = IBM.load_account()',
+      'backend = provider.get_backend("ibmq_quito")',
+      '&nbsp;',
+      'optimized_circuit = qiskit.transpile(quantum_circuit, backend)',
+      'optimized_circuit.draw()',
+      '&nbsp;',
+      '# run in real hardware',
+      'job = backend.run(optimized_circuit)',
+      'retrieved_job = backend.retrieve_job(job.job_id())',
+      'result = retrieved_job.result()',
+      'print result.get_counts()'
+    ]
+  },
+  {
+    title: 'Quantum Volume',
+    codeSample: [
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line'
+    ]
+  },
+  {
+    title: 'VQE',
+    codeSample: [
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line'
+    ]
+  },
+  {
+    title: 'QAOA',
+    codeSample: [
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line'
+    ]
+  },
+  {
+    title: 'QSVM',
+    codeSample: [
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      'lorem ipsum code line',
+      '&nbsp;',
+      '# comment ipsum',
+      'lorem ipsum code line',
+      'lorem ipsum code line'
+    ]
+  }
+]
+
 export {
   TableOfContentEntry,
   ProvidersSection,
   ProvidersSubSection,
   TABLE_OF_CONTENTS,
-  CONTENT_SECTIONS
+  CONTENT_SECTIONS,
+  AlgorithmsContent
 }

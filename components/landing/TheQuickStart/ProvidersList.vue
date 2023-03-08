@@ -3,7 +3,7 @@
     <h4>Providers</h4>
     <ul class="providers__list">
       <li v-for="item in providersList" :key="item.id">
-        <a class="providers__list__item" href="" target="_blank">
+        <a class="providers__list__item" :href="item.link" target="_blank">
           {{ item.title }}
           <span class="providers__list__cta">
             <span class="providers__list__cta-label">Learn more</span>
@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
 type ProviderLink = {
@@ -30,78 +30,14 @@ type ProviderLink = {
   link: string
 }
 
-type ProvidersList = Array<ProviderLink>
-
 @Component
 export default class StartLocally extends Vue {
+  @Prop(Array) providersList!: ProviderLink[]
+
   providersPage: GeneralLink = {
     url: '/providers',
     label: 'See all providers'
   }
-
-  // TODO: replace w/ proper provider information and figure out how we'll handle this data
-  providersList: ProvidersList = [
-    {
-      title: 'Provider 1',
-      id: '1',
-      link: ''
-    },
-    {
-      title: 'Provider 2',
-      id: '2',
-      link: ''
-    },
-    {
-      title: 'Provider 3',
-      id: '3',
-      link: ''
-    },
-    {
-      title: 'Provider 4',
-      id: '4',
-      link: ''
-    },
-    {
-      title: 'Provider 5',
-      id: '5',
-      link: ''
-    },
-    {
-      title: 'Provider 6',
-      id: '6',
-      link: ''
-    },
-    {
-      title: 'Provider 7',
-      id: '7',
-      link: ''
-    },
-    {
-      title: 'Provider 8',
-      id: '8',
-      link: ''
-    },
-    {
-      title: 'Provider 9',
-      id: '9',
-      link: ''
-    },
-    {
-      title: 'Provider 10',
-      id: '10',
-      link: ''
-    },
-    {
-      title: 'Provider 11',
-      id: '11',
-      link: ''
-    },
-    {
-      title: 'Provider 12',
-      id: '12',
-      link: ''
-    }
-  ]
 }
 </script>
 
