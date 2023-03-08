@@ -22,14 +22,15 @@
           </cv-tabs>
         </client-only>
       </div>
-      <div v-if="isCalendar" class="event-page__calendar">
+      <div v-if="isCalendar">
         <iframe
-          class="airtable-embed"
+          class="event-page__calendar"
           src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
           width="100%"
           height="560"
-          allowtransparency="true"
         />
+        <FollowCalendar />
+        <RequestEvent />
       </div>
       <AppFiltersResultsLayout v-else>
         <template slot="filters-on-m-l-screen">
@@ -96,43 +97,8 @@
           </div>
         </template>
         <template slot="extra-info">
-          <div id="follow-our-event-calendar" class="event-page__section">
-            <h3>Follow our event calendar</h3>
-            <p class="event-page__section__description">
-              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-              Stay up to date with all of our scheduled events by following our calendar. You can view the calendar by visiting <AppLink v-bind="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</AppLink>, or subscribe to it by adding to the calendar app of your choice.
-            </p>
-            <div class="event-page__tabs">
-              <cv-tabs aria-label="Calendar applications">
-                <cv-tab
-                  v-for="{ name, instructions } in calendarsInstructions"
-                  :id="`tab-${name}`"
-                  :key="name"
-                  :label="name"
-                  class="event-page__tab"
-                >
-                  <p class="event-page__sync">
-                    Start by copying the calendar subscription link
-                    <cv-code-snippet
-                      kind="inline"
-                      feedback-aria-label="Copy calendar sync url"
-                    >
-                      <span>{{ qiskitCalendarSyncLink }}</span>
-                    </cv-code-snippet>
-                  </p>
-                  <component :is="instructions" class="event-page__instructions" />
-                </cv-tab>
-              </cv-tabs>
-            </div>
-          </div>
-          <div class="event-page__section">
-            <h3>Start an event</h3>
-            <p class="event-page__section__description">
-              We can help you bring Qiskit experts to your campus for guest
-              lectures, hackathons, and other events.
-            </p>
-            <AppCta v-bind="eventRequestLink" />
-          </div>
+          <FollowCalendar id="follow-our-event-calendar" />
+          <RequestEvent />
         </template>
       </AppFiltersResultsLayout>
     </div>
@@ -142,9 +108,6 @@
 <script lang="ts">
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
-import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
-import OutlookCalendarInstructions from '~/components/events/calendars/OutlookInstructions.vue'
-import AppleCalendarInstructions from '~/components/events/calendars/AppleInstructions.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 
 import {
@@ -152,7 +115,6 @@ import {
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS
 } from '~/store/events'
-import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
 
 @Component({
   head () {
@@ -169,11 +131,6 @@ import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
       'activeSet'
     ])
   },
-  components: {
-    AppleCalendarInstructions,
-    GoogleCalendarInstructions,
-    OutlookCalendarInstructions
-  },
 
   async fetch ({ store }) {
     const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
@@ -187,7 +144,6 @@ import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
 })
 export default class EventsPage extends QiskitPage {
   routeName: string = 'events'
-  eventRequestLink = EVENT_REQUEST_LINK
   emptyCard = {
     title: 'No events found',
     description: 'Try using wider search criteria, or consider starting your own event.',
@@ -207,80 +163,47 @@ export default class EventsPage extends QiskitPage {
     }
   ]
 
-  calendarsInstructions = [
-    {
-      name: 'Google',
-      instructions: GoogleCalendarInstructions
-    },
-    {
-      name: 'Outlook',
-      instructions: OutlookCalendarInstructions
-    },
-    {
-      name: 'Apple',
-      instructions: AppleCalendarInstructions
-    }
-  ]
+  get noEvents (): boolean {
+    return (this as any).filteredEvents.length === 0
+  }
 
-    qiskitCalendarSyncLink = 'https://qisk.it/calendar-sync'
-    qiskitCalendarLink: GeneralLink = {
-      url: 'https://qisk.it/calendar',
-      label: 'https://qisk.it/calendar',
-      segment: {
-        cta: 'qiskit-calendar', location: 'events-page'
-      }
-    }
+  get isCalendar (): boolean {
+    return (this as any).activeSet === 'calendar'
+  }
 
-    get noEvents (): boolean {
-      return (this as any).filteredEvents.length === 0
-    }
+  getCheckedFilters (filter: string) {
+    return (this as any)[filter]
+  }
 
-    get isCalendar (): boolean {
-      return (this as any).activeSet === 'calendar'
-    }
+  updateWholeFilter (filter: string, filterValues: string[]): void {
+    const { commit } = this.$store
+    const payload = { filter, filterValues }
 
-    getCheckedFilters (filter: string) {
-      return (this as any)[filter]
-    }
+    commit('events/updateFilterSet', payload)
+  }
 
-    updateWholeFilter (filter: string, filterValues: string[]): void {
-      const { commit } = this.$store
-      const payload = { filter, filterValues }
+  isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
+    const typeFilters = (this as any).typeFilters
+    const regionFilters = (this as any).regionFilters
 
-      commit('events/updateFilterSet', payload)
-    }
+    return filter === 'regionFilters'
+      ? regionFilters.includes(filterValue)
+      : typeFilters.includes(filterValue)
+  }
 
-    isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
-      const typeFilters = (this as any).typeFilters
-      const regionFilters = (this as any).regionFilters
+  updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
+    const payload = { filter, filterValue }
+    const { commit } = this.$store
 
-      return filter === 'regionFilters'
-        ? regionFilters.includes(filterValue)
-        : typeFilters.includes(filterValue)
-    }
+    isSelected
+      ? commit('events/addFilter', payload)
+      : commit('events/removeFilter', payload)
+  }
 
-    updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
-      const payload = { filter, filterValue }
-      const { commit } = this.$store
-
-      isSelected
-        ? commit('events/addFilter', payload)
-        : commit('events/removeFilter', payload)
-    }
-
-    selectTab (selectedTab: number) {
-      switch (selectedTab) {
-        case 0:
-          this.$store.commit('events/setActiveSet', 'upcoming')
-          break
-        case 1:
-          this.$store.commit('events/setActiveSet', 'past')
-          break
-        case 2:
-          this.$store.commit('events/setActiveSet', 'calendar')
-          break
-      }
-    }
+  selectTab (selectedTab: number) {
+    const tabs = ['upcoming', 'past', 'calendar']
+    this.$store.commit('events/setActiveSet', tabs[selectedTab])
+  }
 }
 </script>
 
@@ -360,7 +283,6 @@ export default class EventsPage extends QiskitPage {
   }
 
   &__calendar{
-    margin-bottom: $spacing-10;
     border: 1px solid $border-color ;
 
     @include mq($until: medium) {
@@ -368,28 +290,9 @@ export default class EventsPage extends QiskitPage {
     }
   }
 
-  &__section {
-    margin-top: $spacing-10;
-    margin-bottom: $spacing-10;
-
-    &__description {
-      margin-top: $spacing-06;
-      margin-bottom: $spacing-07;
-      max-width: 20rem;
-
-      @include mq($from: large) {
-        max-width: 24rem;
-      }
-    }
-
-  }
-
   &__tab {
     padding-top: $spacing-06;
   }
 
-  &__instructions {
-    padding-left: $spacing-06;
-  }
 }
 </style>
