@@ -1,19 +1,19 @@
 <template>
-  <section class="providers">
+  <section class="providers-list">
     <h4>Providers</h4>
-    <ul class="providers__list">
+    <ul class="providers-list__list">
       <li v-for="item in providersList" :key="item.id">
-        <a class="providers__list__item" :href="item.link" target="_blank">
+        <a class="providers-list__list__item" :href="item.link" target="_blank">
           {{ item.title }}
-          <span class="providers__list__cta">
-            <span class="providers__list__cta-label">Learn more</span>
-            <Launch16 class="providers__list__cta-icon" />
+          <span class="providers-list__list__cta">
+            <span class="providers-list__list__cta-label">Learn more</span>
+            <Launch16 class="providers-list__list__cta-icon" />
           </span>
         </a>
       </li>
     </ul>
     <AppCta
-      class="providers__btn"
+      class="providers-list__btn"
       v-bind="providersPage"
     />
   </section>
@@ -44,7 +44,7 @@ export default class StartLocally extends Vue {
 <style lang="scss" scoped>
 @import '~carbon-components/scss/globals/scss/typography';
 
-.providers {
+.providers-list {
   padding-top: $spacing-05;
 
   &__list {
@@ -76,7 +76,7 @@ export default class StartLocally extends Vue {
         cursor: pointer;
         border-left: 2px solid $border-color-secondary;
 
-        .providers__list__cta {
+        .providers-list__list__cta {
           opacity: 1;
         }
       }
