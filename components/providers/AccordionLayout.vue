@@ -4,34 +4,17 @@
       {{ description }}
     </p>
     <img v-if="image" :src="image" class="accordion-layout__image">
-    <div class="accordion-layout__code-snippet">
-      <code class="accordion-layout__code-cell">
-        <pre class="accordion-layout__code-cell__line">{{ installation }}</pre>
-      </code>
-      <cv-button
-        title="Copy"
-        class="accordion-layout__copy-button"
-        @click="[copyToClipboard($event), $trackClickEvent(`Copy ${title} install code`, 'providers')]"
-      >
-        Copy
-      </cv-button>
-    </div>
+    <CodeSnippet 
+      :code-lines="[ installation ]"
+      :copy-button-label="title"
+      :copy-button-location="'providers'"
+    />
     <div class="accordion-layout__code-block">
-      <code class="accordion-layout__code-cell">
-        <template v-for="(line, index) in helloWorldExample">
-          <!-- eslint-disable vue/no-v-html -->
-          <pre v-if="line.startsWith('#')" :key="line" class="accordion-layout__code-cell__comment" v-html="line" />
-          <pre v-else :key="index" class="accordion-layout__code-cell__line" v-html="line" />
-          <!-- eslint-enable -->
-        </template>
-      </code>
-      <cv-button
-        title="Copy"
-        class="accordion-layout__copy-button"
-        @click="[copyToClipboard($event), $trackClickEvent(`Copy ${title} helloWorldExample`, 'providers')]"
-      >
-        {{ copyCodeCta }}
-      </cv-button>
+      <CodeSnippet 
+        :code-lines="codeExample"
+        :copy-button-label="title"
+        :copy-button-location="'providers'"
+      />
     </div>
     <div class="accordion-layout__cta-group">
       <AppCta
@@ -47,7 +30,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { NavLink } from '~/constants/menuLinks'
+import { GeneralLink } from '~/constants/appLinks'
+import CodeSnippet from '../ui/CodeSnippet.vue'
 
 interface AccordionLayoutProps {
   title: string
@@ -66,7 +50,7 @@ interface AccordionLayoutProps {
     label: string | null
     url: string | null
   }
-  helloWorldExample: string[]
+  codeExample: string[]
 }
 
 export { AccordionLayoutProps }
@@ -77,30 +61,13 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   @Prop(String) description!: string
   @Prop(String) image!: string
   @Prop(String) installation!: string
-  @Prop(Object) websiteCta!: NavLink
-  @Prop(Object) docsCta!: NavLink
-  @Prop(Object) sourceCta!: NavLink
-  @Prop(Array) helloWorldExample!: string[]
+  @Prop(Object) websiteCta!: GeneralLink
+  @Prop(Object) docsCta!: GeneralLink
+  @Prop(Object) sourceCta!: GeneralLink
+  @Prop(Array) codeExample!: string[]
 
   get validCtas () {
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
-  }
-
-  copyCodeCta = 'Copy'
-
-  copyToClipboard (e: { target: any }): void {
-    const buttonElement = e.target
-    const codeBlock = buttonElement.parentNode
-    const codeSnippet = codeBlock.querySelector('.accordion-layout__code-cell')
-
-    if (codeSnippet !== null) {
-      navigator.clipboard.writeText(codeSnippet.innerText)
-      buttonElement.innerText = 'Copied!'
-      setTimeout(() => {
-        buttonElement.blur()
-        buttonElement.innerText = this.copyCodeCta
-      }, 3500)
-    }
   }
 }
 </script>
@@ -123,12 +90,6 @@ $cta-max-width: 4rem;
     margin-bottom: $spacing-06;
   }
 
-  &__code-snippet {
-    position: relative;
-    margin-bottom: $spacing-05;
-    max-width: initial;
-  }
-
   &__cta-group {
     display: flex;
 
@@ -143,58 +104,6 @@ $cta-max-width: 4rem;
       @include mq($until: medium) {
         max-width: initial;
       }
-    }
-  }
-
-  &__code-block {
-    position: relative;
-    @include mq($until: medium) {
-      margin-bottom: $spacing-05;
-    }
-  }
-
-  &__code-cell {
-    display: block;
-    background-color: $background-color-white;
-    color: $text-color;
-    padding: $spacing-05 $spacing-12 $spacing-05 $spacing-05;
-
-    &__comment {
-      color: $text-active-color;
-      word-break: break-word;
-      white-space: normal;
-    }
-
-    &__line {
-      word-break: break-word;
-      white-space: normal;
-    }
-  }
-
-  &__copy-button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    max-width: $cta-max-width;
-    background-size: 200% 100%;
-    background-position-x: 100%;
-    background-image: linear-gradient(90deg, $button-background-color-light 0%, $button-background-color-light 50%, $background-color-secondary 50%, $background-color-secondary 100%);
-    transition: background-position-x 0.3s ease-out;
-
-    &:hover,
-    &:active {
-      background-position-x: 0;
-    }
-
-    &:focus {
-      border-color: $button-background-color-light;
-      box-shadow: inset 0 0 0 1px $button-background-color-light, inset 0 0 0 2px $white-0;
-    }
-
-    &__label {
-      display: block;
-      width: 100%;
     }
   }
 }

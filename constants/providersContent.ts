@@ -2,6 +2,7 @@ import { NavLink } from '~/constants/menuLinks'
 import rawHardwareData from '~/content/providers/hardware.json'
 import rawSimulatorsData from '~/content/providers/simulators.json'
 import rawMultiplatformsData from '~/content/providers/multiplatforms.json'
+import { GeneralLink } from './appLinks'
 
 type TableOfContentEntry = {
   /** The visible name of the link */
@@ -17,18 +18,9 @@ type ProviderObject = {
   image: string | null
   description: string
   installation: string
-  websiteCta: {
-    label: string | null
-    url: string | null
-  }
-  docsCta: {
-    label: string | null
-    url: string | null
-  }
-  sourceCta: {
-    label: string | null
-    url: string | null
-  }
+  websiteCta?: GeneralLink
+  docsCta?: GeneralLink
+  sourceCta?: GeneralLink
   helloWorldExample: string[]
 }
 
@@ -52,32 +44,6 @@ interface ProvidersSection {
   image?: string
 }
 
-const convertJsonToObjectData = (jsonData: ProviderObject[]) => {
-  const parsedData = jsonData.map((jsonObject) => {
-    return {
-      title: jsonObject.title,
-      image: jsonObject.image,
-      description: jsonObject.description,
-      installation: jsonObject.installation,
-      websiteCta: {
-        label: jsonObject.websiteCta.label,
-        url: jsonObject.websiteCta.url
-      },
-      docsCta: {
-        label: jsonObject.docsCta.label,
-        url: jsonObject.docsCta.url
-      },
-      sourceCta: {
-        label: jsonObject.sourceCta.label,
-        url: jsonObject.sourceCta.url
-      },
-      helloWorldExample: jsonObject.helloWorldExample
-    }
-  })
-
-  return parsedData
-}
-
 const runtimes: string = 'runtimes'
 
 const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
@@ -90,7 +56,7 @@ const QUANTUM_RUNTIMES: ProvidersSection = {
   id: runtimes,
   title: 'Quantum Runtimes',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
-  subSections: convertJsonToObjectData(rawHardwareData)
+  subSections: rawHardwareData as ProviderObject[]
 }
 
 const simulatorsId: string = 'simulators'
@@ -105,7 +71,7 @@ const SIMULATORS_COLLECTION: ProvidersSection = {
   id: simulatorsId,
   title: 'Simulators',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
-  subSections: convertJsonToObjectData(rawSimulatorsData)
+  subSections: rawSimulatorsData as ProviderObject[]
 }
 
 const multiplatformsId: string = 'multiplatforms'
@@ -120,7 +86,7 @@ const MULTIPLATFORMS_COLLECTION: ProvidersSection = {
   id: multiplatformsId,
   title: 'Multiplatforms',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
-  subSections: convertJsonToObjectData(rawMultiplatformsData)
+  subSections: rawMultiplatformsData as ProviderObject[]
 }
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [

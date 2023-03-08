@@ -16,7 +16,7 @@
           :website-cta="tab.websiteCta"
           :docs-cta="tab.docsCta"
           :source-cta="tab.sourceCta"
-          :hello-world-example="tab.helloWorldExample"
+          :code-example="tab.helloWorldExample"
         />
       </bx-accordion-item>
     </div>
