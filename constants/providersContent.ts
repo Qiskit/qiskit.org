@@ -50,24 +50,6 @@ const REAL_HARDWARE: ProvidersSection = {
   id: realHardware,
   title: 'Run With Real Hardware',
   description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
-  // linkset: [
-  //   {
-  //     label: 'See machine learning docs',
-  //     url: 'https://qiskit.org/documentation/machine-learning/'
-  //   },
-  //   {
-  //     label: 'See nature docs',
-  //     url: 'https://qiskit.org/documentation/nature/'
-  //   },
-  //   {
-  //     label: 'See finance docs',
-  //     url: 'https://qiskit.org/documentation/finance/'
-  //   },
-  //   {
-  //     label: 'See optimization docs',
-  //     url: 'https://qiskit.org/documentation/optimization/'
-  //   }
-  // ],
   subSections: [
     {
       title: 'IBM Quantum Qiskit Runtime',
@@ -199,7 +181,7 @@ const AlgorithmsContent = [
     codeSample: [
       'import qiskit',
       '&nbsp;',
-      '# Oiskit quantum circuits libraries',
+      '# Qiskit quantum circuits libraries',
       'quantum_circuit = qiskit.circuit.library.QuantumVolume',
       'quantum_circuit.measure_all()',
       'quantum_circuit.draw()',
