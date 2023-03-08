@@ -31,7 +31,9 @@ import { Component } from 'vue-property-decorator'
 import CodeSnippet from '~/components/ui/CodeSnippet.vue'
 import { AlgorithmsContent } from '~/constants/providersContent'
 
-@Component
+@Component({
+  components: { CodeSnippet }
+})
 export default class Algorithms extends Vue {
   algorithmsContent = AlgorithmsContent
 }
