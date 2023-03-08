@@ -2,8 +2,8 @@
   <section class="providers-list">
     <h4>Providers</h4>
     <ul class="providers-list__list">
-      <li v-for="item in providersList" :key="item.id">
-        <a class="providers-list__list__item" :href="item.link" target="_blank">
+      <li v-for="item in providersList" :key="item.title">
+        <a class="providers-list__list__item" :href="item.url" target="_blank">
           {{ item.title }}
           <span class="providers-list__list__cta">
             <span class="providers-list__list__cta-label">Learn more</span>
@@ -24,15 +24,9 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
 
-type ProviderLink = {
-  title: string,
-  id: string,
-  link: string
-}
-
 @Component
 export default class StartLocally extends Vue {
-  @Prop(Array) providersList!: ProviderLink[]
+  @Prop(Array) providersList!: GeneralLink[]
 
   providersPage: GeneralLink = {
     url: '/providers',

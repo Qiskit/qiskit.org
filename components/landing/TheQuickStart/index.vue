@@ -31,7 +31,7 @@ export default class TheQuickStart extends Vue {
     ...rawHardware,
     ...rawSimulators,
     ...rawMultiplatforms
-  ].map(({ title, websiteCta: { url } }) => ({ title, link: url }));
+  ].map(({ title, docsCta: { url } }) => ({ title, url }));
 }
 </script>
 
