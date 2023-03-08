@@ -15,7 +15,7 @@
       title="Copy"
       size="sm"
       class="code-snippet__copy-button"
-      @click="[copyToClipboard($event), $trackClickEvent(`Copy ${copyButtonLabel} install code`, copyButtonLocation)]"
+      @click="[copyToClipboard($event), $trackClickEvent(`Copy ${codeSnippetTitle} install code`, codeSnippetLocation)]"
     >
       Copy
     </cv-button>
@@ -29,8 +29,8 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class CodeSnippet extends Vue {
   @Prop(Array) codeLines!: string[]
-  @Prop(String) copyButtonLabel!: string
-  @Prop(String) copyButtonLocation!: string
+  @Prop(String) codeSnippetTitle!: string
+  @Prop(String) codeSnippetLocation!: string
 
   copyCodeCta = 'Copy'
 

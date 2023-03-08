@@ -5,8 +5,8 @@
       <div class="algorithms__section">
         <CodeSnippet
           :code-lines="['pip install qiskit', 'pip install qiskit']"
-          :copy-button-label="'TODO: update this'"
-          :copy-button-location="'quick-start-algorithms'"
+          :code-snippet-title="'TODO: update this'"
+          :code-snippet-location="'quick-start-algorithms'"
         />
       </div>
       <h3>Test some algorithms</h3>
@@ -15,8 +15,8 @@
           <div class="algorithms__section">
             <CodeSnippet
               :code-lines="algorithm.codeSample"
-              :copy-button-label="algorithm.title"
-              :copy-button-location="'quick-start-algorithms'"
+              :code-snippet-title="algorithm.title"
+              :code-snippet-location="'quick-start-algorithms'"
             />
           </div>
         </cv-tab>
