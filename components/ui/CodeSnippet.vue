@@ -5,16 +5,17 @@
       <pre
         v-for="(line, index) in codeLines"
         :key="index"
-        class="code-snippet__code-cell__line"
-        :class="{'code-snippet__code-cell__comment' : line.startsWith('#') }"
+        class="code-snippet__code-cell_line"
+        :class="{'code-snippet__code-cell_comment' : line.startsWith('#') }"
         v-html="line"
       />
       <!-- eslint-enable -->
     </code>
     <cv-button
       title="Copy"
+      size="sm"
       class="code-snippet__copy-button"
-      @click="[copyToClipboard($event), $trackClickEvent(`Copy ${copyButtonLabel} install code`, copyButtonLocation)]"
+      @click="[copyToClipboard($event), $trackClickEvent(`Copy ${codeSnippetTitle} install code`, codeSnippetLocation)]"
     >
       Copy
     </cv-button>
@@ -28,8 +29,8 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class CodeSnippet extends Vue {
   @Prop(Array) codeLines!: string[]
-  @Prop(String) copyButtonLabel!: string
-  @Prop(String) copyButtonLocation!: string
+  @Prop(String) codeSnippetTitle!: string
+  @Prop(String) codeSnippetLocation!: string
 
   copyCodeCta = 'Copy'
 
@@ -59,49 +60,19 @@ $cta-max-width: 4rem;
   margin-bottom: $spacing-05;
   max-width: initial;
 
-  // &__code-snippet {
-  //   position: relative;
-  //   margin-bottom: $spacing-05;
-  //   max-width: initial;
-  // }
-
-  // &__cta-group {
-  //   display: flex;
-
-  //   @include mq($until: medium) {
-  //     flex-direction: column;
-  //   }
-
-  //   .app-cta {
-  //     max-width: 10rem;
-  //     padding-left: $spacing-05;
-
-  //     @include mq($until: medium) {
-  //       max-width: initial;
-  //     }
-  //   }
-  // }
-
-  // &__code-block {
-  //   position: relative;
-  //   @include mq($until: medium) {
-  //     margin-bottom: $spacing-05;
-  //   }
-  // }
-
   &__code-cell {
     display: block;
     background-color: $background-color-white;
     color: $text-color;
     padding: $spacing-05 $spacing-12 $spacing-05 $spacing-05;
 
-    &__comment {
+    &_comment {
       color: $text-active-color;
       word-break: break-word;
       white-space: normal;
     }
 
-    &__line {
+    &_line {
       word-break: break-word;
       white-space: normal;
     }

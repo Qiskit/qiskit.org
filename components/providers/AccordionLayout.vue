@@ -6,14 +6,14 @@
     <img v-if="image" :src="image" class="accordion-layout__image">
     <CodeSnippet
       :code-lines="[ installation ]"
-      :copy-button-label="title"
-      :copy-button-location="'providers'"
+      :code-snippet-title="title"
+      :code-snippet-location="'providers'"
     />
     <div class="accordion-layout__code-block">
       <CodeSnippet
         :code-lines="codeExample"
-        :copy-button-label="title"
-        :copy-button-location="'providers'"
+        :code-snippet-title="title"
+        :code-snippet-location="'providers'"
       />
     </div>
     <div class="accordion-layout__cta-group">
