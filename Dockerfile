@@ -4,7 +4,6 @@ WORKDIR /qiskit.org
 COPY package*.json ./
 RUN npm ci
 
-COPY app app/
 COPY assets assets/
 COPY constants constants/
 COPY content content/
