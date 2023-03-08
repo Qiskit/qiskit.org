@@ -1,13 +1,15 @@
 <template>
   <div class="code-snippet">
     <code class="code-snippet__code-cell">
+      <!-- eslint-disable vue/no-v-html -->
       <pre
         v-for="(line, index) in codeLines"
-        :key="index" 
+        :key="index"
         class="code-snippet__code-cell__line"
         :class="{'code-snippet__code-cell__comment' : line.startsWith('#') }"
         v-html="line"
-        />
+      />
+      <!-- eslint-enable -->
     </code>
     <cv-button
       title="Copy"

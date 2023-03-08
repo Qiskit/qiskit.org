@@ -1,8 +1,8 @@
+import { GeneralLink } from './appLinks'
 import { NavLink } from '~/constants/menuLinks'
 import rawHardwareData from '~/content/providers/hardware.json'
 import rawSimulatorsData from '~/content/providers/simulators.json'
 import rawMultiplatformsData from '~/content/providers/multiplatforms.json'
-import { GeneralLink } from './appLinks'
 
 type TableOfContentEntry = {
   /** The visible name of the link */

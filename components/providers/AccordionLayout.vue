@@ -4,13 +4,13 @@
       {{ description }}
     </p>
     <img v-if="image" :src="image" class="accordion-layout__image">
-    <CodeSnippet 
+    <CodeSnippet
       :code-lines="[ installation ]"
       :copy-button-label="title"
       :copy-button-location="'providers'"
     />
     <div class="accordion-layout__code-block">
-      <CodeSnippet 
+      <CodeSnippet
         :code-lines="codeExample"
         :copy-button-label="title"
         :copy-button-location="'providers'"
@@ -30,8 +30,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { GeneralLink } from '~/constants/appLinks'
 import CodeSnippet from '../ui/CodeSnippet.vue'
+import { GeneralLink } from '~/constants/appLinks'
 
 interface AccordionLayoutProps {
   title: string
@@ -55,7 +55,9 @@ interface AccordionLayoutProps {
 
 export { AccordionLayoutProps }
 
-@Component
+@Component({
+  components: { CodeSnippet }
+})
 export default class AccordionLayout extends Vue implements AccordionLayoutProps {
   @Prop(String) title!: string
   @Prop(String) description!: string
