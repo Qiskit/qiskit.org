@@ -30,7 +30,11 @@ export default class StartLocally extends Vue {
 
   providersPage: GeneralLink = {
     url: '/providers',
-    label: 'See all providers'
+    label: 'See all providers',
+    segment: {
+      cta: 'see-all-providers',
+      location: 'quick-start'
+    }
   }
 }
 </script>
