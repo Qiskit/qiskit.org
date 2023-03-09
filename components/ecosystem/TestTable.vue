@@ -17,7 +17,7 @@
           {{ data }}
           <bx-tooltip-icon
             v-if="addTooltip"
-            :body-text="testTypeTooltip[data as keyof typeof testTypeTooltip]"
+            :body-text="testTypeTooltip[data]"
             direction="bottom"
           >
             <Information16 class="bx-tooltip-icon__icon" />
@@ -67,13 +67,17 @@ interface filteredDataItem {
   timestamp: string;
 }
 
+interface TestTypeToolTip {
+  [key: string]: string;
+}
+
 interface Props {
   filteredData: filteredDataItem[];
 }
 
 const props = defineProps<Props>();
 
-const testTypeTooltip = {
+const testTypeTooltip: TestTypeToolTip = {
   development:
     "This test type indicates the ecosystem tests were run for this package using the latest development version of Qiskit",
   stable:
