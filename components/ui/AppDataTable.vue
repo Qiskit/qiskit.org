@@ -3,16 +3,8 @@
     <bx-table>
       <bx-table-head>
         <bx-table-header-row>
-<<<<<<< HEAD
-          <bx-table-header-cell
-            v-for="columnTitle in columns"
-            :key="columnTitle"
-          >
-            {{ columnTitle }}
-=======
           <bx-table-header-cell v-for="column in columns" :key="column">
             {{ column }}
->>>>>>> feat/2899-nuxt-3-update
           </bx-table-header-cell>
         </bx-table-header-row>
       </bx-table-head>
@@ -64,5 +56,9 @@ bx-table-header-cell {
 .bx--data-table li {
   list-style-type: disc;
   margin-left: carbon.$spacing-06;
+}
+
+bx-table-body {
+  background-color: qiskit.$background-color-white;
 }
 </style>
