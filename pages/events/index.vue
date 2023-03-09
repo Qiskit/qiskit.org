@@ -16,29 +16,30 @@
           </bx-tabs>
         </client-only>
       </div>
-      <!-- <AppFiltersResultsLayout>
-        <template slot="filters-on-m-l-screen">
-          <AppFieldset
+      <UiAppFiltersResultsLayout>
+        <template #filters-on-m-l-screen>
+          <UiAppFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
             :label="filter.label"
           >
             <client-only>
-              <cv-checkbox
+              <bx-checkbox
                 v-for="option in filter.options"
                 :key="option"
-                :value="option"
-                :label="option"
                 :checked="isFilterChecked(filter.filterType, option)"
-                :aria-checked="isFilterChecked(filter.filterType, option)"
-                @change="updateFilter(filter.filterType, option, $event)"
+                :label-text="option"
+                :value="option"
+                @bx-checkbox-changed="
+                  updateFilter(filter.filterType, option, $event.target.checked)
+                "
               />
             </client-only>
-          </AppFieldset>
+          </UiAppFieldset>
         </template>
-        <template slot="filters-on-s-screen">
+        <template #filters-on-s-screen>
           <div v-for="filter in extraFilters" :key="filter.label">
-            <AppMultiSelect
+            <UiAppMultiSelect
               :label="filter.label"
               :options="filter.options"
               :value="getCheckedFilters(filter.filterType)"
@@ -46,7 +47,7 @@
             />
           </div>
         </template>
-        <template slot="results">
+        <!-- <template slot="results">
           <AppCard
             v-if="noEvents"
             :image="emptyCard.img"
@@ -74,8 +75,8 @@
               />
             </div>
           </div>
-        </template>
-        <template slot="extra-info">
+        </template> -->
+        <!-- <template slot="extra-info">
           <div class="event-page__section">
             <h3>Follow our event calendar</h3>
             <p class="event-page__section__description">
@@ -122,22 +123,23 @@
             </p>
             <UiAppCta :label="eventRequestLink.label" :url="eventRequestLink.url" />
           </div>
-        </template>
-      </AppFiltersResultsLayout> -->
+        </template> -->
+      </UiAppFiltersResultsLayout>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/checkbox/index.js";
 import "@carbon/web-components/es/components/tabs/index.js";
 // import GoogleCalendarInstructions from '~/components/events/calendars/GoogleInstructions.vue'
 // import OutlookCalendarInstructions from '~/components/events/calendars/OutlookInstructions.vue'
 // import AppleCalendarInstructions from '~/components/events/calendars/AppleInstructions.vue'
-// import {
-//   CommunityEvent,
-//   WORLD_REGION_OPTIONS,
-//   COMMUNITY_EVENT_TYPE_OPTIONS
-// } from '~/store/events'
+import {
+  CommunityEvent,
+  WORLD_REGION_OPTIONS,
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+} from "~/types/events";
 // import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
 
 definePageMeta({
@@ -195,25 +197,24 @@ useHead({
 //   }
 // })
 
-// TODO: Integrate old code
 // const eventRequestLink = EVENT_REQUEST_LINK
 // const emptyCard = {
 //   title: 'No events found',
 //   description: 'Trying doing a wider search criteria, or consider starting your own event.',
 //   img: '/images/events/no-events.svg'
 // }
-// const extraFilters = [
-//   {
-//     label: 'Locations',
-//     options: WORLD_REGION_OPTIONS,
-//     filterType: 'regionFilters'
-//   },
-//   {
-//     label: 'Types',
-//     options: COMMUNITY_EVENT_TYPE_OPTIONS,
-//     filterType: 'typeFilters'
-//   }
-// ]
+const extraFilters = [
+  {
+    label: "Locations",
+    options: WORLD_REGION_OPTIONS,
+    filterType: "regionFilters",
+  },
+  {
+    label: "Types",
+    options: COMMUNITY_EVENT_TYPE_OPTIONS,
+    filterType: "typeFilters",
+  },
+];
 
 // const { data: upcomingEvents } = useLazyAsyncData(
 //   'fetch-upcoming-events',
@@ -226,8 +227,8 @@ useHead({
 // )
 
 // const activeSet = ref<'past'|'upcoming'>('upcoming')
-// const regionFilters = ref<string[]>([])
-// const typeFilters = ref<string[]>([])
+const regionFilters = ref<string[]>([]);
+const typeFilters = ref<string[]>([]);
 
 // const showUpcomingEvents = computed(() => activeSet.value === 'upcoming')
 // const events = computed(() => showUpcomingEvents.value ? upcomingEvents.value : pastEvents.value)
@@ -258,35 +259,42 @@ useHead({
 
 // const noEvents = computed(() => filteredEvents.value.length === 0)
 
-// function isRegionFilter (filter: string) {
-//   return filter === 'regionFilters'
-// }
+const regionFiltersAsString = computed(() => regionFilters.value.join(","));
+const typeFiltersAsString = computed(() => typeFilters.value.join(","));
 
-// function getCheckedFilters (filter: string) {
-//   return isRegionFilter(filter)
-//     ? regionFilters.value
-//     : typeFilters.value
-// }
+function isRegionFilter(filter: string) {
+  return filter === "regionFilters";
+}
 
-// const updateWholeFilter = (filter: string, filterValues: string[]) => {
-//   isRegionFilter(filter)
-//     ? regionFilters.value = filterValues
-//     : typeFilters.value = filterValues
-// }
+function getCheckedFilters(filter: string) {
+  return isRegionFilter(filter)
+    ? regionFiltersAsString.value
+    : typeFiltersAsString.value;
+}
 
-// const isFilterChecked = (filter: string, filterValue: string): boolean => {
-//   return isRegionFilter(filter)
-//     ? regionFilters.value.includes(filterValue)
-//     : typeFilters.value.includes(filterValue)
-// }
+function updateWholeFilter(filter: string, newRegionFilters: string) {
+  isRegionFilter(filter)
+    ? (regionFilters.value = newRegionFilters.split(","))
+    : (typeFilters.value = newRegionFilters.split(","));
+}
 
-// function updateFilter (filter: string, filterValue: string, isSelected: boolean) {
-//   const filterContent = isRegionFilter(filter) ? regionFilters.value : typeFilters.value
+function isFilterChecked(filter: string, filterValue: string): boolean {
+  return isRegionFilter(filter)
+    ? regionFilters.value.includes(filterValue)
+    : typeFilters.value.includes(filterValue);
+}
 
-//   isSelected
-//     ? addFilter(filterContent, filterValue)
-//     : removeFilter(filterContent, filterValue)
-// }
+function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
+  if (isChecked) {
+    isRegionFilter(filter)
+      ? regionFilters.value.push(filterValue)
+      : typeFilters.value.push(filterValue);
+  } else {
+    isRegionFilter(filter)
+      ? regionFilters.value.splice(regionFilters.value.indexOf(filterValue), 1)
+      : typeFilters.value.splice(typeFilters.value.indexOf(filterValue), 1);
+  }
+}
 
 // function addFilter (filterContent: string[], filterValue: string) {
 //   const filterIndex = filterContent.indexOf(filterValue)
@@ -312,10 +320,7 @@ useHead({
 // }
 </script>
 
-<style lang="scss">
-// TODO: Review old CSS
-// @import "~carbon-components/scss/globals/scss/typography";
-
+<style lang="scss" scoped>
 // .event-page {
 //   &__tabs {
 //     margin-top: carbon.$spacing-07;

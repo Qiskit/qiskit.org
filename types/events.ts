@@ -10,14 +10,14 @@ const WORLD_REGIONS = Object.freeze({
 
 type WorldRegion = (typeof WORLD_REGIONS)[keyof typeof WORLD_REGIONS];
 
-const WORLD_REGION_OPTIONS = Object.freeze([
+const WORLD_REGION_OPTIONS = [
   WORLD_REGIONS.northAmerica,
   WORLD_REGIONS.southAmerica,
   WORLD_REGIONS.asiaPacific,
   WORLD_REGIONS.europe,
   WORLD_REGIONS.africa,
   WORLD_REGIONS.online,
-]);
+];
 
 const COMMUNITY_EVENT_TYPES = Object.freeze({
   hackathon: "Hackathon",
