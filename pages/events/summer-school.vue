@@ -58,6 +58,7 @@
             v-for="week in agendaData.weeks"
             :id="week.tabName"
             :key="week.tabName"
+            class="summer-school-page__agenda__table"
             role="tabpanel"
             :aria-labelledby="week.tabName"
             hidden
@@ -189,6 +190,11 @@ const helpfulResourcesData = helpfulResources;
 
     @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-05;
+    }
+
+    &__table {
+      max-width: 100%;
+      overflow-x: scroll;
     }
   }
 

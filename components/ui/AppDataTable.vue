@@ -35,15 +35,10 @@ interface Props {
 defineProps<Props>();
 </script>
 
-<style lang="scss" scoped>
-.app-data-table {
-  overflow-x: scroll;
-  max-width: 100%;
-}
-</style>
-
 <style lang="scss">
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 bx-table-body {
-  background-color: white;
+  background-color: qiskit.$background-color-white;
 }
 </style>

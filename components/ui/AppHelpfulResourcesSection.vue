@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { DescriptionCard } from "~/types/uiComponents";
+import type { DescriptionCard } from "~/types/uiComponents";
 
 interface Props {
   resources: DescriptionCard[];
