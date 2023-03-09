@@ -37,11 +37,6 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-data-table {
-  overflow-x: scroll;
-  max-width: 100%;
-}
-
 bx-table-header-cell {
   --cds-ui-03: #{qiskit.$background-color-light};
 }
@@ -61,5 +56,9 @@ bx-table-header-cell {
 .bx--data-table li {
   list-style-type: disc;
   margin-left: carbon.$spacing-06;
+}
+
+bx-table-body {
+  background-color: qiskit.$background-color-white;
 }
 </style>

@@ -36,13 +36,14 @@ import { GeneralLink } from "~/constants/appLinks";
 
 interface Props {
   cardTitle: string;
-  cta: GeneralLink;
+  cta?: GeneralLink;
 }
 
 defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 

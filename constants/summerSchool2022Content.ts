@@ -1,4 +1,4 @@
-import { MosaicElement } from "@/components/ui/AppMosaic.vue";
+import type { MosaicElement } from "~/types/uiComponents";
 import { DescriptionCard } from "@/components/ui/AppDescriptionCard.vue";
 
 const header = {
