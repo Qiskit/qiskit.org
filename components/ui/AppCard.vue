@@ -38,7 +38,7 @@
             >
               {{ tag.label }}
               <bx-tooltip-icon :body-text="tag.description" direction="bottom">
-                <Information16 class="bx-tooltip-icon__icon" />
+                <Information16 class="app-card__tooltip__icon" />
               </bx-tooltip-icon>
             </div>
           </div>
@@ -181,6 +181,13 @@ function hasTags(tags: string[] | TagTooltip[]) {
     flex: 1;
     margin-bottom: carbon.$spacing-02;
   }
+
+  &__tooltip {
+    &__icon {
+      fill: carbon.$white;
+      margin-left: carbon.$spacing-02;
+    }
+  }
 }
 
 .app-card_vertical {
@@ -243,13 +250,6 @@ bx-tag {
 
 bx-tooltip-icon {
   line-height: 0;
-}
-
-.bx-tooltip-icon {
-  &__icon {
-    fill: carbon.$white;
-    margin-left: carbon.$spacing-02;
-  }
 }
 </style>
 
