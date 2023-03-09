@@ -1,6 +1,5 @@
 <template>
-  <!-- TODO: review if class is needed or can be deleted -->
-  <div class="metal-page">
+  <div>
     <MetalTheDarkHeader />
     <MetalIntroSection />
     <MetalCapabilitiesSection />
@@ -11,8 +10,6 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-
 definePageMeta({
   layout: "metal",
 });

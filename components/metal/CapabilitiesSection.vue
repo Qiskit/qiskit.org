@@ -74,8 +74,6 @@ const isVideo = (url: string): boolean => {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-// @import "~carbon-components/scss/globals/scss/typography";
-
 .capabilities-section {
   // multiple backgrounds in one section
   background-image: url("/images/grid/grid-right-dark.svg"),
