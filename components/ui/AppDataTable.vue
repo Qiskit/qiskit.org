@@ -1,5 +1,5 @@
 <template>
-  <bx-table class="app-data-table" :columns="columns">
+  <bx-table class="app-data-table">
     <bx-table-head>
       <bx-table-header-row>
         <bx-table-header-cell v-for="column in columns" :key="column">
