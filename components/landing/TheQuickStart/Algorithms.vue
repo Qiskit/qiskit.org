@@ -10,17 +10,30 @@
         />
       </div>
       <h3>Test some algorithms</h3>
-      <cv-tabs container>
-        <cv-tab v-for="algorithm in algorithmsContent" :key="algorithm.title" :label="algorithm.title">
-          <div class="algorithms__section">
-            <CodeSnippet
-              :code-lines="algorithm.codeSample"
-              :code-snippet-title="algorithm.title"
-              :code-snippet-location="'quick-start-algorithms'"
-            />
-          </div>
-        </cv-tab>
-      </cv-tabs>
+      <bx-tabs container value="Bell State">
+        <bx-tab 
+          v-for="algorithm in algorithmsContent"
+          :key="algorithm"
+          :target="algorithm.title"
+          :value="algorithm.title"
+        >
+          {{ algorithm.title }}
+        </bx-tab>
+      </bx-tabs>
+      <div 
+        v-for="algorithm in algorithmsContent"
+        class="algorithms__section"
+        :id="algorithm.title"
+        :key="algorithm.title"
+        role="tabpanel"
+        :aria-labelledby="algorithm.title"
+      >
+        <CodeSnippet
+          :code-lines="algorithm.codeSample"
+          :code-snippet-title="algorithm.title"
+          :code-snippet-location="'quick-start-algorithms'"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -30,6 +43,7 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import CodeSnippet from '~/components/ui/CodeSnippet.vue'
 import { AlgorithmsContent } from '~/constants/providersContent'
+import '@carbon/web-components/es/components/tabs/index.js';
 
 @Component({
   components: { CodeSnippet }
@@ -53,39 +67,6 @@ $cta-max-width: 4rem;
   &__section {
     position: relative;
     margin-bottom: $spacing-07;
-  }
-}
-</style>
-
-<style lang="scss">
-// Carbon overrides
-.algorithms {
-  .bx--tabs--scrollable {
-    background-color: $background-color-lighter;
-  }
-
-  .bx--tabs--scrollable .bx--tabs--scrollable__nav-item--selected {
-    background-color: $background-color-light-2;
-
-    &:hover {
-      background-color: $background-color-light;
-    }
-  }
-
-  .bx--tabs--scrollable .bx--tabs--scrollable__nav-item {
-    &:hover {
-      background-color: $background-color-light;
-    }
-  }
-
-  .bx--tabs--scrollable .bx--tabs--scrollable__nav-link,
-  .bx--tabs--scrollable .bx--tabs--scrollable__nav-item--selected .bx--tabs--scrollable__nav-link {
-    border-bottom: 2px solid transparent;
-  }
-
-  .bx--tabs--scrollable .bx--tabs--scrollable__nav-link:active {
-    border: none;
-    outline: none;
   }
 }
 </style>
