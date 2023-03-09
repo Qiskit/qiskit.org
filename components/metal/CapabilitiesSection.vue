@@ -21,7 +21,7 @@
             class="capabilities-section__visual-resource-container"
             :class="{
               'capabilities-section__visual-resource-container_active':
-              isActiveImage(item, index),
+                isActiveImage(item, index),
             }"
           >
             <video
@@ -33,15 +33,15 @@
               muted
               playsinline
             >
-              <source :data-src="item.visualResource" type="video/mp4">
-              <source :data-src="item.visualResource" type="video/ogg">
+              <source :data-src="item.visualResource" type="video/mp4" />
+              <source :data-src="item.visualResource" type="video/ogg" />
               Your browser does not support video.
             </video>
             <div
               v-else
               v-lazy-load
               class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
-              :style="{ 'background-image': `url(${item.visualResource})` }" 
+              :style="{ 'background-image': `url(${item.visualResource})` }"
             />
           </div>
         </div>
@@ -61,20 +61,21 @@ const capabilities = METAL_CAPABILITIES;
 
 const isActiveImage = (item: MetalCapability, index: number): boolean => {
   return (
-  item.title === activeSection.value ||
+    item.title === activeSection.value ||
     (activeSection.value === "" && index === 0)
   );
-}
+};
 
 const isVideo = (url: string): boolean => {
   const extension = url.substring(url.length - 4);
   return extension === ".mp4";
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+
 // @import "~carbon-components/scss/globals/scss/typography";
 
 .capabilities-section {
