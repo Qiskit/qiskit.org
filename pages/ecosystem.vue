@@ -95,9 +95,9 @@
               <bx-accordion v-if="member.testsResults.length != 0">
                 <bx-accordion-item
                   class="bx-accordion__item"
-                  :title-text="`Test Results (${new Date(
-                    member.updatedAt * 1000
-                  ).toLocaleString('en-UK', { timeZone: 'UTC' })})`"
+                  :title-text="`Test Results (${formatTimestamp(
+                    member.updatedAt
+                  )})`"
                 >
                   <EcosystemTestTable :filtered-data="getTestRows(member)" />
                 </bx-accordion-item>
@@ -155,13 +155,16 @@ const filteredMembers = computed(() => {
 
 const tiersNames = computed(() => tiers.map((tier) => tier.name));
 
+function formatTimestamp(timestamp: number): string {
+  return new Date(timestamp * 1000).toLocaleString("en-UK", {
+    timeZone: "UTC",
+  });
+}
+
 function getTestRows(member: Member) {
   if (member.testsResults) {
     return member.testsResults.map((res) => {
-      // make timestamp human readable
-      const timestamp = new Date(res.timestamp * 1000).toLocaleString("en-UK", {
-        timeZone: "UTC",
-      });
+      const timestamp = formatTimestamp(res.timestamp);
       // Convert package name to title case
       let packageName;
       if (res.package) {
