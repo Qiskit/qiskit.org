@@ -1,16 +1,28 @@
 <template>
-  <cv-data-table class="app-data-table" :columns="columns" :sortable="false">
-    <template #data>
-      <slot />
-    </template>
-  </cv-data-table>
+  <bx-data-table class="app-data-table">
+    <bx-table>
+      <bx-table-head>
+        <bx-table-header-row>
+          <bx-table-header-cell v-for="column in columns" :key="column">
+            {{ column }}
+          </bx-table-header-cell>
+        </bx-table-header-row>
+      </bx-table-head>
+      <bx-table-body>
+        <slot />
+      </bx-table-body>
+    </bx-table>
+  </bx-data-table>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/data-table/index.js";
 import { GeneralLink } from "~/constants/appLinks";
 
 export interface TableRowElement {
+  addTooltip?: boolean;
   component?: string;
+  packageName?: string;
   styles?: string;
   data: string | GeneralLink;
 }
@@ -23,26 +35,21 @@ defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .app-data-table {
   overflow-x: scroll;
   max-width: 100%;
+}
+
+bx-table-header-cell {
+  --cds-ui-03: #{qiskit.$background-color-light};
 }
 </style>
 
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
-
-.bx--data-table th {
-  color: carbon.$black-100;
-  background-color: qiskit.$background-color-light;
-
-  // TODO: remove this override once issue is fixed
-  // https://github.com/carbon-design-system/carbon-components-vue/issues/1161#issuecomment-815689534
-  &[aria-sort] {
-    padding: carbon.$spacing-05;
-  }
-}
 
 .bx--data-table tbody tr td,
 .bx--data-table tbody tr:hover td {
