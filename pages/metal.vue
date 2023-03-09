@@ -1,7 +1,6 @@
 <template>
   <!-- TODO: review if class is needed or can be deleted -->
   <div class="metal-page">
-    <!-- TODO: Integrate components -->
     <MetalTheDarkHeader />
     <MetalIntroSection />
     <MetalCapabilitiesSection />
