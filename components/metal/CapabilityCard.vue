@@ -14,20 +14,18 @@
     </div>
     <video
       v-if="isVideo"
-      v-lazy-load
       class="capability-card__visual-resource"
       loop
       autoplay
       muted
       playsinline
     >
-      <source :data-src="visualResource" type="video/mp4" />
-      <source :data-src="visualResource" type="video/ogg" />
+      <source src="visualResource" type="video/mp4" />
+      <source src="visualResource" type="video/ogg" />
       Your browser does not support video.
     </video>
     <div
       v-else
-      v-lazy-load
       class="capability-card__visual-resource"
       :style="{ 'background-image': `url(${visualResource})` }"
     />

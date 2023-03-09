@@ -26,20 +26,18 @@
           >
             <video
               v-if="isVideo(item.visualResource)"
-              v-lazy-load
               class="capabilities-section__visual-resource capabilities-section__visual-resource_type_video"
               loop
               autoplay
               muted
               playsinline
             >
-              <source :data-src="item.visualResource" type="video/mp4" />
-              <source :data-src="item.visualResource" type="video/ogg" />
+              <source src="item.visualResource" type="video/mp4" />
+              <source src="item.visualResource" type="video/ogg" />
               Your browser does not support video.
             </video>
             <div
               v-else
-              v-lazy-load
               class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
               :style="{ 'background-image': `url(${item.visualResource})` }"
             />

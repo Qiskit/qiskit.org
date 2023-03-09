@@ -8,13 +8,4 @@ export default defineNuxtConfig({
         tag.startsWith("qiskit-") || tag.startsWith("bx-"),
     },
   },
-  modules: [
-    [
-      "nuxt3-lazy-load",
-      {
-        videos: true,
-        directiveOnly: true,
-      },
-    ],
-  ],
 });

@@ -5,7 +5,6 @@
     </h3>
     <div class="feature-card__content">
       <div
-        v-lazy-load
         class="feature-card__image"
         :style="{ 'background-image': `url(${image})` }"
       />
