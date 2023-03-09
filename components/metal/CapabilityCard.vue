@@ -20,8 +20,8 @@
       muted
       playsinline
     >
-      <source src="visualResource" type="video/mp4" />
-      <source src="visualResource" type="video/ogg" />
+      <source :src="visualResource" type="video/mp4" />
+      <source :src="visualResource" type="video/ogg" />
       Your browser does not support video.
     </video>
     <div
