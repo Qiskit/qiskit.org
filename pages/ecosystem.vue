@@ -225,7 +225,7 @@ const joinAction: GeneralLink = {
 @use "~/assets/scss/carbon.scss";
 
 .ecosystem__filters-result-section {
-  margin-top: 4rem;
+  margin-top: carbon.$spacing-10;
 }
 
 .cds--col-sm-4 {
