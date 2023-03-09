@@ -1,16 +1,18 @@
 <template>
-  <bx-table class="app-data-table">
-    <bx-table-head>
-      <bx-table-header-row>
-        <bx-table-header-cell v-for="column in columns" :key="column">
-          {{ column }}
-        </bx-table-header-cell>
-      </bx-table-header-row>
-    </bx-table-head>
-    <bx-table-body>
-      <slot />
-    </bx-table-body>
-  </bx-table>
+  <bx-data-table class="app-data-table">
+    <bx-table>
+      <bx-table-head>
+        <bx-table-header-row>
+          <bx-table-header-cell v-for="column in columns" :key="column">
+            {{ column }}
+          </bx-table-header-cell>
+        </bx-table-header-row>
+      </bx-table-head>
+      <bx-table-body>
+        <slot />
+      </bx-table-body>
+    </bx-table>
+  </bx-data-table>
 </template>
 
 <script setup lang="ts">
