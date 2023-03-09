@@ -3,11 +3,16 @@
     <bx-table>
       <bx-table-head>
         <bx-table-header-row>
+<<<<<<< HEAD
           <bx-table-header-cell
             v-for="columnTitle in columns"
             :key="columnTitle"
           >
             {{ columnTitle }}
+=======
+          <bx-table-header-cell v-for="column in columns" :key="column">
+            {{ column }}
+>>>>>>> feat/2899-nuxt-3-update
           </bx-table-header-cell>
         </bx-table-header-row>
       </bx-table-head>
@@ -23,7 +28,9 @@ import "@carbon/web-components/es/components/data-table/index.js";
 import { GeneralLink } from "~/constants/appLinks";
 
 export interface TableRowElement {
+  addTooltip?: boolean;
   component?: string;
+  packageName?: string;
   styles?: string;
   data: string | GeneralLink;
 }
@@ -35,10 +42,27 @@ interface Props {
 defineProps<Props>();
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-bx-table-body {
+bx-table-header-cell {
+  --cds-ui-03: #{qiskit.$background-color-light};
+}
+</style>
+
+<style lang="scss">
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
+.bx--data-table tbody tr td,
+.bx--data-table tbody tr:hover td {
   background-color: qiskit.$background-color-white;
+  border-top: none;
+  border-bottom: 1px solid qiskit.$border-color;
+}
+
+.bx--data-table li {
+  list-style-type: disc;
+  margin-left: carbon.$spacing-06;
 }
 </style>

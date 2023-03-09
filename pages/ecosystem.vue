@@ -1,16 +1,15 @@
 <template>
   <main>
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderFixed class="ecosystem-header__hero">
+    <UiAppPageHeaderFixed class="ecosystem-header__hero">
       <br />
       Explore
-      <TypewriterEffect
+      <UiTypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
       from Qiskit
       <br />
       and the Qiskit community
-    </AppPageHeaderFixed> -->
+    </UiAppPageHeaderFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
@@ -23,48 +22,52 @@
           </p>
         </div>
       </div>
-      <div class="bx-row">
-        <!-- <UiAppCta class="ecosystem-header__cta" :label="joinAction.label" :url="joinAction.url" /> -->
-      </div>
-      <!-- <AppFiltersResultsLayout class="ecosystem__filters-result-section">
-        <template slot="filters-on-m-l-screen">
-          <AppFieldset label="Tier">
+      <UiAppCta
+        class="ecosystem-header__cta"
+        :label="joinAction.label"
+        :url="joinAction.url"
+      />
+      <UiAppFiltersResultsLayout class="ecosystem__filters-result-section">
+        <template #filters-on-m-l-screen>
+          <UiAppFieldset label="Tier">
             <client-only>
-              <cv-checkbox
+              <bx-checkbox
                 v-for="option in tiers"
                 :key="option.name"
                 class="ecosystem__filters-result-section__tiers"
-                :label="option.name"
-                :value="option.name"
                 :checked="isTierFilterChecked(option.name)"
-                @change="updateTierFilter(option.name, $event)"
+                :label-text="option.name"
+                :value="option.name"
+                @bx-checkbox-changed="
+                  updateTierFilter(option.name, $event.target.checked)
+                "
               />
             </client-only>
-          </AppFieldset>
+          </UiAppFieldset>
         </template>
-        <template slot="filters-on-s-screen">
-          <AppMultiSelect
+        <template #filters-on-s-screen>
+          <UiAppMultiSelect
             label="Tier"
             :options="tiersNames"
-            :value="tierFilters"
+            :value="tierFiltersAsString"
             @change-selection="updateTierFilters($event)"
           />
         </template>
-        <template slot="results">
+        <template #results>
           <div class="cds--row">
             <div
               v-for="(member, index) in filteredMembers"
               :key="index"
               class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <AppCard
+              <UiAppCard
                 class="project-card"
                 :title="member.name"
                 :tags="member.labels"
                 :tooltip-tags="[
                   {
                     label: member.tier,
-                    message: getTierDescription(member.tier),
+                    description: getTierDescription(member.tier),
                   },
                 ]"
                 cta-label="Go to repo"
@@ -88,44 +91,42 @@
                 <p>
                   {{ member.description }}
                 </p>
-              </AppCard>
-              <cv-accordion v-if="member.testsResults.length != 0">
-                <cv-accordion-item>
-                  <template slot="title">
-                    <span style="font-weight: bold">Test Results</span>
-                    <span
-                      >({{
-                        new Date(member.updatedAt * 1000).toLocaleString(
-                          "en-UK",
-                          { timeZone: "UTC" }
-                        )
-                      }})</span
-                    >
-                  </template>
-                  <template slot="content">
-                    <TestTable :filtered-data="getTestRows(member)" />
-                  </template>
-                </cv-accordion-item>
-              </cv-accordion>
+              </UiAppCard>
+              <bx-accordion v-if="member.testsResults.length != 0">
+                <bx-accordion-item
+                  class="bx-accordion__item"
+                  :title-text="`Test Results (${formatTimestamp(
+                    member.updatedAt
+                  )})`"
+                >
+                  <EcosystemTestTable :filtered-data="getTestRows(member)" />
+                </bx-accordion-item>
+              </bx-accordion>
             </div>
           </div>
         </template>
-      </AppFiltersResultsLayout> -->
+      </UiAppFiltersResultsLayout>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import { Component } from "vue-property-decorator";
-// import { GeneralLink } from "~/constants/appLinks";
+import "@carbon/web-components/es/components/accordion/index.js";
+import "@carbon/web-components/es/components/checkbox/index.js";
+import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
+import { GeneralLink } from "~/constants/appLinks";
+import rawMembers from "~/content/ecosystem/members.json";
+import rawTiers from "~/content/ecosystem/tiers.json";
+import type { Member, Tier } from "~/types/ecosystem";
+
+const members = rawMembers as Member[];
+const tiers = rawTiers as Tier[];
 
 definePageMeta({
   layout: "default-max",
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Ecosystem",
   meta: [
     {
@@ -136,177 +137,144 @@ useHead({
   ],
 });
 
-// TODO: Integrate old code
-// const { data: members } = useLazyAsyncData(
-//   "fetch-members",
-//   async () => await import("~/content/ecosystem/members.json")
-// );
+const tierFilters = ref<string[]>([]);
 
-// const { data: tiers } = useLazyAsyncData(
-//   "fetch-tiers",
-//   async () => await import("~/content/ecosystem/tiers.json")
-// );
+const tierFiltersAsString = computed(() => tierFilters.value.join(","));
 
-// const tierFilters = ref<string[]>([]);
+const filteredMembers = computed(() => {
+  if (!members) {
+    return [];
+  }
 
-// const noTierFiltersSelected = computed(() => tierFilters.value.length === 0);
+  const noTierFilters = tierFilters.value.length === 0;
 
-// const filteredMembers = computed(() => {
-//   return noTierFiltersSelected
-//     ? members.value
-//     : members.value.filter((member) => tierFilters.value.includes(member.tier));
-// });
+  return noTierFilters
+    ? members
+    : members.filter((member) => tierFilters.value.includes(member.tier));
+});
 
-// const tiersNames = computed(() => tiers.value.map((tier: any) => tier.name));
+const tiersNames = computed(() => tiers.map((tier) => tier.name));
 
-// function getTestRows(member: any) {
-//   if (member.testsResults) {
-//     return member.testsResults.map((res: any) => {
-//       // make tiemstamp human readable
-//       const timestamp = new Date(res.timestamp * 1000).toLocaleString("en-UK", {
-//         timeZone: "UTC",
-//       });
-//       // Convert package name to title case
-//       let packageName;
-//       if (res.package) {
-//         packageName = res.package
-//           .replaceAll("-", " ")
-//           .split(" ")
-//           .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-//           .join(" ");
-//       }
+function formatTimestamp(timestamp: number): string {
+  return new Date(timestamp * 1000).toLocaleString("en-UK", {
+    timeZone: "UTC",
+  });
+}
 
-//       return {
-//         packageName,
-//         packageVersion: res.packageVersion,
-//         pythonVersion: res.pythonVersion,
-//         qiskitVersion: res.qiskitVersion,
-//         status: res.status,
-//         timestamp,
-//       };
-//     });
-//   }
-// }
+function getTestRows(member: Member) {
+  if (member.testsResults) {
+    return member.testsResults.map((res) => {
+      const timestamp = formatTimestamp(res.timestamp);
+      // Convert package name to title case
+      let packageName;
+      if (res.package) {
+        packageName = res.package
+          .replaceAll("-", " ")
+          .split(" ")
+          .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+          .join(" ");
+      }
 
-// function getTierDescription(tierName: string): string {
-//   const tier = tiers.value.find((tier: any) => tier.name === tierName);
-//   return tier.description || "";
-// }
+      return {
+        packageName,
+        packageVersion: res.packageVersion,
+        testType: res.testType,
+        passed: res.passed,
+        timestamp,
+        logsLink: res.logsLink,
+      };
+    });
+  }
 
-// function updateTierFilter(filterValue: string, isChecked: boolean) {
-//   isChecked
-//     ? tierFilters.value.push(filterValue)
-//     : (tierFilters.value = tierFilters.value.filter(
-//         (tier: any) => tier !== filterValue
-//       ));
-// }
+  return [];
+}
 
-// const updateTierFilters = (filterValues: string[]) => {
-//   tierFilters.value = filterValues;
-// };
+function getTierDescription(tierName: string): string {
+  const tier = tiers.find((tier: any) => tier.name === tierName);
+  return tier!.description || "";
+}
 
-// function isTierFilterChecked(filterValue: string): boolean {
-//   return tierFilters.value.includes(filterValue);
-// }
+function updateTierFilter(filterValue: string, isChecked: boolean) {
+  isChecked
+    ? tierFilters.value.push(filterValue)
+    : (tierFilters.value = tierFilters.value.filter(
+        (tier: any) => tier !== filterValue
+      ));
+}
+
+function updateTierFilters(newTierFilters: string) {
+  const newTierFiltersAsArray = newTierFilters.split(",");
+  tierFilters.value = newTierFiltersAsArray;
+}
+
+const isTierFilterChecked = (filterValue: string): boolean =>
+  tierFilters.value.includes(filterValue);
+
+const joinAction: GeneralLink = {
+  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
+  label: "Join the ecosystem",
+};
 
 // TODO: Refactor tracking
 // export default class EcosystemPage {
 //   routeName: string = 'ecosystem';
-
-//   joinAction: GeneralLink = {
-//     url: 'https://github.com/qiskit-community/ecosystem#ecosystem--',
-//     label: 'Join the ecosystem'
-//   };
 // }
 </script>
 
-<style lang="scss">
-// TODO: Review old CSS
-// .ecosystem-header {
-//   &__hero {
-//     .cds--col-max-8 {
-//       max-width: 100%;
-//       flex: 0 0 100%;
-//     }
-//   }
+<style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
 
-//   &__cta {
-//     height: 50%;
-//   }
-// }
+.ecosystem__filters-result-section {
+  margin-top: carbon.$spacing-10;
+}
 
-// .ecosystem__filters-result-section {
-//   margin-top: 4rem;
+.cds--col-sm-4 {
+  padding-bottom: carbon.$spacing-08;
+}
 
-//   &__tiers {
-//     text-transform: capitalize;
-//   }
-// }
+.app-card {
+  &__description {
+    .cds--row {
+      margin-left: 0;
+    }
+  }
 
-// .cds--col-sm-4 {
-//   padding-bottom: carbon.$spacing-08;
-// }
+  &__tags {
+    flex-direction: row;
+  }
+}
 
-// .app-card {
-//   &__description {
-//     .cds--row {
-//       margin-left: 0;
-//     }
-//   }
+.project-card {
+  &__license {
+    font-size: 12px;
+    margin-right: carbon.$spacing-05;
+    margin-top: calc(carbon.$spacing-01 / 2);
+  }
 
-//   &__tags {
-//     flex-direction: row;
-//   }
-// }
+  &__star {
+    display: flex;
+    flex-direction: row;
 
-// .bx--accordion__title {
-//   display: flex;
-//   flex-direction: row;
-//   gap: 10px;
+    svg {
+      margin-top: calc(carbon.$spacing-01 / 2);
+      margin-right: carbon.$spacing-01;
+      fill: carbon.$cool-gray-60;
+    }
+  }
 
-//   p,
-//   .p {
-//     margin-bottom: 0;
-//   }
-// }
+  :deep(.app-card__title) {
+    font-size: 20px;
+  }
+}
 
-// .bx--accordion__item {
-//   background-color:carbon.$cool-gray-20;
-//   border-bottom: none;
-// }
+.bx-accordion__item {
+  &::part(content) {
+    margin: 0;
+    padding: 0;
+  }
 
-// .bx--accordion__item--active .bx--accordion__content {
-//   padding: 0;
-//   margin: 0;
-//   padding-top: 0;
-//   padding-bottom: 0;
-// }
-
-// .bx--accordion__item:last-child {
-//   border-bottom: none;
-// }
-
-// .project-card {
-//   &__license {
-//     font-size: 12px;
-//     margin-right: carbon.$spacing-05;
-//     margin-top: calc($spacing-01 / 2);
-//   }
-
-//   &__star {
-//     display: flex;
-//     flex-direction: row;
-
-//     svg {
-//       margin-top: calc($spacing-01 / 2);
-//       margin-right: carbon.$spacing-01;
-//       fill:carbon.$cool-gray-60;
-//     }
-
-//   }
-
-//   .app-card__title {
-//     font-size: 20px;
-//   }
-// }
+  &::part(expando) {
+    background-color: carbon.$cool-gray-20;
+  }
+}
 </style>
