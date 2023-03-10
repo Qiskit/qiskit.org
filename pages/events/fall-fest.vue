@@ -36,38 +36,49 @@
       <section class="fall-fest-page__section">
         <h2 v-text="agendaData.title" />
         <p v-text="agendaData.subtitle" />
-        <!-- <cv-tabs>
-          <cv-tab
+        <bx-tabs value="Wave 1">
+          <bx-tab
             v-for="week in agendaData.weeks"
             :key="week.tabName"
-            :label="week.tabName"
+            :target="week.tabName"
+            :value="week.tabName"
           >
-            <AppDataTable
-              class="fall-fest-page__section"
-              :columns="agendaColumnsDataTable"
+            {{ week.tabName }}
+          </bx-tab>
+        </bx-tabs>
+        <div
+          v-for="week in agendaData.weeks"
+          :key="week.tabName"
+          :id="week.tabName"
+          :aria-labelledby="week.tabName"
+          role="tabpanel"
+          hidden
+        >
+          <UiAppDataTable
+            class="fall-fest-page__section"
+            :columns="agendaColumnsDataTable"
+          >
+            <bx-table-row
+              v-for="(row, rowIndex) in week.tableData"
+              :key="`${rowIndex}`"
             >
-              <cv-data-table-row
-                v-for="(row, rowIndex) in week.tableData"
-                :key="`${rowIndex}`"
+              <bx-table-cell
+                v-for="({ styles, data, link }, elementIndex) in row"
+                :key="`${elementIndex}`"
               >
-                <cv-data-table-cell
-                  v-for="({ styles, data, link }, elementIndex) in row"
-                  :key="`${elementIndex}`"
+                <UiAppLink
+                  v-if="link"
+                  class="fall-fest-page__table-link"
+                  :style="styles"
+                  :url="link"
                 >
-                  <UiAppLink
-                    v-if="link"
-                    class="fall-fest-page__table-link"
-                    :style="styles"
-                    :url="link"
-                  >
-                    Link to event
-                  </UiAppLink>
-                  <span v-else :style="styles">{{ data }}</span>
-                </cv-data-table-cell>
-              </cv-data-table-row>
-            </AppDataTable>
-          </cv-tab>
-        </cv-tabs> -->
+                  Link to event
+                </UiAppLink>
+                <span v-else :style="styles">{{ data }}</span>
+              </bx-table-cell>
+            </bx-table-row>
+          </UiAppDataTable>
+        </div>
       </section>
 
       <UiAppHelpfulResourcesSection
@@ -80,8 +91,7 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import UniversityDirectorySection from '../../components/events/fall-fest/UniversityDirectorySection.vue'
+import "@carbon/web-components/es/components/tabs/index.js";
 import {
   header,
   agenda,
@@ -153,6 +163,14 @@ useHead({
 });
 
 const agendaData = agenda;
+const agendaColumnsDataTable: string[] = [
+  "University",
+  "Start Date",
+  "End Date",
+  "Detail",
+  "Type of Event",
+  "Link",
+];
 const headerData = header;
 const helpfulResourcesData = helpfulResources;
 
@@ -160,7 +178,6 @@ const helpfulResourcesData = helpfulResources;
 // @Component({
 // export default class FallFestPage {
 //   routeName = 'fall-fest'
-//   agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
 // }
 </script>
 
@@ -187,74 +204,4 @@ const helpfulResourcesData = helpfulResources;
     }
   }
 }
-
-// overrides
-// .fall-fest-page {
-//   &__table-link {
-//     &:hover,
-//     &:focus,
-//     &:active {
-//       text-decoration: underline;
-//     }
-//   }
-
-//   ::v-deep {
-//     // TODO: Extract styles like "_checkbox" to be defined globally
-//     & a.bx--tabs--scrollable__nav-link {
-//       color: qiskit.$text-color-light;
-//       border-bottom-color: qiskit.$border-color;
-
-//       &:focus,
-//       &:active {
-//         outline: none;
-//       }
-
-//       &:not(.bx--tabs--scrollable__nav-item--disabled) {
-//         color: qiskit.$text-color-light;
-//       }
-//     }
-
-//     // TODO: Not sure if the order is important in these selectors.
-//     // So, disabling. Review the reule 'no-descending-specificity' here:
-//     // https://stylelint.io/user-guide/ignore-code
-//     // stylelint-disable no-descending-specificity
-//     & .bx--tabs--scrollable__nav-item {
-//       &--selected:not(.bx--tabs--scrollable__nav-item--disabled)
-//         .bx--tabs--scrollable__nav-link {
-//         border-bottom-color: qiskit.$border-color-secondary;
-//       }
-//     }
-
-//     &
-//       .bx--tabs--scrollable__nav-item:hover:not(
-//         .bx--tabs--scrollable__nav-item--disabled
-//       ) {
-//       box-shadow: none;
-//     }
-
-//     &
-//       .bx--tabs--scrollable__nav-item:hover:not(
-//         .bx--tabs--scrollable__nav-item--selected
-//       ):not(.bx--tabs--scrollable__nav-item--disabled),
-//     & .bx--tabs--scrollable__nav-item,
-//     & .bx--tabs-trigger {
-//       background-color: qiskit.$background-color-white;
-
-//       svg {
-//         fill: carbon.$gray-100;
-//       }
-//     }
-
-//     & .bx--tabs--scrollable__nav-link,
-//     & .bx--tabs-trigger-text {
-//       color: qiskit.$text-color;
-//     }
-//     // stylelint-enable no-descending-specificity
-
-//     .app-data-table {
-//       margin-top: carbon.$spacing-07;
-//       padding: 0;
-//     }
-//   }
-// }
 </style>
