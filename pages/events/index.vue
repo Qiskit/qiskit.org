@@ -107,8 +107,8 @@
             </div>
             <div
               v-for="{ name, instructions } in calendarsInstructions"
-              :key="name"
               :id="`panel-${name}`"
+              :key="name"
               role="tabpanel"
               :aria-labelledby="`tab-${name}`"
               hidden
@@ -342,9 +342,7 @@ const selectTab = (selectedTab: string) => {
         .bx--tabs--scrollable__nav-item--disabled
       )
       .bx--tabs--scrollable__nav-link,
-    .bx--tabs--scrollable__nav-item:hover:not(
-        .bx--tabs--scrollable__nav-item--selected
-      ):not(.bx--tabs--scrollable__nav-item--disabled)
+    .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected, .bx--tabs--scrollable__nav-item--disabled)
       .bx--tabs--scrollable__nav-link {
       color: qiskit.$text-color;
     }
@@ -383,9 +381,7 @@ const selectTab = (selectedTab: string) => {
         border-bottom: none;
       }
 
-      .bx--tabs--scrollable__nav-item:hover:not(
-          .bx--tabs--scrollable__nav-item--selected
-        ):not(.bx--tabs--scrollable__nav-item--disabled) {
+      .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected, .bx--tabs--scrollable__nav-item--disabled) {
         background-color: qiskit.$background-color-light;
       }
     }
