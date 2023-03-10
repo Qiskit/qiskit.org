@@ -18,7 +18,7 @@
             :key="title"
             class="cds--col-xlg-8"
           >
-            <AppCard
+            <UiAppCard
               :cta-label="cta.label"
               :to="cta.url"
               :segment="cta.segment"
@@ -33,7 +33,7 @@
                 <br />
                 {{ detail }}
               </p>
-            </AppCard>
+            </UiAppCard>
           </div>
         </div>
       </div>

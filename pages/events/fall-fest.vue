@@ -28,7 +28,7 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <!-- <UniversityDirectorySection /> -->
+        <EventsFallFestUniversityDirectorySection />
       </section>
     </div>
 
