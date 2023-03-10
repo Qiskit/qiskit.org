@@ -1,32 +1,26 @@
 <template>
   <main class="event-page seminar-series-page">
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderWithCard
-      :cta="headerCTA"
-      :card-title="headerCardTitle"
-    >
-      <template slot="title">
+    <UiAppPageHeaderWithCard :cta="headerCTA" :card-title="headerCardTitle">
+      <template #title>
         {{ headerTitle }}
       </template>
-      <template slot="description">
+      <template #description>
         <p
           v-for="(paragraph, index) in headerDescription"
           :key="index"
           v-text="paragraph"
         />
       </template>
-      <template slot="card">
-        <EventsItemCard v-bind="cardContent" vertical-layout>
-          {{ cardContent.description }}
-        </EventsItemCard>
+      <template #card>
+        <EventsItemCard v-bind="cardContent" vertical-layout />
       </template>
-    </AppPageHeaderWithCard> -->
+    </UiAppPageHeaderWithCard>
     <div class="cds--grid">
-      <!-- <AppMosaicSection
+      <UiAppMosaicSection
         class="seminar-series-page__section"
         :title="mosaicSectionTitle"
         :elements="mosaicElements"
-      /> -->
+      />
       <!-- <AppDataTableSection
         v-if="hasUpcomingEvents"
         class="seminar-series-page__section"
@@ -98,17 +92,16 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import { MosaicElement } from "~/components/ui/AppMosaic.vue";
+import type { MosaicElement } from "~/types/uiComponents";
 // import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 // import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
 // import { TableRowElement } from "~/components/ui/AppDataTable.vue";
-// import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
-// import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
-// import {
-//   SEMINAR_SERIES_ALL_EPISODES_CTA,
-//   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
-// } from "~/constants/appLinks";
+import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
+import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
+import {
+  SEMINAR_SERIES_ALL_EPISODES_CTA,
+  SEMINAR_SERIES_FULL_ARCHIVE_CTA,
+} from "~/constants/appLinks";
 
 definePageMeta({
   layout: "default-max",
@@ -121,34 +114,34 @@ useHead({
 
 // TODO: Integrate old code
 // // Data for the header section
-// const headerTitle = "Quantum Information Science Seminar Series";
-// const headerDescription = [
-//   `The Qiskit Quantum Information Science Seminar Series is dedicated to the
-//   research and academic communities as a broad and deep dive into the latest
-//   cutting edge quantum research.`,
-//   `The seminar is live and interactive, you can discuss and ask questions as
-//   you watch, and is streamed on YouTube.`,
-//   "Join us live every Friday at 12:00 PM ET.",
-// ];
+const headerTitle = "Quantum Information Science Seminar Series";
+const headerDescription = [
+  `The Qiskit Quantum Information Science Seminar Series is dedicated to the
+  research and academic communities as a broad and deep dive into the latest
+  cutting edge quantum research.`,
+  `The seminar is live and interactive, you can discuss and ask questions as
+  you watch, and is streamed on YouTube.`,
+  "Join us live every Friday at 12:00 PM ET.",
+];
 
-// const headerCTA = {
-//   ...SEMINAR_SERIES_ALL_EPISODES_CTA,
-//   segment: {
-//     cta: "talk-on-youtube",
-//     location: "header",
-//   },
-// };
+const headerCTA = {
+  ...SEMINAR_SERIES_ALL_EPISODES_CTA,
+  segment: {
+    cta: "talk-on-youtube",
+    location: "header",
+  },
+};
 
-// // When there are no upcoming events, the JSON file is filled with []
-// const hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== "[]";
-// const randomNumber = Math.random();
-// const randomIndex = Math.floor(randomNumber * pastSeminarSeriesEvents.length);
+// When there are no upcoming events, the JSON file is filled with []
+const hasUpcomingEvents = JSON.stringify(upcomingSeminarSerieEvents) !== "[]";
+const randomNumber = Math.random();
+const randomIndex = Math.floor(randomNumber * pastSeminarSeriesEvents.length);
 
-// const headerCardTitle = hasUpcomingEvents ? "Up next:" : "Featured seminar:";
+const headerCardTitle = hasUpcomingEvents ? "Up next:" : "Featured seminar:";
 
-// const cardContent = hasUpcomingEvents
-//   ? upcomingSeminarSerieEvents[0]
-//   : pastSeminarSeriesEvents[randomIndex];
+const cardContent = hasUpcomingEvents
+  ? upcomingSeminarSerieEvents[0]
+  : pastSeminarSeriesEvents[randomIndex];
 
 // const headerCardContent = {
 //   ...cardContent,
@@ -156,39 +149,39 @@ useHead({
 //   description: cardContent.title,
 // };
 
-// // Data for the mosaic section
-// const mosaicSectionTitle =
-//   "What is the Quantum Information Science Seminar Series?";
-// const mosaicElements: MosaicElement[] = [
-//   {
-//     position: "first",
-//     title: "Learn from experts",
-//     description:
-//       "Learn from & interact directly with world-leading experts in quantum, from across the globe.",
-//     image: "/images/events/seminar-series/mosaic-experts.png",
-//   },
-//   {
-//     position: "second",
-//     title: "About the hosts",
-//     description:
-//       "Dr. Zlatko K. Minev, research staff member at IBM Quantum and recipient of MIT Tech Review’s 35 under 35 Global Innovator award, is our lead host. He is joined by Dr. Olivia Lanes, an experimental researcher and education developer at IBM, working to bridge the gap between the hardware and software communities.",
-//     image: "/images/events/seminar-series/mosaic-hosts.png",
-//   },
-//   {
-//     position: "third",
-//     title: "The latest in quantum computing",
-//     description:
-//       "This series will discuss all the most current research and new developements across the field of quantum computing.",
-//     image: "/images/events/seminar-series/mosaic-team.png",
-//   },
-//   {
-//     position: "fourth",
-//     title: "Real time questions & discussion",
-//     description:
-//       "Discuss in real time with other researchers, students, and folks in quantum, while having the ability to ask questions of the speaker in real time via the comment chat box on YouTube.",
-//     image: "/images/events/seminar-series/mosaic-interactivity.png",
-//   },
-// ];
+// Data for the mosaic section
+const mosaicSectionTitle =
+  "What is the Quantum Information Science Seminar Series?";
+const mosaicElements: MosaicElement[] = [
+  {
+    position: "first",
+    title: "Learn from experts",
+    description:
+      "Learn from & interact directly with world-leading experts in quantum, from across the globe.",
+    image: "/images/events/seminar-series/mosaic-experts.png",
+  },
+  {
+    position: "second",
+    title: "About the hosts",
+    description:
+      "Dr. Zlatko K. Minev, research staff member at IBM Quantum and recipient of MIT Tech Review’s 35 under 35 Global Innovator award, is our lead host. He is joined by Dr. Olivia Lanes, an experimental researcher and education developer at IBM, working to bridge the gap between the hardware and software communities.",
+    image: "/images/events/seminar-series/mosaic-hosts.png",
+  },
+  {
+    position: "third",
+    title: "The latest in quantum computing",
+    description:
+      "This series will discuss all the most current research and new developements across the field of quantum computing.",
+    image: "/images/events/seminar-series/mosaic-team.png",
+  },
+  {
+    position: "fourth",
+    title: "Real time questions & discussion",
+    description:
+      "Discuss in real time with other researchers, students, and folks in quantum, while having the ability to ask questions of the speaker in real time via the comment chat box on YouTube.",
+    image: "/images/events/seminar-series/mosaic-interactivity.png",
+  },
+];
 
 // // Data for the data table's sections
 // const upcomingEventsSectionTitle = "Upcoming Quantum Seminar Schedule";
@@ -315,19 +308,20 @@ useHead({
 </script>
 
 <style lang="scss" scoped>
-// TODO: Review old CSS
-// .seminar-series-page {
-//   &__section {
-//     margin-top: carbon.$spacing-10;
-//     margin-bottom: carbon.$spacing-07;
+@use "~/assets/scss/carbon.scss";
 
-//     @include carbon.breakpoint-down(lg) {
-//       margin-bottom: carbon.$spacing-05;
-//     }
-//   }
+.seminar-series-page {
+  &__section {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-07;
 
-//   &__past-events-cta {
-//     padding-bottom: 0;
-//   }
-// }
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+  }
+
+  &__past-events-cta {
+    padding-bottom: 0;
+  }
+}
 </style>
