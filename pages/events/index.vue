@@ -10,7 +10,10 @@
     <div class="cds--grid">
       <div class="event-page__tabs">
         <client-only>
-          <bx-tabs value="upcoming">
+          <bx-tabs
+            value="upcoming"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
             <bx-tab id="tab-1" value="upcoming">Upcoming events</bx-tab>
             <bx-tab id="tab-2" value="past">Past events</bx-tab>
           </bx-tabs>
@@ -300,9 +303,9 @@ function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
   }
 }
 
-// const selectTab = (selectedTab: number) => {
-//   activeSet.value = selectedTab === 0 ? 'upcoming' : 'past'
-// }
+const selectTab = (selectedTab: string) => {
+  activeSet.value = selectedTab as "past" | "upcoming";
+};
 
 // TODO: Refactor tracking
 // export default class EventsPage {
