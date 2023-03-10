@@ -1,0 +1,198 @@
+{
+  "id": "multiplatforms",
+  "title": "Multiplatforms",
+  "description": "Cloud services that allow you to connect with several quantum services.",
+  "providers": [
+    {
+      "title": "Azure Quantum",
+      "image": null,
+      "description": "Qiskit provider for IonQ backends.",
+      "installation": "pip install \"azure-quantum[qiskit]\"",
+      "websiteCta": {
+        "label": "Website",
+        "url": "https://aka.ms/aq"
+      },
+      "docsCta": {
+        "label": "Docs",
+        "url": "https://aka.ms/AQ/Qiskit/QuickStart"
+      },
+      "sourceCta": {
+        "label": null,
+        "url": null
+      },
+      "codeExamples": [
+        {
+          "name": "bell",
+          "fullCode": [
+            "from azure.quantum.qiskit import AzureQuantumProvider",
+            "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+            "backend = provider.get_backend(\"ionq.simulator\")",
+            "&nbsp;",
+            "# Build and transpile circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "transpiled_circuit = transpile(circuit, backend)",
+            "&nbsp;",
+            "# Run the circuit and get result",
+            "job = backend.run(transpiled_circuit)",
+            "counts = job.result().get_counts()",
+            "print(counts)"
+          ]
+        },
+        {
+          "name": "bell",
+          "fullCode": [
+            "from azure.quantum.qiskit import AzureQuantumProvider",
+            "from qiskit.primitives import BackendSampler",
+            "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+            "backend = provider.get_backend(\"ionq.simulator\")",
+            "sampler = BackendSampler(backend)",
+            "&nbsp;",
+            "# Build circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "&nbsp;",
+            "# Run the circuit and get result distribution",
+            "job = sampler.run(circuit)",
+            "quasi_dist = job.result().quasi_dists[0]",
+            "print(quasi_dist)"
+          ]
+        },
+        {
+          "name": "vqe",
+          "fullCode": [
+            "from azure.quantum.qiskit import AzureQuantumProvider",
+            "from qiskit.primitives import BackendEstimator",
+            "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+            "backend = provider.get_backend(\"ionq.simulator\")",
+            "estimator = BackendEstimator(backend)",
+            "&nbsp;",
+            "from qiskit.quantum_info import SparsePauliOp",
+            "&nbsp;",
+            "H2_op = SparsePauliOp.from_list([",
+            "    (\"II\", -1.052373245772859),",
+            "    (\"IZ\", 0.39793742484318045),",
+            "    (\"ZI\", -0.39793742484318045),",
+            "    (\"ZZ\", -0.01128010425623538),",
+            "    (\"XX\", 0.18093119978423156)",
+            "])",
+            "&nbsp;",
+            "# Calculate ground state energy using VQE",
+            "from qiskit.circuit.library import TwoLocal",
+            "from qiskit.algorithms.optimizers import SLSQP",
+            "from qiskit.algorithms.minimum_eigensolvers import VQE",
+            "&nbsp;",
+            "ansatz = TwoLocal(2, \"ry\", \"cz\")",
+            "optimizer = SLSQP(maxiter=1000)",
+            "vqe = VQE(estimator, ansatz, optimizer)",
+            "result = vqe.compute_minimum_eigenvalue(operator=H2_op)",
+            "print(result.eigenvalue)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Amazon Braket",
+      "image": null,
+      "description": "Execute Qiskit programs on AWS quantum computing hardware devices through Amazon Braket",
+      "installation": "pip install qiskit_braket_provider",
+      "websiteCta": {
+        "label": "Website",
+        "url": "https://aws.amazon.com/braket/"
+      },
+      "docsCta": {
+        "label": "Docs",
+        "url": "https://qiskit-community.github.io/qiskit-braket-provider/"
+      },
+      "sourceCta": {
+        "label": "GitHub",
+        "url": "https://github.com/qiskit-community/qiskit-braket-provider"
+      },
+      "code": {
+        "backend": "from qiskit_braket_provider import AWSBraketProvider\nprovider = AWSBraketProvider()\nbackend = provider.backends(\"SV1\")"
+      },
+      "codeExamples": [
+        {
+          "name": "bell",
+          "fullCode": [
+            "from qiskit_braket_provider import AWSBraketProvider",
+            "provider = AWSBraketProvider()",
+            "backend = provider.backends(\"SV1\")",
+            "&nbsp;",
+            "# Build and transpile circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "transpiled_circuit = transpile(circuit, backend)",
+            "&nbsp;",
+            "# Run the circuit and get result",
+            "job = backend.run(transpiled_circuit)",
+            "counts = job.result().get_counts()",
+            "print(counts)"
+          ]
+        },
+        {
+          "name": "bell",
+          "fullCode": [
+            "from qiskit_braket_provider import AWSBraketProvider",
+            "from qiskit.primitives import BackendSampler",
+            "provider = AWSBraketProvider()",
+            "backend = provider.backends(\"SV1\")",
+            "sampler = BackendSampler(backend)",
+            "&nbsp;",
+            "# Build circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "&nbsp;",
+            "# Run the circuit and get result distribution",
+            "job = sampler.run(circuit)",
+            "quasi_dist = job.result().quasi_dists[0]",
+            "print(quasi_dist)"
+          ]
+        },
+        {
+          "name": "vqe",
+          "fullCode": [
+            "from qiskit_braket_provider import AWSBraketProvider",
+            "from qiskit.primitives import BackendEstimator",
+            "provider = AWSBraketProvider()",
+            "backend = provider.backends(\"SV1\")",
+            "estimator = BackendEstimator(backend)",
+            "&nbsp;",
+            "from qiskit.quantum_info import SparsePauliOp",
+            "&nbsp;",
+            "H2_op = SparsePauliOp.from_list([",
+            "    (\"II\", -1.052373245772859),",
+            "    (\"IZ\", 0.39793742484318045),",
+            "    (\"ZI\", -0.39793742484318045),",
+            "    (\"ZZ\", -0.01128010425623538),",
+            "    (\"XX\", 0.18093119978423156)",
+            "])",
+            "&nbsp;",
+            "# Calculate ground state energy using VQE",
+            "from qiskit.circuit.library import TwoLocal",
+            "from qiskit.algorithms.optimizers import SLSQP",
+            "from qiskit.algorithms.minimum_eigensolvers import VQE",
+            "&nbsp;",
+            "ansatz = TwoLocal(2, \"ry\", \"cz\")",
+            "optimizer = SLSQP(maxiter=1000)",
+            "vqe = VQE(estimator, ansatz, optimizer)",
+            "result = vqe.compute_minimum_eigenvalue(operator=H2_op)",
+            "print(result.eigenvalue)"
+          ]
+        }
+      ]
+    }
+  ]
+}

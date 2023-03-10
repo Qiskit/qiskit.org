@@ -4,14 +4,14 @@
     <!-- eslint-disable vue/multiline-html-element-content-newline -->
     <BasicLink
       v-for="entry in entries"
-      :key="entry.sectionId || entry.label"
+      :key="entry.sectionId || entry.title"
       class="the-table-of-contents__entry"
       :class="{
         'the-table-of-contents__entry_active': isActive(entry),
         'the-table-of-contents__entry_second-level': entry.isSecondary
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
-    >{{ entry.label }}</BasicLink>
+    >{{ entry.title }}</BasicLink>
     <!-- eslint-enable -->
   </nav>
 </template>

@@ -1,16 +1,20 @@
-import { GeneralLink } from './appLinks'
-import { NavLink } from '~/constants/menuLinks'
 import rawHardwareData from '~/content/providers/hardware.json'
-import rawSimulatorsData from '~/content/providers/simulators.json'
-import rawMultiplatformsData from '~/content/providers/multiplatforms.json'
+import rawLocalSimulatorsData from '~/content/providers/local-simulators.json'
+import rawMultiplatformsData from '~/content/providers/multi-platforms.json'
+import rawRuntimesData from '~/content/providers/runtimes.json'
 
 type TableOfContentEntry = {
   /** The visible name of the link */
-  label: string
+  title: string
   /** Id of the section we want to jump to */
   sectionId?: string
   /** Use when the link is on secondary level */
   isSecondary?: boolean
+}
+
+type ProviderCodeExample = {
+  name: string
+  fullCode: string[]
 }
 
 type ProviderObject = {
@@ -18,10 +22,19 @@ type ProviderObject = {
   image: string | null
   description: string
   installation: string
-  websiteCta?: GeneralLink
-  docsCta?: GeneralLink
-  sourceCta?: GeneralLink
-  helloWorldExample: string[]
+  websiteCta?: {
+    label: string | null,
+    url: string | null
+  }
+  docsCta?: {
+    label: string | null,
+    url: string | null
+  }
+  sourceCta?: {
+    label: string | null,
+    url: string | null
+  }
+  codeExamples: ProviderCodeExample[]
 }
 
 /**
@@ -35,79 +48,64 @@ interface ProvidersSection {
   /** The visible description of the section */
   description: string
   /** Where we want to go to get more info of the section */
-  link?: NavLink
-  /** A set of links to get more information on the section */
-  linkset?: NavLink[]
-  /** The sub sections inside the section */
-  subSections?: ProviderObject[]
-  /** The image to show if the section doesn't have subsections */
-  image?: string
+  providers: ProviderObject[]
 }
 
-const runtimes: string = 'runtimes'
+const HARDWARE_IN_MENU: TableOfContentEntry = {
+  sectionId: rawHardwareData.id,
+  title: rawHardwareData.title,
+  isSecondary: true
+}
+
+const HARDWARE_COLLECTION: ProvidersSection = rawHardwareData
 
 const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
-  sectionId: runtimes,
-  label: 'Quantum Runtimes',
+  sectionId: rawRuntimesData.id,
+  title: rawRuntimesData.title,
   isSecondary: true
 }
 
-const QUANTUM_RUNTIMES: ProvidersSection = {
-  id: runtimes,
-  title: 'Quantum Runtimes',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
-  subSections: rawHardwareData as ProviderObject[]
-}
+const QUANTUM_RUNTIMES_COLLECTION: ProvidersSection = rawRuntimesData
 
-const simulatorsId: string = 'simulators'
-
-const SIMULATORS_IN_MENU: TableOfContentEntry = {
-  sectionId: simulatorsId,
-  label: 'Simulators',
+const LOCAL_SIMULATORS_IN_MENU: TableOfContentEntry = {
+  sectionId: rawLocalSimulatorsData.id,
+  title: rawLocalSimulatorsData.title,
   isSecondary: true
 }
 
-const SIMULATORS_COLLECTION: ProvidersSection = {
-  id: simulatorsId,
-  title: 'Simulators',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
-  subSections: rawSimulatorsData as ProviderObject[]
-}
-
-const multiplatformsId: string = 'multiplatforms'
+const LOCAL_SIMULATORS_COLLECTION: ProvidersSection = rawLocalSimulatorsData
 
 const MULTIPLATFORMS_IN_MENU: TableOfContentEntry = {
-  sectionId: multiplatformsId,
-  label: 'Multiplatforms',
+  sectionId: rawMultiplatformsData.id,
+  title: rawMultiplatformsData.title,
   isSecondary: true
 }
 
-const MULTIPLATFORMS_COLLECTION: ProvidersSection = {
-  id: multiplatformsId,
-  title: 'Multiplatforms',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere eros sed tortor facilisis efficitur. Vestibulum finibus, libero vitae aliquam finibus.',
-  subSections: rawMultiplatformsData as ProviderObject[]
-}
+const MULTI_PLATFORMS_COLLECTION: ProvidersSection = rawMultiplatformsData
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
-    label: 'Run Qiskit circuits with'
+    title: 'Run Qiskit circuits with'
   },
+  HARDWARE_IN_MENU,
   QUANTUM_RUNTIMES_IN_MENU,
-  SIMULATORS_IN_MENU,
+  LOCAL_SIMULATORS_IN_MENU,
   MULTIPLATFORMS_IN_MENU
 ]
 
 const CONTENT_SECTIONS: ProvidersSection[] = [
-  QUANTUM_RUNTIMES,
-  SIMULATORS_COLLECTION,
-  MULTIPLATFORMS_COLLECTION
+  HARDWARE_COLLECTION,
+  QUANTUM_RUNTIMES_COLLECTION,
+  LOCAL_SIMULATORS_COLLECTION,
+  MULTI_PLATFORMS_COLLECTION
 ]
 
 export {
   TableOfContentEntry,
   ProvidersSection,
   ProviderObject,
+  ProviderCodeExample,
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS
+
 }

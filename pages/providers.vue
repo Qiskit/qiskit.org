@@ -30,22 +30,12 @@
             class="providers-page__content-section scrollable"
             :title="section.title"
             :description="section.description"
-            :link="section.link"
-            :linkset="section.linkset"
           >
             <ContentAccordion
-              v-if="section.subSections"
+              v-if="section.providers"
               class="providers-page__content-section-details"
-              :tabs="asTabs(section.subSections)"
+              :tabs="asTabs(section.providers)"
             />
-            <div v-else class="providers-page__content-section-details">
-              <div class="providers-page__content-section-image__wrapper">
-                <img
-                  class="providers-page__content-section-image"
-                  :src="section.image"
-                >
-              </div>
-            </div>
           </AppIntroductoryContent>
         </div>
       </div>
@@ -78,8 +68,8 @@ export default class ProvidersPage extends QiskitPage {
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
 
-  asTabs (subsections: Array<ProviderObject>): Array<ProviderObject> {
-    return subsections.map(subsection => subsection as ProviderObject)
+  asTabs (providers: Array<ProviderObject>): Array<ProviderObject> {
+    return providers.map(provider => provider as ProviderObject)
   }
 }
 </script>
@@ -98,17 +88,6 @@ export default class ProvidersPage extends QiskitPage {
   &__content-section-details {
     background-color: $background-color-lighter;
     height: 100%;
-  }
-
-  &__content-section-image {
-    transform: translateX(20%);
-    max-width: 100%;
-    max-height: 30.5rem;
-
-    &__wrapper {
-      display: flex;
-      justify-content: flex-end;
-    }
   }
 }
 </style>

@@ -1,33 +1,51 @@
 {
-  "id": "qpus",
-  "title": "Quantum Systems",
-  "description": "Quantum systems (aka quantum processors, QPUs, quantum hardware, quantum chips) are services that allow users to execute quantum programs in specialized hardware that leverages quantum mechanical phenomena for quantum computation. These services usually require user registration and have different pricing plans.",
+  "id": "simulators",
+  "title": "Local Simulators",
+  "description": "It is possible to simulate in quantum processor in your own computer. There are several projects that allow you to do that locally after installing some extra software. This is probably the best way to start with quantum computing.",
   "providers": [
     {
-      "title": "IBM Qiskit Runtime",
-      "image": "/images/providers/qiskit-ibm-runtime.png",
-      "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
-      "installation": "pip install qiskit-ibm-runtime",
+      "title": "Qiskit Aer",
+      "image": null,
+      "description": "Qiskit Aer is a high performance simulator for quantum circuits that includes noise models.",
+      "installation": "pip install qiskit-aer",
       "websiteCta": {
-        "label": "Website",
-        "url": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/"
+        "label": null,
+        "url": null
       },
       "docsCta": {
         "label": "Docs",
-        "url": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
+        "url": "https://qiskit.org/documentation/aer/"
       },
       "sourceCta": {
         "label": "GitHub",
-        "url": "https://github.com/Qiskit/qiskit-ibm-runtime"
+        "url": "https://github.com/Qiskit/qiskit-aer"
       },
       "codeExamples": [
         {
           "name": "bell",
           "fullCode": [
-            "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
-            "service = QiskitRuntimeService()",
-            "backend = service.backend(\"ibmq_qasm_simulator\")",
-            "sampler = Sampler(session=backend)",
+            "from qiskit_aer import AerSimulator",
+            "backend = AerSimulator()",
+            "&nbsp;",
+            "# Build and transpile circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "transpiled_circuit = transpile(circuit, backend)",
+            "&nbsp;",
+            "# Run the circuit and get result",
+            "job = backend.run(transpiled_circuit)",
+            "counts = job.result().get_counts()",
+            "print(counts)"
+          ]
+        },
+        {
+          "name": "bell",
+          "fullCode": [
+            "from qiskit_aer.primitives import Sampler",
+            "sampler = Sampler()",
             "&nbsp;",
             "# Build circuit",
             "from qiskit import QuantumCircuit",
@@ -45,10 +63,8 @@
         {
           "name": "vqe",
           "fullCode": [
-            "from qiskit_ibm_runtime import QiskitRuntimeService, Estimator",
-            "service = QiskitRuntimeService()",
-            "backend = service.backend(\"ibmq_qasm_simulator\")",
-            "estimator = Estimator(session=backend)",
+            "from qiskit_aer.primitives import Estimator",
+            "estimator = Estimator()",
             "&nbsp;",
             "from qiskit.quantum_info import SparsePauliOp",
             "&nbsp;",

@@ -11,7 +11,7 @@
     />
     <div class="accordion-layout__code-block">
       <CodeSnippet
-        :code-lines="codeExample"
+        :code-lines="codeExamples[0].fullCode"
         :code-snippet-title="title"
         :code-snippet-location="'providers'"
       />
@@ -32,6 +32,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import CodeSnippet from '../ui/CodeSnippet.vue'
 import { GeneralLink } from '~/constants/appLinks'
+import { ProviderCodeExample } from '~/constants/providersContent'
 
 interface AccordionLayoutProps {
   title: string
@@ -50,7 +51,7 @@ interface AccordionLayoutProps {
     label: string | null
     url: string | null
   }
-  codeExample: string[]
+  codeExamples: ProviderCodeExample[]
 }
 
 export { AccordionLayoutProps }
@@ -66,11 +67,15 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   @Prop(Object) websiteCta!: GeneralLink
   @Prop(Object) docsCta!: GeneralLink
   @Prop(Object) sourceCta!: GeneralLink
-  @Prop(Array) codeExample!: string[]
+  @Prop(Array) codeExamples!: ProviderCodeExample[]
 
   get validCtas () {
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
+
+  // mounted() {
+  //   console.log(this.codeExamples[0].fullCode, "codeExamples")
+  // }
 }
 </script>
 

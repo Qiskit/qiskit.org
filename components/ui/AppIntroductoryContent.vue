@@ -8,19 +8,6 @@
             <p class="app-introductory-content__description">
               {{ description }}
             </p>
-            <AppCta
-              v-if="link"
-              v-bind="link"
-              kind="ghost"
-            />
-            <template v-if="linkset">
-              <AppCta
-                v-for="link in linkset"
-                v-bind="link"
-                :key="link"
-                kind="ghost"
-              />
-            </template>
           </div>
         </div>
         <div class="bx--col-lg-12">
@@ -34,14 +21,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { NavLink } from '~/constants/menuLinks'
 
 @Component
 export default class AppIntroductoryContent extends Vue {
   @Prop(String) title!: string
   @Prop(String) description!: string
-  @Prop(Object) link!: NavLink
-  @Prop(Array) linkset!: NavLink[]
 }
 </script>
 
