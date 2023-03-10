@@ -34,8 +34,8 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <!-- <h2 v-text="agendaData.title" /> -->
-        <!-- <p v-text="agendaData.subtitle" /> -->
+        <h2 v-text="agendaData.title" />
+        <p v-text="agendaData.subtitle" />
         <!-- <cv-tabs>
           <cv-tab
             v-for="week in agendaData.weeks"
@@ -70,11 +70,11 @@
         </cv-tabs> -->
       </section>
 
-      <!-- <AppHelpfulResourcesSection
+      <UiAppHelpfulResourcesSection
         class="fall-fest-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"
-      /> -->
+      />
     </div>
   </main>
 </template>
@@ -152,14 +152,15 @@ useHead({
   ],
 });
 
+const agendaData = agenda;
 const headerData = header;
+const helpfulResourcesData = helpfulResources;
+
 // TODO: Refactor tracking
 // @Component({
 // export default class FallFestPage {
 //   routeName = 'fall-fest'
 //   agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
-//   agendaData = agenda
-//   helpfulResourcesData = helpfulResources
 // }
 </script>
 
