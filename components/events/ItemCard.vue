@@ -45,8 +45,8 @@ interface Props {
   title: string;
   image: string;
   institution?: string;
-  location: string;
-  date: string;
+  location?: string;
+  date?: string;
   time?: string;
   to: string;
   ctaLabel?: string;

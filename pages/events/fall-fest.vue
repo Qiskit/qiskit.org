@@ -1,16 +1,13 @@
 <template>
   <main class="fall-fest-page">
-    <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderWithCard
+    <UiAppPageHeaderWithCard
       :cta="headerData.cta"
       :card-title="headerData.cardSectionHeading"
     >
-      <template slot="title">
+      <template #title>
         {{ headerData.titleLine1 }}
-        <br />
-        {{ headerData.titleLine2 }}
       </template>
-      <template slot="description">
+      <template #description>
         <p>
           The Qiskit Fall Fest is a collection of quantum computing events on
           college campuses around the world. Every Fall Fest event is organized
@@ -22,12 +19,12 @@
           local community’s skill set.
         </p>
       </template>
-      <template slot="card">
+      <template #card>
         <EventsItemCard v-bind="headerData.card" vertical-layout>
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>
-    </AppPageHeaderWithCard> -->
+    </UiAppPageHeaderWithCard>
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
@@ -85,11 +82,11 @@
 <script setup lang="ts">
 // TODO: Integrate old code
 // import UniversityDirectorySection from '../../components/events/fall-fest/UniversityDirectorySection.vue'
-// import {
-//   header,
-//   agenda,
-//   helpfulResources
-// } from '~/constants/fallFest2022Content'
+import {
+  header,
+  agenda,
+  helpfulResources,
+} from "~/constants/fallFest2022Content";
 
 const title = "Qiskit Fall Fest 2022";
 const description =
@@ -155,43 +152,42 @@ useHead({
   ],
 });
 
+const headerData = header;
 // TODO: Refactor tracking
 // @Component({
 // export default class FallFestPage {
 //   routeName = 'fall-fest'
 //   agendaColumnsDataTable: string[] = ['University', 'Start Date', 'End Date', 'Detail', 'Type of Event', 'Link']
-//   headerData = header
 //   agendaData = agenda
 //   helpfulResourcesData = helpfulResources
 // }
 </script>
 
 <style lang="scss" scoped>
-// TODO: Review old CSS
-// .fall-fest-page {
-//   display: flex;
-//   flex-direction: column;
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
-//   &__section {
-//     margin-top: carbon.$spacing-10;
-//     margin-bottom: carbon.$spacing-07;
+.fall-fest-page {
+  display: flex;
+  flex-direction: column;
 
-//     @include carbon.breakpoint-down(lg) {
-//       margin-bottom: carbon.$spacing-05;
-//     }
-//   }
+  &__section {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-07;
 
-//   &__content {
-//     @include carbon.breakpoint-down(lg) {
-//       max-width: 100%;
-//     }
-//   }
-// }
-</style>
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+  }
 
-<style lang="scss" scoped>
-// TODO: Review old CSS
-// // overrides
+  &__content {
+    @include carbon.breakpoint-down(lg) {
+      max-width: 100%;
+    }
+  }
+}
+
+// overrides
 // .fall-fest-page {
 //   &__table-link {
 //     &:hover,
@@ -244,7 +240,7 @@ useHead({
 //       background-color: qiskit.$background-color-white;
 
 //       svg {
-//         fill: $gray-100;
+//         fill: carbon.$gray-100;
 //       }
 //     }
 
