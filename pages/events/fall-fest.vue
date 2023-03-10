@@ -48,8 +48,8 @@
         </bx-tabs>
         <div
           v-for="week in agendaData.weeks"
-          :key="week.tabName"
           :id="week.tabName"
+          :key="week.tabName"
           :aria-labelledby="week.tabName"
           role="tabpanel"
           hidden
