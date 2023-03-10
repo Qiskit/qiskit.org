@@ -8,13 +8,13 @@
         <p class="app-mosaic-section__description" v-text="description" />
       </div>
     </div>
-    <AppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
+    <UiAppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
     <slot />
   </section>
 </template>
 
 <script setup lang="ts">
-import { MosaicElement } from "~/components/ui/AppMosaic.vue";
+import type { MosaicElement } from "~/types/uiComponents";
 
 interface Props {
   description?: string;

@@ -2,7 +2,7 @@
   <section class="app-helpful-resources-section">
     <h2 v-text="title" />
     <div class="cds--row">
-      <AppDescriptionCard
+      <UiAppDescriptionCard
         v-for="resource in resources"
         :key="resource.title"
         class="cds--col-lg-4 cds--col-md-4 app-helpful-resources-section__card"
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
+import type { DescriptionCard } from "~/types/uiComponents";
 
 interface Props {
   resources: DescriptionCard[];

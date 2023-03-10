@@ -20,12 +20,6 @@
 <script setup lang="ts">
 import { GeneralLink } from "~/constants/appLinks";
 
-export type DescriptionCard = {
-  title: string;
-  description: string;
-  cta: GeneralLink;
-};
-
 interface Props {
   cta: GeneralLink;
   description: string;

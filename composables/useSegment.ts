@@ -106,7 +106,7 @@ function trackPage(context: AnalyticsContext, route: string) {
 
   const category = getOrFailCategory(digitalData);
   const productTitle = getOrFailProductTitle(digitalData);
-  const project = "project-saiba";
+  const project = "Qiskit.org";
 
   bluemixAnalytics.pageEvent(category, project, {
     navigationType: "pushState",
