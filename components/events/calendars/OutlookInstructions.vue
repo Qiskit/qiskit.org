@@ -1,13 +1,17 @@
 <template>
-  <cv-list ordered>
-    <cv-list-item
-      >Open your Outlook Calendar and click on “Add calendar”</cv-list-item
+  <bx-ordered-list>
+    <bx-list-item
+      >Open your Outlook Calendar and click on “Add calendar”</bx-list-item
     >
-    <cv-list-item>Select the menu item “Subscribe from web”</cv-list-item>
-    <cv-list-item
-      >Paste the events subscription link you copied above</cv-list-item
+    <bx-list-item>Select the menu item “Subscribe from web”</bx-list-item>
+    <bx-list-item
+      >Paste the events subscription link you copied above</bx-list-item
     >
-    <cv-list-item>Add a name for your calendar</cv-list-item>
-    <cv-list-item>Click “Import”</cv-list-item>
-  </cv-list>
+    <bx-list-item>Add a name for your calendar</bx-list-item>
+    <bx-list-item>Click “Import”</bx-list-item>
+  </bx-ordered-list>
 </template>
+
+<script setup lang="ts">
+import "@carbon/web-components/es/components/list/index.js";
+</script>

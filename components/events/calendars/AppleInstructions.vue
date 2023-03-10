@@ -1,13 +1,17 @@
 <template>
-  <cv-list ordered>
-    <cv-list-item>Open your Apple Calendar</cv-list-item>
-    <cv-list-item
-      >In the menu, select "File" > "New Calendar Subscription"</cv-list-item
+  <bx-ordered-list>
+    <bx-list-item>Open your Apple Calendar</bx-list-item>
+    <bx-list-item
+      >In the menu, select "File" > "New Calendar Subscription"</bx-list-item
     >
-    <cv-list-item
-      >Paste the events subscription link you copied above</cv-list-item
+    <bx-list-item
+      >Paste the events subscription link you copied above</bx-list-item
     >
-    <cv-list-item>Click "Subscribe"</cv-list-item>
-    <cv-list-item>Click "Ok"</cv-list-item>
-  </cv-list>
+    <bx-list-item>Click "Subscribe"</bx-list-item>
+    <bx-list-item>Click "Ok"</bx-list-item>
+  </bx-ordered-list>
 </template>
+
+<script setup lang="ts">
+import "@carbon/web-components/es/components/list/index.js";
+</script>
