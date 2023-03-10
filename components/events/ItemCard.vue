@@ -1,6 +1,6 @@
 <template>
   <UiAppCard
-    class="event-card"
+    class="item-card"
     :image="image"
     :title="title"
     :tags="types"
@@ -9,24 +9,24 @@
     :segment="segment"
     :vertical-layout="verticalLayout"
   >
-    <div class="event-card__description">
+    <div class="item-card__description">
       <slot v-if="$slots.default" />
     </div>
     <div>
-      <div v-if="location" class="event-card__detail">
-        <Map20 class="event-card__icon" />
+      <div v-if="location" class="item-card__detail">
+        <Map20 class="item-card__icon" />
         {{ location }}
       </div>
-      <div v-if="date" class="event-card__detail">
-        <Calendar20 class="event-card__icon" />
+      <div v-if="date" class="item-card__detail">
+        <Calendar20 class="item-card__icon" />
         <time>{{ date }}</time>
       </div>
-      <div v-if="time" class="event-card__detail">
-        <Time20 class="event-card__icon" />
+      <div v-if="time" class="item-card__detail">
+        <Time20 class="item-card__icon" />
         <time>{{ time }}</time>
       </div>
-      <div v-if="institution" class="event-card__detail">
-        <Education20 class="event-card__icon" />
+      <div v-if="institution" class="item-card__detail">
+        <Education20 class="item-card__icon" />
         {{ institution }}
       </div>
     </div>
@@ -66,7 +66,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.event-card {
+.item-card {
   &__description {
     margin-bottom: carbon.$spacing-06;
   }
