@@ -31,9 +31,9 @@
         <p>See you next year!</p>
       </template>
       <template slot="card">
-        <EventCard v-bind="headerData.card" vertical-layout>
+        <EventsItemCard v-bind="headerData.card" vertical-layout>
           {{ headerData.card.description }}
-        </EventCard>
+        </EventsItemCard>
       </template>
     </AppPageHeaderWithCard> -->
 

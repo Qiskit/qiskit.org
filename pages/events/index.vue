@@ -47,8 +47,8 @@
             />
           </div>
         </template>
-        <!-- <template slot="results">
-          <AppCard
+        <template #results>
+          <UiAppCard
             v-if="noEvents"
             :image="emptyCard.img"
             :title="emptyCard.title"
@@ -56,26 +56,26 @@
             <div class="event-page__empty-card-description">
               {{ emptyCard.description }}
             </div>
-          </AppCard>
+          </UiAppCard>
           <div v-else class="cds--row">
             <div
-              v-for="event in filteredEvents"
-              :key="`${event.title}-${event.place}-${event.date}`"
+              v-for="(eventItem, index) in filteredEvents"
+              :key="index"
               class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <EventCard
-                class="app-filters-results-layout__results-item"
-                :types="event.types"
-                :title="event.title"
-                :image="event.image"
-                :location="event.location"
-                :date="event.date"
-                :time="event.startDateAndTime"
-                :to="event.to"
+              <EventsItemCard
+                class="event-page__card"
+                :types="eventItem.types"
+                :title="eventItem.title"
+                :image="eventItem.image"
+                :location="eventItem.location"
+                :date="eventItem.date"
+                :time="eventItem.startDateAndTime"
+                :to="eventItem.to"
               />
             </div>
           </div>
-        </template> -->
+        </template>
         <!-- <template slot="extra-info">
           <div class="event-page__section">
             <h3>Follow our event calendar</h3>
@@ -141,17 +141,20 @@ import {
   COMMUNITY_EVENT_TYPE_OPTIONS,
 } from "~/types/events";
 // import { EVENT_REQUEST_LINK, GeneralLink } from '~/constants/appLinks'
+import rawPastEvents from "~/content/events/past-community-events.json";
+import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
+
+const pastEvents = rawPastEvents as CommunityEvent[];
+const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
 
 definePageMeta({
   layout: "default-max",
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Events",
 });
 
-// TODO: Integrate old code
 // const calendarsInstructions = [
 //   {
 //     name: 'Google',
@@ -176,33 +179,15 @@ useHead({
 //   }
 // }
 
-// // TODO: Replace Vuex with Pinia
-// @Component({
-//   computed: {
-//     ...mapGetters('events', [
-//       'filteredEvents',
-//       'typeFilters',
-//       'regionFilters'
-//     ])
-//   },
-
-//   async fetch ({ store }) {
-//     const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
-//     const pastEvents = await store.dispatch('events/fetchPastEvents')
-
-//     const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
-//     const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
-//     store.commit('events/setEvents', upcomingEventsPayload)
-//     store.commit('events/setEvents', pastEventsPayload)
-//   }
-// })
-
 // const eventRequestLink = EVENT_REQUEST_LINK
-// const emptyCard = {
-//   title: 'No events found',
-//   description: 'Trying doing a wider search criteria, or consider starting your own event.',
-//   img: '/images/events/no-events.svg'
-// }
+
+const emptyCard = {
+  title: "No events found",
+  description:
+    "Trying doing a wider search criteria, or consider starting your own event.",
+  img: "/images/events/no-events.svg",
+};
+
 const extraFilters = [
   {
     label: "Locations",
@@ -216,48 +201,54 @@ const extraFilters = [
   },
 ];
 
-// const { data: upcomingEvents } = useLazyAsyncData(
-//   'fetch-upcoming-events',
-//   async () => await import('~/content/events/upcoming-community-events.json') as CommunityEvent[]
-// )
-
-// const { data: pastEvents } = useLazyAsyncData(
-//   'fetch-past-events',
-//   async () => await import('~/content/events/past-community-events.json') as CommunityEvent[]
-// )
-
-// const activeSet = ref<'past'|'upcoming'>('upcoming')
+const activeSet = ref<"past" | "upcoming">("upcoming");
 const regionFilters = ref<string[]>([]);
 const typeFilters = ref<string[]>([]);
 
-// const showUpcomingEvents = computed(() => activeSet.value === 'upcoming')
-// const events = computed(() => showUpcomingEvents.value ? upcomingEvents.value : pastEvents.value)
-// const noRegionFiltersSelected = computed(() => regionFilters.value.length === 0)
-// const noTypeFiltersSelected = computed(() => typeFilters.value.length === 0)
+const showUpcomingEvents = computed(() => activeSet.value === "upcoming");
+const events = computed(() =>
+  showUpcomingEvents.value ? upcomingEvents : pastEvents
+);
+const noRegionFiltersSelected = computed(
+  () => regionFilters.value.length === 0
+);
+const noTypeFiltersSelected = computed(() => typeFilters.value.length === 0);
 
-// const filteredEvents = computed(
-//   () => {
-//     if (noTypeFiltersSelected.value && noRegionFiltersSelected.value) { return events.value }
+const filteredEvents = computed(() => {
+  if (noTypeFiltersSelected.value && noRegionFiltersSelected.value) {
+    return events.value;
+  }
 
-//     if (noRegionFiltersSelected.value) { return filterBy(events.value, typeFilters.value, 'types') }
+  if (noRegionFiltersSelected.value) {
+    return filterBy(events.value, typeFilters.value, "types");
+  }
 
-//     if (noTypeFiltersSelected.value) { return filterBy(events.value, regionFilters.value, 'regions') }
+  if (noTypeFiltersSelected.value) {
+    return filterBy(events.value, regionFilters.value, "regions");
+  }
 
-//     const eventsAfterApplyTypeFilter = filterBy(events.value, typeFilters, 'types')
+  const eventsAfterApplyTypeFilter = filterBy(
+    events.value,
+    typeFilters.value,
+    "types"
+  );
 
-//     return filterBy(eventsAfterApplyTypeFilter, regionFilters, 'regions')
+  return filterBy(eventsAfterApplyTypeFilter, regionFilters.value, "regions");
 
-//     function filterBy (allEvents: CommunityEvent[], selectedFilters: string[], propToFilter: keyof CommunityEvent) {
-//       return allEvents.filter((event) => {
-//         const propValue = event[propToFilter] || []
-//         const valueArray = Array.isArray(propValue) ? propValue : [propValue]
-//         return valueArray.some(value => selectedFilters.includes(value))
-//       })
-//     }
-//   }
-// )
+  function filterBy(
+    allEvents: CommunityEvent[],
+    selectedFilters: string[],
+    propToFilter: keyof CommunityEvent
+  ) {
+    return allEvents.filter((event) => {
+      const propValue = event[propToFilter] || [];
+      const valueArray = Array.isArray(propValue) ? propValue : [propValue];
+      return valueArray.some((value) => selectedFilters.includes(value));
+    });
+  }
+});
 
-// const noEvents = computed(() => filteredEvents.value.length === 0)
+const noEvents = computed(() => filteredEvents.value.length === 0);
 
 const regionFiltersAsString = computed(() => regionFilters.value.join(","));
 const typeFiltersAsString = computed(() => typeFilters.value.join(","));
@@ -321,111 +312,118 @@ function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
 </script>
 
 <style lang="scss" scoped>
-// .event-page {
-//   &__tabs {
-//     margin-top: carbon.$spacing-07;
-//     margin-bottom: carbon.$spacing-09;
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
-//     .bx--tabs--scrollable__nav-link {
-//       color: carbon.$black-100;
-//       border-bottom-color: qiskit.$border-color;
-//     }
+.event-page {
+  &__card {
+    margin-bottom: carbon.$spacing-06;
+  }
 
-//     .bx--tabs--scrollable__nav-item--selected:not(
-//         .bx--tabs--scrollable__nav-item--disabled
-//       )
-//       .bx--tabs--scrollable__nav-link {
-//       border-bottom-color: qiskit.$border-color-secondary;
-//     }
+  &__tabs {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-09;
 
-//     .bx--tabs--scrollable__nav-item:not(
-//         .bx--tabs--scrollable__nav-item--disabled
-//       )
-//       .bx--tabs--scrollable__nav-link,
-//     .bx--tabs--scrollable__nav-item:hover:not(
-//         .bx--tabs--scrollable__nav-item--selected
-//       ):not(.bx--tabs--scrollable__nav-item--disabled)
-//       .bx--tabs--scrollable__nav-link {
-//       color: qiskit.$text-color;
-//     }
+    .bx--tabs--scrollable__nav-link {
+      color: carbon.$black-100;
+      border-bottom-color: qiskit.$border-color;
+    }
 
-//     @include carbon.breakpoint-down(md) {
-//       margin-bottom: 0;
+    .bx--tabs--scrollable__nav-item--selected:not(
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link {
+      border-bottom-color: qiskit.$border-color-secondary;
+    }
 
-//       .bx--tabs-trigger {
-//         background-color: qiskit.$background-color-white;
-//         border-bottom: 1px solid qiskit.$border-color;
+    .bx--tabs--scrollable__nav-item:not(
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link,
+    .bx--tabs--scrollable__nav-item:hover:not(
+        .bx--tabs--scrollable__nav-item--selected
+      ):not(.bx--tabs--scrollable__nav-item--disabled)
+      .bx--tabs--scrollable__nav-link {
+      color: qiskit.$text-color;
+    }
 
-//         &[class*="--open"] {
-//           background-color: qiskit.$background-color-lighter;
-//         }
-//       }
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: 0;
 
-//       .bx--tabs-trigger svg {
-//         fill: carbon.$black-100;
-//       }
+      .bx--tabs-trigger {
+        background-color: qiskit.$background-color-white;
+        border-bottom: 1px solid qiskit.$border-color;
 
-//       .bx--tabs-trigger-text {
-//         color: qiskit.$text-color;
-//       }
+        &[class*="--open"] {
+          background-color: qiskit.$background-color-lighter;
+        }
+      }
 
-//       .bx--tabs-trigger--open {
-//         border-bottom: 1px solid qiskit.$border-color-quaternary;
-//       }
+      .bx--tabs-trigger svg {
+        fill: carbon.$black-100;
+      }
 
-//       .bx--tabs-trigger--open,
-//       .bx--tabs--scrollable__nav-item {
-//         background-color: qiskit.$background-color-lighter;
-//       }
+      .bx--tabs-trigger-text {
+        color: qiskit.$text-color;
+      }
 
-//       .bx--tabs--scrollable__nav-item:last-child
-//         .bx--tabs--scrollable__nav-link {
-//         border-bottom: none;
-//       }
+      .bx--tabs-trigger--open {
+        border-bottom: 1px solid qiskit.$border-color-quaternary;
+      }
 
-//       .bx--tabs--scrollable__nav-item:hover:not(
-//           .bx--tabs--scrollable__nav-item--selected
-//         ):not(.bx--tabs--scrollable__nav-item--disabled) {
-//         background-color: qiskit.$background-color-light;
-//       }
-//     }
-//   }
+      .bx--tabs-trigger--open,
+      .bx--tabs--scrollable__nav-item {
+        background-color: qiskit.$background-color-lighter;
+      }
 
-//   &__main-content {
-//     @include carbon.breakpoint-down(md) {
-//       margin-top: carbon.$spacing-09;
-//     }
-//   }
+      .bx--tabs--scrollable__nav-item:last-child
+        .bx--tabs--scrollable__nav-link {
+        border-bottom: none;
+      }
 
-//   &__empty-card-description {
-//     height: 8rem;
+      .bx--tabs--scrollable__nav-item:hover:not(
+          .bx--tabs--scrollable__nav-item--selected
+        ):not(.bx--tabs--scrollable__nav-item--disabled) {
+        background-color: qiskit.$background-color-light;
+      }
+    }
+  }
 
-//     @include carbon.breakpoint-down(md) {
-//       height: auto;
-//     }
-//   }
+  &__main-content {
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-09;
+    }
+  }
 
-//   &__section {
-//     margin-top: carbon.$spacing-10;
-//     margin-bottom: carbon.$spacing-10;
+  &__empty-card-description {
+    height: 8rem;
 
-//     &__description {
-//       margin-top: carbon.$spacing-06;
-//       margin-bottom: carbon.$spacing-07;
-//       max-width: 20rem;
+    @include carbon.breakpoint-down(md) {
+      height: auto;
+    }
+  }
 
-//       @include carbon.breakpoint-up(lg) {
-//         max-width: 24rem;
-//       }
-//     }
-//   }
+  &__section {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-10;
 
-//   &__tab {
-//     padding-top: carbon.$spacing-06;
-//   }
+    &__description {
+      margin-top: carbon.$spacing-06;
+      margin-bottom: carbon.$spacing-07;
+      max-width: 20rem;
 
-//   &__instructions {
-//     padding-left: carbon.$spacing-06;
-//   }
-// }
+      @include carbon.breakpoint-up(lg) {
+        max-width: 24rem;
+      }
+    }
+  }
+
+  &__tab {
+    padding-top: carbon.$spacing-06;
+  }
+
+  &__instructions {
+    padding-left: carbon.$spacing-06;
+  }
+}
 </style>
