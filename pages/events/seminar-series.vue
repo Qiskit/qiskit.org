@@ -15,6 +15,7 @@
         <EventsItemCard v-bind="cardContent" vertical-layout />
       </template>
     </UiAppPageHeaderWithCard>
+
     <div class="cds--grid">
       <UiAppMosaicSection
         class="seminar-series-page__section"
@@ -83,17 +84,17 @@
           :url="showMorePastEventsCta.url"
         />
       </AppDataTableSection> -->
-      <!-- <AppHelpfulResourcesSection
+
+      <UiAppHelpfulResourcesSection
         class="seminar-series-page__section"
         :resources="helpfulResources"
-      /> -->
+      />
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import type { MosaicElement } from "~/types/uiComponents";
-// import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
+import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 // import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
 // import { TableRowElement } from "~/components/ui/AppDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
@@ -205,61 +206,61 @@ const mosaicElements: MosaicElement[] = [
 
 // const pastEvents = pastSeminarSeriesEvents;
 
-// // Data for the helpful resources section
-// const helpfulResources: DescriptionCard[] = [
-//   {
-//     title: "Stay informed",
-//     description:
-//       "Want to keep up to date with upcoming seminars? Click here to subscribe to our calendar for all upcoming events.",
-//     cta: {
-//       url: "https://calendar.google.com/calendar/ical/c12g9fqo0mkvp9bo26dhm3u1rs%40group.calendar.google.com/public/basic.ics",
-//       label: "Get calendar updates",
-//       segment: {
-//         cta: "get-calendar",
-//         location: "helpful-resources",
-//       },
-//     },
-//   },
-//   {
-//     title: "Nominate",
-//     description:
-//       "If you or someone you know might be interested in speaking in a future seminar, we would love to include them. Please include your name, topic and available dates.",
-//     cta: {
-//       url: "https://airtable.com/shrB5wy8SCaMMtKop",
-//       label: "Contact us",
-//       segment: {
-//         cta: "contact",
-//         location: "helpful-resources",
-//       },
-//     },
-//   },
-//   {
-//     title: "Get up to speed",
-//     description:
-//       "If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.",
-//     cta: {
-//       url: "https://qiskit.org/learn",
-//       label: "Start learning",
-//       segment: {
-//         cta: "qiskit-org-learn",
-//         location: "helpful-resources",
-//       },
-//     },
-//   },
-//   {
-//     title: "Code of conduct",
-//     description:
-//       "Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.",
-//     cta: {
-//       url: "https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md",
-//       label: "See code of conduct",
-//       segment: {
-//         cta: "code-of-conduct",
-//         location: "helpful-resources",
-//       },
-//     },
-//   },
-// ];
+// Data for the helpful resources section
+const helpfulResources: DescriptionCard[] = [
+  {
+    title: "Stay informed",
+    description:
+      "Want to keep up to date with upcoming seminars? Click here to subscribe to our calendar for all upcoming events.",
+    cta: {
+      url: "https://calendar.google.com/calendar/ical/c12g9fqo0mkvp9bo26dhm3u1rs%40group.calendar.google.com/public/basic.ics",
+      label: "Get calendar updates",
+      segment: {
+        cta: "get-calendar",
+        location: "helpful-resources",
+      },
+    },
+  },
+  {
+    title: "Nominate",
+    description:
+      "If you or someone you know might be interested in speaking in a future seminar, we would love to include them. Please include your name, topic and available dates.",
+    cta: {
+      url: "https://airtable.com/shrB5wy8SCaMMtKop",
+      label: "Contact us",
+      segment: {
+        cta: "contact",
+        location: "helpful-resources",
+      },
+    },
+  },
+  {
+    title: "Get up to speed",
+    description:
+      "If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.",
+    cta: {
+      url: "https://qiskit.org/learn",
+      label: "Start learning",
+      segment: {
+        cta: "qiskit-org-learn",
+        location: "helpful-resources",
+      },
+    },
+  },
+  {
+    title: "Code of conduct",
+    description:
+      "Qiskit is dedicated to providing an enjoyable and safe experience for all participants. We have a code of conduct that all events adhere to.",
+    cta: {
+      url: "https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md",
+      label: "See code of conduct",
+      segment: {
+        cta: "code-of-conduct",
+        location: "helpful-resources",
+      },
+    },
+  },
+];
 
 // function isAppCtaComponent(component: string): boolean {
 //   return component === "AppCta";
