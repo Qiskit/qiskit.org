@@ -22,23 +22,28 @@
         :title="mosaicSectionTitle"
         :elements="mosaicElements"
       />
-      <!-- <AppDataTableSection
+
+      <UiAppDataTableSection
         v-if="hasUpcomingEvents"
         class="seminar-series-page__section"
         :section-title="upcomingEventsSectionTitle"
         :data-table-columns="seminarSeriesDataTableColumns"
       >
         <template #data-table-elements>
-          <cv-data-table-row
+          <bx-table-row
             v-for="(row, rowIndex) in upcomingEventsDataTable"
             :key="`${rowIndex}`"
           >
-            <cv-data-table-cell
+            <bx-table-cell
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
               <UiAppCta
-                v-if="isAppCtaComponent(component)"
+                v-if="
+                  component &&
+                  isAppCtaComponent(component) &&
+                  typeof data === 'object'
+                "
                 kind="ghost"
                 :label="data.label"
                 :segment="data.segment"
@@ -46,26 +51,31 @@
                 :url="data.url"
               />
               <span v-else :style="styles">{{ data }}</span>
-            </cv-data-table-cell>
-          </cv-data-table-row>
+            </bx-table-cell>
+          </bx-table-row>
         </template>
-      </AppDataTableSection> -->
-      <!-- <AppDataTableSection
+      </UiAppDataTableSection>
+
+      <UiAppDataTableSection
         class="seminar-series-page__section"
         :section-title="pastEventsSectionTitle"
         :data-table-columns="seminarSeriesDataTableColumns"
       >
         <template #data-table-elements>
-          <cv-data-table-row
+          <bx-table-row
             v-for="(row, rowIndex) in pastEventsDataTable"
             :key="`${rowIndex}`"
           >
-            <cv-data-table-cell
+            <bx-table-cell
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
               <UiAppCta
-                v-if="isAppCtaComponent(component)"
+                v-if="
+                  component &&
+                  isAppCtaComponent(component) &&
+                  typeof data === 'object'
+                "
                 kind="ghost"
                 :label="data.label"
                 :segment="data.segment"
@@ -73,8 +83,8 @@
                 :url="data.url"
               />
               <span v-else :style="styles">{{ data }}</span>
-            </cv-data-table-cell>
-          </cv-data-table-row>
+            </bx-table-cell>
+          </bx-table-row>
         </template>
         <UiAppCta
           class="seminar-series-page__past-events-cta"
@@ -83,7 +93,7 @@
           :segment="showMorePastEventsCta.segment"
           :url="showMorePastEventsCta.url"
         />
-      </AppDataTableSection> -->
+      </UiAppDataTableSection>
 
       <UiAppHelpfulResourcesSection
         class="seminar-series-page__section"
@@ -95,8 +105,8 @@
 
 <script setup lang="ts">
 import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
-// import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-// import { TableRowElement } from "~/components/ui/AppDataTable.vue";
+import type { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
+import type { TableRowElement } from "~/components/ui/AppDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
 import {
@@ -109,12 +119,10 @@ definePageMeta({
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Seminar Series",
 });
 
-// TODO: Integrate old code
-// // Data for the header section
+// Data for the header section
 const headerTitle = "Quantum Information Science Seminar Series";
 const headerDescription = [
   `The Qiskit Quantum Information Science Seminar Series is dedicated to the
@@ -143,12 +151,6 @@ const headerCardTitle = hasUpcomingEvents ? "Up next:" : "Featured seminar:";
 const cardContent = hasUpcomingEvents
   ? upcomingSeminarSerieEvents[0]
   : pastSeminarSeriesEvents[randomIndex];
-
-// const headerCardContent = {
-//   ...cardContent,
-//   title: cardContent.speaker,
-//   description: cardContent.title,
-// };
 
 // Data for the mosaic section
 const mosaicSectionTitle =
@@ -184,27 +186,25 @@ const mosaicElements: MosaicElement[] = [
   },
 ];
 
-// // Data for the data table's sections
-// const upcomingEventsSectionTitle = "Upcoming Quantum Seminar Schedule";
-// const pastEventsSectionTitle = "Past Quantum Seminars";
-// const seminarSeriesDataTableColumns = [
-//   "Speaker",
-//   "Institution",
-//   "Name of talk",
-//   "Date of talk",
-//   "Link to talk",
-// ];
-// const upcomingEventsDataTable = dataPerRow(
-//   upcomingSeminarSerieEvents,
-//   "upcoming-events-section"
-// );
-// const pastEventsDataTable = dataPerRow(
-//   pastSeminarSeriesEvents,
-//   "past-events-section"
-// );
-// const showMorePastEventsCta = SEMINAR_SERIES_FULL_ARCHIVE_CTA;
-
-// const pastEvents = pastSeminarSeriesEvents;
+// Data for the data table's sections
+const upcomingEventsSectionTitle = "Upcoming Quantum Seminar Schedule";
+const pastEventsSectionTitle = "Past Quantum Seminars";
+const seminarSeriesDataTableColumns = [
+  "Speaker",
+  "Institution",
+  "Name of talk",
+  "Date of talk",
+  "Link to talk",
+];
+const upcomingEventsDataTable = dataPerRow(
+  upcomingSeminarSerieEvents,
+  "upcoming-events-section"
+);
+const pastEventsDataTable = dataPerRow(
+  pastSeminarSeriesEvents,
+  "past-events-section"
+);
+const showMorePastEventsCta = SEMINAR_SERIES_FULL_ARCHIVE_CTA;
 
 // Data for the helpful resources section
 const helpfulResources: DescriptionCard[] = [
@@ -262,45 +262,45 @@ const helpfulResources: DescriptionCard[] = [
   },
 ];
 
-// function isAppCtaComponent(component: string): boolean {
-//   return component === "AppCta";
-// }
+function isAppCtaComponent(component: string): boolean {
+  return component === "AppCta";
+}
 
-// function dataPerRow(
-//   events: SeminarSeriesEvent[],
-//   eventsSection: string
-// ): TableRowElement[][] {
-//   return events.map((event) => [
-//     {
-//       styles: "min-width: 9rem; display: inline-block;",
-//       data: event.speaker,
-//     },
-//     {
-//       styles: "min-width: 9rem; display: inline-block;",
-//       data: event.institution,
-//     },
-//     {
-//       styles: "min-width: 19rem; display: inline-block;",
-//       data: event.title,
-//     },
-//     {
-//       styles: "min-width: 8rem; display: inline-block;",
-//       data: event.date,
-//     },
-//     {
-//       component: "AppCta",
-//       styles: "min-width: 5rem;",
-//       data: {
-//         url: event.to,
-//         label: "Join event",
-//         segment: {
-//           cta: "talk-on-youtube",
-//           location: eventsSection,
-//         },
-//       },
-//     },
-//   ]);
-// }
+function dataPerRow(
+  events: SeminarSeriesEvent[],
+  eventsSection: string
+): TableRowElement[][] {
+  return events.map((event) => [
+    {
+      styles: "min-width: 9rem; display: inline-block;",
+      data: event.speaker,
+    },
+    {
+      styles: "min-width: 9rem; display: inline-block;",
+      data: event.institution,
+    },
+    {
+      styles: "min-width: 19rem; display: inline-block;",
+      data: event.title,
+    },
+    {
+      styles: "min-width: 8rem; display: inline-block;",
+      data: event.date,
+    },
+    {
+      component: "AppCta",
+      styles: "min-width: 5rem;",
+      data: {
+        url: event.to,
+        label: "Join event",
+        segment: {
+          cta: "talk-on-youtube",
+          location: eventsSection,
+        },
+      },
+    },
+  ]);
+}
 
 // TODO: Refactor tracking
 // export default class SeminarSeriesPage {
