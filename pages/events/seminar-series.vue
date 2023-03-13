@@ -16,9 +16,9 @@
         />
       </template>
       <template slot="card">
-        <EventCard v-bind="cardContent" vertical-layout>
+        <EventsItemCard v-bind="cardContent" vertical-layout>
           {{ cardContent.description }}
-        </EventCard>
+        </EventsItemCard>
       </template>
     </AppPageHeaderWithCard> -->
     <div class="cds--grid">

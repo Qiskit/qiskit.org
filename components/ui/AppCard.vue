@@ -26,7 +26,12 @@
         </div>
         <div class="cds--row">
           <div v-if="hasTags(tags)" class="app-card__tags">
-            <bx-tag v-for="tag in tags" :key="tag" type="purple">
+            <bx-tag
+              v-for="tag in tags"
+              :key="tag"
+              class="app-card__tag"
+              type="purple"
+            >
               {{ tag }}
             </bx-tag>
           </div>
@@ -175,6 +180,10 @@ function hasTags(tags: string[] | TagTooltip[]) {
       margin-left: 0;
       margin-bottom: carbon.$spacing-03;
     }
+  }
+
+  &__tag {
+    white-space: nowrap;
   }
 
   &__title {

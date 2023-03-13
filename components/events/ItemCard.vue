@@ -34,10 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import Map20 from "@carbon/icons-vue/lib/map/20";
 import Calendar20 from "@carbon/icons-vue/lib/calendar/20";
-import Time20 from "@carbon/icons-vue/lib/time/20";
 import Education20 from "@carbon/icons-vue/lib/education/20";
+import Map20 from "@carbon/icons-vue/lib/map/20";
+import Time20 from "@carbon/icons-vue/lib/time/20";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
@@ -47,7 +47,7 @@ interface Props {
   institution?: string;
   location: string;
   date: string;
-  time: string;
+  time?: string;
   to: string;
   ctaLabel?: string;
   segment?: CtaClickedEventProp | undefined;
