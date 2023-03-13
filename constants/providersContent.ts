@@ -1,3 +1,4 @@
+import rawCloudSimulatorsData from '~/content/providers/cloud-simulators.json'
 import rawHardwareData from '~/content/providers/hardware.json'
 import rawLocalSimulatorsData from '~/content/providers/local-simulators.json'
 import rawMultiplatformsData from '~/content/providers/multi-platforms.json'
@@ -51,6 +52,14 @@ interface ProvidersSection {
   providers: ProviderObject[]
 }
 
+const CLOUD_SIMULATORS_IN_MENU: TableOfContentEntry = {
+  sectionId: rawCloudSimulatorsData.id,
+  title: rawCloudSimulatorsData.title,
+  isSecondary: true
+}
+
+const CLOUD_SIMULATORS_COLLECTION: ProvidersSection = rawCloudSimulatorsData
+
 const HARDWARE_IN_MENU: TableOfContentEntry = {
   sectionId: rawHardwareData.id,
   title: rawHardwareData.title,
@@ -87,6 +96,7 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
     title: 'Run Qiskit circuits with'
   },
+  CLOUD_SIMULATORS_IN_MENU,
   HARDWARE_IN_MENU,
   QUANTUM_RUNTIMES_IN_MENU,
   LOCAL_SIMULATORS_IN_MENU,
@@ -94,6 +104,7 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
 ]
 
 const CONTENT_SECTIONS: ProvidersSection[] = [
+  CLOUD_SIMULATORS_COLLECTION,
   HARDWARE_COLLECTION,
   QUANTUM_RUNTIMES_COLLECTION,
   LOCAL_SIMULATORS_COLLECTION,
@@ -107,5 +118,4 @@ export {
   ProviderCodeExample,
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS
-
 }
