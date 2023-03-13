@@ -11,9 +11,13 @@
         <p class="quick-start__introduction__copy">
           Test some of the available providers and algorithms.
         </p>
-        <ProvidersList :providers-list="providersData" />
+        <ProvidersList :providers-list="providersData" @select-provider="updateSelectedProvider($event)" />
       </div>
-      <Algorithms class="bx--col-md-8 bx--col-lg-8" />
+      <Algorithms
+        class="bx--col-md-8 bx--col-lg-8"
+        :install-code="providersData[selectedProviderIndex].installation"
+        :code-examples="providersData[selectedProviderIndex].codeExamples"
+      />
     </div>
   </article>
 </template>
@@ -21,17 +25,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import rawHardware from '~/content/providers/hardware.json'
-import rawSimulators from '~/content/providers/simulators.json'
-import rawMultiplatforms from '~/content/providers/multiplatforms.json'
+import { CONTENT_SECTIONS } from '~/constants/providersContent'
 
 @Component
 export default class TheQuickStart extends Vue {
-  providersData = [
-    ...rawHardware,
-    ...rawSimulators,
-    ...rawMultiplatforms
-  ].map(({ title, docsCta: { url } }) => ({ title, url }));
+  providersData = CONTENT_SECTIONS.map(category => category.providers).flat();
+
+  selectedProviderIndex = 0
+
+  updateSelectedProvider (selectedProviderId: number):void {
+    this.selectedProviderIndex = selectedProviderId
+  }
 }
 </script>
 

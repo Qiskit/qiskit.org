@@ -2,15 +2,23 @@
   <section class="providers-list">
     <h4>Providers</h4>
     <ul class="providers-list__list">
-      <li v-for="item in providersList" :key="item.title">
-        <a class="providers-list__list__item" :href="item.url" target="_blank">
+      <template v-for="(item, index) in providersList">
+        <li
+          v-if="item.docsCta"
+          :key="index"
+          class="providers-list__list-item"
+          :class="activeIndex === index ? 'providers-list__list-item_active' : 'providers-list__list-item_inactive'"
+          tabindex="0"
+          @click="updateSelectedProvider(index)"
+        >
           {{ item.title }}
-          <span class="providers-list__list__cta">
-            <span class="providers-list__list__cta-label">Learn more</span>
-            <Launch16 class="providers-list__list__cta-icon" />
-          </span>
-        </a>
-      </li>
+          <AppCta
+            class="providers-list__list__cta"
+            v-bind="{ url: item.docsCta.url, label: `Learn more` }"
+            kind="ghost"
+          />
+        </li>
+      </template>
     </ul>
     <AppCta
       class="providers-list__btn"
@@ -23,10 +31,11 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { GeneralLink } from '~/constants/appLinks'
+import { ProviderObject } from '~/constants/providersContent'
 
 @Component
 export default class StartLocally extends Vue {
-  @Prop(Array) providersList!: GeneralLink[]
+  @Prop(Array) providersList!: ProviderObject[]
 
   providersPage: GeneralLink = {
     url: '/providers',
@@ -35,6 +44,13 @@ export default class StartLocally extends Vue {
       cta: 'see-all-providers',
       location: 'quick-start'
     }
+  }
+
+  activeIndex = 0
+
+  updateSelectedProvider (selectedProviderIndex: number):void {
+    this.activeIndex = selectedProviderIndex
+    this.$emit('select-provider', selectedProviderIndex)
   }
 }
 </script>
@@ -52,41 +68,50 @@ export default class StartLocally extends Vue {
     border-bottom: 1px solid $background-color-light;
 
     &__cta {
-      display: flex;
-      align-items: center;
       opacity: 0;
+      width: initial;
+
+      &:focus {
+        opacity: 1;
+        outline: initial;
+      }
     }
 
-    &__item {
+    &-item {
       display: flex;
       justify-content: space-between;
       color: $text-color;
-      text-decoration: none;
-      background-color: $background-color-lighter;
-      padding: $spacing-03;
+      padding: $spacing-03 $spacing-05 $spacing-03 $spacing-03;
       border-left: 2px solid transparent;
       margin-bottom: $spacing-04;
+      max-height: 2.5rem;
+      align-items: center;
 
-      &:hover,
-      &:focus,
-      &:active {
+      &_inactive {
+        background-color: $background-color-lighter;
+      }
+
+      &_active {
         background-color: $background-color-light;
-        cursor: pointer;
         border-left: 2px solid $border-color-secondary;
 
         .providers-list__list__cta {
           opacity: 1;
         }
       }
-    }
 
-    &__cta-label {
-      padding-right: $spacing-03;
-      color: $text-active-color;
-    }
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $background-color-light;
+        border-left: 2px solid $border-color-secondary;
+        border: 1px solid $border-color-secondary;
+        outline: initial;
 
-    &__cta-icon {
-      fill: $text-active-color;
+        .providers-list__list__cta {
+          opacity: 1;
+        }
+      }
     }
   }
 

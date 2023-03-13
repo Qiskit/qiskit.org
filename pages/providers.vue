@@ -1,3 +1,4 @@
+
 <template>
   <div class="providers-page">
     <AppPageHeaderFixed>
@@ -14,7 +15,7 @@
       class="bx--grid page-section"
     >
       <div class="bx--row">
-        <div class="bx--col-sm-0 bx--col-md-2 bx--col-lg-3">
+        <div class="bx--col-sm-0 bx--col-md-3 bx--col-lg-3">
           <div class="providers-page__table-of-contents">
             <TheTableOfContents
               :entries="tocEntries"
@@ -22,7 +23,7 @@
             />
           </div>
         </div>
-        <div class="bx--col-lg-13 bx--col-md-6">
+        <div class="bx--col-md-5 bx--col-lg-13">
           <AppIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"
@@ -30,22 +31,12 @@
             class="providers-page__content-section scrollable"
             :title="section.title"
             :description="section.description"
-            :link="section.link"
-            :linkset="section.linkset"
           >
             <ContentAccordion
-              v-if="section.subSections"
+              v-if="section.providers"
               class="providers-page__content-section-details"
-              :tabs="asTabs(section.subSections)"
+              :tabs="asTabs(section.providers)"
             />
-            <div v-else class="providers-page__content-section-details">
-              <div class="providers-page__content-section-image__wrapper">
-                <img
-                  class="providers-page__content-section-image"
-                  :src="section.image"
-                >
-              </div>
-            </div>
           </AppIntroductoryContent>
         </div>
       </div>
@@ -56,11 +47,10 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { ContentAccordionTab } from '~/components/providers/ContentAccordion.vue'
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  ProvidersSubSection
+  ProviderObject
 } from '~/constants/providersContent'
 import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
@@ -79,8 +69,8 @@ export default class ProvidersPage extends QiskitPage {
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
 
-  asTabs (subsections: Array<ProvidersSubSection>): Array<ContentAccordionTab> {
-    return subsections.map(subsection => subsection as ContentAccordionTab)
+  asTabs (providers: Array<ProviderObject>): Array<ProviderObject> {
+    return providers.map(provider => provider as ProviderObject)
   }
 }
 </script>
@@ -89,28 +79,16 @@ export default class ProvidersPage extends QiskitPage {
 .providers-page {
   &__table-of-contents {
     position: sticky;
-    top: $spacing-06;
+    top: $spacing-11;
   }
 
   &__content-section {
     margin-bottom: $spacing-10;
-    overflow: hidden;
   }
 
   &__content-section-details {
     background-color: $background-color-lighter;
     height: 100%;
-  }
-
-  &__content-section-image {
-    transform: translateX(20%);
-    max-width: 100%;
-    max-height: 30.5rem;
-
-    &__wrapper {
-      display: flex;
-      justify-content: flex-end;
-    }
   }
 }
 </style>

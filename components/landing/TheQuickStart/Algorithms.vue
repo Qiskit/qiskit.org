@@ -4,33 +4,33 @@
       <h3>Get the SDK</h3>
       <div class="algorithms__section">
         <CodeSnippet
-          :code-lines="['pip install qiskit', 'pip install qiskit']"
+          :code-lines="[installCode]"
           :code-snippet-title="'TODO: update this'"
           :code-snippet-location="'quick-start-algorithms'"
         />
       </div>
       <h3>Test some algorithms</h3>
-      <bx-tabs container value="Bell State">
-        <bx-tab 
-          v-for="algorithm in algorithmsContent"
-          :key="algorithm"
-          :target="algorithm.title"
-          :value="algorithm.title"
+      <bx-tabs container :value="initialTabValue">
+        <bx-tab
+          v-for="(algorithm, index) in codeExamples"
+          :key="index"
+          :target="index"
+          :value="index"
         >
-          {{ algorithm.title }}
+          {{ algorithm.name }}
         </bx-tab>
       </bx-tabs>
-      <div 
-        v-for="algorithm in algorithmsContent"
+      <div
+        v-for="(algorithm, index) in codeExamples"
+        :id="index"
+        :key="index"
         class="algorithms__section"
-        :id="algorithm.title"
-        :key="algorithm.title"
         role="tabpanel"
-        :aria-labelledby="algorithm.title"
+        :aria-labelledby="index"
       >
         <CodeSnippet
-          :code-lines="algorithm.codeSample"
-          :code-snippet-title="algorithm.title"
+          :code-lines="algorithm.fullCode"
+          :code-snippet-title="algorithm.name"
           :code-snippet-location="'quick-start-algorithms'"
         />
       </div>
@@ -40,16 +40,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import CodeSnippet from '~/components/ui/CodeSnippet.vue'
-import { AlgorithmsContent } from '~/constants/providersContent'
-import '@carbon/web-components/es/components/tabs/index.js';
+import '@carbon/web-components/es/components/tabs/index.js'
+
+type codeExample = {
+  name: string
+  runMethod: string
+  fullCode: string[]
+}
 
 @Component({
   components: { CodeSnippet }
 })
 export default class Algorithms extends Vue {
-  algorithmsContent = AlgorithmsContent
+  @Prop(String) installCode!: string
+  @Prop(Array) codeExamples!: codeExample[]
+
+  initialTabValue = 0
 }
 </script>
 
