@@ -1,4 +1,3 @@
-
 <template>
   <div class="providers-page">
     <AppPageHeaderFixed>
