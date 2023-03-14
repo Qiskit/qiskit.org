@@ -100,17 +100,10 @@ export default class StartLocally extends Vue {
         }
       }
 
-      &:hover,
-      &:focus,
-      &:active {
-        background-color: $background-color-light;
-        border-left: 2px solid $border-color-secondary;
+      &:hover {
         border: 1px solid $border-color-secondary;
+        border-left: 2px solid $border-color-secondary;
         outline: initial;
-
-        .providers-list__list__cta {
-          opacity: 1;
-        }
       }
     }
   }
