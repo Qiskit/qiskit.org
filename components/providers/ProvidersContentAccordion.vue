@@ -15,9 +15,14 @@
         "
       >
         <ProvidersAccordionLayout
-          :image="tab.content.image"
-          :description="tab.content.description"
-          :cta="tab.content.cta"
+          :title="tab.title"
+          :description="tab.description"
+          :installation="tab.installation"
+          :image="tab.image"
+          :website-cta="tab.websiteCta"
+          :docs-cta="tab.docsCta"
+          :source-cta="tab.sourceCta"
+          :code-examples="tab.codeExamples"
         />
       </bx-accordion-item>
     </div>
@@ -26,15 +31,10 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/accordion/index.js";
-import { AccordionLayoutProps } from "~/components/Providers/ProvidersAccordionLayout.vue";
-
-export type ContentAccordionTab = {
-  title: string;
-  content: AccordionLayoutProps;
-};
+import { ProviderObject } from "~/constants/providersContent";
 
 interface Props {
-  tabs: Array<ContentAccordionTab>;
+  tabs: Array<ProviderObject>;
 }
 
 defineProps<Props>();

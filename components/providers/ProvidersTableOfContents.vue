@@ -4,14 +4,14 @@
     <!-- eslint-disable vue/multiline-html-element-content-newline -->
     <UiBasicLink
       v-for="entry in entries"
-      :key="entry.sectionId || entry.label"
+      :key="entry.sectionId || entry.title"
       class="table-of-contents__entry"
       :class="{
         'table-of-contents__entry_active': isActive(entry),
         'table-of-contents__entry_second-level': entry.isSecondary,
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
-      >{{ entry.label }}</UiBasicLink
+      >{{ entry.title }}</UiBasicLink
     >
     <!-- eslint-enable -->
   </nav>
@@ -55,7 +55,7 @@ function isActive(entry: TableOfContentEntry): boolean {
         color: qiskit.$text-active-color;
         font-weight: bold;
         display: inline-block;
-        padding-right: carbon.$spacing-06;
+        padding-right: carbon.$spacing-04;
       }
     }
 
