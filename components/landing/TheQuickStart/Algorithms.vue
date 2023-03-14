@@ -10,7 +10,7 @@
         />
       </div>
       <h3>Test some algorithms</h3>
-      <bx-tabs container :value="initialTabValue">
+      <bx-tabs container :value="activeTabValue">
         <bx-tab
           v-for="(algorithm, index) in codeExamples"
           :key="index"
@@ -57,7 +57,12 @@ export default class Algorithms extends Vue {
   @Prop(String) installCode!: string
   @Prop(Array) codeExamples!: codeExample[]
 
-  initialTabValue = 0
+  activeTabValue = 0
+
+  updated () {
+    // use the first available algorithm
+    this.activeTabValue = 0
+  }
 }
 </script>
 
