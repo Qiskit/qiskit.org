@@ -1,72 +1,83 @@
 <template>
   <article class="accordion-layout">
-    <cv-code-snippet
-      kind="oneline"
-      light
-      feedback-aria-label="Copy code snippet"
-    >
-      <!-- TODO: replace w/ dynamic code snippet -->
-      <span>pip install something</span>
-    </cv-code-snippet>
-    <img :src="image" class="accordion-layout__image">
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <AppCta
-      kind="ghost"
-      v-bind="cta"
+    <img v-if="image" :src="image" class="accordion-layout__image">
+    <CodeSnippet
+      :code-lines="[ installation ]"
+      :code-snippet-title="title"
+      :code-snippet-location="'providers'"
     />
-    <!-- TODO: replace w/ dynamic code sample -->
-    <cv-code-snippet
-      kind="multiline"
-      light
-      feedback-aria-label="Copy code snippet"
-    >
-      import qiskit
-      from qiskit_runtime import ...
-
-      (very) short code example
-      Lorem ipsum dolor sit amet
-      consectetur adipiscing elit
-      Suspendisse id laoreet urna
-      nec egestas lorem
-      Donec porta
-      mauris sed facilisis pulvinar
-    </cv-code-snippet>
+    <div class="accordion-layout__code-block">
+      <CodeSnippet
+        :code-lines="codeExamples[0].fullCode"
+        :code-snippet-title="title"
+        :code-snippet-location="'providers'"
+      />
+    </div>
+    <div class="accordion-layout__cta-group">
+      <AppCta
+        v-for="cta in validCtas"
+        :key="cta.label"
+        kind="ghost"
+        v-bind="cta"
+      />
+    </div>
   </article>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import CodeSnippet from '../ui/CodeSnippet.vue'
+import { GeneralLink } from '~/constants/appLinks'
+import { ProviderCodeExample } from '~/constants/providersContent'
 
-// TODO: It is not possible to extract the interface of the component props
-// so we need this redundant interface to do it. Explore if it is worth
-// removing the @Prop decorator in favour of:
-// https://class-component.vuejs.org/guide/props-definition.html
 interface AccordionLayoutProps {
-  image: string,
-  description: string,
-  cta: {
-    url: string,
-    label: string
+  title: string
+  image: string | null
+  description: string
+  installation: string
+  websiteCta: {
+    label: string | null
+    url: string | null
   }
+  docsCta: {
+    label: string | null
+    url: string | null
+  }
+  sourceCta: {
+    label: string | null
+    url: string | null
+  }
+  codeExamples: ProviderCodeExample[]
 }
 
 export { AccordionLayoutProps }
 
-@Component
+@Component({
+  components: { CodeSnippet }
+})
 export default class AccordionLayout extends Vue implements AccordionLayoutProps {
-  @Prop(String) image!: string
+  @Prop(String) title!: string
   @Prop(String) description!: string
-  @Prop(Object) cta!: {
-    url: string,
-    label: string
+  @Prop(String) image!: string
+  @Prop(String) installation!: string
+  @Prop(Object) websiteCta!: GeneralLink
+  @Prop(Object) docsCta!: GeneralLink
+  @Prop(Object) sourceCta!: GeneralLink
+  @Prop(Array) codeExamples!: ProviderCodeExample[]
+
+  get validCtas () {
+    return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
 }
 </script>
 
 <style lang="scss" scoped>
+$cta-max-width: 4rem;
+
 .accordion-layout {
   display: flex;
   flex-direction: column;
@@ -75,12 +86,28 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
     align-self: center;
     height: auto;
     width: 100%;
-    max-width: 26rem;
     margin-bottom: $spacing-05;
   }
 
   &__description {
     margin-bottom: $spacing-06;
+  }
+
+  &__cta-group {
+    display: flex;
+
+    @include mq($until: medium) {
+      flex-direction: column;
+    }
+
+    .app-cta {
+      max-width: 10rem;
+      padding-left: $spacing-05;
+
+      @include mq($until: medium) {
+        max-width: initial;
+      }
+    }
   }
 }
 </style>
