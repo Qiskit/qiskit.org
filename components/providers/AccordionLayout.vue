@@ -72,10 +72,6 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   get validCtas () {
     return [this.websiteCta, this.docsCta, this.sourceCta].filter(cta => cta.url !== null)
   }
-
-  // mounted() {
-  //   console.log(this.codeExamples[0].fullCode, "codeExamples")
-  // }
 }
 </script>
 
