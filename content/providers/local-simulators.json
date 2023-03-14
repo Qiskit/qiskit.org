@@ -1,33 +1,32 @@
 {
-  "id": "hardware",
-  "title": "Quantum Hardware",
-  "description": "Quantum hardware are services that allow users to execute quantum programs in specialized hardware that leverages quantum mechanical phenomena for quantum computation.",
+  "id": "local-simulators",
+  "title": "Local Simulators",
+  "description": "Local simulators are software packages that allow users to simulate quantum programs in a local computer.",
   "providers": [
     {
-      "title": "IBM Quantum Platform",
-      "image": "/images/providers/qiskit-ibm-provider.png",
-      "description": "IBM Quantum platform offers access to IBM Quantum systems and simulators.",
-      "installation": "pip install qiskit-ibm-provider",
+      "title": "Qiskit Aer",
+      "image": null,
+      "description": "Qiskit Aer is a high performance simulator for quantum circuits that includes noise models.",
+      "installation": "pip install qiskit-aer",
       "websiteCta": {
-        "label": "Website",
-        "url": "https://www.ibm.com/quantum/systems"
+        "label": null,
+        "url": null
       },
       "docsCta": {
         "label": "Docs",
-        "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
+        "url": "https://qiskit.org/documentation/aer/"
       },
       "sourceCta": {
         "label": "GitHub",
-        "url": "https://github.com/Qiskit/qiskit-ibm-provider"
+        "url": "https://github.com/Qiskit/qiskit-aer"
       },
       "codeExamples": [
         {
           "name": "bell",
           "runMethod": "backend",
           "fullCode": [
-            "from qiskit_ibm_provider import IBMProvider",
-            "provider = IBMProvider()",
-            "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+            "from qiskit_aer import AerSimulator",
+            "backend = AerSimulator()",
             "&nbsp;",
             "# Build and transpile circuit",
             "from qiskit import QuantumCircuit",
@@ -47,11 +46,8 @@
           "name": "bell",
           "runMethod": "sampler",
           "fullCode": [
-            "from qiskit_ibm_provider import IBMProvider",
-            "from qiskit.primitives import BackendSampler",
-            "provider = IBMProvider()",
-            "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
-            "sampler = BackendSampler(backend)",
+            "from qiskit_aer.primitives import Sampler",
+            "sampler = Sampler()",
             "&nbsp;",
             "# Build circuit",
             "from qiskit import QuantumCircuit",
@@ -70,11 +66,8 @@
           "name": "vqe",
           "runMethod": "estimator",
           "fullCode": [
-            "from qiskit_ibm_provider import IBMProvider",
-            "from qiskit.primitives import BackendEstimator",
-            "provider = IBMProvider()",
-            "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
-            "estimator = BackendEstimator(backend)",
+            "from qiskit_aer.primitives import Estimator",
+            "estimator = Estimator()",
             "&nbsp;",
             "from qiskit.quantum_info import SparsePauliOp",
             "&nbsp;",
