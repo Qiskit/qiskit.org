@@ -240,5 +240,9 @@ function isIdAnchor(url: string) {
       }
     }
   }
+
+  &__content {
+    @include carbon.type-style("body-short-01");
+  }
 }
 </style>

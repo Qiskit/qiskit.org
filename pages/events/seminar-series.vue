@@ -12,7 +12,9 @@
         />
       </template>
       <template #card>
-        <EventsItemCard v-bind="cardContent" vertical-layout />
+        <EventsItemCard v-bind="cardContent" vertical-layout>
+          {{ cardContent.description }}
+        </EventsItemCard>
       </template>
     </UiAppPageHeaderWithCard>
 
