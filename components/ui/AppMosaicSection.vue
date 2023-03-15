@@ -8,7 +8,10 @@
         <p class="app-mosaic-section__description" v-text="description" />
       </div>
     </div>
-    <UiAppMosaic class="app-mosaic-section__mosaic" :mosaic-elements="elements" />
+    <UiAppMosaic
+      class="app-mosaic-section__mosaic"
+      :mosaic-elements="elements"
+    />
     <slot />
   </section>
 </template>
