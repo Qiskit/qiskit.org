@@ -59,6 +59,7 @@ withDefaults(defineProps<Props>(), {
   institution: "",
   ctaLabel: "Join the event",
   segment: undefined,
+  time: undefined,
   verticalLayout: false,
 });
 </script>
