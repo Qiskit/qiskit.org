@@ -1,13 +1,15 @@
 // TODO: Fix this composable to work with Vue 3
-import { ref, onMounted, onUpdated, onBeforeUnmount } from "vue";
+import { ref, onMounted, onUpdated, onBeforeUnmount, nextTick } from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
 
 export function useScrollBetweenSections() {
   const activeSection = ref("");
-  const _observer: Ref<IntersectionObserver | null> = ref(null);
-  // const root: Ref<HTMLElement | null> = ref(null);
+  const _observer = ref<IntersectionObserver | null>(null);
+  const root = ref<HTMLElement | null>(null);
 
   onMounted(() => {
+    root.value = document.getElementById("capabilities");
+
     const threshold = [...Array(25).keys()].map((x) => (4 * x) / 100);
     const windowTriggerMargins = "-16px 0px -80% 0px";
     _observer.value = new IntersectionObserver(_onSectionAppearing, {
@@ -15,11 +17,11 @@ export function useScrollBetweenSections() {
       rootMargin: windowTriggerMargins,
       threshold,
     });
-    // updateObserved();
+    updateObserved();
   });
 
   onUpdated(() => {
-    // nextTick(() => updateObserved());
+    nextTick(() => updateObserved());
   });
 
   onBeforeUnmount(() => {
@@ -42,13 +44,15 @@ export function useScrollBetweenSections() {
     next();
   });
 
-  // function updateObserved() {
-  //   (root!.value as HTMLElement)
-  //     .querySelectorAll(".scrollable")
-  //     .forEach((section) => {
-  //       (_observer.value as IntersectionObserver).observe(section);
-  //     });
-  // }
+  function updateObserved() {
+    if (root.value !== null) {
+      (root!.value as HTMLElement)
+        .querySelectorAll(".scrollable")
+        .forEach((section) => {
+          (_observer.value as IntersectionObserver).observe(section);
+        });
+    }
+  }
 
   function _onSectionAppearing(entries: Array<IntersectionObserverEntry>) {
     let highestTopValue = Infinity;

@@ -1,19 +1,15 @@
 <template>
-  <!-- TODO: review if class is needed or can be deleted -->
-  <div class="metal-page">
-    <!-- TODO: Integrate components -->
-    <!-- <TheDarkHeader /> -->
-    <!-- <IntroSection /> -->
-    <!-- <CapabilitiesSection /> -->
-    <!-- <FeaturesSection /> -->
-    <!-- <BuildingSection /> -->
-    <!-- <JoinUsSection /> -->
+  <div>
+    <MetalTheDarkHeader />
+    <MetalIntroSection />
+    <MetalCapabilitiesSection />
+    <MetalFeaturesSection />
+    <MetalBuildingSection />
+    <MetalJoinUsSection />
   </div>
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-
 definePageMeta({
   layout: "metal",
 });
