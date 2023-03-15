@@ -45,8 +45,8 @@ interface Props {
   title: string;
   image: string;
   institution?: string;
-  location: string;
-  date: string;
+  location?: string;
+  date?: string;
   time?: string;
   to: string;
   ctaLabel?: string;
@@ -58,6 +58,8 @@ withDefaults(defineProps<Props>(), {
   types: () => [],
   institution: "",
   ctaLabel: "Join the event",
+  date: undefined,
+  location: undefined,
   segment: undefined,
   time: undefined,
   verticalLayout: false,
