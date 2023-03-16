@@ -1,7 +1,10 @@
 <template>
-  <div ref="canvasWrapper" class="dynamic-background-logo">
-    <canvas ref="canvas" class="dynamic-background-logo__background-canvas" />
-    <SketchedLogo class="dynamic-background-logo__overlay" />
+  <div ref="canvasWrapperRef" class="dynamic-background-logo">
+    <canvas
+      ref="canvasRef"
+      class="dynamic-background-logo__background-canvas"
+    />
+    <LearnSketchedLogo class="dynamic-background-logo__overlay" />
   </div>
 </template>
 
@@ -367,8 +370,8 @@ const props = withDefaults(defineProps<Props>(), {
   initialDrawSpeed: 5,
 });
 
-const canvasWrapperRef = ref<HTMLElement>(null);
-const canvasRef = ref<HTMLCanvasElement>(null);
+const canvasWrapperRef = ref<HTMLDivElement>();
+const canvasRef = ref<HTMLCanvasElement>();
 
 const parentWidth = ref(0);
 const parentHeight = ref(0);
@@ -381,7 +384,7 @@ const lastRender = ref(0);
 
 const maskHeight = computed(() => imgMask.length);
 const maskWidth = computed(() => imgMask[0].length);
-const parent = computed(() => canvasWrapperRef.value as HTMLElement);
+const parent = computed(() => canvasWrapperRef.value as HTMLDivElement);
 const canvas = computed(() => canvasRef.value as HTMLCanvasElement);
 const renderingContext = computed<CanvasRenderingContext2D>(
   () => canvas.value.getContext("2d")!
@@ -457,8 +460,8 @@ function draw(deltaTime: number) {
 }
 
 function resize() {
-  parentWidth.value = parent!.clientWidth;
-  parentHeight.value = parent!.clientHeight;
+  parentWidth.value = parent!.value.clientWidth;
+  parentHeight.value = parent!.value.clientHeight;
   squareSizeWithSpacing.value =
     (parentWidth.value - 2 * SPACING_BETWEEN_CELLS) /
     Math.max(maskHeight.value, maskWidth.value);
@@ -471,21 +474,23 @@ function resize() {
   this disparity of html-width/height and css-width/height
   creates a high resolution canvas with better lines
   */
-  canvas!.width = parentWidth.value * pixelDensityConsideringDevicePixelRatio;
-  canvas!.height = parentHeight.value * pixelDensityConsideringDevicePixelRatio;
-  canvas!.style.width = `${parentWidth.value}px`;
-  canvas!.style.height = `${parentHeight.value}px`;
+  canvas!.value.width =
+    parentWidth.value * pixelDensityConsideringDevicePixelRatio;
+  canvas!.value.height =
+    parentHeight.value * pixelDensityConsideringDevicePixelRatio;
+  canvas!.value.style.width = `${parentWidth.value}px`;
+  canvas!.value.style.height = `${parentHeight.value}px`;
 
-  renderingContext!.scale(
+  renderingContext!.value.scale(
     pixelDensityConsideringDevicePixelRatio,
     pixelDensityConsideringDevicePixelRatio
   );
-  animationProgress.value = Math.min(0.9, animationProgress);
+  animationProgress.value = Math.min(0.9, animationProgress.value);
 }
 
 // randomize mask with the quantum probabilities
 function randomizeMask() {
-  gridData.value = imgMask.map((row) =>
+  const newGridDataValue = imgMask.map((row) =>
     row.map((maskValue: number): GridCell => {
       const randomSuccess = Math.random();
       const randomDelay = Math.random();
@@ -507,6 +512,8 @@ function randomizeMask() {
       return { value: 0, delay: 0 };
     })
   );
+
+  gridData.splice(0, gridData.length, ...newGridDataValue);
 }
 
 function clamp(value: number): number {

@@ -3,7 +3,7 @@
     <div class="learn-header__container-wrapper">
       <div class="learn-header__container">
         <div class="learn-header__logo-container">
-          <DynamicBackgroundLogo class="learn-header__logo" />
+          <LearnDynamicBackgroundLogo class="learn-header__logo" />
         </div>
         <div>
           <h1 class="learn-header__headline">Qiskit Textbook (beta)</h1>
@@ -40,49 +40,12 @@ const startLearningCTA = LEARN_START_LEARNING;
 const dropdownMenuContent = LEARN_MEGA_MENU;
 
 const appMegaDropdownMenuIsVisible = ref(true);
-let appMegaDropdownMenuObserver: IntersectionObserver | undefined;
 
-const appMegaDropdownMenuId = computed(
-  () => `app-mega-dropdown-menu-${this._uid}`
-);
+const appMegaDropdownMenuId = "learn-header__app-mega-dropdown-menu";
 
-onMounted(() => {
-  connectAppMegaDropdownMenuObserver();
-});
-
-onBeforeUnmount(() => {
-  disconnectAppMegaDropdownMenuObserver();
-});
-
-function connectAppMegaDropdownMenuObserver() {
-  const appMegaDropdownMenuElement = this.$el.querySelector(
-    `#${appMegaDropdownMenuId}`
-  );
-
-  if (appMegaDropdownMenuElement) {
-    appMegaDropdownMenuObserver = new IntersectionObserver(
-      updateAppMegaDropdownMenuLayout
-    );
-    appMegaDropdownMenuObserver.observe(appMegaDropdownMenuElement);
-  }
-}
-
-function disconnectAppMegaDropdownMenuObserver() {
-  if (appMegaDropdownMenuObserver) {
-    appMegaDropdownMenuObserver.disconnect();
-  }
-}
-
-function updateAppMegaDropdownMenuLayout(
-  entries: Array<IntersectionObserverEntry>
-) {
-  entries.forEach(({ isIntersecting }) => {
-    appMegaDropdownMenuIsVisible.value = isIntersecting;
-  });
-}
-
+// TODO: Refactor tracking
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function trackPerformedSearch(uiElement: string, field: string) {
-  // TODO: Refactor tracking
   // this.$trackPerformedSearch(uiElement, field);
 }
 </script>
@@ -95,7 +58,7 @@ function trackPerformedSearch(uiElement: string, field: string) {
   background: linear-gradient(
     315deg,
     carbon.$cool-gray-10 0%,
-    $blue-40 25%,
+    carbon.$blue-40 25%,
     carbon.$purple-70 100%
   );
   height: 37.5rem;

@@ -1,7 +1,6 @@
 <template>
   <main class="learn-page">
-    <!-- TODO: Integrate components -->
-    <!-- <qiskit-banner>
+    <qiskit-banner>
       <div class="content">
         Miss the old version of the textbook? Access it
         <UiAppLink
@@ -12,8 +11,8 @@
           here
         </UiAppLink>
       </div>
-    </qiskit-banner> -->
-    <!-- <LearnHeader /> -->
+    </qiskit-banner>
+    <LearnPageHeader />
     <!-- <StartLearningSection class="learn-page__section" /> -->
     <!-- <AppHelpfulResourcesSection
       class="learn-page__section"
@@ -23,8 +22,7 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import "@qiskit/web-components/banner";
+import "@qiskit/web-components/banner";
 // import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
 // import { SOCIAL_MEDIA } from "~/constants/menuLinks";
 
@@ -84,51 +82,50 @@ useHead({
 // ];
 
 // TODO: Refactor tracking
-// export default class LearnPage {
-//   routeName: string = 'learn'
-// }
+const routeName = "learn";
 </script>
 
 <style lang="scss" scoped>
-// TODO: Review old CSS
-// @use "~/assets/scss/helpers/index.scss" as qiskit;
-// .learn-page {
-//   &__section {
-//     @include qiskit.contained();
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
-//     max-width: qiskit.$max-size;
-//     margin-bottom: carbon.$spacing-07;
-//     margin-top: carbon.$spacing-10;
-//   }
+.learn-page {
+  &__section {
+    @include qiskit.contained();
 
-//   qiskit-banner {
-//     .content {
-//       @include qiskit.contained();
+    max-width: qiskit.$max-size;
+    margin-bottom: carbon.$spacing-07;
+    margin-top: carbon.$spacing-10;
+  }
 
-//       max-width: qiskit.$max-size;
-//       padding: carbon.$spacing-04 carbon.$spacing-06;
-//       display: flex;
-//       flex: 1;
+  qiskit-banner {
+    .content {
+      @include qiskit.contained();
 
-//       @include carbon.breakpoint-down(md) {
-//         display: block;
-//       }
-//     }
+      max-width: qiskit.$max-size;
+      padding: carbon.$spacing-04 carbon.$spacing-06;
+      display: flex;
+      flex: 1;
 
-//     .link {
-//       color: qiskit.$text-color-white;
-//       text-decoration: underline;
-//       margin-left: 4px;
+      @include carbon.breakpoint-down(md) {
+        display: block;
+      }
+    }
 
-//       &:hover,
-//       &:visited {
-//         color: currentColor;
-//       }
+    .link {
+      color: qiskit.$text-color-white;
+      text-decoration: underline;
+      margin-left: 4px;
 
-//       @include carbon.breakpoint-down(md) {
-//         margin-left: 2px;
-//       }
-//     }
-//   }
-// }
+      &:hover,
+      &:visited {
+        color: currentColor;
+      }
+
+      @include carbon.breakpoint-down(md) {
+        margin-left: 2px;
+      }
+    }
+  }
+}
 </style>
