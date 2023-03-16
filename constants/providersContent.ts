@@ -22,7 +22,7 @@ type ProviderObject = {
   title: string
   image: string | null
   description: string
-  installation: string
+  installation: string[]
   websiteCta?: {
     label: string | null,
     url: string | null

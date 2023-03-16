@@ -4,7 +4,7 @@
       <h3>Get the SDK</h3>
       <div class="algorithms__section">
         <CodeSnippet
-          :code-lines="[installCode]"
+          :code-lines="installCode"
           :code-snippet-title="'TODO: update this'"
           :code-snippet-location="'quick-start-algorithms'"
         />
@@ -54,7 +54,7 @@ type codeExample = {
   components: { CodeSnippet }
 })
 export default class Algorithms extends Vue {
-  @Prop(String) installCode!: string
+  @Prop(Array) installCode!: string[]
   @Prop(Array) codeExamples!: codeExample[]
 
   activeTabValue = 0

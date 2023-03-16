@@ -5,7 +5,7 @@
     </p>
     <img v-if="image" :src="image" class="accordion-layout__image">
     <CodeSnippet
-      :code-lines="[ installation ]"
+      :code-lines="installation"
       :code-snippet-title="title"
       :code-snippet-location="'providers'"
     />
@@ -38,7 +38,7 @@ interface AccordionLayoutProps {
   title: string
   image: string | null
   description: string
-  installation: string
+  installation: string[]
   websiteCta: {
     label: string | null
     url: string | null
@@ -63,7 +63,7 @@ export default class AccordionLayout extends Vue implements AccordionLayoutProps
   @Prop(String) title!: string
   @Prop(String) description!: string
   @Prop(String) image!: string
-  @Prop(String) installation!: string
+  @Prop(Array) installation!: string[]
   @Prop(Object) websiteCta!: GeneralLink
   @Prop(Object) docsCta!: GeneralLink
   @Prop(Object) sourceCta!: GeneralLink
