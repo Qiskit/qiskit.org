@@ -25,11 +25,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { CONTENT_SECTIONS } from '~/constants/providersContent'
+import rawQuickStartProvidersData from '~/content/providers/quick-start.json'
 
 @Component
 export default class TheQuickStart extends Vue {
-  providersData = CONTENT_SECTIONS.map(category => category.providers).flat();
+  providersData = rawQuickStartProvidersData
 
   selectedProviderIndex = 0
 

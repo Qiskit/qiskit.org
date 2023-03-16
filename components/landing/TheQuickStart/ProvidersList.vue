@@ -4,7 +4,7 @@
     <ul class="providers-list__list">
       <template v-for="(item, index) in providersList">
         <li
-          v-if="item.docsCta"
+          v-if="item.docsCta && item.docsCta.url"
           :key="index"
           class="providers-list__list-item"
           :class="activeIndex === index ? 'providers-list__list-item_active' : 'providers-list__list-item_inactive'"

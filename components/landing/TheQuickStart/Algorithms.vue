@@ -58,11 +58,6 @@ export default class Algorithms extends Vue {
   @Prop(Array) codeExamples!: codeExample[]
 
   activeTabValue = 0
-
-  updated () {
-    // use the first available algorithm
-    this.activeTabValue = 0
-  }
 }
 </script>
 
