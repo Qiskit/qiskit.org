@@ -13,7 +13,7 @@
       </div>
     </qiskit-banner>
     <LearnPageHeader />
-    <!-- <StartLearningSection class="learn-page__section" /> -->
+    <LearnStartLearningSection class="learn-page__section" />
     <UiAppHelpfulResourcesSection
       class="learn-page__section"
       :resources="helpfulResources"
