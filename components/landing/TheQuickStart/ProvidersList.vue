@@ -10,6 +10,7 @@
           :class="activeIndex === index ? 'providers-list__list-item_active' : 'providers-list__list-item_inactive'"
           tabindex="0"
           @click="updateSelectedProvider(index)"
+          @keydown.enter="updateSelectedProvider(index)"
         >
           {{ item.title }}
           <AppCta
@@ -69,11 +70,14 @@ export default class StartLocally extends Vue {
 
     &__cta {
       opacity: 0;
+      padding: $spacing-03;
       width: initial;
 
       &:focus {
         opacity: 1;
         outline: initial;
+        border: 1px solid $border-color-secondary;
+        background-color: $background-color-lighter;
       }
     }
 
@@ -81,7 +85,7 @@ export default class StartLocally extends Vue {
       display: flex;
       justify-content: space-between;
       color: $text-color;
-      padding: $spacing-03 $spacing-05 $spacing-03 $spacing-03;
+      padding: $spacing-03 2px $spacing-03 $spacing-03;
       border-left: 2px solid transparent;
       margin-bottom: $spacing-04;
       max-height: 2.5rem;
@@ -100,7 +104,8 @@ export default class StartLocally extends Vue {
         }
       }
 
-      &:hover {
+      &:hover,
+      &:focus {
         border: 1px solid $border-color-secondary;
         border-left: 2px solid $border-color-secondary;
         outline: initial;
