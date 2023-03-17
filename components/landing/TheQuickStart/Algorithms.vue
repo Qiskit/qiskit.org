@@ -10,7 +10,7 @@
         />
       </div>
       <h3>Test some algorithms</h3>
-      <bx-tabs container :value="activeTabValue">
+      <bx-tabs container :value="activeTabValue" @bx-tabs-selected="updateSelectedTab($event)">
         <bx-tab
           v-for="(algorithm, index) in codeExamples"
           :key="index"
@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component, Prop, Watch } from 'vue-property-decorator'
 import CodeSnippet from '~/components/ui/CodeSnippet.vue'
 import '@carbon/web-components/es/components/tabs/index.js'
 
@@ -58,6 +58,15 @@ export default class Algorithms extends Vue {
   @Prop(Array) codeExamples!: codeExample[]
 
   activeTabValue = 0
+
+  updateSelectedTab (e: { detail: { item: { value: number } } }) {
+    this.activeTabValue = e.detail.item.value
+  }
+
+  @Watch('installCode')
+  onSelectedProviderUpdated () {
+    this.activeTabValue = 0
+  }
 }
 </script>
 
