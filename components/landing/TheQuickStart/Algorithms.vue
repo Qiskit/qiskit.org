@@ -44,7 +44,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 import CodeSnippet from '~/components/ui/CodeSnippet.vue'
 import '@carbon/web-components/es/components/tabs/index.js'
 
-type codeExample = {
+interface codeExample {
   name: string
   runMethod: string
   fullCode: string[]
