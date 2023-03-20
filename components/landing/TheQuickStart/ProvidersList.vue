@@ -15,7 +15,8 @@
           {{ item.title }}
           <AppCta
             class="providers-list__list__cta"
-            v-bind="{ url: item.docsCta.url, label: `Learn more` }"
+            label="Learn more"
+            :url="item.docsCta.url"
             kind="ghost"
           />
         </li>
