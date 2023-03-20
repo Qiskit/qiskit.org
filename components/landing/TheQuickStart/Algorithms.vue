@@ -10,23 +10,23 @@
         />
       </div>
       <h3>Test some algorithms</h3>
-      <bx-tabs container :value="activeTabValue" @bx-tabs-selected="updateSelectedTab($event)">
+      <bx-tabs container :value="activeTabLabel" @bx-tabs-selected="updateSelectedTab($event)">
         <bx-tab
-          v-for="(algorithm, index) in codeExamples"
-          :key="index"
-          :target="index"
-          :value="index"
+          v-for="algorithm in codeExamples"
+          :key="algorithm.name"
+          :target="algorithm.name"
+          :value="algorithm.name"
         >
           {{ algorithm.name }}
         </bx-tab>
       </bx-tabs>
       <div
-        v-for="(algorithm, index) in codeExamples"
-        :id="index"
-        :key="index"
+        v-for="algorithm in codeExamples"
+        :id="algorithm.name"
+        :key="algorithm.name"
         class="algorithms__section"
         role="tabpanel"
-        :aria-labelledby="index"
+        :aria-labelledby="algorithm.name"
       >
         <CodeSnippet
           :code-lines="algorithm.fullCode"
@@ -58,15 +58,15 @@ export default class Algorithms extends Vue {
   @Prop(String) providerTitle!: string
   @Prop(Array) codeExamples!: codeExample[]
 
-  activeTabValue = 0
+  activeTabLabel = this.codeExamples[0].name
 
-  updateSelectedTab (e: { detail: { item: { value: number } } }) {
-    this.activeTabValue = e.detail.item.value
+  updateSelectedTab (e: { detail: { item: { value: string } } }) {
+    this.activeTabLabel = e.detail.item.value
   }
 
   @Watch('installCode')
   onSelectedProviderUpdated () {
-    this.activeTabValue = 0
+    this.activeTabLabel = this.codeExamples[0].name
   }
 }
 </script>
