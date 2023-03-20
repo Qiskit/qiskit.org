@@ -5,7 +5,7 @@
       <div class="algorithms__section">
         <CodeSnippet
           :code-lines="installCode"
-          :code-snippet-title="'TODO: update this'"
+          :code-snippet-title="`${providerTitle} install-code`"
           :code-snippet-location="'quick-start-algorithms'"
         />
       </div>
@@ -55,6 +55,7 @@ type codeExample = {
 })
 export default class Algorithms extends Vue {
   @Prop(Array) installCode!: string[]
+  @Prop(String) providerTitle!: string
   @Prop(Array) codeExamples!: codeExample[]
 
   activeTabValue = 0

@@ -17,6 +17,7 @@
         class="bx--col-md-8 bx--col-lg-8"
         :install-code="providersData[selectedProviderIndex].installation"
         :code-examples="providersData[selectedProviderIndex].codeExamples"
+        :provider-title="providersData[selectedProviderIndex].title"
       />
     </div>
   </article>
