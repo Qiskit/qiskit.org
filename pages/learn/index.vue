@@ -90,7 +90,7 @@ const routeName = "learn";
 
 .learn-page {
   &__section {
-    @include qiskit.contained();
+    @include qiskit.contained;
 
     max-width: qiskit.$max-size;
     margin-bottom: carbon.$spacing-07;
@@ -99,7 +99,7 @@ const routeName = "learn";
 
   qiskit-banner {
     .content {
-      @include qiskit.contained();
+      @include qiskit.contained;
 
       max-width: qiskit.$max-size;
       padding: carbon.$spacing-04 carbon.$spacing-06;
@@ -118,7 +118,7 @@ const routeName = "learn";
 
       &:hover,
       &:visited {
-        color: currentColor;
+        color: currentcolor;
       }
 
       @include carbon.breakpoint-down(md) {
