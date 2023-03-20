@@ -17,8 +17,9 @@ import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
 
 const dropdownMenuContent = LEARN_MEGA_MENU;
 
+// TODO: Refactor tracking
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function trackPerformedSearch(uiElement: string, field: string) {
-  // TODO: Refactor tracking
   // this.$trackPerformedSearch(uiElement, field);
 }
 </script>
