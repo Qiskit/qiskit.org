@@ -14,6 +14,7 @@
         </h1>
         <div class="app-page-header-with-img__image-wrapper">
           <slot name="image" />
+          <div>Test</div>
         </div>
         <div class="app-page-header-with-img__description">
           <slot name="description" />
@@ -94,17 +95,6 @@ defineProps<Props>();
     }
   }
 
-  &__image {
-    max-height: 25rem;
-    width: auto;
-
-    @include carbon.breakpoint-down(xlg) {
-      height: auto;
-      max-width: 22rem;
-      width: 100%;
-    }
-  }
-
   &__description {
     grid-area: description;
     margin-top: carbon.$spacing-05;
@@ -112,6 +102,17 @@ defineProps<Props>();
 
   &__cta {
     grid-area: cta;
+  }
+}
+
+:deep(.app-page-header-with-img__image) {
+  max-height: 25rem;
+  width: auto;
+
+  @include carbon.breakpoint-down(xlg) {
+    height: auto;
+    max-width: 22rem;
+    width: 100%;
   }
 }
 </style>
