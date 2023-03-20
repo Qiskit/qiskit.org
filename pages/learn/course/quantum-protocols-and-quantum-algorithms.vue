@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import type { GeneralLink } from "~/constants/appLinks";
 import { QuantumProtocolsAndQuantumAlgorithmsUrl } from "~/constants/appLinks";
-import type { RecommendedReading } from "~/components/learn/ExternalRecommendedReadings.vue";
+import type { RecommendedReading } from "~/types/learn";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({

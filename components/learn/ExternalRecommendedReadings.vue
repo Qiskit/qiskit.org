@@ -44,12 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
-
-export type RecommendedReading = GeneralLink & {
-  description?: string;
-  author?: string;
-};
+import type { RecommendedReading } from "~/types/learn";
 
 interface Props {
   links: RecommendedReading[];

@@ -14,7 +14,6 @@
         </h1>
         <div class="app-page-header-with-img__image-wrapper">
           <slot name="image" />
-          <div>Test</div>
         </div>
         <div class="app-page-header-with-img__description">
           <slot name="description" />
