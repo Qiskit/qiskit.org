@@ -20,7 +20,6 @@ type ProviderCodeExample = {
 
 type ProviderObject = {
   title: string
-  image: string | null
   description: string
   installation: string[]
   websiteCta?: {
