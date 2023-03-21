@@ -70,7 +70,7 @@
         :key="title"
         class="cds--row"
       >
-        <div class="cds--col-xlg-4 cds--col-lg-4">
+        <div class="cds--col-lg-4">
           <h3>Community Syllabi</h3>
           <p>
             You can add any of these pre made curated syllabi to your classroom
@@ -86,7 +86,7 @@
             />
           </div>
         </div>
-        <div class="cds--col-xlg-12 cds--col-lg-12">
+        <div class="cds--col-lg-12">
           <div class="cds--row">
             <div
               v-for="{
