@@ -48,7 +48,7 @@
           <h2>Become a provider</h2>
           <p>Are you looking to integrate with Qiskit? Become a provider and enable your quantum device or simulator to be used with our SDK. Check out our guides on how to write a new provider, and join our community of providers today to help accelerate the development of quantum computing.</p>
           <AppCta class="providers-page__join-section__cta" v-bind="howToGuideLink" />
-        </div>        
+        </div>
       </div>
     </section>
   </div>
