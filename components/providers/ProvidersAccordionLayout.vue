@@ -5,7 +5,7 @@
     </p>
     <img v-if="image" :src="image" class="accordion-layout__image" />
     <UiCodeSnippet
-      :code-lines="[installation]"
+      :code-lines="installation"
       :code-snippet-title="title"
       :code-snippet-location="'providers'"
     />
@@ -35,7 +35,7 @@ export interface AccordionLayoutProps {
   title: string;
   image: string | null;
   description: string;
-  installation: string;
+  installation: string[];
   websiteCta: GeneralLink;
   docsCta: GeneralLink;
   sourceCta: GeneralLink;
