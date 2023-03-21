@@ -1,123 +1,121 @@
 <template>
   <section class="start-learning-section">
     <h2>Start learning in the best way for you</h2>
-    <section>
-      <div class="start-learning-section__tabs-wrapper">
-        <bx-tabs class="start-learning-section__tabs" value="Learn">
-          <bx-tab id="tab-learn" target="tab-learn-content" value="Learn">
-            Learn
-          </bx-tab>
-          <bx-tab id="tab-teach" target="tab-teach-content" value="Teach">
-            Teach
-          </bx-tab>
-        </bx-tabs>
-      </div>
-      <div
-        id="tab-learn-content"
-        aria-labelledby="tab-learn"
-        role="tabpanel"
-        hidden
+    <div class="start-learning-section__tabs-wrapper">
+      <bx-tabs class="start-learning-section__tabs" value="Learn">
+        <bx-tab id="tab-learn" target="tab-learn-content" value="Learn">
+          Learn
+        </bx-tab>
+        <bx-tab id="tab-teach" target="tab-teach-content" value="Teach">
+          Teach
+        </bx-tab>
+      </bx-tabs>
+    </div>
+    <div
+      id="tab-learn-content"
+      aria-labelledby="tab-learn"
+      role="tabpanel"
+      hidden
+    >
+      <article
+        v-for="{ title, description, courses } in learningSections"
+        :key="title"
+        class="cds--row"
       >
-        <article
-          v-for="{ title, description, courses } in learningSections"
-          :key="title"
-          class="cds--row"
-        >
-          <div class="cds--col-xlg-4 cds--col-lg-4">
-            <h3 v-text="title" />
-            <!-- eslint-disable vue/no-v-html -->
-            <p v-html="description" />
-            <!-- eslint-enable -->
-          </div>
-          <div class="cds--col-xlg-12 cds--col-lg-12">
-            <div class="cds--row">
-              <div
-                v-for="{
-                  description: courseDescription,
-                  image,
-                  title: courseTitle,
-                  subtitle: courseSubtitle,
-                  cta,
-                } in courses"
-                :key="courseTitle"
-                class="cds--col-xlg-8"
+        <div class="cds--col-xlg-4 cds--col-lg-4">
+          <h3 v-text="title" />
+          <!-- eslint-disable vue/no-v-html -->
+          <p v-html="description" />
+          <!-- eslint-enable -->
+        </div>
+        <div class="cds--col-xlg-12 cds--col-lg-12">
+          <div class="cds--row">
+            <div
+              v-for="{
+                description: courseDescription,
+                image,
+                title: courseTitle,
+                subtitle: courseSubtitle,
+                cta,
+              } in courses"
+              :key="courseTitle"
+              class="cds--col-xlg-8"
+            >
+              <UiAppCard
+                :cta-label="cta.label"
+                :to="cta.url"
+                :segment="cta.segment"
+                :image="image"
+                image-contain
+                :title="courseTitle"
+                :subtitle="courseSubtitle"
+                class="start-learning-section__card"
+                :description-whole-size="true"
               >
-                <UiAppCard
-                  :cta-label="cta.label"
-                  :to="cta.url"
-                  :segment="cta.segment"
-                  :image="image"
-                  image-contain
-                  :title="courseTitle"
-                  :subtitle="courseSubtitle"
-                  class="start-learning-section__card"
-                  :description-whole-size="true"
-                >
-                  {{ courseDescription }}
-                </UiAppCard>
-              </div>
+                {{ courseDescription }}
+              </UiAppCard>
             </div>
           </div>
-        </article>
-      </div>
-      <div
-        id="tab-teach-content"
-        aria-labelledby="tab-teach"
-        role="tabpanel"
-        hidden
+        </div>
+      </article>
+    </div>
+    <div
+      id="tab-teach-content"
+      aria-labelledby="tab-teach"
+      role="tabpanel"
+      hidden
+    >
+      <article
+        v-for="{ title, syllabi } in teachingSections"
+        :key="title"
+        class="cds--row"
       >
-        <article
-          v-for="{ title, syllabi } in teachingSections"
-          :key="title"
-          class="cds--row"
-        >
-          <div class="cds--col-xlg-4 cds--col-lg-4">
-            <h3>Community Syllabi</h3>
-            <p>
-              You can add any of these pre made curated syllabi to your
-              classroom section to edit and share by clicking on the syllabus
-              and choosing “Add to Profile”
-            </p>
-            <div class="start-learning-section__teach-section-cta">
-              <h3>Want to create your own?</h3>
-              <UiAppCta
-                kind="ghost"
-                label="Go to the syllabus tool"
-                url="https://learn.qiskit.org/syllabus/create"
-              />
-            </div>
+        <div class="cds--col-xlg-4 cds--col-lg-4">
+          <h3>Community Syllabi</h3>
+          <p>
+            You can add any of these pre made curated syllabi to your classroom
+            section to edit and share by clicking on the syllabus and choosing
+            “Add to Profile”
+          </p>
+          <div class="start-learning-section__teach-section-cta">
+            <h3>Want to create your own?</h3>
+            <UiAppCta
+              kind="ghost"
+              label="Go to the syllabus tool"
+              url="https://learn.qiskit.org/syllabus/create"
+            />
           </div>
-          <div class="cds--col-xlg-12 cds--col-lg-12">
-            <div class="cds--row">
-              <div
-                v-for="{
-                  title: syllabusTitle,
-                  cta,
-                  instructor,
-                  university,
-                } in syllabi"
-                :key="syllabusTitle"
-                class="cds--col-xlg-8"
+        </div>
+        <div class="cds--col-xlg-12 cds--col-lg-12">
+          <div class="cds--row">
+            <div
+              v-for="{
+                title: syllabusTitle,
+                cta,
+                instructor,
+                university,
+              } in syllabi"
+              :key="syllabusTitle"
+              class="cds--col-xlg-8"
+            >
+              <SyllabusCard
+                :url="cta.url"
+                :segment="cta.segment"
+                image-contain
+                :title="syllabusTitle"
+                class="start-learning-section__card"
+                :description-whole-size="true"
               >
-                <SyllabusCard
-                  :url="cta.url"
-                  :segment="cta.segment"
-                  image-contain
-                  :title="syllabusTitle"
-                  class="start-learning-section__card"
-                  :description-whole-size="true"
-                >
-                  <p>
-                    <strong>Instructor:</strong> {{ instructor }} <br />
-                    <strong>University:</strong> {{ university }} <br />
-                  </p>
-                </SyllabusCard>
-              </div>
+                <p>
+                  <strong>Instructor:</strong> {{ instructor }} <br />
+                  <strong>University:</strong> {{ university }} <br />
+                </p>
+              </SyllabusCard>
             </div>
           </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 
