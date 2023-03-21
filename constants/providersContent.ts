@@ -23,7 +23,7 @@ type ProviderObject = {
   title: string;
   image: string | null;
   description: string;
-  installation: string;
+  installation: string[];
   websiteCta?: GeneralLink;
   docsCta?: GeneralLink;
   sourceCta?: GeneralLink;
