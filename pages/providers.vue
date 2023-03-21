@@ -20,6 +20,10 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
+            <AppCta
+              v-bind="howToGuideLink"
+              kind="ghost"
+            />
           </div>
         </div>
         <div class="bx--col-md-5 bx--col-lg-13">
@@ -38,6 +42,13 @@
             />
           </AppIntroductoryContent>
         </div>
+      </div>
+      <div class="bx--row providers-page__join-section">
+        <div class="bx--col-md-5 bx--offset-lg-3 bx--col-lg-5">
+          <h2>Become a provider</h2>
+          <p>Are you looking to integrate with Qiskit? Become a provider and enable your quantum device or simulator to be used with our SDK. Check out our guides on how to write a new provider, and join our community of providers today to help accelerate the development of quantum computing.</p>
+          <AppCta class="providers-page__join-section__cta" v-bind="howToGuideLink" />
+        </div>        
       </div>
     </section>
   </div>
@@ -68,6 +79,11 @@ export default class ProvidersPage extends QiskitPage {
   tocEntries = TABLE_OF_CONTENTS
   contentSections = CONTENT_SECTIONS
 
+  howToGuideLink = {
+    url: 'https://qiskit.org/documentation/apidoc/providers.html#writing-a-new-provider',
+    label: 'Become a provider'
+  }
+
   asTabs (providers: Array<ProviderObject>): Array<ProviderObject> {
     return providers.map(provider => provider as ProviderObject)
   }
@@ -88,6 +104,18 @@ export default class ProvidersPage extends QiskitPage {
   &__content-section-details {
     background-color: $background-color-lighter;
     height: 100%;
+  }
+
+  &__join-section {
+    padding-top: $spacing-09;
+
+    @include mq($until: medium) {
+      padding-top: initial;
+    }
+
+    &__cta {
+      margin-top: $spacing-07;
+    }
   }
 }
 </style>
