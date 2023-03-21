@@ -44,6 +44,7 @@ export default class CodeCell extends Vue {
   display: block;
   background-color: $background-color-lighter;
   color: $text-color;
+  overflow-x: scroll;
   padding: $spacing-05 0;
 
   &__block {
