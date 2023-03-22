@@ -5,7 +5,6 @@
       <pre
         v-for="(line, index) in codeLines"
         :key="index"
-        class="code-snippet__code-cell_line"
         :class="{'code-snippet__code-cell_comment' : line.startsWith('#') }"
         v-html="line"
       />
@@ -64,17 +63,11 @@ $cta-max-width: 4rem;
     display: block;
     background-color: $background-color-white;
     color: $text-color;
-    padding: $spacing-05 $spacing-12 $spacing-05 $spacing-05;
+    padding: $spacing-05;
+    overflow-x: scroll;
 
     &_comment {
       color: $text-active-color;
-      word-break: break-word;
-      white-space: normal;
-    }
-
-    &_line {
-      word-break: break-word;
-      white-space: normal;
     }
   }
 
