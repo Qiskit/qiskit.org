@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import type { GeneralLink } from "~/constants/appLinks";
 import { StartLearningUrl } from "~/constants/appLinks";
-import type { RecommendedReading } from "~/components/learn/ExternalRecommendedReadings.vue";
+import type { RecommendedReading } from "~/types/learn";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -150,10 +150,10 @@ const courses: Course[] = [
     url: StartLearningUrl.BasicsQuantumInformation + "/quantum-circuits",
   },
   {
-    image: "protocols-games-preview.png",
-    label: "Quantum protocols and games",
-    segment: { cta: "protocols-games", location: "course" },
-    url: StartLearningUrl.BasicsQuantumInformation + "/protocols-games",
+    image: "entanglement-in-action-preview.png",
+    label: "Entanglement in action",
+    segment: { cta: "entanglement-in-action", location: "course" },
+    url: StartLearningUrl.BasicsQuantumInformation + "/entanglement-in-action",
   },
 ];
 

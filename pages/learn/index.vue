@@ -1,7 +1,6 @@
 <template>
   <main class="learn-page">
-    <!-- TODO: Integrate components -->
-    <!-- <qiskit-banner>
+    <qiskit-banner>
       <div class="content">
         Miss the old version of the textbook? Access it
         <UiAppLink
@@ -12,21 +11,20 @@
           here
         </UiAppLink>
       </div>
-    </qiskit-banner> -->
-    <!-- <LearnHeader /> -->
-    <!-- <StartLearningSection class="learn-page__section" /> -->
-    <!-- <AppHelpfulResourcesSection
+    </qiskit-banner>
+    <LearnPageHeader />
+    <LearnStartLearningSection class="learn-page__section" />
+    <UiAppHelpfulResourcesSection
       class="learn-page__section"
       :resources="helpfulResources"
-    /> -->
+    />
   </main>
 </template>
 
 <script setup lang="ts">
-// TODO: Integrate old code
-// import "@qiskit/web-components/banner";
-// import { DescriptionCard } from "~/components/ui/AppDescriptionCard.vue";
-// import { SOCIAL_MEDIA } from "~/constants/menuLinks";
+import "@qiskit/web-components/banner";
+import { SOCIAL_MEDIA } from "~/constants/menuLinks";
+import type { DescriptionCard } from "~/types/uiComponents";
 
 definePageMeta({
   layout: "default-max",
@@ -37,98 +35,96 @@ useHead({
   title: "Qiskit Textbook",
 });
 
-// TODO: Integrate old code
-// const helpfulResources: DescriptionCard[] = [
-//   {
-//     title: "Documentation",
-//     description: `The Qiskit Documentation is the right place for you if
-//     you are looking for the installation guide, release notes, or API
-//     references.`,
-//     cta: {
-//       url: "https://qiskit.org/documentation/",
-//       label: "Go to documentation",
-//       segment: { cta: "documentation", location: "helpful-resources" },
-//     },
-//   },
-//   {
-//     title: SOCIAL_MEDIA.stack.label,
-//     description: `Have a question? Ask it on stack exchange! Qiskit
-//     advocates and core contributors monitor this forum and will happily
-//     answer your questions.`,
-//     cta: {
-//       url: SOCIAL_MEDIA.stack.url,
-//       label: "Visit Stack Exchange",
-//       segment: { cta: "stack-exchange", location: "helpful-resources" },
-//     },
-//   },
-//   {
-//     title: SOCIAL_MEDIA.slack.label,
-//     description: `The Slack community is a great place to engage in
-//     discussion on research and quantum development.`,
-//     cta: {
-//       url: SOCIAL_MEDIA.slack.url,
-//       label: "Visit Slack",
-//       segment: { cta: "slack", location: "helpful-resources" },
-//     },
-//   },
-//   {
-//     title: "Educators Program",
-//     description:
-//       "This program helps teachers in the growing quantum field connect with one another, and provides the learning resources, tools, and systems access they need to provide quality educational experiences.",
-//     cta: {
-//       url: "https://quantum-computing.ibm.com/programs/educators",
-//       label: "Visit the Educators Program",
-//       segment: { cta: "educators-program", location: "helpful-resources" },
-//     },
-//   },
-// ];
+const helpfulResources: DescriptionCard[] = [
+  {
+    title: "Documentation",
+    description: `The Qiskit Documentation is the right place for you if
+    you are looking for the installation guide, release notes, or API
+    references.`,
+    cta: {
+      url: "https://qiskit.org/documentation/",
+      label: "Go to documentation",
+      segment: { cta: "documentation", location: "helpful-resources" },
+    },
+  },
+  {
+    title: SOCIAL_MEDIA.stack.label,
+    description: `Have a question? Ask it on stack exchange! Qiskit
+    advocates and core contributors monitor this forum and will happily
+    answer your questions.`,
+    cta: {
+      url: SOCIAL_MEDIA.stack.url,
+      label: "Visit Stack Exchange",
+      segment: { cta: "stack-exchange", location: "helpful-resources" },
+    },
+  },
+  {
+    title: SOCIAL_MEDIA.slack.label,
+    description: `The Slack community is a great place to engage in
+    discussion on research and quantum development.`,
+    cta: {
+      url: SOCIAL_MEDIA.slack.url,
+      label: "Visit Slack",
+      segment: { cta: "slack", location: "helpful-resources" },
+    },
+  },
+  {
+    title: "Educators Program",
+    description:
+      "This program helps teachers in the growing quantum field connect with one another, and provides the learning resources, tools, and systems access they need to provide quality educational experiences.",
+    cta: {
+      url: "https://quantum-computing.ibm.com/programs/educators",
+      label: "Visit the Educators Program",
+      segment: { cta: "educators-program", location: "helpful-resources" },
+    },
+  },
+];
 
 // TODO: Refactor tracking
-// export default class LearnPage {
-//   routeName: string = 'learn'
-// }
+const routeName = "learn";
 </script>
 
 <style lang="scss" scoped>
-// TODO: Review old CSS
-// @use "~/assets/scss/helpers/index.scss" as qiskit;
-// .learn-page {
-//   &__section {
-//     @include qiskit.contained();
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
-//     max-width: qiskit.$max-size;
-//     margin-bottom: carbon.$spacing-07;
-//     margin-top: carbon.$spacing-10;
-//   }
+.learn-page {
+  &__section {
+    @include qiskit.contained;
 
-//   qiskit-banner {
-//     .content {
-//       @include qiskit.contained();
+    max-width: qiskit.$max-size;
+    margin-bottom: carbon.$spacing-07;
+    margin-top: carbon.$spacing-10;
+  }
 
-//       max-width: qiskit.$max-size;
-//       padding: carbon.$spacing-04 carbon.$spacing-06;
-//       display: flex;
-//       flex: 1;
+  qiskit-banner {
+    .content {
+      @include qiskit.contained;
 
-//       @include carbon.breakpoint-down(md) {
-//         display: block;
-//       }
-//     }
+      max-width: qiskit.$max-size;
+      padding: carbon.$spacing-04 carbon.$spacing-06;
+      display: flex;
+      flex: 1;
 
-//     .link {
-//       color: qiskit.$text-color-white;
-//       text-decoration: underline;
-//       margin-left: 4px;
+      @include carbon.breakpoint-down(md) {
+        display: block;
+      }
+    }
 
-//       &:hover,
-//       &:visited {
-//         color: currentColor;
-//       }
+    .link {
+      color: qiskit.$text-color-white;
+      text-decoration: underline;
+      margin-left: 4px;
 
-//       @include carbon.breakpoint-down(md) {
-//         margin-left: 2px;
-//       }
-//     }
-//   }
-// }
+      &:hover,
+      &:visited {
+        color: currentcolor;
+      }
+
+      @include carbon.breakpoint-down(md) {
+        margin-left: 2px;
+      }
+    }
+  }
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <svg
-      class="logo__fill"
+      class="sketched-logo__fill"
       xmlns="http://www.w3.org/2000/svg"
       x="0"
       y="0"
@@ -9,11 +9,6 @@
       viewBox="0 0 140.7 140.9"
       xml:space="preserve"
     >
-      <style>
-        .st1 {
-          fill: #fff;
-        }
-      </style>
       <radialGradient
         id="SVGID_1_"
         cx="403.9"
@@ -31,7 +26,7 @@
       />
       <path
         d="M70.8 140.3a70 70 0 1161.4-103 70 70 0 01-61.4 103zM70.6 5.2a65 65 0 10.2 130.4 65.2 65.2 0 0057.4-96A65 65 0 0070.6 5.2z"
-        class="st1"
+        class="sketched-logo__st1"
       />
       <radialGradient
         id="SVGID_2_"
@@ -80,15 +75,20 @@
       />
       <path
         d="M70.4.4c-5.1 0-16.9.8-16.9 7.9s11.8 7.9 16.9 7.9 16.9-.8 16.9-7.9S75.5.4 70.4.4zm0 4.8c7.2 0 12.1 1.6 12.1 3.1s-5 3.1-12.1 3.1-12.1-1.7-12.1-3.1 5-3.1 12.1-3.1zM100 112.8l-.9.1-26.3-45.5-24-41.4c2.1-2.6 1.7-6.4-.9-8.4s-6.4-1.7-8.4.9-1.7 6.4.9 8.4c1.1.9 2.5 1.3 3.9 1.3l.8-.1 24 41.4 10.8 18.7L95.3 115c-2.1 2.6-1.7 6.3.8 8.4s6.3 1.7 8.4-.8a6 6 0 00-.8-8.4c-1-.9-2.3-1.4-3.7-1.4z"
-        class="st1"
+        class="sketched-logo__st1"
       />
     </svg>
-    <img class="logo__sketch" src="/images/learn/logo-sketch-lines.png" />
+    <img
+      class="sketched-logo__sketch"
+      src="/images/learn/logo-sketch-lines.png"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.logo {
+@use "~/assets/scss/carbon.scss";
+
+.sketched-logo {
   &__fill {
     position: absolute;
     left: 50%;
@@ -103,6 +103,10 @@
     top: 50%;
     width: 100%;
     transform: translate(-50%, -50%);
+  }
+
+  &__st1 {
+    fill: carbon.$white;
   }
 }
 </style>

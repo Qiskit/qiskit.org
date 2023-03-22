@@ -59,8 +59,10 @@ defineProps<Props>();
     display: grid;
     padding: carbon.$spacing-12 carbon.$spacing-05 0;
     gap: carbon.$spacing-05;
-    grid-template:
-      repeat(4, 1fr) repeat(3, auto) 52px "headline headline img img"
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, auto) 52px;
+    grid-template-areas:
+      "headline headline img img"
       "description description img img"
       ". . img img"
       "cta . img img";
@@ -92,17 +94,6 @@ defineProps<Props>();
     }
   }
 
-  &__image {
-    max-height: 25rem;
-    width: auto;
-
-    @include carbon.breakpoint-down(xlg) {
-      height: auto;
-      max-width: 22rem;
-      width: 100%;
-    }
-  }
-
   &__description {
     grid-area: description;
     margin-top: carbon.$spacing-05;
@@ -110,6 +101,17 @@ defineProps<Props>();
 
   &__cta {
     grid-area: cta;
+  }
+}
+
+:deep(.app-page-header-with-img__image) {
+  max-height: 25rem;
+  width: auto;
+
+  @include carbon.breakpoint-down(xlg) {
+    height: auto;
+    max-width: 22rem;
+    width: 100%;
   }
 }
 </style>

@@ -1,109 +1,126 @@
 <template>
   <section class="start-learning-section">
     <h2>Start learning in the best way for you</h2>
-    <section class="start-learning-section__tabs">
-      <cv-tabs aria-label="navigation tab label">
-        <cv-tab id="tab-1" label="Learn">
-          <article
-            v-for="{ title, description, courses } in learningSections"
-            :key="title"
-            class="cds--row"
-          >
-            <div class="cds--col-xlg-4 cds--col-lg-4">
-              <h3 v-text="title" />
-              <!-- eslint-disable vue/no-v-html -->
-              <p v-html="description" />
-              <!-- eslint-enable -->
+    <div class="start-learning-section__tabs-wrapper">
+      <bx-tabs class="start-learning-section__tabs" value="Learn">
+        <bx-tab id="tab-learn" target="tab-learn-content" value="Learn">
+          Learn
+        </bx-tab>
+        <bx-tab id="tab-teach" target="tab-teach-content" value="Teach">
+          Teach
+        </bx-tab>
+      </bx-tabs>
+    </div>
+    <div
+      id="tab-learn-content"
+      aria-labelledby="tab-learn"
+      role="tabpanel"
+      hidden
+    >
+      <article
+        v-for="{ title, description, courses } in learningSections"
+        :key="title"
+        class="cds--row"
+      >
+        <div class="cds--col-xlg-4 cds--col-lg-4">
+          <h3 v-text="title" />
+          <!-- eslint-disable vue/no-v-html -->
+          <p v-html="description" />
+          <!-- eslint-enable -->
+        </div>
+        <div class="cds--col-xlg-12 cds--col-lg-12">
+          <div class="cds--row">
+            <div
+              v-for="{
+                description: courseDescription,
+                image,
+                title: courseTitle,
+                subtitle: courseSubtitle,
+                cta,
+              } in courses"
+              :key="courseTitle"
+              class="cds--col-xlg-8"
+            >
+              <UiAppCard
+                :cta-label="cta.label"
+                :to="cta.url"
+                :segment="cta.segment"
+                :image="image"
+                image-contain
+                :title="courseTitle"
+                :subtitle="courseSubtitle"
+                class="start-learning-section__card"
+                :description-whole-size="true"
+              >
+                {{ courseDescription }}
+              </UiAppCard>
             </div>
-            <div class="cds--col-xlg-12 cds--col-lg-12">
-              <div class="cds--row">
-                <div
-                  v-for="{
-                    description: courseDescription,
-                    image,
-                    title: courseTitle,
-                    subtitle: courseSubtitle,
-                    cta,
-                  } in courses"
-                  :key="courseTitle"
-                  class="cds--col-xlg-8"
-                >
-                  <AppCard
-                    :cta-label="cta.label"
-                    :to="cta.url"
-                    :segment="cta.segment"
-                    :image="image"
-                    image-contain
-                    :title="courseTitle"
-                    :subtitle="courseSubtitle"
-                    class="start-learning-section__card"
-                    :description-whole-size="true"
-                  >
-                    {{ courseDescription }}
-                  </AppCard>
-                </div>
-              </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div
+      id="tab-teach-content"
+      aria-labelledby="tab-teach"
+      role="tabpanel"
+      hidden
+    >
+      <article
+        v-for="{ title, syllabi } in teachingSections"
+        :key="title"
+        class="cds--row"
+      >
+        <div class="cds--col-lg-4">
+          <h3>Community Syllabi</h3>
+          <p>
+            You can add any of these pre made curated syllabi to your classroom
+            section to edit and share by clicking on the syllabus and choosing
+            “Add to Profile”
+          </p>
+          <div class="start-learning-section__teach-section-cta">
+            <h3>Want to create your own?</h3>
+            <UiAppCta
+              kind="ghost"
+              label="Go to the syllabus tool"
+              url="https://learn.qiskit.org/syllabus/create"
+            />
+          </div>
+        </div>
+        <div class="cds--col-lg-12">
+          <div class="cds--row">
+            <div
+              v-for="{
+                title: syllabusTitle,
+                cta,
+                instructor,
+                university,
+              } in syllabi"
+              :key="syllabusTitle"
+              class="cds--col-xlg-8"
+            >
+              <SyllabusCard
+                :url="cta.url"
+                :segment="cta.segment"
+                image-contain
+                :title="syllabusTitle"
+                class="start-learning-section__card"
+                :description-whole-size="true"
+              >
+                <p>
+                  <strong>Instructor:</strong> {{ instructor }} <br />
+                  <strong>University:</strong> {{ university }} <br />
+                </p>
+              </SyllabusCard>
             </div>
-          </article>
-        </cv-tab>
-        <cv-tab id="tab-2" label="Teach">
-          <article
-            v-for="{ title, syllabi } in teachingSections"
-            :key="title"
-            class="cds--row"
-          >
-            <div class="cds--col-xlg-4 cds--col-lg-4">
-              <h3>Community Syllabi</h3>
-              <p>
-                You can add any of these pre made curated syllabi to your
-                classroom section to edit and share by clicking on the syllabus
-                and choosing “Add to Profile”
-              </p>
-              <div class="start-learning-section__teach-section-cta">
-                <h3>Want to create your own?</h3>
-                <UiAppCta
-                  kind="ghost"
-                  label="Go to the syllabus tool"
-                  url="https://learn.qiskit.org/syllabus/create"
-                />
-              </div>
-            </div>
-            <div class="cds--col-xlg-12 cds--col-lg-12">
-              <div class="cds--row">
-                <div
-                  v-for="{
-                    title: syllabusTitle,
-                    cta,
-                    instructor,
-                    university,
-                  } in syllabi"
-                  :key="syllabusTitle"
-                  class="cds--col-xlg-8"
-                >
-                  <SyllabusCard
-                    :url="cta.url"
-                    :segment="cta.segment"
-                    image-contain
-                    :title="syllabusTitle"
-                    class="start-learning-section__card"
-                    :description-whole-size="true"
-                  >
-                    <p>
-                      <strong>Instructor:</strong> {{ instructor }} <br />
-                      <strong>University:</strong> {{ university }} <br />
-                    </p>
-                  </SyllabusCard>
-                </div>
-              </div>
-            </div>
-          </article>
-        </cv-tab>
-      </cv-tabs>
-    </section>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/tabs/index.js";
 import SyllabusCard from "./SyllabusCard.vue";
 import { GeneralLink } from "~/constants/appLinks";
 
@@ -532,42 +549,22 @@ const teachingSections: TeachingSection[] = [
     }
   }
 
-  &__teach-section-cta {
-    margin-top: carbon.$spacing-09;
-  }
-}
-</style>
-
-<style lang="scss">
-@use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/index.scss" as qiskit;
-
-.start-learning-section {
-  .cv-tab.bx--tabs--scrollable {
+  &__tabs {
     display: flex;
     justify-content: flex-end;
-    padding-bottom: carbon.$spacing-09;
 
     @include carbon.breakpoint-down(md) {
+      display: block;
       justify-content: flex-start;
     }
   }
 
-  .cv-tabs {
-    padding-bottom: carbon.$spacing-05;
+  &__tabs-wrapper {
+    padding-bottom: carbon.$spacing-09;
   }
 
-  .cv-tabs__panels {
-    @include carbon.breakpoint-down(md) {
-      padding-top: carbon.$spacing-09;
-    }
-  }
-
-  & .bx--tabs--scrollable__nav-item {
-    &--selected:not(.bx--tabs--scrollable__nav-item--disabled)
-      .bx--tabs--scrollable__nav-link {
-      border-bottom-color: qiskit.$border-color-secondary;
-    }
+  &__teach-section-cta {
+    margin-top: carbon.$spacing-09;
   }
 }
 </style>

@@ -5,7 +5,7 @@
     :to="isNuxtLink && url"
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
-    :target="isExternal && '_blank'"
+    :target="isExternal ? '_blank' : undefined"
     @click="handleClick"
     @mouseenter="$emit('mouseenter')"
   >
