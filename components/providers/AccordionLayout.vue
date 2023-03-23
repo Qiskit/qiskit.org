@@ -3,7 +3,6 @@
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <img v-if="image" :src="image" class="accordion-layout__image">
     <CodeSnippet
       :code-lines="installation"
       :code-snippet-title="title"
@@ -36,7 +35,6 @@ import { ProviderCodeExample } from '~/constants/providersContent'
 
 interface AccordionLayoutProps {
   title: string
-  image: string | null
   description: string
   installation: string[]
   websiteCta: {
@@ -62,7 +60,6 @@ export { AccordionLayoutProps }
 export default class AccordionLayout extends Vue implements AccordionLayoutProps {
   @Prop(String) title!: string
   @Prop(String) description!: string
-  @Prop(String) image!: string
   @Prop(Array) installation!: string[]
   @Prop(Object) websiteCta!: GeneralLink
   @Prop(Object) docsCta!: GeneralLink
@@ -81,13 +78,6 @@ $cta-max-width: 4rem;
 .accordion-layout {
   display: flex;
   flex-direction: column;
-
-  &__image {
-    align-self: center;
-    height: auto;
-    width: 100%;
-    margin-bottom: $spacing-05;
-  }
 
   &__description {
     margin-bottom: $spacing-06;
