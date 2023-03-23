@@ -17,7 +17,7 @@
           @keydown.enter="updateSelectedProvider(index)"
         >
           {{ item.title }}
-          <AppCta
+          <UiCta
             class="providers-list__list__cta"
             label="Learn more"
             :url="item.docsCta.url"
@@ -26,7 +26,7 @@
         </li>
       </template>
     </ul>
-    <AppCta class="providers-list__btn" v-bind="providersPage" />
+    <UiCta class="providers-list__btn" v-bind="providersPage" />
   </section>
 </template>
 
