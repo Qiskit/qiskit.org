@@ -3,7 +3,6 @@
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <img v-if="image" :src="image" class="accordion-layout__image" />
     <UiCodeSnippet
       :code-lines="installation"
       :code-snippet-title="title"
@@ -33,7 +32,6 @@ import { ProviderCodeExample } from "~/constants/providersContent";
 
 export interface AccordionLayoutProps {
   title: string;
-  image: string | null;
   description: string;
   installation: string[];
   websiteCta: GeneralLink;
@@ -59,13 +57,6 @@ $cta-max-width: 4rem;
 .accordion-layout {
   display: flex;
   flex-direction: column;
-
-  &__image {
-    align-self: center;
-    height: auto;
-    width: 100%;
-    margin-bottom: carbon.$spacing-05;
-  }
 
   &__description {
     margin-bottom: carbon.$spacing-06;

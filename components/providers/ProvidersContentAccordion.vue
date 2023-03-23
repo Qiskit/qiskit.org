@@ -18,7 +18,6 @@
           :title="tab.title"
           :description="tab.description"
           :installation="tab.installation"
-          :image="tab.image"
           :website-cta="tab.websiteCta"
           :docs-cta="tab.docsCta"
           :source-cta="tab.sourceCta"
