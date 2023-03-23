@@ -2,7 +2,7 @@
   <!-- tabindex is needed to allow hiding the menu in iOS Safari -->
   <div class="layout" tabindex="-1">
     <slot />
-    <Footer theme="dark" />
+    <FooterComponent theme="dark" />
   </div>
 </template>
 
