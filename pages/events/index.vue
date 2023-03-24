@@ -164,6 +164,7 @@ export default class EventsPage extends QiskitPage {
   ]
 
   tabs = ['upcoming', 'past', 'calendar']
+  firstLoadOfPageDone = false
 
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
@@ -204,7 +205,10 @@ export default class EventsPage extends QiskitPage {
 
   handleTabSelected (tabIndex: number) {
     this.selectTab(tabIndex)
-    this.$trackClickEvent(this.tabs[tabIndex], 'events-list')
+    if (this.firstLoadOfPageDone) {
+      this.$trackClickEvent(this.tabs[tabIndex], 'events-list')
+    }
+    this.firstLoadOfPageDone = true
   }
 
   selectTab (selectedTab: number) {
