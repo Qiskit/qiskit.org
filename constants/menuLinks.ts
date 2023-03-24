@@ -1,3 +1,7 @@
+import LogoMedium20 from "@carbon/icons-vue/lib/logo--medium/20";
+import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
+import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
+import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
 import { CtaClickedEventProp } from "~/types/segment";
 
 /**
@@ -17,7 +21,12 @@ interface NavLink {
    */
   rel?: string;
   /** The visible icon of the link */
-  icon?: "LogoTwitter20" | "LogoSlack20" | "LogoYouTube20" | "LogoMedium20";
+  icon?:
+    | typeof LogoMedium20
+    | typeof LogoSlack20
+    | typeof LogoTwitter20
+    | typeof LogoYouTube20;
+
   /**
    * TODO: This is for enabling a quick fix of a menu hierarchy for addressing:
    * https://github.com/Qiskit/qiskit.org/issues/700
@@ -197,22 +206,22 @@ const STAY_CONNECTED_LINKS: FooterSection = {
   elements: [
     {
       label: "Twitter",
-      icon: "LogoTwitter20",
+      icon: LogoTwitter20,
       url: SOCIAL_MEDIA.twitter.url,
     },
     {
       label: "Slack",
-      icon: "LogoSlack20",
+      icon: LogoSlack20,
       url: SOCIAL_MEDIA.slack.url,
     },
     {
       label: "Youtube",
-      icon: "LogoYouTube20",
+      icon: LogoYouTube20,
       url: SOCIAL_MEDIA.youtube.url,
     },
     {
       label: "Medium",
-      icon: "LogoMedium20",
+      icon: LogoMedium20,
       url: SOCIAL_MEDIA.medium.url,
     },
   ],
