@@ -23,13 +23,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Investigating Quantum Hardware Using Microwave Pulses",
+  routeName: "quantum-hardware-pulses",
 });
 
 useHead({
   title: "Investigating Quantum Hardware Using Microwave Pulses",
 });
 
-// TODO: Refactor "logic" pages
 const routeName = "quantum-hardware-pulses";
 
 const headerTitle = "Investigating Quantum Hardware Using Microwave Pulses";

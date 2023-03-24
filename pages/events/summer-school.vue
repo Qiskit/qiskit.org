@@ -102,6 +102,8 @@ import {
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Global Summer School 2022",
+  routeName: "summer-school",
 });
 
 const title = "Qiskit Global Summer School 2022";

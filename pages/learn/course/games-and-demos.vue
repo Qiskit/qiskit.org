@@ -23,13 +23,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Quantum Algorithms for Applications",
+  routeName: "games-and-demos",
 });
 
 useHead({
   title: "Quantum Algorithms for Applications",
 });
 
-// TODO: Refactor tracking
 const routeName = "games-and-demos";
 
 const headerTitle = "Games and demos";

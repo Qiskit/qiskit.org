@@ -16,6 +16,8 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Advocates",
+  routeName: "advocates",
 });
 
 useHead({
@@ -28,9 +30,4 @@ useHead({
     },
   ],
 });
-
-// TODO: Refactor tracking
-// export default class AdvocatesPage {
-//   routeName: string = 'advocates'
-// }
 </script>

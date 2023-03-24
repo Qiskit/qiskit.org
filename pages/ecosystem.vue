@@ -124,6 +124,8 @@ const tiers = rawTiers as Tier[];
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Ecosystem",
+  routeName: "ecosystem",
 });
 
 useHead({
@@ -214,11 +216,6 @@ const joinAction: GeneralLink = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
 };
-
-// TODO: Refactor tracking
-// export default class EcosystemPage {
-//   routeName: string = 'ecosystem';
-// }
 </script>
 
 <style lang="scss" scoped>

@@ -23,13 +23,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "2022 Qiskit global summer school on quantum simulation",
+  routeName: "quantum-simulation-summer-school-2022",
 });
 
 useHead({
   title: "2022 Qiskit global summer school on quantum simulation",
 });
 
-// TODO: Refactor tracking
 const routeName = "quantum-simulation-summer-school-2022";
 
 const headerTitle = "2022 Qiskit global summer school on quantum simulation";

@@ -23,13 +23,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Quantum Computing Labs",
+  routeName: "quantum-computing-labs",
 });
 
 useHead({
   title: "Quantum Computing Labs",
 });
 
-// TODO: Refactor "logic" pages
 const routeName = "quantum-computing-labs";
 
 const headerTitle = "Quantum Computing Labs";

@@ -23,6 +23,9 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle:
+    "2020 Qiskit global summer school on quantum computing and quantum hardware",
+  routeName: "introduction-to-quantum-computing-and-quantum-hardware-2020",
 });
 
 useHead({
@@ -30,7 +33,6 @@ useHead({
     "2020 Qiskit global summer school on quantum computing and quantum hardware",
 });
 
-// TODO: Refactor tracking
 const routeName = "introduction-to-quantum-computing-and-quantum-hardware-2020";
 
 const headerTitle =
@@ -47,15 +49,6 @@ const headerDescription = [
 
 const headerImg =
   "/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png";
-
-// const backToTextbookHomeLink: GeneralLink = {
-//   url: "/learn",
-//   label: "Home",
-//   segment: {
-//     cta: "back-to-textbook-home",
-//     location: "header",
-//   },
-// };
 
 const startLearningCTA: GeneralLink = {
   url: StartLearningUrl.SummerSchool2020,

@@ -116,6 +116,8 @@ import {
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Seminar Series",
+  routeName: "seminar-series",
 });
 
 useHead({
@@ -301,11 +303,6 @@ function dataPerRow(
     },
   ]);
 }
-
-// TODO: Refactor tracking
-// export default class SeminarSeriesPage {
-//   routeName = 'seminar-series'
-// }
 </script>
 
 <style lang="scss" scoped>

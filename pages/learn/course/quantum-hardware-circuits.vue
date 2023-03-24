@@ -23,13 +23,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Investigating Quantum Hardware Using Quantum Circuits",
+  routeName: "quantum-hardware-circuits",
 });
 
 useHead({
   title: "Investigating Quantum Hardware Using Quantum Circuits",
 });
 
-// TODO: Refactor "logic" pages
 const routeName = "quantum-hardware-circuits";
 
 const headerTitle = "Investigating Quantum Hardware Using Quantum Circuits";

@@ -16,14 +16,13 @@ interface PackageInfo {
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit",
+  routeName: "qiskit-landing-page",
 });
 
 useHead({
   title: "Qiskit",
 });
-
-// TODO: Refactor tracking
-// const routeName = "qiskit-landing-page";
 
 const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
   $fetch("https://pypi.org/pypi/qiskit/json")

@@ -24,13 +24,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Prerequisites",
+  routeName: "prerequisites",
 });
 
 useHead({
   title: "Prerequisites",
 });
 
-// TODO: Refactor tracking
 const routeName = "prerequisites";
 
 const headerTitle = "Prerequisites";

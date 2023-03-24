@@ -28,12 +28,15 @@ import type { DescriptionCard } from "~/types/uiComponents";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Textbook",
+  routeName: "learn",
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Textbook",
 });
+
+const routeName = "learn";
 
 const helpfulResources: DescriptionCard[] = [
   {
@@ -79,9 +82,6 @@ const helpfulResources: DescriptionCard[] = [
     },
   },
 ];
-
-// TODO: Refactor tracking
-const routeName = "learn";
 </script>
 
 <style lang="scss" scoped>
