@@ -1,16 +1,22 @@
 <template>
   <article class="bx--grid page-section quick-start">
-    <h2>Quick Start</h2>
-    <div class="bx--row quick-start__introduction">
+    <div class="bx--row">
       <div class="bx--col-md-8 bx--col-lg-8">
-        <p class="quick-start__introduction__copy">
-          When you are looking to start Qiskit, you have two options. You can
-          start Qiskit locally, which is much more secure and private, or you
-          get started with Jupyter Notebooks hosted in IBM Quantum Lab.
-        </p>
-        <p class="quick-start__introduction__copy">
-          Test some of the available providers and algorithms.
-        </p>
+        <div class="quick-start__introduction">
+          <h2>Quick Start</h2>
+          <p class="quick-start__introduction__copy">
+            When you are looking to start Qiskit, you have two options. You can
+            start Qiskit locally, which is much more secure and private, or you
+            get started with Jupyter Notebooks hosted in IBM Quantum Lab.
+          </p>
+          <p class="quick-start__introduction__copy">
+            Test some of the available providers and algorithms.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col-md-8 bx--col-lg-8">
         <ProvidersList :providers-list="providersData" @select-provider="updateSelectedProvider($event)" />
       </div>
       <Algorithms
