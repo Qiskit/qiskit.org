@@ -15,7 +15,7 @@
     <div class="bx--grid">
       <div class="event-page__tabs">
         <client-only>
-          <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
+          <cv-tabs aria-label="Event tabs" @tab-selected="selectTab" @click="[$trackClickEvent]">
             <cv-tab id="tab-1" label="Upcoming events" />
             <cv-tab id="tab-2" label="Past events" />
             <cv-tab id="tab-3" label="Calendar" />
@@ -106,6 +106,7 @@
 </template>
 
 <script lang="ts">
+import { CtaClickedEventProp } from '~/constants/segment'
 import { mapGetters } from 'vuex'
 import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
