@@ -41,7 +41,7 @@ const SOCIAL_MEDIA: LabeledLinks = {
   },
   slack: {
     label: 'Slack',
-    url: 'https://ibm.co/joinqiskitslack'
+    url: 'https://qisk.it/join-slack'
   },
   twitter: {
     label: 'Twitter',

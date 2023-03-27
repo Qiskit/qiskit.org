@@ -188,11 +188,10 @@ describe('convertToCommunityEvent', () => {
   })
 })
 
-describe('getType', () => {
+describe('convertToCommunityEvent types', () => {
   let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
-    name: 'Name',
     types: 'Types'
   }
 
@@ -200,70 +199,72 @@ describe('getType', () => {
     eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
-  it('filters the values so only those recognized by qiskit.org get into the event', () => {
-    const { hackathon } = COMMUNITY_EVENT_TYPES
-
+  it('filters the values so only those recognized by qiskit.org get into the event', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Camp'
           case 'Types':
-            return [hackathon, 'Unknown1', 'Unknown2']
+            return [COMMUNITY_EVENT_TYPES.hackathon, 'Unknown1', 'Unknown2']
         }
       }
     }
 
-    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([hackathon])
+    const { types } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ types }).toEqual({
+      types: [COMMUNITY_EVENT_TYPES.hackathon]
+    })
   })
 
-  it('gets Talks type if there is no type', () => {
-    const { talks } = COMMUNITY_EVENT_TYPES
-
+  it('gets Talks type if there is no type', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Camp'
+          case 'Types':
+            return undefined
         }
       }
     }
 
-    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([talks])
+    const { types } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ types }).toEqual({
+      types: [COMMUNITY_EVENT_TYPES.talks]
+    })
   })
 
-  it('gets Talks type if no type is recognized by qiskit.org', () => {
-    const { talks } = COMMUNITY_EVENT_TYPES
-
+  it('gets Talks type if no type is recognized by qiskit.org', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Camp'
           case 'Types':
             return ['A', 'B', 'C']
         }
       }
     }
 
-    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([talks])
+    const { types } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ types }).toEqual({
+      types: [COMMUNITY_EVENT_TYPES.talks]
+    })
   })
 
-  it('gets an array of one value if types is not an array but a single value', () => {
-    const { hackathon } = COMMUNITY_EVENT_TYPES
-
+  it('gets an array of one value if types is not an array but a single value', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Camp'
           case 'Types':
-            return [hackathon]
+            return [COMMUNITY_EVENT_TYPES.hackathon]
         }
       }
     }
 
-    expect(eventsAirtableRecords.getTypes(fakeRecord)).toEqual([hackathon])
+    const { types } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ types }).toEqual({
+      types: [COMMUNITY_EVENT_TYPES.hackathon]
+    })
   })
 })
 
@@ -275,11 +276,10 @@ describe('filterByWhitelist', () => {
   })
 })
 
-describe('getRegions', () => {
+describe('convertToCommunityEvent regions', () => {
   let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
-    name: 'Name',
     regions: 'Regions'
   }
 
@@ -287,59 +287,62 @@ describe('getRegions', () => {
     eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
-  it('defaults in TBD if there is no region', () => {
-    const { tbd } = WORLD_REGIONS
-
+  it('defaults in TBD if there is no region', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Conference'
-        }
-      }
-    }
-
-    expect(eventsAirtableRecords.getRegions(fakeRecord)).toEqual([tbd])
-  })
-
-  it('gets the region from the record', () => {
-    const { northAmerica } = WORLD_REGIONS
-
-    const fakeRecord = {
-      get: (field: string) => {
-        switch (field) {
-          case 'Name':
-            return 'Fake Conference'
           case 'Regions':
-            return [northAmerica]
+            return undefined
         }
       }
     }
 
-    expect(eventsAirtableRecords.getRegions(fakeRecord)).toEqual([northAmerica])
+    const { regions } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ regions }).toEqual({
+      regions: [WORLD_REGIONS.tbd]
+    })
   })
 
-  it('gets the region from the record even if it is not recognized by qiskit', () => {
+  it('gets the region from the record', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Conference'
+          case 'Regions':
+            return [WORLD_REGIONS.northAmerica]
+        }
+      }
+    }
+
+    const { regions } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ regions }).toEqual({
+      regions: [WORLD_REGIONS.northAmerica]
+    })
+  })
+
+  it('gets the region from the record even if it is not recognized by qiskit', async () => {
+    const fakeRecord = {
+      get: (field: string) => {
+        switch (field) {
           case 'Regions':
             return ['Lemuria']
         }
       }
     }
 
-    expect(eventsAirtableRecords.getRegions(fakeRecord)).toEqual(['Lemuria'])
+    const { regions } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ regions }).toEqual({
+      regions: ['Lemuria']
+    })
   })
 })
 
-describe('getLocation', () => {
+describe('convertToCommunityEvent location', () => {
   let eventsAirtableRecords: EventsAirtableRecords
 
   const mockRecordFields = {
-    name: 'Name',
     location: 'Location'
   }
 
@@ -347,36 +350,38 @@ describe('getLocation', () => {
     eventsAirtableRecords = new EventsAirtableRecords('testApiKey', 'testView', mockRecordFields)
   })
 
-  it('defaults in region TBD if there is no location', () => {
-    const { tbd } = WORLD_REGIONS
-
+  it('defaults in region TBD if there is no location', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Nowhere Conference'
           default:
             return undefined
         }
       }
     }
 
-    expect(eventsAirtableRecords.getLocation(fakeRecord)).toEqual(tbd)
+    const { location } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ location }).toEqual({
+      location: WORLD_REGIONS.tbd
+    })
   })
 
-  it('gets the location from the record', () => {
+  it('gets the location from the record', async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
-          case 'Name':
-            return 'Fake Conference'
           case 'Location':
             return 'Gotham'
         }
       }
     }
 
-    expect(eventsAirtableRecords.getLocation(fakeRecord)).toBe('Gotham')
+    const { location } = await eventsAirtableRecords.convertToCommunityEvent(fakeRecord)
+
+    expect({ location }).toEqual({
+      location: 'Gotham'
+    })
   })
 })
 
