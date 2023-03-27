@@ -9,7 +9,6 @@
           :code-snippet-location="'quick-start-algorithms'"
         />
       </div>
-      <h3>Test some algorithms</h3>
       <bx-tabs container :value="activeTabLabel" @bx-tabs-selected="updateSelectedTab($event)">
         <bx-tab
           v-for="algorithm in codeExamples"
@@ -75,7 +74,7 @@ export default class Algorithms extends Vue {
 $cta-max-width: 4rem;
 
 .algorithms {
-  padding: $spacing-05;
+  padding: $spacing-09 $spacing-05 $spacing-05 $spacing-05;
 
   &__container {
     background-color: $background-color-lighter;
@@ -84,7 +83,6 @@ $cta-max-width: 4rem;
 
   &__section {
     position: relative;
-    margin-bottom: $spacing-07;
   }
 }
 </style>

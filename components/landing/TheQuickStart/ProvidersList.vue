@@ -64,10 +64,14 @@ export default class StartLocally extends Vue {
   padding-top: $spacing-05;
 
   &__list {
-    max-height: 29rem;
+    max-height: 31.25rem;
     overflow-y: scroll;
     margin-bottom: $spacing-07;
     border-bottom: 1px solid $background-color-light;
+
+    @include mq($until: large) {
+      max-height: initial;
+    }
 
     &__cta {
       opacity: 0;
