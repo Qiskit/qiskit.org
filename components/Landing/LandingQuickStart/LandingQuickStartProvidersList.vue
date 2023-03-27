@@ -67,10 +67,14 @@ function updateSelectedProvider(selectedProviderIndex: number) {
   padding-top: carbon.$spacing-05;
 
   &__list {
-    max-height: 29rem;
+    max-height: 31.25rem;
     overflow-y: scroll;
     margin-bottom: carbon.$spacing-07;
     border-bottom: 1px solid qiskit.$background-color-light;
+
+    @include carbon.breakpoint-down(lg) {
+      max-height: initial;
+    }
 
     &__cta {
       opacity: 0;
