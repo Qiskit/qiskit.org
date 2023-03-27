@@ -15,7 +15,7 @@
     <div class="bx--grid">
       <div class="event-page__tabs">
         <client-only>
-          <cv-tabs aria-label="Event tabs" @tab-selected="selectTab">
+          <cv-tabs aria-label="Event tabs" @tab-selected="handleTabSelected($event)">
             <cv-tab id="tab-1" label="Upcoming events" />
             <cv-tab id="tab-2" label="Past events" />
             <cv-tab id="tab-3" label="Calendar" />
@@ -163,6 +163,9 @@ export default class EventsPage extends QiskitPage {
     }
   ]
 
+  tabs = ['upcoming', 'past', 'calendar']
+  tabsIsDirty = false
+
   get noEvents (): boolean {
     return (this as any).filteredEvents.length === 0
   }
@@ -200,9 +203,16 @@ export default class EventsPage extends QiskitPage {
       : commit('events/removeFilter', payload)
   }
 
+  handleTabSelected (tabIndex: number) {
+    this.selectTab(tabIndex)
+    if (this.tabsIsDirty) {
+      this.$trackClickEvent(this.tabs[tabIndex], 'events-list')
+    }
+    this.tabsIsDirty = true
+  }
+
   selectTab (selectedTab: number) {
-    const tabs = ['upcoming', 'past', 'calendar']
-    this.$store.commit('events/setActiveSet', tabs[selectedTab])
+    this.$store.commit('events/setActiveSet', this.tabs[selectedTab])
   }
 }
 </script>
