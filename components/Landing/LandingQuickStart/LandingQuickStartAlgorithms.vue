@@ -9,7 +9,6 @@
           :code-snippet-location="'quick-start-algorithms'"
         />
       </div>
-      <h3>Test some algorithms</h3>
       <bx-tabs
         container
         :value="activeTabLabel"
@@ -78,7 +77,8 @@ watch(
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .algorithms {
-  padding: carbon.$spacing-05;
+  padding: carbon.$spacing-09 carbon.$spacing-05 carbon.$spacing-05
+    carbon.$spacing-05;
 
   &__container {
     background-color: qiskit.$background-color-lighter;
@@ -87,7 +87,6 @@ watch(
 
   &__section {
     position: relative;
-    margin-bottom: carbon.$spacing-07;
   }
 }
 </style>
