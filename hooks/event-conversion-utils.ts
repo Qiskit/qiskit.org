@@ -5,6 +5,7 @@ import {
   CommunityEventType,
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
+  type WorldRegion,
   WORLD_REGIONS,
 } from "../types/events";
 import {
@@ -239,11 +240,15 @@ class EventsAirtableRecords extends AirtableRecords {
     record: Record<string, any>
   ): Promise<CommunityEvent> {
     const event = {
-      endDate: record.get(this.recordFields!.endDate) || "",
-      location: record.get(this.recordFields!.location) || WORLD_REGIONS.tbd,
-      regions: record.get(this.recordFields!.regions) || [WORLD_REGIONS.tbd],
-      title: record.get(this.recordFields!.name) || "",
-      to: record.get(this.recordFields!.website) || "",
+      endDate: (record.get(this.recordFields!.endDate) as string) || "",
+      location:
+        (record.get(this.recordFields!.location) as string) ||
+        WORLD_REGIONS.tbd,
+      regions: (record.get(this.recordFields!.regions) as WorldRegion[]) || [
+        WORLD_REGIONS.tbd,
+      ],
+      title: (record.get(this.recordFields!.name) as string) || "",
+      to: (record.get(this.recordFields!.website) as string) || "",
 
       date: this.formatDates(...this.getDates(record)),
       image: await this.getImage(record),
