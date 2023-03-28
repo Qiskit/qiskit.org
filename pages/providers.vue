@@ -1,18 +1,10 @@
 <template>
   <div class="providers-page">
     <AppPageHeaderFixed>
-      Run Qiskit Compiled circuits on
-      <TypewriterEffect
-        :values="[
-          'real hardware',
-          'simulators',
-        ]"
-      />
+      Run Qiskit compiled circuits on
+      <TypewriterEffect :values="['real hardware', 'simulators']" />
     </AppPageHeaderFixed>
-    <section
-      id="contentContainer"
-      class="bx--grid page-section"
-    >
+    <section id="contentContainer" class="bx--grid page-section">
       <div class="bx--row">
         <div class="bx--col-sm-0 bx--col-md-3 bx--col-lg-3">
           <div class="providers-page__table-of-contents">
@@ -20,10 +12,7 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <AppCta
-              v-bind="howToGuideLink"
-              kind="ghost"
-            />
+            <AppCta v-bind="howToGuideLink" kind="ghost" />
           </div>
         </div>
         <div class="bx--col-md-5 bx--col-lg-13">
@@ -46,8 +35,17 @@
       <div class="bx--row providers-page__join-section">
         <div class="bx--col-md-5 bx--offset-lg-3 bx--col-lg-5">
           <h2>Become a provider</h2>
-          <p>Are you looking to integrate with Qiskit? Become a provider and enable your quantum device or simulator to be used with our SDK. Check out our guides on how to write a new provider, and join our community of providers today to help accelerate the development of quantum computing.</p>
-          <AppCta class="providers-page__join-section__cta" v-bind="howToGuideLink" />
+          <p>
+            Are you looking to integrate with Qiskit? Become a provider and
+            enable your quantum device or simulator to be used with our SDK.
+            Check out our guides on how to write a new provider, and join our
+            community of providers today to help accelerate the development of
+            quantum computing.
+          </p>
+          <AppCta
+            class="providers-page__join-section__cta"
+            v-bind="howToGuideLink"
+          />
         </div>
       </div>
     </section>
@@ -55,37 +53,37 @@
 </template>
 
 <script lang="ts">
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+import { Component } from "vue-property-decorator";
+import QiskitPage from "~/components/logic/QiskitPage.vue";
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  ProviderObject
-} from '~/constants/providersContent'
-import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
+  ProviderObject,
+} from "~/constants/providersContent";
+import ScrollSectionsMixin from "~/mixins/scrollBetweenSections";
 
 @Component({
   mixins: [ScrollSectionsMixin],
-  head () {
+  head() {
     return {
-      title: 'Qiskit Providers'
-    }
+      title: "Qiskit Providers",
+    };
   },
-  layout: 'default-max'
+  layout: "default-max",
 })
 export default class ProvidersPage extends QiskitPage {
-  routeName = 'providers'
+  routeName = "providers";
 
-  tocEntries = TABLE_OF_CONTENTS
-  contentSections = CONTENT_SECTIONS
+  tocEntries = TABLE_OF_CONTENTS;
+  contentSections = CONTENT_SECTIONS;
 
   howToGuideLink = {
-    url: 'https://qiskit.org/documentation/apidoc/providers.html#writing-a-new-provider',
-    label: 'Become a provider'
-  }
+    url: "https://qiskit.org/documentation/apidoc/providers.html#writing-a-new-provider",
+    label: "Become a provider",
+  };
 
-  asTabs (providers: Array<ProviderObject>): Array<ProviderObject> {
-    return providers.map(provider => provider as ProviderObject)
+  asTabs(providers: Array<ProviderObject>): Array<ProviderObject> {
+    return providers.map((provider) => provider as ProviderObject);
   }
 }
 </script>

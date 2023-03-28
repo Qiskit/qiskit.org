@@ -5,19 +5,23 @@
         <div class="quick-start__introduction">
           <h2>Quick Start</h2>
           <p class="quick-start__introduction__copy">
-            When you are looking to start Qiskit, you have two options. You can
-            start Qiskit locally, which is much more secure and private, or you
-            get started with Jupyter Notebooks hosted in IBM Quantum Lab.
+            You can try Qiskit as a stand-alone tool or you can compile quantum
+            programs to a variety of targets, called providers. No other quantum
+            framework allows you to work with so many vendors!
           </p>
           <p class="quick-start__introduction__copy">
-            Test some of the available providers and algorithms.
+            Here are some code examples for common tasks so you can start
+            exploring different combinations:
           </p>
         </div>
       </div>
     </div>
     <div class="bx--row">
       <div class="bx--col-md-8 bx--col-lg-8">
-        <ProvidersList :providers-list="providersData" @select-provider="updateSelectedProvider($event)" />
+        <ProvidersList
+          :providers-list="providersData"
+          @select-provider="updateSelectedProvider($event)"
+        />
       </div>
       <Algorithms
         class="bx--col-md-8 bx--col-lg-8"
@@ -30,18 +34,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import rawQuickStartProvidersData from '~/content/providers/quick-start.json'
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import rawQuickStartProvidersData from "~/content/providers/quick-start.json";
 
 @Component
 export default class TheQuickStart extends Vue {
-  providersData = rawQuickStartProvidersData
+  providersData = rawQuickStartProvidersData;
 
-  selectedProviderIndex = 0
+  selectedProviderIndex = 0;
 
-  updateSelectedProvider (selectedProviderId: number):void {
-    this.selectedProviderIndex = selectedProviderId
+  updateSelectedProvider(selectedProviderId: number): void {
+    this.selectedProviderIndex = selectedProviderId;
   }
 }
 </script>
@@ -55,6 +59,5 @@ export default class TheQuickStart extends Vue {
       max-width: 32rem;
     }
   }
-
 }
 </style>
