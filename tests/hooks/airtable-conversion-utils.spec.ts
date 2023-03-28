@@ -1,15 +1,16 @@
 import { promises as fsPromises } from "fs";
 import axios from "axios";
-import { AirtableRecords } from "~/hooks/airtable-conversion-utils";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { AirtableRecords } from "../../hooks/airtable-conversion-utils";
 
 const id = "TESTID";
 const imageUrl = "https://example.com/image.jpg";
 const imageFilePath = `public/test/target-dir/${id}.jpg`;
 
-jest.mock("fs", () => {
+vi.mock("fs", () => {
   return {
     promises: {
-      writeFile: jest.fn(),
+      writeFile: vi.fn(),
     },
   };
 });
@@ -25,19 +26,17 @@ describe("storeImage", () => {
       "testView",
       id
     );
-    jest.spyOn(axios, "get");
+    vi.spyOn(axios, "get");
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
-  it("should store image and return a resolved promise", async () => {
+  test("should store image and return a resolved promise", async () => {
     const mockImageBuffer = Buffer.from("imageData");
-    jest.spyOn(axios, "get").mockResolvedValue({ data: mockImageBuffer });
-    const mockWriteFile = jest
-      .spyOn(fsPromises, "writeFile")
-      .mockResolvedValue();
+    vi.spyOn(axios, "get").mockResolvedValue({ data: mockImageBuffer });
+    const mockWriteFile = vi.spyOn(fsPromises, "writeFile").mockResolvedValue();
 
     await expect(
       airtableRecords.storeImage(imageUrl, imageFilePath)
@@ -45,20 +44,20 @@ describe("storeImage", () => {
     expect(mockWriteFile).toHaveBeenCalledWith(imageFilePath, mockImageBuffer);
   });
 
-  it("should throw error when image URL is invalid", async () => {
-    jest.spyOn(axios, "get").mockRejectedValue(new Error("Invalid image URL"));
+  test("should throw error when image URL is invalid", async () => {
+    vi.spyOn(axios, "get").mockRejectedValue(new Error("Invalid image URL"));
     await expect(
       airtableRecords.storeImage("invalidImageUrl", imageFilePath)
     ).rejects.toThrowError("Invalid image URL");
   });
 
-  it("should throw error when there is problem with file system", async () => {
-    jest.spyOn(fsPromises, "writeFile").mockImplementation(() => {
+  test("should throw error when there is problem with file system", async () => {
+    vi.spyOn(fsPromises, "writeFile").mockImplementation(() => {
       throw new Error("File system error");
     });
-    jest
-      .spyOn(axios, "get")
-      .mockResolvedValue({ data: Buffer.from("imageData") });
+    vi.spyOn(axios, "get").mockResolvedValue({
+      data: Buffer.from("imageData"),
+    });
     await expect(
       airtableRecords.storeImage(imageUrl, imageFilePath)
     ).rejects.toThrowError("File system error");
