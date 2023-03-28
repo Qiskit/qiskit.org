@@ -53,7 +53,9 @@ export default class LearnPage extends QiskitPage {
     },
     {
       title: SOCIAL_MEDIA.support.label,
-      description: `If you need support on anything relating to using and developing Qiskit, you can use the following forums to direct your issue/queries to the appropriate audience.`,
+      description: `If you need support on anything relating to using and
+      developing Qiskit, you can use the following forums to direct your
+      issue / queries to the appropriate audience.`,
       cta: {
         url: SOCIAL_MEDIA.support.url,
         label: 'Visit Support Channels',
