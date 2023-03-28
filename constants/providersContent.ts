@@ -85,7 +85,7 @@ const MULTI_PLATFORMS_COLLECTION: ProvidersSection = rawMultiplatformsData;
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
-    title: "Run Qiskit circuits with",
+    title: "Run Qiskit with",
   },
   CLOUD_SIMULATORS_IN_MENU,
   HARDWARE_IN_MENU,

@@ -5,12 +5,13 @@
         <div class="quick-start__introduction">
           <h2>Quick Start</h2>
           <p class="quick-start__introduction__copy">
-            When you are looking to start Qiskit, you have two options. You can
-            start Qiskit locally, which is much more secure and private, or you
-            get started with Jupyter Notebooks hosted in IBM Quantum Lab.
+            You can try Qiskit as a stand-alone tool or you can compile quantum
+            programs to a variety of targets, called providers. No other quantum
+            framework allows you to work with so many vendors!
           </p>
           <p class="quick-start__introduction__copy">
-            Test some of the available providers and algorithms.
+            Here are some code examples for common tasks so you can start
+            exploring different combinations:
           </p>
         </div>
       </div>
