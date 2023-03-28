@@ -53,37 +53,37 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import QiskitPage from "~/components/logic/QiskitPage.vue";
+import { Component } from 'vue-property-decorator'
+import QiskitPage from '~/components/logic/QiskitPage.vue'
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  ProviderObject,
-} from "~/constants/providersContent";
-import ScrollSectionsMixin from "~/mixins/scrollBetweenSections";
+  ProviderObject
+} from '~/constants/providersContent'
+import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
 
 @Component({
   mixins: [ScrollSectionsMixin],
-  head() {
+  head () {
     return {
-      title: "Qiskit Providers",
-    };
+      title: 'Qiskit Providers'
+    }
   },
-  layout: "default-max",
+  layout: 'default-max'
 })
 export default class ProvidersPage extends QiskitPage {
-  routeName = "providers";
+  routeName = 'providers';
 
   tocEntries = TABLE_OF_CONTENTS;
   contentSections = CONTENT_SECTIONS;
 
   howToGuideLink = {
-    url: "https://qiskit.org/documentation/apidoc/providers.html#writing-a-new-provider",
-    label: "Become a provider",
+    url: 'https://qiskit.org/documentation/apidoc/providers.html#writing-a-new-provider',
+    label: 'Become a provider'
   };
 
-  asTabs(providers: Array<ProviderObject>): Array<ProviderObject> {
-    return providers.map((provider) => provider as ProviderObject);
+  asTabs (providers: Array<ProviderObject>): Array<ProviderObject> {
+    return providers.map(provider => provider as ProviderObject)
   }
 }
 </script>

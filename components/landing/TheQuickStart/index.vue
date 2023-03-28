@@ -34,9 +34,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
-import rawQuickStartProvidersData from "~/content/providers/quick-start.json";
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+import rawQuickStartProvidersData from '~/content/providers/quick-start.json'
 
 @Component
 export default class TheQuickStart extends Vue {
@@ -44,8 +44,8 @@ export default class TheQuickStart extends Vue {
 
   selectedProviderIndex = 0;
 
-  updateSelectedProvider(selectedProviderId: number): void {
-    this.selectedProviderIndex = selectedProviderId;
+  updateSelectedProvider (selectedProviderId: number): void {
+    this.selectedProviderIndex = selectedProviderId
   }
 }
 </script>

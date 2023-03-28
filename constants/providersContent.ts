@@ -1,8 +1,8 @@
-import rawCloudSimulatorsData from "~/content/providers/cloud-simulators.json";
-import rawHardwareData from "~/content/providers/hardware.json";
-import rawLocalSimulatorsData from "~/content/providers/local-simulators.json";
-import rawMultiplatformsData from "~/content/providers/multi-platforms.json";
-import rawRuntimesData from "~/content/providers/runtimes.json";
+import rawCloudSimulatorsData from '~/content/providers/cloud-simulators.json'
+import rawHardwareData from '~/content/providers/hardware.json'
+import rawLocalSimulatorsData from '~/content/providers/local-simulators.json'
+import rawMultiplatformsData from '~/content/providers/multi-platforms.json'
+import rawRuntimesData from '~/content/providers/runtimes.json'
 
 type TableOfContentEntry = {
   /** The visible name of the link */
@@ -54,61 +54,61 @@ interface ProvidersSection {
 const CLOUD_SIMULATORS_IN_MENU: TableOfContentEntry = {
   sectionId: rawCloudSimulatorsData.id,
   title: rawCloudSimulatorsData.title,
-  isSecondary: true,
-};
+  isSecondary: true
+}
 
-const CLOUD_SIMULATORS_COLLECTION: ProvidersSection = rawCloudSimulatorsData;
+const CLOUD_SIMULATORS_COLLECTION: ProvidersSection = rawCloudSimulatorsData
 
 const HARDWARE_IN_MENU: TableOfContentEntry = {
   sectionId: rawHardwareData.id,
   title: rawHardwareData.title,
-  isSecondary: true,
-};
+  isSecondary: true
+}
 
-const HARDWARE_COLLECTION: ProvidersSection = rawHardwareData;
+const HARDWARE_COLLECTION: ProvidersSection = rawHardwareData
 
 const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
   sectionId: rawRuntimesData.id,
   title: rawRuntimesData.title,
-  isSecondary: true,
-};
+  isSecondary: true
+}
 
-const QUANTUM_RUNTIMES_COLLECTION: ProvidersSection = rawRuntimesData;
+const QUANTUM_RUNTIMES_COLLECTION: ProvidersSection = rawRuntimesData
 
 const LOCAL_SIMULATORS_IN_MENU: TableOfContentEntry = {
   sectionId: rawLocalSimulatorsData.id,
   title: rawLocalSimulatorsData.title,
-  isSecondary: true,
-};
+  isSecondary: true
+}
 
-const LOCAL_SIMULATORS_COLLECTION: ProvidersSection = rawLocalSimulatorsData;
+const LOCAL_SIMULATORS_COLLECTION: ProvidersSection = rawLocalSimulatorsData
 
 const MULTIPLATFORMS_IN_MENU: TableOfContentEntry = {
   sectionId: rawMultiplatformsData.id,
   title: rawMultiplatformsData.title,
-  isSecondary: true,
-};
+  isSecondary: true
+}
 
-const MULTI_PLATFORMS_COLLECTION: ProvidersSection = rawMultiplatformsData;
+const MULTI_PLATFORMS_COLLECTION: ProvidersSection = rawMultiplatformsData
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
-    title: "Run Qiskit with",
+    title: 'Run Qiskit with'
   },
   CLOUD_SIMULATORS_IN_MENU,
   HARDWARE_IN_MENU,
   QUANTUM_RUNTIMES_IN_MENU,
   LOCAL_SIMULATORS_IN_MENU,
-  MULTIPLATFORMS_IN_MENU,
-];
+  MULTIPLATFORMS_IN_MENU
+]
 
 const CONTENT_SECTIONS: ProvidersSection[] = [
   CLOUD_SIMULATORS_COLLECTION,
   HARDWARE_COLLECTION,
   QUANTUM_RUNTIMES_COLLECTION,
   LOCAL_SIMULATORS_COLLECTION,
-  MULTI_PLATFORMS_COLLECTION,
-];
+  MULTI_PLATFORMS_COLLECTION
+]
 
 export {
   TableOfContentEntry,
@@ -116,5 +116,5 @@ export {
   ProviderObject,
   ProviderCodeExample,
   TABLE_OF_CONTENTS,
-  CONTENT_SECTIONS,
-};
+  CONTENT_SECTIONS
+}
