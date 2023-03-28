@@ -55,7 +55,7 @@ const SOCIAL_MEDIA: LabeledLinks = {
     label: 'YouTube',
     url: 'https://www.youtube.com/Qiskit'
   },
-  stack: {
+  support: {
     label: 'Support Channels',
     url: 'https://qisk.it/support'
   }
@@ -190,7 +190,7 @@ const FOOTER_ELEMENTS: FooterStructure = [
     title: 'Support',
     elements: [
       SOCIAL_MEDIA.github,
-      SOCIAL_MEDIA.stack,
+      SOCIAL_MEDIA.support,
       DOCUMENTATION_LINK
     ]
   }
