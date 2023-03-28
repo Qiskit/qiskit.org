@@ -56,8 +56,8 @@ const SOCIAL_MEDIA: LabeledLinks = {
     url: 'https://www.youtube.com/Qiskit'
   },
   stack: {
-    label: 'Stack Exchange',
-    url: 'https://quantumcomputing.stackexchange.com/questions/tagged/qiskit'
+    label: 'Support Channels',
+    url: 'https://qisk.it/support'
   }
 }
 
