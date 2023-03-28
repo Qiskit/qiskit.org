@@ -1,5 +1,5 @@
 import axios from "axios";
-import { camelCase } from "lodash";
+import camelCase from "lodash/camelCase";
 
 async function fetchMembers() {
   try {
@@ -19,6 +19,7 @@ async function fetchMembers() {
     const shuffled = fyShuffle(convertedArray);
     return shuffled;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
 }
@@ -31,6 +32,7 @@ async function fetchTiers() {
     );
     return res.data;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
 }

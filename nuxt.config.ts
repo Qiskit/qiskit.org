@@ -44,6 +44,10 @@ export default defineNuxtConfig({
  * @returns A promise that resolves when the content has been generated
  */
 async function generateContent() {
+  // eslint-disable-next-line no-console
+  console.info("Generating the ecosystem content...");
+  await fetchEcosystemMembers("./content/ecosystem");
+
   if (AIRTABLE_API_KEY) {
     // eslint-disable-next-line no-console
     console.info("Generating the events content...");
@@ -52,10 +56,6 @@ async function generateContent() {
     // eslint-disable-next-line no-console
     console.info("Generating the advocates content...");
     await fetchAdvocates(AIRTABLE_API_KEY, "./content/advocates");
-
-    // eslint-disable-next-line no-console
-    console.info("Generating the ecosystem content...");
-    await fetchEcosystemMembers("./content/ecosystem");
   } else {
     // eslint-disable-next-line no-console
     console.warn(
