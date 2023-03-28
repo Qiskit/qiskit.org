@@ -1,3 +1,8 @@
-declare module "frontmatter-markdown-loader/mode";
-declare module "@carbon/icons-vue";
-declare module "@carbon/icons-vue/*";
+declare module "#app" {
+  interface PageMeta {
+    pageTitle: string;
+    routeName: string;
+  }
+}
+
+export {};

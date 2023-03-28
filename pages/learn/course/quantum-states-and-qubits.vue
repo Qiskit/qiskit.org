@@ -24,13 +24,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Quantum States and Qubits",
+  routeName: "quantum-states-and-qubits",
 });
 
 useHead({
   title: "Quantum States and Qubits",
 });
 
-// TODO: Refactor "logic" pages
 const routeName = "quantum-states-and-qubits";
 
 const headerTitle = "Quantum States and Qubits";

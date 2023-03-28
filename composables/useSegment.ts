@@ -85,6 +85,7 @@ function installAnalytics(url: string) {
     document.head.appendChild(script);
     script.onload = resolve;
     script.onerror = (err) => {
+      // eslint-disable-next-line no-console
       console.warn("Error loading Bluemix Analytics script:", err);
       reject(err);
     };
@@ -95,9 +96,14 @@ function installAnalytics(url: string) {
  * Send a page visitation event to segment.
  * @param context the Bluemix Analytics object with the analytics configuration.
  * This is usually `window`.
- * @param route a unique name identifying the page.
+ * @param routeName a unique name identifying the contents of the route.
+ * @param title the title meta tag of the page
  */
-function trackPage(context: AnalyticsContext, route: string) {
+function trackPage(
+  context: AnalyticsContext,
+  routeName: string,
+  title: string
+) {
   const { bluemixAnalytics, digitalData } = context;
 
   if (!bluemixAnalytics || !digitalData) {
@@ -106,12 +112,11 @@ function trackPage(context: AnalyticsContext, route: string) {
 
   const category = getOrFailCategory(digitalData);
   const productTitle = getOrFailProductTitle(digitalData);
-  const project = "Qiskit.org";
 
-  bluemixAnalytics.pageEvent(category, project, {
+  bluemixAnalytics.pageEvent(category, routeName, {
     navigationType: "pushState",
     productTitle,
-    route,
+    title,
   });
 }
 
@@ -156,6 +161,7 @@ function afterAnalyticsReady<S extends any[]>(callback: (...S: any[]) => void) {
       await useState("analyticsReady").value;
       callback(window, ...args);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.warn(err);
     }
   };

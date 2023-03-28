@@ -24,13 +24,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Quantum Protocols and Quantum Algorithms",
+  routeName: "quantum-protocols-and-quantum-algorithms",
 });
 
 useHead({
   title: "Quantum Protocols and Quantum Algorithms",
 });
 
-// TODO: Refactor "logic" pages
 const routeName = "quantum-protocols-and-quantum-algorithms";
 
 const headerTitle = "Quantum Protocols and Quantum Algorithms";

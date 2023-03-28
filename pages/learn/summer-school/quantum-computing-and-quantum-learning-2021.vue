@@ -24,13 +24,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "2021 Qiskit Global Summer School on Quantum Machine Learning",
+  routeName: "quantum-computing-and-quantum-learning-2021",
 });
 
 useHead({
   title: "2021 Qiskit Global Summer School on Quantum Machine Learning",
 });
 
-// TODO: Refactor tracking
 const routeName = "quantum-computing-and-quantum-learning-2021";
 
 const headerTitle =

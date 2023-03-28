@@ -94,7 +94,7 @@
             <div class="event-page__tabs">
               <bx-tabs value="Google">
                 <bx-tab
-                  v-for="{ name, instructions } in calendarsInstructions"
+                  v-for="{ name } in calendarsInstructions"
                   :id="`tab-${name}`"
                   :key="name"
                   :target="`panel-${name}`"
@@ -158,12 +158,14 @@ import { EVENT_REQUEST_LINK, GeneralLink } from "~/constants/appLinks";
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
 
-const pastEvents = rawPastEvents as CommunityEvent[];
-const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
-
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Events",
+  routeName: "events",
 });
+
+const pastEvents = rawPastEvents as CommunityEvent[];
+const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
 
 useHead({
   title: "Qiskit Events",
@@ -306,11 +308,6 @@ function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
 const selectTab = (selectedTab: string) => {
   activeSet.value = selectedTab as "past" | "upcoming";
 };
-
-// TODO: Refactor tracking
-// export default class EventsPage {
-//   const routeName = 'events'
-// }
 </script>
 
 <style lang="scss" scoped>

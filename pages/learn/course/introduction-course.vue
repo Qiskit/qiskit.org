@@ -24,13 +24,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Introduction course",
+  routeName: "introduction-course",
 });
 
 useHead({
   title: "Introduction course",
 });
 
-// TODO: Refactor tracking
 const routeName = "introduction-course";
 
 const headerTitle = "Introduction to Quantum Computing";

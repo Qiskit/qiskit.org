@@ -23,13 +23,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Quantum machine learning course",
+  routeName: "machine-learning-course",
 });
 
 useHead({
   title: "Quantum machine learning course",
 });
 
-// TODO: Refactor tracking
 const routeName = "machine-learning-course";
 
 const headerTitle = "Quantum machine learning";

@@ -24,13 +24,14 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Basics of quantum information",
+  routeName: "basics-quantum-information-course",
 });
 
 useHead({
   title: "Basics of quantum information",
 });
 
-// TODO: Refactor tracking
 const routeName = "basics-quantum-information-course";
 
 const headerTitle = "Basics of quantum information";
