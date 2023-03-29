@@ -7,7 +7,7 @@
         devices. We will work closely to develop Metal and design quantum
         devices with it.
       </p>
-      <UiAppCta
+      <UiCta
         :label="joinSlackLink.label"
         theme="dark"
         :url="joinSlackLink.url"

@@ -5,7 +5,7 @@
       <slot />
     </div>
     <div class="syllabus-card__footer">
-      <UiAppCta
+      <UiCta
         class="syllabus-card__footer__cta"
         label="View syllabus"
         :segment="segment"
@@ -53,7 +53,7 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 .syllabus-card {
-  .app-cta {
+  .cta {
     width: 100%;
     max-width: 50%;
   }

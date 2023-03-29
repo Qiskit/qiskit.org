@@ -25,7 +25,7 @@
           allowfullscreen
         />
       </div>
-      <UiAppCta
+      <UiCta
         class="intro-section__cta"
         :label="joinWaitingListLink.label"
         theme="dark"

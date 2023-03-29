@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <bx-multi-select
-      class="app-multi-select"
+      class="multi-select"
       :theme="theme"
       :label-text="label"
       :value="value"
@@ -57,7 +57,7 @@ function formatOptions(optionsList: any): Array<multiSelectOption> {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-multi-select {
+.multi-select {
   & .bx--list-box--light,
   & .bx--list-box__menu {
     background-color: qiskit.$background-color-white;

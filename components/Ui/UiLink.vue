@@ -1,5 +1,5 @@
 <template>
-  <UiBasicLink class="app-link" :class="`app-link_${kind}`" v-bind="$attrs">
+  <UiBasicLink class="link" :class="`link_${kind}`" v-bind="$attrs">
     <slot />
   </UiBasicLink>
 </template>
@@ -17,7 +17,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-link {
+.link {
   // &_none is intentionally not resolved
 
   &_primary,

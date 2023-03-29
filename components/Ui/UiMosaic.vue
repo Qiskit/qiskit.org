@@ -1,36 +1,36 @@
 <template>
-  <section class="app-mosaic">
-    <dl class="app-mosaic__layout">
+  <section class="mosaic">
+    <dl class="mosaic__layout">
       <div
         v-for="{ position, title, description, image, cta } in mosaicElements"
         :key="title"
-        class="app-mosaic__element"
-        :class="`app-mosaic__element_${position}`"
+        class="mosaic__element"
+        :class="`mosaic__element_${position}`"
       >
         <div
-          class="app-mosaic__element-copy"
-          :class="`app-mosaic__element-copy_${position}`"
+          class="mosaic__element-copy"
+          :class="`mosaic__element-copy_${position}`"
         >
           <dt class="h3" v-text="title" />
           <!-- eslint-disable vue/no-v-html -->
           <dd
-            class="app-mosaic__element-copy-description"
-            :class="`app-mosaic__element-copy-description_${position}`"
+            class="mosaic__element-copy-description"
+            :class="`mosaic__element-copy-description_${position}`"
             v-html="description"
           />
           <!-- estlint-enable -->
-          <UiAppLink
+          <UiLink
             v-if="cta"
             v-bind="cta"
-            class="app-mosaic__element-copy-link"
+            class="mosaic__element-copy-link"
           >
             {{ cta.label }}
-          </UiAppLink>
+          </UiLink>
         </div>
         <div
           v-if="image"
-          class="app-mosaic__element-image"
-          :class="`app-mosaic__element-image_${position}`"
+          class="mosaic__element-image"
+          :class="`mosaic__element-image_${position}`"
           :style="{
             'background-image': `url(${image})`,
           }"
@@ -54,7 +54,7 @@ defineProps<Props>();
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-mosaic {
+.mosaic {
   &__layout {
     display: grid;
     gap: carbon.$spacing-07;

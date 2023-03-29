@@ -39,19 +39,19 @@
           <p class="building-section__text">
             Learn more about the physics behind Qiskit Metal and qubit design
             from the
-            <UiAppLink
+            <UiLink
               url="/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020"
-              >Introduction to Quantum Computing and Quantum Hardware</UiAppLink
+              >Introduction to Quantum Computing and Quantum Hardware</UiLink
             >
             summer school lectures series by Zlatko Minev on superconducting
             qubits. Also, check out the open source
-            <UiAppLink
+            <UiLink
               url="https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics"
-              >Qiskit textbook</UiAppLink
+              >Qiskit textbook</UiLink
             >
             chapters on quantum devices and their control.
           </p>
-          <UiAppCta
+          <UiCta
             :label="stayInTouchLink.label"
             :url="stayInTouchLink.url"
             theme="dark"

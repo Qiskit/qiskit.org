@@ -1,6 +1,6 @@
 <template>
   <main>
-    <UiAppPageHeaderFixed class="ecosystem-header__hero">
+    <UiPageHeaderFixed class="ecosystem-header__hero">
       <br />
       Explore
       <UiTypewriterEffect
@@ -9,7 +9,7 @@
       from Qiskit
       <br />
       and the Qiskit community
-    </UiAppPageHeaderFixed>
+    </UiPageHeaderFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
@@ -22,14 +22,14 @@
           </p>
         </div>
       </div>
-      <UiAppCta
+      <UiCta
         class="ecosystem-header__cta"
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <UiAppFiltersResultsLayout class="ecosystem__filters-result-section">
+      <UiFiltersResultsLayout class="ecosystem__filters-result-section">
         <template #filters-on-m-l-screen>
-          <UiAppFieldset label="Tier">
+          <UiFieldset label="Tier">
             <client-only>
               <bx-checkbox
                 v-for="option in tiers"
@@ -43,10 +43,10 @@
                 "
               />
             </client-only>
-          </UiAppFieldset>
+          </UiFieldset>
         </template>
         <template #filters-on-s-screen>
-          <UiAppMultiSelect
+          <UiMultiSelect
             label="Tier"
             :options="tiersNames"
             :value="tierFiltersAsString"
@@ -60,7 +60,7 @@
               :key="index"
               class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <UiAppCard
+              <UiCard
                 class="project-card"
                 :title="member.name"
                 :tags="member.labels"
@@ -91,7 +91,7 @@
                 <p>
                   {{ member.description }}
                 </p>
-              </UiAppCard>
+              </UiCard>
               <bx-accordion v-if="member.testsResults.length != 0">
                 <bx-accordion-item
                   class="bx-accordion__item"
@@ -105,7 +105,7 @@
             </div>
           </div>
         </template>
-      </UiAppFiltersResultsLayout>
+      </UiFiltersResultsLayout>
     </section>
   </main>
 </template>
@@ -229,7 +229,7 @@ const joinAction: GeneralLink = {
   padding-bottom: carbon.$spacing-08;
 }
 
-.app-card {
+.card {
   &__description {
     .cds--row {
       margin-left: 0;
@@ -259,7 +259,7 @@ const joinAction: GeneralLink = {
     }
   }
 
-  :deep(.app-card__title) {
+  :deep(.card__title) {
     font-size: 20px;
   }
 }

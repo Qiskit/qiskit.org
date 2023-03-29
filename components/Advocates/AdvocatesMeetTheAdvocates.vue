@@ -10,18 +10,18 @@
           area.
         </p>
         <p>
-          <UiAppLink :url="joinSlackLink">
+          <UiLink :url="joinSlackLink">
             Sign-up for the Qiskit Slack workspace
-          </UiAppLink>
+          </UiLink>
           to reach the advocates and join the conversation.
         </p>
       </div>
     </div>
-    <UiAppFiltersResultsLayout
+    <UiFiltersResultsLayout
       class="meet-the-advocates__filters-result-section"
     >
       <template #filters-on-m-l-screen>
-        <UiAppFieldset :label="filter.label">
+        <UiFieldset :label="filter.label">
           <client-only>
             <bx-checkbox
               v-for="option in filter.options"
@@ -34,10 +34,10 @@
               "
             />
           </client-only>
-        </UiAppFieldset>
+        </UiFieldset>
       </template>
       <template #filters-on-s-screen>
-        <UiAppMultiSelect
+        <UiMultiSelect
           :label="filter.label"
           :options="filter.options"
           :value="regionFiltersAsString"
@@ -63,7 +63,7 @@
           </div>
         </div>
       </template>
-    </UiAppFiltersResultsLayout>
+    </UiFiltersResultsLayout>
   </section>
 </template>
 

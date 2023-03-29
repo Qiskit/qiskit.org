@@ -2,7 +2,7 @@
   <section class="prerequisite-material-section">
     <h2>Prerequisite material</h2>
     <div class="prerequisite-material-section__cards">
-      <UiAppDescriptionCard
+      <UiDescriptionCard
         v-for="{ title, description, segment, url } in data"
         :key="title"
         :description="description"

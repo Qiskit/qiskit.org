@@ -1,15 +1,15 @@
 <template>
-  <section class="app-mosaic-section">
+  <section class="mosaic-section">
     <div class="cds--row">
       <h2 class="cds--col-md-4 cds--col-lg-8" v-text="title" />
     </div>
-    <div v-if="description" class="cds--row app-mosaic-section__introduction">
+    <div v-if="description" class="cds--row mosaic-section__introduction">
       <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-        <p class="app-mosaic-section__description" v-text="description" />
+        <p class="mosaic-section__description" v-text="description" />
       </div>
     </div>
-    <UiAppMosaic
-      class="app-mosaic-section__mosaic"
+    <UiMosaic
+      class="mosaic-section__mosaic"
       :mosaic-elements="elements"
     />
     <slot />
@@ -33,7 +33,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
 
-.app-mosaic-section {
+.mosaic-section {
   &__description {
     margin-bottom: 0;
   }

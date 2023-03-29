@@ -1,5 +1,5 @@
 <template>
-  <bx-data-table class="app-data-table">
+  <bx-data-table class="data-table">
     <bx-table>
       <bx-table-head>
         <bx-table-header-row>
@@ -37,7 +37,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-data-table {
+.data-table {
   display: block;
   overflow-x: scroll;
   max-width: 100%;

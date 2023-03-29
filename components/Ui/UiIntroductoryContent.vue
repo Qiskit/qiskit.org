@@ -1,11 +1,11 @@
 <template>
-  <article class="app-introductory-content">
-    <div class="app-introductory-content__overview">
+  <article class="introductory-content">
+    <div class="introductory-content__overview">
       <h2 v-text="title" />
-      <p class="app-introductory-content__description">
+      <p class="introductory-content__description">
         {{ description }}
       </p>
-      <UiAppCta
+      <UiCta
         v-if="link"
         kind="ghost"
         :label="link.label"
@@ -13,7 +13,7 @@
         :url="link.url"
       />
       <template v-if="linkset">
-        <UiAppCta
+        <UiCta
           v-for="link in linkset"
           :key="link.label"
           kind="ghost"
@@ -23,7 +23,7 @@
         />
       </template>
     </div>
-    <div class="app-introductory-content__details">
+    <div class="introductory-content__details">
       <slot />
     </div>
   </article>
@@ -45,7 +45,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.app-introductory-content {
+.introductory-content {
   display: flex;
 
   @include carbon.breakpoint-down(lg) {

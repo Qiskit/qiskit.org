@@ -1,9 +1,9 @@
 <template>
   <section>
     <h2 v-text="sectionTitle" />
-    <UiAppDataTable :columns="dataTableColumns">
+    <UiDataTable :columns="dataTableColumns">
       <slot name="data-table-elements" />
-    </UiAppDataTable>
+    </UiDataTable>
     <slot />
   </section>
 </template>

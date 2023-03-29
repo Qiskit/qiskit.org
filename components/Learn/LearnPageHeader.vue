@@ -15,7 +15,7 @@
             :track-performed-search="trackPerformedSearch"
           />
         </div>
-        <UiAppCta
+        <UiCta
           class="learn-header__cta"
           :label="startLearningCTA.label"
           :segment="startLearningCTA.segment"
@@ -41,7 +41,7 @@ const dropdownMenuContent = LEARN_MEGA_MENU;
 
 const appMegaDropdownMenuIsVisible = ref(true);
 
-const appMegaDropdownMenuId = "learn-header__app-mega-dropdown-menu";
+const appMegaDropdownMenuId = "learn-header__mega-dropdown-menu";
 
 // TODO: Refactor tracking
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

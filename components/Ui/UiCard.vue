@@ -1,23 +1,23 @@
 <template>
   <article
-    class="app-card"
+    class="card"
     :class="{
-      'app-card_vertical': verticalLayout,
-      'app-card_description-whole-size': descriptionWholeSize,
+      'card_vertical': verticalLayout,
+      'card_description-whole-size': descriptionWholeSize,
     }"
   >
     <div
       v-if="image"
-      class="app-card__image"
-      :class="imageContain ? 'app-card__image_contain' : null"
+      class="card__image"
+      :class="imageContain ? 'card__image_contain' : null"
       :style="{
         'background-image': `url(${image})`,
       }"
     />
-    <div class="app-card__content">
-      <header class="app-card__header">
+    <div class="card__content">
+      <header class="card__header">
         <div>
-          <h4 class="app-card__title">
+          <h4 class="card__title">
             {{ title }}
           </h4>
           <h5 v-if="subtitle">
@@ -25,37 +25,37 @@
           </h5>
         </div>
         <div class="cds--row">
-          <div v-if="hasTags(tags)" class="app-card__tags">
+          <div v-if="hasTags(tags)" class="card__tags">
             <bx-tag
               v-for="tag in tags"
               :key="tag"
-              class="app-card__tag"
+              class="card__tag"
               type="purple"
             >
               {{ tag }}
             </bx-tag>
           </div>
-          <div v-if="hasTags(tooltipTags)" class="app-card__tags">
+          <div v-if="hasTags(tooltipTags)" class="card__tags">
             <div
               v-for="tag in tooltipTags"
               :key="tag.label"
-              class="app-card__custom-pill"
+              class="card__custom-pill"
             >
               {{ tag.label }}
               <bx-tooltip-icon :body-text="tag.description" direction="bottom">
-                <Information16 class="app-card__tooltip__icon" />
+                <Information16 class="card__tooltip__icon" />
               </bx-tooltip-icon>
             </div>
           </div>
         </div>
       </header>
-      <div class="app-card__body">
-        <div class="app-card__description">
+      <div class="card__body">
+        <div class="card__description">
           <slot />
         </div>
-        <UiAppCta
+        <UiCta
           v-if="to"
-          class="app-card__cta"
+          class="card__cta"
           is-wider
           kind="ghost"
           :label="ctaLink.label"
@@ -123,7 +123,7 @@ function hasTags(tags: string[] | TagTooltip[]) {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-card {
+.card {
   min-height: 13rem;
   width: 100%;
   background-color: qiskit.$background-color-lighter;
@@ -199,10 +199,10 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 }
 
-.app-card_vertical {
+.card_vertical {
   flex-direction: column;
 
-  .app-card {
+  .card {
     &__content {
       padding: carbon.$spacing-05;
     }
@@ -230,8 +230,8 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 }
 
-.app-card_description-whole-size {
-  .app-card {
+.card_description-whole-size {
+  .card {
     &__header {
       min-height: carbon.$spacing-09;
     }
@@ -266,7 +266,7 @@ bx-tooltip-icon {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-card {
+.card {
   &__custom-pill {
     @include carbon.type-style("label-01");
 

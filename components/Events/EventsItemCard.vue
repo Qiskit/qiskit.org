@@ -1,5 +1,5 @@
 <template>
-  <UiAppCard
+  <UiCard
     class="item-card"
     :image="image"
     :title="title"
@@ -30,7 +30,7 @@
         {{ institution }}
       </div>
     </div>
-  </UiAppCard>
+  </UiCard>
 </template>
 
 <script setup lang="ts">

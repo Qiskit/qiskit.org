@@ -8,7 +8,7 @@
           The Qiskit advocate program is a global program that provides support
           to the individuals who actively contribute to the Qiskit Community.
         </p>
-        <UiAppCta
+        <UiCta
           is-wider
           :label="joinAction.label"
           :segment="joinAction.segment"

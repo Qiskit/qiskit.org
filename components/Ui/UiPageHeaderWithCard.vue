@@ -1,27 +1,27 @@
 <template>
-  <header class="app-page-header">
+  <header class="page-header">
     <div class="cds--grid">
       <div class="cds--row">
-        <main class="cds--col app-page-header__main">
+        <main class="cds--col page-header__main">
           <div>
-            <h1 class="app-page-header__headline">
+            <h1 class="page-header__headline">
               <slot name="title" />
             </h1>
-            <div class="app-page-header__description">
+            <div class="page-header__description">
               <slot name="description" />
             </div>
           </div>
-          <UiAppCta
+          <UiCta
             v-if="cta"
             :label="cta.label"
             :segment="cta.segment"
             :url="cta.url"
           />
         </main>
-        <aside class="cds--col-lg-5 cds--col-md-4 app-page-header__aside">
+        <aside class="cds--col-lg-5 cds--col-md-4 page-header__aside">
           <div>
-            <div class="app-page-header__card-title-wrapper">
-              <div class="app-page-header__card-title" v-text="cardTitle" />
+            <div class="page-header__card-title-wrapper">
+              <div class="page-header__card-title" v-text="cardTitle" />
             </div>
             <slot name="card" />
           </div>
@@ -47,7 +47,7 @@ defineProps<Props>();
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-page-header {
+.page-header {
   @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-learn.svg",
     auto,

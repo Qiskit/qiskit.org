@@ -35,7 +35,7 @@
             :src="activeCoursePreviewImage"
           />
         </UiBasicLink>
-        <UiAppCta
+        <UiCta
           label="Go to page"
           class="course-pages-section__main__preview__cta"
           :segment="activeCourse.segment"

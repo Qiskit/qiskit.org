@@ -4,7 +4,7 @@
     <p class="accordion-layout__description">
       {{ description }}
     </p>
-    <UiAppCta kind="ghost" :label="cta.label" :url="cta.url" />
+    <UiCta kind="ghost" :label="cta.label" :url="cta.url" />
   </article>
 </template>
 

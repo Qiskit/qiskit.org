@@ -18,7 +18,7 @@
               :key="link.label"
               class="external-recommended-readings__list__item"
             >
-              <UiAppLink
+              <UiLink
                 class="external-recommended-readings__link"
                 :segment="link.segment"
                 :url="link.url"
@@ -33,7 +33,7 @@
                 >
                   {{ link.label }}
                 </span>
-              </UiAppLink>
+              </UiLink>
               <span v-if="link.description">- {{ link.description }}</span>
             </li>
           </ol>

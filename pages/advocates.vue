@@ -1,13 +1,13 @@
 <template>
   <main>
-    <UiAppPageHeaderFixed>
+    <UiPageHeaderFixed>
       Connect with the<br />
       <UiTypewriterEffect
         :values="['enthusiasts', 'advocates', 'mentors', 'experts']"
       />
       from within<br />
       the Qiskit community
-    </UiAppPageHeaderFixed>
+    </UiPageHeaderFixed>
     <AdvocatesJoinSection />
     <AdvocatesMeetTheAdvocates />
   </main>

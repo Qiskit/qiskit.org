@@ -9,7 +9,7 @@
       >
         <div class="cds--row">
           <div class="cds--col-lg-4 cds--col-md">
-            <UiAppLogo
+            <UiLogo
               class="page-footer__logo"
               :class="`page-footer__logo_theme_${theme}`"
             />

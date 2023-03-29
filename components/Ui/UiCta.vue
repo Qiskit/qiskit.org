@@ -1,23 +1,23 @@
 <template>
   <UiBasicLink
     ref="link"
-    class="app-cta"
+    class="cta"
     :class="[
-      `app-cta_${kind}`,
-      `app-cta_${kind}_theme_${theme}`,
-      { 'app-cta_wider': isWider },
+      `cta_${kind}`,
+      `cta_${kind}_theme_${theme}`,
+      { 'cta_wider': isWider },
     ]"
     v-bind="$attrs"
     :url="urlString"
     @click="$emit('click')"
   >
-    <span class="app-cta__content">
+    <span class="cta__content">
       {{ label }}
     </span>
     <component
       :is="iconPerLinkType"
-      class="app-cta__icon"
-      :class="`app-cta__icon_${iconPerLinkType}`"
+      class="cta__icon"
+      :class="`cta__icon_${iconPerLinkType}`"
     />
   </UiBasicLink>
 </template>
@@ -90,7 +90,7 @@ function isIdAnchor(url: string) {
   );
 }
 
-.app-cta {
+.cta {
   display: flex;
   justify-content: space-between;
   text-decoration: none;

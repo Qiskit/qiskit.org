@@ -1,6 +1,6 @@
 <template>
   <main class="event-page seminar-series-page">
-    <UiAppPageHeaderWithCard :cta="headerCTA" :card-title="headerCardTitle">
+    <UiPageHeaderWithCard :cta="headerCTA" :card-title="headerCardTitle">
       <template #title>
         {{ headerTitle }}
       </template>
@@ -14,16 +14,16 @@
       <template #card>
         <EventsItemCard v-bind="cardContent" vertical-layout />
       </template>
-    </UiAppPageHeaderWithCard>
+    </UiPageHeaderWithCard>
 
     <div class="cds--grid">
-      <UiAppMosaicSection
+      <UiMosaicSection
         class="seminar-series-page__section"
         :title="mosaicSectionTitle"
         :elements="mosaicElements"
       />
 
-      <UiAppDataTableSection
+      <UiDataTableSection
         v-if="hasUpcomingEvents"
         class="seminar-series-page__section"
         :section-title="upcomingEventsSectionTitle"
@@ -38,7 +38,7 @@
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
-              <UiAppCta
+              <UiCta
                 v-if="
                   component &&
                   isAppCtaComponent(component) &&
@@ -54,9 +54,9 @@
             </bx-table-cell>
           </bx-table-row>
         </template>
-      </UiAppDataTableSection>
+      </UiDataTableSection>
 
-      <UiAppDataTableSection
+      <UiDataTableSection
         class="seminar-series-page__section"
         :section-title="pastEventsSectionTitle"
         :data-table-columns="seminarSeriesDataTableColumns"
@@ -70,7 +70,7 @@
               v-for="({ component, styles, data }, elementIndex) in row"
               :key="`${elementIndex}`"
             >
-              <UiAppCta
+              <UiCta
                 v-if="
                   component &&
                   isAppCtaComponent(component) &&
@@ -86,16 +86,16 @@
             </bx-table-cell>
           </bx-table-row>
         </template>
-        <UiAppCta
+        <UiCta
           class="seminar-series-page__past-events-cta"
           kind="ghost"
           :label="showMorePastEventsCta.label"
           :segment="showMorePastEventsCta.segment"
           :url="showMorePastEventsCta.url"
         />
-      </UiAppDataTableSection>
+      </UiDataTableSection>
 
-      <UiAppHelpfulResourcesSection
+      <UiHelpfulResourcesSection
         class="seminar-series-page__section"
         :resources="helpfulResources"
       />
@@ -106,7 +106,7 @@
 <script setup lang="ts">
 import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 import type { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-import type { TableRowElement } from "~/components/Ui/UiAppDataTable.vue";
+import type { TableRowElement } from "~/components/Ui/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
 import {

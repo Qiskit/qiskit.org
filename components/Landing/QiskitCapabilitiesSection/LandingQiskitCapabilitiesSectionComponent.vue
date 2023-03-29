@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="qiskit-capabilities-section__ctas">
-      <UiAppCta
+      <UiCta
         class="qiskit-capabilities-section__ctas__link"
         kind="ghost"
         :label="quantumLabCTA.label"

@@ -1,5 +1,5 @@
 <template>
-  <UiAppDataTable
+  <UiDataTable
     class="test-table"
     :columns="[
       'Status',
@@ -23,9 +23,9 @@
             <Information16 class="bx-tooltip-icon__icon" />
           </bx-tooltip-icon>
         </span>
-        <UiAppCta
+        <UiCta
           v-else-if="component === 'link'"
-          class="app-card__cta"
+          class="card__cta"
           is-wider
           label="see test logs"
           kind="ghost"
@@ -48,7 +48,7 @@
         />
       </bx-table-cell>
     </bx-table-row>
-  </UiAppDataTable>
+  </UiDataTable>
 </template>
 
 <script setup lang="ts">

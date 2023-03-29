@@ -22,7 +22,7 @@
             application modules.
           </p>
         </div>
-        <UiAppCta
+        <UiCta
           class="hero-moment__cta"
           :label="getStartedLink.label"
           :segment="getStartedLink.segment"

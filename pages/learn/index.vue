@@ -3,18 +3,18 @@
     <qiskit-banner>
       <div class="content">
         Miss the old version of the textbook? Access it
-        <UiAppLink
+        <UiLink
           class="link"
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
           here
-        </UiAppLink>
+        </UiLink>
       </div>
     </qiskit-banner>
     <LearnPageHeader />
     <LearnStartLearningSection class="learn-page__section" />
-    <UiAppHelpfulResourcesSection
+    <UiHelpfulResourcesSection
       class="learn-page__section"
       :resources="helpfulResources"
     />

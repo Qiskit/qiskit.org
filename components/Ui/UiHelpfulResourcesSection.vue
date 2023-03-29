@@ -1,11 +1,11 @@
 <template>
-  <section class="app-helpful-resources-section">
+  <section class="helpful-resources-section">
     <h2 v-text="title" />
     <div class="cds--row">
-      <UiAppDescriptionCard
+      <UiDescriptionCard
         v-for="resource in resources"
         :key="resource.title"
-        class="cds--col-lg-4 cds--col-md-4 app-helpful-resources-section__card"
+        class="cds--col-lg-4 cds--col-md-4 helpful-resources-section__card"
         v-bind="resource"
       />
     </div>
@@ -28,7 +28,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.app-helpful-resources-section {
+.helpful-resources-section {
   &__card {
     @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;

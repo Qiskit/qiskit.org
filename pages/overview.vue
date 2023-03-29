@@ -1,13 +1,13 @@
 <template>
   <div class="overview-page">
     <!-- TODO: Integrate components -->
-    <!-- <UiAppPageHeaderFixed>
+    <!-- <UiPageHeaderFixed>
       The most
       <UiTypewriterEffect
         :values="['feature-rich', 'modular', 'open', 'popular']"
       />
       quantum computing SDK
-    </UiAppPageHeaderFixed> -->
+    </UiPageHeaderFixed> -->
     <!-- <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
@@ -16,11 +16,11 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <UiAppCta kind="ghost" :label="quickStartLink.label" :url="quickStartLink.url" />
+            <UiCta kind="ghost" :label="quickStartLink.label" :url="quickStartLink.url" />
           </div>
         </div>
         <div class="cds--col-lg-13 cds--col-md-6">
-          <UiAppIntroductoryContent
+          <UiIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"
             :key="section.id"
@@ -43,7 +43,7 @@
                 />
               </div>
             </div>
-          </UiAppIntroductoryContent>
+          </UiIntroductoryContent>
         </div>
       </div>
     </section> -->

@@ -1,11 +1,11 @@
 <template>
-  <nav class="app-nav-back-link">
+  <nav class="nav-back-link">
     <UiBasicLink
-      class="app-nav-back-link__link"
-      :class="`app-nav-back-link__link_${theme}`"
+      class="nav-back-link__link"
+      :class="`nav-back-link__link_${theme}`"
       :url="url"
     >
-      <ArrowLeft16 class="app-nav-back-link__icon" /><span v-text="label" />
+      <ArrowLeft16 class="nav-back-link__icon" /><span v-text="label" />
     </UiBasicLink>
   </nav>
 </template>
@@ -28,7 +28,7 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.app-nav-back-link {
+.nav-back-link {
   @include qiskit.contained;
 
   padding-bottom: carbon.$spacing-06;

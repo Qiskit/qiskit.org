@@ -1,12 +1,12 @@
 <template>
   <div>
-    <UiAppPageHeaderFixed>
+    <UiPageHeaderFixed>
       Join
       <UiTypewriterEffect
         :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
       />
       from the world&rsquo;s largest quantum computing community
-    </UiAppPageHeaderFixed>
+    </UiPageHeaderFixed>
     <div class="cds--grid">
       <div class="event-page__tabs">
         <client-only>
@@ -19,9 +19,9 @@
           </bx-tabs>
         </client-only>
       </div>
-      <UiAppFiltersResultsLayout>
+      <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
-          <UiAppFieldset
+          <UiFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
             :label="filter.label"
@@ -38,11 +38,11 @@
                 "
               />
             </client-only>
-          </UiAppFieldset>
+          </UiFieldset>
         </template>
         <template #filters-on-s-screen>
           <div v-for="filter in extraFilters" :key="filter.label">
-            <UiAppMultiSelect
+            <UiMultiSelect
               :label="filter.label"
               :options="filter.options"
               :value="getCheckedFilters(filter.filterType)"
@@ -51,7 +51,7 @@
           </div>
         </template>
         <template #results>
-          <UiAppCard
+          <UiCard
             v-if="noEvents"
             :image="emptyCard.img"
             :title="emptyCard.title"
@@ -59,7 +59,7 @@
             <div class="event-page__empty-card-description">
               {{ emptyCard.description }}
             </div>
-          </UiAppCard>
+          </UiCard>
           <div v-else class="cds--row">
             <div
               v-for="(eventItem, index) in filteredEvents"
@@ -85,9 +85,9 @@
             <p class="event-page__section__description">
               Stay up to date with all of our scheduled events by following our
               calendar. You can view the calendar by visiting
-              <UiAppLink v-bind="qiskitCalendarLink">{{
+              <UiLink v-bind="qiskitCalendarLink">{{
                 qiskitCalendarLink.label
-              }}</UiAppLink
+              }}</UiLink
               >, or subscribe to it by adding to the calendar app of your
               choice.
             </p>
@@ -131,13 +131,13 @@
               We can help you bring Qiskit experts to your campus for guest
               lectures, hackathons, and other events.
             </p>
-            <UiAppCta
+            <UiCta
               :label="eventRequestLink.label"
               :url="eventRequestLink.url"
             />
           </div>
         </template>
-      </UiAppFiltersResultsLayout>
+      </UiFiltersResultsLayout>
     </div>
   </div>
 </template>

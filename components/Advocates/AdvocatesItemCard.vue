@@ -1,5 +1,5 @@
 <template>
-  <UiAppCard
+  <UiCard
     class="advocate-card"
     :image="image"
     :title="name"
@@ -11,11 +11,11 @@
     </div>
     <div class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <UiAppLink :url="`https://qiskit.slack.com/team/${slackId}`">
+      <UiLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
-      </UiAppLink>
+      </UiLink>
     </div>
-  </UiAppCard>
+  </UiCard>
 </template>
 
 <script setup lang="ts">

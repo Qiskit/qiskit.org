@@ -28,9 +28,9 @@ Here is an example of a component called `AppCard.vue`:
 
 ```vue
 <template>
-  <div class="app-card">
-    <h3 class="app-card__title" v-text="title" />
-    <p class="app-card__description" v-text="description" />
+  <div class="card">
+    <h3 class="card__title" v-text="title" />
+    <p class="card__description" v-text="description" />
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default class AppCard extends Vue {
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
 
-.app-card {
+.card {
   background-color: carbon.$cool-gray-10;
 
   &__title {
