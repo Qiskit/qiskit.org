@@ -106,7 +106,7 @@
 <script setup lang="ts">
 import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 import type { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-import type { TableRowElement } from "~/components/ui/AppDataTable.vue";
+import type { TableRowElement } from "~/components/Ui/UiAppDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
 import {

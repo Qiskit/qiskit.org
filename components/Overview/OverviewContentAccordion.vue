@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { AccordionLayoutProps } from "~/components/overview/OverviewAccordionLayout.vue";
+import { AccordionLayoutProps } from "~/components/Overview/OverviewAccordionLayout.vue";
 
 export type ContentAccordionTab = {
   title: string;

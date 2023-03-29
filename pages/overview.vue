@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentAccordionTab } from "~/components/overview/OverviewContentAccordion.vue";
+import { ContentAccordionTab } from "~/components/Overview/OverviewContentAccordion.vue";
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
