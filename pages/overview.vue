@@ -1,13 +1,12 @@
 <template>
   <div class="overview-page">
-    <!-- TODO: Integrate components -->
-    <!-- <UiPageHeaderFixed>
+    <UiPageHeaderFixed>
       The most
       <UiTypewriterEffect
         :values="['feature-rich', 'modular', 'open', 'popular']"
       />
       quantum computing SDK
-    </UiPageHeaderFixed> -->
+    </UiPageHeaderFixed>
     <!-- <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
