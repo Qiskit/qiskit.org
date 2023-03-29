@@ -46,7 +46,7 @@
         </div>
       </div>
     </section> -->
-    <!-- <LandingQuickStart id="quick-start" /> -->
+    <LandingQuickStart id="quick-start" />
   </div>
 </template>
 
