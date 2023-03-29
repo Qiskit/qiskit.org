@@ -146,14 +146,14 @@
 import "@carbon/web-components/es/components/checkbox/index.js";
 import "@carbon/web-components/es/components/code-snippet/index.js";
 import "@carbon/web-components/es/components/tabs/index.js";
-import GoogleCalendarInstructions from "~/components/events/calendars/GoogleInstructions.vue";
-import OutlookCalendarInstructions from "~/components/events/calendars/OutlookInstructions.vue";
-import AppleCalendarInstructions from "~/components/events/calendars/AppleInstructions.vue";
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS,
 } from "~/types/events";
+import EventsCalendarsAppleInstructions from "~/components/Events/Calendars/EventsCalendarsAppleInstructions.vue";
+import EventsCalendarsGoogleInstructions from "~/components/Events/Calendars/EventsCalendarsGoogleInstructions.vue";
+import EventsCalendarsOutlookInstructions from "~/components/Events/Calendars/EventsCalendarsOutlookInstructions.vue";
 import { EVENT_REQUEST_LINK, GeneralLink } from "~/constants/appLinks";
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
@@ -174,15 +174,15 @@ useHead({
 const calendarsInstructions = [
   {
     name: "Google",
-    instructions: GoogleCalendarInstructions,
+    instructions: EventsCalendarsGoogleInstructions,
   },
   {
     name: "Outlook",
-    instructions: OutlookCalendarInstructions,
+    instructions: EventsCalendarsOutlookInstructions,
   },
   {
     name: "Apple",
-    instructions: AppleCalendarInstructions,
+    instructions: EventsCalendarsAppleInstructions,
   },
 ];
 

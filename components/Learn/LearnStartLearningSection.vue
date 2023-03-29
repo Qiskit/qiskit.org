@@ -98,7 +98,7 @@
               :key="syllabusTitle"
               class="cds--col-xlg-8"
             >
-              <SyllabusCard
+              <LearnSyllabusCard
                 :url="cta.url"
                 :segment="cta.segment"
                 image-contain
@@ -110,7 +110,7 @@
                   <strong>Instructor:</strong> {{ instructor }} <br />
                   <strong>University:</strong> {{ university }} <br />
                 </p>
-              </SyllabusCard>
+              </LearnSyllabusCard>
             </div>
           </div>
         </div>
@@ -121,7 +121,6 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/tabs/index.js";
-import SyllabusCard from "./SyllabusCard.vue";
 import { GeneralLink } from "~/constants/appLinks";
 
 type Course = {

@@ -1,5 +1,5 @@
 import type { MosaicElement } from "~/types/uiComponents";
-import { DescriptionCard } from "@/components/ui/AppDescriptionCard.vue";
+import { DescriptionCard } from "~/components/Ui/UiAppDescriptionCard.vue";
 
 const header = {
   titleLine1: "Qiskit Global Summer School 2022:",

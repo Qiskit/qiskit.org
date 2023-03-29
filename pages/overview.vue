@@ -1,18 +1,18 @@
 <template>
   <div class="overview-page">
     <!-- TODO: Integrate components -->
-    <!-- <AppPageHeaderFixed>
+    <!-- <UiAppPageHeaderFixed>
       The most
-      <TypewriterEffect
+      <UiTypewriterEffect
         :values="['feature-rich', 'modular', 'open', 'popular']"
       />
       quantum computing SDK
-    </AppPageHeaderFixed> -->
+    </UiAppPageHeaderFixed> -->
     <!-- <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
           <div class="overview-page__table-of-contents">
-            <TheTableOfContents
+            <OverviewTheTableOfContents
               :entries="tocEntries"
               :active-section="activeSection"
             />
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="cds--col-lg-13 cds--col-md-6">
-          <AppIntroductoryContent
+          <UiAppIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"
             :key="section.id"
@@ -30,7 +30,7 @@
             :link="section.link"
             :linkset="section.linkset"
           >
-            <ContentAccordion
+            <OverviewContentAccordion
               v-if="section.subSections"
               class="overview-page__content-section-details"
               :tabs="asTabs(section.subSections)"
@@ -43,7 +43,7 @@
                 />
               </div>
             </div>
-          </AppIntroductoryContent>
+          </UiAppIntroductoryContent>
         </div>
       </div>
     </section> -->
@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentAccordionTab } from "~/components/overview/ContentAccordion.vue";
+import { ContentAccordionTab } from "~/components/overview/OverviewContentAccordion.vue";
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,

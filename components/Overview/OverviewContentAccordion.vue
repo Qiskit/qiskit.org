@@ -10,7 +10,7 @@
           {{ tab.title }}
         </template>
         <template #content>
-          <AccordionLayout
+          <OverviewAccordionLayout
             :image="tab.content.image"
             :description="tab.content.description"
             :cta="tab.content.cta"
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { AccordionLayoutProps } from "~/components/overview/AccordionLayout.vue";
+import { AccordionLayoutProps } from "~/components/overview/OverviewAccordionLayout.vue";
 
 export type ContentAccordionTab = {
   title: string;

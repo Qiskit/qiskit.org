@@ -1,4 +1,4 @@
-import { DescriptionCard } from "@/components/ui/AppDescriptionCard.vue";
+import { DescriptionCard } from "~/components/Ui/UiAppDescriptionCard.vue";
 
 const header = {
   titleLine1: "Qiskit Fall Fest 2022:",
