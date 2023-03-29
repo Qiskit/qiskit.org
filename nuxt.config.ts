@@ -2,7 +2,7 @@ import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
 
-const { AIRTABLE_API_KEY, NODE_ENV } = process.env;
+const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV } = process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -24,7 +24,9 @@ export default defineNuxtConfig({
 
   hooks: {
     "build:before": async () => {
-      await generateContent();
+      if (GENERATE_CONTENT) {
+        await generateContent();
+      }
     },
   },
 
