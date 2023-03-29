@@ -47,7 +47,7 @@ type CommunityEvent = {
   regions: WorldRegion[];
   date: string;
   startDate: string;
-  startDateAndTime: string;
+  startDateAndTime: string | null;
   endDate: string;
   to: string;
 };

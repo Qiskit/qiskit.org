@@ -79,6 +79,7 @@ class AirtableRecords {
         })
         .then(() => fieldName || "");
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(`Error in getFieldName: ${error}`);
       return Promise.resolve(null);
     }
@@ -102,10 +103,12 @@ class AirtableRecords {
             if (fieldName) {
               return { [field]: fieldName };
             } else {
+              // eslint-disable-next-line no-console
               console.warn(`Field name not found for field ID ${fieldId}`);
             }
           })
           .catch((error) => {
+            // eslint-disable-next-line no-console
             console.error(`Error in setAllFieldNames: ${error}`);
             return { [field]: null };
           });
@@ -133,6 +136,7 @@ class AirtableRecords {
       await fsPromises.writeFile(filePath, imageBuffer);
       return Promise.resolve();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       return Promise.reject(error);
     }

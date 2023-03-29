@@ -1,4 +1,8 @@
-const { NODE_ENV } = process.env;
+import fetchEvents from "./hooks/update-events";
+import fetchAdvocates from "./hooks/update-advocates";
+import fetchEcosystemMembers from "./hooks/update-ecosystem";
+
+const { AIRTABLE_API_KEY, NODE_ENV } = process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -15,8 +19,17 @@ export default defineNuxtConfig({
       isAnalyticsEnabled: true,
     },
   },
+
   css: ["~/assets/scss/main.scss"],
+
+  hooks: {
+    "build:before": async () => {
+      await generateContent();
+    },
+  },
+
   ssr: false,
+
   vue: {
     compilerOptions: {
       isCustomElement: (tag: string) =>
@@ -24,3 +37,29 @@ export default defineNuxtConfig({
     },
   },
 });
+
+/**
+ * Fetches data from Airtable and generates the advocates, ecosystem and events
+ * content.
+ * @returns A promise that resolves when the content has been generated
+ */
+async function generateContent() {
+  // eslint-disable-next-line no-console
+  console.info("Generating the ecosystem content...");
+  await fetchEcosystemMembers("./content/ecosystem");
+
+  if (AIRTABLE_API_KEY) {
+    // eslint-disable-next-line no-console
+    console.info("Generating the events content...");
+    await fetchEvents(AIRTABLE_API_KEY, "./content/events");
+
+    // eslint-disable-next-line no-console
+    console.info("Generating the advocates content...");
+    await fetchAdvocates(AIRTABLE_API_KEY, "./content/advocates");
+  } else {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "No AIRTABLE_API_KEY environment variable found. Skipping content generation."
+    );
+  }
+}
