@@ -1,11 +1,12 @@
 import axios from "axios";
-import { fetchMembers } from "~/hooks/ecosystem-conversion-utils";
+import { beforeEach, describe, expect, test, vi } from "vitest";
+import { fetchMembers } from "../../hooks/ecosystem-conversion-utils";
 
-jest.mock("axios");
+vi.mock("axios");
 
 describe("fetchMembers", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const members = {
@@ -20,7 +21,7 @@ describe("fetchMembers", () => {
     },
   };
 
-  it("fetches members and formats correctly", async () => {
+  test("fetches members and formats correctly", async () => {
     const formattedMembers: {
       name: string;
       tier: string;
@@ -40,10 +41,8 @@ describe("fetchMembers", () => {
     expect(result).toEqual(formattedMembers);
   });
 
-  it("throws error if api call fails", async () => {
-    const consoleSpy = jest
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
+  test("throws error if api call fails", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchMembers();

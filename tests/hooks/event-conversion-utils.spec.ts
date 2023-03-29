@@ -1,6 +1,7 @@
-import EventsAirtableRecords from "~/hooks/event-conversion-utils";
-import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from "~/types/events";
-import type { CommunityEvent } from "~/types/events";
+import { beforeEach, describe, expect, test, vi } from "vitest";
+import EventsAirtableRecords from "../../hooks/event-conversion-utils";
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from "../../types/events";
+import type { CommunityEvent } from "../../types/events";
 
 describe("isEventInDateRange", () => {
   let eventsAirtableRecords: EventsAirtableRecords;
@@ -34,7 +35,7 @@ describe("isEventInDateRange", () => {
 
   let mockEvent: CommunityEvent;
 
-  it("returns true if the event happens within the next 15 days", () => {
+  test("returns true if the event happens within the next 15 days", () => {
     const days = 15;
 
     // Event happened in the past
@@ -42,6 +43,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(-7),
       endDate: getFormattedDate(-1),
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -52,6 +54,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(7),
       endDate: "",
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -62,6 +65,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(0),
       endDate: "",
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -72,6 +76,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(7),
       endDate: getFormattedDate(20),
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -82,6 +87,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(15),
       endDate: "",
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -92,13 +98,14 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(100),
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
     );
   });
 
-  it("returns true if the event happened within the last 15 days", () => {
+  test("returns true if the event happened within the last 15 days", () => {
     const days = -15;
 
     // Event happened before the last 15 days
@@ -106,6 +113,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(-20),
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -116,6 +124,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(-7),
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -126,6 +135,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(7),
       endDate: "",
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -136,6 +146,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(0),
       endDate: "",
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -146,6 +157,7 @@ describe("isEventInDateRange", () => {
       ...mockEventBase,
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(100),
+      startDateAndTime: null,
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -198,7 +210,7 @@ describe("convertToCommunityEvent", () => {
     );
   });
 
-  it("extracts and format information from the record", async () => {
+  test("extracts and format information from the record", async () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES;
     const { europe } = WORLD_REGIONS;
     const { title, types, location, regions, date, to } =
@@ -230,7 +242,7 @@ describe("convertToCommunityEvent types", () => {
     );
   });
 
-  it("filters the values so only those recognized by qiskit.org get into the event", async () => {
+  test("filters the values so only those recognized by qiskit.org get into the event", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -249,7 +261,7 @@ describe("convertToCommunityEvent types", () => {
     });
   });
 
-  it("gets Talks type if there is no type", async () => {
+  test("gets Talks type if there is no type", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -268,7 +280,7 @@ describe("convertToCommunityEvent types", () => {
     });
   });
 
-  it("gets Talks type if no type is recognized by qiskit.org", async () => {
+  test("gets Talks type if no type is recognized by qiskit.org", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -287,7 +299,7 @@ describe("convertToCommunityEvent types", () => {
     });
   });
 
-  it("gets an array of one value if types is not an array but a single value", async () => {
+  test("gets an array of one value if types is not an array but a single value", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -312,7 +324,7 @@ describe("filterByWhitelist", () => {
     "testApiKey",
     "testView"
   );
-  it("creates a new list, from an input one, only with the values in a whitelist", () => {
+  test("creates a new list, from an input one, only with the values in a whitelist", () => {
     const list = ["a", "x", "b", "y", "c", "z", "a", "x", "b", "y"];
     expect(
       eventsAirtableRecords.filterWithWhitelist(list, ["a", "b", "c"])
@@ -335,7 +347,7 @@ describe("convertToCommunityEvent regions", () => {
     );
   });
 
-  it("defaults in TBD if there is no region", async () => {
+  test("defaults in TBD if there is no region", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -354,7 +366,7 @@ describe("convertToCommunityEvent regions", () => {
     });
   });
 
-  it("gets the region from the record", async () => {
+  test("gets the region from the record", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -373,7 +385,7 @@ describe("convertToCommunityEvent regions", () => {
     });
   });
 
-  it("gets the region from the record even if it is not recognized by qiskit", async () => {
+  test("gets the region from the record even if it is not recognized by qiskit", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -408,7 +420,7 @@ describe("convertToCommunityEvent location", () => {
     );
   });
 
-  it("defaults in region TBD if there is no location", async () => {
+  test("defaults in region TBD if there is no location", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -427,7 +439,7 @@ describe("convertToCommunityEvent location", () => {
     });
   });
 
-  it("gets the location from the record", async () => {
+  test("gets the location from the record", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -463,7 +475,7 @@ describe("getImage", () => {
     );
   });
 
-  it("defaults in a no-picture.jpg value if there is no attachment", async () => {
+  test("defaults in a no-picture.jpg value if there is no attachment", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -477,7 +489,7 @@ describe("getImage", () => {
     expect(result).toBe("/images/events/no-picture.jpg");
   });
 
-  it("defaults in a no-picture.jpg value if the attachment is of no image type", async () => {
+  test("defaults in a no-picture.jpg value if the attachment is of no image type", async () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -497,7 +509,7 @@ describe("getImage", () => {
     expect(result).toBe("/images/events/no-picture.jpg");
   });
 
-  it("stores the attachment URL if there are no thumbnails", async () => {
+  test("stores the attachment URL if there are no thumbnails", async () => {
     const attachmentUrl = "http://url.to/image.jpg";
     const fakeRecord = {
       get: (field: string) => {
@@ -515,14 +527,14 @@ describe("getImage", () => {
       },
     };
 
-    const mockStoreImage = jest
+    const mockStoreImage = vi
       .spyOn(eventsAirtableRecords, "storeImage")
       .mockImplementation(() => Promise.resolve());
     await eventsAirtableRecords.getImage(fakeRecord);
     expect(mockStoreImage).toBeCalledWith(attachmentUrl, expect.any(String));
   });
 
-  it("stores the attachment URL if there is no large thumbnail", async () => {
+  test("stores the attachment URL if there is no large thumbnail", async () => {
     const attachmentUrl = "http://url.to/image.jpg";
     const fakeRecord = {
       get: (field: string) => {
@@ -541,14 +553,14 @@ describe("getImage", () => {
       },
     };
 
-    const mockStoreImage = jest
+    const mockStoreImage = vi
       .spyOn(eventsAirtableRecords, "storeImage")
       .mockImplementation(() => Promise.resolve());
     await eventsAirtableRecords.getImage(fakeRecord);
     expect(mockStoreImage).toBeCalledWith(attachmentUrl, expect.any(String));
   });
 
-  it("stores the thumbnail URL if there is a large thumbnail available", async () => {
+  test("stores the thumbnail URL if there is a large thumbnail available", async () => {
     const thumbnailUrl = "http://url.to/thumbnails/large.jpg";
     const fakeRecord = {
       get: (field: string) => {
@@ -569,7 +581,7 @@ describe("getImage", () => {
       },
     };
 
-    const mockStoreImage = jest
+    const mockStoreImage = vi
       .spyOn(eventsAirtableRecords, "storeImage")
       .mockImplementation(() => Promise.resolve());
     await eventsAirtableRecords.getImage(fakeRecord);
@@ -594,7 +606,7 @@ describe("getDates", () => {
     );
   });
 
-  it("returns date objects if both dates exists", () => {
+  test("returns date objects if both dates exists", () => {
     const expectedStartDate = new Date("2020-01-01");
     const expectedEndDate = new Date("2020-01-02");
 
@@ -616,7 +628,7 @@ describe("getDates", () => {
     expect(endDate).toEqual(expectedEndDate);
   });
 
-  it("returns undefined if the start date is missing", () => {
+  test("returns undefined if the start date is missing", () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -633,7 +645,7 @@ describe("getDates", () => {
     expect(startDate).toBeUndefined();
   });
 
-  it("returns undefined if the end date is missing", () => {
+  test("returns undefined if the end date is missing", () => {
     const fakeRecord = {
       get: (field: string) => {
         switch (field) {
@@ -665,34 +677,34 @@ describe("formatDates", () => {
   const endNextYear = new Date("2021-01-01");
   const noDate = undefined;
 
-  it("shows TBD if no start date is passed", () => {
+  test("shows TBD if no start date is passed", () => {
     expect(eventsAirtableRecords.formatDates()).toBe("TBD");
     expect(eventsAirtableRecords.formatDates(noDate, endNextDay)).toBe("TBD");
   });
 
-  it("shows start date when start and end dates are equal", () => {
+  test("shows start date when start and end dates are equal", () => {
     expect(eventsAirtableRecords.formatDates(start, endSameDate)).toBe(
       "January 1, 2020"
     );
   });
 
-  it("shows the start date when there is only start date", () => {
+  test("shows the start date when there is only start date", () => {
     expect(eventsAirtableRecords.formatDates(start)).toBe("January 1, 2020");
   });
 
-  it("shows complete dates when the years are different", () => {
+  test("shows complete dates when the years are different", () => {
     expect(eventsAirtableRecords.formatDates(start, endNextYear)).toBe(
       "January 1, 2020 - January 1, 2021"
     );
   });
 
-  it("factors out the year when years are equal", () => {
+  test("factors out the year when years are equal", () => {
     expect(eventsAirtableRecords.formatDates(start, endNextMonth)).toBe(
       "January 1 - February 1, 2020"
     );
   });
 
-  it("factors out year and month when the event falls into the same month", () => {
+  test("factors out year and month when the event falls into the same month", () => {
     expect(eventsAirtableRecords.formatDates(start, endNextDay)).toBe(
       "January 1-2, 2020"
     );
