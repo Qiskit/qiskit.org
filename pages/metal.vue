@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MetalTheDarkHeader />
+    <MetalDarkHeader />
     <MetalIntroSection />
     <MetalCapabilitiesSection />
     <MetalFeaturesSection />

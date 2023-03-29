@@ -1,10 +1,10 @@
 <template>
-  <header class="the-dark-header">
+  <header class="dark-header">
     <UiAppNavBackLink label="Back to Qiskit.org" theme="dark" url="/" />
 
-    <div class="the-dark-header__container">
+    <div class="dark-header__container">
       <svg
-        class="the-dark-header__title"
+        class="dark-header__title"
         aria-labelledby="qiskitQuantumDeviceDesign"
         width="606"
         height="95"
@@ -129,19 +129,19 @@
         />
       </svg>
 
-      <div class="the-dark-header__media">
+      <div class="dark-header__media">
         <img
-          class="the-dark-header__media-cryo"
+          class="dark-header__media-cryo"
           src="/images/metal/hero/cryo.png"
           alt=""
         />
         <img
-          class="the-dark-header__media-transmon-outline"
+          class="dark-header__media-transmon-outline"
           src="/images/metal/hero/transmon.svg"
           alt=""
         />
         <img
-          class="the-dark-header__media-transmon"
+          class="dark-header__media-transmon"
           src="/images/metal/hero/transmon.png"
           alt=""
         />
@@ -155,7 +155,7 @@
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.the-dark-header {
+.dark-header {
   @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-dark.svg",
     auto,

@@ -1,9 +1,9 @@
 <template>
   <main>
-    <LandingTheHeroMomentComponent :version="qiskitVersion" />
-    <LandingTheQuickStart />
-    <LandingTheQiskitCapabilitiesSectionComponent />
-    <LandingTheLearnSectionComponent />
+    <LandingHeroMomentComponent :version="qiskitVersion" />
+    <LandingQuickStart />
+    <LandingQiskitCapabilitiesSectionComponent />
+    <LandingLearnSectionComponent />
   </main>
 </template>
 

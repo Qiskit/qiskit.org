@@ -12,7 +12,7 @@
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
           <div class="overview-page__table-of-contents">
-            <OverviewTheTableOfContents
+            <OverviewTableOfContents
               :entries="tocEntries"
               :active-section="activeSection"
             />

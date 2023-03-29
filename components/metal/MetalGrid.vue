@@ -1,7 +1,7 @@
 <template>
   <section class="metal-grid">
     <div class="metal-grid__underlayer">
-      <MetalTheDarkHeader class="metal-grid__header" />
+      <MetalDarkHeader class="metal-grid__header" />
     </div>
     <div class="metal-grid__container">
       <div

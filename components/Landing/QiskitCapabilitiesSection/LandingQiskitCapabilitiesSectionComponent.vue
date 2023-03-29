@@ -4,7 +4,7 @@
     <div class="qiskit-capabilities-section__container">
       <div class="qiskit-capabilities-section__capabilities">
         <div class="qiskit-capabilities-section__content">
-          <LandingTheQiskitCapabilityCard
+          <LandingQiskitCapabilityCard
             v-for="item in capabilities"
             :id="item.title"
             :key="item.title"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="qiskit-capabilities-section__scrolling-ui">
-          <LandingTheQiskitCapabilitiesSectionCodeCell
+          <LandingQiskitCapabilitiesSectionCodeCell
             :active-blocks="
               capabilities.map((item, index) => isActiveSection(item, index))
             "

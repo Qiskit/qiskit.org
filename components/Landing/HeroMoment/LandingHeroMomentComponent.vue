@@ -1,21 +1,21 @@
 <template>
-  <article class="the-hero-moment">
+  <article class="hero-moment">
     <MetalGrid>
-      <div class="cds--grid the-hero-moment__container">
-        <LandingTheHeroMomentVersionInfo
-          class="the-hero-moment__version-info"
+      <div class="cds--grid hero-moment__container">
+        <LandingHeroMomentVersionInfo
+          class="hero-moment__version-info"
           :version="version"
         />
         <div class="cds--row">
           <h1
-            class="cds--col-md-4 cds--col-lg-9 cds--col-xlg-7 cds--col-max-7 the-hero-moment__title"
+            class="cds--col-md-4 cds--col-lg-9 cds--col-xlg-7 cds--col-max-7 hero-moment__title"
           >
             Open-Source Quantum Development
           </h1>
         </div>
         <div class="cds--row">
           <p
-            class="cds--col-sm cds--col-md-4 cds--col-lg-6 cds--col-xlg-4 the-hero-moment__description"
+            class="cds--col-sm cds--col-md-4 cds--col-lg-6 cds--col-xlg-4 hero-moment__description"
           >
             Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
             with quantum computers at the level of pulses, circuits, and
@@ -23,7 +23,7 @@
           </p>
         </div>
         <UiAppCta
-          class="the-hero-moment__cta"
+          class="hero-moment__cta"
           :label="getStartedLink.label"
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
@@ -56,7 +56,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.the-hero-moment {
+.hero-moment {
   height: calc(#{math.div(56rem * 40, 64)} + 2px);
   position: relative;
   overflow: hidden;
