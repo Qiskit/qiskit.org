@@ -76,7 +76,6 @@ useHead({
 const tocEntries = TABLE_OF_CONTENTS;
 const contentSections = CONTENT_SECTIONS;
 
-// TODO: Check if this is working correctly
 const { activeSection } = useScrollBetweenSections();
 
 const quickStartLink = {
