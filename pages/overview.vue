@@ -22,7 +22,7 @@
             />
           </div>
         </div>
-        <!-- <div class="cds--col-lg-13 cds--col-md-6">
+        <div class="cds--col-lg-13 cds--col-md-6">
           <UiIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"
@@ -47,7 +47,7 @@
               </div>
             </div>
           </UiIntroductoryContent>
-        </div> -->
+        </div>
       </div>
     </section>
     <LandingQuickStart id="quick-start" />
@@ -74,7 +74,7 @@ useHead({
 });
 
 const tocEntries = TABLE_OF_CONTENTS;
-// const contentSections = CONTENT_SECTIONS;
+const contentSections = CONTENT_SECTIONS;
 
 // TODO: Check if this is working correctly
 const { activeSection } = useScrollBetweenSections();
@@ -84,40 +84,42 @@ const quickStartLink = {
   label: "Get Started",
 };
 
-// function asTabs(
-//   subsections: Array<OverviewSubSection>
-// ): Array<ContentAccordionTab> {
-//   return subsections.map((subsection) => subsection as ContentAccordionTab);
-// }
+function asTabs(
+  subsections: Array<OverviewSubSection>
+): Array<ContentAccordionTab> {
+  return subsections.map((subsection) => subsection as ContentAccordionTab);
+}
 </script>
 
 <style lang="scss" scoped>
-// TODO: Review old CSS
-// .overview-page {
-//   &__table-of-contents {
-//     position: sticky;
-//     top: carbon.$spacing-06;
-//   }
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
-//   &__content-section {
-//     margin-bottom: carbon.$spacing-10;
-//     overflow: hidden;
-//   }
+.overview-page {
+  &__table-of-contents {
+    position: sticky;
+    top: carbon.$spacing-06;
+  }
 
-//   &__content-section-details {
-//     background-color: qiskit.$background-color-lighter;
-//     height: 100%;
-//   }
+  &__content-section {
+    margin-bottom: carbon.$spacing-10;
+    overflow: hidden;
+  }
 
-//   &__content-section-image {
-//     transform: translateX(20%);
-//     max-width: 100%;
-//     max-height: 30.5rem;
+  &__content-section-details {
+    background-color: qiskit.$background-color-lighter;
+    height: 100%;
+  }
 
-//     &__wrapper {
-//       display: flex;
-//       justify-content: flex-end;
-//     }
-//   }
-// }
+  &__content-section-image {
+    transform: translateX(20%);
+    max-width: 100%;
+    max-height: 30.5rem;
+
+    &__wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
 </style>

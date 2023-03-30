@@ -14,12 +14,12 @@
       />
       <template v-if="linkset">
         <UiCta
-          v-for="link in linkset"
-          :key="link.label"
+          v-for="linksetLink in linkset"
+          :key="linksetLink.label"
           kind="ghost"
-          :label="link.label"
-          :segment="link.segment"
-          :url="link.url"
+          :label="linksetLink.label"
+          :segment="linksetLink.segment"
+          :url="linksetLink.url"
         />
       </template>
     </div>
@@ -34,8 +34,8 @@ import { NavLink } from "~/constants/menuLinks";
 
 interface Props {
   description: string;
-  link: NavLink;
-  linkset: NavLink[];
+  link?: NavLink;
+  linkset?: NavLink[];
   title: string;
 }
 
@@ -43,6 +43,7 @@ defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
 @use "~/assets/scss/carbon.scss";
 
 .introductory-content {
