@@ -1,7 +1,7 @@
 <template>
   <main>
     <LandingHeroMomentComponent :version="qiskitVersion" />
-    <LandingQuickStart />
+    <LandingQuickStartComponent />
     <LandingQiskitCapabilitiesSectionComponent />
     <LandingLearnSectionComponent />
   </main>

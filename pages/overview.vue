@@ -50,7 +50,7 @@
         </div>
       </div>
     </section>
-    <LandingQuickStart id="quick-start" />
+    <LandingQuickStartComponent id="quick-start" />
   </div>
 </template>
 
