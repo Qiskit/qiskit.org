@@ -7,7 +7,7 @@
       />
       quantum computing SDK
     </UiPageHeaderFixed>
-    <!-- <section id="contentContainer" class="cds--grid page-section">
+    <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
           <div class="overview-page__table-of-contents">
@@ -15,10 +15,14 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <UiCta kind="ghost" :label="quickStartLink.label" :url="quickStartLink.url" />
+            <UiCta
+              kind="ghost"
+              :label="quickStartLink.label"
+              :url="quickStartLink.url"
+            />
           </div>
         </div>
-        <div class="cds--col-lg-13 cds--col-md-6">
+        <!-- <div class="cds--col-lg-13 cds--col-md-6">
           <UiIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"
@@ -43,9 +47,9 @@
               </div>
             </div>
           </UiIntroductoryContent>
-        </div>
+        </div> -->
       </div>
-    </section> -->
+    </section>
     <LandingQuickStart id="quick-start" />
   </div>
 </template>
@@ -61,15 +65,15 @@ import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections
 
 definePageMeta({
   layout: "default-max",
+  pageTitle: "Qiskit Overview",
+  routeName: "overview",
 });
 
 useHead({
-  // TODO: Review if this is the intended title
   title: "Qiskit Overview",
 });
 
-// TODO: Integrate old code
-// const tocEntries = TABLE_OF_CONTENTS;
+const tocEntries = TABLE_OF_CONTENTS;
 // const contentSections = CONTENT_SECTIONS;
 
 // TODO: Check if this is working correctly
@@ -84,11 +88,6 @@ const quickStartLink = {
 //   subsections: Array<OverviewSubSection>
 // ): Array<ContentAccordionTab> {
 //   return subsections.map((subsection) => subsection as ContentAccordionTab);
-// }
-
-// TODO: Refactor tracking
-// export default class OverviewPage {
-//   routeName = 'overview'
 // }
 </script>
 
