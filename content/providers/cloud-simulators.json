@@ -1,11 +1,10 @@
 {
   "id": "cloud-simulators",
   "title": "Cloud Simulators",
-  "description": "Cloud simulators are cloud services that allow you to simulate quantum programs in high performance computers.",
+  "description": "Cloud services that allow you to simulate quantum programs in high performance computers.",
   "providers": [
     {
       "title": "IBM Quantum Platform",
-      "image": "/images/providers/qiskit-ibm-provider.png",
       "description": "IBM Quantum platform offers access to IBM Quantum systems and simulators.",
       "installation": [
         "pip install qiskit",
@@ -13,7 +12,7 @@
       ],
       "websiteCta": {
         "label": "Website",
-        "url": "https://www.ibm.com/quantum/systems"
+        "url": "https://quantum-computing.ibm.com/services/resources?tab=simulators"
       },
       "docsCta": {
         "label": "Docs",
@@ -25,38 +24,13 @@
       },
       "codeExamples": [
         {
-          "name": "bell",
+          "name": "Transpile and run",
           "runMethod": "backend",
           "fullCode": [
             "from qiskit_ibm_provider import IBMProvider",
             "&nbsp;",
             "provider = IBMProvider()",
             "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
-            "&nbsp;",
-            "# Build and transpile circuit",
-            "from qiskit import QuantumCircuit",
-            "circuit = QuantumCircuit(2, 2)",
-            "circuit.h(0)",
-            "circuit.cx(0,1)",
-            "circuit.measure([0,1], [0,1])",
-            "transpiled_circuit = transpile(circuit, backend)",
-            "&nbsp;",
-            "# Run the circuit and get result",
-            "job = backend.run(transpiled_circuit)",
-            "counts = job.result().get_counts()",
-            "print(counts)"
-          ]
-        },
-        {
-          "name": "bell",
-          "runMethod": "sampler",
-          "fullCode": [
-            "from qiskit_ibm_provider import IBMProvider",
-            "from qiskit.primitives import BackendSampler",
-            "&nbsp;",
-            "provider = IBMProvider()",
-            "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
-            "sampler = BackendSampler(backend)",
             "&nbsp;",
             "# Build circuit",
             "from qiskit import QuantumCircuit",
@@ -65,43 +39,14 @@
             "circuit.cx(0,1)",
             "circuit.measure([0,1], [0,1])",
             "&nbsp;",
-            "# Run the circuit and get result distribution",
-            "job = sampler.run(circuit)",
-            "quasi_dist = job.result().quasi_dists[0]",
-            "print(quasi_dist)"
-          ]
-        },
-        {
-          "name": "vqe",
-          "runMethod": "estimator",
-          "fullCode": [
-            "from qiskit_ibm_provider import IBMProvider",
-            "from qiskit.primitives import BackendEstimator",
+            "# Transpile circuit",
+            "from qiskit import transpile",
+            "transpiled_circuit = transpile(circuit, backend)",
             "&nbsp;",
-            "provider = IBMProvider()",
-            "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
-            "estimator = BackendEstimator(backend)",
-            "&nbsp;",
-            "from qiskit.quantum_info import SparsePauliOp",
-            "&nbsp;",
-            "H2_op = SparsePauliOp.from_list([",
-            "    (\"II\", -1.052373245772859),",
-            "    (\"IZ\", 0.39793742484318045),",
-            "    (\"ZI\", -0.39793742484318045),",
-            "    (\"ZZ\", -0.01128010425623538),",
-            "    (\"XX\", 0.18093119978423156)",
-            "])",
-            "&nbsp;",
-            "# Calculate ground state energy using VQE",
-            "from qiskit.circuit.library import TwoLocal",
-            "from qiskit.algorithms.optimizers import SLSQP",
-            "from qiskit.algorithms.minimum_eigensolvers import VQE",
-            "&nbsp;",
-            "ansatz = TwoLocal(2, \"ry\", \"cz\")",
-            "optimizer = SLSQP(maxiter=1000)",
-            "vqe = VQE(estimator, ansatz, optimizer)",
-            "result = vqe.compute_minimum_eigenvalue(operator=H2_op)",
-            "print(result.eigenvalue)"
+            "# Run the circuit and get result",
+            "job = backend.run(transpiled_circuit)",
+            "counts = job.result().get_counts()",
+            "print(counts)"
           ]
         }
       ]
