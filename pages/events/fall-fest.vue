@@ -1,6 +1,6 @@
 <template>
   <main class="fall-fest-page">
-    <UiAppPageHeaderWithCard
+    <UiPageHeaderWithCard
       :cta="headerData.cta"
       :card-title="headerData.cardSectionHeading"
     >
@@ -24,7 +24,7 @@
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>
-    </UiAppPageHeaderWithCard>
+    </UiPageHeaderWithCard>
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
@@ -54,7 +54,7 @@
           role="tabpanel"
           hidden
         >
-          <UiAppDataTable
+          <UiDataTable
             class="fall-fest-page__section"
             :columns="agendaColumnsDataTable"
           >
@@ -66,22 +66,22 @@
                 v-for="({ styles, data, link }, elementIndex) in row"
                 :key="`${elementIndex}`"
               >
-                <UiAppLink
+                <UiLink
                   v-if="link"
                   class="fall-fest-page__table-link"
                   :style="styles"
                   :url="link"
                 >
                   Link to event
-                </UiAppLink>
+                </UiLink>
                 <span v-else :style="styles">{{ data }}</span>
               </bx-table-cell>
             </bx-table-row>
-          </UiAppDataTable>
+          </UiDataTable>
         </div>
       </section>
 
-      <UiAppHelpfulResourcesSection
+      <UiHelpfulResourcesSection
         class="fall-fest-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"

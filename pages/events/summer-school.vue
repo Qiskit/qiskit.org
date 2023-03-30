@@ -1,6 +1,6 @@
 <template>
   <main class="summer-school-page">
-    <UiAppPageHeaderWithCard :card-title="headerData.cardSectionHeading">
+    <UiPageHeaderWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
         <br />
@@ -18,9 +18,9 @@
         </p>
         <p>
           Please follow
-          <UiAppLink v-bind="headerData.qiskitTwitterLink">
+          <UiLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
-          </UiAppLink>
+          </UiLink>
           for more details and updates. For any questions, please check out our
           FAQ below!
         </p>
@@ -31,10 +31,10 @@
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>
-    </UiAppPageHeaderWithCard>
+    </UiPageHeaderWithCard>
 
     <div class="cds--grid summer-school-page__content">
-      <UiAppMosaicSection
+      <UiMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
         :elements="mosaicData.tiles"
@@ -63,7 +63,7 @@
             :aria-labelledby="week.tabName"
             hidden
           >
-            <UiAppDataTable :columns="agendaColumnsDataTable">
+            <UiDataTable :columns="agendaColumnsDataTable">
               <bx-table-row
                 v-for="(row, rowIndex) in week.tableData"
                 :key="`${rowIndex}`"
@@ -75,14 +75,14 @@
                   <span :style="styles">{{ data }}</span>
                 </bx-table-cell>
               </bx-table-row>
-            </UiAppDataTable>
+            </UiDataTable>
           </div>
         </div>
       </section>
 
       <EventsSummerSchoolFaq class="summer-school-page__section" />
 
-      <UiAppHelpfulResourcesSection
+      <UiHelpfulResourcesSection
         class="summer-school-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"

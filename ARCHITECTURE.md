@@ -24,13 +24,13 @@ The **script section** is written in [class-style syntax](https://class-componen
 
 The **style section** is written in SCSS.
 
-Here is an example of a component called `AppCard.vue`:
+Here is an example of a component called `CardComponent.vue`:
 
 ```vue
 <template>
-  <div class="app-card">
-    <h3 class="app-card__title" v-text="title" />
-    <p class="app-card__description" v-text="description" />
+  <div class="card">
+    <h3 class="card__title" v-text="title" />
+    <p class="card__description" v-text="description" />
   </div>
 </template>
 
@@ -39,7 +39,7 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class AppCard extends Vue {
+export default class CardComponent extends Vue {
   @Prop({ type: String, required: true }) title!: string;
   @Prop({ type: String, required: true }) description!: string;
 }
@@ -48,7 +48,7 @@ export default class AppCard extends Vue {
 <style lang="scss" scoped>
 @import "~carbon-components/scss/globals/scss/typography";
 
-.app-card {
+.card {
   background-color: carbon.$cool-gray-10;
 
   &__title {
