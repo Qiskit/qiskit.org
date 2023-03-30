@@ -4,8 +4,8 @@
   "description": "Cloud services that allow you to simulate quantum programs in high performance computers.",
   "providers": [
     {
-      "title": "IBM Quantum Platform",
-      "description": "IBM Quantum platform offers access to IBM Quantum systems and simulators.",
+      "title": "IBM Quantum",
+      "description": "IBM Quantum features a collection of high-performance simulators for prototyping quantum circuits and algorithms, and exploring their performance under realistic device noise models.",
       "installation": [
         "pip install qiskit",
         "pip install qiskit-ibm-provider"
@@ -28,9 +28,102 @@
           "runMethod": "backend",
           "fullCode": [
             "from qiskit_ibm_provider import IBMProvider",
-            "&nbsp;",
             "provider = IBMProvider()",
-            "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+            "backend = provider.get_backend(\"simulator_statevector\")",
+            "&nbsp;",
+            "# Build circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "&nbsp;",
+            "# Transpile circuit",
+            "from qiskit import transpile",
+            "transpiled_circuit = transpile(circuit, backend)",
+            "&nbsp;",
+            "# Run the circuit and get result",
+            "job = backend.run(transpiled_circuit)",
+            "counts = job.result().get_counts()",
+            "print(counts)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "IonQ",
+      "description": "The IonQ Quantum Cloud providers 29-qubit cloud simulator.",
+      "installation": [
+        "pip install qiskit",
+        "pip install qiskit-ionq"
+      ],
+      "websiteCta": {
+        "label": "Website",
+        "url": "https://ionq.com/resources/the-value-of-classical-quantum-simulators"
+      },
+      "docsCta": {
+        "label": "Docs",
+        "url": "https://qiskit.org/documentation/partners/ionq/"
+      },
+      "sourceCta": {
+        "label": "GitHub",
+        "url": "https://github.com/Qiskit-Partners/qiskit-ionq"
+      },
+      "codeExamples": [
+        {
+          "name": "Transpile and run",
+          "runMethod": "backend",
+          "fullCode": [
+            "from qiskit_ionq import IonQProvider",
+            "provider = IonQProvider(\"MY_IONQ_TOKEN\")",
+            "backend = provider.get_backend(\"ionq_simulator\")",
+            "&nbsp;",
+            "# Build circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "&nbsp;",
+            "# Transpile circuit",
+            "from qiskit import transpile",
+            "transpiled_circuit = transpile(circuit, backend)",
+            "&nbsp;",
+            "# Run the circuit and get result",
+            "job = backend.run(transpiled_circuit)",
+            "counts = job.result().get_counts()",
+            "print(counts)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Rigetti Quantum Virtual Machine (QVM)",
+      "description": "The Rigetti Quantum Virtual Machine is a wavefunction simulation of unitary evolution with classical control flow and shared quantum classical memory.",
+      "installation": [
+        "pip install qiskit",
+        "pip install qiskit-rigetti"
+      ],
+      "websiteCta": {
+        "label": "Website",
+        "url": "https://www.rigetti.com/applications/qvm"
+      },
+      "docsCta": {
+        "label": "Docs",
+        "url": "https://qiskit-rigetti.readthedocs.io/en/latest/"
+      },
+      "sourceCta": {
+        "label": "GitHub",
+        "url": "https://github.com/rigetti/qiskit-rigetti"
+      },
+      "codeExamples": [
+        {
+          "name": "Transpile and run",
+          "runMethod": "backend",
+          "fullCode": [
+            "from qiskit_rigetti import RigettiQCSProvider",
+            "provider = RigettiQCSProvider()",
+            "backend = provider.get_simulator(num_qubits=5, noisy=True)",
             "&nbsp;",
             "# Build circuit",
             "from qiskit import QuantumCircuit",
