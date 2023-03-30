@@ -24,7 +24,7 @@ The **script section** is written in [class-style syntax](https://class-componen
 
 The **style section** is written in SCSS.
 
-Here is an example of a component called `AppCard.vue`:
+Here is an example of a component called `CardComponent.vue`:
 
 ```vue
 <template>
@@ -39,7 +39,7 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class AppCard extends Vue {
+export default class CardComponent extends Vue {
   @Prop({ type: String, required: true }) title!: string;
   @Prop({ type: String, required: true }) description!: string;
 }
