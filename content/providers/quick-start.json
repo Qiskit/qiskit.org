@@ -20,6 +20,23 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit.providers.basicaer import BasicAer",
+          "backend = BasicAer.get_backend('qasm_simulator')",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -166,6 +183,24 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_aqt_provider import AQTProvider",
+          "aqt = AQTProvider('MY_TOKEN')",
+          "backend = aqt.get_backend('aqt_qasm_simulator')",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -242,6 +277,25 @@
       "url": "https://github.com/Qiskit/qiskit-ibm-provider"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_ibm_provider import IBMProvider",
+          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
+          "provider = IBMProvider()",
+          "backend = provider.get_backend(\"ibm_nairobi\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -322,6 +376,24 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_ionq import IonQProvider",
+          "provider = IonQProvider(\"MY_IONQ_TOKEN\")",
+          "backend = provider.get_backend(\"ionq_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -398,6 +470,24 @@
       "url": "https://github.com/iqm-finland/qiskit-on-iqm"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_iqm import IQMProvider",
+          "provider = IQMProvider(iqm_server_url)",
+          "backend = provider.get_backend()",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -476,6 +566,24 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_quantinuum import Quantinuum",
+          "Quantinuum.save_account(\"username@company.com\")",
+          "backend = Quantinuum.get_backend(\"DEVICE_NAME\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -552,6 +660,24 @@
       "url": "https://github.com/rigetti/qiskit-rigetti"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_rigetti import RigettiQCSProvider",
+          "provider = RigettiQCSProvider()",
+          "backend = provider.get_backend(name=\"Aspen-9\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -630,6 +756,23 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_aer import AerSimulator",
+          "backend = AerSimulator()",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -700,6 +843,24 @@
       "url": "https://github.com/cda-tum/ddsim"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from mqt import ddsim",
+          "provider = ddsim.DDSIMProvider()",
+          "backend = provider.get_backend('qasm_simulator')",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -778,6 +939,23 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from cusvaer.backends import StatevectorSimulator",
+          "backend = StatevectorSimulator()",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -853,6 +1031,23 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from quac_qiskit import Quac",
+          "backend = Quac.get_backend(\"fake_vigo_density_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -927,6 +1122,25 @@
       "url": "https://github.com/Qiskit/qiskit-ibm-provider"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_ibm_provider import IBMProvider",
+          "&nbsp;",
+          "provider = IBMProvider()",
+          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -1007,6 +1221,24 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_braket_provider import AWSBraketProvider",
+          "provider = AWSBraketProvider()",
+          "backend = provider.backends(\"SV1\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -1084,6 +1316,24 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from azure.quantum.qiskit import AzureQuantumProvider",
+          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+          "backend = provider.get_backend(\"ionq.simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -1160,6 +1410,26 @@
       "url": "https://github.com/gaqqie/gaqqie"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from gaqqie_door import QiskitGaqqie",
+          "# rewrite to the endpoint URL of the user API",
+          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
+          "QiskitGaqqie.enable_account(url)",
+          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -1242,6 +1512,24 @@
     },
     "codeExamples": [
       {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_qcware import QcwareProvider",
+          "provider = QcwareProvider()",
+          "backend = provider.get_backend('forge_statevector')",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
@@ -1318,6 +1606,27 @@
       "url": null
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "import strangeworks",
+          "from strangeworks_qiskit import StrangeworksProvider",
+          "# get your API key from the Strangeworks Portal",
+          "strangeworks.authenticate(api_key=\"your-api-key\")",
+          "provider = StrangeworksProvider()",
+          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
@@ -1401,6 +1710,24 @@
       "url": "https://github.com/SupertechLabs/qiskit-superstaq"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_superstaq import SuperstaQProvider",
+          "provider = SuperstaQProvider(\"MY_SUPERSTAQ_TOKEN\")",
+          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
