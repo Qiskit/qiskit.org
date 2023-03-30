@@ -45,9 +45,11 @@ function copyToClipboard(code: string) {
   position: relative;
   background-color: qiskit.$background-color-lighter;
   padding: carbon.$spacing-05 carbon.$spacing-07;
+
   @include carbon.breakpoint-down(lg) {
     padding: carbon.$spacing-05 carbon.$spacing-05;
   }
+
   &__copy-button {
     position: absolute;
     right: 0;
@@ -64,11 +66,13 @@ function copyToClipboard(code: string) {
       qiskit.$background-color-secondary 100%
     );
     transition: background-position-x 0.3s ease-out;
+
     &:hover,
     &:active {
       background-position-x: 0;
     }
   }
+
   &__code {
     min-height: 8rem;
   }

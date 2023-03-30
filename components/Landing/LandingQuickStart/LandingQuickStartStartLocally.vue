@@ -135,58 +135,74 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
 @use "sass:math";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .bx--btn-set .bx--btn:not(:focus) {
   box-shadow: none;
 }
+
 .start-locally {
   @include carbon.breakpoint-down(md) {
     margin-bottom: carbon.$spacing-09;
   }
+
   &__introduction {
     margin-bottom: carbon.$spacing-08;
+
     @include carbon.breakpoint-up(lg) {
       $grid-columns: math.div(
         9,
         10
       ); // Number of columns that the element will use at this breakpoint.
+
       max-width: 100% * $grid-columns;
       padding-right: carbon.$spacing-05;
     }
+
     @include carbon.breakpoint-up(xlg) {
       $grid-columns: math.div(
         7,
         11
       ); // Number of columns that the element will use at this breakpoint.
+
       max-width: 100% * $grid-columns;
     }
+
     @include carbon.breakpoint-up(max) {
       $grid-columns: math.div(
         6,
         12
       ); // Number of columns that the element will use at this breakpoint.
+
       max-width: 100% * $grid-columns;
     }
   }
+
   &__options {
     display: flex;
     flex-direction: column;
   }
+
   &__options-group {
     display: grid;
     column-gap: carbon.$spacing-07;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+
     @include carbon.breakpoint-down(lg) {
       column-gap: carbon.$spacing-05;
     }
   }
+
   &__option {
     --cds-interactive-03: #{carbon.$cool-gray-60};
+
     max-width: 100%;
     margin-bottom: carbon.$spacing-07;
+
     @include carbon.breakpoint-down(lg) {
       padding-left: carbon.$spacing-05;
       margin-bottom: carbon.$spacing-05;
     }
+
     &_active {
       --cds-interactive-03: #{carbon.$purple-70};
     }
@@ -197,6 +213,7 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .start-locally {
   /**
    * TODO: Review if there is some mechanism, inside the Carbon Themes
@@ -208,10 +225,12 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
    */
   &__prerequisites-section {
     margin-bottom: carbon.$spacing-05;
+
     & .bx--accordion__item {
       border-bottom: none;
       border-top-color: qiskit.$border-color;
     }
+
     & .bx--accordion__heading {
       &:hover::before {
         // To match default light theme UI hover, which is not among the Carbon
@@ -219,6 +238,7 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
         background-color: #e5e5e5;
       }
     }
+
     & .bx--accordion__arrow {
       fill: currentcolor;
     }

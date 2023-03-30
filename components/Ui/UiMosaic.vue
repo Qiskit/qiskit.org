@@ -19,11 +19,7 @@
             v-html="description"
           />
           <!-- estlint-enable -->
-          <UiLink
-            v-if="cta"
-            v-bind="cta"
-            class="mosaic__element-copy-link"
-          >
+          <UiLink v-if="cta" v-bind="cta" class="mosaic__element-copy-link">
             {{ cta.label }}
           </UiLink>
         </div>

@@ -8,10 +8,7 @@
         <p class="mosaic-section__description" v-text="description" />
       </div>
     </div>
-    <UiMosaic
-      class="mosaic-section__mosaic"
-      :mosaic-elements="elements"
-    />
+    <UiMosaic class="mosaic-section__mosaic" :mosaic-elements="elements" />
     <slot />
   </section>
 </template>

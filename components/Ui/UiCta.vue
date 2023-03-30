@@ -5,7 +5,7 @@
     :class="[
       `cta_${kind}`,
       `cta_${kind}_theme_${theme}`,
-      { 'cta_wider': isWider },
+      { cta_wider: isWider },
     ]"
     v-bind="$attrs"
     :url="urlString"

@@ -25,20 +25,25 @@ const ibmQExperienceLink = IBM_Q_EXPERIENCE;
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .start-on-the-cloud {
   &__wrapper {
     @include qiskit.responsive-grid-bg("/images/grid/grid-white.svg", 36rem);
+
     background-color: qiskit.$background-color-lighter;
     background-position: bottom left;
     background-repeat: no-repeat;
     height: 100%;
+
     @include carbon.breakpoint-down(md) {
       background-position: bottom right;
       height: 17rem;
     }
   }
+
   &__content {
     padding: carbon.$spacing-07;
+
     @include carbon.breakpoint-down(lg) {
       padding: carbon.$spacing-05;
     }
