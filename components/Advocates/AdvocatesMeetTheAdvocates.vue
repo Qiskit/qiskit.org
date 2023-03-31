@@ -17,9 +17,7 @@
         </p>
       </div>
     </div>
-    <UiFiltersResultsLayout
-      class="meet-the-advocates__filters-result-section"
-    >
+    <UiFiltersResultsLayout class="meet-the-advocates__filters-result-section">
       <template #filters-on-m-l-screen>
         <UiFieldset :label="filter.label">
           <client-only>

@@ -48,12 +48,10 @@
   </section>
 </template>
 
-<!-- TODO: Refactor using Composition API once Mixins are refactored -->
 <script setup lang="ts">
 import { MetalCapability, METAL_CAPABILITIES } from "~/constants/metalContent";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
-// TODO: Review how this work
 const { activeSection } = useScrollBetweenSections();
 const capabilities = METAL_CAPABILITIES;
 

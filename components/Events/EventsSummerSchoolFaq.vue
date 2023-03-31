@@ -8,9 +8,7 @@
         <p>
           Minimal prerequisites are required for the Qiskit Global Summer
           School. If you know
-          <UiLink v-bind="khanAcademy">
-            how to multiply two matrices
-          </UiLink>
+          <UiLink v-bind="khanAcademy">how to multiply two matrices</UiLink>
           , and have some programming experience in Python, you are ready for
           the Summer School.
         </p>
@@ -22,9 +20,7 @@
           before attending the lectures by using the Qiskit Textbook. To make
           the most out of these lectures, you may also consider looking through
           the
-          <UiLink v-bind="linearAlgebra">
-            linear algebra prerequisites
-          </UiLink>
+          <UiLink v-bind="linearAlgebra">linear algebra prerequisites</UiLink>
           section of the Qiskit Textbook.
         </p>
       </bx-accordion-item>
@@ -179,9 +175,7 @@
           </UiLink>
           , which is continually updated as we roll out more events throughout
           the year. You can also
-          <UiLink v-bind="twitterQiskit">
-            follow Qiskit on Twitter
-          </UiLink>
+          <UiLink v-bind="twitterQiskit">follow Qiskit on Twitter</UiLink>
           for the latest announcements on new and upcoming events!
         </p>
       </bx-accordion-item>
@@ -191,8 +185,7 @@
           For any questions about the summer school, please submit your
           questions using the form below. For all other enquiries, feel free to
           email us directly at
-          <UiLink v-bind="mailtoQiskit"> qiskit.events@us.ibm.com </UiLink
-          >.
+          <UiLink v-bind="mailtoQiskit">qiskit.events@us.ibm.com</UiLink>.
         </p>
       </bx-accordion-item>
     </bx-accordion>

@@ -2,7 +2,7 @@
   <article
     class="card"
     :class="{
-      'card_vertical': verticalLayout,
+      card_vertical: verticalLayout,
       'card_description-whole-size': descriptionWholeSize,
     }"
   >

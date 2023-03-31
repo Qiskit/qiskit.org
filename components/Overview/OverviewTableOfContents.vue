@@ -27,9 +27,9 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const isActive = computed<boolean>((entry: TableOfContentEntry): boolean => {
+function isActive(entry: TableOfContentEntry): boolean {
   return !!(entry.sectionId && entry.sectionId === props.activeSection);
-});
+}
 </script>
 
 <style lang="scss" scoped>
