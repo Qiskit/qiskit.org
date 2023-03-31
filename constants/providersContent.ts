@@ -2,7 +2,6 @@ import rawCloudSimulatorsData from '~/content/providers/cloud-simulators.json'
 import rawHardwareData from '~/content/providers/hardware.json'
 import rawLocalSimulatorsData from '~/content/providers/local-simulators.json'
 import rawMultiplatformsData from '~/content/providers/multi-platforms.json'
-import rawRuntimesData from '~/content/providers/runtimes.json'
 import rawPrimitivesData from '~/content/providers/primitives.json'
 
 type TableOfContentEntry = {
@@ -68,14 +67,6 @@ const HARDWARE_IN_MENU: TableOfContentEntry = {
 
 const HARDWARE_COLLECTION: ProvidersSection = rawHardwareData
 
-const QUANTUM_RUNTIMES_IN_MENU: TableOfContentEntry = {
-  sectionId: rawRuntimesData.id,
-  title: rawRuntimesData.title,
-  isSecondary: true
-}
-
-const QUANTUM_RUNTIMES_COLLECTION: ProvidersSection = rawRuntimesData
-
 const PRIMITIVES_IN_MENU: TableOfContentEntry = {
   sectionId: rawPrimitivesData.id,
   title: rawPrimitivesData.title,
@@ -104,7 +95,6 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
     title: 'Run Qiskit with'
   },
-  QUANTUM_RUNTIMES_IN_MENU,
   PRIMITIVES_IN_MENU,
   HARDWARE_IN_MENU,
   LOCAL_SIMULATORS_IN_MENU,
@@ -113,7 +103,6 @@ const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
 ]
 
 const CONTENT_SECTIONS: ProvidersSection[] = [
-  QUANTUM_RUNTIMES_COLLECTION,
   PRIMITIVES_COLLECTION,
   HARDWARE_COLLECTION,
   LOCAL_SIMULATORS_COLLECTION,
