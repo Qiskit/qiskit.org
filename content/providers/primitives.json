@@ -24,8 +24,8 @@
       },
       "codeExamples": [
         {
-          "name": "Transpiling",
-          "runMethod": "backend",
+          "name": "Sampling Bell Circuit",
+          "runMethod": "sampler",
           "fullCode": [
             "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
             "service = QiskitRuntimeService()",
@@ -33,13 +33,16 @@
             "sampler = Sampler(session=backend)",
             "&nbsp;",
             "# Build circuit",
-            "from qiskit.circuit.library import QuantumVolume",
-            "circuit = QuantumVolume(5)",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
             "&nbsp;",
-            "# Transpile circuit",
-            "from qiskit import transpile",
-            "transpiled_circuit = transpile(circuit, backend)",
-            "transpiled_circuit.draw()"
+            "# Run the circuit and get result distribution",
+            "job = sampler.run(circuit)",
+            "quasi_dist = job.result().quasi_dists[0]",
+            "print(quasi_dist)"
           ]
         }
       ]
@@ -65,27 +68,23 @@
       },
       "codeExamples": [
         {
-          "name": "Transpile and run",
-          "runMethod": "backend",
+          "name": "Sampling Bell Circuit",
+          "runMethod": "sampler",
           "fullCode": [
-            "from qiskit_aer import AerSimulator",
-            "backend = AerSimulator()",
-            "&nbsp;",
-            "# Build circuit",
-            "from qiskit import QuantumCircuit",
-            "circuit = QuantumCircuit(2, 2)",
-            "circuit.h(0)",
-            "circuit.cx(0,1)",
-            "circuit.measure([0,1], [0,1])",
-            "&nbsp;",
-            "# Transpile circuit",
-            "from qiskit import transpile",
-            "transpiled_circuit = transpile(circuit, backend)",
-            "&nbsp;",
-            "# Run the circuit and get result",
-            "job = backend.run(transpiled_circuit)",
-            "counts = job.result().get_counts()",
-            "print(counts)"
+            "from qiskit_aer.primitives import Sampler",
+          "sampler = Sampler()",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit import QuantumCircuit",
+          "circuit = QuantumCircuit(2, 2)",
+          "circuit.h(0)",
+          "circuit.cx(0,1)",
+          "circuit.measure([0,1], [0,1])",
+          "&nbsp;",
+          "# Run the circuit and get result distribution",
+          "job = sampler.run(circuit)",
+          "quasi_dist = job.result().quasi_dists[0]",
+          "print(quasi_dist)"
           ]
         }
       ]
