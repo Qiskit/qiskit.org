@@ -186,9 +186,9 @@ function isIdAnchor(url: string) {
   /*
     Icons Styles
   */
-  $arrow-right_path: "_arrow-right-16 path:nth-child(1)";
-  $arrow-down_path: "_arrow-down-16 path:nth-child(1)";
-  $launch_path: "_launch-16 path:nth-child(2)";
+  $arrow-right-path: "_arrow-right-16 path:nth-child(1)";
+  $arrow-down-path: "_arrow-down-16 path:nth-child(1)";
+  $launch-path: "_launch-16 path:nth-child(2)";
 
   &__icon {
     fill: currentcolor;
@@ -199,9 +199,9 @@ function isIdAnchor(url: string) {
       margin-right: carbon.$spacing-02;
     }
 
-    &#{$arrow-right_path},
-    &#{$arrow-down_path},
-    &#{$launch_path} {
+    &#{$arrow-right-path},
+    &#{$arrow-down-path},
+    &#{$launch-path} {
       transform: translate(0, 0);
       transition: transform 0.2s ease-in-out;
     }
@@ -214,13 +214,13 @@ function isIdAnchor(url: string) {
   &:hover &__icon,
   &:focus &__icon,
   &:active &__icon {
-    &#{$arrow-right_path} {
+    &#{$arrow-right-path} {
       transform: translate(4px, 0);
     }
-    &#{$arrow-down_path} {
+    &#{$arrow-down-path} {
       transform: translate(0, 4px);
     }
-    &#{$launch_path} {
+    &#{$launch-path} {
       transform: translate(2px, -2px);
     }
   }

@@ -26,6 +26,7 @@ export default function (to, from) {
 
       const el = document.querySelector(to.hash);
       if (!el) {
+        // eslint-disable-next-line no-console
         console.warn("Trying to navigate to a missing element", to.hash);
         return resolve();
       }
