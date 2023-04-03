@@ -5,7 +5,7 @@ declare global {
   }
 }
 
-export default () => {
+export default defineNuxtPlugin(() => {
   (function (h, o, t, j, a?: any, r?: any) {
     h.hj =
       h.hj ||
@@ -20,4 +20,4 @@ export default () => {
     r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
     a.appendChild(r);
   })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
-};
+});
