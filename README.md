@@ -140,7 +140,6 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
 ## 🧐 Directory structure
 
     qiskit.org/
-    ├─ app/
     ├─ assets/
     ├─ components/
     ├─ constants/
@@ -158,10 +157,6 @@ by default. To enable, set the `ENABLE_ANALYTICS` environment variable.
     ├─ types/
     ├─ nuxt.config.js
     ├─ ... other third-parties configuration files like ESLint, Jest or GitHub Actions
-
-- **`app/`**: Global scripts.
-
-  Currently only contains `router.ScrollBehavior.js` for controlling the behavior of the scroll when navigating.
 
 - **`assets/`**: Un-compiled Sass files.
 
