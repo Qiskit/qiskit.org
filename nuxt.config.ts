@@ -1,12 +1,21 @@
 import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
+import pkg from "./package.json";
 
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV } = process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      meta: [
+        { hid: "description", name: "description", content: pkg.description },
+      ],
+    },
+  },
+
   runtimeConfig: {
     // Keys within public are also exposed client-side
     public: {
