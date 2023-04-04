@@ -84,32 +84,31 @@
     ]
   },
   {
-    "title": "IBM Qiskit Runtime",
-    "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
+    "title": "Aer",
+    "description": "Aer is a high performance simulator for quantum circuits that includes noise models.",
     "installation": [
       "pip install qiskit",
-      "pip install qiskit-ibm-runtime"
+      "pip install qiskit-aer"
     ],
     "websiteCta": {
-      "label": "Website",
-      "url": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/"
+      "label": null,
+      "url": null
     },
     "docsCta": {
       "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
+      "url": "https://qiskit.org/ecosystem/aer/"
     },
     "sourceCta": {
       "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-ibm-runtime"
+      "url": "https://github.com/Qiskit/qiskit-aer"
     },
     "codeExamples": [
       {
         "name": "Transpiling",
         "runMethod": "backend",
         "fullCode": [
-          "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
-          "service = QiskitRuntimeService()",
-          "backend = service.backend(\"ibm_nairobi\")",
+          "from qiskit_aer import AerSimulator",
+          "backend = AerSimulator()",
           "&nbsp;",
           "# Build circuit",
           "from qiskit.circuit.library import QuantumVolume",
@@ -125,10 +124,8 @@
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
-          "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
-          "service = QiskitRuntimeService()",
-          "backend = service.backend(\"ibm_nairobi\")",
-          "sampler = Sampler(session=backend)",
+          "from qiskit_aer.primitives import Sampler",
+          "sampler = Sampler()",
           "&nbsp;",
           "# Build circuit",
           "from qiskit import QuantumCircuit",
@@ -147,10 +144,109 @@
         "name": "Running VQE",
         "runMethod": "estimator",
         "fullCode": [
-          "from qiskit_ibm_runtime import QiskitRuntimeService, Estimator",
-          "service = QiskitRuntimeService()",
-          "backend = service.backend(\"ibm_nairobi\")",
-          "estimator = Estimator(session=backend)",
+          "from qiskit_aer.primitives import Estimator",
+          "estimator = Estimator()",
+          "&nbsp;",
+          "# Express hydrogen molecule Hamiltonian as an operator",
+          "from qiskit.quantum_info import SparsePauliOp",
+          "H2_operator = SparsePauliOp.from_list([",
+          "    (\"II\", -1.052373245772859),",
+          "    (\"IZ\", 0.39793742484318045),",
+          "    (\"ZI\", -0.39793742484318045),",
+          "    (\"ZZ\", -0.01128010425623538),",
+          "    (\"XX\", 0.18093119978423156)",
+          "])",
+          "&nbsp;",
+          "# Calculate ground state energy using VQE",
+          "from qiskit.circuit.library import TwoLocal",
+          "from qiskit.algorithms.optimizers import SLSQP",
+          "from qiskit.algorithms.minimum_eigensolvers import VQE",
+          "&nbsp;",
+          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
+          "optimizer = SLSQP(maxiter=100)",
+          "vqe = VQE(estimator, ansatz, optimizer)",
+          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
+          "print(result.eigenvalue)"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Amazon Braket",
+    "description": "Amazon Braket is a fully managed quantum computing service designed to help speed up scientific research and software development for quantum computing.",
+    "installation": [
+      "pip install qiskit",
+      "pip install qiskit_braket_provider"
+    ],
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://aws.amazon.com/braket/"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://qiskit-community.github.io/qiskit-braket-provider/"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/qiskit-community/qiskit-braket-provider"
+    },
+    "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_braket_provider import AWSBraketProvider",
+          "provider = AWSBraketProvider()",
+          "# QuEra Aquila is a 256-qubit quantum processor based on",
+          "# programmable arrays of neutral Rubidium atoms",
+          "backend = provider.backends(\"Aquila\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
+        "name": "Sampling Bell Circuit",
+        "runMethod": "sampler",
+        "fullCode": [
+          "from qiskit_braket_provider import AWSBraketProvider",
+          "from qiskit.primitives import BackendSampler",
+          "provider = AWSBraketProvider()",
+          "# QuEra Aquila is a 256-qubit quantum processor based on",
+          "# programmable arrays of neutral Rubidium atoms",
+          "backend = provider.backends(\"Aquila\")",
+          "sampler = BackendSampler(backend)",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit import QuantumCircuit",
+          "circuit = QuantumCircuit(2, 2)",
+          "circuit.h(0)",
+          "circuit.cx(0,1)",
+          "circuit.measure([0,1], [0,1])",
+          "&nbsp;",
+          "# Run the circuit and get result distribution",
+          "job = sampler.run(circuit)",
+          "quasi_dist = job.result().quasi_dists[0]",
+          "print(quasi_dist)"
+        ]
+      },
+      {
+        "name": "Running VQE",
+        "runMethod": "estimator",
+        "fullCode": [
+          "from qiskit_braket_provider import AWSBraketProvider",
+          "from qiskit.primitives import BackendEstimator",
+          "provider = AWSBraketProvider()",
+          "# QuEra Aquila is a 256-qubit quantum processor based on",
+          "# programmable arrays of neutral Rubidium atoms",
+          "backend = provider.backends(\"Aquila\")",
+          "estimator = BackendEstimator(backend)",
           "&nbsp;",
           "# Express hydrogen molecule Hamiltonian as an operator",
           "from qiskit.quantum_info import SparsePauliOp",
@@ -202,7 +298,7 @@
         "fullCode": [
           "from qiskit_aqt_provider import AQTProvider",
           "aqt = AQTProvider('MY_TOKEN')",
-          "backend = aqt.get_backend('aqt_qasm_simulator')",
+          "backend = aqt.get_backend('aqt_innsbruck')",
           "&nbsp;",
           "# Build circuit",
           "from qiskit.circuit.library import QuantumVolume",
@@ -221,7 +317,7 @@
           "from qiskit_aqt_provider import AQTProvider",
           "from qiskit.primitives import BackendSampler",
           "aqt = AQTProvider('MY_TOKEN')",
-          "backend = aqt.get_backend('aqt_qasm_simulator')",
+          "backend = aqt.get_backend('aqt_innsbruck')",
           "sampler = BackendSampler(backend)",
           "&nbsp;",
           "# Build circuit",
@@ -244,8 +340,279 @@
           "from qiskit_aqt_provider import AQTProvider",
           "from qiskit.primitives import BackendEstimator",
           "aqt = AQTProvider('MY_TOKEN')",
-          "backend = aqt.get_backend('aqt_qasm_simulator')",
+          "backend = aqt.get_backend('aqt_innsbruck')",
           "estimator = BackendEstimator(backend)",
+          "&nbsp;",
+          "# Express hydrogen molecule Hamiltonian as an operator",
+          "from qiskit.quantum_info import SparsePauliOp",
+          "H2_operator = SparsePauliOp.from_list([",
+          "    (\"II\", -1.052373245772859),",
+          "    (\"IZ\", 0.39793742484318045),",
+          "    (\"ZI\", -0.39793742484318045),",
+          "    (\"ZZ\", -0.01128010425623538),",
+          "    (\"XX\", 0.18093119978423156)",
+          "])",
+          "&nbsp;",
+          "# Calculate ground state energy using VQE",
+          "from qiskit.circuit.library import TwoLocal",
+          "from qiskit.algorithms.optimizers import SLSQP",
+          "from qiskit.algorithms.minimum_eigensolvers import VQE",
+          "&nbsp;",
+          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
+          "optimizer = SLSQP(maxiter=100)",
+          "vqe = VQE(estimator, ansatz, optimizer)",
+          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
+          "print(result.eigenvalue)"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Azure Quantum",
+    "description": "Azure Quantum is the cloud quantum computing service of Azure, with a diverse set of quantum solutions and technologies.",
+    "installation": [
+      "pip install qiskit",
+      "pip install \"azure-quantum[qiskit]\""
+    ],
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://aka.ms/aq"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://aka.ms/AQ/Qiskit/QuickStart"
+    },
+    "sourceCta": {
+      "label": null,
+      "url": null
+    },
+    "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from azure.quantum.qiskit import AzureQuantumProvider",
+          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+          "backend = provider.get_backend(\"quantinuum.qpu.h1-2\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
+        "name": "Sampling Bell Circuit",
+        "runMethod": "sampler",
+        "fullCode": [
+          "from azure.quantum.qiskit import AzureQuantumProvider",
+          "from qiskit.primitives import BackendSampler",
+          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+          "backend = provider.get_backend(\"quantinuum.qpu.h1-2\")",
+          "sampler = BackendSampler(backend)",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit import QuantumCircuit",
+          "circuit = QuantumCircuit(2, 2)",
+          "circuit.h(0)",
+          "circuit.cx(0,1)",
+          "circuit.measure([0,1], [0,1])",
+          "&nbsp;",
+          "# Run the circuit and get result distribution",
+          "job = sampler.run(circuit)",
+          "quasi_dist = job.result().quasi_dists[0]",
+          "print(quasi_dist)"
+        ]
+      },
+      {
+        "name": "Running VQE",
+        "runMethod": "estimator",
+        "fullCode": [
+          "from azure.quantum.qiskit import AzureQuantumProvider",
+          "from qiskit.primitives import BackendEstimator",
+          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
+          "backend = provider.get_backend(\"quantinuum.qpu.h1-2\")",
+          "estimator = BackendEstimator(backend)",
+          "&nbsp;",
+          "# Express hydrogen molecule Hamiltonian as an operator",
+          "from qiskit.quantum_info import SparsePauliOp",
+          "H2_operator = SparsePauliOp.from_list([",
+          "    (\"II\", -1.052373245772859),",
+          "    (\"IZ\", 0.39793742484318045),",
+          "    (\"ZI\", -0.39793742484318045),",
+          "    (\"ZZ\", -0.01128010425623538),",
+          "    (\"XX\", 0.18093119978423156)",
+          "])",
+          "&nbsp;",
+          "# Calculate ground state energy using VQE",
+          "from qiskit.circuit.library import TwoLocal",
+          "from qiskit.algorithms.optimizers import SLSQP",
+          "from qiskit.algorithms.minimum_eigensolvers import VQE",
+          "&nbsp;",
+          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
+          "optimizer = SLSQP(maxiter=100)",
+          "vqe = VQE(estimator, ansatz, optimizer)",
+          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
+          "print(result.eigenvalue)"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Gaqqie",
+    "description": "Gaqqie is an open-source quantum computer cloud platform.",
+    "installation": [
+      "pip install qiskit",
+      "pip install gaqqie-door"
+    ],
+    "websiteCta": {
+      "label": "Website",
+      "url": null
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://github.com/gaqqie/gaqqie/blob/main/docs/document.pdf"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/gaqqie/gaqqie"
+    },
+    "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from gaqqie_door import QiskitGaqqie",
+          "# rewrite to the endpoint URL of the user API",
+          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
+          "QiskitGaqqie.enable_account(url)",
+          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
+        "name": "Sampling Bell Circuit",
+        "runMethod": "sampler",
+        "fullCode": [
+          "from gaqqie_door import QiskitGaqqie",
+          "from qiskit.primitives import BackendSampler",
+          "# rewrite to the endpoint URL of the user API",
+          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
+          "QiskitGaqqie.enable_account(url)",
+          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
+          "sampler = BackendSampler(backend)",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit import QuantumCircuit",
+          "circuit = QuantumCircuit(2, 2)",
+          "circuit.h(0)",
+          "circuit.cx(0,1)",
+          "circuit.measure([0,1], [0,1])",
+          "&nbsp;",
+          "# Run the circuit and get result distribution",
+          "job = sampler.run(circuit)",
+          "quasi_dist = job.result().quasi_dists[0]",
+          "print(quasi_dist)"
+        ]
+      },
+      {
+        "name": "Running VQE",
+        "runMethod": "estimator",
+        "fullCode": [
+          "from gaqqie_door import QiskitGaqqie",
+          "from qiskit.primitives import BackendEstimator",
+          "# rewrite to the endpoint URL of the user API",
+          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
+          "QiskitGaqqie.enable_account(url)",
+          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
+          "estimator = BackendEstimator(backend)",
+          "&nbsp;",
+          "# Express hydrogen molecule Hamiltonian as an operator",
+          "from qiskit.quantum_info import SparsePauliOp",
+          "H2_operator = SparsePauliOp.from_list([",
+          "    (\"II\", -1.052373245772859),",
+          "    (\"IZ\", 0.39793742484318045),",
+          "    (\"ZI\", -0.39793742484318045),",
+          "    (\"ZZ\", -0.01128010425623538),",
+          "    (\"XX\", 0.18093119978423156)",
+          "])",
+          "&nbsp;",
+          "# Calculate ground state energy using VQE",
+          "from qiskit.circuit.library import TwoLocal",
+          "from qiskit.algorithms.optimizers import SLSQP",
+          "from qiskit.algorithms.minimum_eigensolvers import VQE",
+          "&nbsp;",
+          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
+          "optimizer = SLSQP(maxiter=100)",
+          "vqe = VQE(estimator, ansatz, optimizer)",
+          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
+          "print(result.eigenvalue)"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "IBM Qiskit Runtime",
+    "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
+    "installation": [
+      "pip install qiskit",
+      "pip install qiskit-ibm-runtime"
+    ],
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/Qiskit/qiskit-ibm-runtime"
+    },
+    "codeExamples": [
+      {
+        "name": "Sampling Bell Circuit",
+        "runMethod": "sampler",
+        "fullCode": [
+          "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
+          "service = QiskitRuntimeService()",
+          "backend = service.backend(\"ibm_perth\")",
+          "sampler = Sampler(session=backend)",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit import QuantumCircuit",
+          "circuit = QuantumCircuit(2, 2)",
+          "circuit.h(0)",
+          "circuit.cx(0,1)",
+          "circuit.measure([0,1], [0,1])",
+          "&nbsp;",
+          "# Run the circuit and get result distribution",
+          "job = sampler.run(circuit)",
+          "quasi_dist = job.result().quasi_dists[0]",
+          "print(quasi_dist)"
+        ]
+      },
+      {
+        "name": "Running VQE",
+        "runMethod": "estimator",
+        "fullCode": [
+          "from qiskit_ibm_runtime import QiskitRuntimeService, Estimator",
+          "service = QiskitRuntimeService()",
+          "backend = service.backend(\"ibm_perth\")",
+          "estimator = Estimator(session=backend)",
           "&nbsp;",
           "# Express hydrogen molecule Hamiltonian as an operator",
           "from qiskit.quantum_info import SparsePauliOp",
@@ -560,284 +927,6 @@
     ]
   },
   {
-    "title": "Quantinuum",
-    "description": "Quantinuum provides access to Ytterbium trapped-ion systems with high-fidelity, fully connected qubits, and the ability to perform mid-circuit measurement.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit-quantinuum-provider"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://www.quantinuum.com/"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://github.com/qiskit-community/qiskit-quantinuum-provider/blob/master/examples/QuantinuumExample.ipynb"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/qiskit-community/qiskit-quantinuum-provider"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from qiskit_quantinuum import Quantinuum",
-          "Quantinuum.save_account(\"username@company.com\")",
-          "backend = Quantinuum.get_backend(\"DEVICE_NAME\")",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_quantinuum import Quantinuum",
-          "from qiskit.primitives import BackendSampler",
-          "Quantinuum.save_account(\"username@company.com\")",
-          "backend = Quantinuum.get_backend(\"DEVICE_NAME\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_quantinuum import Quantinuum",
-          "from qiskit.primitives import BackendEstimator",
-          "Quantinuum.save_account(\"username@company.com\")",
-          "backend = Quantinuum.get_backend(\"DEVICE_NAME\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Rigetti",
-    "description": "Rigetti offers access to universal, gate-model machines based on tunable superconducting qubits.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit-rigetti"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://www.rigetti.com/"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://qiskit-rigetti.readthedocs.io/en/latest/"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/rigetti/qiskit-rigetti"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from qiskit_rigetti import RigettiQCSProvider",
-          "provider = RigettiQCSProvider()",
-          "backend = provider.get_backend(name=\"Aspen-9\")",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_rigetti import RigettiQCSProvider",
-          "from qiskit.primitives import BackendSampler",
-          "provider = RigettiQCSProvider()",
-          "backend = provider.get_backend(name=\"Aspen-9\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_rigetti import RigettiQCSProvider",
-          "from qiskit.primitives import BackendEstimator",
-          "provider = RigettiQCSProvider()",
-          "backend = provider.get_backend(name=\"Aspen-9\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Aer",
-    "description": "Aer is a high performance simulator for quantum circuits that includes noise models.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit-aer"
-    ],
-    "websiteCta": {
-      "label": null,
-      "url": null
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://qiskit.org/ecosystem/aer/"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-aer"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from qiskit_aer import AerSimulator",
-          "backend = AerSimulator()",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_aer.primitives import Sampler",
-          "sampler = Sampler()",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_aer.primitives import Estimator",
-          "estimator = Estimator()",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
     "title": "MQT DDSIM",
     "description": "MQT DDSIM is a quantum circuit simulator based on decision diagrams written in C++.",
     "installation": [
@@ -1025,6 +1114,101 @@
     ]
   },
   {
+    "title": "QC Ware Forge",
+    "description": "QC Ware Forge is an unique and efficient turn-key algorithms for data scientists and powerful circuit building blocks for quantum engineers.",
+    "installation": [
+      "pip install qiskit",
+      "pip install qiskit-qcware"
+    ],
+    "websiteCta": {
+      "label": "Website",
+      "url": "https://forge.qcware.com/"
+    },
+    "docsCta": {
+      "label": "Docs",
+      "url": "https://github.com/qcware/qiskit_qcware/blob/master/notebooks/basic_demo.ipynb"
+    },
+    "sourceCta": {
+      "label": "GitHub",
+      "url": "https://github.com/qcware/qiskit_qcware"
+    },
+    "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_qcware import QcwareProvider",
+          "provider = QcwareProvider()",
+          "backend = provider.get_backend('forge_statevector')",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
+      {
+        "name": "Sampling Bell Circuit",
+        "runMethod": "sampler",
+        "fullCode": [
+          "from qiskit_qcware import QcwareProvider",
+          "from qiskit.primitives import BackendSampler",
+          "provider = QcwareProvider()",
+          "backend = provider.get_backend('forge_statevector')",
+          "sampler = BackendSampler(backend)",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit import QuantumCircuit",
+          "circuit = QuantumCircuit(2, 2)",
+          "circuit.h(0)",
+          "circuit.cx(0,1)",
+          "circuit.measure([0,1], [0,1])",
+          "&nbsp;",
+          "# Run the circuit and get result distribution",
+          "job = sampler.run(circuit)",
+          "quasi_dist = job.result().quasi_dists[0]",
+          "print(quasi_dist)"
+        ]
+      },
+      {
+        "name": "Running VQE",
+        "runMethod": "estimator",
+        "fullCode": [
+          "from qiskit_qcware import QcwareProvider",
+          "from qiskit.primitives import BackendEstimator",
+          "provider = QcwareProvider()",
+          "backend = provider.get_backend('forge_statevector')",
+          "estimator = BackendEstimator(backend)",
+          "&nbsp;",
+          "# Express hydrogen molecule Hamiltonian as an operator",
+          "from qiskit.quantum_info import SparsePauliOp",
+          "H2_operator = SparsePauliOp.from_list([",
+          "    (\"II\", -1.052373245772859),",
+          "    (\"IZ\", 0.39793742484318045),",
+          "    (\"ZI\", -0.39793742484318045),",
+          "    (\"ZZ\", -0.01128010425623538),",
+          "    (\"XX\", 0.18093119978423156)",
+          "])",
+          "&nbsp;",
+          "# Calculate ground state energy using VQE",
+          "from qiskit.circuit.library import TwoLocal",
+          "from qiskit.algorithms.optimizers import SLSQP",
+          "from qiskit.algorithms.minimum_eigensolvers import VQE",
+          "&nbsp;",
+          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
+          "optimizer = SLSQP(maxiter=100)",
+          "vqe = VQE(estimator, ansatz, optimizer)",
+          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
+          "print(result.eigenvalue)"
+        ]
+      }
+    ]
+  },
+  {
     "title": "QuaC",
     "description": "QuaC is a parallel time dependent open quantum systems solver.",
     "installation": [
@@ -1117,32 +1301,32 @@
     ]
   },
   {
-    "title": "IBM Quantum",
-    "description": "IBM Quantum features a collection of high-performance simulators for prototyping quantum circuits and algorithms, and exploring their performance under realistic device noise models.",
+    "title": "Quantinuum",
+    "description": "Quantinuum provides access to Ytterbium trapped-ion systems with high-fidelity, fully connected qubits, and the ability to perform mid-circuit measurement.",
     "installation": [
       "pip install qiskit",
-      "pip install qiskit-ibm-provider"
+      "pip install qiskit-quantinuum-provider"
     ],
     "websiteCta": {
       "label": "Website",
-      "url": "https://quantum-computing.ibm.com/services/resources?tab=simulators"
+      "url": "https://www.quantinuum.com/"
     },
     "docsCta": {
       "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
+      "url": "https://github.com/qiskit-community/qiskit-quantinuum-provider/blob/master/examples/QuantinuumExample.ipynb"
     },
     "sourceCta": {
       "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-ibm-provider"
+      "url": "https://github.com/qiskit-community/qiskit-quantinuum-provider"
     },
     "codeExamples": [
       {
         "name": "Transpiling",
         "runMethod": "backend",
         "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"simulator_statevector\")",
+          "from qiskit_quantinuum import Quantinuum",
+          "Quantinuum.save_account(\"username@company.com\")",
+          "backend = Quantinuum.get_backend(\"deadhead\")",
           "&nbsp;",
           "# Build circuit",
           "from qiskit.circuit.library import QuantumVolume",
@@ -1158,10 +1342,10 @@
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
+          "from qiskit_quantinuum import Quantinuum",
           "from qiskit.primitives import BackendSampler",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"simulator_statevector\")",
+          "Quantinuum.save_account(\"username@company.com\")",
+          "backend = Quantinuum.get_backend(\"deadhead\")",
           "sampler = BackendSampler(backend)",
           "&nbsp;",
           "# Build circuit",
@@ -1181,10 +1365,10 @@
         "name": "Running VQE",
         "runMethod": "estimator",
         "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
+          "from qiskit_quantinuum import Quantinuum",
           "from qiskit.primitives import BackendEstimator",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"simulator_statevector\")",
+          "Quantinuum.save_account(\"username@company.com\")",
+          "backend = Quantinuum.get_backend(\"deadhead\")",
           "estimator = BackendEstimator(backend)",
           "&nbsp;",
           "# Express hydrogen molecule Hamiltonian as an operator",
@@ -1212,32 +1396,32 @@
     ]
   },
   {
-    "title": "IonQ",
-    "description": "The IonQ Quantum Cloud providers 29-qubit cloud simulator.",
+    "title": "Rigetti",
+    "description": "Rigetti offers access to universal, gate-model machines based on tunable superconducting qubits.",
     "installation": [
       "pip install qiskit",
-      "pip install qiskit-ionq"
+      "pip install qiskit-rigetti"
     ],
     "websiteCta": {
       "label": "Website",
-      "url": "https://ionq.com/resources/the-value-of-classical-quantum-simulators"
+      "url": "https://www.rigetti.com/"
     },
     "docsCta": {
       "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/ionq/"
+      "url": "https://qiskit-rigetti.readthedocs.io/en/latest/"
     },
     "sourceCta": {
       "label": "GitHub",
-      "url": "https://github.com/Qiskit-Partners/qiskit-ionq"
+      "url": "https://github.com/rigetti/qiskit-rigetti"
     },
     "codeExamples": [
       {
         "name": "Transpiling",
         "runMethod": "backend",
         "fullCode": [
-          "from qiskit_ionq import IonQProvider",
-          "provider = IonQProvider(\"MY_IONQ_TOKEN\")",
-          "backend = provider.get_backend(\"ionq_simulator\")",
+          "from qiskit_rigetti import RigettiQCSProvider",
+          "provider = RigettiQCSProvider()",
+          "backend = provider.get_backend(\"Aspen-11\")",
           "&nbsp;",
           "# Build circuit",
           "from qiskit.circuit.library import QuantumVolume",
@@ -1253,10 +1437,10 @@
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
-          "from qiskit_ionq import IonQProvider",
+          "from qiskit_rigetti import RigettiQCSProvider",
           "from qiskit.primitives import BackendSampler",
-          "provider = IonQProvider(\"MY_IONQ_TOKEN\")",
-          "backend = provider.get_backend(\"ionq_simulator\")",
+          "provider = RigettiQCSProvider()",
+          "backend = provider.get_backend(\"Aspen-11\")",
           "sampler = BackendSampler(backend)",
           "&nbsp;",
           "# Build circuit",
@@ -1276,10 +1460,10 @@
         "name": "Running VQE",
         "runMethod": "estimator",
         "fullCode": [
-          "from qiskit_ionq import IonQProvider",
+          "from qiskit_rigetti import RigettiQCSProvider",
           "from qiskit.primitives import BackendEstimator",
-          "provider = IonQProvider(\"MY_IONQ_TOKEN\")",
-          "backend = provider.get_backend(\"ionq_simulator\")",
+          "provider = RigettiQCSProvider()",
+          "backend = provider.get_backend(\"Aspen-11\")",
           "estimator = BackendEstimator(backend)",
           "&nbsp;",
           "# Express hydrogen molecule Hamiltonian as an operator",
@@ -1402,392 +1586,6 @@
     ]
   },
   {
-    "title": "Amazon Braket",
-    "description": "Amazon Braket is a fully managed quantum computing service designed to help speed up scientific research and software development for quantum computing.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit_braket_provider"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://aws.amazon.com/braket/"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://qiskit-community.github.io/qiskit-braket-provider/"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/qiskit-community/qiskit-braket-provider"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from qiskit_braket_provider import AWSBraketProvider",
-          "provider = AWSBraketProvider()",
-          "backend = provider.backends(\"SV1\")",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_braket_provider import AWSBraketProvider",
-          "from qiskit.primitives import BackendSampler",
-          "provider = AWSBraketProvider()",
-          "backend = provider.backends(\"SV1\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_braket_provider import AWSBraketProvider",
-          "from qiskit.primitives import BackendEstimator",
-          "provider = AWSBraketProvider()",
-          "backend = provider.backends(\"SV1\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Azure Quantum",
-    "description": "Azure Quantum is the cloud quantum computing service of Azure, with a diverse set of quantum solutions and technologies.",
-    "installation": [
-      "pip install qiskit",
-      "pip install \"azure-quantum[qiskit]\""
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://aka.ms/aq"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://aka.ms/AQ/Qiskit/QuickStart"
-    },
-    "sourceCta": {
-      "label": null,
-      "url": null
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from azure.quantum.qiskit import AzureQuantumProvider",
-          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
-          "backend = provider.get_backend(\"ionq.simulator\")",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from azure.quantum.qiskit import AzureQuantumProvider",
-          "from qiskit.primitives import BackendSampler",
-          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
-          "backend = provider.get_backend(\"ionq.simulator\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from azure.quantum.qiskit import AzureQuantumProvider",
-          "from qiskit.primitives import BackendEstimator",
-          "provider = AzureQuantumProvider(resource_id=\"MY_RESOURCE_ID\",location=\"MY_LOCATION\")",
-          "backend = provider.get_backend(\"ionq.simulator\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Gaqqie",
-    "description": "Gaqqie is an open-source quantum computer cloud platform.",
-    "installation": [
-      "pip install qiskit",
-      "pip install gaqqie-door"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": null
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://github.com/gaqqie/gaqqie/blob/main/docs/document.pdf"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/gaqqie/gaqqie"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from gaqqie_door import QiskitGaqqie",
-          "# rewrite to the endpoint URL of the user API",
-          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
-          "QiskitGaqqie.enable_account(url)",
-          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from gaqqie_door import QiskitGaqqie",
-          "from qiskit.primitives import BackendSampler",
-          "# rewrite to the endpoint URL of the user API",
-          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
-          "QiskitGaqqie.enable_account(url)",
-          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from gaqqie_door import QiskitGaqqie",
-          "from qiskit.primitives import BackendEstimator",
-          "# rewrite to the endpoint URL of the user API",
-          "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
-          "QiskitGaqqie.enable_account(url)",
-          "backend = QiskitGaqqie.get_backend(\"qiskit_simulator\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
-    "title": "QC Ware Forge",
-    "description": "QC Ware Forge is an unique and efficient turn-key algorithms for Data Scientists and powerful circuit building blocks for Quantum Engineers.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit-qcware"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://forge.qcware.com/"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://github.com/qcware/qiskit_qcware/blob/master/notebooks/basic_demo.ipynb"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/qcware/qiskit_qcware"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from qiskit_qcware import QcwareProvider",
-          "provider = QcwareProvider()",
-          "backend = provider.get_backend('forge_statevector')",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_qcware import QcwareProvider",
-          "from qiskit.primitives import BackendSampler",
-          "provider = QcwareProvider()",
-          "backend = provider.get_backend('forge_statevector')",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_qcware import QcwareProvider",
-          "from qiskit.primitives import BackendEstimator",
-          "provider = QcwareProvider()",
-          "backend = provider.get_backend('forge_statevector')",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
-  },
-  {
     "title": "Strangeworks",
     "description": "Strangeworks is the ultimate collaboration of hardware, software, education, and service providers, working to develop and test quantum and future compute technologies.",
     "installation": [
@@ -1816,7 +1614,9 @@
           "# get your API key from the Strangeworks Portal",
           "strangeworks.authenticate(api_key=\"your-api-key\")",
           "provider = StrangeworksProvider()",
-          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "# Xanadu Borealis is a photonic quantum computer with a programmable loop-based",
+          "# interferometer with over 216 squeezed-state qubits",
+          "backend = provider.get_backend(\"borealis\")",
           "&nbsp;",
           "# Build circuit",
           "from qiskit.circuit.library import QuantumVolume",
@@ -1838,7 +1638,9 @@
           "# get your API key from the Strangeworks Portal",
           "strangeworks.authenticate(api_key=\"your-api-key\")",
           "provider = StrangeworksProvider()",
-          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "# Xanadu Borealis is a photonic quantum computer with a programmable loop-based",
+          "# interferometer with over 216 squeezed-state qubits",
+          "backend = provider.get_backend(\"borealis\")",
           "sampler = BackendSampler(backend)",
           "&nbsp;",
           "# Build circuit",
@@ -1864,7 +1666,9 @@
           "# get your API key from the Strangeworks Portal",
           "strangeworks.authenticate(api_key=\"your-api-key\")",
           "provider = StrangeworksProvider()",
-          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "# Xanadu Borealis is a photonic quantum computer with a programmable loop-based",
+          "# interferometer with over 216 squeezed-state qubits",
+          "backend = provider.get_backend(\"borealis\")",
           "estimator = BackendEstimator(backend)",
           "&nbsp;",
           "# Express hydrogen molecule Hamiltonian as an operator",
@@ -1917,7 +1721,7 @@
         "fullCode": [
           "from qiskit_superstaq import SuperstaQProvider",
           "provider = SuperstaQProvider(\"MY_SUPERSTAQ_TOKEN\")",
-          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "backend = provider.get_backend(\"aws_sv1_simulator\")",
           "&nbsp;",
           "# Build circuit",
           "from qiskit.circuit.library import QuantumVolume",
@@ -1936,7 +1740,7 @@
           "from qiskit_superstaq import SuperstaQProvider",
           "from qiskit.primitives import BackendSampler",
           "provider = SuperstaQProvider(\"MY_SUPERSTAQ_TOKEN\")",
-          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "backend = provider.get_backend(\"aws_sv1_simulator\")",
           "sampler = BackendSampler(backend)",
           "&nbsp;",
           "# Build circuit",
@@ -1959,7 +1763,7 @@
           "from qiskit_superstaq import SuperstaQProvider",
           "from qiskit.primitives import BackendEstimator",
           "provider = SuperstaQProvider(\"MY_SUPERSTAQ_TOKEN\")",
-          "backend = provider.get_backend(\"ibmq_qasm_simulator\")",
+          "backend = provider.get_backend(\"aws_sv1_simulator\")",
           "estimator = BackendEstimator(backend)",
           "&nbsp;",
           "# Express hydrogen molecule Hamiltonian as an operator",

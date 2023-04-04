@@ -29,7 +29,7 @@
           "fullCode": [
             "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
             "service = QiskitRuntimeService()",
-            "backend = service.backend(\"ibmq_qasm_simulator\")",
+            "backend = service.backend(\"ibm_perth\")",
             "sampler = Sampler(session=backend)",
             "&nbsp;",
             "# Build circuit",
@@ -72,19 +72,19 @@
           "runMethod": "sampler",
           "fullCode": [
             "from qiskit_aer.primitives import Sampler",
-          "sampler = Sampler()",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
+            "sampler = Sampler()",
+            "&nbsp;",
+            "# Build circuit",
+            "from qiskit import QuantumCircuit",
+            "circuit = QuantumCircuit(2, 2)",
+            "circuit.h(0)",
+            "circuit.cx(0,1)",
+            "circuit.measure([0,1], [0,1])",
+            "&nbsp;",
+            "# Run the circuit and get result distribution",
+            "job = sampler.run(circuit)",
+            "quasi_dist = job.result().quasi_dists[0]",
+            "print(quasi_dist)"
           ]
         }
       ]
