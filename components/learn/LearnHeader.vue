@@ -7,7 +7,7 @@
         </div>
         <div>
           <h1 class="learn-header__headline">
-            Qiskit Textbook (beta)
+            Qiskit Textbook
           </h1>
           <qiskit-mega-menu-dropdown
             :id="appMegaDropdownMenuId"
