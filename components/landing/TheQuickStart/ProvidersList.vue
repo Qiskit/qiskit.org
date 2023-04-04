@@ -1,6 +1,5 @@
 <template>
   <section class="providers-list">
-    <h4>Providers</h4>
     <ul class="providers-list__list">
       <template v-for="(item, index) in providersList">
         <li
