@@ -66,13 +66,13 @@ export default class NearTermAlgorithmDesignCoursePage extends CourseOverviewPag
   ]
 
   courses: Course[] = [
-    // {
-    //   image: '',
-    //   label: 'Single systems',
-    //   segment: { cta: 'single-systems', location: 'course' },
-    //   url: StartLearningUrl.NearTermAlgorithmDesign + '/'
-    // }
-    // Stored in /static/images/learn/course/*
+    {
+      image: 'single-systems-preview.png',
+      label: 'Single systems',
+      segment: { cta: 'single-systems', location: 'course' },
+      url: StartLearningUrl.NearTermAlgorithmDesign + '/'
+    }
+    // Stored in /static/images/learn/course/algorithm-design
   ]
 
   prerequisites: Prerequisite[] = []
