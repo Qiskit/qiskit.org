@@ -16,10 +16,20 @@
           >
             <bx-tab id="tab-1" value="upcoming">Upcoming events</bx-tab>
             <bx-tab id="tab-2" value="past">Past events</bx-tab>
+            <bx-tab id="tab-3" value="calendar">Calendar</bx-tab>
           </bx-tabs>
         </client-only>
       </div>
-      <UiFiltersResultsLayout>
+      <div v-if="showCalendar" class="event-page__calendar">
+        <iframe
+          class="airtable-embed"
+          src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
+          width="100%"
+          height="560"
+          allowtransparency="true"
+        />
+      </div>
+      <UiFiltersResultsLayout v-else>
         <template #filters-on-m-l-screen>
           <UiFieldset
             v-for="filter in extraFilters"
@@ -221,10 +231,11 @@ const extraFilters = [
   },
 ];
 
-const activeSet = ref<"past" | "upcoming">("upcoming");
+const activeSet = ref<"calendar" | "past" | "upcoming">("upcoming");
 const regionFilters = ref<string[]>([]);
 const typeFilters = ref<string[]>([]);
 
+const showCalendar = computed(() => activeSet.value === "calendar");
 const showUpcomingEvents = computed(() => activeSet.value === "upcoming");
 const events = computed(() =>
   showUpcomingEvents.value ? upcomingEvents : pastEvents
@@ -403,6 +414,15 @@ const selectTab = (selectedTab: string) => {
 
     @include carbon.breakpoint-down(md) {
       height: auto;
+    }
+  }
+
+  &__calendar {
+    margin-bottom: carbon.$spacing-10;
+    border: 1px solid qiskit.$border-color;
+
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-06;
     }
   }
 
