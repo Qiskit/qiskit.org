@@ -131,6 +131,19 @@ enum GamesAndDemos {
   WidgetsDemonstration = 'https://learn.qiskit.org/course/ch-demos/widgets-demonstration'
 }
 
+enum LegacyContent {
+  Prerequisites = 'https://learn.qiskit.org/v1/course/ch-prerequisites/',
+  QuantumStatesAndQubits = 'https://learn.qiskit.org/v1/course/ch-states/',
+  MultipleQubitsAndEntanglement = 'https://learn.qiskit.org/v1/course/ch-gates',
+  QuantumProtocolsAndQuantumAlgorithms = 'https://learn.qiskit.org/v1/course/ch-algorithms/',
+  QuantumAlgorithmsForApplications = 'https://learn.qiskit.org/v1/course/ch-applications/',
+  InvestigatingQuantumHardwareUsingQuantumCircuits = 'https://learn.qiskit.org/v1/course/ch-quantum-hardware/',
+  InvestigatingQuantumHardwareUsingMicrowavePulses = 'https://learn.qiskit.org/v1/course/ch-quantum-hardware/calibrating-qubits-pulse',
+  QuantumComputingLabs = 'https://learn.qiskit.org/v1/course/ch-labs/',
+  Appendix = 'https://learn.qiskit.org/v1/course/ch-appendix/',
+  GamesAndDemos = 'https://learn.qiskit.org/v1/course/ch-demos/',
+}
+
 enum QuantumComputingLabs {
   Lab1 = 'https://learn.qiskit.org/course/ch-labs/lab-1-quantum-circuits',
   Lab2 = 'https://learn.qiskit.org/course/ch-labs/lab-2-single-qubit-gates',
@@ -164,5 +177,6 @@ export {
   QuantumHardwareCircuitsUrl,
   QuantumComputingLabs,
   GamesAndDemos,
+  LegacyContent,
   IBM_Q_EXPERIENCE
 }

@@ -271,6 +271,16 @@ export default class StartLearningSection extends Vue {
             url: '/learn/course/games-and-demos',
             segment: { cta: 'games-and-demos', location: 'course' }
           }
+        },
+        {
+          image: '/images/learn/course/legacy-content/legacy-content.png',
+          title: 'Legacy content',
+          description: "Has the page you're using changed? Find it in the old version of the Qiskit Textbook.",
+          cta: {
+            label: 'View version 1',
+            url: '/learn/course/legacy-content',
+            segment: { cta: 'legacy-content', location: 'course' }
+          }
         }
       ]
     },
