@@ -114,6 +114,8 @@ import {
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
 
+type TabActiveSet = "calendar" | "past" | "upcoming";
+
 definePageMeta({
   layout: "default-max",
   pageTitle: "Qiskit Events",
@@ -126,6 +128,8 @@ const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
 useHead({
   title: "Qiskit Events",
 });
+
+const { trackClickEvent } = useSegment();
 
 const emptyCard = {
   title: "No events found",
@@ -147,8 +151,9 @@ const extraFilters = [
   },
 ];
 
-const activeSet = ref<"calendar" | "past" | "upcoming">("upcoming");
+const activeSet = ref<TabActiveSet>("upcoming");
 const regionFilters = ref<string[]>([]);
+const tabsIsDirty = ref(false);
 const typeFilters = ref<string[]>([]);
 
 const showCalendar = computed(() => activeSet.value === "calendar");
@@ -235,7 +240,13 @@ function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
 }
 
 const selectTab = (selectedTab: string) => {
-  activeSet.value = selectedTab as "past" | "upcoming";
+  activeSet.value = selectedTab as TabActiveSet;
+
+  if (tabsIsDirty) {
+    trackClickEvent(`${selectedTab}`, "events-list");
+  }
+
+  tabsIsDirty.value = true;
 };
 </script>
 
