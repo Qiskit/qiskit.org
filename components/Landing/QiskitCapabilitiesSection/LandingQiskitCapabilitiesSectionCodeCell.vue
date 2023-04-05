@@ -56,6 +56,7 @@ defineProps<Props>();
   display: block;
   background-color: qiskit.$background-color-lighter;
   color: qiskit.$text-color;
+  overflow-x: scroll;
   padding: carbon.$spacing-05 0;
 
   &__block {
