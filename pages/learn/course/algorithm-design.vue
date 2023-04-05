@@ -13,7 +13,7 @@ import { RecommendedReading } from '~/components/learn/ExternalRecommendedReadin
 export default class NearTermAlgorithmDesignCoursePage extends CourseOverviewPage {
   routeName: string = 'algorithm-design'
 
-  headerTitle = 'Near-Term Algorithm Design'
+  headerTitle = 'Near-term algorithm design'
 
   headerDescription = ['This course teaches you how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage. Throughout this course, you\'ll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.']
 
