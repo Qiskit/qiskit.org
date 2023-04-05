@@ -15,7 +15,7 @@ export default class NearTermAlgorithmDesignCoursePage extends CourseOverviewPag
 
   headerTitle = 'Near-Term Algorithm Design'
 
-  headerDescription = ['This course is designed to teach you how to write variational algorithms, near-term hybrid quantum-classical algorithms that are ideal candidates to achieve Quantum Advantage. Throughout this course, you\'ll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.']
+  headerDescription = ['This course teaches you how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage. Throughout this course, you\'ll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.']
 
   headerImg = '/images/learn/course/basics-quantum-information/atom.png'
 
