@@ -75,7 +75,9 @@
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
                 :to="eventItem.to"
-              />
+              >
+                {{ eventItem.abstract }}
+              </EventsItemCard>
             </div>
           </div>
         </template>

@@ -47,7 +47,7 @@ interface Props {
   institution?: string;
   location?: string;
   date?: string;
-  time?: string;
+  time?: string | null;
   to: string;
   ctaLabel?: string;
   segment?: CtaClickedEventProp | undefined;
