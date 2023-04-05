@@ -1,12 +1,12 @@
 <template>
-  <section class="algorithms">
-    <div class="algorithms__container">
+  <section class="providers-code-examples">
+    <div class="providers-code-examples__container">
       <h3>Get the SDK</h3>
-      <div class="algorithms__section">
+      <div class="providers-code-examples__section">
         <UiCodeSnippet
           :code-lines="installCode"
           :code-snippet-title="`${providerTitle} install-code`"
-          :code-snippet-location="'quick-start-algorithms'"
+          :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
       <bx-tabs
@@ -27,14 +27,14 @@
         v-for="algorithm in codeExamples"
         :id="algorithm.name"
         :key="algorithm.name"
-        class="algorithms__section"
+        class="providers-code-examples__section"
         role="tabpanel"
         :aria-labelledby="algorithm.name"
       >
         <UiCodeSnippet
           :code-lines="algorithm.fullCode"
           :code-snippet-title="algorithm.name"
-          :code-snippet-location="'quick-start-algorithms'"
+          :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
     </div>
@@ -76,9 +76,8 @@ watch(
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.algorithms {
-  padding: carbon.$spacing-09 carbon.$spacing-05 carbon.$spacing-05
-    carbon.$spacing-05;
+.providers-code-examples {
+  padding: $spacing-05;
 
   &__container {
     background-color: qiskit.$background-color-lighter;
