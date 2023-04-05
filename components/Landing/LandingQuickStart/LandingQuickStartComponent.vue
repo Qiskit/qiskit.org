@@ -23,7 +23,7 @@
           @select-provider="updateSelectedProvider($event)"
         />
       </div>
-      <LandingQuickStartAlgorithms
+      <LandingQuickStartProvidersCodeExamples
         class="cds--col-md-8 cds--col-lg-8"
         :install-code="providersData[selectedProviderIndex].installation"
         :code-examples="providersData[selectedProviderIndex].codeExamples"
