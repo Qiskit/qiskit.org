@@ -38,7 +38,7 @@ export default class NearTermAlgorithmDesignCoursePage extends CourseOverviewPag
   references: string[] = []
 
   externalRecommendedReadingsPreamble: string = `To make the most out of this
-  course, we recommend familiarity with Basics of Quantum Information. You may
+  course, we recommend familiarity with the basics of quantum information. You may
   also want to install Qiskit and the IBM Qiskit Runtime package:`
 
   links: RecommendedReading[] = [
