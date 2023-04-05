@@ -1,12 +1,12 @@
 <template>
-  <section class="algorithms">
-    <div class="algorithms__container">
+  <section class="providers-code-examples">
+    <div class="providers-code-examples__container">
       <h3>Get the SDK</h3>
-      <div class="algorithms__section">
+      <div class="providers-code-examples__section">
         <CodeSnippet
           :code-lines="installCode"
           :code-snippet-title="`${providerTitle} install-code`"
-          :code-snippet-location="'quick-start-algorithms'"
+          :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
       <bx-tabs container :value="activeTabLabel" @bx-tabs-selected="updateSelectedTab($event)">
@@ -23,14 +23,14 @@
         v-for="algorithm in codeExamples"
         :id="algorithm.name"
         :key="algorithm.name"
-        class="algorithms__section"
+        class="providers-code-examples__section"
         role="tabpanel"
         :aria-labelledby="algorithm.name"
       >
         <CodeSnippet
           :code-lines="algorithm.fullCode"
           :code-snippet-title="algorithm.name"
-          :code-snippet-location="'quick-start-algorithms'"
+          :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
     </div>
@@ -52,7 +52,7 @@ interface codeExample {
 @Component({
   components: { CodeSnippet }
 })
-export default class Algorithms extends Vue {
+export default class ProvidersCodeExamples extends Vue {
   @Prop(Array) installCode!: string[]
   @Prop(String) providerTitle!: string
   @Prop(Array) codeExamples!: codeExample[]
@@ -73,8 +73,8 @@ export default class Algorithms extends Vue {
 <style lang="scss" scoped>
 $cta-max-width: 4rem;
 
-.algorithms {
-  padding: $spacing-09 $spacing-05 $spacing-05 $spacing-05;
+.providers-code-examples {
+  padding: $spacing-05;
 
   &__container {
     background-color: $background-color-lighter;
