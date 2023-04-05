@@ -57,7 +57,7 @@ export default class NearTermAlgorithmDesignCoursePage extends CourseOverviewPag
       url: 'https://quantum-computing.ibm.com/lab/docs/iql/runtime/',
       author: '',
       label: 'Qiskit Runtime Overview',
-      description: `Explore Qiskit Runtime service documentation and tutorials.`,
+      description: 'Explore Qiskit Runtime service documentation and tutorials.',
       segment: {
         cta: 'runtime-docs',
         location: 'external-recommended-readings'
