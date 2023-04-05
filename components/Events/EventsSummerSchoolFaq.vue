@@ -253,7 +253,7 @@ const qiskitSubscribe: TrackedLink = {
 
 // TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
 const joinqiskitslack: TrackedLink = {
-  url: "https://ibm.co/joinqiskitslack",
+  url: "https://qisk.it/join-slack",
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
 

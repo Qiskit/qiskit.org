@@ -19,7 +19,7 @@
 <script setup lang="ts">
 // TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
 const joinSlackLink = {
-  url: "https://ibm.co/joinqiskitslack",
+  url: "https://qisk.it/join-slack",
   label: "Stay in touch through Slack",
 };
 </script>
