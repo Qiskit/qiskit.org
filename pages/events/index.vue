@@ -202,7 +202,7 @@ const eventRequestLink = EVENT_REQUEST_LINK;
 const emptyCard = {
   title: "No events found",
   description:
-    "Trying doing a wider search criteria, or consider starting your own event.",
+    "Try using wider search criteria, or consider starting your own event.",
   img: "/images/events/no-events.svg",
 };
 
