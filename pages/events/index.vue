@@ -257,6 +257,14 @@ const selectTab = (selectedTab: string) => {
 .event-page {
   &__card {
     margin-bottom: carbon.$spacing-06;
+
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+
+    @include carbon.breakpoint-up(xlg) {
+      height: calc(100% - #{carbon.$spacing-06});
+    }
   }
 
   &__tabs {
