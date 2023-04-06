@@ -93,7 +93,7 @@
           </div>
         </template>
         <template #extra-info>
-          <EventsFollowCalendar />
+          <EventsFollowCalendar id="follow-our-event-calendar" />
           <EventsRequestEvent />
         </template>
       </UiFiltersResultsLayout>
