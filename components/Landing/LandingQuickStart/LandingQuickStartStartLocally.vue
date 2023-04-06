@@ -198,7 +198,6 @@ function selectOption(choicesGroup: ChoicesGroup, selectedOption: string) {
     margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-down(lg) {
-      padding-left: carbon.$spacing-05;
       margin-bottom: carbon.$spacing-05;
     }
 
