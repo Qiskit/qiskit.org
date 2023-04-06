@@ -116,7 +116,7 @@ function updateRegionFilters(newRegionFilters: string) {
 }
 
 // TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
-const joinSlackLink = "https://ibm.co/joinqiskitslack";
+const joinSlackLink = "https://qisk.it/join-slack";
 </script>
 
 <style lang="scss" scoped>

@@ -50,6 +50,7 @@ type CommunityEvent = {
   startDateAndTime: string | null;
   endDate: string;
   to: string;
+  abstract?: string;
 };
 
 const COMMUNITY_EVENT_TYPE_OPTIONS = Object.values(

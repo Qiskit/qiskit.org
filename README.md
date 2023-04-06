@@ -53,7 +53,7 @@ git branch -u upstream/main main
   <span> · </span>
   <a href="https://qiskit.org/advocates/">Advocates</a>
   <span> · </span>
-  Support: <a href="http://ibm.co/joinqiskitslack">Slack</a>
+  Support: <a href="http://qisk.it/join-slack">Slack</a>
 </h3>
 
 ## What’s In This Document

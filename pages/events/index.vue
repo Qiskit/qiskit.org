@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-page">
     <UiPageHeaderFixed>
       Join
       <UiTypewriterEffect
@@ -16,10 +16,21 @@
           >
             <bx-tab id="tab-1" value="upcoming">Upcoming events</bx-tab>
             <bx-tab id="tab-2" value="past">Past events</bx-tab>
+            <bx-tab id="tab-3" value="calendar">Calendar</bx-tab>
           </bx-tabs>
         </client-only>
       </div>
-      <UiFiltersResultsLayout>
+      <div v-if="showCalendar">
+        <iframe
+          class="event-page__calendar"
+          src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
+          width="100%"
+          height="560"
+        />
+        <EventsFollowCalendar />
+        <EventsRequestEvent />
+      </div>
+      <UiFiltersResultsLayout v-else>
         <template #filters-on-m-l-screen>
           <UiFieldset
             v-for="filter in extraFilters"
@@ -75,67 +86,15 @@
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
                 :to="eventItem.to"
-              />
+              >
+                {{ eventItem.abstract }}
+              </EventsItemCard>
             </div>
           </div>
         </template>
         <template #extra-info>
-          <div class="event-page__section">
-            <h3>Follow our event calendar</h3>
-            <p class="event-page__section__description">
-              Stay up to date with all of our scheduled events by following our
-              calendar. You can view the calendar by visiting
-              <UiLink v-bind="qiskitCalendarLink">{{
-                qiskitCalendarLink.label
-              }}</UiLink
-              >, or subscribe to it by adding to the calendar app of your
-              choice.
-            </p>
-            <div class="event-page__tabs">
-              <bx-tabs value="Google">
-                <bx-tab
-                  v-for="{ name } in calendarsInstructions"
-                  :id="`tab-${name}`"
-                  :key="name"
-                  :target="`panel-${name}`"
-                  :value="name"
-                  class="event-page__tab"
-                >
-                  {{ name }}
-                </bx-tab>
-              </bx-tabs>
-            </div>
-            <div
-              v-for="{ name, instructions } in calendarsInstructions"
-              :id="`panel-${name}`"
-              :key="name"
-              role="tabpanel"
-              :aria-labelledby="`tab-${name}`"
-              hidden
-            >
-              <p class="event-page__sync">
-                Start by copying the calendar subscription link
-                <bx-code-snippet
-                  copy-button-feedback-text="Copy calendar sync url"
-                  type="inline"
-                >
-                  <span>{{ qiskitCalendarSyncLink }}</span>
-                </bx-code-snippet>
-              </p>
-              <component :is="instructions" class="event-page__instructions" />
-            </div>
-          </div>
-          <div class="event-page__section">
-            <h3>Start an event</h3>
-            <p class="event-page__section__description">
-              We can help you bring Qiskit experts to your campus for guest
-              lectures, hackathons, and other events.
-            </p>
-            <UiCta
-              :label="eventRequestLink.label"
-              :url="eventRequestLink.url"
-            />
-          </div>
+          <EventsFollowCalendar />
+          <EventsRequestEvent />
         </template>
       </UiFiltersResultsLayout>
     </div>
@@ -151,12 +110,11 @@ import {
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS,
 } from "~/types/events";
-import EventsCalendarsAppleInstructions from "~/components/Events/Calendars/EventsCalendarsAppleInstructions.vue";
-import EventsCalendarsGoogleInstructions from "~/components/Events/Calendars/EventsCalendarsGoogleInstructions.vue";
-import EventsCalendarsOutlookInstructions from "~/components/Events/Calendars/EventsCalendarsOutlookInstructions.vue";
-import { EVENT_REQUEST_LINK, GeneralLink } from "~/constants/appLinks";
+
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
+
+type TabActiveSet = "calendar" | "past" | "upcoming";
 
 definePageMeta({
   layout: "default-max",
@@ -171,38 +129,12 @@ useHead({
   title: "Qiskit Events",
 });
 
-const calendarsInstructions = [
-  {
-    name: "Google",
-    instructions: EventsCalendarsGoogleInstructions,
-  },
-  {
-    name: "Outlook",
-    instructions: EventsCalendarsOutlookInstructions,
-  },
-  {
-    name: "Apple",
-    instructions: EventsCalendarsAppleInstructions,
-  },
-];
-
-const qiskitCalendarSyncLink = "https://qisk.it/calendar-sync";
-
-const qiskitCalendarLink: GeneralLink = {
-  url: "https://qisk.it/calendar",
-  label: "https://qisk.it/calendar",
-  segment: {
-    cta: "qiskit-calendar",
-    location: "events-page",
-  },
-};
-
-const eventRequestLink = EVENT_REQUEST_LINK;
+const { trackClickEvent } = useSegment();
 
 const emptyCard = {
   title: "No events found",
   description:
-    "Trying doing a wider search criteria, or consider starting your own event.",
+    "Try using wider search criteria, or consider starting your own event.",
   img: "/images/events/no-events.svg",
 };
 
@@ -219,10 +151,12 @@ const extraFilters = [
   },
 ];
 
-const activeSet = ref<"past" | "upcoming">("upcoming");
+const activeSet = ref<TabActiveSet>("upcoming");
 const regionFilters = ref<string[]>([]);
+const tabsIsDirty = ref(false);
 const typeFilters = ref<string[]>([]);
 
+const showCalendar = computed(() => activeSet.value === "calendar");
 const showUpcomingEvents = computed(() => activeSet.value === "upcoming");
 const events = computed(() =>
   showUpcomingEvents.value ? upcomingEvents : pastEvents
@@ -306,7 +240,13 @@ function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
 }
 
 const selectTab = (selectedTab: string) => {
-  activeSet.value = selectedTab as "past" | "upcoming";
+  activeSet.value = selectedTab as TabActiveSet;
+
+  if (tabsIsDirty) {
+    trackClickEvent(`${selectedTab}`, "events-list");
+  }
+
+  tabsIsDirty.value = true;
 };
 </script>
 
@@ -404,26 +344,40 @@ const selectTab = (selectedTab: string) => {
     }
   }
 
-  &__section {
-    margin-top: carbon.$spacing-10;
+  &__calendar {
     margin-bottom: carbon.$spacing-10;
+    border: 1px solid qiskit.$border-color;
 
-    &__description {
+    @include carbon.breakpoint-down(md) {
       margin-top: carbon.$spacing-06;
-      margin-bottom: carbon.$spacing-07;
-      max-width: 20rem;
-
-      @include carbon.breakpoint-up(lg) {
-        max-width: 24rem;
-      }
     }
   }
 
-  &__tab {
+  &:deep(.event-page__section) {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-10;
+  }
+
+  &:deep(.event-page__section__description) {
+    margin-top: carbon.$spacing-06;
+    margin-bottom: carbon.$spacing-07;
+    max-width: 20rem;
+
+    @include carbon.breakpoint-up(lg) {
+      max-width: 24rem;
+    }
+  }
+
+  &:deep(.event-page__tabs) {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-09;
+  }
+
+  &:deep(.event-page__tab) {
     padding-top: carbon.$spacing-06;
   }
 
-  &__instructions {
+  &:deep(.event-page__instructions) {
     padding-left: carbon.$spacing-06;
   }
 }
