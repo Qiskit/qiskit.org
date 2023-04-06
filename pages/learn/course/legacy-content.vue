@@ -16,10 +16,10 @@ export default class LegacyContentPage extends CourseOverviewPage {
     `We're constantly updating and improving the Qiskit Textbook, but we know
     these changes can be disruptive. For this reason, you can always access
     older versions of the Qiskit Textbook through our versioning system. Use
-    the links below to access all chapters available in version 1 of the Qiskit
-    Textbook, formerly known as "Learn Quantum Computation using Qiskit". These
-    pages are stable and will not change.`,
-    `These pages are outdated and might not work with current versions of
+    the links below to access all chapters available in the original version
+    (v1) of the Qiskit Textbook, formerly known as "Learn Quantum Computation
+    using Qiskit". These pages are stable and will not change.`,
+    `These pages may be outdated and might not work with current versions of
     Qiskit. See the bottom of each page for the package versions used at the
     time of writing.`
   ]
