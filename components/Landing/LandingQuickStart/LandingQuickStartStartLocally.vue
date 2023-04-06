@@ -31,19 +31,18 @@
         </div>
       </div>
       <div>
-        <bx-accordion
-          v-if="prerequisitesToInstallQiskit"
-          class="start-locally__prerequisites-section"
-        >
-          <bx-accordion-item
-            title-text="Installing from source requires that you have the Rust compiler on your system"
-          >
-            <LandingQuickStartPrerequisitesForWindows
-              v-if="selectedOs === OPERATING_SYSTEMS.windows"
-            />
-            <LandingQuickStartPrerequisitesForLinuxMac v-else />
-          </bx-accordion-item>
-        </bx-accordion>
+        <div class="start-locally__prerequisites-section">
+          <bx-accordion v-if="prerequisitesToInstallQiskit">
+            <bx-accordion-item
+              title-text="Installing from source requires that you have the Rust compiler on your system"
+            >
+              <LandingQuickStartPrerequisitesForWindows
+                v-if="selectedOs === OPERATING_SYSTEMS.windows"
+              />
+              <LandingQuickStartPrerequisitesForLinuxMac v-else />
+            </bx-accordion-item>
+          </bx-accordion>
+        </div>
         <h4>Terminal</h4>
         <UiSyntaxHighlight :label="segmentLabel" :code="codeToInstallQiskit" />
       </div>
