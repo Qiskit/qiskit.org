@@ -156,6 +156,12 @@ export default class QuantumProtocolsAndQuantumAlgorithmsPage extends CourseOver
       label: 'Quantum Key Distribution',
       segment: { cta: 'quantum-key-distribution', location: 'course' },
       url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumKeyDistribution
+    },
+    {
+      image: 'quantum-walk-search-algorithm.png',
+      label: 'Quantum Walk Search Algorithm',
+      segment: { cta: 'quantum-walk-search-algorithm', location: 'course' },
+      url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumWalkSearchAlgorithm
     }
   ]
 

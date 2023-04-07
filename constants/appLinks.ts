@@ -92,7 +92,8 @@ enum QuantumProtocolsAndQuantumAlgorithmsUrl {
   QuantumCounting = 'https://learn.qiskit.org/course/ch-algorithms/quantum-counting',
   QuantumTeleportation = 'https://learn.qiskit.org/course/ch-algorithms/quantum-teleportation',
   SuperdenseCoding = 'https://learn.qiskit.org/course/ch-algorithms/superdense-coding',
-  QuantumKeyDistribution = 'https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution'
+  QuantumKeyDistribution = 'https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution',
+  QuantumWalkSearchAlgorithm = 'https://learn.qiskit.org/course/ch-algorithms/quantum-walk-search-algorithm',
 }
 
 enum QuantumHardwarePulsesUrl {
@@ -112,14 +113,18 @@ enum QuantumAlgorithmsForApplications {
   SolvingSatisfiabilityProblemsUsingGroversAlgorithm = 'https://learn.qiskit.org/course/ch-applications/solving-satisfiability-problems-using-grovers-algorithm',
   HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit = 'https://learn.qiskit.org/course/ch-applications/hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit',
   VariationalQuantumLinearSolver = 'https://learn.qiskit.org/course/ch-applications/the-variational-quantum-linear-solver',
-  FlexibleRepresentationOfQuantumImages = 'https://learn.qiskit.org/course/ch-applications/flexible-representation-of-quantum-images-frqi'
+  FlexibleRepresentationOfQuantumImages = 'https://learn.qiskit.org/course/ch-applications/flexible-representation-of-quantum-images-frqi',
+  FacialExpressionRecognition = 'https://learn.qiskit.org/course/ch-applications/facial-expression-recognition',
+  EdgeDetection = 'https://learn.qiskit.org/course/ch-applications/quantum-edge-detection',
+  TravellingSalesmanProblem = 'https://learn.qiskit.org/course/ch-applications/tsp',
 }
 
 enum QuantumHardwareCircuitsUrl {
   Introduction = 'https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code',
   MeasurementErrorMitigation = 'https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation',
   RandomizedBenchmarking = 'https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking',
-  MeasuringQuantumVolume = 'https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume'
+  MeasuringQuantumVolume = 'https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume',
+  DensityMatrixAndMixedStates = 'https://learn.qiskit.org/course/quantum-hardware/density-matrix',
 }
 
 enum GamesAndDemos {
@@ -128,7 +133,10 @@ enum GamesAndDemos {
   Level5ProvingTheUniquenessOfQuantumVariables = 'https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-153-0',
   EstimatingPiUsingQPEA = 'https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm',
   LocalRealityAndTheChshInequality = 'https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality',
-  WidgetsDemonstration = 'https://learn.qiskit.org/course/ch-demos/widgets-demonstration'
+  WidgetsDemonstration = 'https://learn.qiskit.org/course/ch-demos/widgets-demonstration',
+  CoinGame = 'https://learn.qiskit.org/course/ch-demos/coin-game',
+  FirstQuantumGame = 'https://learn.qiskit.org/course/ch-demos/first-quantum-game',
+  VariationalQuantumRegression = 'https://learn.qiskit.org/course/ch-demos/variational-quantum-regression'
 }
 
 enum QuantumComputingLabs {

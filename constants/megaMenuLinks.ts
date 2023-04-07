@@ -393,6 +393,27 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       segment: {
         cta: 'widgets-demonstration', location: sectionGamesAndDemos
       }
+    },
+    {
+      label: 'Quantum Coin Game',
+      url: `${baseUrl}${pathGamesAndDemos}/coin-game`,
+      segment: {
+        cta: 'coin-game', location: sectionGamesAndDemos
+      }
+    },
+    {
+      label: 'Your First Quantum Game',
+      url: `${baseUrl}${pathGamesAndDemos}/first-quantum-game`,
+      segment: {
+        cta: 'first-quantum-game', location: sectionGamesAndDemos
+      }
+    },
+    {
+      label: 'Variational Quantum Regression',
+      url: `${baseUrl}${pathGamesAndDemos}/variational-quantum-regression`,
+      segment: {
+        cta: 'variational-quantum-regression', location: sectionGamesAndDemos
+      }
     }
   ]
 }
@@ -488,6 +509,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         cta: 'quantum-key-distribution', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
+      label: 'Quantum Walk Search Algorithm',
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
+      segment: {
+        cta: 'quantum-walk-search-algorithm', location: sectionProtocolsAndAlgorithms
       }
     }
   ]
@@ -610,6 +638,27 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         cta: 'flexible-representation-of-quantum-images-frqi', location: sectionApps
+      }
+    },
+    {
+      label: 'Quantum Facial Expression Recognition',
+      url: `${baseUrl}${pathApps}/facial-expression-recognition`,
+      segment: {
+        cta: 'facial-expression-recognition', location: sectionApps
+      }
+    },
+    {
+      label: 'Quantum edge detection',
+      url: `${baseUrl}${pathApps}/quantum-edge-detection`,
+      segment: {
+        cta: 'edge-detection', location: sectionApps
+      }
+    },
+    {
+      label: 'Travelling Salesman Problem using Quantum Phase Estimation',
+      url: `${baseUrl}${pathApps}/tsp`,
+      segment: {
+        cta: 'travelling-salesman-problem', location: sectionApps
       }
     }
   ]

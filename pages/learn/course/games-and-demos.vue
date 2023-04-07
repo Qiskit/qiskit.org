@@ -69,6 +69,24 @@ export default class GamesAndDemosPage extends CourseOverviewPage {
       label: 'Widgets Demonstration',
       segment: { cta: 'widgets-demonstrationr', location: 'course' },
       url: GamesAndDemos.WidgetsDemonstration
+    },
+    {
+      image: 'coin-game.png',
+      label: 'Quantum Coin Game',
+      segment: { cta: 'coin-game', location: 'course' },
+      url: GamesAndDemos.CoinGame
+    },
+    {
+      image: 'first-quantum-game.png',
+      label: 'Your First Quantum Game',
+      segment: { cta: 'first-quantum-game', location: 'course' },
+      url: GamesAndDemos.FirstQuantumGame
+    },
+    {
+      image: 'variational-quantum-regression.png',
+      label: 'Variational Quantum Regression',
+      segment: { cta: 'variational-quantum-regression', location: 'course' },
+      url: GamesAndDemos.VariationalQuantumRegression
     }
   ]
 

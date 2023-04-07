@@ -61,6 +61,12 @@ export default class QuantumHardwareCircuitsPage extends CourseOverviewPage {
       label: 'Measuring Quantum Volume',
       segment: { cta: 'measuring-quantum-volume', location: 'course' },
       url: QuantumHardwareCircuitsUrl.MeasuringQuantumVolume
+    },
+    {
+      image: 'density-matrix-mixed-states.png',
+      label: 'The Density Matrix & Mixed States',
+      segment: { cta: 'density-matrix', location: 'course' },
+      url: QuantumHardwareCircuitsUrl.DensityMatrixAndMixedStates
     }
   ]
 

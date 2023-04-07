@@ -79,6 +79,24 @@ export default class QuantumAlgorithmsForApplicationsPage extends CourseOverview
       label: 'Quantum Image Processing - FRQI and NEQR Image Representations',
       segment: { cta: 'flexible-representation-of-quantum-images', location: 'course' },
       url: QuantumAlgorithmsForApplications.FlexibleRepresentationOfQuantumImages
+    },
+    {
+      image: 'facial-expression-recognition.png',
+      label: 'Quantum Facial Expression Recognition',
+      segment: { cta: 'facial-expression-recognition', location: 'course' },
+      url: QuantumAlgorithmsForApplications.FacialExpressionRecognition
+    },
+    {
+      image: 'edge-detection.png',
+      label: 'Quantum edge detection',
+      segment: { cta: 'edge-detection', location: 'course' },
+      url: QuantumAlgorithmsForApplications.EdgeDetection
+    },
+    {
+      image: 'tsp.png',
+      label: 'Travelling Salesman Problem using Quantum Phase Estimation',
+      segment: { cta: 'travelling-salesman-problem', location: 'course' },
+      url: QuantumAlgorithmsForApplications.TravellingSalesmanProblem
     }
   ]
 
