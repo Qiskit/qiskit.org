@@ -53,7 +53,7 @@
               :name="advocate.name"
               :image="advocate.image"
               :city="advocate.city"
-              :country="advocate.country"
+              :country="advocate.country[0]"
               :region="advocate.region"
               :slack-id="advocate.slackId"
               :slack-username="advocate.slackUsername"

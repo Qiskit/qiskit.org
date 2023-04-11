@@ -54,22 +54,30 @@ defineProps<Props>();
   &__layout {
     display: grid;
     gap: carbon.$spacing-07;
-    grid-template:
-      2.5fr 4fr 3fr 29.5rem minmax(16rem, auto) "a b c"
+    grid-template-columns: 2.5fr 4fr 3fr;
+    grid-template-rows: 29.5rem minmax(16rem, auto);
+    grid-template-areas:
+      "a b c"
       "d d c";
     justify-items: stretch;
 
     @include carbon.breakpoint-between(md, lg) {
-      grid-template:
-        1fr 1fr minmax(26rem, auto) minmax(12rem, auto) minmax(12rem, auto)
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: minmax(26rem, auto) minmax(12rem, auto) minmax(
+          12rem,
+          auto
+        );
+      grid-template-areas:
         "a b"
         "c c"
         "d d";
     }
 
     @include carbon.breakpoint-down(md) {
-      grid-template:
-        1fr repeat(4, minmax(18.75rem, auto)) "a"
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, minmax(18.75rem, auto));
+      grid-template-areas:
+        "a"
         "b"
         "c"
         "d";

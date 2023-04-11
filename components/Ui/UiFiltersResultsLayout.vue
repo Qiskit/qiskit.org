@@ -24,17 +24,5 @@
       margin-top: carbon.$spacing-09;
     }
   }
-
-  :deep(&__results-item) {
-    margin-bottom: carbon.$spacing-06;
-
-    @include carbon.breakpoint-down(lg) {
-      margin-bottom: carbon.$spacing-05;
-    }
-
-    @include carbon.breakpoint-up(xlg) {
-      height: calc(100% - #{carbon.$spacing-06});
-    }
-  }
 }
 </style>

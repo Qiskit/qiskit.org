@@ -100,12 +100,15 @@ const helpfulResources: DescriptionCard[] = [
       @include qiskit.contained;
 
       max-width: qiskit.$max-size;
-      padding: carbon.$spacing-04 carbon.$spacing-06;
       display: flex;
       flex: 1;
 
       @include carbon.breakpoint-down(md) {
         display: block;
+      }
+
+      @include carbon.breakpoint-between(sm, max) {
+        padding-left: 0;
       }
     }
 
