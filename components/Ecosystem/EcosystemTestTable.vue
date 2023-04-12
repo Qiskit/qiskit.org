@@ -119,7 +119,7 @@ const tableData = computed(() => {
 @use "~/assets/scss/carbon.scss";
 
 .test-table {
-  overflow-x: unset !important;
+  overflow-x: scroll;
 }
 
 bx-table-cell {
