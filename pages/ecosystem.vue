@@ -205,7 +205,8 @@ function updateTierFilter(filterValue: string, isChecked: boolean) {
 }
 
 function updateTierFilters(newTierFilters: string) {
-  const newTierFiltersAsArray = newTierFilters.split(",");
+  const newTierFiltersAsArray =
+    newTierFilters === "" ? [] : newTierFilters.split(",");
   tierFilters.value = newTierFiltersAsArray;
 }
 
