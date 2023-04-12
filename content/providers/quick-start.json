@@ -80,7 +80,7 @@
           "transpiled_circuit = transpile(circuit, basis_gates=['sx', 'rz', 'cx'])",
           "transpiled_circuit.draw()"
         ]
-      }
+      }      
     ]
   },
   {
@@ -168,7 +168,7 @@
           "transpiled_circuit = transpile(circuit, backend)",
           "transpiled_circuit.draw()"
         ]
-      }
+      }      
     ]
   },
   {
@@ -198,6 +198,7 @@
           "from qiskit_braket_provider import AWSBraketProvider",
           "from qiskit.primitives import BackendSampler",
           "provider = AWSBraketProvider()",
+          "&nbsp;",
           "# QuEra Aquila is a 256-qubit quantum processor based on",
           "# programmable arrays of neutral Rubidium atoms",
           "backend = provider.backends(\"Aquila\")",
@@ -223,6 +224,7 @@
           "from qiskit_braket_provider import AWSBraketProvider",
           "from qiskit.primitives import BackendEstimator",
           "provider = AWSBraketProvider()",
+          "&nbsp;",
           "# QuEra Aquila is a 256-qubit quantum processor based on",
           "# programmable arrays of neutral Rubidium atoms",
           "backend = provider.backends(\"Aquila\")",
@@ -256,6 +258,7 @@
         "fullCode": [
           "from qiskit_braket_provider import AWSBraketProvider",
           "provider = AWSBraketProvider()",
+          "&nbsp;",
           "# QuEra Aquila is a 256-qubit quantum processor based on",
           "# programmable arrays of neutral Rubidium atoms",
           "backend = provider.backends(\"Aquila\")",
@@ -488,6 +491,7 @@
         "fullCode": [
           "from gaqqie_door import QiskitGaqqie",
           "from qiskit.primitives import BackendSampler",
+          "&nbsp;",
           "# rewrite to the endpoint URL of the user API",
           "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
           "QiskitGaqqie.enable_account(url)",
@@ -513,6 +517,7 @@
         "fullCode": [
           "from gaqqie_door import QiskitGaqqie",
           "from qiskit.primitives import BackendEstimator",
+          "&nbsp;",
           "# rewrite to the endpoint URL of the user API",
           "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
           "QiskitGaqqie.enable_account(url)",
@@ -546,6 +551,7 @@
         "runMethod": "backend",
         "fullCode": [
           "from gaqqie_door import QiskitGaqqie",
+          "&nbsp;",
           "# rewrite to the endpoint URL of the user API",
           "url = \"https://<api-id>.execute-api.<region>.amazonaws.com/<stage>\"",
           "QiskitGaqqie.enable_account(url)",
@@ -564,23 +570,23 @@
     ]
   },
   {
-    "title": "IBM Qiskit Runtime",
-    "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
+    "title": "IBM Quantum",
+    "description": "IBM Quantum offers both open and premium access to a wide variety of quantum systems. All quantum systems deployed by IBM Quantum are based on superconducting qubit technology, as the control and scalability of this technology pave a clear path to achieving quantum advantage with these systems.",
     "installation": [
       "pip install qiskit",
-      "pip install qiskit-ibm-runtime"
+      "pip install qiskit-ibm-provider qiskit-ibm-runtime"
     ],
     "websiteCta": {
       "label": "Website",
-      "url": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/"
+      "url": "https://quantum-computing.ibm.com/"
     },
     "docsCta": {
       "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
+      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
     },
     "sourceCta": {
       "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-ibm-runtime"
+      "url": "https://github.com/Qiskit/qiskit-ibm-provider"
     },
     "codeExamples": [
       {
@@ -588,7 +594,9 @@
         "runMethod": "sampler",
         "fullCode": [
           "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
-          "service = QiskitRuntimeService()",
+          "&nbsp;",
+          "# Get the API token in https://quantum-computing.ibm.com/",
+          "service = QiskitRuntimeService(token=\"<IBM Cloud API key>\")",
           "backend = service.backend(\"ibm_perth\")",
           "sampler = Sampler(session=backend)",
           "&nbsp;",
@@ -610,7 +618,10 @@
         "runMethod": "estimator",
         "fullCode": [
           "from qiskit_ibm_runtime import QiskitRuntimeService, Estimator",
-          "service = QiskitRuntimeService()",
+          "&nbsp;",
+          "# Get the API token in https://quantum-computing.ibm.com/",
+          "service = QiskitRuntimeService(token=\"<IBM Cloud API key>\")",
+          "&nbsp;",
           "backend = service.backend(\"ibm_perth\")",
           "estimator = Estimator(session=backend)",
           "&nbsp;",
@@ -635,91 +646,14 @@
           "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
           "print(result.eigenvalue)"
         ]
-      }
-    ]
-  },
-  {
-    "title": "IBM Quantum",
-    "description": "IBM Quantum offers both open and premium access to a wide variety of quantum systems. All quantum systems deployed by IBM Quantum are based on superconducting qubit technology, as the control and scalability of this technology pave a clear path to achieving quantum advantage with these systems.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit-ibm-provider"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://quantum-computing.ibm.com/services?services=systems"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-ibm-provider"
-    },
-    "codeExamples": [
-      {
-        "name": "Sample a Bell State",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
-          "from qiskit.primitives import BackendSampler",
-          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"ibm_nairobi\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Run VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
-          "from qiskit.primitives import BackendEstimator",
-          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"ibm_nairobi\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
       },
       {
         "name": "Transpile",
         "runMethod": "backend",
         "fullCode": [
           "from qiskit_ibm_provider import IBMProvider",
+          "&nbsp;",
+          "# Get the API token in https://quantum-computing.ibm.com/",
           "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
           "provider = IBMProvider()",
           "backend = provider.get_backend(\"ibm_nairobi\")",
@@ -733,7 +667,7 @@
           "transpiled_circuit = transpile(circuit, backend)",
           "transpiled_circuit.draw()"
         ]
-      }      
+      }
     ]
   },
   {
@@ -923,7 +857,7 @@
           "transpiled_circuit = transpile(circuit, backend)",
           "transpiled_circuit.draw()"
         ]
-      }
+      }      
     ]
   },
   {
@@ -1612,9 +1546,11 @@
           "import strangeworks",
           "from qiskit.primitives import BackendSampler",
           "from strangeworks_qiskit import StrangeworksProvider",
+          "&nbsp;",
           "# get your API key from the Strangeworks Portal",
           "strangeworks.authenticate(api_key=\"your-api-key\")",
           "provider = StrangeworksProvider()",
+          "&nbsp;",
           "# Xanadu Borealis is a photonic quantum computer with a programmable loop-based",
           "# interferometer with over 216 squeezed-state qubits",
           "backend = provider.get_backend(\"borealis\")",
@@ -1640,9 +1576,11 @@
           "import strangeworks",
           "from qiskit.primitives import BackendEstimator",
           "from strangeworks_qiskit import StrangeworksProvider",
+          "&nbsp;",
           "# get your API key from the Strangeworks Portal",
           "strangeworks.authenticate(api_key=\"your-api-key\")",
           "provider = StrangeworksProvider()",
+          "&nbsp;",
           "# Xanadu Borealis is a photonic quantum computer with a programmable loop-based",
           "# interferometer with over 216 squeezed-state qubits",
           "backend = provider.get_backend(\"borealis\")",
@@ -1676,9 +1614,11 @@
         "fullCode": [
           "import strangeworks",
           "from strangeworks_qiskit import StrangeworksProvider",
+          "&nbsp;",
           "# get your API key from the Strangeworks Portal",
           "strangeworks.authenticate(api_key=\"your-api-key\")",
           "provider = StrangeworksProvider()",
+          "&nbsp;",
           "# Xanadu Borealis is a photonic quantum computer with a programmable loop-based",
           "# interferometer with over 216 squeezed-state qubits",
           "backend = provider.get_backend(\"borealis\")",
