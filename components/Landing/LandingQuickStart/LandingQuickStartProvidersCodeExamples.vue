@@ -1,41 +1,43 @@
 <template>
   <section class="providers-code-examples">
     <div class="providers-code-examples__container">
-      <h3>Get the SDK</h3>
       <div class="providers-code-examples__section">
+        <h3>Installation</h3>
         <UiCodeSnippet
           :code-lines="installCode"
           :code-snippet-title="`${providerTitle} install-code`"
           :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
-      <bx-tabs
-        container
-        :value="activeTabLabel"
-        @bx-tabs-selected="updateSelectedTab($event)"
-      >
-        <bx-tab
-          v-for="algorithm in codeExamples"
-          :key="algorithm.name"
-          :target="algorithm.name"
-          :value="algorithm.name"
+      <div class="providers-code-examples__section">
+        <h3>Build and run a quantum program</h3>
+        <bx-tabs
+          container
+          :value="activeTabLabel"
+          @bx-tabs-selected="updateSelectedTab($event)"
         >
-          {{ algorithm.name }}
-        </bx-tab>
-      </bx-tabs>
-      <div
-        v-for="algorithm in codeExamples"
-        :id="algorithm.name"
-        :key="algorithm.name"
-        class="providers-code-examples__section"
-        role="tabpanel"
-        :aria-labelledby="algorithm.name"
-      >
-        <UiCodeSnippet
-          :code-lines="algorithm.fullCode"
-          :code-snippet-title="algorithm.name"
-          :code-snippet-location="'quick-start-providers-code-examples'"
-        />
+          <bx-tab
+            v-for="algorithm in codeExamples"
+            :key="algorithm.name"
+            :target="algorithm.name"
+            :value="algorithm.name"
+          >
+            {{ algorithm.name }}
+          </bx-tab>
+        </bx-tabs>
+        <div
+          v-for="algorithm in codeExamples"
+          :id="algorithm.name"
+          :key="algorithm.name"
+          role="tabpanel"
+          :aria-labelledby="algorithm.name"
+        >
+          <UiCodeSnippet
+            :code-lines="algorithm.fullCode"
+            :code-snippet-title="algorithm.name"
+            :code-snippet-location="'quick-start-providers-code-examples'"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -85,7 +87,9 @@ watch(
   }
 
   &__section {
-    position: relative;
+    &:not(:last-child) {
+      margin-bottom: $spacing-07;
+    }
   }
 }
 </style>
