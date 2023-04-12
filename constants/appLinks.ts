@@ -134,16 +134,16 @@ enum GamesAndDemos {
 }
 
 enum LegacyContent {
-  Prerequisites = 'https://learn.qiskit.org/v1/course/ch-prerequisites/',
-  QuantumStatesAndQubits = 'https://learn.qiskit.org/v1/course/ch-states/',
-  MultipleQubitsAndEntanglement = 'https://learn.qiskit.org/v1/course/ch-gates',
-  QuantumProtocolsAndQuantumAlgorithms = 'https://learn.qiskit.org/v1/course/ch-algorithms/',
-  QuantumAlgorithmsForApplications = 'https://learn.qiskit.org/v1/course/ch-applications/',
-  InvestigatingQuantumHardwareUsingQuantumCircuits = 'https://learn.qiskit.org/v1/course/ch-quantum-hardware/',
-  InvestigatingQuantumHardwareUsingMicrowavePulses = 'https://learn.qiskit.org/v1/course/ch-quantum-hardware/calibrating-qubits-pulse',
-  QuantumComputingLabs = 'https://learn.qiskit.org/v1/course/ch-labs/',
-  Appendix = 'https://learn.qiskit.org/v1/course/ch-appendix/',
-  GamesAndDemos = 'https://learn.qiskit.org/v1/course/ch-demos/',
+  Prerequisites = "https://learn.qiskit.org/v1/course/ch-prerequisites/",
+  QuantumStatesAndQubits = "https://learn.qiskit.org/v1/course/ch-states/",
+  MultipleQubitsAndEntanglement = "https://learn.qiskit.org/v1/course/ch-gates",
+  QuantumProtocolsAndQuantumAlgorithms = "https://learn.qiskit.org/v1/course/ch-algorithms/",
+  QuantumAlgorithmsForApplications = "https://learn.qiskit.org/v1/course/ch-applications/",
+  InvestigatingQuantumHardwareUsingQuantumCircuits = "https://learn.qiskit.org/v1/course/ch-quantum-hardware/",
+  InvestigatingQuantumHardwareUsingMicrowavePulses = "https://learn.qiskit.org/v1/course/ch-quantum-hardware/calibrating-qubits-pulse",
+  QuantumComputingLabs = "https://learn.qiskit.org/v1/course/ch-labs/",
+  Appendix = "https://learn.qiskit.org/v1/course/ch-appendix/",
+  GamesAndDemos = "https://learn.qiskit.org/v1/course/ch-demos/",
 }
 
 enum QuantumComputingLabs {
