@@ -75,7 +75,7 @@ const pattern: number[][] = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
 ]; // size 16x9
 
-const hiddenCells: string[] = [];
+const hiddenCells = ref<string[]>([]);
 
 const slotContainerIsHidden = ref(false);
 
@@ -147,7 +147,7 @@ const fallingCells = computed<string[]>(() =>
 );
 
 function isHidden(pos: CellSpecification): boolean {
-  return hiddenCells.includes(getPosId(pos));
+  return hiddenCells.value.includes(getPosId(pos));
 }
 
 function isTrigger(pos: CellSpecification): boolean {
@@ -178,7 +178,7 @@ function removeCell() {
 
   const index = Math.floor(Math.random() * length);
   const cellToHideId = fallingCells.value.splice(index, 1)[0];
-  hiddenCells.splice(0, 0, cellToHideId);
+  hiddenCells.value.splice(0, 0, cellToHideId);
 
   setTimeout(removeCell, timeToRemoveNextCell);
 }
