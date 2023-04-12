@@ -33,7 +33,7 @@ export default defineNuxtConfig({
 
   hooks: {
     "build:before": async () => {
-      if (GENERATE_CONTENT) {
+      if (IS_PRODUCTION || GENERATE_CONTENT) {
         await generateContent();
       }
     },
