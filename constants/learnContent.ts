@@ -1,32 +1,29 @@
-import { CtaClickedEventProp } from '~/constants/segment'
+import { CtaClickedEventProp } from "~/types/segment";
 
 /**
  * Represent a course on the site
  */
 interface Course {
   /** The preview image of the course */
-  image: string
+  image: string;
   /** The visible name of the course */
-  label: string
-  segment?: CtaClickedEventProp
+  label: string;
+  segment?: CtaClickedEventProp;
   /** Where we want to go */
-  url: string
+  url: string;
 }
 
 /**
  * Represent a preprequisite on the site
  */
- interface Prerequisite {
+interface Prerequisite {
   /** The visible title of prereq */
-  title: string
+  title: string;
   /** The short description of the prereq */
-  description: string
-  segment?: CtaClickedEventProp
+  description: string;
+  segment?: CtaClickedEventProp;
   /** Where we want to go */
-  url: string
+  url: string;
 }
 
-export {
-  Course,
-  Prerequisite
-}
+export { Course, Prerequisite };

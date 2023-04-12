@@ -1,63 +1,59 @@
 <template>
-  <div>
-    <AppPageHeaderFixed>
-      Join <TypewriterEffect
-        :values="[
-          'events',
-          'hackathons',
-          'camps',
-          'unconferences',
-          'talks'
-        ]"
-      /> from the world&rsquo;s largest
-      quantum computing community
-    </AppPageHeaderFixed>
-    <div class="bx--grid">
+  <div class="event-page">
+    <UiPageHeaderFixed>
+      Join
+      <UiTypewriterEffect
+        :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
+      />
+      from the world&rsquo;s largest quantum computing community
+    </UiPageHeaderFixed>
+    <div class="cds--grid">
       <div class="event-page__tabs">
         <client-only>
-          <cv-tabs aria-label="Event tabs" @tab-selected="handleTabSelected($event)">
-            <cv-tab id="tab-1" label="Upcoming events" />
-            <cv-tab id="tab-2" label="Past events" />
-            <cv-tab id="tab-3" label="Calendar" />
-          </cv-tabs>
+          <bx-tabs
+            value="upcoming"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
+            <bx-tab id="tab-1" value="upcoming">Upcoming events</bx-tab>
+            <bx-tab id="tab-2" value="past">Past events</bx-tab>
+            <bx-tab id="tab-3" value="calendar">Calendar</bx-tab>
+          </bx-tabs>
         </client-only>
       </div>
-      <div v-if="isCalendar">
+      <div v-if="showCalendar">
         <iframe
           class="event-page__calendar"
           src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
           width="100%"
           height="560"
         />
-        <FollowCalendar />
-        <RequestEvent />
+        <EventsFollowCalendar />
+        <EventsRequestEvent />
       </div>
-      <AppFiltersResultsLayout v-else>
-        <template slot="filters-on-m-l-screen">
-          <AppFieldset
+      <UiFiltersResultsLayout v-else>
+        <template #filters-on-m-l-screen>
+          <UiFieldset
             v-for="filter in extraFilters"
             :key="filter.label"
             :label="filter.label"
           >
             <client-only>
-              <cv-checkbox
+              <bx-checkbox
                 v-for="option in filter.options"
                 :key="option"
-                :value="option"
-                :label="option"
                 :checked="isFilterChecked(filter.filterType, option)"
-                :aria-checked="isFilterChecked(filter.filterType, option)"
-                @change="updateFilter(filter.filterType, option, $event)"
+                :label-text="option"
+                :value="option"
+                @bx-checkbox-changed="
+                  updateFilter(filter.filterType, option, $event.target.checked)
+                "
               />
             </client-only>
-          </AppFieldset>
+          </UiFieldset>
         </template>
-        <template slot="filters-on-s-screen">
-          <div
-            v-for="filter in extraFilters"
-            :key="filter.label"
-          >
-            <AppMultiSelect
+        <template #filters-on-s-screen>
+          <div v-for="filter in extraFilters" :key="filter.label">
+            <UiMultiSelect
               :label="filter.label"
               :options="filter.options"
               :value="getCheckedFilters(filter.filterType)"
@@ -65,8 +61,8 @@
             />
           </div>
         </template>
-        <template slot="results">
-          <AppCard
+        <template #results>
+          <UiCard
             v-if="noEvents"
             :image="emptyCard.img"
             :title="emptyCard.title"
@@ -74,235 +70,323 @@
             <div class="event-page__empty-card-description">
               {{ emptyCard.description }}
             </div>
-          </AppCard>
-          <div v-else class="bx--row">
+          </UiCard>
+          <div v-else class="cds--row">
             <div
-              v-for="event in filteredEvents"
-              :key="`${event.title}-${event.place}-${event.date}`"
-              class="bx--col-sm-4 bx--col-xlg-8"
+              v-for="(eventItem, index) in filteredEvents"
+              :key="index"
+              class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <EventCard
-                class="app-filters-results-layout__results-item"
-                :types="event.types"
-                :title="event.title"
-                :image="event.image"
-                :location="event.location"
-                :date="event.date"
-                :time="event.startDateAndTime"
-                :to="event.to"
+              <EventsItemCard
+                class="event-page__card"
+                :types="eventItem.types"
+                :title="eventItem.title"
+                :image="eventItem.image"
+                :location="eventItem.location"
+                :date="eventItem.date"
+                :time="eventItem.startDateAndTime"
+                :to="eventItem.to"
               >
-                {{ event.abstract }}
-              </EventCard>
+                {{ eventItem.abstract }}
+              </EventsItemCard>
             </div>
           </div>
         </template>
-        <template slot="extra-info">
-          <FollowCalendar />
-          <RequestEvent />
+        <template #extra-info>
+          <EventsFollowCalendar />
+          <EventsRequestEvent />
         </template>
-      </AppFiltersResultsLayout>
+      </UiFiltersResultsLayout>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { mapGetters } from 'vuex'
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
-
+<script setup lang="ts">
+import "@carbon/web-components/es/components/checkbox/index.js";
+import "@carbon/web-components/es/components/code-snippet/index.js";
+import "@carbon/web-components/es/components/tabs/index.js";
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
-  COMMUNITY_EVENT_TYPE_OPTIONS
-} from '~/store/events'
+  COMMUNITY_EVENT_TYPE_OPTIONS,
+} from "~/types/events";
 
-@Component({
-  head () {
-    return {
-      title: 'Qiskit Events'
-    }
+import rawPastEvents from "~/content/events/past-community-events.json";
+import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
+
+type TabActiveSet = "calendar" | "past" | "upcoming";
+
+definePageMeta({
+  layout: "default-max",
+  pageTitle: "Qiskit Events",
+  routeName: "events",
+});
+
+const pastEvents = rawPastEvents as CommunityEvent[];
+const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
+
+useHead({
+  title: "Qiskit Events",
+});
+
+const { trackClickEvent } = useSegment();
+
+const emptyCard = {
+  title: "No events found",
+  description:
+    "Try using wider search criteria, or consider starting your own event.",
+  img: "/images/events/no-events.svg",
+};
+
+const extraFilters = [
+  {
+    label: "Locations",
+    options: WORLD_REGION_OPTIONS,
+    filterType: "regionFilters",
   },
-  layout: 'default-max',
-  computed: {
-    ...mapGetters('events', [
-      'filteredEvents',
-      'typeFilters',
-      'regionFilters',
-      'activeSet'
-    ])
+  {
+    label: "Types",
+    options: COMMUNITY_EVENT_TYPE_OPTIONS,
+    filterType: "typeFilters",
   },
+];
 
-  async fetch ({ store }) {
-    const upcomingEvents = await store.dispatch('events/fetchUpcomingEvents')
-    const pastEvents = await store.dispatch('events/fetchPastEvents')
+const activeSet = ref<TabActiveSet>("upcoming");
+const regionFilters = ref<string[]>([]);
+const tabsIsDirty = ref(false);
+const typeFilters = ref<string[]>([]);
 
-    const upcomingEventsPayload = { events: 'upcomingCommunityEvents', eventsSet: upcomingEvents }
-    const pastEventsPayload = { events: 'pastCommunityEvents', eventsSet: pastEvents }
-    store.commit('events/setEvents', upcomingEventsPayload)
-    store.commit('events/setEvents', pastEventsPayload)
-  }
-})
-export default class EventsPage extends QiskitPage {
-  routeName: string = 'events'
-  emptyCard = {
-    title: 'No events found',
-    description: 'Try using wider search criteria, or consider starting your own event.',
-    img: '/images/events/no-events.svg'
-  }
+const showCalendar = computed(() => activeSet.value === "calendar");
+const showUpcomingEvents = computed(() => activeSet.value === "upcoming");
+const events = computed(() =>
+  showUpcomingEvents.value ? upcomingEvents : pastEvents
+);
+const noRegionFiltersSelected = computed(
+  () => regionFilters.value.length === 0
+);
+const noTypeFiltersSelected = computed(() => typeFilters.value.length === 0);
 
-  extraFilters = [
-    {
-      label: 'Locations',
-      options: WORLD_REGION_OPTIONS,
-      filterType: 'regionFilters'
-    },
-    {
-      label: 'Types',
-      options: COMMUNITY_EVENT_TYPE_OPTIONS,
-      filterType: 'typeFilters'
-    }
-  ]
-
-  tabs = ['upcoming', 'past', 'calendar']
-  tabsIsDirty = false
-
-  get noEvents (): boolean {
-    return (this as any).filteredEvents.length === 0
+const filteredEvents = computed(() => {
+  if (noTypeFiltersSelected.value && noRegionFiltersSelected.value) {
+    return events.value;
   }
 
-  get isCalendar (): boolean {
-    return (this as any).activeSet === 'calendar'
+  if (noRegionFiltersSelected.value) {
+    return filterBy(events.value, typeFilters.value, "types");
   }
 
-  getCheckedFilters (filter: string) {
-    return (this as any)[filter]
+  if (noTypeFiltersSelected.value) {
+    return filterBy(events.value, regionFilters.value, "regions");
   }
 
-  updateWholeFilter (filter: string, filterValues: string[]): void {
-    const { commit } = this.$store
-    const payload = { filter, filterValues }
+  const eventsAfterApplyTypeFilter = filterBy(
+    events.value,
+    typeFilters.value,
+    "types"
+  );
 
-    commit('events/updateFilterSet', payload)
+  return filterBy(eventsAfterApplyTypeFilter, regionFilters.value, "regions");
+
+  function filterBy(
+    allEvents: CommunityEvent[],
+    selectedFilters: string[],
+    propToFilter: keyof CommunityEvent
+  ) {
+    return allEvents.filter((event) => {
+      const propValue = event[propToFilter] || [];
+      const valueArray = Array.isArray(propValue) ? propValue : [propValue];
+      return valueArray.some((value) => selectedFilters.includes(value));
+    });
   }
+});
 
-  isFilterChecked (filter: string, filterValue: string): Array<CommunityEvent> {
-    const typeFilters = (this as any).typeFilters
-    const regionFilters = (this as any).regionFilters
+const noEvents = computed(() => filteredEvents.value.length === 0);
 
-    return filter === 'regionFilters'
-      ? regionFilters.includes(filterValue)
-      : typeFilters.includes(filterValue)
-  }
+const regionFiltersAsString = computed(() => regionFilters.value.join(","));
+const typeFiltersAsString = computed(() => typeFilters.value.join(","));
 
-  updateFilter (filter: string, filterValue: string, isSelected: boolean): void {
-    const payload = { filter, filterValue }
-    const { commit } = this.$store
+function isRegionFilter(filter: string) {
+  return filter === "regionFilters";
+}
 
-    isSelected
-      ? commit('events/addFilter', payload)
-      : commit('events/removeFilter', payload)
-  }
+function getCheckedFilters(filter: string) {
+  return isRegionFilter(filter)
+    ? regionFiltersAsString.value
+    : typeFiltersAsString.value;
+}
 
-  handleTabSelected (tabIndex: number) {
-    this.selectTab(tabIndex)
-    if (this.tabsIsDirty) {
-      this.$trackClickEvent(this.tabs[tabIndex], 'events-list')
-    }
-    this.tabsIsDirty = true
-  }
-
-  selectTab (selectedTab: number) {
-    this.$store.commit('events/setActiveSet', this.tabs[selectedTab])
+function updateWholeFilter(filter: string, newFilters: string) {
+  const newFiltersArray = newFilters === "" ? [] : newFilters.split(",");
+  if (isRegionFilter(filter)) {
+    regionFilters.value = newFiltersArray;
+  } else {
+    typeFilters.value = newFiltersArray;
   }
 }
+
+function isFilterChecked(filter: string, filterValue: string): boolean {
+  return isRegionFilter(filter)
+    ? regionFilters.value.includes(filterValue)
+    : typeFilters.value.includes(filterValue);
+}
+
+function updateFilter(filter: string, filterValue: string, isChecked: boolean) {
+  if (isChecked) {
+    isRegionFilter(filter)
+      ? regionFilters.value.push(filterValue)
+      : typeFilters.value.push(filterValue);
+  } else {
+    isRegionFilter(filter)
+      ? regionFilters.value.splice(regionFilters.value.indexOf(filterValue), 1)
+      : typeFilters.value.splice(typeFilters.value.indexOf(filterValue), 1);
+  }
+}
+
+const selectTab = (selectedTab: string) => {
+  activeSet.value = selectedTab as TabActiveSet;
+
+  if (tabsIsDirty) {
+    trackClickEvent(`${selectedTab}`, "events-list");
+  }
+
+  tabsIsDirty.value = true;
+};
 </script>
 
-<style lang="scss">
-@import '~carbon-components/scss/globals/scss/typography';
+<style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .event-page {
+  &__card {
+    margin-bottom: carbon.$spacing-06;
+
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+
+    @include carbon.breakpoint-up(xlg) {
+      height: calc(100% - #{carbon.$spacing-06});
+    }
+  }
+
   &__tabs {
-    margin-top: $spacing-07;
-    margin-bottom: $spacing-09;
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-09;
 
     .bx--tabs--scrollable__nav-link {
-      color: $black-100;
-      border-bottom-color: $border-color;
+      color: carbon.$black-100;
+      border-bottom-color: qiskit.$border-color;
     }
 
-    .bx--tabs--scrollable__nav-item--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-        border-bottom-color: $border-color-secondary;
+    .bx--tabs--scrollable__nav-item--selected:not(
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link {
+      border-bottom-color: qiskit.$border-color-secondary;
     }
 
-    .bx--tabs--scrollable__nav-item:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link,
-    .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-      color: $text-color;
+    .bx--tabs--scrollable__nav-item:not(
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link,
+    .bx--tabs--scrollable__nav-item:hover:not(
+        .bx--tabs--scrollable__nav-item--selected,
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link {
+      color: qiskit.$text-color;
     }
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       margin-bottom: 0;
 
       .bx--tabs-trigger {
-        background-color: $background-color-white;
-        border-bottom: 1px solid $border-color;
+        background-color: qiskit.$background-color-white;
+        border-bottom: 1px solid qiskit.$border-color;
 
         &[class*="--open"] {
-          background-color: $background-color-lighter;
+          background-color: qiskit.$background-color-lighter;
         }
       }
 
       .bx--tabs-trigger svg {
-        fill: $black-100;
+        fill: carbon.$black-100;
       }
 
       .bx--tabs-trigger-text {
-        color: $text-color;
+        color: qiskit.$text-color;
       }
 
       .bx--tabs-trigger--open {
-        border-bottom: 1px solid $border-color-quaternary;
+        border-bottom: 1px solid qiskit.$border-color-quaternary;
       }
 
       .bx--tabs-trigger--open,
       .bx--tabs--scrollable__nav-item {
-        background-color: $background-color-lighter;
+        background-color: qiskit.$background-color-lighter;
       }
 
-      .bx--tabs--scrollable__nav-item:last-child .bx--tabs--scrollable__nav-link {
+      .bx--tabs--scrollable__nav-item:last-child
+        .bx--tabs--scrollable__nav-link {
         border-bottom: none;
       }
 
-      .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled) {
-        background-color: $background-color-light;
+      .bx--tabs--scrollable__nav-item:hover:not(
+          .bx--tabs--scrollable__nav-item--selected,
+          .bx--tabs--scrollable__nav-item--disabled
+        ) {
+        background-color: qiskit.$background-color-light;
       }
     }
   }
 
   &__main-content {
-    @include mq($until: medium) {
-      margin-top: $spacing-09;
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-09;
     }
   }
 
   &__empty-card-description {
     height: 8rem;
 
-    @include mq($until: medium) {
+    @include carbon.breakpoint-down(md) {
       height: auto;
     }
   }
 
-  &__calendar{
-    border: 1px solid $border-color ;
+  &__calendar {
+    margin-bottom: carbon.$spacing-10;
+    border: 1px solid qiskit.$border-color;
 
-    @include mq($until: medium) {
-      margin-top: $spacing-06;
+    @include carbon.breakpoint-down(md) {
+      margin-top: carbon.$spacing-06;
     }
   }
 
-  &__tab {
-    padding-top: $spacing-06;
+  &:deep(.event-page__section) {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-10;
   }
 
+  &:deep(.event-page__section__description) {
+    margin-top: carbon.$spacing-06;
+    margin-bottom: carbon.$spacing-07;
+    max-width: 20rem;
+
+    @include carbon.breakpoint-up(lg) {
+      max-width: 24rem;
+    }
+  }
+
+  &:deep(.event-page__tabs) {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-09;
+    padding-top: carbon.$spacing-06;
+  }
+
+  &:deep(.event-page__instructions) {
+    padding-left: carbon.$spacing-06;
+  }
 }
 </style>

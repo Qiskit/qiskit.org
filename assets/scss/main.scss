@@ -1,5 +1,37 @@
-@import "@qiskit-community/qiskit-vue/dist/styles/index.css";
-@import "./helpers";
-@import "./vendor";
-@import "./layout";
-@import "./components";
+@use "@ibm/plex/scss/sans" with (
+  $font-prefix: "@ibm/plex/"
+);
+@use "@carbon/styles/scss/reset";
+@use "carbon";
+@use "./_typography";
+@use "./components";
+@include carbon.grid-css-grid;
+@include carbon.grid-flex-grid;
+
+:root {
+  --cds-active-primary: #{carbon.$purple-80};
+  --cds-active-tertiary: #{carbon.$purple-90};
+  --cds-body-long-01-font-size: 0.875rem;
+  --cds-button-primary-active: #{carbon.$purple-90};
+  --cds-button-primary-hover: #{carbon.$purple-80};
+  --cds-button-primary: #{carbon.$purple-70};
+  --cds-focus: #{carbon.$purple-70};
+  --cds-hover-primary-text: #{carbon.$purple-60};
+  --cds-hover-primary: #{carbon.$purple-80};
+  --cds-hover-tertiary: #{carbon.$purple-80};
+  --cds-hover-ui: #{carbon.$cool-gray-30};
+  --cds-icon-01: #{carbon.$purple-70};
+  --cds-interactive-01: #{carbon.$purple-70};
+  --cds-interactive-03: #{carbon.$purple-70};
+  --cds-interactive-04: #{carbon.$purple-70};
+  --cds-inverse-02: #{carbon.$purple-70};
+  --cds-link-01: #{carbon.$purple-70};
+  --cds-link-primary: #{carbon.$purple-70};
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}

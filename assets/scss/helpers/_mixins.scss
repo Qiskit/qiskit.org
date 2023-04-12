@@ -3,21 +3,23 @@
  * https://www.carbondesignsystem.com/guidelines/2x-grid/basics/#breakpoints
  */
 @use "sass:math";
+@use "~/assets/scss/carbon.scss" as carbon;
+@use "./functions" as qiskit-functions;
 
 @mixin contained() {
   box-sizing: border-box;
-  max-width: $large;
+  max-width: qiskit-functions.$large;
   margin-left: auto;
   margin-right: auto;
   padding-left: 2rem; // 1rem for the grid margin + 1 rem for the column padding
   padding-right: 1rem;
 
-  @include mq($from: max-size) {
+  @include carbon.breakpoint-up(xlg) {
     padding-left: 2.5rem; // 1.5rem for the grid margin + 1 rem for the column padding
     padding-right: 1.5rem;
   }
 
-  @include mq($until: medium) {
+  @include carbon.breakpoint-down(md) {
     padding-left: 1rem; // 0rem for the grid margin + 1 rem for the column padding
   }
 }
@@ -27,7 +29,12 @@
  * sizing. The mixin uses responsive-grid-bg() and repeat it horizontally with
  * a vertical offset equal to $top-offset.
  */
-@mixin responsive-grid-bg-strip($url, $background-width, $background-height: auto, $top-offset: 0) {
+@mixin responsive-grid-bg-strip(
+  $url,
+  $background-width,
+  $background-height: auto,
+  $top-offset: 0
+) {
   @include responsive-grid-bg($url, $background-width, $background-height);
 
   background-position: top $top-offset center;
@@ -46,24 +53,20 @@
   background-image: url($url);
   background-size: $background-width $background-height;
 
-  @include mq($until: large) {
+  @include carbon.breakpoint-down(lg) {
     $grid-small-scale: math.div(40, 64);
-
     $background-width-scaled: auto;
+
     @if $background-width != auto {
       $background-width-scaled: $background-width * $grid-small-scale;
     }
 
     $background-height-scaled: auto;
+
     @if $background-height != auto {
       $background-height-scaled: $background-height * $grid-small-scale;
     }
 
     background-size: $background-width-scaled $background-height-scaled;
   }
-}
-
-@mixin elegant-title() {
-  text-align: center;
-  text-transform: uppercase;
 }
