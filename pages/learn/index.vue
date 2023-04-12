@@ -24,8 +24,6 @@ useHead({
   title: "Qiskit Textbook",
 });
 
-const routeName = "learn";
-
 const helpfulResources: DescriptionCard[] = [
   {
     title: "Documentation",
