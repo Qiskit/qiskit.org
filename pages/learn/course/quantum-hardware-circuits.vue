@@ -1,82 +1,101 @@
-<script lang="ts">
-import { Course, Prerequisite } from 'constants/learnContent'
-import { Component } from 'vue-property-decorator'
-import CourseOverviewPage from '~/components/logic/CourseOverviewPage.vue'
-import { GeneralLink, QuantumHardwareCircuitsUrl } from '~/constants/appLinks'
+<template>
+  <CourseOverviewPage
+    :courses="courses"
+    :external-recommended-readings-preamble="
+      externalRecommendedReadingsPreamble
+    "
+    :header-title="headerTitle"
+    :header-description="headerDescription"
+    :header-img="headerImg"
+    :image-url-base="imageUrlBase"
+    :links="links"
+    :prerequisites="prerequisites"
+    :references="references"
+    :route-name="routeName"
+    :start-learning-cta="startLearningCTA"
+  />
+</template>
 
-@Component({
-  head: () => ({
-    title: 'Investigating Quantum Hardware Using Quantum Circuits'
-  })
-})
-export default class QuantumHardwareCircuitsPage extends CourseOverviewPage {
-  routeName: string = 'quantum-hardware-circuits'
+<script setup lang="ts">
+import type { GeneralLink } from "~/constants/appLinks";
+import { QuantumHardwareCircuitsUrl } from "~/constants/appLinks";
+import type { Course, Prerequisite } from "constants/learnContent";
 
-  headerTitle = 'Investigating Quantum Hardware Using Quantum Circuits'
-  headerDescription = ['Most gate-based quantum computers share similar challenges with noise and errors. These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.']
+definePageMeta({
+  layout: "default-max",
+  pageTitle: "Investigating Quantum Hardware Using Quantum Circuits",
+  routeName: "quantum-hardware-circuits",
+});
 
-  headerImg = '/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png'
+useHead({
+  title: "Investigating Quantum Hardware Using Quantum Circuits",
+});
 
-  backToTextbookHomeLink: GeneralLink = {
-    url: '/learn',
-    label: 'Home',
+const routeName = "quantum-hardware-circuits";
+
+const headerTitle = "Investigating Quantum Hardware Using Quantum Circuits";
+const headerDescription = [
+  "Most gate-based quantum computers share similar challenges with noise and errors. These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.",
+];
+
+const headerImg =
+  "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
+
+const startLearningCTA: GeneralLink = {
+  url: QuantumHardwareCircuitsUrl.Introduction,
+  label: "Start learning",
+  segment: {
+    cta: "introduction",
+    location: "header",
+  },
+};
+
+const references: string[] = [];
+const externalRecommendedReadingsPreamble = "";
+const links: GeneralLink[] = [];
+
+const courses: Course[] = [
+  {
+    image: "introduction-to-quantum-error-correction.png",
+    label: "Introduction to Quantum Error Correction Using Repetition Codes",
     segment: {
-      cta: 'back-to-textbook-home', location: 'header'
-    }
-  }
-
-  startLearningCTA: GeneralLink = {
+      cta: "introduction-to-quantum-error-correction",
+      location: "course",
+    },
     url: QuantumHardwareCircuitsUrl.Introduction,
-    label: 'Start learning',
+  },
+  {
+    image: "measurement-error-mitigation.png",
+    label: "Measurement Error Mitigation",
+    segment: { cta: "measurement-error-mitigation", location: "course" },
+    url: QuantumHardwareCircuitsUrl.MeasurementErrorMitigation,
+  },
+  {
+    image: "randomized-benchmarking.png",
+    label: "Randomized Benchmarking",
+    segment: { cta: "randomized-benchmarking", location: "course" },
+    url: QuantumHardwareCircuitsUrl.RandomizedBenchmarking,
+  },
+  {
+    image: "measuring-quantum-volume.png",
+    label: "Measuring Quantum Volume",
+    segment: { cta: "measuring-quantum-volume", location: "course" },
+    url: QuantumHardwareCircuitsUrl.MeasuringQuantumVolume,
+  },
+];
+
+const prerequisites: Prerequisite[] = [
+  {
+    title: "Multiple Qubits and Entanglement",
+    description:
+      "With the basics down, this chapter explores the consequences of these new quantum effects, and sets us up with tools to understand quantum algorithms.",
     segment: {
-      cta: 'introduction', location: 'header'
-    }
-  }
-
-  references: string[] = []
-  externalRecommendedReadingsPreamble: string = ''
-  links: GeneralLink[] = []
-
-  courses: Course[] = [
-    {
-      image: 'introduction-to-quantum-error-correction.png',
-      label: 'Introduction to Quantum Error Correction Using Repetition Codes',
-      segment: { cta: 'introduction-to-quantum-error-correction', location: 'course' },
-      url: QuantumHardwareCircuitsUrl.Introduction
+      cta: "multiple-qubits-and-entanglement",
+      location: "prerequisite-material",
     },
-    {
-      image: 'measurement-error-mitigation.png',
-      label: 'Measurement Error Mitigation',
-      segment: { cta: 'measurement-error-mitigation', location: 'course' },
-      url: QuantumHardwareCircuitsUrl.MeasurementErrorMitigation
-    },
-    {
-      image: 'randomized-benchmarking.png',
-      label: 'Randomized Benchmarking',
-      segment: { cta: 'randomized-benchmarking', location: 'course' },
-      url: QuantumHardwareCircuitsUrl.RandomizedBenchmarking
-    },
-    {
-      image: 'measuring-quantum-volume.png',
-      label: 'Measuring Quantum Volume',
-      segment: { cta: 'measuring-quantum-volume', location: 'course' },
-      url: QuantumHardwareCircuitsUrl.MeasuringQuantumVolume
-    }
-  ]
+    url: "https://learn.qiskit.org/course/ch-gates/introduction",
+  },
+];
 
-  prerequisites: Prerequisite[] = [
-    {
-      title: 'Multiple Qubits and Entanglement',
-      description:
-        'With the basics down, this chapter explores the consequences of these new quantum effects, and sets us up with tools to understand quantum algorithms.',
-      segment: {
-        cta: 'multiple-qubits-and-entanglement', location: 'prerequisite-material'
-      },
-      url:
-        'https://learn.qiskit.org/course/ch-gates/introduction'
-    }
-  ]
-
-  imageUrlBase = '/images/learn/course/quantum-hardware-circuits'
-}
+const imageUrlBase = "/images/learn/course/quantum-hardware-circuits";
 </script>

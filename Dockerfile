@@ -1,32 +1,23 @@
-FROM node:16-alpine
+# Build
+
+FROM node:16-alpine AS build
+
 WORKDIR /qiskit.org
 
-COPY package*.json ./
+COPY . .
+
 RUN npm ci
+RUN npm run build
 
-COPY app app/
-COPY assets assets/
-COPY constants constants/
-COPY content content/
-COPY deploy deploy/
-COPY hooks hooks/
-COPY layouts layouts/
-COPY mixins mixins/
-COPY pages pages/
-COPY plugins plugins/
-COPY static static/
-COPY store store
-COPY types types/
-COPY .eslintrc.js jest.config.js jest.setup.js \
-     nuxt.config.ts stylelint.config.js tsconfig.json \
-     ./
-COPY tests tests/
-COPY components components/
-RUN npm run generate
+# Serve
 
-EXPOSE 3000
+FROM node:16-alpine
+
+COPY --from=build /qiskit.org/.output ./.output/
 
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
 
-CMD [ "npm", "start" ]
+EXPOSE 3000
+
+CMD ["node", ".output/server/index.mjs"]

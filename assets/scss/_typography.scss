@@ -1,0 +1,89 @@
+@use "carbon";
+
+// TODO: Use standard Carbon type sets
+
+body {
+  @include carbon.type-style("body-long-01");
+}
+
+p,
+.p {
+  @include carbon.type-style("body-long-01");
+
+  margin-bottom: carbon.$spacing-05;
+}
+
+h1,
+.h1 {
+  @include carbon.type-style("heading-05");
+
+  @include carbon.breakpoint-up(md) {
+    font-size: carbon.type-scale(9);
+    font-weight: carbon.font-weight("light");
+    line-height: 1.22;
+  }
+
+  @include carbon.breakpoint-up(lg) {
+    font-size: carbon.type-scale(10);
+    line-height: 1.19;
+  }
+
+  @include carbon.breakpoint-up(xlg) {
+    font-size: carbon.type-scale(11);
+    line-height: 1.17;
+  }
+
+  @include carbon.breakpoint-up(max) {
+    font-size: carbon.type-scale(13);
+  }
+}
+
+h2,
+.h2 {
+  @include carbon.type-style("heading-04");
+
+  margin-bottom: carbon.$spacing-05;
+
+  @include carbon.breakpoint-up(xlg) {
+    font-size: carbon.type-scale(8);
+    line-height: 1.25;
+    margin-bottom: carbon.$spacing-06;
+  }
+}
+
+h3,
+.h3 {
+  @include carbon.type-style("heading-03");
+
+  margin-bottom: carbon.$spacing-05;
+
+  @include carbon.breakpoint-up(max) {
+    font-size: carbon.type-scale(6);
+    line-height: 1.17;
+  }
+}
+
+h4,
+.h4 {
+  @include carbon.type-style("heading-01");
+
+  margin-bottom: carbon.$spacing-05;
+}
+
+h5,
+.h5 {
+  @include carbon.type-style("heading-01");
+
+  font-weight: normal;
+  font-style: italic;
+  margin-bottom: carbon.$spacing-05;
+}
+
+.caption {
+  @include carbon.type-style("label-01");
+}
+
+code,
+.code {
+  @include carbon.type-style("code-01");
+}

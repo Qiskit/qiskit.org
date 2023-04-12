@@ -1,38 +1,40 @@
 <template>
   <main class="summer-school-page">
-    <AppPageHeaderWithCard
-      :cta="null"
-      :card-title="headerData.cardSectionHeading"
-    >
-      <template slot="title">
+    <UiPageHeaderWithCard :card-title="headerData.cardSectionHeading">
+      <template #title>
         {{ headerData.titleLine1 }}
-        <br>
+        <br />
         {{ headerData.titleLine2 }}
       </template>
-      <template slot="description">
+      <template #description>
         <p>
-          The Qiskit Global Summer School 2022 is a two-week intensive summer program designed to empower the quantum researchers and developers of tomorrow with the skills and know-how to explore the world of quantum computing and its applications. This third-annual summer school will provide a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry.
+          The Qiskit Global Summer School 2022 is a two-week intensive summer
+          program designed to empower the quantum researchers and developers of
+          tomorrow with the skills and know-how to explore the world of quantum
+          computing and its applications. This third-annual summer school will
+          provide a focused introduction to quantum computing and its
+          applications to quantum simulation, with a specific focus on quantum
+          chemistry.
         </p>
         <p>
           Please follow
-          <AppLink v-bind="headerData.qiskitTwitterLink">
+          <UiLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
-          </AppLink>
-          for more details and updates. For any questions, please check out our FAQ below!
+          </UiLink>
+          for more details and updates. For any questions, please check out our
+          FAQ below!
         </p>
-        <p>
-          See you next year!
-        </p>
+        <p>See you next year!</p>
       </template>
-      <template slot="card">
-        <EventCard v-bind="headerData.card" vertical-layout>
+      <template #card>
+        <EventsItemCard v-bind="headerData.card" vertical-layout>
           {{ headerData.card.description }}
-        </EventCard>
+        </EventsItemCard>
       </template>
-    </AppPageHeaderWithCard>
+    </UiPageHeaderWithCard>
 
-    <div class="bx--grid summer-school-page__content">
-      <AppMosaicSection
+    <div class="cds--grid summer-school-page__content">
+      <UiMosaicSection
         class="summer-school-page__section"
         :title="mosaicData.title"
         :elements="mosaicData.tiles"
@@ -41,29 +43,46 @@
       <section class="summer-school-page__section">
         <h2 v-text="agendaData.title" />
         <p v-text="agendaData.subtitle" />
-        <cv-tabs>
-          <cv-tab
+        <bx-tabs trigger-content="Select an item" value="Week 1">
+          <bx-tab
             v-for="week in agendaData.weeks"
             :key="week.tabName"
-            :label="week.tabName"
+            :target="week.tabName"
+            :value="week.tabName"
           >
-            <AppDataTable
-              class="summer-school-page__section"
-              :columns="agendaColumnsDataTable"
-            >
-              <cv-data-table-row v-for="(row, rowIndex) in week.tableData" :key="`${rowIndex}`">
-                <cv-data-table-cell v-for="({styles, data}, elementIndex) in row" :key="`${elementIndex}`">
+            {{ week.tabName }}
+          </bx-tab>
+        </bx-tabs>
+        <div class="summer-school-page__agenda">
+          <div
+            v-for="week in agendaData.weeks"
+            :id="week.tabName"
+            :key="week.tabName"
+            class="summer-school-page__agenda__table"
+            role="tabpanel"
+            :aria-labelledby="week.tabName"
+            hidden
+          >
+            <UiDataTable :columns="agendaColumnsDataTable">
+              <bx-table-row
+                v-for="(row, rowIndex) in week.tableData"
+                :key="`${rowIndex}`"
+              >
+                <bx-table-cell
+                  v-for="({ styles, data }, elementIndex) in row"
+                  :key="`${elementIndex}`"
+                >
                   <span :style="styles">{{ data }}</span>
-                </cv-data-table-cell>
-              </cv-data-table-row>
-            </AppDataTable>
-          </cv-tab>
-        </cv-tabs>
+                </bx-table-cell>
+              </bx-table-row>
+            </UiDataTable>
+          </div>
+        </div>
       </section>
 
-      <FaqSection class="summer-school-page__section" />
+      <EventsSummerSchoolFaq class="summer-school-page__section" />
 
-      <AppHelpfulResourcesSection
+      <UiHelpfulResourcesSection
         class="summer-school-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"
@@ -72,170 +91,119 @@
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+<script setup lang="ts">
+import "@carbon/web-components/es/components/tabs/index.js";
 import {
   header,
   mosaic,
   agenda,
-  helpfulResources
-} from '~/constants/summerSchool2022Content'
+  helpfulResources,
+} from "~/constants/summerSchool2022Content";
 
-@Component({
-  head () {
-    const title = 'Qiskit Global Summer School 2022'
-    const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
-    designed to empower the next generation of quantum researchers and developers with the skills
-    and know-how to explore quantum applications on their own`
-    const image = '/images/events/summer-school/summer-school-logo.png'
+definePageMeta({
+  layout: "default-max",
+  pageTitle: "Qiskit Global Summer School 2022",
+  routeName: "summer-school",
+});
 
-    return {
-      title,
-      meta: [
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: title
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: description
-        },
-        {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: image
-        },
-        {
-          hid: 'twitter:image:alt',
-          name: 'twitter:image:alt',
-          content: title
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: image
-        },
-        {
-          hid: 'og:image:secure_url',
-          property: 'og:image:secure_url',
-          content: image
-        },
-        {
-          hid: 'og:image:alt',
-          property: 'og:image:alt',
-          content: title
-        }
-      ]
-    }
-  },
-  layout: 'default-max'
-})
-export default class SummerSchoolPage extends QiskitPage {
-  routeName = 'summer-school'
-  agendaColumnsDataTable: string[] = ['Day', 'Topic', 'Speaker', 'Format']
-  headerData = header
-  mosaicData = mosaic
-  agendaData = agenda
-  helpfulResourcesData = helpfulResources
-}
+const title = "Qiskit Global Summer School 2022";
+const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
+designed to empower the next generation of quantum researchers and developers with the skills
+and know-how to explore quantum applications on their own`;
+const image = "/images/events/summer-school/summer-school-logo.png";
+
+useHead({
+  title,
+  meta: [
+    {
+      hid: "twitter:title",
+      name: "twitter:title",
+      content: title,
+    },
+    {
+      hid: "twitter:description",
+      name: "twitter:description",
+      content: description,
+    },
+    {
+      hid: "twitter:image",
+      name: "twitter:image",
+      content: image,
+    },
+    {
+      hid: "twitter:image:alt",
+      name: "twitter:image:alt",
+      content: title,
+    },
+    {
+      hid: "og:title",
+      property: "og:title",
+      content: title,
+    },
+    {
+      hid: "og:description",
+      property: "og:description",
+      content: description,
+    },
+    {
+      hid: "og:image",
+      property: "og:image",
+      content: image,
+    },
+    {
+      hid: "og:image:secure_url",
+      property: "og:image:secure_url",
+      content: image,
+    },
+    {
+      hid: "og:image:alt",
+      property: "og:image:alt",
+      content: title,
+    },
+  ],
+});
+
+const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
+const headerData = header;
+const mosaicData = mosaic;
+const agendaData = agenda;
+const helpfulResourcesData = helpfulResources;
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
 .summer-school-page {
   display: flex;
   flex-direction: column;
 
   &__section {
-    margin-top: $spacing-10;
-    margin-bottom: $spacing-07;
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-07;
 
-    @include mq($until: large) {
-      margin-bottom: $spacing-05;
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+  }
+
+  &__agenda {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-07;
+
+    @include carbon.breakpoint-down(lg) {
+      margin-bottom: carbon.$spacing-05;
+    }
+
+    &__table {
+      max-width: 100%;
+      overflow-x: scroll;
     }
   }
 
   &__content {
-    @include mq($until: large) {
+    @include carbon.breakpoint-down(lg) {
       max-width: 100%;
     }
   }
 }
-</style>
-
-<style lang="scss" scoped>
-// overrides
-.summer-school-page {
-  ::v-deep {
-    // TODO: Extract styles like "_checkbox" to be defined globally
-    & a.bx--tabs--scrollable__nav-link {
-      color: $text-color-light;
-      border-bottom-color: $border-color;
-
-      &:focus,
-      &:active {
-        outline: none;
-      }
-
-      &:not(.bx--tabs--scrollable__nav-item--disabled) {
-        color: $text-color-light;
-      }
-    }
-
-    // TODO: Not sure if the order is important in these selectors.
-    // So, disabling. Review the reule 'no-descending-specificity' here:
-    // https://stylelint.io/user-guide/ignore-code
-    // stylelint-disable no-descending-specificity
-    & .bx--tabs--scrollable__nav-item {
-      &:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link,
-      &:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled):not(.bx--tabs--scrollable__nav-item--selected) .bx--tabs--scrollable__nav-link:focus,
-      &:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled):not(.bx--tabs--scrollable__nav-item--selected) a.bx--tabs--scrollable__nav-link:active,
-      &:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link, .bx--tabs--scrollable__nav-item--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link:focus {
-        color: $text-color-light;
-      }
-
-      &--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
-        border-bottom-color: $border-color-secondary;
-      }
-    }
-
-    & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--disabled) {
-        box-shadow: none;
-      }
-
-      & .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected):not(.bx--tabs--scrollable__nav-item--disabled),
-      & .bx--tabs--scrollable__nav-item,
-      & .bx--tabs-trigger {
-        background-color: $background-color-white;
-
-        svg {
-          fill: $gray-100;
-        }
-      }
-
-      & .bx--tabs--scrollable__nav-link,
-      & .bx--tabs-trigger-text {
-        color: $text-color;
-    }
-    // stylelint-enable no-descending-specificity
-
-    .app-data-table {
-      margin-top: $spacing-07;
-      padding: 0;
-    }
-  }
-}
-
 </style>

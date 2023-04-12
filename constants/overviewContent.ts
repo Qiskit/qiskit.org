@@ -1,343 +1,363 @@
-import { NavLink } from '~/constants/menuLinks'
+import { NavLink } from "~/constants/menuLinks";
 
 type TableOfContentEntry = {
   /** The visible name of the link */
-  label: string
+  label: string;
   /** Id of the section we want to jump to */
-  sectionId?: string
+  sectionId?: string;
   /** Use when the link is on secondary level */
-  isSecondary?: boolean
-}
+  isSecondary?: boolean;
+};
 
 type OverviewSubSection = {
-  title: string
+  title: string;
   content: {
-    image: string
-    description: string
-    cta: NavLink
-  }
-}
+    image: string;
+    description: string;
+    cta: NavLink;
+  };
+};
 
 /**
  * Represent a content section for the overview page
  */
 interface OverviewSection {
   /** The identifier of the section */
-  id: string
+  id: string;
   /** The visible title of the section */
-  title: string
+  title: string;
   /** The visible description of the section */
-  description: string
+  description: string;
   /** Where we want to go to get more info of the section */
-  link?: NavLink
+  link?: NavLink;
   /** A set of links to get more information on the section */
-  linkset?: NavLink[]
+  linkset?: NavLink[];
   /** The sub sections inside the section */
-  subSections?: OverviewSubSection[]
+  subSections?: OverviewSubSection[];
   /** The image to show if the section doesn't have subsections */
-  image?: string
+  image?: string;
 }
 
-const researchAppId: string = 'applications'
+const researchAppId = "applications";
 
 const RESEARCH_APPS_IN_MENU: TableOfContentEntry = {
   sectionId: researchAppId,
-  label: 'Applications',
-  isSecondary: true
-}
+  label: "Applications",
+  isSecondary: true,
+};
 
 const RESEARCH_APPS: OverviewSection = {
   id: researchAppId,
-  title: 'Research Applications',
-  description: 'Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.',
+  title: "Research Applications",
+  description:
+    "Qiskit allows for easy research and development for specific industry use cases that have the highest potential for quantum advantage.",
   linkset: [
     {
-      label: 'See machine learning docs',
-      url: 'https://qiskit.org/documentation/machine-learning/'
+      label: "See machine learning docs",
+      url: "https://qiskit.org/documentation/machine-learning/",
     },
     {
-      label: 'See nature docs',
-      url: 'https://qiskit.org/documentation/nature/'
+      label: "See nature docs",
+      url: "https://qiskit.org/documentation/nature/",
     },
     {
-      label: 'See finance docs',
-      url: 'https://qiskit.org/documentation/finance/'
+      label: "See finance docs",
+      url: "https://qiskit.org/documentation/finance/",
     },
     {
-      label: 'See optimization docs',
-      url: 'https://qiskit.org/documentation/optimization/'
-    }
+      label: "See optimization docs",
+      url: "https://qiskit.org/documentation/optimization/",
+    },
   ],
   subSections: [
     {
-      title: 'Optimization',
+      title: "Optimization",
       content: {
-        image: '/images/overview/applications/optimization.png',
-        description: 'The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.',
+        image: "/images/overview/applications/optimization.png",
+        description:
+          "The Qiskit Optimization package covers the whole range from high-level modeling of optimization problems, with automatic conversion of problems to different required representations, to a suite of easy-to-use quantum optimization algorithms that are ready to run on classical simulators, as well as on real quantum systems.",
         cta: {
-          label: 'Solve the Max Cut Problem',
-          url: 'https://qiskit.org/documentation/optimization/tutorials/01_quadratic_program.html'
-        }
-      }
+          label: "Solve the Max Cut Problem",
+          url: "https://qiskit.org/documentation/optimization/tutorials/01_quadratic_program.html",
+        },
+      },
     },
     {
-      title: 'Finance',
+      title: "Finance",
       content: {
-        image: '/images/overview/applications/finance.png',
-        description: 'The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.',
+        image: "/images/overview/applications/finance.png",
+        description:
+          "The Qiskit Finance package contains components to load uncertainty models, e.g., for pricing securities/derivatives or analyzing the risk involved. It also contains data providers to source real or random data to finance experiments and together with the Qiskit Optimization package allows easy modeling of optimization problems as arising e.g. in portfolio management.",
         cta: {
-          label: 'Perform Option Pricing with qGans',
-          url: 'https://qiskit.org/documentation/finance/tutorials/10_qgan_option_pricing.html'
-        }
-      }
+          label: "Perform Option Pricing with qGans",
+          url: "https://qiskit.org/documentation/finance/tutorials/10_qgan_option_pricing.html",
+        },
+      },
     },
     {
-      title: 'Machine Learning',
+      title: "Machine Learning",
       content: {
-        image: '/images/overview/applications/machine-learning.png',
-        description: 'The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.',
+        image: "/images/overview/applications/machine-learning.png",
+        description:
+          "The Qiskit Machine Learning package simply contains sample datasets at present. Qiskit has some classification algorithms such as QSVM (Quantum Support Vector Machine) and VQC (Variational Quantum Classifier), where this data can be used for experiments, and there is also QGAN (Quantum Generative Adversarial Network) algorithm.",
         cta: {
-          label: 'Classify data with a VQC',
-          url: 'https://qiskit.org/documentation/machine-learning/tutorials/01_neural_networks.html'
-        }
-      }
+          label: "Classify data with a VQC",
+          url: "https://qiskit.org/documentation/machine-learning/tutorials/01_neural_networks.html",
+        },
+      },
     },
     {
-      title: 'Chemistry',
+      title: "Chemistry",
       content: {
-        image: '/images/overview/applications/chemestry.png',
-        description: 'The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.',
+        image: "/images/overview/applications/chemestry.png",
+        description:
+          "The Qiskit Chemistry package supports problems including ground state energy computations, excited states and dipole moments of molecule, both open and closed-shell.",
         cta: {
-          label: 'Find the Energy Ground State of a Molecule',
-          url: 'https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html'
-        }
-      }
-    }
-  ]
-}
+          label: "Find the Energy Ground State of a Molecule",
+          url: "https://qiskit.org/documentation/nature/tutorials/01_electronic_structure.html",
+        },
+      },
+    },
+  ],
+};
 
-const algorithmsCollectionId: string = 'algorithms'
+const algorithmsCollectionId = "algorithms";
 
 const ALGORITHMS_COLLECTION_IN_MENU: TableOfContentEntry = {
   sectionId: algorithmsCollectionId,
-  label: 'Algorithms',
-  isSecondary: true
-}
+  label: "Algorithms",
+  isSecondary: true,
+};
 
 const ALGORITHMS_COLLECTION: OverviewSection = {
   id: algorithmsCollectionId,
-  title: 'Collection of Algorithms',
-  description: 'Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.',
+  title: "Collection of Algorithms",
+  description:
+    "Qiskit contains a generic framework of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built.",
   link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/algorithms.html'
+    label: "See docs",
+    url: "https://qiskit.org/documentation/apidoc/algorithms.html",
   },
   subSections: [
     {
-      title: 'Grover',
+      title: "Grover",
       content: {
-        image: '/images/overview/algorithms/grover.png',
-        description: 'Grover\'s algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.',
+        image: "/images/overview/algorithms/grover.png",
+        description:
+          "Grover's algorithm is a well known quantum algorithm part of the amplitude amplifier category that provides quadratic speedup for searching through unstructured collections of records in search of particular targets.",
         cta: {
-          label: 'Try out Grover’s',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover'
-        }
-      }
+          label: "Try out Grover’s",
+          url: "https://qiskit.org/documentation/stubs/qiskit.algorithms.Grover.html#qiskit.algorithms.Grover",
+        },
+      },
     },
     {
-      title: 'VQE',
+      title: "VQE",
       content: {
-        image: '/images/overview/algorithms/vqe.png',
-        description: 'VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.',
+        image: "/images/overview/algorithms/vqe.png",
+        description:
+          "VQE (Variational Quantum Eigensolver) is another well known quantum algorithm part of the minimum eigensolvers category. This algorithm uses variational techniques and interleaves quantum and classical computations in order to find the minimum eigenvalue of the Hamiltonian of a given system.",
         cta: {
-          label: 'Try out VQE',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html#qiskit.algorithms.VQE'
-        }
-      }
+          label: "Try out VQE",
+          url: "https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html#qiskit.algorithms.VQE",
+        },
+      },
     },
     {
-      title: 'QAOA',
+      title: "QAOA",
       content: {
-        image: '/images/overview/algorithms/qaoa.png',
-        description: 'QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE\'s general optimization structure but uses its own fine-tuned variational form.',
+        image: "/images/overview/algorithms/qaoa.png",
+        description:
+          "QAOA (Quantum Approximate Optimization Algorithm) is also part of the minimum eigensolvers category. This algorithm extends VQE (Variational Quantum Eigensolver) and inherits VQE's general optimization structure but uses its own fine-tuned variational form.",
         cta: {
-          label: 'Try out QAOA',
-          url: 'https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html#qiskit.algorithms.QAOA'
-        }
-      }
+          label: "Try out QAOA",
+          url: "https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html#qiskit.algorithms.QAOA",
+        },
+      },
     },
     {
-      title: 'QSVM',
+      title: "QSVM",
       content: {
-        image: '/images/overview/algorithms/qsvm.png',
-        description: 'QSVM is part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ',
+        image: "/images/overview/algorithms/qsvm.png",
+        description:
+          "QSVM is part of the classifiers category and applies to problems that require a feature map for which computing the collection of inner products is not efficient classically. ",
         cta: {
-          label: 'Try out QSVM',
-          url: 'https://qiskit.org/documentation/machine-learning/apidocs/qiskit_machine_learning.algorithms.html#classifiers'
-        }
-      }
-    }
-  ]
-}
+          label: "Try out QSVM",
+          url: "https://qiskit.org/documentation/machine-learning/apidocs/qiskit_machine_learning.algorithms.html#classifiers",
+        },
+      },
+    },
+  ],
+};
 
-const experimentalistToolboxId: string = 'characterization'
+const experimentalistToolboxId = "characterization";
 
 const EXPERIMENTALIST_TOOLBOX_IN_MENU: TableOfContentEntry = {
   sectionId: experimentalistToolboxId,
-  label: 'Characterization',
-  isSecondary: true
-}
+  label: "Characterization",
+  isSecondary: true,
+};
 
 const EXPERIMENTALIST_TOOLBOX: OverviewSection = {
   id: experimentalistToolboxId,
-  title: 'Experimentalist Toolbox',
-  description: 'Qiskit\'s characterization framework offers circuits and analysis methods to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
+  title: "Experimentalist Toolbox",
+  description:
+    "Qiskit's characterization framework offers circuits and analysis methods to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂* , T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.",
   link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/experiments/index.html'
+    label: "See docs",
+    url: "https://qiskit.org/documentation/experiments/index.html",
   },
   subSections: [
     {
-      title: 'Characterization',
+      title: "Characterization",
       content: {
-        image: '/images/overview/characterization/characterization.png',
-        description: 'Qiskit\'s characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.',
+        image: "/images/overview/characterization/characterization.png",
+        description:
+          "Qiskit's characterization framework brings the analysis parameters and circuits to users in order to understand and characterize the source of noise that impacts our devices. Such parameters include T1, T₂*, T2, Hamiltonian parameters such as the ZZ interaction rate and control errors in the gates.",
         cta: {
-          label: 'See Characterization framework',
-          url: 'https://qiskit.org/documentation/experiments/apidocs/library.html#characterization-experiments'
-        }
-      }
+          label: "See Characterization framework",
+          url: "https://qiskit.org/documentation/experiments/apidocs/library.html#characterization-experiments",
+        },
+      },
     },
     {
-      title: 'Verification',
+      title: "Verification",
       content: {
-        image: '/images/overview/characterization/verification.png',
-        description: 'Qiskit\'s verification framework provides experiments that are designed to verify gates and small circuit performance through tomography, quantum volume and randomized benchmarking.',
+        image: "/images/overview/characterization/verification.png",
+        description:
+          "Qiskit's verification framework provides experiments that are designed to verify gates and small circuit performance through tomography, quantum volume and randomized benchmarking.",
         cta: {
-          label: 'See Verification framework',
-          url: 'https://qiskit.org/documentation/experiments/apidocs/library.html#verification-experiments'
-        }
-      }
+          label: "See Verification framework",
+          url: "https://qiskit.org/documentation/experiments/apidocs/library.html#verification-experiments",
+        },
+      },
     },
     {
-      title: 'Calibration',
+      title: "Calibration",
       content: {
-        image: '/images/overview/characterization/calibration.png',
-        description: 'Qiskit\'s calibration module allows users to optimize pulse parameters to minimize errors. Perform simple parameter scans, with more sophisticated error amplification sequences coming soon.',
+        image: "/images/overview/characterization/calibration.png",
+        description:
+          "Qiskit's calibration module allows users to optimize pulse parameters to minimize errors. Perform simple parameter scans, with more sophisticated error amplification sequences coming soon.",
         cta: {
-          label: 'See Calibration module',
-          url: 'https://qiskit.org/documentation/experiments/apidocs/library.html#calibration-experiments'
-        }
-      }
-    }
-  ]
-}
+          label: "See Calibration module",
+          url: "https://qiskit.org/documentation/experiments/apidocs/library.html#calibration-experiments",
+        },
+      },
+    },
+  ],
+};
 
-const circuitsId: string = 'circuits'
+const circuitsId = "circuits";
 
 const CIRCUITS_IN_MENU: TableOfContentEntry = {
   sectionId: circuitsId,
-  label: 'Circuits',
-  isSecondary: true
-}
+  label: "Circuits",
+  isSecondary: true,
+};
 
 const CIRCUITS: OverviewSection = {
   id: circuitsId,
-  title: 'Circuits',
-  description: 'Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.',
+  title: "Circuits",
+  description:
+    "Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends.",
   link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/circuit.html'
+    label: "See docs",
+    url: "https://qiskit.org/documentation/apidoc/circuit.html",
   },
   subSections: [
     {
-      title: 'Compiler',
+      title: "Compiler",
       content: {
-        image: '/images/overview/circuits/compiler.png',
-        description: 'Qiskit robust compiler provides users with the ability to explore how quantum circuits run on real hardware and optimize such circuits using modules such as pass managers.',
+        image: "/images/overview/circuits/compiler.png",
+        description:
+          "Qiskit robust compiler provides users with the ability to explore how quantum circuits run on real hardware and optimize such circuits using modules such as pass managers.",
         cta: {
-          label: 'See Compiler',
-          url: 'https://qiskit.org/documentation/apidoc/compiler.html'
-        }
-      }
+          label: "See Compiler",
+          url: "https://qiskit.org/documentation/apidoc/compiler.html",
+        },
+      },
     },
     {
-      title: 'Circuit Library',
+      title: "Circuit Library",
       content: {
-        image: '/images/overview/circuits/circuit-library.png',
-        description: 'Circuit Library is a collection of well studied circuits and gates that can be plugged into many experiments allowing users to program at higher levels of abstraction when developing and experimenting with circuits.',
+        image: "/images/overview/circuits/circuit-library.png",
+        description:
+          "Circuit Library is a collection of well studied circuits and gates that can be plugged into many experiments allowing users to program at higher levels of abstraction when developing and experimenting with circuits.",
         cta: {
-          label: 'See Circuit Library',
-          url: 'https://qiskit.org/documentation/apidoc/circuit_library.html'
-        }
-      }
+          label: "See Circuit Library",
+          url: "https://qiskit.org/documentation/apidoc/circuit_library.html",
+        },
+      },
     },
     {
-      title: 'Pulse',
+      title: "Pulse",
       content: {
-        image: '/images/overview/circuits/pulses.png',
-        description: 'Pulse is a lower level quantum programming tool. This tool allows users more control over using quantum circuits when interacting with real quantum hardware.',
+        image: "/images/overview/circuits/pulses.png",
+        description:
+          "Pulse is a lower level quantum programming tool. This tool allows users more control over using quantum circuits when interacting with real quantum hardware.",
         cta: {
-          label: 'See OpenPulse',
-          url: 'https://qiskit.org/documentation/apidoc/pulse.html'
-        }
-      }
-    }
-  ]
-}
+          label: "See OpenPulse",
+          url: "https://qiskit.org/documentation/apidoc/pulse.html",
+        },
+      },
+    },
+  ],
+};
 
-const simulatorsId: string = 'simulators'
+const simulatorsId = "simulators";
 
 const SIMULATORS_IN_MENU: TableOfContentEntry = {
   sectionId: simulatorsId,
-  label: 'Simulators',
-  isSecondary: true
-}
+  label: "Simulators",
+  isSecondary: true,
+};
 
 const SIMULATORS: OverviewSection = {
-  id: 'simulators',
-  title: 'Simulate Quantum Hardware',
-  description: 'Qiskit provides a high performance simulator framework for the Qiskit software stack. It contains optimized C++ simulator backends for executing compiled circuits, and tools for constructing highly configurable noise models for performing realistic noisy simulations of the errors that occur during execution on real devices.',
+  id: "simulators",
+  title: "Simulate Quantum Hardware",
+  description:
+    "Qiskit provides a high performance simulator framework for the Qiskit software stack. It contains optimized C++ simulator backends for executing compiled circuits, and tools for constructing highly configurable noise models for performing realistic noisy simulations of the errors that occur during execution on real devices.",
   link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/aer.html'
+    label: "See docs",
+    url: "https://qiskit.org/documentation/apidoc/aer.html",
   },
-  image: '/images/overview/simulators/laptop.png'
-}
+  image: "/images/overview/simulators/laptop.png",
+};
 
-const hardwareId: string = 'hardware'
+const hardwareId = "hardware";
 
 const HARDWARE_IN_MENU: TableOfContentEntry = {
   sectionId: hardwareId,
-  label: 'Hardware',
-  isSecondary: true
-}
+  label: "Hardware",
+  isSecondary: true,
+};
 
 const HARDWARE: OverviewSection = {
-  id: 'hardware',
-  title: 'Run Circuits on Real Quantum Systems',
-  description: 'Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.',
+  id: "hardware",
+  title: "Run Circuits on Real Quantum Systems",
+  description:
+    "Circuits are the foundational roots for our software stack. Qiskit provides a set of tools for composing quantum programs at the level of circuits and pulses, optimizing them for the constraints of a particular physical quantum processor, and managing the batched execution of experiments on remote-access backends. Qiskit is modularly constructed, simplifying the addition of extensions for circuit optimizations and backends.",
   link: {
-    label: 'See docs',
-    url: 'https://qiskit.org/documentation/apidoc/ibmq_provider.html'
+    label: "See docs",
+    url: "https://qiskit.org/documentation/apidoc/ibmq_provider.html",
   },
-  image: '/images/overview/hardware/quantum-computer.png'
-}
+  image: "/images/overview/hardware/quantum-computer.png",
+};
 
 const TABLE_OF_CONTENTS: TableOfContentEntry[] = [
   {
-    label: 'Write Quantum Code'
+    label: "Write Quantum Code",
   },
   RESEARCH_APPS_IN_MENU,
   ALGORITHMS_COLLECTION_IN_MENU,
   EXPERIMENTALIST_TOOLBOX_IN_MENU,
   CIRCUITS_IN_MENU,
   {
-    label: 'Run Quantum Code'
+    label: "Run Quantum Code",
   },
   SIMULATORS_IN_MENU,
-  HARDWARE_IN_MENU
-]
+  HARDWARE_IN_MENU,
+];
 
 const CONTENT_SECTIONS: OverviewSection[] = [
   RESEARCH_APPS,
@@ -345,13 +365,13 @@ const CONTENT_SECTIONS: OverviewSection[] = [
   EXPERIMENTALIST_TOOLBOX,
   CIRCUITS,
   SIMULATORS,
-  HARDWARE
-]
+  HARDWARE,
+];
 
 export {
   TableOfContentEntry,
   OverviewSection,
   OverviewSubSection,
   TABLE_OF_CONTENTS,
-  CONTENT_SECTIONS
-}
+  CONTENT_SECTIONS,
+};

@@ -3,118 +3,126 @@
     <qiskit-banner>
       <div class="content">
         Miss the old version of the textbook? Access it
-        <AppLink
+        <UiLink
           class="link"
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
           url="https://qiskit.org/textbook"
         >
           here
-        </AppLink>
+        </UiLink>
       </div>
     </qiskit-banner>
-    <LearnHeader />
-    <StartLearningSection class="learn-page__section" />
-    <AppHelpfulResourcesSection
+    <LearnPageHeader />
+    <LearnStartLearningSection class="learn-page__section" />
+    <UiHelpfulResourcesSection
       class="learn-page__section"
       :resources="helpfulResources"
     />
   </main>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
-import '@qiskit/web-components/components/banner'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
-import { SOCIAL_MEDIA } from '~/constants/menuLinks'
+<script setup lang="ts">
+import "@qiskit/web-components/banner";
+import { SOCIAL_MEDIA } from "~/constants/menuLinks";
+import type { DescriptionCard } from "~/types/uiComponents";
 
-@Component({
-  layout: 'default-max',
-  head () {
-    return {
-      title: 'Qiskit Textbook'
-    }
-  }
-})
-export default class LearnPage extends QiskitPage {
-  routeName: string = 'learn'
+definePageMeta({
+  layout: "default-max",
+  pageTitle: "Qiskit Textbook",
+  routeName: "learn",
+});
 
-  helpfulResources: DescriptionCard[] = [
-    {
-      title: 'Documentation',
-      description: 'The Qiskit Documentation is the right place for you if you are looking for the installation guide, release notes, or API references.',
-      cta: {
-        url: 'https://qiskit.org/documentation/',
-        label: 'Go to documentation',
-        segment: { cta: 'documentation', location: 'helpful-resources' }
-      }
+useHead({
+  title: "Qiskit Textbook",
+});
+
+const routeName = "learn";
+
+const helpfulResources: DescriptionCard[] = [
+  {
+    title: "Documentation",
+    description:
+      "The Qiskit Documentation is the right place for you if you are looking for the installation guide, release notes, or API references.",
+    cta: {
+      url: "https://qiskit.org/documentation/",
+      label: "Go to documentation",
+      segment: { cta: "documentation", location: "helpful-resources" },
     },
-    {
-      title: SOCIAL_MEDIA.support.label,
-      description: 'If you need support on anything relating to using and developing Qiskit, you can use the following forums to direct your issue / queries to the appropriate audience.',
-      cta: {
-        url: SOCIAL_MEDIA.support.url,
-        label: 'Visit Support Channels',
-        segment: { cta: 'support-channels', location: 'helpful-resources' }
-      }
+  },
+  {
+    title: SOCIAL_MEDIA.support.label,
+    description:
+      "If you need support on anything relating to using and developing Qiskit, you can use the following forums to direct your issue / queries to the appropriate audience.",
+    cta: {
+      url: SOCIAL_MEDIA.support.url,
+      label: "Visit Support Channels",
+      segment: { cta: "support-channels", location: "helpful-resources" },
     },
-    {
-      title: SOCIAL_MEDIA.slack.label,
-      description: 'The Slack community is a great place to engage in discussion on research and quantum development.',
-      cta: {
-        url: SOCIAL_MEDIA.slack.url,
-        label: 'Visit Slack',
-        segment: { cta: 'slack', location: 'helpful-resources' }
-      }
+  },
+  {
+    title: SOCIAL_MEDIA.slack.label,
+    description:
+      "The Slack community is a great place to engage in discussion on research and quantum development.",
+    cta: {
+      url: SOCIAL_MEDIA.slack.url,
+      label: "Visit Slack",
+      segment: { cta: "slack", location: "helpful-resources" },
     },
-    {
-      title: 'Educators Program',
-      description: 'This program helps teachers in the growing quantum field connect with one another, and provides the learning resources, tools, and systems access they need to provide quality educational experiences.',
-      cta: {
-        url: 'https://quantum-computing.ibm.com/programs/educators',
-        label: 'Visit the Educators Program',
-        segment: { cta: 'educators-program', location: 'helpful-resources' }
-      }
-    }
-  ]
-}
+  },
+  {
+    title: "Educators Program",
+    description:
+      "This program helps teachers in the growing quantum field connect with one another, and provides the learning resources, tools, and systems access they need to provide quality educational experiences.",
+    cta: {
+      url: "https://quantum-computing.ibm.com/programs/educators",
+      label: "Visit the Educators Program",
+      segment: { cta: "educators-program", location: "helpful-resources" },
+    },
+  },
+];
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .learn-page {
   &__section {
-    @include contained();
+    @include qiskit.contained;
 
-    max-width: $max-size;
-    margin-bottom: $spacing-07;
-    margin-top: $spacing-10;
+    max-width: qiskit.$max-size;
+    margin-bottom: carbon.$spacing-07;
+    margin-top: carbon.$spacing-10;
   }
 
   qiskit-banner {
     .content {
-      @include contained();
+      @include qiskit.contained;
 
-      max-width: $max-size;
-      padding: $spacing-04 $spacing-06;
+      max-width: qiskit.$max-size;
       display: flex;
       flex: 1;
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         display: block;
+      }
+
+      @include carbon.breakpoint-between(sm, max) {
+        padding-left: 0;
       }
     }
 
     .link {
-      color: $text-color-white;
+      color: qiskit.$text-color-white;
       text-decoration: underline;
       margin-left: 4px;
 
       &:hover,
       &:visited {
-        color: currentColor;
+        color: currentcolor;
       }
 
-      @include mq($until: medium) {
+      @include carbon.breakpoint-down(md) {
         margin-left: 2px;
       }
     }

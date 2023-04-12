@@ -3,25 +3,23 @@
     <qiskit-ui-shell v-if="isALearningPage" @on-click="onClick" />
     <qiskit-ui-shell v-else variant="hide-account" @on-click="onClick" />
     <div class="main-container">
-      <nuxt />
+      <slot />
     </div>
-    <PageFooter theme="light" />
+    <FooterComponent theme="light" />
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import '@qiskit/web-components/components/ui-shell'
+<script setup lang="ts">
+import "@qiskit/web-components/ui-shell";
 
-@Component
-export default class MaxLayout extends Vue {
-  onClick (e: CustomEvent) {
-    this.$trackClickEvent(`${e.detail?.label?.toLowerCase()}`, 'menu')
-  }
+const route = useRoute();
+const { trackClickEvent } = useSegment();
 
-  isALearningPage: boolean = this.$route.path.includes('/learn')
+function onClick(e: CustomEvent) {
+  trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
 }
+
+const isALearningPage = computed(() => route.path.includes("/learn"));
 </script>
 
 <style lang="scss" scoped>

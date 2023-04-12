@@ -1,31 +1,32 @@
 <template>
-  <main class="landing-page">
-    <TheHeroMoment :version="qiskitVersion" />
-    <TheQuickStart />
-    <TheQiskitCapabilitiesSection />
-    <TheLearnSection />
+  <main>
+    <LandingHeroMomentComponent :version="qiskitVersion" />
+    <LandingQuickStartComponent />
+    <LandingQiskitCapabilitiesSectionComponent />
+    <LandingLearnSectionComponent />
   </main>
 </template>
 
-<script lang="ts">
-import axios from 'axios'
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
-
-@Component({
-  head () {
-    return { title: 'Qiskit' }
-  },
-  layout: 'default-max',
-  async asyncData () {
-    const qiskitPackageInfoUrl = 'https://pypi.org/pypi/qiskit/json'
-    const packageInfo = (await axios.get(qiskitPackageInfoUrl)).data
-    return {
-      qiskitVersion: packageInfo.info.version
-    }
-  }
-})
-export default class LandingPage extends QiskitPage {
-  routeName = 'qiskit-landing-page'
+<script setup lang="ts">
+interface PackageInfo {
+  info: {
+    version: string;
+  };
 }
+
+definePageMeta({
+  layout: "default-max",
+  pageTitle: "Qiskit",
+  routeName: "qiskit-landing-page",
+});
+
+useHead({
+  title: "Qiskit",
+});
+
+const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
+  $fetch("https://pypi.org/pypi/qiskit/json")
+);
+
+const qiskitVersion = packageInfo.value?.info.version ?? "";
 </script>

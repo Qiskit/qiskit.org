@@ -1,27 +1,22 @@
 <template>
-  <div class="metal-page">
-    <TheDarkHeader />
-    <IntroSection />
-    <CapabilitiesSection />
-    <FeaturesSection />
-    <BuildingSection />
-    <JoinUsSection />
+  <div>
+    <MetalDarkHeader />
+    <MetalIntroSection />
+    <MetalCapabilitiesSection />
+    <MetalFeaturesSection />
+    <MetalBuildingSection />
+    <MetalJoinUsSection />
   </div>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
+<script setup lang="ts">
+definePageMeta({
+  layout: "metal",
+  pageTitle: "Metal",
+  routeName: "metal",
+});
 
-@Component({
-  layout: 'metal',
-  head () {
-    return {
-      title: 'Metal'
-    }
-  }
-})
-export default class MetalPage extends QiskitPage {
-  routeName = 'metal'
-}
+useHead({
+  title: "Metal",
+});
 </script>

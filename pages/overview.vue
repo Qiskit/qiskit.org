@@ -1,36 +1,29 @@
 <template>
   <div class="overview-page">
-    <AppPageHeaderFixed>
+    <UiPageHeaderFixed>
       The most
-      <TypewriterEffect
-        :values="[
-          'feature-rich',
-          'modular',
-          'open',
-          'popular'
-        ]"
+      <UiTypewriterEffect
+        :values="['feature-rich', 'modular', 'open', 'popular']"
       />
       quantum computing SDK
-    </AppPageHeaderFixed>
-    <section
-      id="contentContainer"
-      class="bx--grid page-section"
-    >
-      <div class="bx--row">
-        <div class="bx--col-sm-0 bx--col-md-2 bx--col-lg-3">
+    </UiPageHeaderFixed>
+    <section id="contentContainer" class="cds--grid page-section">
+      <div class="cds--row">
+        <div class="cds--col-sm-0 cds--col-md-2 cds--col-lg-3">
           <div class="overview-page__table-of-contents">
-            <TheTableOfContents
+            <OverviewTableOfContents
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <AppCta
-              v-bind="quickStartLink"
+            <UiCta
               kind="ghost"
+              :label="quickStartLink.label"
+              :url="quickStartLink.url"
             />
           </div>
         </div>
-        <div class="bx--col-lg-13 bx--col-md-6">
-          <AppIntroductoryContent
+        <div class="cds--col-lg-13 cds--col-md-6">
+          <UiIntroductoryContent
             v-for="section in contentSections"
             :id="section.id"
             :key="section.id"
@@ -40,7 +33,7 @@
             :link="section.link"
             :linkset="section.linkset"
           >
-            <ContentAccordion
+            <OverviewContentAccordion
               v-if="section.subSections"
               class="overview-page__content-section-details"
               :tabs="asTabs(section.subSections)"
@@ -50,68 +43,70 @@
                 <img
                   class="overview-page__content-section-image"
                   :src="section.image"
-                >
+                />
               </div>
             </div>
-          </AppIntroductoryContent>
+          </UiIntroductoryContent>
         </div>
       </div>
     </section>
-    <TheQuickStart id="quick-start" />
+    <LandingQuickStartComponent id="quick-start" />
   </div>
 </template>
 
-<script lang="ts">
-import { Component } from 'vue-property-decorator'
-import QiskitPage from '~/components/logic/QiskitPage.vue'
-import { ContentAccordionTab } from '~/components/overview/ContentAccordion.vue'
+<script setup lang="ts">
+import { ContentAccordionTab } from "~/components/Overview/OverviewContentAccordion.vue";
 import {
   TABLE_OF_CONTENTS,
   CONTENT_SECTIONS,
-  OverviewSubSection
-} from '~/constants/overviewContent'
-import ScrollSectionsMixin from '~/mixins/scrollBetweenSections'
+  OverviewSubSection,
+} from "~/constants/overviewContent";
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
-@Component({
-  mixins: [ScrollSectionsMixin],
-  head () {
-    return {
-      title: 'Qiskit Overview'
-    }
-  },
-  layout: 'default-max'
-})
-export default class OverviewPage extends QiskitPage {
-  routeName = 'overview'
+definePageMeta({
+  layout: "default-max",
+  pageTitle: "Qiskit Overview",
+  routeName: "overview",
+});
 
-  tocEntries = TABLE_OF_CONTENTS
-  contentSections = CONTENT_SECTIONS
+useHead({
+  title: "Qiskit Overview",
+});
 
-  quickStartLink = {
-    url: '#quick-start',
-    label: 'Get Started'
-  }
+const tocEntries = TABLE_OF_CONTENTS;
+const contentSections = CONTENT_SECTIONS;
 
-  asTabs (subsections: Array<OverviewSubSection>): Array<ContentAccordionTab> {
-    return subsections.map(subsection => subsection as ContentAccordionTab)
-  }
+const { activeSection } = useScrollBetweenSections();
+
+const quickStartLink = {
+  url: "#quick-start",
+  label: "Get Started",
+};
+
+function asTabs(
+  subsections: Array<OverviewSubSection>
+): Array<ContentAccordionTab> {
+  return subsections.map((subsection) => subsection as ContentAccordionTab);
 }
 </script>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .overview-page {
   &__table-of-contents {
     position: sticky;
-    top: $spacing-06;
+    top: carbon.$spacing-06;
   }
 
   &__content-section {
-    margin-bottom: $spacing-10;
+    margin-bottom: carbon.$spacing-10;
     overflow: hidden;
   }
 
   &__content-section-details {
-    background-color: $background-color-lighter;
+    background-color: qiskit.$background-color-lighter;
     height: 100%;
   }
 
