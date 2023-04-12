@@ -6,7 +6,7 @@
           <LearnDynamicBackgroundLogo class="learn-header__logo" />
         </div>
         <div>
-          <h1 class="learn-header__headline">Qiskit Textbook (beta)</h1>
+          <h1 class="learn-header__headline">Qiskit Textbook</h1>
           <qiskit-mega-menu-dropdown
             :id="appMegaDropdownMenuId"
             class="learn-header__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
