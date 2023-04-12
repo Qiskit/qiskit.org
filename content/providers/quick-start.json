@@ -564,31 +564,54 @@
     ]
   },
   {
-    "title": "IBM Qiskit Runtime",
-    "description": "Qiskit Runtime is a quantum computing service and programming model that allows users to optimize workloads and efficiently execute them on quantum systems at scale. The programming model extends the existing interface in Qiskit with a set of new primitive programs.",
+    "title": "IBM Quantum",
+    "description": "IBM Quantum offers both open and premium access to a wide variety of quantum systems. All quantum systems deployed by IBM Quantum are based on superconducting qubit technology, as the control and scalability of this technology pave a clear path to achieving quantum advantage with these systems.",
     "installation": [
       "pip install qiskit",
-      "pip install qiskit-ibm-runtime"
+      "pip install qiskit-ibm-provider qiskit-ibm-runtime"
     ],
     "websiteCta": {
       "label": "Website",
-      "url": "https://quantum-computing.ibm.com/lab/docs/iql/runtime/"
+      "url": "https://quantum-computing.ibm.com/"
     },
     "docsCta": {
       "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_runtime/"
+      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
     },
     "sourceCta": {
       "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-ibm-runtime"
+      "url": "https://github.com/Qiskit/qiskit-ibm-provider"
     },
     "codeExamples": [
+      {
+        "name": "Transpiling",
+        "runMethod": "backend",
+        "fullCode": [
+          "from qiskit_ibm_provider import IBMProvider",
+          "&nbsp;",
+          "# Get the API token in https://quantum-computing.ibm.com/",
+          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
+          "provider = IBMProvider()",
+          "backend = provider.get_backend(\"ibm_nairobi\")",
+          "&nbsp;",
+          "# Build circuit",
+          "from qiskit.circuit.library import QuantumVolume",
+          "circuit = QuantumVolume(5)",
+          "&nbsp;",
+          "# Transpile circuit",
+          "from qiskit import transpile",
+          "transpiled_circuit = transpile(circuit, backend)",
+          "transpiled_circuit.draw()"
+        ]
+      },
       {
         "name": "Sampling Bell Circuit",
         "runMethod": "sampler",
         "fullCode": [
           "from qiskit_ibm_runtime import QiskitRuntimeService, Sampler",
-          "service = QiskitRuntimeService()",
+          "&nbsp;",
+          "# Get the API token in https://quantum-computing.ibm.com/",
+          "service = QiskitRuntimeService(token=\"<IBM Cloud API key>\")",
           "backend = service.backend(\"ibm_perth\")",
           "sampler = Sampler(session=backend)",
           "&nbsp;",
@@ -610,7 +633,10 @@
         "runMethod": "estimator",
         "fullCode": [
           "from qiskit_ibm_runtime import QiskitRuntimeService, Estimator",
-          "service = QiskitRuntimeService()",
+          "&nbsp;",
+          "# Get the API token in https://quantum-computing.ibm.com/",
+          "service = QiskitRuntimeService(token=\"<IBM Cloud API key>\")",
+          "&nbsp;",
           "backend = service.backend(\"ibm_perth\")",
           "estimator = Estimator(session=backend)",
           "&nbsp;",
@@ -635,106 +661,7 @@
           "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
           "print(result.eigenvalue)"
         ]
-      }
-    ]
-  },
-  {
-    "title": "IBM Quantum",
-    "description": "IBM Quantum offers both open and premium access to a wide variety of quantum systems. All quantum systems deployed by IBM Quantum are based on superconducting qubit technology, as the control and scalability of this technology pave a clear path to achieving quantum advantage with these systems.",
-    "installation": [
-      "pip install qiskit",
-      "pip install qiskit-ibm-provider"
-    ],
-    "websiteCta": {
-      "label": "Website",
-      "url": "https://quantum-computing.ibm.com/services?services=systems"
-    },
-    "docsCta": {
-      "label": "Docs",
-      "url": "https://qiskit.org/documentation/partners/qiskit_ibm_provider/"
-    },
-    "sourceCta": {
-      "label": "GitHub",
-      "url": "https://github.com/Qiskit/qiskit-ibm-provider"
-    },
-    "codeExamples": [
-      {
-        "name": "Transpiling",
-        "runMethod": "backend",
-        "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
-          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"ibm_nairobi\")",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit.circuit.library import QuantumVolume",
-          "circuit = QuantumVolume(5)",
-          "&nbsp;",
-          "# Transpile circuit",
-          "from qiskit import transpile",
-          "transpiled_circuit = transpile(circuit, backend)",
-          "transpiled_circuit.draw()"
-        ]
-      },
-      {
-        "name": "Sampling Bell Circuit",
-        "runMethod": "sampler",
-        "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
-          "from qiskit.primitives import BackendSampler",
-          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"ibm_nairobi\")",
-          "sampler = BackendSampler(backend)",
-          "&nbsp;",
-          "# Build circuit",
-          "from qiskit import QuantumCircuit",
-          "circuit = QuantumCircuit(2, 2)",
-          "circuit.h(0)",
-          "circuit.cx(0,1)",
-          "circuit.measure([0,1], [0,1])",
-          "&nbsp;",
-          "# Run the circuit and get result distribution",
-          "job = sampler.run(circuit)",
-          "quasi_dist = job.result().quasi_dists[0]",
-          "print(quasi_dist)"
-        ]
-      },
-      {
-        "name": "Running VQE",
-        "runMethod": "estimator",
-        "fullCode": [
-          "from qiskit_ibm_provider import IBMProvider",
-          "from qiskit.primitives import BackendEstimator",
-          "IBMProvider.save_account(\"MY_IBM_QUANTUM_TOKEN\")",
-          "provider = IBMProvider()",
-          "backend = provider.get_backend(\"ibm_nairobi\")",
-          "estimator = BackendEstimator(backend)",
-          "&nbsp;",
-          "# Express hydrogen molecule Hamiltonian as an operator",
-          "from qiskit.quantum_info import SparsePauliOp",
-          "H2_operator = SparsePauliOp.from_list([",
-          "    (\"II\", -1.052373245772859),",
-          "    (\"IZ\", 0.39793742484318045),",
-          "    (\"ZI\", -0.39793742484318045),",
-          "    (\"ZZ\", -0.01128010425623538),",
-          "    (\"XX\", 0.18093119978423156)",
-          "])",
-          "&nbsp;",
-          "# Calculate ground state energy using VQE",
-          "from qiskit.circuit.library import TwoLocal",
-          "from qiskit.algorithms.optimizers import SLSQP",
-          "from qiskit.algorithms.minimum_eigensolvers import VQE",
-          "&nbsp;",
-          "ansatz = TwoLocal(num_qubits=2, rotation_blocks=\"ry\", entanglement_blocks=\"cz\")",
-          "optimizer = SLSQP(maxiter=100)",
-          "vqe = VQE(estimator, ansatz, optimizer)",
-          "result = vqe.compute_minimum_eigenvalue(operator=H2_operator)",
-          "print(result.eigenvalue)"
-        ]
-      }
-    ]
+      }    ]
   },
   {
     "title": "IonQ",
