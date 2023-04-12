@@ -235,13 +235,13 @@
       right: -8rem;
     }
 
-    @include carbon.breakpoint-between(md, lg) {
+    @include carbon.breakpoint-down(lg) {
       width: 32rem;
       right: auto;
       left: 15rem;
     }
 
-    @include carbon.breakpoint-between(sm, md) {
+    @include carbon.breakpoint-down(md) {
       width: 22rem;
       right: auto;
       left: 6.5rem;
