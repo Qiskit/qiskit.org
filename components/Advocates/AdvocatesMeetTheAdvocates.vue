@@ -111,7 +111,8 @@ function updateRegionFilter(option: string, isChecked: boolean) {
 }
 
 function updateRegionFilters(newRegionFilters: string) {
-  const newRegionFiltersAsArray = newRegionFilters.split(",");
+  const newRegionFiltersAsArray =
+    newRegionFilters === "" ? [] : newRegionFilters.split(",");
   regionFilters.value = newRegionFiltersAsArray;
 }
 
