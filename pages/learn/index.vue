@@ -1,17 +1,5 @@
 <template>
   <main class="learn-page">
-    <qiskit-banner>
-      <div class="content">
-        Miss the old version of the textbook? Access it
-        <UiLink
-          class="link"
-          :segment="{ action: `${routeName} > banner > old-textbook-version` }"
-          url="https://qiskit.org/textbook"
-        >
-          here
-        </UiLink>
-      </div>
-    </qiskit-banner>
     <LearnPageHeader />
     <LearnStartLearningSection class="learn-page__section" />
     <UiHelpfulResourcesSection
