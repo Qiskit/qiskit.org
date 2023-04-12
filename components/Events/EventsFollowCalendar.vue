@@ -15,7 +15,6 @@
           :key="name"
           :target="`panel-${name}`"
           :value="name"
-          class="event-page__tab"
         >
           {{ name }}
         </bx-tab>

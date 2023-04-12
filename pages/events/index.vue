@@ -382,9 +382,6 @@ const selectTab = (selectedTab: string) => {
   &:deep(.event-page__tabs) {
     margin-top: carbon.$spacing-07;
     margin-bottom: carbon.$spacing-09;
-  }
-
-  &:deep(.event-page__tab) {
     padding-top: carbon.$spacing-06;
   }
 
