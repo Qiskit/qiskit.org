@@ -215,10 +215,13 @@ function getCheckedFilters(filter: string) {
     : typeFiltersAsString.value;
 }
 
-function updateWholeFilter(filter: string, newRegionFilters: string) {
-  isRegionFilter(filter)
-    ? (regionFilters.value = newRegionFilters.split(","))
-    : (typeFilters.value = newRegionFilters.split(","));
+function updateWholeFilter(filter: string, newFilters: string) {
+  const newFiltersArray = newFilters === "" ? [] : newFilters.split(",");
+  if (isRegionFilter(filter)) {
+    regionFilters.value = newFiltersArray;
+  } else {
+    typeFilters.value = newFiltersArray;
+  }
 }
 
 function isFilterChecked(filter: string, filterValue: string): boolean {
