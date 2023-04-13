@@ -1,6 +1,6 @@
 # Build
 
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 
 WORKDIR /qiskit.org
 
@@ -11,7 +11,7 @@ RUN npm run build
 
 # Serve
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 COPY --from=build /qiskit.org/.output ./.output/
 
