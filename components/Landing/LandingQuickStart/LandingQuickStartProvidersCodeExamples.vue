@@ -77,7 +77,7 @@ watch(
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .providers-code-examples {
-  padding: $spacing-05;
+  padding: carbon.$spacing-05;
 
   &__container {
     background-color: qiskit.$background-color-lighter;
