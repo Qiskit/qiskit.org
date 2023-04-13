@@ -88,7 +88,7 @@ watch(
 
   &__section {
     &:not(:last-child) {
-      margin-bottom: $spacing-07;
+      margin-bottom: carbon.$spacing-07;
     }
   }
 }
