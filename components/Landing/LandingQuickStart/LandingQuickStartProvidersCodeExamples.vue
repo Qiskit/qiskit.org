@@ -2,7 +2,7 @@
   <section class="providers-code-examples">
     <div class="providers-code-examples__container">
       <div class="providers-code-examples__section">
-        <h3>Installation</h3>
+        <h3>Install</h3>
         <UiCodeSnippet
           :code-lines="installCode"
           :code-snippet-title="`${providerTitle} install-code`"
@@ -10,7 +10,7 @@
         />
       </div>
       <div class="providers-code-examples__section">
-        <h3>Build and run a quantum program</h3>
+        <h3>Build and run</h3>
         <bx-tabs
           container
           :value="activeTabLabel"
