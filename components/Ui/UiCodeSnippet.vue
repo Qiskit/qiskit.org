@@ -1,16 +1,14 @@
 <template>
   <div class="code-snippet">
     <code class="code-snippet__code-cell">
-      <!-- eslint-disable vue/no-v-html -->
       <pre
         v-for="(line, index) in codeLines"
         :key="index"
         :class="{ 'code-snippet__code-cell_comment': line.startsWith('#') }"
-        v-html="line"
+        v-text="line"
       />
-      <!-- eslint-enable -->
     </code>
-    <cv-button
+    <bx-btn
       title="Copy"
       size="sm"
       class="code-snippet__copy-button"
@@ -25,18 +23,32 @@
       "
     >
       Copy
-    </cv-button>
+    </bx-btn>
   </div>
 </template>
 
 <script setup lang="ts">
+import "@carbon/web-components/es/components/button/index.js";
+
 interface Props {
-  codeLines: string[];
+  code: string;
   codeSnippetTitle: string;
   codeSnippetLocation: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const codeLines = computed(() => {
+  const code = props.code;
+  const codeLines = code.split("\n");
+  const codeLinesWithEmptyLines = codeLines.map((line) => {
+    if (line === "") {
+      return "\n";
+    }
+    return line;
+  });
+  return codeLinesWithEmptyLines;
+});
 
 const { trackClickEvent } = useSegment();
 
@@ -63,8 +75,6 @@ function copyToClipboard(e: { target: any }) {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-$cta-max-width: 4rem;
-
 .code-snippet {
   position: relative;
   margin-bottom: carbon.$spacing-05;
@@ -86,8 +96,6 @@ $cta-max-width: 4rem;
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 100%;
-    max-width: $cta-max-width;
     background-size: 200% 100%;
     background-position-x: 100%;
     background-image: linear-gradient(

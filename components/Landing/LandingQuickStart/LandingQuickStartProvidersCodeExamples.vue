@@ -4,7 +4,7 @@
       <div class="providers-code-examples__section">
         <h3>Install</h3>
         <UiCodeSnippet
-          :code-lines="installCode"
+          :code="installCode"
           :code-snippet-title="`${providerTitle} install-code`"
           :code-snippet-location="'quick-start-providers-code-examples'"
         />
@@ -33,7 +33,7 @@
           :aria-labelledby="algorithm.name"
         >
           <UiCodeSnippet
-            :code-lines="algorithm.fullCode"
+            :code="algorithm.fullCode"
             :code-snippet-title="algorithm.name"
             :code-snippet-location="'quick-start-providers-code-examples'"
           />
@@ -49,11 +49,11 @@ import "@carbon/web-components/es/components/tabs/index.js";
 interface codeExample {
   name: string;
   runMethod: string;
-  fullCode: string[];
+  fullCode: string;
 }
 
 interface Props {
-  installCode: string[];
+  installCode: string;
   providerTitle: string;
   codeExamples: codeExample[];
 }

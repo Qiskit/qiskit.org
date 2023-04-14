@@ -16,7 +16,7 @@ type TableOfContentEntry = {
 
 type ProviderCodeExample = {
   name: string;
-  fullCode: string[];
+  runMethod: string;
 };
 
 type ProviderObject = {

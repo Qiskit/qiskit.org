@@ -4,13 +4,13 @@
       {{ description }}
     </p>
     <UiCodeSnippet
-      :code-lines="installation"
+      :code="installation"
       :code-snippet-title="title"
       :code-snippet-location="'providers'"
     />
     <div class="accordion-layout__code-block">
       <UiCodeSnippet
-        :code-lines="codeExamples[0].fullCode"
+        :code="codeExamples[0].fullCode"
         :code-snippet-title="title"
         :code-snippet-location="'providers'"
       />
@@ -33,7 +33,7 @@ import { ProviderCodeExample } from "~/constants/providersContent";
 export interface AccordionLayoutProps {
   title: string;
   description: string;
-  installation: string[];
+  installation: string;
   websiteCta: GeneralLink;
   docsCta: GeneralLink;
   sourceCta: GeneralLink;
