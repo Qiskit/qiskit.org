@@ -38,7 +38,7 @@
 import type { ProviderObject } from "~/constants/providersContent";
 
 const { data } = await useAsyncData("providers-quick-start", () =>
-  queryContent("/providers/quick-start").findOne()
+  queryContent("/providers/quick-start/data").findOne()
 );
 
 const providersData = data.value!.body as ProviderObject[];

@@ -4,7 +4,7 @@ import { describe, test } from "vitest";
 
 describe("providers", () => {
   test("content file exists", async () => {
-    const contentFilePath = "content/providers/quick-start.yaml";
+    const contentFilePath = "content/providers/quick-start/data.yaml";
 
     const resolvedContentFilePath = path.resolve(
       process.cwd(),
