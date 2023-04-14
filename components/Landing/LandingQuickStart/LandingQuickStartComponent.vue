@@ -35,9 +35,13 @@
 </template>
 
 <script setup lang="ts">
-import rawQuickStartProvidersData from "~/content/providers/quick-start.json";
+import type { ProviderObject } from "~/constants/providersContent";
 
-const providersData = ref(rawQuickStartProvidersData);
+const { data } = await useAsyncData("providers-quick-start", () =>
+  queryContent("/providers/quick-start").findOne()
+);
+
+const providersData = data.value!.body as ProviderObject[];
 const selectedProviderIndex = ref(0);
 
 function updateSelectedProvider(selectedProviderId: number) {
