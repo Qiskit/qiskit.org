@@ -42,6 +42,7 @@ export interface AccordionLayoutProps {
 
 const props = defineProps<AccordionLayoutProps>();
 
+// FIX: This should already be checked by the GeneralLink type
 const validCtas = computed(() => {
   return [props.websiteCta, props.docsCta, props.sourceCta].filter(
     (cta) => cta.url !== null
