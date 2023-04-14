@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { GeneralLink } from "~/constants/appLinks";
-import type { ProviderObject } from "~/types/providersContent.js";
+import type { ProviderObject } from "~/types/providersContent";
 
 interface Props {
   providersList: ProviderObject[];

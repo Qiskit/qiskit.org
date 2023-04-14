@@ -57,7 +57,7 @@ import type {
   ProviderObject,
   ProvidersSectionParsedContent,
   TableOfContentEntry,
-} from "~/types/providersContent.js";
+} from "~/types/providersContent";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({

@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ProviderObject } from "~/types/providersContent.js";
+import type { ProviderObject } from "~/types/providersContent";
 
 const { data } = await useAsyncData("providers-quick-start", () =>
   queryContent("/providers/quick-start/data").findOne()
