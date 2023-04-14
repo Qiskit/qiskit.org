@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { GeneralLink } from "~/constants/appLinks";
-import { ProviderCodeExample } from "~/constants/providersContent";
+import type { ProviderCodeExample } from "~/types/providersContent.js";
 
 export interface AccordionLayoutProps {
   title: string;

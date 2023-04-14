@@ -53,11 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  TABLE_OF_CONTENTS,
-  CONTENT_SECTIONS,
+import type {
   ProviderObject,
-} from "~/constants/providersContent";
+  ProvidersSectionParsedContent,
+  TableOfContentEntry,
+} from "~/types/providersContent.js";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({
@@ -70,8 +70,21 @@ useHead({
   title: "Qiskit Providers",
 });
 
-const tocEntries = TABLE_OF_CONTENTS;
-const contentSections = CONTENT_SECTIONS;
+const { data: providersData } = await useAsyncData("providers", () =>
+  queryContent("/providers/list").find()
+);
+
+const contentSections = providersData.value as ProvidersSectionParsedContent[];
+const tocEntries: TableOfContentEntry[] = [
+  {
+    title: "Run Qiskit with",
+  },
+  ...contentSections.map((section) => ({
+    isSecondary: true,
+    sectionId: section.id,
+    title: section.title,
+  })),
+];
 
 const { activeSection } = useScrollBetweenSections();
 
