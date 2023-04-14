@@ -1,0 +1,77 @@
+description: Services or software packages that provide native support to Qiskit Primitives.
+  Qiskit Primitives provide a set of interfaces for performing operations such as
+  sampling (Sampler) and estimating (Estimator) that forms the fundamental building
+  blocks of quantum algorithm development.
+id: primitives
+providers:
+- codeExamples:
+  - fullCode: |-
+      from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
+      service = QiskitRuntimeService()
+      backend = service.backend("ibm_perth")
+      sampler = Sampler(session=backend)
+
+      # Build circuit
+      from qiskit import QuantumCircuit
+      circuit = QuantumCircuit(2, 2)
+      circuit.h(0)
+      circuit.cx(0,1)
+      circuit.measure([0,1], [0,1])
+
+      # Run the circuit and get result distribution
+      job = sampler.run(circuit)
+      quasi_dist = job.result().quasi_dists[0]
+      print(quasi_dist)
+    name: Sampling Bell Circuit
+    runMethod: sampler
+  description: Qiskit Runtime is a quantum computing service and programming model
+    that allows users to optimize workloads and efficiently execute them on quantum
+    systems at scale. The programming model extends the existing interface in Qiskit
+    with a set of new primitive programs.
+  docsCta:
+    label: Docs
+    url: https://qiskit.org/documentation/partners/qiskit_ibm_runtime/
+  installation: |-
+    pip install qiskit
+    pip install qiskit-ibm-runtime
+  sourceCta:
+    label: GitHub
+    url: https://github.com/Qiskit/qiskit-ibm-runtime
+  title: IBM Qiskit Runtime
+  websiteCta:
+    label: Website
+    url: https://quantum-computing.ibm.com/lab/docs/iql/runtime/
+- codeExamples:
+  - fullCode: |-
+      from qiskit_aer.primitives import Sampler
+      sampler = Sampler()
+
+      # Build circuit
+      from qiskit import QuantumCircuit
+      circuit = QuantumCircuit(2, 2)
+      circuit.h(0)
+      circuit.cx(0,1)
+      circuit.measure([0,1], [0,1])
+
+      # Run the circuit and get result distribution
+      job = sampler.run(circuit)
+      quasi_dist = job.result().quasi_dists[0]
+      print(quasi_dist)
+    name: Sampling Bell Circuit
+    runMethod: sampler
+  description: Aer is a high performance simulator for quantum circuits that includes
+    noise models.
+  docsCta:
+    label: Docs
+    url: https://qiskit.org/ecosystem/aer/
+  installation: |-
+    pip install qiskit
+    pip install qiskit-aer
+  sourceCta:
+    label: GitHub
+    url: https://github.com/Qiskit/qiskit-aer
+  title: Aer
+  websiteCta:
+    label: null
+    url: null
+title: Native Primitives
