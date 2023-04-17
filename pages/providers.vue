@@ -71,10 +71,15 @@ useHead({
 });
 
 const { data: providersData } = await useAsyncData("providers", () =>
-  queryContent("/providers/list").find()
+  queryContent<ProvidersSectionParsedContent>("/providers/list").find()
 );
 
-const contentSections = providersData.value as ProvidersSectionParsedContent[];
+const contentSections = providersData.value;
+
+if (!contentSections) {
+  throw new Error("No providers data found");
+}
+
 const tocEntries: TableOfContentEntry[] = [
   {
     title: "Run Qiskit with",

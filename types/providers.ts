@@ -17,6 +17,8 @@ export interface Provider {
   codeExamples: ProviderCodeExample[];
 }
 
+export interface ProviderParsedContent extends ParsedContent {}
+
 export interface ProvidersSectionParsedContent extends ParsedContent {
   /** The identifier of the section */
   id: string;

@@ -35,13 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Provider } from "~/types/providers";
+import type { ProviderParsedContent } from "~/types/providers";
 
-const { data } = await useAsyncData("providers-quick-start", () =>
-  queryContent("/providers/quick-start/data").findOne()
+const { data: providerData } = await useAsyncData("providers-quick-start", () =>
+  queryContent<ProviderParsedContent>("/providers/quick-start/data").findOne()
 );
 
-const providersData = data.value!.body as Provider[];
+if (!providerData) {
+  throw new Error("No providers data found");
+}
+
+const providersData = providerData.value!.body;
 const selectedProviderIndex = ref(0);
 
 function updateSelectedProvider(selectedProviderId: number) {
