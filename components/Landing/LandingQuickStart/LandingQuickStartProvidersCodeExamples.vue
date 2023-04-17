@@ -79,6 +79,8 @@ watch(
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .providers-code-examples {
+  --cds-heading-01-font-weight: 500;
+
   padding: carbon.$spacing-05;
 
   &__container {
