@@ -1,4 +1,3 @@
-import type { ParsedContent } from "@nuxt/content/dist/runtime/types";
 import type { GeneralLink } from "~/constants/appLinks";
 
 export interface ProviderCodeExample {
@@ -17,9 +16,12 @@ export interface Provider {
   codeExamples: ProviderCodeExample[];
 }
 
-export interface ProviderParsedContent extends ParsedContent {}
+export interface ProviderParsedContent extends Provider {
+  // From @nuxt/content ParsedContent interface
+  body: any;
+}
 
-export interface ProvidersSectionParsedContent extends ParsedContent {
+export interface ProvidersSection {
   /** The identifier of the section */
   id: string;
   /** The visible title of the section */

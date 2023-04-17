@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import type {
   Provider,
-  ProvidersSectionParsedContent,
+  ProvidersSection,
   TableOfContentEntry,
 } from "~/types/providers";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
@@ -71,7 +71,7 @@ useHead({
 });
 
 const { data: providersData } = await useAsyncData("providers", () =>
-  queryContent<ProvidersSectionParsedContent>("/providers/list").find()
+  queryContent<ProvidersSection>("/providers/list").find()
 );
 
 const contentSections = providersData.value;
