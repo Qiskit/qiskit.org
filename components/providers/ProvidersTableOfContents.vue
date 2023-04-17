@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TableOfContentEntry } from "~/types/providersContent";
+import type { TableOfContentEntry } from "~/types/providers";
 
 interface Props {
   entries: Array<TableOfContentEntry>;
