@@ -31,10 +31,10 @@
 
 <script setup lang="ts">
 import { GeneralLink } from "~/constants/appLinks";
-import type { ProviderObject } from "~/types/providers";
+import type { Provider } from "~/types/providers";
 
 interface Props {
-  providersList: ProviderObject[];
+  providersList: Provider[];
 }
 
 const providersPage: GeneralLink = {

@@ -35,13 +35,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ProviderObject } from "~/types/providers";
+import type { Provider } from "~/types/providers";
 
 const { data } = await useAsyncData("providers-quick-start", () =>
   queryContent("/providers/quick-start/data").findOne()
 );
 
-const providersData = data.value!.body as ProviderObject[];
+const providersData = data.value!.body as Provider[];
 const selectedProviderIndex = ref(0);
 
 function updateSelectedProvider(selectedProviderId: number) {

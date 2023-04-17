@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import type {
-  ProviderObject,
+  Provider,
   ProvidersSectionParsedContent,
   TableOfContentEntry,
 } from "~/types/providers";
@@ -93,8 +93,8 @@ const howToGuideLink = {
   label: "Become a provider",
 };
 
-function asTabs(providers: Array<ProviderObject>): Array<ProviderObject> {
-  return providers.map((provider) => provider as ProviderObject);
+function asTabs(providers: Array<Provider>): Array<Provider> {
+  return providers.map((provider) => provider as Provider);
 }
 </script>
 

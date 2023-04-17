@@ -7,7 +7,7 @@ export interface ProviderCodeExample {
   fullCode: string;
 }
 
-export interface ProviderObject {
+export interface Provider {
   title: string;
   description: string;
   installation: string;
@@ -25,7 +25,7 @@ export interface ProvidersSectionParsedContent extends ParsedContent {
   /** The visible description of the section */
   description: string;
   /** Where we want to go to get more info of the section */
-  providers: ProviderObject[];
+  providers: Provider[];
 }
 
 export interface TableOfContentEntry {
