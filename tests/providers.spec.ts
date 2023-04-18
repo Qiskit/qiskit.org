@@ -2,7 +2,7 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import { describe, test } from "vitest";
 import { parse } from "yaml";
-import { ProvidersSection } from "~/types/providers";
+import { ProviderParsedContent, ProvidersSection } from "~/types/providers";
 
 describe("list", () => {
   test("at least one content file exists", async () => {
@@ -41,7 +41,7 @@ describe("list", () => {
         "utf-8"
       );
 
-      const parsedContent: ProvidersSection[] = parse(contentFileContent);
+      const parsedContent = parse(contentFileContent);
 
       if (typeof parsedContent !== "object") {
         throw new TypeError(`Content file ${contentFile} is not valid`);
@@ -82,6 +82,46 @@ describe("quick-start", () => {
       await fs.access(resolvedContentFilePath);
     } catch (err) {
       throw new Error(`Required file ${contentFilePath} does not exist`);
+    }
+  });
+
+  test("content file is valid", async () => {
+    const contentFilePath = "content/providers/quick-start/data.yaml";
+
+    const resolvedContentFilePath = path.resolve(
+      process.cwd(),
+      contentFilePath
+    );
+
+    const contentFileContent = await fs.readFile(
+      resolvedContentFilePath,
+      "utf-8"
+    );
+
+    const parsedContent = parse(contentFileContent);
+
+    if (typeof parsedContent !== "object") {
+      throw new TypeError(`Content file ${contentFilePath} is not valid`);
+    }
+
+    type KeysOfProviderParsedContent = keyof ProviderParsedContent;
+
+    const expectedProperties: KeysOfProviderParsedContent[] = [
+      "title",
+      "description",
+      "installation",
+      "codeExamples",
+      "body",
+    ];
+
+    const parsedContentProperties = Object.keys(parsedContent);
+
+    for (const expectedProperty of expectedProperties) {
+      if (!parsedContentProperties.includes(expectedProperty)) {
+        throw new Error(
+          `Content file ${contentFilePath} is missing the ${expectedProperty} property`
+        );
+      }
     }
   });
 });
