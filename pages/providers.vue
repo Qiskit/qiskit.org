@@ -94,7 +94,7 @@ const tocEntries: TableOfContentEntry[] = [
 const { activeSection } = useScrollBetweenSections();
 
 const howToGuideLink = {
-  url: "https://qiskit.org/documentation/apidoc/providers.html#writing-a-new-provider",
+  url: "https://qisk.it/writing-a-new-provider",
   label: "Become a provider",
 };
 
