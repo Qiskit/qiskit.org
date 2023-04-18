@@ -125,12 +125,8 @@ enum QuantumHardwareCircuitsUrl {
 }
 
 enum GamesAndDemos {
-  BonusLevelSandbox = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox",
-  BonusLevelMakeYourOwnPuzzle = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-148-0",
-  Level5ProvingTheUniquenessOfQuantumVariables = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-153-0",
   EstimatingPiUsingQPEA = "https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm",
   LocalRealityAndTheChshInequality = "https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality",
-  WidgetsDemonstration = "https://learn.qiskit.org/course/ch-demos/widgets-demonstration",
 }
 
 enum LegacyContent {

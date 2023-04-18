@@ -409,14 +409,6 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
   },
   content: [
     {
-      label: "Bonus Level: Sandbox",
-      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-sandbox`,
-      segment: {
-        cta: "bonus-level-sandbox",
-        location: sectionGamesAndDemos,
-      },
-    },
-    {
       label: "Estimating Pi Using Quantum Phase Estimation Algorithm",
       url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
@@ -429,14 +421,6 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathGamesAndDemos}/local-reality-and-the-chsh-inequality`,
       segment: {
         cta: "local-reality-and-the-chsh-inequality",
-        location: sectionGamesAndDemos,
-      },
-    },
-    {
-      label: "Widgets Demonstration",
-      url: `${baseUrl}${pathGamesAndDemos}/widgets-demonstration`,
-      segment: {
-        cta: "widgets-demonstration",
         location: sectionGamesAndDemos,
       },
     },
