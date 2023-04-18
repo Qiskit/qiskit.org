@@ -30,10 +30,10 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/accordion/index.js";
-import { ProviderObject } from "~/constants/providersContent";
+import type { Provider } from "~/types/providers";
 
 interface Props {
-  tabs: Array<ProviderObject>;
+  tabs: Array<Provider>;
 }
 
 defineProps<Props>();

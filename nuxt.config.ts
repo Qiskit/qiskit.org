@@ -16,6 +16,8 @@ export default defineNuxtConfig({
     },
   },
 
+  modules: ["@nuxt/content"],
+
   runtimeConfig: {
     // Keys within public are also exposed client-side
     public: {

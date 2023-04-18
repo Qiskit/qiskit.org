@@ -4,13 +4,13 @@
       {{ description }}
     </p>
     <UiCodeSnippet
-      :code-lines="installation"
+      :code="installation"
       :code-snippet-title="title"
       :code-snippet-location="'providers'"
     />
     <div class="accordion-layout__code-block">
       <UiCodeSnippet
-        :code-lines="codeExamples[0].fullCode"
+        :code="codeExamples[0].fullCode"
         :code-snippet-title="title"
         :code-snippet-location="'providers'"
       />
@@ -28,12 +28,12 @@
 
 <script setup lang="ts">
 import { GeneralLink } from "~/constants/appLinks";
-import { ProviderCodeExample } from "~/constants/providersContent";
+import type { ProviderCodeExample } from "~/types/providers";
 
 export interface AccordionLayoutProps {
   title: string;
   description: string;
-  installation: string[];
+  installation: string;
   websiteCta: GeneralLink;
   docsCta: GeneralLink;
   sourceCta: GeneralLink;
@@ -42,6 +42,7 @@ export interface AccordionLayoutProps {
 
 const props = defineProps<AccordionLayoutProps>();
 
+// FIX: This should already be checked by the GeneralLink type
 const validCtas = computed(() => {
   return [props.websiteCta, props.docsCta, props.sourceCta].filter(
     (cta) => cta.url !== null
