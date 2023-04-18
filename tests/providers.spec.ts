@@ -2,7 +2,7 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import { describe, test } from "vitest";
 import { parse } from "yaml";
-import { ProviderParsedContent, ProvidersSection } from "~/types/providers";
+import { Provider, ProvidersSection } from "~/types/providers";
 
 describe("list", async () => {
   const contentFilesPath = "content/providers/list";
@@ -85,23 +85,24 @@ describe("quick-start", () => {
       throw new TypeError(`Content file ${contentFilePath} is not valid`);
     }
 
-    type KeysOfProviderParsedContent = keyof ProviderParsedContent;
+    type KeysOfProviderParsedContent = keyof Provider;
 
     const expectedProperties: KeysOfProviderParsedContent[] = [
       "title",
       "description",
       "installation",
       "codeExamples",
-      "body",
     ];
 
-    const parsedContentProperties = Object.keys(parsedContent);
+    for (const parsedContentItem of parsedContent) {
+      const parsedContentProperties = Object.keys(parsedContentItem);
 
-    for (const expectedProperty of expectedProperties) {
-      if (!parsedContentProperties.includes(expectedProperty)) {
-        throw new Error(
-          `Content file ${contentFilePath} is missing the ${expectedProperty} property`
-        );
+      for (const expectedProperty of expectedProperties) {
+        if (!parsedContentProperties.includes(expectedProperty)) {
+          throw new Error(
+            `Content file ${contentFilePath} is missing the ${expectedProperty} property`
+          );
+        }
       }
     }
   });
