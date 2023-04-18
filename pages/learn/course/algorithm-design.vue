@@ -24,25 +24,25 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
-  pageTitle: "Near-Term Algorithm Design",
+  pageTitle: "Variational Algorithm Design",
   routeName: "algorithm-design",
 });
 
 useHead({
-  title: "Near-Term Algorithm Design",
+  title: "Variational Algorithm Design",
 });
 
 const routeName = "algorithm-design";
 
-const headerTitle = "Near-Term Algorithm Design";
+const headerTitle = "Variational algorithm design";
 const headerDescription = [
-  "This course teaches you how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage. Throughout this course, you'll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.",
+  "This course teaches how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage. Throughout this course, you'll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.",
 ];
 
-const headerImg = "/images/learn/course/basics-quantum-information/atom.png";
+const headerImg = "/images/learn/course/algorithm-design/algorithm-design.png";
 
 const startLearningCTA: GeneralLink = {
-  url: StartLearningUrl.NearTermAlgorithmDesign,
+  url: StartLearningUrl.AlgorithmDesign,
   label: "Start learning",
   segment: {
     cta: "algorithm-design-cta",
@@ -82,10 +82,52 @@ const links: RecommendedReading[] = [
 
 const courses: Course[] = [
   {
-    image: "single-systems-preview.png",
-    label: "Single systems",
-    segment: { cta: "single-systems", location: "course" },
-    url: StartLearningUrl.NearTermAlgorithmDesign + "/",
+    image: "variational.png",
+    label: "Variational algorithms",
+    segment: { cta: "variational-algorithms", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/",
+  },
+  {
+    image: "reference.png",
+    label: "Reference states",
+    segment: { cta: "reference-states", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/reference",
+  },
+  {
+    image: "ansatz.png",
+    label: "Ansatze and variational forms",
+    segment: { cta: "ansatz", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/ansatz",
+  },
+  {
+    image: "cost_function.png",
+    label: "Cost functions",
+    segment: { cta: "cost-functions", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/cost_function",
+  },
+  {
+    image: "optimization.png",
+    label: "Optimization loops",
+    segment: { cta: "optimization", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/optimization",
+  },
+  {
+    image: "instances.png",
+    label: "Instances and extensions",
+    segment: { cta: "instances", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/instances",
+  },
+  {
+    image: "examples.png",
+    label: "Examples and applications",
+    segment: { cta: "examples", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/applications",
+  },
+  {
+    image: "badge.png",
+    label: "Earn your badge",
+    segment: { cta: "badge", location: "course" },
+    url: StartLearningUrl.AlgorithmDesign + "/badge",
   },
 ];
 

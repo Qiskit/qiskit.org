@@ -19,6 +19,7 @@ const sectionProblemSets = "problem-sets";
 
 const baseUrl = "https://learn.qiskit.org";
 const pathBasicsCourse = "/course/basics";
+const pathAlgorithmDesign = "/course/algorithm-design";
 const pathIntroductionCourse = "/course/introduction";
 const pathQuantumMachineLearning = "/course/machine-learning";
 const pathPrerequisites = "/course/ch-prerequisites";
@@ -81,6 +82,59 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
         cta: "entanglement_in_action",
         location: sectionBasicsCourse,
       },
+    },
+  ],
+};
+
+const ALGORITHM_DESIGN: MegaDropdownMenuGroup = {
+  title: {
+    label: "Variational algorithm design",
+    url: `${baseUrl}${pathAlgorithmDesign}`,
+    segment: {
+      cta: wholeSection,
+      location: sectionBasicsCourse,
+    },
+  },
+  content: [
+    {
+      label: "Variational algorithms",
+      segment: { cta: "variational-algorithms", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/`,
+    },
+    {
+      label: "Reference states",
+      segment: { cta: "reference-states", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/reference`,
+    },
+    {
+      label: "Ansatze and variational forms",
+      segment: { cta: "ansatz", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/ansatz`,
+    },
+    {
+      label: "Cost functions",
+      segment: { cta: "cost-functions", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/cost_function`,
+    },
+    {
+      label: "Optimization Loops",
+      segment: { cta: "optimization", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/optimization`,
+    },
+    {
+      label: "Instances and extensions",
+      segment: { cta: "instances", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/instances`,
+    },
+    {
+      label: "Examples and applications",
+      segment: { cta: "examples", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/applications`,
+    },
+    {
+      label: "Earn your badge",
+      segment: { cta: "badge", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/badge`,
     },
   ],
 };
@@ -1665,7 +1719,7 @@ type MegaDropdownMenuContent = MegaDropdownMenuSection[];
 
 const COURSES_SECTION: MegaDropdownMenuSection = {
   title: "Courses",
-  content: [BASICS_COURSE, INTRODUCTION_COURSE, QML_COURSE],
+  content: [BASICS_COURSE, ALGORITHM_DESIGN, INTRODUCTION_COURSE, QML_COURSE],
 };
 
 const CHAPTERS_SECTION: MegaDropdownMenuSection = {
