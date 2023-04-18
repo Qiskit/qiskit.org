@@ -4,32 +4,23 @@ import { describe, test } from "vitest";
 import { parse } from "yaml";
 import { ProviderParsedContent, ProvidersSection } from "~/types/providers";
 
-describe("list", () => {
-  test("at least one content file exists", async () => {
-    const contentFilesPath = "content/providers/list";
+describe("list", async () => {
+  const contentFilesPath = "content/providers/list";
 
-    const resolvedContentFilesPath = path.resolve(
-      process.cwd(),
-      contentFilesPath
-    );
+  const resolvedContentFilesPath = path.resolve(
+    process.cwd(),
+    contentFilesPath
+  );
 
-    const contentFiles = await fs.readdir(resolvedContentFilesPath);
+  const contentFiles = await fs.readdir(resolvedContentFilesPath);
 
+  test("at least one content file exists", () => {
     if (contentFiles.length === 0) {
       throw new Error(`No content files found in ${contentFilesPath}`);
     }
   });
 
   test("content files are valid", async () => {
-    const contentFilesPath = "content/providers/list";
-
-    const resolvedContentFilesPath = path.resolve(
-      process.cwd(),
-      contentFilesPath
-    );
-
-    const contentFiles = await fs.readdir(resolvedContentFilesPath);
-
     for (const contentFile of contentFiles) {
       const resolvedContentFilePath = path.resolve(
         resolvedContentFilesPath,
@@ -70,14 +61,11 @@ describe("list", () => {
 });
 
 describe("quick-start", () => {
+  const contentFilePath = "content/providers/quick-start/data.yaml";
+
+  const resolvedContentFilePath = path.resolve(process.cwd(), contentFilePath);
+
   test("content file exists", async () => {
-    const contentFilePath = "content/providers/quick-start/data.yaml";
-
-    const resolvedContentFilePath = path.resolve(
-      process.cwd(),
-      contentFilePath
-    );
-
     try {
       await fs.access(resolvedContentFilePath);
     } catch (err) {
@@ -86,13 +74,6 @@ describe("quick-start", () => {
   });
 
   test("content file is valid", async () => {
-    const contentFilePath = "content/providers/quick-start/data.yaml";
-
-    const resolvedContentFilePath = path.resolve(
-      process.cwd(),
-      contentFilePath
-    );
-
     const contentFileContent = await fs.readFile(
       resolvedContentFilePath,
       "utf-8"
