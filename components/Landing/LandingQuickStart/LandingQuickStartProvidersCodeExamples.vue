@@ -1,41 +1,43 @@
 <template>
   <section class="providers-code-examples">
     <div class="providers-code-examples__container">
-      <h3>Get the SDK</h3>
       <div class="providers-code-examples__section">
+        <h3>Install</h3>
         <UiCodeSnippet
-          :code-lines="installCode"
+          :code="installCode"
           :code-snippet-title="`${providerTitle} install-code`"
           :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
-      <bx-tabs
-        container
-        :value="activeTabLabel"
-        @bx-tabs-selected="updateSelectedTab($event)"
-      >
-        <bx-tab
-          v-for="algorithm in codeExamples"
-          :key="algorithm.name"
-          :target="algorithm.name"
-          :value="algorithm.name"
+      <div class="providers-code-examples__section">
+        <h3>Build and run</h3>
+        <bx-tabs
+          container
+          :value="activeTabLabel"
+          @bx-tabs-selected="updateSelectedTab($event)"
         >
-          {{ algorithm.name }}
-        </bx-tab>
-      </bx-tabs>
-      <div
-        v-for="algorithm in codeExamples"
-        :id="algorithm.name"
-        :key="algorithm.name"
-        class="providers-code-examples__section"
-        role="tabpanel"
-        :aria-labelledby="algorithm.name"
-      >
-        <UiCodeSnippet
-          :code-lines="algorithm.fullCode"
-          :code-snippet-title="algorithm.name"
-          :code-snippet-location="'quick-start-providers-code-examples'"
-        />
+          <bx-tab
+            v-for="algorithm in codeExamples"
+            :key="algorithm.name"
+            :target="algorithm.name"
+            :value="algorithm.name"
+          >
+            {{ algorithm.name }}
+          </bx-tab>
+        </bx-tabs>
+        <div
+          v-for="algorithm in codeExamples"
+          :id="algorithm.name"
+          :key="algorithm.name"
+          role="tabpanel"
+          :aria-labelledby="algorithm.name"
+        >
+          <UiCodeSnippet
+            :code="algorithm.fullCode"
+            :code-snippet-title="algorithm.name"
+            :code-snippet-location="'quick-start-providers-code-examples'"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -47,11 +49,11 @@ import "@carbon/web-components/es/components/tabs/index.js";
 interface codeExample {
   name: string;
   runMethod: string;
-  fullCode: string[];
+  fullCode: string;
 }
 
 interface Props {
-  installCode: string[];
+  installCode: string;
   providerTitle: string;
   codeExamples: codeExample[];
 }
@@ -77,6 +79,8 @@ watch(
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .providers-code-examples {
+  --cds-heading-01-font-weight: 500;
+
   padding: carbon.$spacing-05;
 
   &__container {
@@ -85,7 +89,9 @@ watch(
   }
 
   &__section {
-    position: relative;
+    &:not(:last-child) {
+      margin-bottom: carbon.$spacing-07;
+    }
   }
 }
 </style>

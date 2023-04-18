@@ -5,13 +5,14 @@
         <div class="quick-start__introduction">
           <h2>Quick Start</h2>
           <p class="quick-start__introduction__copy">
-            You can try Qiskit as a stand-alone tool or you can compile quantum
-            programs to a variety of targets, called providers. No other quantum
-            framework allows you to work with so many vendors!
+            You can use Qiskit to construct quantum programs and run them on
+            simulators or real quantum computers. With our extensive network of
+            providers you can compile your Qiskit code for a huge range of
+            different backends, more than any other quantum framework!
           </p>
           <p class="quick-start__introduction__copy">
-            Here are some code examples for common tasks so you can start
-            exploring different combinations:
+            Select a provider below and explore code examples of how to use it
+            with Qiskit:
           </p>
         </div>
       </div>
@@ -34,9 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import rawQuickStartProvidersData from "~/content/providers/quick-start.json";
+import type { ProviderParsedContent } from "~/types/providers";
 
-const providersData = ref(rawQuickStartProvidersData);
+const { data: providerData } = await useAsyncData("providers-quick-start", () =>
+  queryContent<ProviderParsedContent>("/providers/quick-start/data").findOne()
+);
+
+if (!providerData) {
+  throw new Error("No providers data found");
+}
+
+const providersData = providerData.value!.body;
 const selectedProviderIndex = ref(0);
 
 function updateSelectedProvider(selectedProviderId: number) {
