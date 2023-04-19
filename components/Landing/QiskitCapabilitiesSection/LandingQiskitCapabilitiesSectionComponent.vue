@@ -62,22 +62,26 @@ const capabilities: QiskitCapability[] = [
     },
   },
   {
-    title: "Run on real hardware",
+    title: "Transpile to any hardware",
     description:
-      "Users can run and schedule jobs on real quantum processors, and employ Qiskit Runtime to orchestrate quantum programs on cloud-based CPUs, QPUs, and GPUs.",
+      "Qiskit helps users run and schedule quantum programs for a variety of local simulators and cloud-based quantum processors. It supports several quantum hardware designs, such as superconducting qubits and trapped ions.",
     thumbnailResource: "/images/library/chip-01.png",
     link: {
-      url: "https://qiskit.org/documentation/apidoc/ibmq_provider.html",
+      url: "/providers",
       label: "Learn more",
-      segment: { cta: "run-on-hardware", location: "homepage-capabilities" },
+      segment: { cta: "transpile-to-any-hardware", location: "homepage-capabilities" },
     },
   },
   {
     title: "Try it yourself",
     description:
-      "Ready to explore Qiskit’s capabilities for yourself? Copy the code to the right of this paragraph and try running it in your local Python environment. You can also click the link to the IBM Quantum Lab and test it there.",
+      "Ready to explore Qiskit’s capabilities for yourself? Check out how to run Qiskit on the cloud or locally in your local Python environment.",
     thumbnailResource: "/images/landing-page/med_02_1.png",
-    segment: { cta: "try-it-yourself", location: "homepage-capabilities" },
+    link: {
+      url: "https://qiskit.org/documentation/getting_started.html",
+      label: "Learn more",
+      segment: { cta: "try-it-yourself", location: "homepage-capabilities" },
+    },
   },
 ];
 </script>
