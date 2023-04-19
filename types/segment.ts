@@ -30,3 +30,10 @@ export interface CtaClickedEventProp {
   location: string;
 }
 
+/**
+ * Properties sent to Segment for the event "Page Loaded".
+ */
+export interface PageLoadedEventSegmentSchema extends CommonSchemaEvent {
+  navigationType: string;
+  title: string;
+}
