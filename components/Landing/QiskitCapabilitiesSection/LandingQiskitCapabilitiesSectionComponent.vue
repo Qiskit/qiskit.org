@@ -32,8 +32,6 @@ interface QiskitCapability {
   segment?: CtaClickedEventProp;
 }
 
-const { trackClickEvent } = useSegment();
-
 const capabilities: QiskitCapability[] = [
   {
     title: "Circuit Library",
@@ -65,7 +63,10 @@ const capabilities: QiskitCapability[] = [
     link: {
       url: "/providers",
       label: "Learn more",
-      segment: { cta: "transpile-to-any-hardware", location: "homepage-capabilities" },
+      segment: {
+        cta: "transpile-to-any-hardware",
+        location: "homepage-capabilities",
+      },
     },
   },
   {
