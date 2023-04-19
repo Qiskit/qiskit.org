@@ -23,12 +23,12 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
-  pageTitle: "Quantum Algorithms for Applications",
+  pageTitle: "Games and demos",
   routeName: "games-and-demos",
 });
 
 useHead({
-  title: "Quantum Algorithms for Applications",
+  title: "Games and demos",
 });
 
 const routeName = "games-and-demos";
@@ -90,6 +90,24 @@ const courses: Course[] = [
       location: "course",
     },
     url: GamesAndDemos.LocalRealityAndTheChshInequality,
+  },
+  {
+    image: "quantum-coin-game.png",
+    label: "Quantum Coin Game",
+    segment: {
+      cta: "coin-game",
+      location: "course",
+    },
+    url: GamesAndDemos.QuantumCoinGame,
+  },
+  {
+    image: "variational-quantum-regression.png",
+    label: "Variational Quantum Regression",
+    segment: {
+      cta: "variational-quantum-regression",
+      location: "course",
+    },
+    url: GamesAndDemos.VariationalQuantumRegression,
   },
   {
     image: "widgets-demonstration.png",

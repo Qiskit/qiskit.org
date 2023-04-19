@@ -157,10 +157,22 @@ const courses: Course[] = [
     url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumCounting,
   },
   {
-    image: "quantum-teleportation.png",
-    label: "Quantum Teleportation",
-    segment: { cta: "quantum-teleportation", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumTeleportation,
+    image: "quantum-walk-search.png",
+    label: "Quantum Walk Search Algorithm",
+    segment: { cta: "quantum-walk-search-algorithm", location: "course" },
+    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumWalkSearchAlgorithm,
+  },
+  {
+    image: "hidden-shift-problem.png",
+    label: "Hidden Shift Problem",
+    segment: { cta: "hidden-shift-problem", location: "course" },
+    url: QuantumProtocolsAndQuantumAlgorithmsUrl.HiddenShiftProblem,
+  },
+  {
+    image: "quantum-key-distribution.png",
+    label: "Quantum Key Distribution",
+    segment: { cta: "quantum-key-distribution", location: "course" },
+    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumKeyDistribution,
   },
   {
     image: "superdense-coding.png",
@@ -169,10 +181,10 @@ const courses: Course[] = [
     url: QuantumProtocolsAndQuantumAlgorithmsUrl.SuperdenseCoding,
   },
   {
-    image: "quantum-key-distribution.png",
-    label: "Quantum Key Distribution",
-    segment: { cta: "quantum-key-distribution", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumKeyDistribution,
+    image: "quantum-teleportation.png",
+    label: "Quantum Teleportation",
+    segment: { cta: "quantum-teleportation", location: "course" },
+    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumTeleportation,
   },
 ];
 
