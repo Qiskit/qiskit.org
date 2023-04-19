@@ -471,6 +471,14 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       },
     },
     {
+      label: "Hello Qiskit",
+      url: `${baseUrl}${pathGamesAndDemos}/hello-qiskit`,
+      segment: {
+        cta: "hello-qiskit",
+        location: sectionGamesAndDemos,
+      },
+    },
+    {
       label: "Estimating Pi Using Quantum Phase Estimation Algorithm",
       url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
@@ -483,6 +491,22 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathGamesAndDemos}/local-reality-and-the-chsh-inequality`,
       segment: {
         cta: "local-reality-and-the-chsh-inequality",
+        location: sectionGamesAndDemos,
+      },
+    },
+    {
+      label: "Quantum Coin Game",
+      url: `${baseUrl}${pathGamesAndDemos}/coin-game`,
+      segment: {
+        cta: "coin-game",
+        location: sectionGamesAndDemos,
+      },
+    },
+    {
+      label: "Variational Quantum Regression",
+      url: `${baseUrl}${pathGamesAndDemos}/variational-quantum-regression`,
+      segment: {
+        cta: "variational-quantum-regression",
         location: sectionGamesAndDemos,
       },
     },
@@ -580,10 +604,26 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Quantum Teleportation",
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-teleportation`,
+      label: "Quantum Walk Search Algorithm",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
       segment: {
-        cta: "quantum-teleportation",
+        cta: "quantum-walk-search-algorithm",
+        location: sectionProtocolsAndAlgorithms,
+      },
+    },
+    {
+      label: "Hidden Shift Problem",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
+      segment: {
+        cta: "hidden-shift-problem",
+        location: sectionProtocolsAndAlgorithms,
+      },
+    },
+    {
+      label: "Quantum Key Distribution",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
+      segment: {
+        cta: "quantum-key-distribution",
         location: sectionProtocolsAndAlgorithms,
       },
     },
@@ -596,10 +636,10 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Quantum Key Distribution",
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
+      label: "Quantum Teleportation",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-teleportation`,
       segment: {
-        cta: "quantum-key-distribution",
+        cta: "quantum-teleportation",
         location: sectionProtocolsAndAlgorithms,
       },
     },
@@ -726,18 +766,42 @@ const QUANTUM_ALGORITHMS_FOR_APPS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Variational Quantum Linear Solver",
-      url: `${baseUrl}${pathApps}/the-variational-quantum-linear-solver`,
-      segment: {
-        cta: "the-variational-quantum-linear-solver",
-        location: sectionApps,
-      },
-    },
-    {
       label: "Quantum Image Processing - FRQI and NEQR Image Representations",
       url: `${baseUrl}${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         cta: "flexible-representation-of-quantum-images-frqi",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Quantum Facial Expression Recognition",
+      url: `${baseUrl}${pathApps}/facial-expression-recognition`,
+      segment: {
+        cta: "facial-expression-recognition",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Quantum Edge Detection",
+      url: `${baseUrl}${pathApps}/quantum-edge-detection`,
+      segment: {
+        cta: "quantum-edge-detection",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Travelling Salesman Problem using Quantum Phase Estimation",
+      url: `${baseUrl}${pathApps}/tsp`,
+      segment: {
+        cta: "tsp",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Variational Quantum Linear Solver",
+      url: `${baseUrl}${pathApps}/the-variational-quantum-linear-solver`,
+      segment: {
+        cta: "the-variational-quantum-linear-solver",
         location: sectionApps,
       },
     },
@@ -876,6 +940,14 @@ const QUANTUM_COMPUTING_LABS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathLabs}/lab-9-quantum-simulation-as-a-search-algorithm`,
       segment: {
         cta: "lab-9-quantum-simulation-as-a-search-algorithm",
+        location: sectionLabs,
+      },
+    },
+    {
+      label: "Lab 10. Quantum Error Correction",
+      url: `${baseUrl}${pathLabs}/lab-10-quantum-error-correction`,
+      segment: {
+        cta: "lab-10-quantum-error-correction",
         location: sectionLabs,
       },
     },
