@@ -82,6 +82,12 @@ const courses: Course[] = [
     segment: { cta: "measuring-quantum-volume", location: "course" },
     url: QuantumHardwareCircuitsUrl.MeasuringQuantumVolume,
   },
+  {
+    image: "density-matrix-and-mixed-states.png",
+    label: "The Density Matrix and Mixed States",
+    segment: { cta: "density-matrix", location: "course" },
+    url: QuantumHardwareCircuitsUrl.DensityMatrixAndMixedStates,
+  },
 ];
 
 const prerequisites: Prerequisite[] = [
