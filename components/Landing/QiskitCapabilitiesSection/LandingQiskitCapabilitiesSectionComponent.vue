@@ -1,21 +1,17 @@
 <template>
   <article class="cds--grid page-section qiskit-capabilities-section">
     <h2>What Can Qiskit Do</h2>
-    <div class="qiskit-capabilities-section__container">
-      <div class="qiskit-capabilities-section__capabilities">
-        <div class="qiskit-capabilities-section__content">
-          <LandingQiskitCapabilityCard
-            v-for="item in capabilities"
-            :id="item.title"
-            :key="item.title"
-            class="qiskit-capabilities-section__card scrollable"
-            :title="item.title"
-            :description="item.description"
-            :thumbnail-resource="item.thumbnailResource"
-            :link="item.link"
-          />
-        </div>
-      </div>
+    <div class="cds--row qiskit-capabilities-section__container">
+      <LandingQiskitCapabilityCard
+        v-for="item in capabilities"
+        :id="item.title"
+        :key="item.title"
+        class="cds--col-sm-4 cds--col-md-4 qiskit-capabilities-section__card scrollable"
+        :title="item.title"
+        :description="item.description"
+        :thumbnail-resource="item.thumbnailResource"
+        :link="item.link"
+      />
     </div>
   </article>
 </template>
@@ -88,9 +84,6 @@ const capabilities: QiskitCapability[] = [
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/index.scss" as qiskit;
-
-$cta-max-width: 14rem;
 
 .qiskit-capabilities-section {
   padding-bottom: carbon.$spacing-09;
@@ -104,25 +97,8 @@ $cta-max-width: 14rem;
     }
   }
 
-  &__capabilities {
-    display: flex;
-    align-items: flex-start;
-
-    @include carbon.breakpoint-down(md) {
-      flex-direction: column;
-    }
-  }
-
   &__card {
     margin-bottom: carbon.$spacing-07;
-
-    &:last-child {
-      margin-bottom: carbon.$spacing-13;
-
-      @include carbon.breakpoint-down(md) {
-        margin-bottom: carbon.$spacing-07;
-      }
-    }
   }
 }
 </style>
