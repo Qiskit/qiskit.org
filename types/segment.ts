@@ -30,11 +30,3 @@ export interface CtaClickedEventProp {
   location: string;
 }
 
-/**
- * Properties sent to Segment for the event "Performed Search".
- * Only the properties used in this project are included in this interface.
- * https://segment-standards.prod.ddp.cis.ibm.net/events/performed-search
- */
-export interface PerformedSearchEventSegmentSchema extends CommonSchemaEvent {
-  field: string;
-}
