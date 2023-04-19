@@ -25,18 +25,18 @@ declare global {
 
 /**
  * Minimum configuration for the analytics system.
- * @param key public key to send analytics
  * @param category Common Schema category
  * @param instanceId Common Schema instance ID
+ * @param key Segment analytics public key
  * @param productCode Common Schema product code
  * @param productCodeType Common Schema product code type
  * @param productTitle Common Schema product title
  * @param UT30 Common Schema UT30
  */
 function configureAnalytics(
-  key: string,
   category: string,
   instanceId: string,
+  key: string,
   productCode: string,
   productCodeType: string,
   productTitle: string,
@@ -186,11 +186,11 @@ export const useSegment = () => {
 
   const runtimeConfig = useRuntimeConfig();
 
-  if (runtimeConfig.public.isAnalyticsEnabled) {
+  if (runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ENABLED) {
     configureAnalytics(
-      runtimeConfig.public.analyticsKey,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_INSTANCE_ID,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE,
@@ -198,7 +198,7 @@ export const useSegment = () => {
     );
 
     useState("analyticsReady", () =>
-      installAnalytics(runtimeConfig.public.analyticsScriptUrl)
+      installAnalytics(runtimeConfig.public.IBM_ANALYTICS_SEGMENT_SCRIPT_SRC)
     );
   }
 
