@@ -479,7 +479,7 @@
   - fullCode: |-
       from qiskit_ibm_provider import IBMProvider
 
-      # Get the API token in https://quantum-computing.ibm.com/
+      # Get the API token in https://quantum-computing.ibm.com/account
       IBMProvider.save_account("MY_IBM_QUANTUM_TOKEN")
       provider = IBMProvider()
       backend = provider.get_backend("ibm_nairobi")
@@ -497,8 +497,8 @@
   - fullCode: |-
       from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 
-      # Get the API token in https://quantum-computing.ibm.com/
-      service = QiskitRuntimeService(token="<IBM Cloud API key>")
+      # Get the API token in https://quantum-computing.ibm.com/account
+      service = QiskitRuntimeService(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")
       backend = service.backend("ibm_perth")
       sampler = Sampler(session=backend)
 
@@ -518,9 +518,8 @@
   - fullCode: |-
       from qiskit_ibm_runtime import QiskitRuntimeService, Estimator
 
-      # Get the API token in https://quantum-computing.ibm.com/
-      service = QiskitRuntimeService(token="<IBM Cloud API key>")
-
+      # Get the API token in https://quantum-computing.ibm.com/account
+      service = QiskitRuntimeService(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")
       backend = service.backend("ibm_perth")
       estimator = Estimator(session=backend)
 
