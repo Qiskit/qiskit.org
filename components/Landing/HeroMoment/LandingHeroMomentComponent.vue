@@ -17,15 +17,10 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 hero-moment__description"
           >
-            <p class="hero-moment__description__title">
-              <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
-            </p>
-            <hr class="hero-moment__description__divider" />
-            <ol class="hero-moment__description__content">
-              <li>open-source toolkit for useful quantum computing.</li>
-              <li>production-ready circuit compiler.</li>
-            </ol>
-          </div>
+            Qiskit {{ qiskitPronunciation }} is an open-source SDK for working with quantum 
+            computers focus in how build circuits and optimize them using the last transpiler 
+            passes, and bringing access to the last quantum hardware interfaces.
+          </p>
         </div>
         <UiCta
           class="hero-moment__cta"
