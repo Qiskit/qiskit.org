@@ -15,13 +15,6 @@
             :link="item.link"
           />
         </div>
-        <div class="qiskit-capabilities-section__scrolling-ui">
-          <LandingQiskitCapabilitiesSectionCodeCell
-            :active-blocks="
-              capabilities.map((item, index) => isActiveSection(item, index))
-            "
-          />
-        </div>
       </div>
     </div>
   </article>
@@ -29,7 +22,6 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/button/index.js";
-import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 import type { CtaClickedEventProp } from "~/types/segment";
 
 interface QiskitCapability {
@@ -45,8 +37,6 @@ interface QiskitCapability {
 }
 
 const { trackClickEvent } = useSegment();
-
-const { activeSection } = useScrollBetweenSections();
 
 const capabilities: QiskitCapability[] = [
   {
@@ -90,17 +80,6 @@ const capabilities: QiskitCapability[] = [
     segment: { cta: "try-it-yourself", location: "homepage-capabilities" },
   },
 ];
-
-function isActiveSection(item: QiskitCapability, index: number): boolean {
-  if (capabilities[capabilities.length - 1].title === activeSection.value) {
-    return true;
-  }
-
-  return (
-    item.title === activeSection.value ||
-    (activeSection.value === "" && index === 0)
-  );
-}
 </script>
 
 <style lang="scss" scoped>
@@ -139,32 +118,6 @@ $cta-max-width: 14rem;
       @include carbon.breakpoint-down(md) {
         margin-bottom: carbon.$spacing-07;
       }
-    }
-  }
-
-  &__scrolling-ui {
-    position: sticky;
-    top: carbon.$spacing-06;
-    flex: 0 0 1;
-    max-width: 100%;
-    min-height: 20rem;
-
-    @include carbon.breakpoint-up(xlg) {
-      flex: 0 0 38rem;
-    }
-
-    @include carbon.breakpoint-between(lg, xlg) {
-      flex: 0 0 34rem;
-    }
-
-    @include carbon.breakpoint-down(lg) {
-      flex: 0 0 22rem;
-    }
-
-    @include carbon.breakpoint-down(md) {
-      flex: initial;
-      width: 100%;
-      margin-bottom: carbon.$spacing-07;
     }
   }
 }
