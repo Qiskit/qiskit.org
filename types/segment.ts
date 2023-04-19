@@ -1,12 +1,14 @@
 /**
- * IBM Cloud Common schema for Segment events.
- * Only the properties used in this project are included in this interface.
- * https://segment-standards.prod.ddp.cis.ibm.net/events/performed-search#IBM%20Cloud%20Common
+ * Required properties for Common Schema Events.
  */
-interface IbmCloudCommonEventSegmentSchema {
+interface CommonSchemaEvent {
   category: string;
+  instanceId: string;
+  productCode: string;
+  productCodeType: string;
   productTitle: string;
   uiElement?: string;
+  UT30: string;
 }
 
 /**
@@ -14,8 +16,7 @@ interface IbmCloudCommonEventSegmentSchema {
  * Only the properties used in this project are included in this interface.
  * https://segment-standards.prod.ddp.cis.ibm.net/events/cta-clicked
  */
-export interface CtaClickedEventSegmentSchema
-  extends IbmCloudCommonEventSegmentSchema {
+export interface CtaClickedEventSegmentSchema extends CommonSchemaEvent {
   CTA: string;
   location: string;
 }
@@ -34,7 +35,6 @@ export interface CtaClickedEventProp {
  * Only the properties used in this project are included in this interface.
  * https://segment-standards.prod.ddp.cis.ibm.net/events/performed-search
  */
-export interface PerformedSearchEventSegmentSchema
-  extends IbmCloudCommonEventSegmentSchema {
+export interface PerformedSearchEventSegmentSchema extends CommonSchemaEvent {
   field: string;
 }
