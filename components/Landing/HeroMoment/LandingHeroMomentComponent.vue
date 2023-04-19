@@ -17,9 +17,10 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 hero-moment__description"
           >
-            Qiskit {{ qiskitPronunciation }} is an open-source SDK for working with quantum 
-            computers focus in how build circuits and optimize them using the last transpiler 
-            passes, and bringing access to the last quantum hardware interfaces.
+            Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
+            with quantum computers focus in how build circuits and optimize them
+            using the last transpiler passes, and bringing access to the last
+            quantum hardware interfaces.
           </p>
         </div>
         <UiCta
