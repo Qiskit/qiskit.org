@@ -7,7 +7,9 @@ providers:
 - codeExamples:
   - fullCode: |-
       from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
-      service = QiskitRuntimeService()
+      
+      # Get the API token in https://quantum-computing.ibm.com/account
+      service = QiskitRuntimeService(channel="ibm_quantum", token="MY_IBM_QUANTUM_TOKEN")
       backend = service.backend("ibm_perth")
       sampler = Sampler(session=backend)
 
