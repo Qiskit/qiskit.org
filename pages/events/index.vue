@@ -62,7 +62,7 @@
           </div>
         </template>
         <template #results>
-          <div v-if="noEvents" class="bx--row">
+          <div v-if="noEvents" class="cds--row">
             <div class="cds--col-sm-4 cds--col-xlg-8">
               <UiCard
                 :image="emptyCard.img"
