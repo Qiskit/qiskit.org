@@ -27,7 +27,7 @@ export default defineNuxtConfig({
       analyticsKey: IS_PRODUCTION
         ? "ffdYLviQze3kzomaINXNk6NwpY9LlXcw"
         : "zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H",
-      isAnalyticsEnabled: true,
+      isAnalyticsEnabled: false,
     },
   },
 
@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     },
   },
 
-  ssr: false,
+  ssr: true,
 
   vue: {
     compilerOptions: {

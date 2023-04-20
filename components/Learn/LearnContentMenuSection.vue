@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import "@qiskit/web-components/mega-menu-dropdown";
+// import "@qiskit/web-components/mega-menu-dropdown";
 import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
 
 const dropdownMenuContent = LEARN_MEGA_MENU;
