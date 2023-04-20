@@ -108,6 +108,12 @@ const courses: Course[] = [
     segment: { cta: "lab-9", location: "course" },
     url: QuantumComputingLabs.Lab9,
   },
+  {
+    image: "lab-10.png",
+    label: "Lab 10 Quantum Error Correction",
+    segment: { cta: "lab-10", location: "course" },
+    url: QuantumComputingLabs.Lab10,
+  },
 ];
 
 const prerequisites: Prerequisite[] = [

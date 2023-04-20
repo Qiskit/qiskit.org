@@ -24,12 +24,12 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
-  pageTitle: "Quantum States and Qubits",
+  pageTitle: "Multiple Qubits and Entanglement",
   routeName: "multiple-qubits-and-entanglement",
 });
 
 useHead({
-  title: "Quantum States and Qubits",
+  title: "Multiple Qubits and Entanglement",
 });
 
 const routeName = "multiple-qubits-and-entanglement";

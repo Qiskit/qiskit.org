@@ -172,6 +172,19 @@ const learningSections: LearningSection[] = [
         },
       },
       {
+        image: "/images/learn/course/algorithm-design/algorithm-design.png",
+        title: "Variational algorithm design",
+        description: `This course teaches how to write variational 
+        algorithms: near-term, hybrid-quantum-classical algorithms that 
+        are ideal candidates to achieve quantum advantage. We'll also cover how to 
+        use Qiskit Runtime primitives to optimize for speed and accuracy.`,
+        cta: {
+          label: "Go to this course",
+          url: "/learn/course/algorithm-design",
+          segment: { cta: "algorithm-design", location: "course" },
+        },
+      },
+      {
         image: "/images/learn/introduction-course.png",
         title: "Introduction course",
         description: `Not sure where to start? This path is for you.

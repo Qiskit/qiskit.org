@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import "@qiskit/web-components/banner";
 import { SOCIAL_MEDIA } from "~/constants/menuLinks";
 import type { DescriptionCard } from "~/types/uiComponents";
 
@@ -79,39 +78,6 @@ const helpfulResources: DescriptionCard[] = [
     max-width: qiskit.$max-size;
     margin-bottom: carbon.$spacing-07;
     margin-top: carbon.$spacing-10;
-  }
-
-  qiskit-banner {
-    .content {
-      @include qiskit.contained;
-
-      max-width: qiskit.$max-size;
-      display: flex;
-      flex: 1;
-
-      @include carbon.breakpoint-down(md) {
-        display: block;
-      }
-
-      @include carbon.breakpoint-between(sm, max) {
-        padding-left: 0;
-      }
-    }
-
-    .link {
-      color: qiskit.$text-color-white;
-      text-decoration: underline;
-      margin-left: 4px;
-
-      &:hover,
-      &:visited {
-        color: currentcolor;
-      }
-
-      @include carbon.breakpoint-down(md) {
-        margin-left: 2px;
-      }
-    }
   }
 }
 </style>

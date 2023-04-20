@@ -53,7 +53,7 @@ const LEARN_START_LEARNING: GeneralLink = {
 enum StartLearningUrl {
   Introduction = "https://learn.qiskit.org/course/introduction",
   BasicsQuantumInformation = "https://learn.qiskit.org/course/basics",
-  NearTermAlgorithmDesign = "https://learn.qiskit.org/course/algorithm-design",
+  AlgorithmDesign = "https://learn.qiskit.org/course/algorithm-design",
   QML = "https://learn.qiskit.org/course/machine-learning",
   SummerSchool2020 = "https://learn.qiskit.org/summer-school/2020/",
   SummerSchool2021 = "https://learn.qiskit.org/summer-school/2021/",
@@ -95,6 +95,8 @@ enum QuantumProtocolsAndQuantumAlgorithmsUrl {
   QuantumTeleportation = "https://learn.qiskit.org/course/ch-algorithms/quantum-teleportation",
   SuperdenseCoding = "https://learn.qiskit.org/course/ch-algorithms/superdense-coding",
   QuantumKeyDistribution = "https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution",
+  QuantumWalkSearchAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/quantum-walk-search-algorithm",
+  HiddenShiftProblem = "https://learn.qiskit.org/course/ch-algorithms/hidden-shift-problem",
 }
 
 enum QuantumHardwarePulsesUrl {
@@ -115,6 +117,9 @@ enum QuantumAlgorithmsForApplications {
   HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit = "https://learn.qiskit.org/course/ch-applications/hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit",
   VariationalQuantumLinearSolver = "https://learn.qiskit.org/course/ch-applications/the-variational-quantum-linear-solver",
   FlexibleRepresentationOfQuantumImages = "https://learn.qiskit.org/course/ch-applications/flexible-representation-of-quantum-images-frqi",
+  FacialExpressionRecognition = "https://learn.qiskit.org/course/ch-applications/facial-expression-recognition",
+  EdgeDetection = "https://learn.qiskit.org/course/ch-applications/quantum-edge-detection",
+  TravellingSalesmanProblem = "https://learn.qiskit.org/course/ch-applications/tsp",
 }
 
 enum QuantumHardwareCircuitsUrl {
@@ -122,6 +127,7 @@ enum QuantumHardwareCircuitsUrl {
   MeasurementErrorMitigation = "https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation",
   RandomizedBenchmarking = "https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking",
   MeasuringQuantumVolume = "https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume",
+  DensityMatrixAndMixedStates = "https://learn.qiskit.org/course/quantum-hardware/density-matrix",
 }
 
 enum GamesAndDemos {
@@ -130,6 +136,8 @@ enum GamesAndDemos {
   Level5ProvingTheUniquenessOfQuantumVariables = "https://learn.qiskit.org/course/ch-demos/bonus-level-sandbox#bonus-153-0",
   EstimatingPiUsingQPEA = "https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm",
   LocalRealityAndTheChshInequality = "https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality",
+  QuantumCoinGame = "https://learn.qiskit.org/course/ch-demos/coin-game",
+  VariationalQuantumRegression = "https://learn.qiskit.org/course/ch-demos/variational-quantum-regression",
   WidgetsDemonstration = "https://learn.qiskit.org/course/ch-demos/widgets-demonstration",
 }
 
@@ -156,6 +164,7 @@ enum QuantumComputingLabs {
   Lab7 = "https://learn.qiskit.org/course/ch-labs/lab-7-scalable-shors-algorithm",
   Lab8 = "https://learn.qiskit.org/course/ch-labs/lab-8-grovers-search-with-an-unknown-number-of-solutions",
   Lab9 = "https://learn.qiskit.org/course/ch-labs/lab-9-quantum-simulation-as-a-search-algorithm",
+  Lab10 = "https://learn.qiskit.org/course/ch-labs/lab-10-quantum-error-correction",
 }
 
 const IBM_Q_EXPERIENCE: GeneralLink = {
