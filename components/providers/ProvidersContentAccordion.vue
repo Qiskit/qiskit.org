@@ -14,10 +14,14 @@
           handleAccordionItemToggled({ changedIndex: index }, $event)
         "
       >
-        <OverviewAccordionLayout
-          :image="tab.content.image"
-          :description="tab.content.description"
-          :cta="tab.content.cta"
+        <ProvidersAccordionLayout
+          :title="tab.title"
+          :description="tab.description"
+          :installation="tab.installation"
+          :website-cta="tab.websiteCta"
+          :docs-cta="tab.docsCta"
+          :source-cta="tab.sourceCta"
+          :code-examples="tab.codeExamples"
         />
       </bx-accordion-item>
     </div>
@@ -26,15 +30,10 @@
 
 <script setup lang="ts">
 import "@carbon/web-components/es/components/accordion/index.js";
-import { AccordionLayoutProps } from "~/components/Overview/OverviewAccordionLayout.vue";
-
-export type ContentAccordionTab = {
-  title: string;
-  content: AccordionLayoutProps;
-};
+import type { Provider } from "~/types/providers";
 
 interface Props {
-  tabs: Array<ContentAccordionTab>;
+  tabs: Array<Provider>;
 }
 
 defineProps<Props>();
