@@ -72,7 +72,7 @@ const capabilities: QiskitCapability[] = [
   {
     title: "Try it yourself",
     description:
-      "Ready to explore Qiskit’s capabilities for yourself? Check out how to run Qiskit on the cloud or locally in your local Python environment.",
+      "Ready to explore Qiskit’s capabilities for yourself? Learn how to run Qiskit in the cloud or your local Python environment.",
     thumbnailResource: "/images/landing-page/med_02_1.png",
     link: {
       url: "https://qiskit.org/documentation/getting_started.html",
