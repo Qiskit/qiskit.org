@@ -19,6 +19,7 @@ const sectionProblemSets = "problem-sets";
 
 const baseUrl = "https://learn.qiskit.org";
 const pathBasicsCourse = "/course/basics";
+const pathAlgorithmDesign = "/course/algorithm-design";
 const pathIntroductionCourse = "/course/introduction";
 const pathQuantumMachineLearning = "/course/machine-learning";
 const pathPrerequisites = "/course/ch-prerequisites";
@@ -81,6 +82,59 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
         cta: "entanglement_in_action",
         location: sectionBasicsCourse,
       },
+    },
+  ],
+};
+
+const ALGORITHM_DESIGN: MegaDropdownMenuGroup = {
+  title: {
+    label: "Variational algorithm design",
+    url: `${baseUrl}${pathAlgorithmDesign}`,
+    segment: {
+      cta: wholeSection,
+      location: sectionBasicsCourse,
+    },
+  },
+  content: [
+    {
+      label: "Variational algorithms",
+      segment: { cta: "variational-algorithms", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/`,
+    },
+    {
+      label: "Reference states",
+      segment: { cta: "reference-states", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/reference`,
+    },
+    {
+      label: "Ansatze and variational forms",
+      segment: { cta: "ansatz", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/ansatz`,
+    },
+    {
+      label: "Cost functions",
+      segment: { cta: "cost-functions", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/cost_function`,
+    },
+    {
+      label: "Optimization Loops",
+      segment: { cta: "optimization", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/optimization`,
+    },
+    {
+      label: "Instances and extensions",
+      segment: { cta: "instances", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/instances`,
+    },
+    {
+      label: "Examples and applications",
+      segment: { cta: "examples", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/applications`,
+    },
+    {
+      label: "Earn your badge",
+      segment: { cta: "badge", location: "course" },
+      url: `${baseUrl}${pathAlgorithmDesign}/badge`,
     },
   ],
 };
@@ -409,6 +463,14 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
   },
   content: [
     {
+      label: "Hello Qiskit",
+      url: `${baseUrl}${pathGamesAndDemos}/hello-qiskit`,
+      segment: {
+        cta: "hello-qiskit",
+        location: sectionGamesAndDemos,
+      },
+    },
+    {
       label: "Estimating Pi Using Quantum Phase Estimation Algorithm",
       url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
@@ -421,6 +483,22 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathGamesAndDemos}/local-reality-and-the-chsh-inequality`,
       segment: {
         cta: "local-reality-and-the-chsh-inequality",
+        location: sectionGamesAndDemos,
+      },
+    },
+    {
+      label: "Quantum Coin Game",
+      url: `${baseUrl}${pathGamesAndDemos}/coin-game`,
+      segment: {
+        cta: "coin-game",
+        location: sectionGamesAndDemos,
+      },
+    },
+    {
+      label: "Variational Quantum Regression",
+      url: `${baseUrl}${pathGamesAndDemos}/variational-quantum-regression`,
+      segment: {
+        cta: "variational-quantum-regression",
         location: sectionGamesAndDemos,
       },
     },
@@ -510,10 +588,26 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Quantum Teleportation",
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-teleportation`,
+      label: "Quantum Walk Search Algorithm",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
       segment: {
-        cta: "quantum-teleportation",
+        cta: "quantum-walk-search-algorithm",
+        location: sectionProtocolsAndAlgorithms,
+      },
+    },
+    {
+      label: "Hidden Shift Problem",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
+      segment: {
+        cta: "hidden-shift-problem",
+        location: sectionProtocolsAndAlgorithms,
+      },
+    },
+    {
+      label: "Quantum Key Distribution",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
+      segment: {
+        cta: "quantum-key-distribution",
         location: sectionProtocolsAndAlgorithms,
       },
     },
@@ -526,10 +620,10 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Quantum Key Distribution",
-      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
+      label: "Quantum Teleportation",
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-teleportation`,
       segment: {
-        cta: "quantum-key-distribution",
+        cta: "quantum-teleportation",
         location: sectionProtocolsAndAlgorithms,
       },
     },
@@ -656,18 +750,42 @@ const QUANTUM_ALGORITHMS_FOR_APPS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Variational Quantum Linear Solver",
-      url: `${baseUrl}${pathApps}/the-variational-quantum-linear-solver`,
-      segment: {
-        cta: "the-variational-quantum-linear-solver",
-        location: sectionApps,
-      },
-    },
-    {
       label: "Quantum Image Processing - FRQI and NEQR Image Representations",
       url: `${baseUrl}${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         cta: "flexible-representation-of-quantum-images-frqi",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Quantum Facial Expression Recognition",
+      url: `${baseUrl}${pathApps}/facial-expression-recognition`,
+      segment: {
+        cta: "facial-expression-recognition",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Quantum Edge Detection",
+      url: `${baseUrl}${pathApps}/quantum-edge-detection`,
+      segment: {
+        cta: "quantum-edge-detection",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Travelling Salesman Problem using Quantum Phase Estimation",
+      url: `${baseUrl}${pathApps}/tsp`,
+      segment: {
+        cta: "tsp",
+        location: sectionApps,
+      },
+    },
+    {
+      label: "Variational Quantum Linear Solver",
+      url: `${baseUrl}${pathApps}/the-variational-quantum-linear-solver`,
+      segment: {
+        cta: "the-variational-quantum-linear-solver",
         location: sectionApps,
       },
     },
@@ -806,6 +924,14 @@ const QUANTUM_COMPUTING_LABS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathLabs}/lab-9-quantum-simulation-as-a-search-algorithm`,
       segment: {
         cta: "lab-9-quantum-simulation-as-a-search-algorithm",
+        location: sectionLabs,
+      },
+    },
+    {
+      label: "Lab 10. Quantum Error Correction",
+      url: `${baseUrl}${pathLabs}/lab-10-quantum-error-correction`,
+      segment: {
+        cta: "lab-10-quantum-error-correction",
         location: sectionLabs,
       },
     },
@@ -1649,7 +1775,7 @@ type MegaDropdownMenuContent = MegaDropdownMenuSection[];
 
 const COURSES_SECTION: MegaDropdownMenuSection = {
   title: "Courses",
-  content: [BASICS_COURSE, INTRODUCTION_COURSE, QML_COURSE],
+  content: [BASICS_COURSE, ALGORITHM_DESIGN, INTRODUCTION_COURSE, QML_COURSE],
 };
 
 const CHAPTERS_SECTION: MegaDropdownMenuSection = {

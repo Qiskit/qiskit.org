@@ -98,12 +98,6 @@ const courses: Course[] = [
     url: QuantumAlgorithmsForApplications.HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit,
   },
   {
-    image: "variational-quantum-linear-solver.png",
-    label: "Variational Quantum Linear Solver",
-    segment: { cta: "variational-quantum-linear-solver", location: "course" },
-    url: QuantumAlgorithmsForApplications.VariationalQuantumLinearSolver,
-  },
-  {
     image: "flexible-representation-of-quantum-images.png",
     label: "Quantum Image Processing - FRQI and NEQR Image Representations",
     segment: {
@@ -111,6 +105,39 @@ const courses: Course[] = [
       location: "course",
     },
     url: QuantumAlgorithmsForApplications.FlexibleRepresentationOfQuantumImages,
+  },
+  {
+    image: "quantum-facial-expression-recognition.png",
+    label: "Quantum Facial Expression Recognition",
+    segment: {
+      cta: "facial-expression-recognition",
+      location: "course",
+    },
+    url: QuantumAlgorithmsForApplications.FacialExpressionRecognition,
+  },
+  {
+    image: "quantum-edge-detection.png",
+    label: "Quantum Edge Detection",
+    segment: {
+      cta: "quantum-edge-detection",
+      location: "course",
+    },
+    url: QuantumAlgorithmsForApplications.EdgeDetection,
+  },
+  {
+    image: "travelling-salesman-problem.png",
+    label: "Travelling Salesman Problem using Quantum Phase Estimation",
+    segment: {
+      cta: "tsp",
+      location: "course",
+    },
+    url: QuantumAlgorithmsForApplications.TravellingSalesmanProblem,
+  },
+  {
+    image: "variational-quantum-linear-solver.png",
+    label: "Variational Quantum Linear Solver",
+    segment: { cta: "variational-quantum-linear-solver", location: "course" },
+    url: QuantumAlgorithmsForApplications.VariationalQuantumLinearSolver,
   },
 ];
 

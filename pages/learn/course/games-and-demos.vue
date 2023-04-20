@@ -23,12 +23,12 @@ import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
   layout: "default-max",
-  pageTitle: "Quantum Algorithms for Applications",
+  pageTitle: "Games and demos",
   routeName: "games-and-demos",
 });
 
 useHead({
-  title: "Quantum Algorithms for Applications",
+  title: "Games and demos",
 });
 
 const routeName = "games-and-demos";
@@ -53,6 +53,15 @@ const externalRecommendedReadingsPreamble = "";
 const links: GeneralLink[] = [];
 const courses: Course[] = [
   {
+    image: "hello-qiskit.png",
+    label: "Hello Qiskit",
+    segment: {
+      cta: "hello-qiskit",
+      location: "course",
+    },
+    url: GamesAndDemos.HelloQiskit
+  },
+  {
     image: "estimating-pi-using-quantum-phase-estimation-algorithm.png",
     label: "Estimating pi using Quantum Phase Estimation Algorithm",
     segment: {
@@ -69,6 +78,24 @@ const courses: Course[] = [
       location: "course",
     },
     url: GamesAndDemos.LocalRealityAndTheChshInequality,
+  },
+  {
+    image: "quantum-coin-game.png",
+    label: "Quantum Coin Game",
+    segment: {
+      cta: "coin-game",
+      location: "course",
+    },
+    url: GamesAndDemos.QuantumCoinGame,
+  },
+  {
+    image: "variational-quantum-regression.png",
+    label: "Variational Quantum Regression",
+    segment: {
+      cta: "variational-quantum-regression",
+      location: "course",
+    },
+    url: GamesAndDemos.VariationalQuantumRegression,
   },
 ];
 
