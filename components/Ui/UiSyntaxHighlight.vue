@@ -1,10 +1,11 @@
 <template>
   <div class="syntax-highlight">
     <bx-btn
+      v-track-click="segmentAction"
       size="sm"
       title="Copy to clipboard"
       class="syntax-highlight__copy-button"
-      @click="[copyToClipboard(code), trackClickEvent(segmentAction)]"
+      @click="copyToClipboard(code)"
     >
       copy
     </bx-btn>
@@ -24,8 +25,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   code: "",
 });
-
-const { trackClickEvent } = useSegment();
 
 const segmentAction = computed<CtaClickedEventProp>(() => ({
   cta: `${props.label}: Copy Code Sample`,
