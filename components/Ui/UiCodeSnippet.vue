@@ -9,18 +9,14 @@
       />
     </code>
     <bx-btn
+      v-track-click="{
+        cta: `Copy ${codeSnippetTitle} install code`,
+        location: codeSnippetLocation,
+      }"
       title="Copy"
       size="sm"
       class="code-snippet__copy-button"
-      @click="
-        [
-          copyToClipboard($event),
-          trackClickEvent(
-            `Copy ${codeSnippetTitle} install code`,
-            codeSnippetLocation
-          ),
-        ]
-      "
+      @click="copyToClipboard($event)"
     >
       Copy
     </bx-btn>
@@ -28,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import "@carbon/web-components/es/components/button/index.js";
+// import "@carbon/web-components/es/components/button/index.js";
 
 interface Props {
   code: string;
@@ -49,8 +45,6 @@ const codeLines = computed(() => {
   });
   return codeLinesWithEmptyLines;
 });
-
-const { trackClickEvent } = useSegment();
 
 const copyCodeCta = "Copy";
 

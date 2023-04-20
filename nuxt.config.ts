@@ -41,8 +41,6 @@ export default defineNuxtConfig({
     },
   },
 
-  ssr: false,
-
   vue: {
     compilerOptions: {
       isCustomElement: (tag: string) =>
