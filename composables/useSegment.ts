@@ -168,6 +168,15 @@ function afterAnalyticsReady<S extends any[]>(callback: (...S: any[]) => void) {
 }
 
 export const useSegment = () => {
+  const nuxtApp = useNuxtApp();
+
+  if (nuxtApp.ssrContext) {
+    return {
+      trackClickEvent: () => {},
+      trackPage: () => {},
+    };
+  }
+
   const runtimeConfig = useRuntimeConfig();
 
   if (runtimeConfig.public.isAnalyticsEnabled) {
