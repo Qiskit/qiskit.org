@@ -1,12 +1,13 @@
 <template>
   <component
     :is="isNuxtLink ? 'NuxtLink' : 'a'"
+    v-track-click="segment"
     :href="isAnchor && url"
     :to="isNuxtLink && url"
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal ? '_blank' : undefined"
-    @click="handleClick"
+    @click="emit('click')"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />
@@ -29,13 +30,6 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits(["click", "mouseenter"]);
-
-const { trackClickEvent } = useSegment();
-
-function handleClick() {
-  emit("click");
-  props.segment && trackClickEvent(props.segment.cta, props.segment.location);
-}
 
 const isExternal = computed(() => {
   return !!props.url && props.url.startsWith("http");
