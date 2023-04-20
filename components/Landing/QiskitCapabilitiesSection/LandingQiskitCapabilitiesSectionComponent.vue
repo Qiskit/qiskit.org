@@ -58,7 +58,7 @@ const capabilities: QiskitCapability[] = [
   {
     title: "Transpile to any hardware",
     description:
-      "Qiskit helps users run and schedule quantum programs for a variety of local simulators and cloud-based quantum processors. It supports several quantum hardware designs, such as superconducting qubits and trapped ions.",
+      "Qiskit helps users schedule and run quantum programs on a variety of local simulators and cloud-based quantum processors. It supports several quantum hardware designs, such as superconducting qubits and trapped ions.",
     thumbnailResource: "/images/library/chip-01.png",
     link: {
       url: "/providers",
