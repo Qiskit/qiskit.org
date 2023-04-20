@@ -62,15 +62,18 @@
           </div>
         </template>
         <template #results>
-          <UiCard
-            v-if="noEvents"
-            :image="emptyCard.img"
-            :title="emptyCard.title"
-          >
-            <div class="event-page__empty-card-description">
-              {{ emptyCard.description }}
+          <div v-if="noEvents" class="bx--row">
+            <div class="cds--col-sm-4 cds--col-xlg-8">
+              <UiCard
+                :image="emptyCard.img"
+                :title="emptyCard.title"
+              >
+                <div class="event-page__empty-card-description">
+                  {{ emptyCard.description }}
+                </div>
+              </UiCard>
             </div>
-          </UiCard>
+          </div>
           <div v-else class="cds--row">
             <div
               v-for="(eventItem, index) in filteredEvents"
