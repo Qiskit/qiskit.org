@@ -102,9 +102,9 @@
 </template>
 
 <script setup lang="ts">
-//import "@carbon/web-components/es/components/checkbox/index.js";
-//import "@carbon/web-components/es/components/code-snippet/index.js";
-//import "@carbon/web-components/es/components/tabs/index.js";
+// import "@carbon/web-components/es/components/checkbox/index.js";
+// import "@carbon/web-components/es/components/code-snippet/index.js";
+// import "@carbon/web-components/es/components/tabs/index.js";
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,

@@ -68,8 +68,8 @@
 </template>
 
 <script setup lang="ts">
-//import "@carbon/web-components/es/components/tag/tag.js";
-//import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
+// import "@carbon/web-components/es/components/tag/tag.js";
+// import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
 import Information16 from "@carbon/icons-vue/lib/information/16";
 import { CtaClickedEventProp } from "~/types/segment";
 

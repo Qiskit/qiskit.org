@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-//import "@carbon/web-components/es/components/button/index.js";
+// import "@carbon/web-components/es/components/button/index.js";
 import Copy16 from "@carbon/icons-vue/lib/copy/16";
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 import type { CtaClickedEventProp } from "~/types/segment";

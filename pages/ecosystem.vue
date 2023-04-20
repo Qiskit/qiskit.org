@@ -111,8 +111,8 @@
 </template>
 
 <script setup lang="ts">
-//import "@carbon/web-components/es/components/accordion/index.js";
-//import "@carbon/web-components/es/components/checkbox/index.js";
+// import "@carbon/web-components/es/components/accordion/index.js";
+// import "@carbon/web-components/es/components/checkbox/index.js";
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { GeneralLink } from "~/constants/appLinks";
 import rawMembers from "~/content/ecosystem/members.json";

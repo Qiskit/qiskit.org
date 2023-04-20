@@ -11,5 +11,4 @@ import "@carbon/web-components/es/components/multi-select/multi-select-item.js";
 import "@qiskit/web-components/ui-shell";
 import "@qiskit/web-components/mega-menu-dropdown";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 export default defineNuxtPlugin(() => {});

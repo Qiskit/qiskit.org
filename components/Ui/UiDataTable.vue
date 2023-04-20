@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-//import "@carbon/web-components/es/components/data-table/index.js";
+// import "@carbon/web-components/es/components/data-table/index.js";
 import { GeneralLink } from "~/constants/appLinks";
 
 export interface TableRowElement {

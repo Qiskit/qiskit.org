@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-//import "@carbon/web-components/es/components/button/index.js";
+// import "@carbon/web-components/es/components/button/index.js";
 
 interface Props {
   code: string;
