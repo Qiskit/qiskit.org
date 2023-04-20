@@ -40,7 +40,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
 const startLearningCTA: GeneralLink = {
-  url: GamesAndDemos.EstimatingPiUsingQPEA,
+  url: GamesAndDemos.HelloQiskit,
   label: "Start learning",
   segment: {
     cta: "introduction",
