@@ -46,7 +46,7 @@ const capabilities: QiskitCapability[] = [
   {
     title: "Transpiler",
     description:
-      "The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor or processor architecture with minimal inputs.",
+      "The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor. Users can transpile with Qiskit's default optimization, use a custom configuration or develop their own plugin.",
     thumbnailResource: "/images/landing-page/transpiler.png",
     link: {
       url: "https://qiskit.org/documentation/apidoc/transpiler.html",
