@@ -6,7 +6,7 @@
         v-for="item in capabilities"
         :id="item.title"
         :key="item.title"
-        class="cds--col-sm-4 cds--col-md-4 qiskit-capabilities-section__card scrollable"
+        class="cds--col-md-4 qiskit-capabilities-section__card"
         :title="item.title"
         :description="item.description"
         :thumbnail-resource="item.thumbnailResource"
