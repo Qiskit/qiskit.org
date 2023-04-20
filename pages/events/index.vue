@@ -64,7 +64,7 @@
         <template #results>
           <div v-if="noEvents" class="cds--row">
             <div class="cds--col-sm-4 cds--col-xlg-8">
-              <UiCard
+              <UiCard :image="emptyCard.img" :title="emptyCard.title">
                 :image="emptyCard.img"
                 :title="emptyCard.title"
               >
