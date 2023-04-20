@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import "@qiskit/web-components/ui-shell";
+//import "@qiskit/web-components/ui-shell";
 
 const route = useRoute();
 const { trackClickEvent } = useSegment();

@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import "@carbon/web-components/es/components/multi-select/index.js";
-import "@carbon/web-components/es/components/multi-select/multi-select-item.js";
+//import "@carbon/web-components/es/components/multi-select/index.js";
+//import "@carbon/web-components/es/components/multi-select/multi-select-item.js";
 
 defineEmits(["change-selection"]);
 

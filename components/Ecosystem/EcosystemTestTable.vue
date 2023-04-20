@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
+//import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
 import Information16 from "@carbon/icons-vue/lib/information/16";
 import CheckmarkFilled16 from "@carbon/icons-vue/lib/checkmark--filled/16";
 import ErrorFilled16 from "@carbon/icons-vue/lib/error--filled/16";

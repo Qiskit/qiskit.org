@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import "@carbon/web-components/es/components/button/index.js";
+//import "@carbon/web-components/es/components/button/index.js";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
