@@ -59,7 +59,7 @@ const courses: Course[] = [
       cta: "hello-qiskit",
       location: "course",
     },
-    url: GamesAndDemos.HelloQiskit
+    url: GamesAndDemos.HelloQiskit,
   },
   {
     image: "estimating-pi-using-quantum-phase-estimation-algorithm.png",
