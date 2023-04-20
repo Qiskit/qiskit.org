@@ -16,5 +16,5 @@
 </template>
 
 <script setup lang="ts">
-import "@carbon/web-components/es/components/list/index.js";
+// import "@carbon/web-components/es/components/list/index.js";
 </script>
