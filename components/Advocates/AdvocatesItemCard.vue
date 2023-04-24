@@ -9,7 +9,7 @@
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </div>
-    <div class="advocate-card__contact">
+    <div v-if="slackUsername" class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
       <UiLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
