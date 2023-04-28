@@ -607,8 +607,8 @@ describe("getDates", () => {
   });
 
   test("returns date objects if both dates exists", () => {
-    const expectedStartDate = new Date("2020-01-01");
-    const expectedEndDate = new Date("2020-01-02");
+    const expectedStartDate = new Date("2020-01-01T00:00:00.000Z");
+    const expectedEndDate = new Date("2020-01-02T00:00:00.000Z");
 
     const fakeRecord = {
       get: (field: string) => {
@@ -670,11 +670,11 @@ describe("formatDates", () => {
     eventsAirtableRecords = new EventsAirtableRecords("testApiKey", "testView");
   });
 
-  const start = new Date("2020-01-01");
-  const endSameDate = new Date("2020-01-01");
-  const endNextDay = new Date("2020-01-02");
-  const endNextMonth = new Date("2020-02-01");
-  const endNextYear = new Date("2021-01-01");
+  const start = new Date("2020-01-01T00:00:00.000Z");
+  const endSameDate = new Date("2020-01-01T00:00:00.000Z");
+  const endNextDay = new Date("2020-01-02T00:00:00.000Z");
+  const endNextMonth = new Date("2020-02-01T00:00:00.000Z");
+  const endNextYear = new Date("2021-01-01T00:00:00.000Z");
   const noDate = undefined;
 
   test("shows TBD if no start date is passed", () => {

@@ -116,6 +116,7 @@ class EventsAirtableRecords extends AirtableRecords {
   ): boolean {
     const { startDate, endDate } = event;
     const today: Date = new Date();
+    today.setUTCHours(0, 0, 0, 0);
     const eventStartDate: Date = new Date(startDate);
     const eventEndDate: Date = new Date(endDate);
     const isFutureRange: boolean = days >= 0;
@@ -288,11 +289,18 @@ class EventsAirtableRecords extends AirtableRecords {
   }
 
   dateParts(date: Date): [string, string, string] {
-    const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
-      date
-    );
-    const month = new Intl.DateTimeFormat("en", { month: "long" }).format(date);
-    const day = new Intl.DateTimeFormat("en", { day: "numeric" }).format(date);
+    const year = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(date);
+    const month = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      timeZone: "UTC",
+    }).format(date);
+    const day = new Intl.DateTimeFormat("en-US", {
+      day: "numeric",
+      timeZone: "UTC",
+    }).format(date);
     return [year, month, day];
   }
 
@@ -335,16 +343,12 @@ class EventsAirtableRecords extends AirtableRecords {
 
     const formattedStartDateAndTime = new Date(startDateAndTime);
 
-    const options = {
+    return new Intl.DateTimeFormat("en-US", {
       hour: "numeric",
       minute: "numeric",
       timeZone: "UTC",
       timeZoneName: "short",
-    } as const;
-
-    return new Intl.DateTimeFormat("en", options).format(
-      formattedStartDateAndTime
-    );
+    }).format(formattedStartDateAndTime);
   }
 
   /**
