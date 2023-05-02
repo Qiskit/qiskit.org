@@ -1,12 +1,14 @@
 <template>
   <section class="content-menu-section">
     <div class="content-menu-section__container">
-      <qiskit-mega-menu-dropdown
-        :content.prop="dropdownMenuContent"
-        class="content-menu-section__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
-        segment-component-name="Textbook mega menu"
-        :track-performed-search="trackPerformedSearch"
-      />
+      <ClientOnly>
+        <qiskit-mega-menu-dropdown
+          :content.prop="dropdownMenuContent"
+          class="content-menu-section__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
+          segment-component-name="Textbook mega menu"
+          :track-performed-search="trackPerformedSearch"
+        />
+      </ClientOnly>
     </div>
   </section>
 </template>
