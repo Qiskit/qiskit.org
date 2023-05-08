@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-  Welcome to [Qiskit.org](https://qiskit.org)
+  Welcome to <a href="https://qiskit.org">Qiskit.org</a>
 </h1>
 <p align="center">
 Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business.
@@ -30,11 +30,15 @@ Qiskit is an open-source quantum computing software development framework for le
   <span> · </span>
   <a href="https://qiskit.org/learn/">Learn</a>
   <span> · </span>
-  <a href="https://qiskit.org/documentation/">Documentation</a>
+  <a href="https://qiskit.org/events/">Events</a>  
   <span> · </span>
   <a href="https://qiskit.org/advocates/">Advocates</a>
   <span> · </span>
-  <a href="https://qiskit.org/ecosystem/">Ecosystem</a>  
+  <a href="https://qiskit.org/ecosystem/">Ecosystem</a>
+  <span> · </span>
+  <a href="https://qiskit.org/documentation/">Documentation</a>
+  <span> · </span>
+  <a href="https://qiskit.org/providers/">Providers</a>
 </h3>
 
 <br/>
@@ -44,11 +48,10 @@ Qiskit is an open-source quantum computing software development framework for le
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [💻 Technology Used](#-technology-used)
 - [🏭 Content Generation](#-content-generation)
-- [📁 Directory structure](#-directory-structure)
 - [✏️ How to Contribute](#️-how-to-contribute)
-- [🗓 Open backlog](#-open-backlog)
+- [🗓 Open Backlog](#-open-backlog)
 - [👩‍💻 Maintainers](#-maintainers)
-- [🔗 Connect With Qiskit](#-connect-with-qiskit)
+- [🔗 Connect with Qiskit](#-connect-with-qiskit)
 
 <br/>
 
@@ -80,15 +83,6 @@ Qiskit.org is a static website generated using [Nuxt](https://nuxt.com/).
 
 We create and run tests using [Vitest](https://vitest.dev/), avoid syntax errors using [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/), and automate code integration and deployment using [GitHub Actions](https://github.com/features/actions).
 
-With these technologies we aim to achieve the following:
-
-- Using a component-based framework (like Vue) that allows us to reuse the UI code in different parts of the application.
-- Fast initial page load.
-- Index content on Search Engines.
-- Test JS unit functions.
-- Avoid syntax errors.
-- Continuous integration pipeline.
-
 <br/>
 
 ## 🏭 Content Generation
@@ -104,11 +98,6 @@ Notice that, for communicating with the team tools, API keys may be required. It
 ```shell
 GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
 ```
-<br/>
-
-## 📁 Directory structure
-
-We follow Nuxt's [directory structure](https://nuxt.com/docs/guide/directory-structure/nuxt).
 
 <br/>
 
@@ -137,7 +126,7 @@ We actively maintain our backlog using [GitHub Projects](https://docs.github.com
 
 <br/>
 
-## 🔗 Connect With Qiskit
+## 🔗 Connect with Qiskit
 
 - [Twitter](https://twitter.com/qiskit)
 - [Medium](https://medium.com/Qiskit)
