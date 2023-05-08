@@ -463,14 +463,6 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
   },
   content: [
     {
-      label: "Bonus Level: Sandbox",
-      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-sandbox`,
-      segment: {
-        cta: "bonus-level-sandbox",
-        location: sectionGamesAndDemos,
-      },
-    },
-    {
       label: "Hello Qiskit",
       url: `${baseUrl}${pathGamesAndDemos}/hello-qiskit`,
       segment: {
@@ -480,9 +472,9 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     },
     {
       label: "Estimating Pi Using Quantum Phase Estimation Algorithm",
-      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
+      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
-        cta: "estimating-pi-pi-using-quantum-phase-estimation-algorithm",
+        cta: "estimating-pi-using-quantum-phase-estimation-algorithm",
         location: sectionGamesAndDemos,
       },
     },
@@ -507,14 +499,6 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathGamesAndDemos}/variational-quantum-regression`,
       segment: {
         cta: "variational-quantum-regression",
-        location: sectionGamesAndDemos,
-      },
-    },
-    {
-      label: "Widgets Demonstration",
-      url: `${baseUrl}${pathGamesAndDemos}/widgets-demonstration`,
-      segment: {
-        cta: "widgets-demonstration",
         location: sectionGamesAndDemos,
       },
     },

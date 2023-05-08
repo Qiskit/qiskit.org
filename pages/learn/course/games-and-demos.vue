@@ -40,7 +40,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
 const startLearningCTA: GeneralLink = {
-  url: GamesAndDemos.BonusLevelSandbox,
+  url: GamesAndDemos.HelloQiskit,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -53,25 +53,13 @@ const externalRecommendedReadingsPreamble = "";
 const links: GeneralLink[] = [];
 const courses: Course[] = [
   {
-    image: "bonus-level-sandbox.png",
-    label: "Bonus Level: Sandbox",
-    segment: { cta: "bonus-level-sandbox", location: "course" },
-    url: GamesAndDemos.BonusLevelSandbox,
-  },
-  {
-    image: "bonus-level-make-your-own-puzzles.png",
-    label: "Bonus Level: Make your own puzzles",
-    segment: { cta: "bonus-level-make-your-own-puzzles", location: "course" },
-    url: GamesAndDemos.BonusLevelMakeYourOwnPuzzle,
-  },
-  {
-    image: "level-5-proving-uniqueness-of-quantum-variables.png",
-    label: "Level 5: Provins the Uniqueness of Quantum Variables",
+    image: "hello-qiskit.png",
+    label: "Hello Qiskit",
     segment: {
-      cta: "level-5-proving-uniqueness-of-quantum-variables",
+      cta: "hello-qiskit",
       location: "course",
     },
-    url: GamesAndDemos.Level5ProvingTheUniquenessOfQuantumVariables,
+    url: GamesAndDemos.HelloQiskit,
   },
   {
     image: "estimating-pi-using-quantum-phase-estimation-algorithm.png",
@@ -108,12 +96,6 @@ const courses: Course[] = [
       location: "course",
     },
     url: GamesAndDemos.VariationalQuantumRegression,
-  },
-  {
-    image: "widgets-demonstration.png",
-    label: "Widgets Demonstration",
-    segment: { cta: "widgets-demonstrationr", location: "course" },
-    url: GamesAndDemos.WidgetsDemonstration,
   },
 ];
 
