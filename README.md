@@ -87,7 +87,7 @@ We create and run tests using [Vitest](https://vitest.dev/), avoid syntax errors
 
 ## 🏭 Content Generation
 
-qiskit.org integrates with the tools used by the IBM Quantum Community Team to generate content based on 3rd party APIs such as Airtable. Part of this content is prefetched during building time. While developing, it is disabled by default. If you want enable content generation, you must set the environment variable `GENERATE_CONTENT`. For instance:
+Qiskit.org integrates with the tools used by the IBM Quantum Community Team to generate content based on 3rd party APIs such as Airtable. Part of this content is prefetched during building time. While developing, it is disabled by default. If you want enable content generation, you must set the environment variable `GENERATE_CONTENT`. For instance:
 
 ```shell
 GENERATE_CONTENT=1 npm run dev
