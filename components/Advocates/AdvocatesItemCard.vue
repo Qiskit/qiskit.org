@@ -64,8 +64,8 @@ const location = computed(() =>
     align-items: center;
   }
 
-  &__location {
-    margin-bottom: carbon.$spacing-03;
+  &__contact {
+    margin-top: carbon.$spacing-03;
   }
 
   &__icon {
