@@ -14,6 +14,13 @@
               :segment="BackToHomeCTA.segment"
               :url="BackToHomeCTA.url"
             />
+            <UiCta
+              class="error-page__ghost-btn"
+              :label="BackToDocsHome.label"
+              :segment="BackToDocsHome.segment"
+              :url="BackToDocsHome.url"
+              kind="ghost"
+            />
           </div>
           <div class="cds--col-lg-8">
             <img
@@ -37,6 +44,15 @@ const BackToHomeCTA: GeneralLink = {
   label: "Back to Qiskit.org home",
   segment: {
     cta: "back-to-home",
+    location: "error-page",
+  },
+};
+
+const BackToDocsHome: GeneralLink = {
+  url: "/documentation",
+  label: "Back to Qiskit Documentation",
+  segment: {
+    cta: "back-to-documentation",
     location: "error-page",
   },
 };
@@ -79,9 +95,17 @@ function onClick(e: CustomEvent) {
     margin-bottom: carbon.$spacing-05;
   }
 
+  &__message {
+    margin-bottom: carbon.$spacing-06;
+  }
+
   &__img {
     display: block;
     max-width: 100%;
+  }
+
+  &__ghost-btn {
+    padding: carbon.$spacing-05;
   }
 }
 
