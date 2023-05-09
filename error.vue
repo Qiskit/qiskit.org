@@ -6,7 +6,9 @@
         <div class="cds--row">
           <div class="cds--col-lg-4">
             <h1 class="error-page__title">404</h1>
+            <!-- eslint-disable vue/no-v-html -->
             <p class="error-page__message" v-html="randomMessage" />
+            <!-- eslint-enable -->
             <UiCta
               :label="BackToHomeCTA.label"
               :segment="BackToHomeCTA.segment"
@@ -14,7 +16,11 @@
             />
           </div>
           <div class="cds--col-lg-8">
-            <img class="error-page__img" :src="errorImgSrc" />
+            <img
+              class="error-page__img"
+              :src="errorImgSrc"
+              alt="Playful illustration of a cat in a cardboard box"
+            />
           </div>
         </div>
       </div>
