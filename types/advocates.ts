@@ -25,4 +25,20 @@ interface Advocate {
   slackUsername?: string;
 }
 
-export { AdvocatesWorldRegion, ADVOCATES_WORLD_REGION_OPTIONS, Advocate };
+interface QampProject {
+  name: string;
+  description: string;
+  url: string;
+  website?: string;
+  tags: string[];
+  mentors?: string[];
+  mentees?: string[];
+  contributors?: string[];
+}
+
+export {
+  AdvocatesWorldRegion,
+  ADVOCATES_WORLD_REGION_OPTIONS,
+  Advocate,
+  QampProject,
+};
