@@ -129,4 +129,9 @@ bx-table-cell {
   background-color: carbon.$cool-gray-10;
   border-bottom: 1px solid carbon.$cool-gray-30;
 }
+bx-tooltip-icon {
+  --cds-inverse-02: #{carbon.$cool-gray-90};
+  
+  line-height: 0;
+}
 </style>
