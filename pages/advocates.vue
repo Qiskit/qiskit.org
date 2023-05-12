@@ -9,32 +9,32 @@
       the Qiskit community
     </UiPageHeaderFixed>
     <AdvocatesJoinSection />
-    <section class="cds--grid advocates-page__tabs">
-      <div class="cds--row">
+    <section class="cds--grid">
+      <div class="advocates-page__tabs">
         <bx-tabs value="Advocates">
           <bx-tab id="tab-advocates" target="panel-advocates" value="Advocates">
             Advocates
           </bx-tab>
           <bx-tab id="tab-qamp" target="panel-qamp" value="QAMP"> QAMP </bx-tab>
         </bx-tabs>
-        <div
-          id="panel-advocates"
-          class="advocates-page__panel"
-          aria-labelledby="Advocates"
-          role="tabpanel"
-          hidden
-        >
-          <AdvocatesMeetTheAdvocates />
-        </div>
-        <div
-          id="panel-qamp"
-          class="advocates-page__panel"
-          aria-labelledby="QAMP"
-          role="tabpanel"
-          hidden
-        >
-          <AdvocatesQampProjects />
-        </div>
+      </div>
+      <div
+        id="panel-advocates"
+        class="advocates-page__panel"
+        aria-labelledby="Advocates"
+        role="tabpanel"
+        hidden
+      >
+        <AdvocatesMeetTheAdvocates />
+      </div>
+      <div
+        id="panel-qamp"
+        class="advocates-page__panel"
+        aria-labelledby="QAMP"
+        role="tabpanel"
+        hidden
+      >
+        <AdvocatesQampProjects />
       </div>
     </section>
   </main>

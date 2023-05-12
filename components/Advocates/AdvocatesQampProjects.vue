@@ -1,5 +1,5 @@
 <template>
-  <section class="cds--grid qamp-projects">
+  <section class="qamp-projects">
     <UiFiltersResultsLayout class="qamp-projects__filters-result-section">
       <template #filters-on-m-l-screen>
         <UiFieldset :label="filter.label">
@@ -33,13 +33,12 @@
             class="cds--col-max-8 qamp-projects__card"
           >
             <UiCard
-              class="qamp-projects__project-card"
               :title="project.name"
               :tags="project.tags"
               cta-label="Go to repo"
               :segment="{
                 cta: project.url,
-                location: 'ecosystem-card',
+                location: 'qamp-project-card',
               }"
               to="https://github.com/QAMP-EXAMPLE/<title-of-project>"
             ></UiCard>
@@ -165,7 +164,7 @@ function updateProjectFilters(newProjectFilters: string) {
   }
 
   &__card {
-    margin-bottom: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-06;
 
     &__section {
       &:not(:last-child) {
