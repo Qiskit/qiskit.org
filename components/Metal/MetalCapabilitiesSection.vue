@@ -11,36 +11,32 @@
             class="capabilities-section__card scrollable"
             :title="item.title"
             :description="item.description"
-            :visual-resource="item.visualResource"
+            :video="item.video"
           />
         </div>
         <div class="capabilities-section__scrolling-ui">
           <div
             v-for="(item, index) in capabilities"
-            :key="item.visualResource"
-            class="capabilities-section__visual-resource-container"
+            :key="item.video"
+            class="capabilities-section__video-container"
             :class="{
-              'capabilities-section__visual-resource-container_active':
-                isActiveImage(item, index),
+              'capabilities-section__video-container_active': isActiveImage(
+                item,
+                index
+              ),
             }"
           >
             <video
-              v-if="isVideo(item.visualResource)"
-              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_video"
+              class="capabilities-section__video"
               loop
               autoplay
               muted
               playsinline
             >
-              <source :src="item.visualResource" type="video/mp4" />
-              <source :src="item.visualResource" type="video/ogg" />
+              <source :src="item.video" type="video/mp4" />
+              <source :src="item.video" type="video/ogg" />
               Your browser does not support video.
             </video>
-            <div
-              v-else
-              class="capabilities-section__visual-resource capabilities-section__visual-resource_type_image"
-              :style="{ 'background-image': `url(${item.visualResource})` }"
-            />
           </div>
         </div>
       </div>
@@ -60,11 +56,6 @@ const isActiveImage = (item: MetalCapability, index: number): boolean => {
     item.title === activeSection.value ||
     (activeSection.value === "" && index === 0)
   );
-};
-
-const isVideo = (url: string): boolean => {
-  const extension = url.substring(url.length - 4);
-  return extension === ".mp4";
 };
 </script>
 
@@ -127,7 +118,7 @@ const isVideo = (url: string): boolean => {
     }
   }
 
-  &__visual-resource-container {
+  &__video-container {
     position: absolute;
     top: 0;
     opacity: 0;
@@ -140,20 +131,8 @@ const isVideo = (url: string): boolean => {
     }
   }
 
-  &__visual-resource {
-    &_type {
-      &_image {
-        width: 100%;
-        height: 100%;
-        background-size: contain;
-        background-position: center top;
-        background-repeat: no-repeat;
-      }
-
-      &_video {
-        width: 100%;
-      }
-    }
+  &__video {
+    width: 100%;
   }
 }
 </style>
