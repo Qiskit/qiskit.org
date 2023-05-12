@@ -65,7 +65,7 @@ many that cover this material`;
 const links: RecommendedReading[] = [
   {
     url: "https://www.khanacademy.org/math/linear-algebra",
-    author: "Khan Academy,",
+    author: "Khan Academy, ",
     label: "Linear algebra",
     description: `In this video series, Sal Khan introduces key concepts in
     linear algebra that we will rely upon.`,
@@ -76,7 +76,7 @@ const links: RecommendedReading[] = [
   },
   {
     url: "https://www.pearson.com/en-us/subject-catalog/p/linear-algebra/P200000006185/9780137515424",
-    author: "Stephen Friedberg, Arnold Insel, Lawrence Spence,",
+    author: "Stephen Friedberg, Arnold Insel, Lawrence Spence, ",
     label: "Linear Algebra",
     description: `This book on linear algebra covers the material we require,
     and also includes appendices on sets, functions, and complex numbers.`,
@@ -87,7 +87,7 @@ const links: RecommendedReading[] = [
   },
   {
     url: "https://link.springer.com/book/10.1007/978-3-319-11080-6",
-    author: "Sheldon Axler,",
+    author: "Sheldon Axler, ",
     label: "Linear Algebra Done Right",
     description: `A classic text on linear algebra suitable for those at or
     beyond an advanced undergraduate level.`,
@@ -98,7 +98,7 @@ const links: RecommendedReading[] = [
   },
   {
     url: "https://www.mathsisfun.com/sets/sets-introduction.html",
-    author: "Ricky Shadrach, Rod Pierce,",
+    author: "Ricky Shadrach, Rod Pierce, ",
     label: "Introduction to Sets",
     description: `A beginner-level web page on sets that may help to bring some
     readers up to speed.`,
@@ -109,7 +109,7 @@ const links: RecommendedReading[] = [
   },
   {
     url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch1.pdf",
-    author: "John K. Hunter,",
+    author: "John K. Hunter, ",
     label: "An Introduction to Real Analysis: Chapter 1",
     description: `The first chapter of these lecture notes includes a more
     formal and detailed introduction to sets and functions.`,
