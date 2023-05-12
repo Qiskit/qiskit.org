@@ -131,7 +131,6 @@ bx-table-cell {
 }
 bx-tooltip-icon {
   --cds-inverse-02: #{carbon.$cool-gray-90};
-  
   line-height: 0;
 }
 </style>
