@@ -25,12 +25,17 @@
         </div>
         <div
           v-if="image"
-          class="mosaic__element-image"
-          :class="`mosaic__element-image_${position}`"
-          :style="{
-            'background-image': `url(${image})`,
-          }"
-        ></div>
+          class="mosaic__element-image-container"
+          :class="`mosaic__element-image-container_${position}`"
+        >
+          <nuxt-img
+            class="mosaic__element-image"
+            :class="`mosaic__element-image_${position}`"
+            format="webp"
+            sizes="sm:350px md:700px"
+            :src="image"
+          />
+        </div>
       </div>
     </dl>
   </section>
@@ -121,38 +126,33 @@ defineProps<Props>();
     }
 
     &-image {
-      flex: 1 0 0;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
 
-      &_first {
-        background-position: right bottom;
-        background-size: contain;
-        background-repeat: no-repeat;
+      &_first,
+      &_fourth {
+        bottom: 0;
+        object-fit: contain;
+        right: 0;
       }
 
-      &_second {
-        background-position: center top;
-        background-size: cover;
-        background-repeat: no-repeat;
+      &_second,
+      &_third {
+        width: 100%;
+      }
+    }
 
+    &-image-container {
+      flex: 1 0 0;
+      overflow: hidden;
+      position: relative;
+
+      &_second,
+      &_third {
         @include carbon.breakpoint-down(lg) {
           min-height: 12rem;
         }
-      }
-
-      &_third {
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        @include carbon.breakpoint-down(md) {
-          min-height: 12rem;
-        }
-      }
-
-      &_fourth {
-        background-position: right bottom;
-        background-size: contain;
-        background-repeat: no-repeat;
       }
     }
 
