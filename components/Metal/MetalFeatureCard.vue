@@ -4,10 +4,14 @@
       {{ title }}
     </h3>
     <div class="feature-card__content">
-      <div
-        class="feature-card__image"
-        :style="{ 'background-image': `url(${image})` }"
-      />
+      <div class="feature-card__image-container">
+        <nuxt-img
+          class="feature-card__image"
+          format="webp"
+          sizes="sm:300px md:600px lg:300px"
+          :src="image"
+        />
+      </div>
       <!-- TODO: HTML content should not be in strings but in components
       but lacking of a better solution given time constraints. -->
       <!-- eslint-disable vue/no-v-html -->
@@ -58,16 +62,19 @@ defineProps<Props>();
   }
 
   &__image {
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    width: 100%;
+  }
+
+  &__image-container {
     flex: 0 0 14rem;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
     overflow: hidden;
+    position: relative;
 
     @include carbon.breakpoint-down(md) {
-      background-size: contain;
       height: 11rem;
-      width: auto;
     }
   }
 
