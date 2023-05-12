@@ -27,7 +27,6 @@ interface Advocate {
 
 interface QampProject {
   name: string;
-  description: string;
   url: string;
   website?: string;
   tags: string[];

@@ -32,15 +32,6 @@
             :key="project.name"
             class="cds--col-max-8 qamp-projects__card"
           >
-            <!-- <AdvocatesItemCard
-              :name="advocate.name"
-              :image="advocate.image"
-              :city="advocate.city"
-              :country="advocate.country[0]"
-              :region="advocate.region"
-              :slack-id="advocate.slackId"
-              :slack-username="advocate.slackUsername"
-            /> -->
             <UiCard
               class="qamp-projects__project-card"
               :title="project.name"
@@ -51,11 +42,7 @@
                 location: 'ecosystem-card',
               }"
               to="https://github.com/QAMP-EXAMPLE/<title-of-project>"
-            >
-              <p>
-                {{ project.description }}
-              </p>
-            </UiCard>
+            ></UiCard>
             <bx-accordion
               v-if="
                 project.contributors?.length != 0 ||
