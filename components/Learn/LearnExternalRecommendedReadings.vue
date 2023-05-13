@@ -77,6 +77,7 @@ withDefaults(defineProps<Props>(), {
 
   &__title {
     font-style: italic;
+    margin-left: carbon.$spacing-01;
   }
 
   &__reference {
