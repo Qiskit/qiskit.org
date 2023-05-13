@@ -1,8 +1,8 @@
-import type { MosaicElement } from "~/types/uiComponents";
+import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 const header = {
   titleLine1: "Qiskit Global Summer School 2023:",
-  titleLine2: "Theory to Implementation",
+  titleLine2: "Theory To Implementation",
   qiskitTwitterLink: {
     url: "https://twitter.com/Qiskit",
     segment: {
@@ -21,12 +21,13 @@ const header = {
   cardSectionHeading: "About the event:",
   card: {
     image: "/images/events/summer-school-2023/summer-school-2023-logo.png",
-    title: "Qiskit Global Summer School 2023: Theory to Implementation",
-    description: "[CARD EVENT DESCRIPTION ]",
+    title: "Qiskit Global Summer School 2023: Theory To Implementation",
+    description:
+      "The Qiskit Global Summer School returns as a two-week intensive course focused on the foundations of quantum computing and more!",
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "",
+    to: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-629462869387",
     ctaLabel: "Learn more",
     segment: {
       cta: "ibm-research-blog",
@@ -45,10 +46,25 @@ const mosaic: MosaicSection = {
   tiles: [
     {
       position: "first",
+      title: "Qiskit YouTube Channel",
+      description:
+        "Join us for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!",
+      image: "/images/events/seminar-series/mosaic-experts.png",
+      cta: {
+        url: "https://www.youtube.com/@qiskit",
+        label: "Watch and subscribe",
+        segment: {
+          cta: "watch-and-subscribe",
+          location: "mosaic",
+        },
+      },
+    },
+    {
+      position: "second",
       title: "Qiskit Textbook",
       description:
         "The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
-      image: "/images/events/seminar-series/mosaic-experts.png",
+      image: "/images/events/summer-school/ibm-system-one-display.jpg",
       cta: {
         url: "/learn",
         label: "Read the textbook",
@@ -59,31 +75,16 @@ const mosaic: MosaicSection = {
       },
     },
     {
-      position: "second",
+      position: "third",
       title: "IBM Quantum",
       description:
         "IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.",
-      image: "/images/events/summer-school/ibm-system-one-display.jpg",
+      image: "/images/events/summer-school/chip.png",
       cta: {
         url: "https://quantum-computing.ibm.com/login",
         label: "Explore IBM Quantum",
         segment: {
           cta: "explore-ibm-quantum",
-          location: "mosaic",
-        },
-      },
-    },
-    {
-      position: "third",
-      title: "Introduction to Quantum Computing and Quantum Hardware",
-      description:
-        "The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.",
-      image: "/images/events/summer-school/chip.png",
-      cta: {
-        url: "/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020",
-        label: "Start the course",
-        segment: {
-          cta: "start-the-course",
           location: "mosaic",
         },
       },
@@ -115,141 +116,181 @@ interface dailyAgenda {
 
 const week1Schedule: dailyAgenda[] = [
   {
-    day: "Monday, July 18",
-    topic: "Qiskit Global Summer School Kick Off",
-    speaker: "-",
+    day: "Monday, July 17",
+    topic: "Kick Off",
+    speaker: "O. Lanes",
+    format: "Address",
+  },
+  {
+    day: "Monday, July 17",
+    topic: "Single Systems",
+    speaker: "J. Watrous",
     format: "Lecture",
   },
   {
-    day: "Monday, July 18",
-    topic: "History of Quantum Computing and Motivation for Quantum Simulation",
-    speaker: "Olivia Lanes",
+    day: "Monday, July 17",
+    topic: "Multiple Systems",
+    speaker: "J. Watrous",
     format: "Lecture",
   },
   {
-    day: "Monday, July 18",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Monday, July 17",
+    topic: " ",
+    speaker: "O. Lanes & J. Watrous",
     format: "Live Q&A",
   },
   {
-    day: "Tuesday, July 19",
-    topic:
-      "Introduction to Linear Algebra, Prerequisite Mathematics, and Circuit Composition",
-    speaker: "Maria Violaris",
+    day: "Tuesday, July 18",
+    topic: "Quantum Circuits",
+    speaker: "J. Watrous",
     format: "Lecture",
   },
   {
-    day: "Tuesday, July 19",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Tuesday, July 18",
+    topic: "Qiskit 101",
+    speaker: "Abby",
+    format: "Lab",
+  },
+  {
+    day: "Tuesday, July 18",
+    topic: "Live Q&A",
+    speaker: "John & Abby",
     format: "Live Q&A",
   },
   {
-    day: "Wednesday, July 20",
-    topic: "Hamiltonian Time Evolution",
-    speaker: "Maria Violaris",
+    day: "Wednesday, July 19",
+    topic: "Entanglement in Action",
+    speaker: "J. Watrous",
     format: "Lecture",
   },
   {
-    day: "Wednesday, July 20",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Thursday, July 20",
+    topic: "Quantum query algorithms",
+    speaker: "J. Watrous",
+    format: "Lecture",
+  },
+  {
+    day: "Thursday, July 20",
+    topic: "Foundations of quantum algorithms ",
+    speaker: "J. Watrous",
+    format: "Lecture",
+  },
+  {
+    day: "Thursday, July 20",
+    topic: " ",
+    speaker: "O. Lanes & J. Watrous",
     format: "Live Q&A",
   },
   {
-    day: "Thursday, July 21",
-    topic: "Simulation Problems",
-    speaker: "Jeffrey Cohn",
+    day: "Friday, July 21",
+    topic: "Phase estimation and factoring",
+    speaker: "J. Watrous",
     format: "Lecture",
   },
   {
-    day: "Thursday, July 21",
-    topic: "Q&A Sessions",
-    speaker: "-",
-    format: "Live Q&A",
+    day: "Friday, July 21",
+    topic: "Diving into Quantum Algorithms",
+    speaker: "K. Ferris",
+    format: "Lab",
   },
   {
-    day: "Friday, July 22",
-    topic: "Noisy Real Hardware - Noise in Quantum Computers",
-    speaker: "Zlatko Minev",
-    format: "Lecture",
-  },
-  {
-    day: "Friday, July 22",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Friday, July 21",
+    topic: " ",
+    speaker: "O. Lanes & J. Watrous",
     format: "Live Q&A",
   },
 ];
 
 const week2Schedule: dailyAgenda[] = [
   {
-    day: "Monday, July 25",
-    topic:
-      "Broad Overview of Quantum Chemistry Simulation and Why it is a Challenge",
-    speaker: "Panos Barkoutsos",
+    day: "Monday, July 24",
+    topic: "Kick Off wk 2",
+    speaker: "O. Lanes",
+    format: "Address",
+  },
+  {
+    day: "Monday, July 24",
+    topic: "Quantum Computing Hardware and Super Conducting Circuits",
+    speaker: "O. Lanes",
     format: "Lecture",
   },
   {
-    day: "Monday, July 25",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Monday, July 24",
+    topic: " ",
+    speaker: "O. Lanes & J. Watrous",
     format: "Live Q&A",
   },
   {
-    day: "Tuesday, July 26",
-    topic: "Methods for Quantum Simulation",
-    speaker: "Yukio Kawashima",
+    day: "Tuesday, July 25",
+    topic: "Introduction to Quantum Noise Part 1",
+    speaker: "Z. Minev",
     format: "Lecture",
   },
   {
-    day: "Tuesday, July 26",
-    topic: "Q&A Sessions",
-    speaker: "-",
-    format: "Live Q&A",
-  },
-  {
-    day: "Wednesday, July 27",
-    topic: "Quantum Static Simulation",
-    speaker: "Ieva Liepuoniute",
+    day: "Tuesday, July 25",
+    topic: "Introduction to Quantum Noise Part 2",
+    speaker: "Z. Minev",
     format: "Lecture",
   },
   {
-    day: "Wednesday, July 27",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Tuesday, July 25",
+    topic: " ",
+    speaker: "Z. Minev & J. Watrous",
     format: "Live Q&A",
   },
   {
-    day: "Thursday, July 28",
-    topic: "Quantum Dynamics",
-    speaker: "Alexander Miessen",
+    day: "Wednesday, July 26",
+    topic: "Iterative Quantum Phase Estimation: Moving Beyond Traditional QPE",
+    speaker: "K. Ferris",
     format: "Lecture",
   },
   {
-    day: "Thursday, July 28",
-    topic: "Q&A Sessions",
-    speaker: "-",
-    format: "Live Q&A",
-  },
-  {
-    day: "Friday, July 29",
-    topic: "What is Quantum Simulation and Where is the Field Going?",
-    speaker: "-",
+    day: "Wednesday, July 26",
+    topic: "Variational Quantum Eigensolver",
+    speaker: "O. Shehab",
     format: "Lecture",
   },
   {
-    day: "Friday, July 29",
-    topic: "Q&A Sessions",
-    speaker: "-",
+    day: "Wednesday, July 26",
+    topic: "Iterative Phase Estimation",
+    speaker: "K. Sung",
+    format: "Lab",
+  },
+  {
+    day: "Wednesday, July 26",
+    topic: " ",
+    speaker: "K. Ferris & J.Watrous",
     format: "Live Q&A",
   },
   {
-    day: "Friday, July 29",
-    topic: "Qiskit Global Summer School 2022 Commencement & Wrap Celebration",
-    speaker: "-",
-    format: "Commencement",
+    day: "Thursday, July 27",
+    topic: "Noise Mitigation pt1",
+    speaker: "N. Bronn",
+    format: "Lecture",
+  },
+  {
+    day: "Thursday, July 27",
+    topic: "Noise Mitigation pt2",
+    speaker: "N. Bronn",
+    format: "Lab",
+  },
+  {
+    day: "Thursday, July 27",
+    topic: "Noise Mitigation",
+    speaker: "K. Sung",
+    format: "Lab",
+  },
+  {
+    day: "Friday, July 28",
+    topic: "Contributing to Qiskit",
+    speaker: "A. Mitchell",
+    format: "Lab",
+  },
+  {
+    day: "Friday, July 28",
+    topic: "Closing Ceremony",
+    speaker: "Various",
+    format: " ",
   },
 ];
 
@@ -303,10 +344,10 @@ const helpfulResources: HelpfulResourcesSection = {
       description:
         "If your questions aren't answered by the FAQ below or our blog post, please use this form to submit your enquiries direct to the team.",
       cta: {
-        url: "http://qisk.it/QGSS2021EnquiryForm",
+        url: "https://qisk.it/QGSS2023EnquiryForm",
         label: "Enquire now",
         segment: {
-          cta: "qgss2021-enquiry-form",
+          cta: "qgss2023-enquiry-form",
           location: "helpful-resources",
         },
       },

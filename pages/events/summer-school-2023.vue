@@ -8,13 +8,13 @@
       </template>
       <template #description>
         <p>
-          The Qiskit Global Summer School 2022 is a two-week intensive summer
+          The Qiskit Global Summer School 2023 is a two-week intensive summer
           program designed to empower the quantum researchers and developers of
           tomorrow with the skills and know-how to explore the world of quantum
-          computing and its applications. This third-annual summer school will
-          provide a focused introduction to quantum computing and its
-          applications to quantum simulation, with a specific focus on quantum
-          chemistry.
+          computing and its applications. This fourth-annual summer school will
+          provide an introduction to quantum computing by taking on a
+          back-to-basics approach, with a specific look at making the transition
+          from theory to implementation.
         </p>
         <p>
           Please follow
@@ -24,7 +24,7 @@
           for more details and updates. For any questions, please check out our
           FAQ below!
         </p>
-        <p>See you next year!</p>
+        <p>See you soon!</p>
       </template>
       <template #card>
         <EventsItemCard v-bind="headerData.card" vertical-layout>
@@ -80,7 +80,7 @@
         </div>
       </section>
 
-      <EventsSummerSchoolFaq class="summer-school-page__section" />
+      <EventsSummerSchoolFaq2023 class="summer-school-page__section" />
 
       <UiHelpfulResourcesSection
         class="summer-school-page__section"
