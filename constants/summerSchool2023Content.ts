@@ -49,7 +49,7 @@ const mosaic: MosaicSection = {
       title: "Qiskit YouTube Channel",
       description:
         "Join us for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!",
-      image: "/images/events/seminar-series/mosaic-experts.png",
+      image: "/images/learn/other-platforms/youtube.png",
       cta: {
         url: "https://www.youtube.com/@qiskit",
         label: "Watch and subscribe",
@@ -64,10 +64,10 @@ const mosaic: MosaicSection = {
       title: "Qiskit Textbook",
       description:
         "The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
-      image: "/images/events/summer-school/ibm-system-one-display.jpg",
+      image: "/images/events/summer-school-2023/qiskit-textbook.jpg",
       cta: {
         url: "/learn",
-        label: "Read the textbook",
+        label: "Read the Textbook",
         segment: {
           cta: "read-the-textbook",
           location: "mosaic",
@@ -94,7 +94,8 @@ const mosaic: MosaicSection = {
       title: "Quantum Computing & Quantum Machine Learning (2021)",
       description:
         "The Qiskit Global Summer School 2021 coursework, lab, and lecture materials are now available online.",
-      image: "/images/events/summer-school/quantum-composer-screen.png",
+      image:
+        "/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png",
       cta: {
         url: "https://qiskit.org/learn/summer-school/quantum-computing-and-quantum-learning-2021",
         label: "Start the course",
