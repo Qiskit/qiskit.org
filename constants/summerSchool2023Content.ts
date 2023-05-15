@@ -149,13 +149,13 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: "Tuesday, July 18",
     topic: "Qiskit 101",
-    speaker: "Abby",
+    speaker: "A. Mitchell",
     format: "Lab",
   },
   {
     day: "Tuesday, July 18",
     topic: "Live Q&A",
-    speaker: "John & Abby",
+    speaker: "J. Watrous & A. Mitchell",
     format: "Live Q&A",
   },
   {
