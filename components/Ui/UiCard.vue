@@ -12,7 +12,7 @@
         :class="imageContain ? 'card__image_contain' : null"
         format="webp"
         loading="lazy"
-        sizes="sm:300px md:650px lg:250px"
+        sizes="sm:300px md:650px"
         :src="image"
       />
     </div>
