@@ -7,21 +7,21 @@
       >
         <p>
           Minimal prerequisites are required for the Qiskit Global Summer
-          School. If you know
-          <UiLink v-bind="khanAcademy">how to multiply two matrices</UiLink>
-          , and have some programming experience in Python, you are ready for
-          the Summer School.
+          School. To follow most of the course, you will need to understand the
+          basics of linear algebra, including vectors and matrices and how to
+          work with them, as well as notions such as linear independence, bases,
+          and dimension. You will also need to know how complex numbers work and
+          be comfortable with some basic mathematical concepts, such as sets and
+          functions.
         </p>
         <p>
-          You can
-          <UiLink v-bind="pythonAndJupyter">
-            brush up on Python programming
-          </UiLink>
-          before attending the lectures by using the Qiskit Textbook. To make
-          the most out of these lectures, you may also consider looking through
-          the
+          To make the most out of the lectures, you may also consider looking
+          through the
           <UiLink v-bind="linearAlgebra">linear algebra prerequisites</UiLink>
-          section of the Qiskit Textbook.
+          section of the Qiskit Textbook and
+          <UiLink v-bind="pythonAndJupyter"
+            >brushing up on Python programming</UiLink
+          >.
         </p>
       </bx-accordion-item>
 
@@ -193,11 +193,6 @@ interface TrackedLink {
   url: string;
   segment: CtaClickedEventProp;
 }
-
-const khanAcademy: TrackedLink = {
-  url: "https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro",
-  segment: { cta: "khanacademy-matrix-multiplication-intro", location: "faq" },
-};
 
 const pythonAndJupyter: TrackedLink = {
   url: "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",

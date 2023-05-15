@@ -137,7 +137,7 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: "Monday, July 17",
     topic: " ",
-    speaker: "O. Lanes & J. Watrous",
+    speaker: "O. Lanes, J. Watrous",
     format: "Live Q&A",
   },
   {
@@ -155,7 +155,7 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: "Tuesday, July 18",
     topic: "Live Q&A",
-    speaker: "J. Watrous & A. Mitchell",
+    speaker: "J. Watrous, A. Mitchell",
     format: "Live Q&A",
   },
   {
@@ -179,7 +179,7 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: "Thursday, July 20",
     topic: " ",
-    speaker: "O. Lanes & J. Watrous",
+    speaker: "O. Lanes, J. Watrous",
     format: "Live Q&A",
   },
   {
@@ -197,7 +197,7 @@ const week1Schedule: dailyAgenda[] = [
   {
     day: "Friday, July 21",
     topic: " ",
-    speaker: "O. Lanes & J. Watrous",
+    speaker: "O. Lanes, J. Watrous",
     format: "Live Q&A",
   },
 ];
@@ -218,7 +218,7 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: "Monday, July 24",
     topic: " ",
-    speaker: "O. Lanes & J. Watrous",
+    speaker: "O. Lanes, J. Watrous",
     format: "Live Q&A",
   },
   {
@@ -236,7 +236,7 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: "Tuesday, July 25",
     topic: " ",
-    speaker: "Z. Minev & J. Watrous",
+    speaker: "Z. Minev, J. Watrous",
     format: "Live Q&A",
   },
   {
@@ -260,18 +260,18 @@ const week2Schedule: dailyAgenda[] = [
   {
     day: "Wednesday, July 26",
     topic: " ",
-    speaker: "K. Ferris & J.Watrous",
+    speaker: "K. Ferris, J.Watrous",
     format: "Live Q&A",
   },
   {
     day: "Thursday, July 27",
-    topic: "Noise Mitigation pt1",
+    topic: "Noise Mitigation Part 1",
     speaker: "N. Bronn",
     format: "Lecture",
   },
   {
     day: "Thursday, July 27",
-    topic: "Noise Mitigation pt2",
+    topic: "Noise Mitigation Part 2",
     speaker: "N. Bronn",
     format: "Lab",
   },
