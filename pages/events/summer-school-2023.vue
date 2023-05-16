@@ -103,14 +103,14 @@ import {
 definePageMeta({
   layout: "default-max",
   pageTitle: "Qiskit Global Summer School 2023",
-  routeName: "summer-school-2023",
+  routeName: "/events/summer-school-2023",
 });
 
-const title = "Qiskit Global Summer School 2022";
-const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
-designed to empower the next generation of quantum researchers and developers with the skills
-and know-how to explore quantum applications on their own`;
-const image = "/images/events/summer-school/summer-school-logo.png";
+const title = "Qiskit Global Summer School 2023";
+const description =
+  "The Qiskit Global Summer School 2023 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
+const image = "/images/events/summer-school-2023/summer-school-2023-logo.png";
+const pageUrl = "https://qiskit.org/events/summer-school-2023";
 
 useHead({
   title,
@@ -144,6 +144,16 @@ useHead({
       hid: "og:description",
       property: "og:description",
       content: description,
+    },
+    {
+      hid: "og:url",
+      property: "og:url",
+      content: pageUrl,
+    },
+    {
+      hid: "og:type",
+      property: "og:type",
+      content: "article",
     },
     {
       hid: "og:image",
