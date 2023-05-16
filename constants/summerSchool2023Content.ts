@@ -154,7 +154,7 @@ const week1Schedule: dailyAgenda[] = [
   },
   {
     day: "Tuesday, July 18",
-    topic: "Live Q&A",
+    topic: " ",
     speaker: "J. Watrous, A. Mitchell",
     format: "Live Q&A",
   },
@@ -165,14 +165,20 @@ const week1Schedule: dailyAgenda[] = [
     format: "Lecture",
   },
   {
+    day: "Wednesday, July 19",
+    topic: "Creating Entanglement with Qiskit",
+    speaker: "N. Bronn",
+    format: "Lecture",
+  },
+  {
     day: "Thursday, July 20",
-    topic: "Quantum query algorithms",
+    topic: "Quantum Query Algorithms",
     speaker: "J. Watrous",
     format: "Lecture",
   },
   {
     day: "Thursday, July 20",
-    topic: "Foundations of quantum algorithms ",
+    topic: "Foundations of Quantum Algorithms ",
     speaker: "J. Watrous",
     format: "Lecture",
   },
@@ -184,13 +190,13 @@ const week1Schedule: dailyAgenda[] = [
   },
   {
     day: "Friday, July 21",
-    topic: "Phase estimation and factoring",
+    topic: "Phase Estimation and Factoring",
     speaker: "J. Watrous",
     format: "Lecture",
   },
   {
     day: "Friday, July 21",
-    topic: "Diving into Quantum Algorithms",
+    topic: "Diving Into Quantum Algorithms",
     speaker: "K. Ferris",
     format: "Lab",
   },
@@ -205,7 +211,7 @@ const week1Schedule: dailyAgenda[] = [
 const week2Schedule: dailyAgenda[] = [
   {
     day: "Monday, July 24",
-    topic: "Kick Off wk 2",
+    topic: "Kick Off",
     speaker: "O. Lanes",
     format: "Address",
   },
@@ -223,13 +229,13 @@ const week2Schedule: dailyAgenda[] = [
   },
   {
     day: "Tuesday, July 25",
-    topic: "Introduction to Quantum Noise Part 1",
+    topic: "Introduction to Quantum Noise - Part 1",
     speaker: "Z. Minev",
     format: "Lecture",
   },
   {
     day: "Tuesday, July 25",
-    topic: "Introduction to Quantum Noise Part 2",
+    topic: "Introduction to Quantum Noise - Part 2",
     speaker: "Z. Minev",
     format: "Lecture",
   },
@@ -265,13 +271,13 @@ const week2Schedule: dailyAgenda[] = [
   },
   {
     day: "Thursday, July 27",
-    topic: "Noise Mitigation Part 1",
+    topic: "Noise Mitigation - Part 1",
     speaker: "N. Bronn",
     format: "Lecture",
   },
   {
     day: "Thursday, July 27",
-    topic: "Noise Mitigation Part 2",
+    topic: "Noise Mitigation - Part 2",
     speaker: "N. Bronn",
     format: "Lab",
   },

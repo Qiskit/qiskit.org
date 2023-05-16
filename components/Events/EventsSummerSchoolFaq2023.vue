@@ -12,7 +12,8 @@
           work with them, as well as notions such as linear independence, bases,
           and dimension. You will also need to know how complex numbers work and
           be comfortable with some basic mathematical concepts, such as sets and
-          functions.
+          functions. <UiLink v-bind="basicsOfQuantumInformation">Here</UiLink>,
+          you can find these foundational concepts explained.
         </p>
         <p>
           To make the most out of the lectures, you may also consider looking
@@ -159,7 +160,7 @@
           If you want to collaborate and connect with other members of the
           community, and participate in some of the ongoing conversations about
           quantum computing, you will want to
-          <UiLink v-bind="joinqiskitslack">
+          <UiLink v-bind="joinQiskitSlack">
             check out our ever-growing Slack Community
           </UiLink>
           . From there you can connect with current and past interns, IBM
@@ -204,6 +205,11 @@ const linearAlgebra: TrackedLink = {
   segment: { cta: "qiskit-linear-algebra", location: "faq" },
 };
 
+const basicsOfQuantumInformation: TrackedLink = {
+  url: "https://qiskit.org/learn/course/basics-quantum-information/",
+  segment: { cta: "basics-of-quantum-information", location: "faq" },
+};
+
 const qCEducators: TrackedLink = {
   url: "https://quantum-computing.ibm.com/programs/educators",
   segment: { cta: "ibm-quantum-educators-program", location: "faq" },
@@ -240,7 +246,7 @@ const qiskitSubscribe: TrackedLink = {
 };
 
 // TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
-const joinqiskitslack: TrackedLink = {
+const joinQiskitSlack: TrackedLink = {
   url: "https://qisk.it/join-slack",
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
