@@ -11,8 +11,8 @@ const header = {
     },
   },
   cta: {
-    label: "Register now!",
-    url: "",
+    label: "Register today",
+    url: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-629462869387",
     segment: {
       cta: "register",
       location: "header",

@@ -25,12 +25,7 @@
           FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta
-          class="summer-school-page__cta"
-          :label="registerCTA.label"
-          :segment="registerCTA.segment"
-          :url="registerCTA.url"
-        />
+        <UiCta class="summer-school-page__cta" v-bind="header.cta" />
       </template>
       <template #card>
         <EventsItemCard v-bind="headerData.card" vertical-layout>
@@ -98,7 +93,6 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
 import {
   header,
   mosaic,
@@ -174,12 +168,6 @@ const headerData = header;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
-
-const registerCTA: GeneralLink = {
-  url: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-629462869387",
-  label: "Register today",
-  segment: { cta: "register-today", location: "summer-school-2023" },
-};
 </script>
 
 <style lang="scss" scoped>
