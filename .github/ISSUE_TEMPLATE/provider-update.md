@@ -1,0 +1,58 @@
+---
+name: Provider update
+about: There is an error/outdated provider information in the examples?
+title: "[provider] description"
+labels: provider code
+assignees: 1ucian0
+
+---
+
+body:
+- type: dropdown
+   id: where
+   attributes:
+   label: Where is the code that needs update?
+   options:
+      - Install instruction
+      - qiskit.org - Transpile
+      - qiskit.org - Sample a Bell State
+      - qiskit.org - Run VQE
+      - qiskit.org/providers/
+      - Other (include where in the next field)
+   validations:
+      required: true
+- type: input
+   id: current
+   validations:
+      required: true
+   attributes:
+      label: What does it say currently?
+      description: What's the code or text that needs update?
+- type: textarea
+   id: suggestion
+   validations:
+      required: true
+   attributes:
+      label: What should it say instead? (either copy or attach a screenshot)
+      description: What's the code or text that needs update?
+- type: textarea
+   id: suggestion
+   validations:
+      required: true
+   attributes:
+      label: What should it say instead?
+      description: What's the code or text that needs update?
+- type: input
+   id: source
+   validations:
+      required: false
+   attributes:
+      label: Link to the provider documentation to support this change
+      description: Is there an official documentation from the provider that supports this change?
+- type: textarea
+   id: additional
+   validations:
+      required: false
+   attributes:
+      label: Additional information
+      description: Tell us more!
