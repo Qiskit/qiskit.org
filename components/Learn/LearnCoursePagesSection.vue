@@ -30,8 +30,11 @@
       </div>
       <div v-if="activeCourse" class="course-pages-section__main__preview">
         <UiBasicLink :url="activeCourse.url">
-          <img
+          <nuxt-img
             class="course-pages-section__main__preview__image"
+            format="webp"
+            preload
+            sizes="md:500px lg:800px"
             :src="activeCoursePreviewImage"
           />
         </UiBasicLink>

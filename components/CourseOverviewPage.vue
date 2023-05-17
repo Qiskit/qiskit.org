@@ -16,7 +16,12 @@
         />
       </template>
       <template #image>
-        <img class="page-header-with-img__image" :src="headerImg" />
+        <nuxt-img
+          class="page-header-with-img__image"
+          format="webp"
+          sizes="sm:300px md:650px lg:500px xl:750px"
+          :src="headerImg"
+        />
       </template>
     </UiPageHeaderWithImage>
     <LearnPrerequisiteMaterialSection

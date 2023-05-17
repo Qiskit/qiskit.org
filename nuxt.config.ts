@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/content"],
+  modules: ["@nuxt/content", "@nuxt/image-edge"],
 
   runtimeConfig: {
     // Keys within public are also exposed client-side
@@ -38,6 +38,16 @@ export default defineNuxtConfig({
       if (IS_PRODUCTION || GENERATE_CONTENT) {
         await generateContent();
       }
+    },
+  },
+
+  image: {
+    screens: {
+      sm: 320,
+      md: 672,
+      lg: 1056,
+      xl: 1312,
+      xxl: 1584,
     },
   },
 

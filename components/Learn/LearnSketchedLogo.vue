@@ -78,8 +78,10 @@
         class="sketched-logo__st1"
       />
     </svg>
-    <img
+    <nuxt-img
       class="sketched-logo__sketch"
+      format="webp"
+      sizes="sm:300px md:600px xxl:700px"
       src="/images/learn/logo-sketch-lines.png"
     />
   </div>

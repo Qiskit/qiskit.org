@@ -2,18 +2,22 @@
   <article>
     <div class="qiskit-capability-card__container">
       <div class="qiskit-capability-card__thumbnail">
-        <img
+        <nuxt-img
           class="qiskit-capability-card__thumbnail__media"
+          format="webp"
           :src="thumbnailResource"
+          width="160px"
         />
       </div>
       <div class="qiskit-capability-card__copy">
         <h3 class="qiskit-capability-card__title">
           {{ title }}
         </h3>
-        <img
+        <nuxt-img
           class="qiskit-capability-card__thumbnail__mobile"
+          format="webp"
           :src="thumbnailResource"
+          width="160px"
         />
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
@@ -77,7 +81,6 @@ $card-img-width: 10rem;
 
     &__media {
       display: block;
-      width: 100%;
       width: $card-img-width;
     }
 
