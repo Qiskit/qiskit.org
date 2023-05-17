@@ -79,7 +79,7 @@ const mosaic: MosaicSection = {
       title: "IBM Quantum",
       description:
         "IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.",
-      image: "/images/events/summer-school/chip.png",
+      image: "/images/events/summer-school-2022/chip.png",
       cta: {
         url: "https://quantum-computing.ibm.com/login",
         label: "Explore IBM Quantum",
