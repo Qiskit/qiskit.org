@@ -168,7 +168,13 @@ const week1Schedule: dailyAgenda[] = [
     day: "Wednesday, July 19",
     topic: "Creating Entanglement with Qiskit",
     speaker: "N. Bronn",
-    format: "Lecture",
+    format: "Lab",
+  },
+  {
+    day: "Wednesday, July 19",
+    topic: " ",
+    speaker: "N. Bronn, J. Watrous",
+    format: "Live Q&A",
   },
   {
     day: "Thursday, July 20",
@@ -286,6 +292,12 @@ const week2Schedule: dailyAgenda[] = [
     topic: "Noise Mitigation",
     speaker: "K. Sung",
     format: "Lab",
+  },
+  {
+    day: "Thursday, July 27",
+    topic: " ",
+    speaker: "K. Sung, J. Watrous",
+    format: "Live Q&A",
   },
   {
     day: "Friday, July 28",
