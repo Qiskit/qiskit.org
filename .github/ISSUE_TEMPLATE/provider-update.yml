@@ -1,0 +1,56 @@
+name: Provider update
+description: Is there an error/outdated provider information in the examples?
+title: "[provider <name>]: <description>"
+labels: ["provider code"]
+assignees:
+  - 1ucian0
+body:
+  - type: input
+    id: provider
+    validations:
+      required: true
+    attributes:
+      label: Provider name
+      description: What's the provider/company affected?
+      placeholder: ex. IBM Quantum Qiskit Runtime
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where is the issue?
+      description: Where is the code/text that needs change/update?
+      options:
+          - Install instruction
+          - qiskit.org - Transpile
+          - qiskit.org - Sample a Bell State
+          - qiskit.org - Run VQE
+          - qiskit.org/providers/
+          - Other (include where in the next field)
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What does it say currently?
+      description: What s the code or text that needs update?
+      placeholder: either copy the code/text or attach a screenshot
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What should it say instead?
+      description: What's the code or text that needs update?
+      placeholder: code/text to replace the previous field
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Link to the provider documentation that supports this change
+      placeholder: ex. https://cloud.ibm.com/docs/quantum-computing?topic=quantum-computing-get-started
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional information
+      placeholder: Tell us more!
