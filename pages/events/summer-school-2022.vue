@@ -80,7 +80,7 @@
         </div>
       </section>
 
-      <EventsSummerSchoolFaq class="summer-school-page__section" />
+      <EventsSummerSchoolFaq2022 class="summer-school-page__section" />
 
       <UiHelpfulResourcesSection
         class="summer-school-page__section"
@@ -92,7 +92,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/tabs/index.js";
 import {
   header,
   mosaic,
@@ -103,14 +102,14 @@ import {
 definePageMeta({
   layout: "default-max",
   pageTitle: "Qiskit Global Summer School 2022",
-  routeName: "summer-school",
+  routeName: "summer-school-2022",
 });
 
 const title = "Qiskit Global Summer School 2022";
 const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
 designed to empower the next generation of quantum researchers and developers with the skills
 and know-how to explore quantum applications on their own`;
-const image = "/images/events/summer-school/summer-school-logo.png";
+const image = "/images/events/summer-school-2022/summer-school-logo.png";
 
 useHead({
   title,
