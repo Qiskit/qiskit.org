@@ -130,20 +130,21 @@
       </svg>
 
       <div class="dark-header__media">
-        <img
+        <nuxt-img
           class="dark-header__media-cryo"
+          format="webp"
+          sizes="sm:500px md:700px lg:900px"
           src="/images/metal/hero/cryo.png"
-          alt=""
         />
-        <img
+        <nuxt-img
           class="dark-header__media-transmon-outline"
+          format="webp"
           src="/images/metal/hero/transmon.svg"
-          alt=""
         />
-        <img
+        <nuxt-img
           class="dark-header__media-transmon"
+          format="webp"
           src="/images/metal/hero/transmon.png"
-          alt=""
         />
       </div>
     </div>

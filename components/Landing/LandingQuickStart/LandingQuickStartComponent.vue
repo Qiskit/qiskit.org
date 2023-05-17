@@ -3,7 +3,7 @@
     <div class="cds--row">
       <div class="cds--col-md-8 cds--col-lg-8">
         <div class="quick-start__introduction">
-          <h2>Backends compatibility</h2>
+          <h2>Backend compatibility</h2>
           <p class="quick-start__introduction__copy">
             You can use Qiskit to construct quantum programs and run them on
             simulators or real quantum computers. With our extensive network of

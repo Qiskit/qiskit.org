@@ -63,8 +63,8 @@ interface MetalCapability {
   title: string;
   /** The visible description of the feature */
   description: string;
-  /** The image of the feature */
-  visualResource: string;
+  /** The video of the feature */
+  video: string;
 }
 
 const METAL_CAPABILITIES: Array<MetalCapability> = [
@@ -72,20 +72,20 @@ const METAL_CAPABILITIES: Array<MetalCapability> = [
     title: "Design quantum systems",
     description:
       "Qiskit Metal enables chip prototyping in a matter of minutes. You can start from a convenient Python Jupyter notebook or take advantage of the user-friendly graphical user interface (GUI). Simply choose from a library of predefined quantum components, such as transmon qubits and coplanar resonators, and customize their parameters in real-time to fit your needs. Use the built-in algorithms to automatically connect components. Easily implement new experimental components using Python templates and examples.",
-    visualResource: "/videos/metal/design-quantum-systems.mp4",
+    video: "/videos/metal/design-quantum-systems.mp4",
   },
   {
     title: "Modeling quantum systems",
     description:
       "Metal helps automate the quantum electrodynamics modeling of quantum devices to predict their performance  and parameters, such as qubit frequencies, anharmonicities, couplings, and dissipation. Metal’s vision is to provide the abstraction layer needed to seamlessly interconnect with your favorite electromagnetic analysis tool (HFSS, Sonnet, CST, AWR, Comsol, …), dynamically rendering and co-simulating your design, at the whim of a click.",
-    visualResource: "/videos/metal/modeling-quantum-systems.mp4",
+    video: "/videos/metal/modeling-quantum-systems.mp4",
   },
   {
     title: "Analysis design performance",
     description: `Metal aims to give access to advanced quantum analysis techniques to calculate qubit frequencies, anharmonicities, and extract non-linear couplings, dissipation, and the full Hamiltonian of the quantum device, with percent-level accuracy.
                   <br><br>
                   We plan to include the Energy Participation Ratio (EPR), impedance analysis, and the lumped-oscillator model. We hope to further build up the quantum analysis library in collaboration with the community.`,
-    visualResource: "/videos/metal/analysis-design-performance.mp4",
+    video: "/videos/metal/analysis-design-performance.mp4",
   },
 ];
 

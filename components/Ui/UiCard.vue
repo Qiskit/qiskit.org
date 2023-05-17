@@ -6,14 +6,16 @@
       'card_description-whole-size': descriptionWholeSize,
     }"
   >
-    <div
-      v-if="image"
-      class="card__image"
-      :class="imageContain ? 'card__image_contain' : null"
-      :style="{
-        'background-image': `url(${image})`,
-      }"
-    />
+    <div v-if="image" class="card__image-container">
+      <nuxt-img
+        class="card__image"
+        :class="imageContain ? 'card__image_contain' : null"
+        format="webp"
+        loading="lazy"
+        sizes="sm:300px md:650px"
+        :src="image"
+      />
+    </div>
     <div class="card__content">
       <header class="card__header">
         <div>
@@ -135,12 +137,22 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 
   &__image {
-    flex: 0 0 14rem;
     background-color: qiskit.$background-color-light;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+
+    &_contain {
+      background-color: transparent;
+      object-fit: contain;
+    }
+  }
+
+  &__image-container {
+    flex: 0 0 14rem;
     overflow: hidden;
+    position: relative;
 
     @include carbon.breakpoint-between(md, lg) {
       flex: 0 0 13rem;
@@ -149,11 +161,6 @@ function hasTags(tags: string[] | TagTooltip[]) {
     @include carbon.breakpoint-down(md) {
       height: 13rem;
       width: auto;
-    }
-
-    &_contain {
-      background-color: transparent;
-      background-size: contain;
     }
   }
 
