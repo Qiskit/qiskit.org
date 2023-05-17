@@ -25,7 +25,11 @@
           FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta class="summer-school-page__cta" v-bind="header.cta" />
+        <UiCta
+          class="summer-school-page__cta"
+          v-bind="header.cta"
+          kind="secondary"
+        />
       </template>
       <template #card>
         <EventsItemCard v-bind="headerData.card" vertical-layout>
@@ -182,6 +186,7 @@ const helpfulResourcesData = helpfulResources;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .summer-school-page {
   display: flex;
@@ -218,6 +223,12 @@ const helpfulResourcesData = helpfulResources;
 
   &__cta {
     margin-top: carbon.$spacing-07;
+    pointer-events: none;
+    color: qiskit.$text-color-light;
+
+    &:deep(.cta__icon) {
+      display: none;
+    }
   }
 }
 </style>
