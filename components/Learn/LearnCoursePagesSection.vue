@@ -33,8 +33,7 @@
           <nuxt-img
             class="course-pages-section__main__preview__image"
             format="webp"
-            preload
-            sizes="md:500px lg:800px"
+            sizes="md:650px lg:500px xl:750px"
             :src="activeCoursePreviewImage"
           />
         </UiBasicLink>
