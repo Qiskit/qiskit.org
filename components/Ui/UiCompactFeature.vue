@@ -1,6 +1,6 @@
 <template>
   <article class="compact-feature">
-    <nuxt-img class="compact-feature__icon" :src="`/images/icons/${icon}`" />
+    <img class="compact-feature__icon" :src="`/images/icons/${icon}`" alt="" />
     <h3 class="h4 compact-feature__title">
       {{ title }}
     </h3>

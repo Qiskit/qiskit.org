@@ -59,12 +59,10 @@
           <!-- eslint-enable -->
         </div>
         <div class="building-section__media">
-          <nuxt-img
-            alt="Sketched illustration of a group standing in front of a whiteboard."
+          <img
             class="building-section__media-img"
-            format="webp"
-            sizes="lg:600px"
             src="/images/metal/whiteboard-dark.png"
+            alt="Sketched illustration of a group standing in front of a whiteboard."
           />
         </div>
       </div>

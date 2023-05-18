@@ -12,22 +12,41 @@
         <!-- estlint-enable -->
       </div>
     </div>
-    <video class="capability-card__video" loop autoplay muted playsinline>
-      <source :src="video" type="video/mp4" />
-      <source :src="video" type="video/ogg" />
+    <video
+      v-if="isVideo"
+      class="capability-card__visual-resource"
+      loop
+      autoplay
+      muted
+      playsinline
+    >
+      <source :src="visualResource" type="video/mp4" />
+      <source :src="visualResource" type="video/ogg" />
       Your browser does not support video.
     </video>
+    <div
+      v-else
+      class="capability-card__visual-resource"
+      :style="{ 'background-image': `url(${visualResource})` }"
+    />
   </article>
 </template>
 
 <script setup lang="ts">
 interface Props {
+  visualResource: string;
   title: string;
   description: string;
-  video: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const isVideo = computed<boolean>(() => {
+  const extension = props.visualResource.substring(
+    props.visualResource.length - 4
+  );
+  return extension === ".mp4";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -80,7 +99,7 @@ defineProps<Props>();
     }
   }
 
-  &__video {
+  &__visual-resource {
     flex: 0 0 32rem;
     width: 100%;
     height: 100%;
