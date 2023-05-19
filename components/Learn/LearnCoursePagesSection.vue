@@ -28,23 +28,29 @@
           Page preview
         </div>
       </div>
-      <div v-if="activeCourse" class="course-pages-section__main__preview">
-        <UiBasicLink :url="activeCourse.url">
-          <nuxt-img
-            class="course-pages-section__main__preview__image"
-            format="webp"
-            preload
-            sizes="md:650px lg:500px xl:750px"
-            :src="activeCoursePreviewImage"
+
+      <template v-for="course in courses" :key="course.label">
+        <div
+          v-if="course.label === activeCourseLabel"
+          class="course-pages-section__main__preview"
+        >
+          <UiBasicLink :url="course.url">
+            <nuxt-img
+              class="course-pages-section__main__preview__image"
+              format="webp"
+              preload
+              sizes="md:650px lg:500px xl:750px"
+              :src="`${props.imgBase}/${course.image}`"
+            />
+          </UiBasicLink>
+          <UiCta
+            label="Go to page"
+            class="course-pages-section__main__preview__cta"
+            :segment="course.segment"
+            :url="course.url"
           />
-        </UiBasicLink>
-        <UiCta
-          label="Go to page"
-          class="course-pages-section__main__preview__cta"
-          :segment="activeCourse.segment"
-          :url="activeCourse.url"
-        />
-      </div>
+        </div>
+      </template>
     </main>
   </section>
 </template>
@@ -59,32 +65,11 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const activeCourseLabel = ref("");
-
-const activeCourse = computed(() => {
-  const activeCourse = props.courses.find(
-    ({ label }) => label === activeCourseLabel.value
-  );
-  return activeCourse || null;
-});
-
-const activeCoursePreviewImage = computed(() => {
-  if (!activeCourse.value) {
-    return "";
-  }
-
-  const imageUrlBase = props.imgBase;
-
-  return `${imageUrlBase}/${activeCourse.value.image}`;
-});
+const activeCourseLabel = ref(props.courses[0].label);
 
 const selectCourse = (courseLabel: string) => {
   activeCourseLabel.value = courseLabel;
 };
-
-onMounted(() => {
-  selectCourse(props.courses[0].label);
-});
 </script>
 
 <style lang="scss" scoped>
