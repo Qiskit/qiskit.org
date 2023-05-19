@@ -8,6 +8,11 @@
 </template>
 
 <script setup lang="ts">
+import {
+  useSchemaOrg,
+  defineWebSite,
+  defineWebPage,
+} from "@unhead/schema-org-vue";
 interface PackageInfo {
   info: {
     version: string;
@@ -29,4 +34,11 @@ const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
 );
 
 const qiskitVersion = packageInfo.value?.info.version ?? "";
+
+useSchemaOrg([
+  defineWebSite({
+    name: "My Awesome Website",
+  }),
+  defineWebPage(),
+]);
 </script>
