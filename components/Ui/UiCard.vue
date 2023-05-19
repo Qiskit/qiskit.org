@@ -7,12 +7,10 @@
     }"
   >
     <div v-if="image" class="card__image-container">
-      <nuxt-img
+      <!-- TODO: Replace with NuxtImg withouth breaking the "events" page -->
+      <img
         class="card__image"
         :class="imageContain ? 'card__image_contain' : null"
-        format="webp"
-        loading="lazy"
-        sizes="sm:300px md:650px"
         :src="image"
       />
     </div>
