@@ -138,7 +138,6 @@
         />
         <nuxt-img
           class="dark-header__media-transmon-outline"
-          format="webp"
           src="/images/metal/hero/transmon.svg"
         />
         <nuxt-img

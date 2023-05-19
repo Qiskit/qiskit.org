@@ -30,11 +30,16 @@
       </div>
       <div v-if="activeCourse" class="course-pages-section__main__preview">
         <UiBasicLink :url="activeCourse.url">
-          <nuxt-img
+          <!-- TODO: investigate why this particular img is not being populated -->
+          <!-- <nuxt-img
             class="course-pages-section__main__preview__image"
             format="webp"
             preload
             sizes="md:650px lg:500px xl:750px"
+            :src="activeCoursePreviewImage"
+          /> -->
+          <img
+            class="course-pages-section__main__preview__image"
             :src="activeCoursePreviewImage"
           />
         </UiBasicLink>
