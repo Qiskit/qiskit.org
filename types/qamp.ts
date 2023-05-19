@@ -1,8 +1,10 @@
 interface QampCohort {
+  id?: string;
   name: string;
 }
 
 interface QampParticipant {
+  id?: string;
   name: string;
 }
 
@@ -15,4 +17,4 @@ interface QampProject {
   name: string;
 }
 
-export { QampProject };
+export { QampCohort, QampParticipant, QampProject };

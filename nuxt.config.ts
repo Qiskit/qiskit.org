@@ -70,8 +70,8 @@ async function generateContent() {
     await fetchAdvocates(AIRTABLE_API_KEY, "./content/advocates");
 
     // eslint-disable-next-line no-console
-    console.info("Generating the QAMP projects content...");
-    await fetchQampProjects(AIRTABLE_API_KEY, "./content/qamp-projects");
+    console.info("Generating the QAMP content...");
+    await fetchQampProjects(AIRTABLE_API_KEY, "./content/qamp");
   } else {
     // eslint-disable-next-line no-console
     console.warn(
