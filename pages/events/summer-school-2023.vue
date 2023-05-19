@@ -113,8 +113,7 @@ definePageMeta({
 const title = "Qiskit Global Summer School 2023";
 const description =
   "The Qiskit Global Summer School 2023 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
-const image =
-  "https://qiskit.org/images/events/summer-school-2023/summer-school-2023-logo.png";
+const image = "/images/events/summer-school-2023/summer-school-2023-logo.png";
 const pageUrl = "https://qiskit.org/events/summer-school-2023";
 
 useHead({
