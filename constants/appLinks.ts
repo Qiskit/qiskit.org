@@ -114,11 +114,6 @@ enum QuantumComputingLabs {
   Lab10 = "https://learn.qiskit.org/course/ch-labs/lab-10-quantum-error-correction",
 }
 
-const IBM_Q_EXPERIENCE: GeneralLink = {
-  url: "https://quantum-computing.ibm.com/lab",
-  label: "IBM Quantum Lab",
-};
-
 export {
   GeneralLink,
   StartLearningUrl,
@@ -132,5 +127,4 @@ export {
   QuantumComputingLabs,
   GamesAndDemos,
   LegacyContent,
-  IBM_Q_EXPERIENCE,
 };

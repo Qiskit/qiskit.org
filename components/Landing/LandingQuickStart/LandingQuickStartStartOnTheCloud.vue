@@ -9,18 +9,13 @@
         </p>
         <UiCta
           kind="ghost"
-          :label="ibmQExperienceLink.label"
-          :url="ibmQExperienceLink.url"
+          label="IBM Quantum Lab"
+          url="https://quantum-computing.ibm.com/lab"
         />
       </div>
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-import { IBM_Q_EXPERIENCE } from "~/constants/appLinks";
-const ibmQExperienceLink = IBM_Q_EXPERIENCE;
-</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
