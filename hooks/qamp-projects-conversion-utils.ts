@@ -19,7 +19,12 @@ class QampProjectsAirtableRecords extends AirtableRecords {
   protected qampCohorts: QampCohort[] = [];
   protected qampParticipants: QampParticipant[] = [];
 
-  constructor(apiKey: string, recordFields?: Record<string, any>) {
+  constructor(
+    apiKey: string,
+    recordFields?: Record<string, any>,
+    qampCohorts?: QampCohort[],
+    qampParticipants?: QampParticipant[]
+  ) {
     super(
       apiKey,
       AIRTABLE_BASE_ID,
@@ -28,6 +33,8 @@ class QampProjectsAirtableRecords extends AirtableRecords {
       undefined,
       recordFields
     );
+    this.qampCohorts = qampCohorts || [];
+    this.qampParticipants = qampParticipants || [];
   }
 
   async fetchProjects(): Promise<QampProject[]> {
