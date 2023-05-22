@@ -58,15 +58,34 @@
 </template>
 
 <script setup lang="ts">
-import {
-  FOOTER_ELEMENTS,
-  SECONDARY_FOOTER_LINKS,
-  STAY_CONNECTED_LINKS,
-} from "~/constants/menuLinks";
+import LogoMedium20 from "@carbon/icons-vue/lib/logo--medium/20";
+import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
+import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
+import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
+import { SOCIAL_MEDIA } from "~/constants/menuLinks";
+import type { GeneralLink } from "~/types/links";
 
 interface Props {
   oldContainer?: boolean;
   theme?: "light" | "dark";
+}
+
+interface LinksGroup {
+  title: string;
+  elements: GeneralLink[];
+}
+
+export interface LinkWithIcon extends GeneralLink {
+  icon?:
+    | typeof LogoMedium20
+    | typeof LogoSlack20
+    | typeof LogoTwitter20
+    | typeof LogoYouTube20;
+}
+
+interface LinksWithIconGroup {
+  title: string;
+  elements: LinkWithIcon[];
 }
 
 withDefaults(defineProps<Props>(), {
@@ -74,9 +93,110 @@ withDefaults(defineProps<Props>(), {
   theme: "light",
 });
 
-const footerElements = FOOTER_ELEMENTS;
-const stayConnectedElements = STAY_CONNECTED_LINKS;
-const secondaryFooterLinks = SECONDARY_FOOTER_LINKS;
+const footerElements: LinksGroup[] = [
+  {
+    title: "Learn",
+    elements: [
+      {
+        label: "Textbook",
+        url: "/learn",
+      },
+      {
+        label: "Tutorials",
+        url: "https://qiskit.org/documentation/tutorials.html",
+        segment: {
+          cta: "tutorials",
+          location: "menu",
+        },
+      },
+      {
+        label: "Videos",
+        url: "https://www.youtube.com/qiskit",
+      },
+    ],
+  },
+  {
+    title: "Community",
+    elements: [
+      {
+        label: "Events",
+        url: "/events",
+        segment: {
+          cta: "events",
+          location: "menu",
+        },
+      },
+      {
+        label: "Advocates",
+        url: "/advocates#become-an-advocate",
+      },
+      {
+        label: "Code of conduct",
+        url: "https://github.com/Qiskit/qiskit/blob/master/CODE_OF_CONDUCT.md",
+        segment: {
+          cta: "code-of-conduct",
+          location: "footer",
+        },
+      },
+    ],
+  },
+  {
+    title: "Support",
+    elements: [
+      SOCIAL_MEDIA.github,
+      SOCIAL_MEDIA.support,
+      {
+        label: "Documentation",
+        url: "https://qiskit.org/documentation/",
+      },
+    ],
+  },
+];
+
+const stayConnectedElements: LinksWithIconGroup = {
+  title: "Stay Connected",
+  elements: [
+    {
+      label: "Twitter",
+      icon: LogoTwitter20,
+      url: SOCIAL_MEDIA.twitter.url,
+    },
+    {
+      label: "Slack",
+      icon: LogoSlack20,
+      url: SOCIAL_MEDIA.slack.url,
+    },
+    {
+      label: "Youtube",
+      icon: LogoYouTube20,
+      url: SOCIAL_MEDIA.youtube.url,
+    },
+    {
+      label: "Medium",
+      icon: LogoMedium20,
+      url: SOCIAL_MEDIA.medium.url,
+    },
+  ],
+};
+
+const secondaryFooterLinks: GeneralLink[] = [
+  {
+    label: "Terms of use",
+    url: "https://www.ibm.com/legal?lnk=flg-tous-usen",
+  },
+  {
+    label: "Accessibility",
+    url: "https://www.ibm.com/accessibility/us/en/?lnk=flg-acce-usen",
+  },
+  {
+    label: "Contact",
+    url: "mailto:hello@qiskit.org",
+  },
+  {
+    label: "Privacy",
+    url: "https://quantum-computing.ibm.com/terms/privacy",
+  },
+];
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-import { GeneralLink } from "~/types/links";
+import type { GeneralLink } from "~/types/links";
 
 enum StartLearningUrl {
   Introduction = "https://learn.qiskit.org/course/introduction",
