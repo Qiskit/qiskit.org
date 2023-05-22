@@ -7,6 +7,7 @@
       `cta_${kind}_theme_${theme}`,
       { cta_wider: isWider },
     ]"
+    :segment="segment"
     v-bind="$attrs"
     :url="urlString"
     @click="$emit('click')"
@@ -27,12 +28,14 @@ import ArrowDown16 from "@carbon/icons-vue/lib/arrow--down/16";
 import ArrowRight16 from "@carbon/icons-vue/lib/arrow--right/16";
 import ErrorOutline16 from "@carbon/icons-vue/lib/error--outline/16";
 import Launch16 from "@carbon/icons-vue/lib/launch/16";
-import type { GeneralLink } from "~~/constants/appLinks";
+import type { GeneralLink } from "~/types/links";
+import type { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
   isWider?: boolean;
   kind?: "primary" | "secondary" | "ghost";
   label: string;
+  segment?: CtaClickedEventProp;
   theme?: "light" | "dark";
   url: string | GeneralLink;
 }
@@ -40,6 +43,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   isWider: false,
   kind: "primary",
+  segment: undefined,
   theme: "light",
 });
 

@@ -1,38 +1,4 @@
-import { CtaClickedEventProp } from "~/types/segment";
-
-/**
- * Represent a general link use on the site
- */
-interface GeneralLink {
-  /** The visible name of the link */
-  label: string;
-  /** Where we want to go */
-  url: string;
-  segment?: CtaClickedEventProp;
-  /** Text shown when leaving the cursor on the link */
-  title?: string;
-}
-
-const seminarSeriesPlaylistUrl =
-  "https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2";
-
-const SEMINAR_SERIES_ALL_EPISODES_CTA: GeneralLink = {
-  url: seminarSeriesPlaylistUrl,
-  label: "Go to YouTube playlist",
-  segment: {
-    cta: "youtube-playlist",
-    location: "header",
-  },
-};
-
-const SEMINAR_SERIES_FULL_ARCHIVE_CTA: GeneralLink = {
-  url: seminarSeriesPlaylistUrl,
-  label: "Explore Full Seminar Archive",
-  segment: {
-    cta: "youtube-playlist",
-    location: "past-events-section",
-  },
-};
+import { GeneralLink } from "~/types/links";
 
 const LEARN_START_LEARNING: GeneralLink = {
   url: "/learn/course/introduction-course",
@@ -164,8 +130,6 @@ const IBM_Q_EXPERIENCE: GeneralLink = {
 
 export {
   GeneralLink,
-  SEMINAR_SERIES_ALL_EPISODES_CTA,
-  SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   LEARN_START_LEARNING,
   StartLearningUrl,
   PrerequisitesUrl,
