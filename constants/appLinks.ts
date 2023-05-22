@@ -1,5 +1,3 @@
-// TODO: Refactor central links definitions: https://github.com/Qiskit/qiskit.org/issues/1566
-
 import { CtaClickedEventProp } from "~/types/segment";
 
 /**
@@ -14,11 +12,6 @@ interface GeneralLink {
   /** Text shown when leaving the cursor on the link */
   title?: string;
 }
-
-const EVENT_REQUEST_LINK: GeneralLink = {
-  url: "https://airtable.com/shrRP0Td8TN4ttlFx",
-  label: "Request an event",
-};
 
 const seminarSeriesPlaylistUrl =
   "https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2";
@@ -171,7 +164,6 @@ const IBM_Q_EXPERIENCE: GeneralLink = {
 
 export {
   GeneralLink,
-  EVENT_REQUEST_LINK,
   SEMINAR_SERIES_ALL_EPISODES_CTA,
   SEMINAR_SERIES_FULL_ARCHIVE_CTA,
   LEARN_START_LEARNING,
