@@ -98,12 +98,6 @@ const COMMUNITY_SUB_LINKS: LabeledLinks = {
   },
 };
 
-const ORDERED_COMMUNITY_SUB_LINKS: Array<NavLink> = [
-  COMMUNITY_SUB_LINKS.events,
-  COMMUNITY_SUB_LINKS.advocates,
-  COMMUNITY_SUB_LINKS.ecosystem,
-];
-
 const QISKIT_EDUCATION: LabeledLinks = {
   textbook: {
     label: "Textbook",
@@ -129,15 +123,6 @@ const CODE_OF_CONDUCT: LabeledLinks = {
   },
 };
 
-const LEARN_LINK: NavLink = {
-  label: "Learn",
-  url: "/learn",
-  segment: {
-    cta: "learn",
-    location: "menu",
-  },
-};
-
 const DOCUMENTATION_LINK: NavLink = {
   label: "Documentation",
   url: "https://qiskit.org/documentation/",
@@ -156,12 +141,6 @@ const TUTORIALS_LINK: NavLink = {
     location: "menu",
   },
 };
-
-// TODO: enable when #663 is done
-// const QISKIT_CAREERS: NavLink = {
-//   label: 'Careers',
-//   url: '#'
-// }
 
 type FooterSection = {
   title: string;
@@ -182,8 +161,6 @@ const FOOTER_ELEMENTS: FooterStructure = [
       COMMUNITY_SUB_LINKS.events,
       QISKIT_ADVOCATES.advocates,
       CODE_OF_CONDUCT.codeOfConduct,
-      // TODO: enable when #663 is done
-      // QISKIT_CAREERS
     ],
   },
   {
@@ -237,39 +214,17 @@ const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
   },
 ];
 
-const HOME_LINK: NavLink = {
-  label: "Qiskit",
-  url: "/",
-};
-
 const GITHUB_REPOSITORY: NavLink = {
   label: "GitHub",
   url: "https://github.com/Qiskit/qiskit",
   segment: { cta: "gitHub-repository", location: "version-info" },
 };
 
-const COMMUNITY_LINK: NavLink = {
-  label: "Community",
-  url: "/advocates",
-};
-
-type InnerNavLink = {
-  anchor: string;
-  label: string;
-};
-
 export {
-  ORDERED_COMMUNITY_SUB_LINKS,
   FOOTER_ELEMENTS,
   SECONDARY_FOOTER_LINKS,
-  HOME_LINK,
   GITHUB_REPOSITORY,
-  COMMUNITY_LINK,
-  TUTORIALS_LINK,
-  DOCUMENTATION_LINK,
   STAY_CONNECTED_LINKS,
-  LEARN_LINK,
   SOCIAL_MEDIA,
   NavLink,
-  InnerNavLink,
 };
