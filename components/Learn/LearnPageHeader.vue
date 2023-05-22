@@ -19,9 +19,9 @@
         </div>
         <UiCta
           class="learn-header__cta"
-          :label="startLearningCTA.label"
-          :segment="startLearningCTA.segment"
-          :url="startLearningCTA.url"
+          label="Start learning"
+          :segment="{ cta: 'start-learning', location: 'header' }"
+          url="/learn/course/introduction-course"
         />
       </div>
     </div>
@@ -35,10 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { LEARN_START_LEARNING } from "~/constants/appLinks";
 import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
 
-const startLearningCTA = LEARN_START_LEARNING;
 const dropdownMenuContent = LEARN_MEGA_MENU;
 
 const appMegaDropdownMenuIsVisible = ref(true);

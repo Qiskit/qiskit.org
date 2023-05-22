@@ -1,14 +1,5 @@
 import { GeneralLink } from "~/types/links";
 
-const LEARN_START_LEARNING: GeneralLink = {
-  url: "/learn/course/introduction-course",
-  label: "Start learning",
-  segment: {
-    cta: "start-learning",
-    location: "header",
-  },
-};
-
 enum StartLearningUrl {
   Introduction = "https://learn.qiskit.org/course/introduction",
   BasicsQuantumInformation = "https://learn.qiskit.org/course/basics",
@@ -130,7 +121,6 @@ const IBM_Q_EXPERIENCE: GeneralLink = {
 
 export {
   GeneralLink,
-  LEARN_START_LEARNING,
   StartLearningUrl,
   PrerequisitesUrl,
   MultipleQubitsAndEntanglementUrl,
