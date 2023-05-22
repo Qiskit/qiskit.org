@@ -12,6 +12,7 @@ import {
   useSchemaOrg,
   defineWebSite,
   defineWebPage,
+  defineOrganization,
 } from "@unhead/schema-org-vue";
 interface PackageInfo {
   info: {
@@ -37,7 +38,11 @@ const qiskitVersion = packageInfo.value?.info.version ?? "";
 
 useSchemaOrg([
   defineWebSite({
-    name: "My Awesome Website",
+    name: "Qiskit.org",
+  }),
+  defineOrganization({
+    name: "Qiskit",
+    logo: "public/images/qiskit-logo.png",
   }),
   defineWebPage(),
 ]);
