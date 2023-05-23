@@ -42,13 +42,11 @@ class QampProjectsAirtableRecords extends AirtableRecords {
       this.recordFields = await this.getAllFieldNames(RECORD_FIELDS_IDS);
     }
 
-    // Fetch QAMP cohorts
     const qampCohortsAirtableRecords = new QampCohortsAirtableRecords(
       this.apiKey
     );
     this.qampCohorts = await qampCohortsAirtableRecords.fetchCohorts();
 
-    // Fetch QAMP participants
     const qampParticipantsAirtableRecords = new QampParticipantsAirtableRecords(
       this.apiKey
     );
