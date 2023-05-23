@@ -62,7 +62,7 @@ import LogoMedium20 from "@carbon/icons-vue/lib/logo--medium/20";
 import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
 import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
 import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
-import { SOCIAL_MEDIA_LINKS } from "~/constants/links";
+import { SocialMedia } from "~/constants/links";
 import type { Link } from "~/types/links";
 
 interface Props {
@@ -143,8 +143,8 @@ const footerElements: LinksGroup[] = [
   {
     title: "Support",
     elements: [
-      SOCIAL_MEDIA_LINKS.github,
-      SOCIAL_MEDIA_LINKS.support,
+      SocialMedia.github,
+      SocialMedia.support,
       {
         label: "Documentation",
         url: "https://qiskit.org/documentation/",
@@ -157,19 +157,19 @@ const stayConnectedElements: LinksWithIconGroup = {
   title: "Stay Connected",
   elements: [
     {
-      ...SOCIAL_MEDIA_LINKS.twitter,
+      ...SocialMedia.twitter,
       icon: LogoTwitter20,
     },
     {
-      ...SOCIAL_MEDIA_LINKS.slack,
+      ...SocialMedia.slack,
       icon: LogoSlack20,
     },
     {
-      ...SOCIAL_MEDIA_LINKS.youtube,
+      ...SocialMedia.youtube,
       icon: LogoYouTube20,
     },
     {
-      ...SOCIAL_MEDIA_LINKS.medium,
+      ...SocialMedia.medium,
       icon: LogoMedium20,
     },
   ],

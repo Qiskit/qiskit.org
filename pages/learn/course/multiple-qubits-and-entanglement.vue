@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { MultipleQubitsAndEntanglementUrl } from "~/constants/appLinks";
+import { LearnMultipleQubitsAndEntanglementUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
@@ -43,7 +43,7 @@ const headerImg =
   "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
 
 const startLearningCTA: Link = {
-  url: MultipleQubitsAndEntanglementUrl.Introduction,
+  url: LearnMultipleQubitsAndEntanglementUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -97,7 +97,7 @@ const courses: Course[] = [
     image: "introduction.png",
     label: "Introduction",
     segment: { cta: "introduction", location: "course" },
-    url: MultipleQubitsAndEntanglementUrl.Introduction,
+    url: LearnMultipleQubitsAndEntanglementUrl.Introduction,
   },
   {
     image: "multiple-qubits-and-entangled-states.png",
@@ -106,25 +106,25 @@ const courses: Course[] = [
       cta: "multiple-qubits-and-entangled-states",
       location: "course",
     },
-    url: MultipleQubitsAndEntanglementUrl.MultipleQubitsAndEntangledStates,
+    url: LearnMultipleQubitsAndEntanglementUrl.MultipleQubitsAndEntangledStates,
   },
   {
     image: "phase-kickback.png",
     label: "Phase Kickback",
     segment: { cta: "phase-kickback", location: "course" },
-    url: MultipleQubitsAndEntanglementUrl.PhaseKickback,
+    url: LearnMultipleQubitsAndEntanglementUrl.PhaseKickback,
   },
   {
     image: "basic-circuit-identities.png",
     label: "Basic Circuit Identities",
     segment: { cta: "basic-circuit-identities", location: "course" },
-    url: MultipleQubitsAndEntanglementUrl.BasicCircuitIdentities,
+    url: LearnMultipleQubitsAndEntanglementUrl.BasicCircuitIdentities,
   },
   {
     image: "proving-universality.png",
     label: "Proving Universality",
     segment: { cta: "proving-universality", location: "course" },
-    url: MultipleQubitsAndEntanglementUrl.ProvingUniversality,
+    url: LearnMultipleQubitsAndEntanglementUrl.ProvingUniversality,
   },
   {
     image: "classical-computation-on-a-quantum-computer.png",
@@ -133,7 +133,7 @@ const courses: Course[] = [
       cta: "classical-computation-on-a-quantum-computer",
       location: "course",
     },
-    url: MultipleQubitsAndEntanglementUrl.ClassicalComputationOnAQuantumComputer,
+    url: LearnMultipleQubitsAndEntanglementUrl.ClassicalComputationOnAQuantumComputer,
   },
 ];
 

@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { QuantumHardwarePulsesUrl } from "~/constants/appLinks";
+import { LearnQuantumHardwarePulsesUrl } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -42,7 +42,7 @@ const headerImg =
   "/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png";
 
 const startLearningCTA: Link = {
-  url: QuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
+  url: LearnQuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -62,25 +62,25 @@ const courses: Course[] = [
       cta: "calibrating-qubits-with-qiskit-pulse",
       location: "course",
     },
-    url: QuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
+    url: LearnQuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
   },
   {
     image: "accessing-higher-energy-states.png",
     label: "Accessing Higher Energy States",
     segment: { cta: "accessing-higher-energy-states", location: "course" },
-    url: QuantumHardwarePulsesUrl.AccessingHigherEnergyStates,
+    url: LearnQuantumHardwarePulsesUrl.AccessingHigherEnergyStates,
   },
   {
     image: "introduction-to-transmon-physics.png",
     label: "Introduction to Transmon Physics",
     segment: { cta: "introduction-to-transmon-physics", location: "course" },
-    url: QuantumHardwarePulsesUrl.IntroductionToTransmonPhysics,
+    url: LearnQuantumHardwarePulsesUrl.IntroductionToTransmonPhysics,
   },
   {
     image: "circuit-quantum-electrodynamics.png",
     label: "Circuit Quantum Electrodynamics",
     segment: { cta: "circuit-quantum-electrodynamics", location: "course" },
-    url: QuantumHardwarePulsesUrl.CircuitQuantumElectrodynamics,
+    url: LearnQuantumHardwarePulsesUrl.CircuitQuantumElectrodynamics,
   },
   {
     image: "exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse.png",
@@ -89,19 +89,19 @@ const courses: Course[] = [
       cta: "exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse",
       location: "course",
     },
-    url: QuantumHardwarePulsesUrl.ExploringTheJaynesCummingsHamiltonianWithQiskitPulse,
+    url: LearnQuantumHardwarePulsesUrl.ExploringTheJaynesCummingsHamiltonianWithQiskitPulse,
   },
   {
     image: "measuring-the-qubit-ac-stak-shift.png",
     label: "Measuring the Qubit ac-Stak Shift",
     segment: { cta: "measuring-the-qubit-ac-stak-shift", location: "course" },
-    url: QuantumHardwarePulsesUrl.MeasuringTheQubitacStakShift,
+    url: LearnQuantumHardwarePulsesUrl.MeasuringTheQubitacStakShift,
   },
   {
     image: "hamiltonian-tomography.png",
     label: "Hamiltonian Tomography",
     segment: { cta: "hamiltonian-tomography", location: "course" },
-    url: QuantumHardwarePulsesUrl.HamiltonianTomography,
+    url: LearnQuantumHardwarePulsesUrl.HamiltonianTomography,
   },
 ];
 

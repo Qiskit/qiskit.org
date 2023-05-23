@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { QuantumProtocolsAndQuantumAlgorithmsUrl } from "~/constants/appLinks";
+import { LearnQuantumProtocolsAndQuantumAlgorithmsUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
@@ -43,7 +43,7 @@ const headerImg =
   "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
 
 const startLearningCTA: Link = {
-  url: QuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
+  url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -106,85 +106,85 @@ const courses: Course[] = [
     image: "defining-quantum-circuits.png",
     label: "Defining Quantum Circuits",
     segment: { cta: "defining-quantum-circuits", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
   },
   {
     image: "deutsch-jozsa-algorithm.png",
     label: "Deutsch-Jozsa Algorithm",
     segment: { cta: "deutsch-jozsa-algorithm", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.DeutschJozsaAlgorithm,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.DeutschJozsaAlgorithm,
   },
   {
     image: "bernstein-vazirani-algorithm.png",
     label: "Bernstein-Vazirani Algorithm",
     segment: { cta: "bernstein-vazirani-algorithm", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.BernsteinVaziraniAlgorithm,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.BernsteinVaziraniAlgorithm,
   },
   {
     image: "simons-algorithm.png",
     label: "Simon’s Algorithm",
     segment: { cta: "simons-algorithm", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.SimonsAlgorithm,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.SimonsAlgorithm,
   },
   {
     image: "quantum-fourier-transformation.png",
     label: "Quantum Fourier Transformation",
     segment: { cta: "quantum-fourier-transformation", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumFourierTransformation,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.QuantumFourierTransformation,
   },
   {
     image: "quantum-phase-estimation.png",
     label: "Quantum Phase Estimation",
     segment: { cta: "quantum-phase-estimation", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumPhaseEstimation,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.QuantumPhaseEstimation,
   },
   {
     image: "shors-algorithm.png",
     label: "Shor’s Algorithm",
     segment: { cta: "shors-algorithm", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.ShorsAlgorithm,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.ShorsAlgorithm,
   },
   {
     image: "grovers-algorithm.png",
     label: "Grover’s Algorithm",
     segment: { cta: "grovers-algorithm", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.GroversAlgorithm,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.GroversAlgorithm,
   },
   {
     image: "quantum-counting.png",
     label: "Quantum Counting",
     segment: { cta: "quantum-counting", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumCounting,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.QuantumCounting,
   },
   {
     image: "quantum-walk-search.png",
     label: "Quantum Walk Search Algorithm",
     segment: { cta: "quantum-walk-search-algorithm", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumWalkSearchAlgorithm,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.QuantumWalkSearchAlgorithm,
   },
   {
     image: "hidden-shift-problem.png",
     label: "Hidden Shift Problem",
     segment: { cta: "hidden-shift-problem", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.HiddenShiftProblem,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.HiddenShiftProblem,
   },
   {
     image: "quantum-key-distribution.png",
     label: "Quantum Key Distribution",
     segment: { cta: "quantum-key-distribution", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumKeyDistribution,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.QuantumKeyDistribution,
   },
   {
     image: "superdense-coding.png",
     label: "Superdense Coding",
     segment: { cta: "superdense-coding", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.SuperdenseCoding,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.SuperdenseCoding,
   },
   {
     image: "quantum-teleportation.png",
     label: "Quantum Teleportation",
     segment: { cta: "quantum-teleportation", location: "course" },
-    url: QuantumProtocolsAndQuantumAlgorithmsUrl.QuantumTeleportation,
+    url: LearnQuantumProtocolsAndQuantumAlgorithmsUrl.QuantumTeleportation,
   },
 ];
 

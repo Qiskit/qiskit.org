@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { LegacyContent } from "~/constants/appLinks";
+import { LearnLegacyContent } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -49,7 +49,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/legacy-content/legacy-content.png";
 
 const startLearningCTA: Link = {
-  url: LegacyContent.QuantumStatesAndQubits,
+  url: LearnLegacyContent.QuantumStatesAndQubits,
   label: "Go to v1/course/ch-states",
   segment: {
     cta: "introduction",
@@ -66,19 +66,19 @@ const courses: Course[] = [
     image: "prerequisites.png",
     label: "0. Prerequisites",
     segment: { cta: "prerequisites", location: "course" },
-    url: LegacyContent.Prerequisites,
+    url: LearnLegacyContent.Prerequisites,
   },
   {
     image: "quantum-states-and-qubits.png",
     label: "1. Quantum States and Qubits ",
     segment: { cta: "quantum-states-and-qubits", location: "course" },
-    url: LegacyContent.QuantumStatesAndQubits,
+    url: LearnLegacyContent.QuantumStatesAndQubits,
   },
   {
     image: "multiple-qubits-entanglement.png",
     label: "2. Multiple Qubits and Entanglement",
     segment: { cta: "multiple-qubits-entanglement", location: "course" },
-    url: LegacyContent.MultipleQubitsAndEntanglement,
+    url: LearnLegacyContent.MultipleQubitsAndEntanglement,
   },
   {
     image: "quantum-protocols-and-quantum-algorithms.png",
@@ -87,13 +87,13 @@ const courses: Course[] = [
       cta: "quantum-protocols-and-quantum-algorithms",
       location: "course",
     },
-    url: LegacyContent.QuantumProtocolsAndQuantumAlgorithms,
+    url: LearnLegacyContent.QuantumProtocolsAndQuantumAlgorithms,
   },
   {
     image: "quantum-algorithms-for-applications.png",
     label: "4. Quantum Algorithms for Applications",
     segment: { cta: "quantum-algorithms-for-applications", location: "course" },
-    url: LegacyContent.QuantumAlgorithmsForApplications,
+    url: LearnLegacyContent.QuantumAlgorithmsForApplications,
   },
   {
     image: "investigating-quantum-hardware-using-quantum-circuits.png",
@@ -102,7 +102,7 @@ const courses: Course[] = [
       cta: "investigating-quantum-hardware-using-quantum-circuits",
       location: "course",
     },
-    url: LegacyContent.InvestigatingQuantumHardwareUsingQuantumCircuits,
+    url: LearnLegacyContent.InvestigatingQuantumHardwareUsingQuantumCircuits,
   },
   {
     image: "investigating-quantum-hardware-using-microwave-pulses.png",
@@ -111,25 +111,25 @@ const courses: Course[] = [
       cta: "investigating-quantum-hardware-using-microwave-pulses",
       location: "course",
     },
-    url: LegacyContent.InvestigatingQuantumHardwareUsingMicrowavePulses,
+    url: LearnLegacyContent.InvestigatingQuantumHardwareUsingMicrowavePulses,
   },
   {
     image: "quantum-computing-labs.png",
     label: "7. Quantum Computing Labs",
     segment: { cta: "quantum-computing-labs", location: "course" },
-    url: LegacyContent.QuantumComputingLabs,
+    url: LearnLegacyContent.QuantumComputingLabs,
   },
   {
     image: "appendix.png",
     label: "8. Appendix",
     segment: { cta: "appendix", location: "course" },
-    url: LegacyContent.Appendix,
+    url: LearnLegacyContent.Appendix,
   },
   {
     image: "games-and-demos.png",
     label: "9. Games & Demos",
     segment: { cta: "games-and-demos", location: "course" },
-    url: LegacyContent.GamesAndDemos,
+    url: LearnLegacyContent.GamesAndDemos,
   },
 ];
 

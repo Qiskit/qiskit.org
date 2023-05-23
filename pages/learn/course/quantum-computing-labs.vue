@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { QuantumComputingLabs } from "~/constants/appLinks";
+import { LearnQuantumComputingLabs } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -41,7 +41,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/quantum-computing-labs/quantum-lab.png";
 
 const startLearningCTA: Link = {
-  url: QuantumComputingLabs.Lab1,
+  url: LearnQuantumComputingLabs.Lab1,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -58,61 +58,61 @@ const courses: Course[] = [
     image: "lab-1.png",
     label: "Lab 1 Quantum Circuits",
     segment: { cta: "lab-1", location: "course" },
-    url: QuantumComputingLabs.Lab1,
+    url: LearnQuantumComputingLabs.Lab1,
   },
   {
     image: "lab-2.png",
     label: "Lab 2 Single Qubit Gates",
     segment: { cta: "lab-2", location: "course" },
-    url: QuantumComputingLabs.Lab2,
+    url: LearnQuantumComputingLabs.Lab2,
   },
   {
     image: "lab-3.png",
     label: "Lab 3 Quantum Measurments",
     segment: { cta: "lab-3", location: "course" },
-    url: QuantumComputingLabs.Lab3,
+    url: LearnQuantumComputingLabs.Lab3,
   },
   {
     image: "lab-4.png",
     label: "Lab 4 Bell Circuit & GHZ Circuit",
     segment: { cta: "lab-4", location: "course" },
-    url: QuantumComputingLabs.Lab4,
+    url: LearnQuantumComputingLabs.Lab4,
   },
   {
     image: "lab-5.png",
     label: "Lab 5 Accuracy of Quantum Phase",
     segment: { cta: "lab-5", location: "course" },
-    url: QuantumComputingLabs.Lab5,
+    url: LearnQuantumComputingLabs.Lab5,
   },
   {
     image: "lab-6.png",
     label: "Lab 6 Iterative Quantum Phase Estimation",
     segment: { cta: "lab-6", location: "course" },
-    url: QuantumComputingLabs.Lab6,
+    url: LearnQuantumComputingLabs.Lab6,
   },
   {
     image: "lab-7.png",
     label: "Lab 7 Scalable Shor’s Algorithm",
     segment: { cta: "lab-7", location: "course" },
-    url: QuantumComputingLabs.Lab7,
+    url: LearnQuantumComputingLabs.Lab7,
   },
   {
     image: "lab-8.png",
     label: "Lab 8 Grover’s Search With an Unknown Number of Solutions",
     segment: { cta: "lab-8", location: "course" },
-    url: QuantumComputingLabs.Lab8,
+    url: LearnQuantumComputingLabs.Lab8,
   },
   {
     image: "lab-9.png",
     label: "Lab 9 Quantum Simulation as a Search Algorithm",
     segment: { cta: "lab-9", location: "course" },
-    url: QuantumComputingLabs.Lab9,
+    url: LearnQuantumComputingLabs.Lab9,
   },
   {
     image: "lab-10.png",
     label: "Lab 10 Quantum Error Correction",
     segment: { cta: "lab-10", location: "course" },
-    url: QuantumComputingLabs.Lab10,
+    url: LearnQuantumComputingLabs.Lab10,
   },
 ];
 

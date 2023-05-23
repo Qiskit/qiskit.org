@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { PrerequisitesUrl } from "~/constants/appLinks";
+import { LearnPrerequisitesUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
@@ -42,7 +42,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/prerequisites/prerequisites.png";
 
 const startLearningCTA: Link = {
-  url: PrerequisitesUrl.Introduction,
+  url: LearnPrerequisitesUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -78,13 +78,13 @@ const courses: Course[] = [
     image: "environment-setup.png",
     label: "Setting Up Your Environment",
     segment: { cta: "setting-up-your-environment", location: "course" },
-    url: PrerequisitesUrl.SettingUp,
+    url: LearnPrerequisitesUrl.SettingUp,
   },
   {
     image: "introduction.png",
     label: "Python and Jupyter Notebooks",
     segment: { cta: "python-and-jupyter-notebooks", location: "course" },
-    url: PrerequisitesUrl.Introduction,
+    url: LearnPrerequisitesUrl.Introduction,
   },
 ];
 

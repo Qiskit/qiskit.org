@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { StartLearningUrl } from "~/constants/appLinks";
+import { LearnStartLearningUrl } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -52,7 +52,7 @@ through the Qiskit Advocate Mentoring Program.`,
 const headerImg = "/images/learn/course/machine-learning-course/header.png";
 
 const startLearningCTA: Link = {
-  url: StartLearningUrl.QML,
+  url: LearnStartLearningUrl.QML,
   label: "Start learning",
   segment: {
     cta: "machine-learning",
@@ -71,7 +71,7 @@ const courses: Course[] = [
     image: "introduction.png",
     label: "Introduction",
     segment: { cta: "qml-introduction", location: "course" },
-    url: StartLearningUrl.QML,
+    url: LearnStartLearningUrl.QML,
   },
   {
     image: "parameterized-quantum-circuits.png",

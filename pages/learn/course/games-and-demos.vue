@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { GamesAndDemos } from "~/constants/appLinks";
+import { LearnGamesAndDemos } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -40,7 +40,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
 const startLearningCTA: Link = {
-  url: GamesAndDemos.HelloQiskit,
+  url: LearnGamesAndDemos.HelloQiskit,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -59,7 +59,7 @@ const courses: Course[] = [
       cta: "hello-qiskit",
       location: "course",
     },
-    url: GamesAndDemos.HelloQiskit,
+    url: LearnGamesAndDemos.HelloQiskit,
   },
   {
     image: "estimating-pi-using-quantum-phase-estimation-algorithm.png",
@@ -68,7 +68,7 @@ const courses: Course[] = [
       cta: "estimating-pi-using-quantum-phase-estimation-algorithm",
       location: "course",
     },
-    url: GamesAndDemos.EstimatingPiUsingQPEA,
+    url: LearnGamesAndDemos.EstimatingPiUsingQPEA,
   },
   {
     image: "local-reality-and-the-chsh-inequality.png",
@@ -77,7 +77,7 @@ const courses: Course[] = [
       cta: "local-reality-and-the-chsh-inequality",
       location: "course",
     },
-    url: GamesAndDemos.LocalRealityAndTheChshInequality,
+    url: LearnGamesAndDemos.LocalRealityAndTheChshInequality,
   },
   {
     image: "quantum-coin-game.png",
@@ -86,7 +86,7 @@ const courses: Course[] = [
       cta: "coin-game",
       location: "course",
     },
-    url: GamesAndDemos.QuantumCoinGame,
+    url: LearnGamesAndDemos.QuantumCoinGame,
   },
   {
     image: "variational-quantum-regression.png",
@@ -95,7 +95,7 @@ const courses: Course[] = [
       cta: "variational-quantum-regression",
       location: "course",
     },
-    url: GamesAndDemos.VariationalQuantumRegression,
+    url: LearnGamesAndDemos.VariationalQuantumRegression,
   },
 ];
 

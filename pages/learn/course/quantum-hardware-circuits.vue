@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { QuantumHardwareCircuitsUrl } from "~/constants/appLinks";
+import { LearnQuantumHardwareCircuitsUrl } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -42,7 +42,7 @@ const headerImg =
   "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
 
 const startLearningCTA: Link = {
-  url: QuantumHardwareCircuitsUrl.Introduction,
+  url: LearnQuantumHardwareCircuitsUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -62,31 +62,31 @@ const courses: Course[] = [
       cta: "introduction-to-quantum-error-correction",
       location: "course",
     },
-    url: QuantumHardwareCircuitsUrl.Introduction,
+    url: LearnQuantumHardwareCircuitsUrl.Introduction,
   },
   {
     image: "measurement-error-mitigation.png",
     label: "Measurement Error Mitigation",
     segment: { cta: "measurement-error-mitigation", location: "course" },
-    url: QuantumHardwareCircuitsUrl.MeasurementErrorMitigation,
+    url: LearnQuantumHardwareCircuitsUrl.MeasurementErrorMitigation,
   },
   {
     image: "randomized-benchmarking.png",
     label: "Randomized Benchmarking",
     segment: { cta: "randomized-benchmarking", location: "course" },
-    url: QuantumHardwareCircuitsUrl.RandomizedBenchmarking,
+    url: LearnQuantumHardwareCircuitsUrl.RandomizedBenchmarking,
   },
   {
     image: "measuring-quantum-volume.png",
     label: "Measuring Quantum Volume",
     segment: { cta: "measuring-quantum-volume", location: "course" },
-    url: QuantumHardwareCircuitsUrl.MeasuringQuantumVolume,
+    url: LearnQuantumHardwareCircuitsUrl.MeasuringQuantumVolume,
   },
   {
     image: "density-matrix-and-mixed-states.png",
     label: "The Density Matrix and Mixed States",
     segment: { cta: "density-matrix", location: "course" },
-    url: QuantumHardwareCircuitsUrl.DensityMatrixAndMixedStates,
+    url: LearnQuantumHardwareCircuitsUrl.DensityMatrixAndMixedStates,
   },
 ];
 

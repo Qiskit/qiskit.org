@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { QuantumStatesAndQubitsUrl } from "~/constants/appLinks";
+import { LearnQuantumStatesAndQubitsUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
@@ -43,7 +43,7 @@ const headerImg =
   "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png";
 
 const startLearningCTA: Link = {
-  url: QuantumStatesAndQubitsUrl.Introduction,
+  url: LearnQuantumStatesAndQubitsUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -97,31 +97,31 @@ const courses: Course[] = [
     image: "introduction.png",
     label: "Introduction",
     segment: { cta: "introduction", location: "course" },
-    url: QuantumStatesAndQubitsUrl.Introduction,
+    url: LearnQuantumStatesAndQubitsUrl.Introduction,
   },
   {
     image: "atoms-of-computation.png",
     label: "The Atoms of Computation",
     segment: { cta: "atoms-of-computation", location: "course" },
-    url: QuantumStatesAndQubitsUrl.AtomsOfComputation,
+    url: LearnQuantumStatesAndQubitsUrl.AtomsOfComputation,
   },
   {
     image: "representing-qubit-states.png",
     label: "Representing Qubit States",
     segment: { cta: "representing-qubit-states", location: "course" },
-    url: QuantumStatesAndQubitsUrl.RepresentingQubitStates,
+    url: LearnQuantumStatesAndQubitsUrl.RepresentingQubitStates,
   },
   {
     image: "single-qubit-gates.png",
     label: "Single Qubit Gates",
     segment: { cta: "single-qubit-gates", location: "course" },
-    url: QuantumStatesAndQubitsUrl.SingleQubitGates,
+    url: LearnQuantumStatesAndQubitsUrl.SingleQubitGates,
   },
   {
     image: "case-for-quantum-computers.png",
     label: "The Case for Quantum",
     segment: { cta: "case-for-quantum-computers", location: "course" },
-    url: QuantumStatesAndQubitsUrl.CaseForQuantum,
+    url: LearnQuantumStatesAndQubitsUrl.CaseForQuantum,
   },
 ];
 

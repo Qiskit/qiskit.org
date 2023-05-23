@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { QuantumAlgorithmsForApplications } from "~/constants/appLinks";
+import { LearnQuantumAlgorithmsForApplications } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -42,7 +42,7 @@ const headerImg =
   "/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png";
 
 const startLearningCTA: Link = {
-  url: QuantumAlgorithmsForApplications.SolvingLinearSystemsOfEquationsUsingHHL,
+  url: LearnQuantumAlgorithmsForApplications.SolvingLinearSystemsOfEquationsUsingHHL,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -62,13 +62,13 @@ const courses: Course[] = [
       cta: "solving-linear-systems-of-equations-using-hhl",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.SolvingLinearSystemsOfEquationsUsingHHL,
+    url: LearnQuantumAlgorithmsForApplications.SolvingLinearSystemsOfEquationsUsingHHL,
   },
   {
     image: "simulating-molecules-using-vqe.png",
     label: "Simulating Molecules Using VQE",
     segment: { cta: "simulating-molecules-using-vqe", location: "course" },
-    url: QuantumAlgorithmsForApplications.SimulatingMoleculesUsingVQE,
+    url: LearnQuantumAlgorithmsForApplications.SimulatingMoleculesUsingVQE,
   },
   {
     image: "solving-combinatorial-optimization-problems-using-qaoa.png",
@@ -77,7 +77,7 @@ const courses: Course[] = [
       cta: "solving-combinatorial-optimization-problems-using-qaoa",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.SolvingCombinatorialOptimizationProblemsUsingQaoa,
+    url: LearnQuantumAlgorithmsForApplications.SolvingCombinatorialOptimizationProblemsUsingQaoa,
   },
   {
     image: "solving-satisfiability-problems-using-grovers-algorithm.png",
@@ -86,7 +86,7 @@ const courses: Course[] = [
       cta: "solving-satisfiability-problems-using-grovers-algorithm",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.SolvingSatisfiabilityProblemsUsingGroversAlgorithm,
+    url: LearnQuantumAlgorithmsForApplications.SolvingSatisfiabilityProblemsUsingGroversAlgorithm,
   },
   {
     image: "hybrid-quantum-classical-neural-networks.png",
@@ -95,7 +95,7 @@ const courses: Course[] = [
       cta: "hybrid-quantum-classical-neural-networks",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit,
+    url: LearnQuantumAlgorithmsForApplications.HybridQuantumClassicalNeuralNetworksWithPytorchAndQiskit,
   },
   {
     image: "flexible-representation-of-quantum-images.png",
@@ -104,7 +104,7 @@ const courses: Course[] = [
       cta: "flexible-representation-of-quantum-images",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.FlexibleRepresentationOfQuantumImages,
+    url: LearnQuantumAlgorithmsForApplications.FlexibleRepresentationOfQuantumImages,
   },
   {
     image: "quantum-facial-expression-recognition.png",
@@ -113,7 +113,7 @@ const courses: Course[] = [
       cta: "facial-expression-recognition",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.FacialExpressionRecognition,
+    url: LearnQuantumAlgorithmsForApplications.FacialExpressionRecognition,
   },
   {
     image: "quantum-edge-detection.png",
@@ -122,7 +122,7 @@ const courses: Course[] = [
       cta: "quantum-edge-detection",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.EdgeDetection,
+    url: LearnQuantumAlgorithmsForApplications.EdgeDetection,
   },
   {
     image: "travelling-salesman-problem.png",
@@ -131,13 +131,13 @@ const courses: Course[] = [
       cta: "tsp",
       location: "course",
     },
-    url: QuantumAlgorithmsForApplications.TravellingSalesmanProblem,
+    url: LearnQuantumAlgorithmsForApplications.TravellingSalesmanProblem,
   },
   {
     image: "variational-quantum-linear-solver.png",
     label: "Variational Quantum Linear Solver",
     segment: { cta: "variational-quantum-linear-solver", location: "course" },
-    url: QuantumAlgorithmsForApplications.VariationalQuantumLinearSolver,
+    url: LearnQuantumAlgorithmsForApplications.VariationalQuantumLinearSolver,
   },
 ];
 

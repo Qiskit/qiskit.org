@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { StartLearningUrl } from "~/constants/appLinks";
+import { LearnStartLearningUrl } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
@@ -51,7 +51,7 @@ const headerImg =
   "/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png";
 
 const startLearningCTA: Link = {
-  url: StartLearningUrl.SummerSchool2020,
+  url: LearnStartLearningUrl.SummerSchool2020,
   label: "Start learning",
   segment: {
     cta: "introduction",
