@@ -42,7 +42,7 @@ useSchemaOrg([
   }),
   defineOrganization({
     name: "Qiskit",
-    logo: "public/images/qiskit-logo.png",
+    logo: "/images/qiskit-logo.png",
   }),
   defineWebPage(),
 ]);
