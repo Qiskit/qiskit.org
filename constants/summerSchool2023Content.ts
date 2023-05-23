@@ -12,7 +12,7 @@ const header = {
   },
   cta: {
     label: "Register now!",
-    url: "https://qisk.it/QGSS2023",
+    url: "https://qisk.it/QGSS23REG",
     segment: {
       cta: "register",
       location: "header",
@@ -27,7 +27,7 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "https://qisk.it/QGSS2023",
+    to: "https://qisk.it/QGSS23REG",
     ctaLabel: "Learn more",
     segment: {
       cta: "ibm-research-blog",
