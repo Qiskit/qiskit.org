@@ -11,8 +11,8 @@ const header = {
     },
   },
   cta: {
-    label: "Registration coming soon!",
-    url: " ",
+    label: "Register now!",
+    url: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-62946286938",
     segment: {
       cta: "register",
       location: "header",
@@ -27,8 +27,8 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "",
-    ctaLabel: "",
+    to: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-62946286938",
+    ctaLabel: "Learn more",
     segment: {
       cta: "ibm-research-blog",
       location: "header",
