@@ -12,7 +12,7 @@ const header = {
   },
   cta: {
     label: "Register now!",
-    url: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-62946286938",
+    url: "https://qisk.it/QGSS2023",
     segment: {
       cta: "register",
       location: "header",
@@ -27,7 +27,7 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "https://www.eventbrite.com/e/2023-qiskit-early-access-summer-school-tickets-62946286938",
+    to: "https://qisk.it/QGSS2023",
     ctaLabel: "Learn more",
     segment: {
       cta: "ibm-research-blog",
