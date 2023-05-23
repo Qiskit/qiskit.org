@@ -76,7 +76,7 @@ class QampProjectsAirtableRecords extends AirtableRecords {
   }
 
   convertToQampProject(record: any): QampProject {
-    const qampProject = {
+    return {
       cohort: this.getCohort(record),
       collaborators: this.getCollaborators(record),
       githubIssueUrl: this.getGithubIssueUrl(record),
@@ -84,7 +84,6 @@ class QampProjectsAirtableRecords extends AirtableRecords {
       mentors: this.getMentors(record),
       name: this.getName(record),
     };
-    return qampProject;
   }
 
   public getCohort(record: any): QampCohort {

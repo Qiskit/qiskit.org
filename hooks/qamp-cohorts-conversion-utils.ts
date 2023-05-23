@@ -45,11 +45,10 @@ class QampCohortsAirtableRecords extends AirtableRecords {
   }
 
   convertToQampCohort(record: any): QampCohort {
-    const qampCohort = {
+    return {
       id: this.id,
       name: this.getName(record),
     };
-    return qampCohort;
   }
 
   public getName(record: any): string {

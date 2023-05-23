@@ -45,11 +45,10 @@ class QampParticipantsAirtableRecords extends AirtableRecords {
   }
 
   convertToQampParticipants(record: any): QampParticipant {
-    const qampParticipant = {
+    return {
       id: this.id,
       name: this.getName(record),
     };
-    return qampParticipant;
   }
 
   public getName(record: any): string {
