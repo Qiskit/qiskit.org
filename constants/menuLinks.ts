@@ -31,10 +31,4 @@ const SOCIAL_MEDIA: LabeledLinks = {
   },
 };
 
-const GITHUB_REPOSITORY: GeneralLink = {
-  label: "GitHub",
-  url: "https://github.com/Qiskit/qiskit",
-  segment: { cta: "gitHub-repository", location: "version-info" },
-};
-
-export { GITHUB_REPOSITORY, SOCIAL_MEDIA };
+export { SOCIAL_MEDIA };
