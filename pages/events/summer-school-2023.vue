@@ -183,7 +183,6 @@ const helpfulResourcesData = helpfulResources;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .summer-school-page {
   display: flex;
