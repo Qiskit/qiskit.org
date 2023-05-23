@@ -23,13 +23,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
-const rustupLink: GeneralLink = {
+import { Link } from "~/types/links";
+const rustupLink: Link = {
   url: "https://rustup.rs/",
   label: "https://rustup.rs/",
   segment: { cta: "rustup-installer", location: "quick-start" },
 };
-const rustLangInstallLink: GeneralLink = {
+const rustLangInstallLink: Link = {
   label: "other installation methods",
   url: "https://forge.rust-lang.org/infra/other-installation-methods.html",
   segment: { cta: "rust-lang-install-methods", location: "quick-start" },

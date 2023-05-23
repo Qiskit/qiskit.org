@@ -30,14 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 import type { Provider } from "~/types/providers";
 
 interface Props {
   providersList: Provider[];
 }
 
-const providersPage: GeneralLink = {
+const providersPage: Link = {
   url: "/providers",
   label: "See all providers",
   segment: {

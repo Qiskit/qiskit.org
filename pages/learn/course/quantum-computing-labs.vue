@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
 import { QuantumComputingLabs } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -40,7 +40,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/quantum-computing-labs/quantum-lab.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: QuantumComputingLabs.Lab1,
   label: "Start learning",
   segment: {
@@ -51,7 +51,7 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const courses: Course[] = [
   {

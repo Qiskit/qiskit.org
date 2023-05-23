@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
 import { QuantumProtocolsAndQuantumAlgorithmsUrl } from "~/constants/appLinks";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -42,7 +42,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: QuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
   label: "Start learning",
   segment: {

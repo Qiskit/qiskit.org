@@ -17,13 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
-const rustup64Link: GeneralLink = {
+import { Link } from "~/types/links";
+const rustup64Link: Link = {
   url: "https://win.rustup.rs/x86_64",
   label: "64-bit installer",
   segment: { cta: "rustup-windows-64-installer", location: "quick-start" },
 };
-const rustup32Link: GeneralLink = {
+const rustup32Link: Link = {
   url: "https://win.rustup.rs/i686",
   label: "32-bit installer",
   segment: { cta: "rustup-windows-32-installer", location: "quick-start" },

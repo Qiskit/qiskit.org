@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
 import { GamesAndDemos } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -39,7 +39,7 @@ const headerDescription = [
 ];
 const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: GamesAndDemos.HelloQiskit,
   label: "Start learning",
   segment: {
@@ -50,7 +50,7 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 const courses: Course[] = [
   {
     image: "hello-qiskit.png",

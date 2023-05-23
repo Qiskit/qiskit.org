@@ -63,7 +63,7 @@ import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
 import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
 import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
 import { SOCIAL_MEDIA_LINKS } from "~/constants/links";
-import type { GeneralLink } from "~/types/links";
+import type { Link } from "~/types/links";
 
 interface Props {
   oldContainer?: boolean;
@@ -72,10 +72,10 @@ interface Props {
 
 interface LinksGroup {
   title: string;
-  elements: GeneralLink[];
+  elements: Link[];
 }
 
-export interface LinkWithIcon extends GeneralLink {
+export interface LinkWithIcon extends Link {
   icon?:
     | typeof LogoMedium20
     | typeof LogoSlack20
@@ -175,7 +175,7 @@ const stayConnectedElements: LinksWithIconGroup = {
   ],
 };
 
-const secondaryFooterLinks: GeneralLink[] = [
+const secondaryFooterLinks: Link[] = [
   {
     label: "Terms of use",
     url: "https://www.ibm.com/legal?lnk=flg-tous-usen",

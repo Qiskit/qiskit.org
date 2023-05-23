@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "~/constants/learnContent";
 
 interface Props {
@@ -53,8 +53,8 @@ interface Props {
   headerTitle: string;
   headerDescription: string[];
   headerImg: string;
-  startLearningCta: GeneralLink;
-  links: GeneralLink[];
+  startLearningCta: Link;
+  links: Link[];
   references: string[];
   externalRecommendedReadingsPreamble: string;
   courses: Course[];
@@ -64,7 +64,7 @@ interface Props {
 
 defineProps<Props>();
 
-const backToTextbookHomeLink: GeneralLink = {
+const backToTextbookHomeLink: Link = {
   url: "/learn",
   label: "Home",
   segment: {

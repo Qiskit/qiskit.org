@@ -1,10 +1,10 @@
 import { CtaClickedEventProp } from "~/types/segment";
 
-interface GeneralLink {
+interface Link {
   label: string;
   segment?: CtaClickedEventProp;
   title?: string;
   url: string;
 }
 
-export { GeneralLink };
+export { Link };

@@ -1,5 +1,3 @@
-import type { GeneralLink } from "~/types/links";
-
 enum StartLearningUrl {
   Introduction = "https://learn.qiskit.org/course/introduction",
   BasicsQuantumInformation = "https://learn.qiskit.org/course/basics",
@@ -115,7 +113,6 @@ enum QuantumComputingLabs {
 }
 
 export {
-  GeneralLink,
   StartLearningUrl,
   PrerequisitesUrl,
   MultipleQubitsAndEntanglementUrl,

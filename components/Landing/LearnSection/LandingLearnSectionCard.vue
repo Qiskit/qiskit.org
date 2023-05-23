@@ -33,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
-const learnLink: GeneralLink = {
+const learnLink: Link = {
   url: "/learn",
   label: "Get learning",
   segment: { cta: "get-learning", location: "learn-card" },

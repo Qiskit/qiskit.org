@@ -1,6 +1,6 @@
-import { GeneralLink } from "~/types/links";
+import { Link } from "~/types/links";
 
-const SOCIAL_MEDIA_LINKS: { [key: string]: GeneralLink } = {
+const SOCIAL_MEDIA_LINKS: { [key: string]: Link } = {
   github: {
     label: "GitHub",
     url: "https://github.com/Qiskit",

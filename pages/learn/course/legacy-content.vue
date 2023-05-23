@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
 import { LegacyContent } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -48,7 +48,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/legacy-content/legacy-content.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: LegacyContent.QuantumStatesAndQubits,
   label: "Go to v1/course/ch-states",
   segment: {
@@ -59,7 +59,7 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const courses: Course[] = [
   {
