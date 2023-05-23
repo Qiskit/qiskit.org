@@ -1,10 +1,6 @@
 import { GeneralLink } from "~/types/links";
 
-type LabeledLinks = {
-  [key: string]: GeneralLink;
-};
-
-const SOCIAL_MEDIA: LabeledLinks = {
+const SOCIAL_MEDIA_LINKS: { [key: string]: GeneralLink } = {
   github: {
     label: "GitHub",
     url: "https://github.com/Qiskit",
@@ -31,4 +27,4 @@ const SOCIAL_MEDIA: LabeledLinks = {
   },
 };
 
-export { SOCIAL_MEDIA };
+export { SOCIAL_MEDIA_LINKS };
