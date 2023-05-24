@@ -7,11 +7,11 @@
             <bx-checkbox
               v-for="option in filter.options"
               :key="option"
-              :checked="isProjectFilterChecked(option)"
+              :checked="isCohortFilterChecked(option)"
               :label-text="option"
               :value="option"
               @bx-checkbox-changed="
-                updateProjectFilter(option, $event.target.checked)
+                updateCohortFilter(option, $event.target.checked)
               "
             />
           </client-only>
@@ -21,8 +21,8 @@
         <UiMultiSelect
           :label="filter.label"
           :options="filter.options"
-          :value="projectFiltersAsString"
-          @change-selection="updateProjectFilters($event)"
+          :value="cohortFiltersAsString"
+          @change-selection="updateCohortFilters($event)"
         />
       </template>
       <template #results>
@@ -34,64 +34,58 @@
           >
             <UiCard
               :title="project.name"
-              :tags="project.tags"
+              :tags="[project.cohort.name]"
               cta-label="Go to repo"
               :segment="{
-                cta: project.url,
+                cta: project.githubIssueUrl,
                 location: 'qamp-project-card',
               }"
-              to="https://github.com/QAMP-EXAMPLE/<title-of-project>"
+              :to="project.githubIssueUrl"
             ></UiCard>
-            <bx-accordion
-              v-if="
-                project.contributors?.length != 0 ||
-                project.mentors?.length != 0 ||
-                project.mentees?.length != 0
-              "
-            >
+            <bx-accordion v-if="hasParticipants(project)">
               <bx-accordion-item title-text="Project contributors">
                 <div
-                  v-if="project.contributors?.length != 0"
+                  v-if="hasCollaborators(project)"
                   class="qamp-projects__card__section"
                 >
-                  <h4>Contributors</h4>
+                  <h4>Collaborators</h4>
                   <ul class="qamp-projects__card__list">
                     <li
-                      v-for="contributor in project.contributors"
-                      :key="contributor"
+                      v-for="collaborator in project.collaborators"
+                      :key="collaborator.name"
                       class="qamp-projects__card__list-item"
                     >
-                      {{ contributor }}
+                      {{ collaborator.name }}
                     </li>
                   </ul>
                 </div>
                 <div
-                  v-if="project.mentors?.length != 0"
+                  v-if="hasMentors(project)"
                   class="qamp-projects__card__section"
                 >
                   <h4>Mentors</h4>
                   <ul class="qamp-projects__card__list">
                     <li
                       v-for="mentor in project.mentors"
-                      :key="mentor"
+                      :key="mentor.name"
                       class="qamp-projects__card__list-item"
                     >
-                      {{ mentor }}
+                      {{ mentor.name }}
                     </li>
                   </ul>
                 </div>
                 <div
-                  v-if="project.mentees?.length != 0"
+                  v-if="hasMentees(project)"
                   class="qamp-projects__card__section"
                 >
                   <h4>Mentees</h4>
                   <ul class="qamp-projects__card__list">
                     <li
                       v-for="mentee in project.mentees"
-                      :key="mentee"
+                      :key="mentee.name"
                       class="qamp-projects__card__list-item"
                     >
-                      {{ mentee }}
+                      {{ mentee.name }}
                     </li>
                   </ul>
                 </div>
@@ -105,53 +99,69 @@
 </template>
 
 <script setup lang="ts">
-import { QampProject } from "~/types/advocates";
-import rawProjects from "~/content/advocates/mock-qamp-projects.json";
+import rawProjects from "~/content/qamp/qamp-projects.json";
+import type { QampProject } from "~/types/qamp";
 
 const projects = rawProjects as QampProject[];
 
+const cohortNames = Array.from(
+  new Set(projects.map((project) => project.cohort.name))
+);
+
 const filter = {
   label: "Cohorts",
-  options: ["Spring 21", "Fall 21", "Spring 22", "Fall 22"],
+  options: cohortNames,
 };
 
-const projectFilters = ref<string[]>([]);
+const cohortFilters = ref<string[]>([]);
 
-const projectFiltersAsString = computed(() => projectFilters.value.join(","));
+const cohortFiltersAsString = computed(() => cohortFilters.value.join(","));
 
 const filteredProjects = computed(() => {
   if (!projects) {
     return [];
   }
 
-  const noProjectFilters = projectFilters.value.length === 0;
+  const noCohortFilters = cohortFilters.value.length === 0;
 
-  return noProjectFilters
+  return noCohortFilters
     ? projects
     : projects.filter((project) =>
-        project.tags.some((tag) => projectFilters.value.includes(tag))
+        cohortFilters.value.includes(project.cohort.name)
       );
 });
 
-const isProjectFilterChecked = (filterValue: string): boolean =>
-  projectFilters.value.includes(filterValue);
+const hasCollaborators = (project: QampProject): boolean =>
+  project.collaborators.length > 0;
 
-function updateProjectFilter(option: string, isChecked: boolean) {
-  const filteredProjectFilters = projectFilters.value.filter(
+const hasMentees = (project: QampProject): boolean =>
+  project.mentees.length > 0;
+
+const hasMentors = (project: QampProject): boolean =>
+  project.mentors.length > 0;
+
+const hasParticipants = (project: QampProject): boolean =>
+  hasCollaborators(project) || hasMentees(project) || hasMentors(project);
+
+const isCohortFilterChecked = (filterValue: string): boolean =>
+  cohortFilters.value.includes(filterValue);
+
+function updateCohortFilter(option: string, isChecked: boolean) {
+  const filteredCohortFilters = cohortFilters.value.filter(
     (oldOption) => oldOption !== option
   );
 
   if (isChecked) {
-    filteredProjectFilters.push(option);
+    filteredCohortFilters.push(option);
   }
 
-  projectFilters.value = filteredProjectFilters;
+  cohortFilters.value = filteredCohortFilters;
 }
 
-function updateProjectFilters(newProjectFilters: string) {
-  const newProjectFiltersAsArray =
-    newProjectFilters === "" ? [] : newProjectFilters.split(",");
-  projectFilters.value = newProjectFiltersAsArray;
+function updateCohortFilters(newCohortFilters: string) {
+  const newCohortFiltersAsArray =
+    newCohortFilters === "" ? [] : newCohortFilters.split(",");
+  cohortFilters.value = newCohortFiltersAsArray;
 }
 </script>
 
