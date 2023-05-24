@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LinkWithIcon } from "./FooterComponent.vue";
+import type { LinkWithIcon } from "~/types/links";
 
 interface Props {
   title: string;
