@@ -4,6 +4,7 @@ import { AirtableRecords } from "./airtable-conversion-utils";
 
 const RECORD_FIELDS_IDS = Object.freeze({
   name: "fld1cnyTtGUHzpCmX",
+  websiteAgreement: "fldvOkJhfMFxStJit",
 } as const);
 
 const AIRTABLE_BASE_ID = "appjU5TOUDYPwBIqO";
@@ -31,6 +32,7 @@ class QampParticipantsAirtableRecords extends AirtableRecords {
     await base("Participants")
       .select({
         fields: Object.values(this.recordFields),
+        filterByFormula: `{${this.recordFields.websiteAgreement}}`,
         sort: [{ field: this.recordFields.name, direction: "asc" }],
       })
       .eachPage((records, nextPage) => {
