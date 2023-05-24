@@ -10,6 +10,13 @@ const header = {
       location: "header",
     },
   },
+  researchBlogLink: {
+    url: "https://qisk.it/QGSS23",
+    segment: {
+      cta: "research-announcement-blog",
+      location: "header",
+    },
+  },
   cta: {
     label: "Register now!",
     url: "https://qisk.it/QGSS23REG",
