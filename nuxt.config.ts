@@ -1,6 +1,7 @@
 import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
+import fetchQampProjects from "./hooks/update-qamp-projects";
 import pkg from "./package.json";
 
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV } = process.env;
@@ -67,6 +68,10 @@ async function generateContent() {
     // eslint-disable-next-line no-console
     console.info("Generating the advocates content...");
     await fetchAdvocates(AIRTABLE_API_KEY, "./content/advocates");
+
+    // eslint-disable-next-line no-console
+    console.info("Generating the QAMP content...");
+    await fetchQampProjects(AIRTABLE_API_KEY, "./content/qamp");
   } else {
     // eslint-disable-next-line no-console
     console.warn(

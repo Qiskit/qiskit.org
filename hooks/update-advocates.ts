@@ -3,7 +3,7 @@ import util from "util";
 
 import AdvocatesAirtableRecords from "./advocate-conversion-utils";
 
-export default async function (apiKey: any, outputFolder: string) {
+export default async function (apiKey: string, outputFolder: string) {
   const advocatesAirtableRecords = new AdvocatesAirtableRecords(apiKey);
   const advocates = await advocatesAirtableRecords.fetchAdvocates();
 
