@@ -11,6 +11,7 @@ const RECORD_FIELDS_IDS = Object.freeze({
   mentees: "flda8motpH4gS5bns",
   mentors: "fldgBeYDL1YKSpkXy",
   name: "fldtLoW4vLVGzsGXa",
+  status: "fld3txoNo9QBgLXFk",
 } as const);
 
 const AIRTABLE_BASE_ID = "appjU5TOUDYPwBIqO";
@@ -59,6 +60,7 @@ class QampProjectsAirtableRecords extends AirtableRecords {
     await base("Projects")
       .select({
         fields: Object.values(this.recordFields),
+        filterByFormula: `{${this.recordFields.status}} = "Final Showcase"`,
         sort: [{ field: this.recordFields.name, direction: "asc" }],
       })
       .eachPage((records, nextPage) => {
