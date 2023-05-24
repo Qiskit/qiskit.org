@@ -17,10 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import { LearnQuantumStatesAndQubitsUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumStatesAndQubitsUrl {
+  Introduction = "https://learn.qiskit.org/course/ch-states/introduction",
+  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/the-atoms-of-computation",
+  RepresentingQubitStates = "https://learn.qiskit.org/course/ch-states/representing-qubit-states",
+  SingleQubitGates = "https://learn.qiskit.org/course/ch-states/single-qubit-gates",
+  CaseForQuantum = "https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -43,7 +50,7 @@ const headerImg =
   "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png";
 
 const startLearningCTA: Link = {
-  url: LearnQuantumStatesAndQubitsUrl.Introduction,
+  url: QuantumStatesAndQubitsUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -97,31 +104,31 @@ const courses: Course[] = [
     image: "introduction.png",
     label: "Introduction",
     segment: { cta: "introduction", location: "course" },
-    url: LearnQuantumStatesAndQubitsUrl.Introduction,
+    url: QuantumStatesAndQubitsUrl.Introduction,
   },
   {
     image: "atoms-of-computation.png",
     label: "The Atoms of Computation",
     segment: { cta: "atoms-of-computation", location: "course" },
-    url: LearnQuantumStatesAndQubitsUrl.AtomsOfComputation,
+    url: QuantumStatesAndQubitsUrl.AtomsOfComputation,
   },
   {
     image: "representing-qubit-states.png",
     label: "Representing Qubit States",
     segment: { cta: "representing-qubit-states", location: "course" },
-    url: LearnQuantumStatesAndQubitsUrl.RepresentingQubitStates,
+    url: QuantumStatesAndQubitsUrl.RepresentingQubitStates,
   },
   {
     image: "single-qubit-gates.png",
     label: "Single Qubit Gates",
     segment: { cta: "single-qubit-gates", location: "course" },
-    url: LearnQuantumStatesAndQubitsUrl.SingleQubitGates,
+    url: QuantumStatesAndQubitsUrl.SingleQubitGates,
   },
   {
     image: "case-for-quantum-computers.png",
     label: "The Case for Quantum",
     segment: { cta: "case-for-quantum-computers", location: "course" },
-    url: LearnQuantumStatesAndQubitsUrl.CaseForQuantum,
+    url: QuantumStatesAndQubitsUrl.CaseForQuantum,
   },
 ];
 

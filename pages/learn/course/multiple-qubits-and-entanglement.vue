@@ -17,10 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import { LearnMultipleQubitsAndEntanglementUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum MultipleQubitsAndEntanglementUrl {
+  Introduction = "https://learn.qiskit.org/course/ch-gates/introduction",
+  MultipleQubitsAndEntangledStates = "https://learn.qiskit.org/course/ch-gates/multiple-qubits-and-entangled-states",
+  PhaseKickback = "https://learn.qiskit.org/course/ch-gates/phase-kickback",
+  BasicCircuitIdentities = "https://learn.qiskit.org/course/ch-gates/basic-circuit-identities",
+  ProvingUniversality = "https://learn.qiskit.org/course/ch-gates/proving-universality",
+  ClassicalComputationOnAQuantumComputer = "https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -43,7 +51,7 @@ const headerImg =
   "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
 
 const startLearningCTA: Link = {
-  url: LearnMultipleQubitsAndEntanglementUrl.Introduction,
+  url: MultipleQubitsAndEntanglementUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -97,7 +105,7 @@ const courses: Course[] = [
     image: "introduction.png",
     label: "Introduction",
     segment: { cta: "introduction", location: "course" },
-    url: LearnMultipleQubitsAndEntanglementUrl.Introduction,
+    url: MultipleQubitsAndEntanglementUrl.Introduction,
   },
   {
     image: "multiple-qubits-and-entangled-states.png",
@@ -106,25 +114,25 @@ const courses: Course[] = [
       cta: "multiple-qubits-and-entangled-states",
       location: "course",
     },
-    url: LearnMultipleQubitsAndEntanglementUrl.MultipleQubitsAndEntangledStates,
+    url: MultipleQubitsAndEntanglementUrl.MultipleQubitsAndEntangledStates,
   },
   {
     image: "phase-kickback.png",
     label: "Phase Kickback",
     segment: { cta: "phase-kickback", location: "course" },
-    url: LearnMultipleQubitsAndEntanglementUrl.PhaseKickback,
+    url: MultipleQubitsAndEntanglementUrl.PhaseKickback,
   },
   {
     image: "basic-circuit-identities.png",
     label: "Basic Circuit Identities",
     segment: { cta: "basic-circuit-identities", location: "course" },
-    url: LearnMultipleQubitsAndEntanglementUrl.BasicCircuitIdentities,
+    url: MultipleQubitsAndEntanglementUrl.BasicCircuitIdentities,
   },
   {
     image: "proving-universality.png",
     label: "Proving Universality",
     segment: { cta: "proving-universality", location: "course" },
-    url: LearnMultipleQubitsAndEntanglementUrl.ProvingUniversality,
+    url: MultipleQubitsAndEntanglementUrl.ProvingUniversality,
   },
   {
     image: "classical-computation-on-a-quantum-computer.png",
@@ -133,7 +141,7 @@ const courses: Course[] = [
       cta: "classical-computation-on-a-quantum-computer",
       location: "course",
     },
-    url: LearnMultipleQubitsAndEntanglementUrl.ClassicalComputationOnAQuantumComputer,
+    url: MultipleQubitsAndEntanglementUrl.ClassicalComputationOnAQuantumComputer,
   },
 ];
 

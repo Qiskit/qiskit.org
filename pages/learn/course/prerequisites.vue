@@ -17,10 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import { LearnPrerequisitesUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum PrerequisitesUrl {
+  SettingUp = "https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook",
+  Introduction = "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -42,7 +46,7 @@ const headerDescription = [
 const headerImg = "/images/learn/course/prerequisites/prerequisites.png";
 
 const startLearningCTA: Link = {
-  url: LearnPrerequisitesUrl.Introduction,
+  url: PrerequisitesUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -78,13 +82,13 @@ const courses: Course[] = [
     image: "environment-setup.png",
     label: "Setting Up Your Environment",
     segment: { cta: "setting-up-your-environment", location: "course" },
-    url: LearnPrerequisitesUrl.SettingUp,
+    url: PrerequisitesUrl.SettingUp,
   },
   {
     image: "introduction.png",
     label: "Python and Jupyter Notebooks",
     segment: { cta: "python-and-jupyter-notebooks", location: "course" },
-    url: LearnPrerequisitesUrl.Introduction,
+    url: PrerequisitesUrl.Introduction,
   },
 ];
 

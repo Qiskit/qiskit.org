@@ -17,9 +17,16 @@
 </template>
 
 <script setup lang="ts">
-import { LearnQuantumHardwareCircuitsUrl } from "~/constants/links";
 import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumHardwareCircuitsUrl {
+  Introduction = "https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code",
+  MeasurementErrorMitigation = "https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation",
+  RandomizedBenchmarking = "https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking",
+  MeasuringQuantumVolume = "https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume",
+  DensityMatrixAndMixedStates = "https://learn.qiskit.org/course/quantum-hardware/density-matrix",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -42,7 +49,7 @@ const headerImg =
   "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
 
 const startLearningCTA: Link = {
-  url: LearnQuantumHardwareCircuitsUrl.Introduction,
+  url: QuantumHardwareCircuitsUrl.Introduction,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -62,31 +69,31 @@ const courses: Course[] = [
       cta: "introduction-to-quantum-error-correction",
       location: "course",
     },
-    url: LearnQuantumHardwareCircuitsUrl.Introduction,
+    url: QuantumHardwareCircuitsUrl.Introduction,
   },
   {
     image: "measurement-error-mitigation.png",
     label: "Measurement Error Mitigation",
     segment: { cta: "measurement-error-mitigation", location: "course" },
-    url: LearnQuantumHardwareCircuitsUrl.MeasurementErrorMitigation,
+    url: QuantumHardwareCircuitsUrl.MeasurementErrorMitigation,
   },
   {
     image: "randomized-benchmarking.png",
     label: "Randomized Benchmarking",
     segment: { cta: "randomized-benchmarking", location: "course" },
-    url: LearnQuantumHardwareCircuitsUrl.RandomizedBenchmarking,
+    url: QuantumHardwareCircuitsUrl.RandomizedBenchmarking,
   },
   {
     image: "measuring-quantum-volume.png",
     label: "Measuring Quantum Volume",
     segment: { cta: "measuring-quantum-volume", location: "course" },
-    url: LearnQuantumHardwareCircuitsUrl.MeasuringQuantumVolume,
+    url: QuantumHardwareCircuitsUrl.MeasuringQuantumVolume,
   },
   {
     image: "density-matrix-and-mixed-states.png",
     label: "The Density Matrix and Mixed States",
     segment: { cta: "density-matrix", location: "course" },
-    url: LearnQuantumHardwareCircuitsUrl.DensityMatrixAndMixedStates,
+    url: QuantumHardwareCircuitsUrl.DensityMatrixAndMixedStates,
   },
 ];
 
