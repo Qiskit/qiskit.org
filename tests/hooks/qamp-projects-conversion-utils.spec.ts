@@ -8,6 +8,8 @@ const fakeRecord = {
         return ["100"];
       case "Collaborators":
         return ["4"];
+      case "Description":
+        return "Lorem ipsum dolor sit amet";
       case "Github Issue URL":
         return "https://example.com/github-issue";
       case "Mentees":
@@ -33,6 +35,7 @@ const mockQampParticipants = [
 const mockRecordFields = {
   cohort: "Cohort",
   collaborators: "Collaborators",
+  description: "Description",
   githubIssueUrl: "Github Issue URL",
   mentees: "Mentees",
   mentors: "Mentors",
@@ -61,6 +64,12 @@ describe("getters", () => {
     expect(qampProjectsAirtableRecords.getCollaborators(fakeRecord)).toEqual([
       { name: "Jane Smith" },
     ]);
+  });
+
+  test("gets the description from the record", () => {
+    expect(qampProjectsAirtableRecords.getDescription(fakeRecord)).toBe(
+      "Lorem ipsum dolor sit amet"
+    );
   });
 
   test("gets the GitHub issue URL from the record", () => {
@@ -114,6 +123,7 @@ describe("convertToQampProject", () => {
     expect(qampProject).toEqual({
       cohort: { name: "QAMP Spring 23" },
       collaborators: [{ name: "Jane Smith" }],
+      description: "Lorem ipsum dolor sit amet",
       githubIssueUrl: "https://example.com/github-issue",
       mentees: [{ name: "Jane Doe" }, { name: "John Smith" }],
       mentors: [{ name: "John Doe" }, { name: "Jane Doe" }],

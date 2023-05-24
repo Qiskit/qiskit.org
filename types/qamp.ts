@@ -11,6 +11,7 @@ interface QampParticipant {
 interface QampProject {
   cohort: QampCohort;
   collaborators: QampParticipant[];
+  description: string;
   githubIssueUrl: string;
   mentees: QampParticipant[];
   mentors: QampParticipant[];

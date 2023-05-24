@@ -7,6 +7,7 @@ import QampParticipantsAirtableRecords from "./qamp-participants-conversion-util
 const RECORD_FIELDS_IDS = Object.freeze({
   cohort: "fldaIxSsaydaOCUGK",
   collaborators: "fldaoHhT2ttO35K7T",
+  description: "fld7WFcr4BRSXmC9Y",
   githubIssueUrl: "fldrZHw1f1nQwO9VX",
   mentees: "flda8motpH4gS5bns",
   mentors: "fldgBeYDL1YKSpkXy",
@@ -79,6 +80,7 @@ class QampProjectsAirtableRecords extends AirtableRecords {
     return {
       cohort: this.getCohort(record),
       collaborators: this.getCollaborators(record),
+      description: this.getDescription(record),
       githubIssueUrl: this.getGithubIssueUrl(record),
       mentees: this.getMentees(record),
       mentors: this.getMentors(record),
@@ -98,8 +100,12 @@ class QampProjectsAirtableRecords extends AirtableRecords {
     );
   }
 
+  public getDescription(record: any): string {
+    return record.get(this.recordFields!.description) || "";
+  }
+
   public getGithubIssueUrl(record: any): string {
-    return record.get(this.recordFields!.githubIssueUrl);
+    return record.get(this.recordFields!.githubIssueUrl) || "";
   }
 
   public getMentees(record: any): QampParticipant[] {
@@ -111,7 +117,7 @@ class QampProjectsAirtableRecords extends AirtableRecords {
   }
 
   public getName(record: any): string {
-    return record.get(this.recordFields!.name);
+    return record.get(this.recordFields!.name) || "";
   }
 
   public getParticipants(ids: string[]): QampParticipant[] {
