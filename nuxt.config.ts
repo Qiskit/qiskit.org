@@ -16,7 +16,11 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/content", "@nuxt/image-edge"],
+  modules: ["@nuxt/content", "@nuxt/image-edge", "nuxt-schema-org"],
+
+  schemaOrg: {
+    host: "https://qiskit.org",
+  },
 
   runtimeConfig: {
     // Keys within public are also exposed client-side
@@ -28,6 +32,7 @@ export default defineNuxtConfig({
         ? "ffdYLviQze3kzomaINXNk6NwpY9LlXcw"
         : "zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H",
       isAnalyticsEnabled: true,
+      siteUrl: "https://qiskit.org",
     },
   },
 
