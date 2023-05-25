@@ -121,14 +121,14 @@
 
 <script setup lang="ts">
 // import "@carbon/web-components/es/components/tabs/index.js";
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 type Course = {
   image: string;
   title: string;
   subtitle?: string;
   description: string;
-  cta: GeneralLink;
+  cta: Link;
 };
 
 type LearningSection = {
@@ -141,7 +141,7 @@ type Syllabus = {
   title: string;
   instructor: string;
   university: string;
-  cta: GeneralLink;
+  cta: Link;
 };
 
 type TeachingSection = {

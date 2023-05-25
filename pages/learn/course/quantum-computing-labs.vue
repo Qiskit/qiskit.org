@@ -17,9 +17,21 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { QuantumComputingLabs } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumComputingLabsUrl {
+  Lab1 = "https://learn.qiskit.org/course/ch-labs/lab-1-quantum-circuits",
+  Lab2 = "https://learn.qiskit.org/course/ch-labs/lab-2-single-qubit-gates",
+  Lab3 = "https://learn.qiskit.org/course/ch-labs/lab-3-quantum-measurements",
+  Lab4 = "https://learn.qiskit.org/course/ch-labs/lab-4-bell-ghz-circuit",
+  Lab5 = "https://learn.qiskit.org/course/ch-labs/lab-5-accuracy-of-quantum-phase-estimation",
+  Lab6 = "https://learn.qiskit.org/course/ch-labs/lab-6-iterative-phase-estimation-algorithm",
+  Lab7 = "https://learn.qiskit.org/course/ch-labs/lab-7-scalable-shors-algorithm",
+  Lab8 = "https://learn.qiskit.org/course/ch-labs/lab-8-grovers-search-with-an-unknown-number-of-solutions",
+  Lab9 = "https://learn.qiskit.org/course/ch-labs/lab-9-quantum-simulation-as-a-search-algorithm",
+  Lab10 = "https://learn.qiskit.org/course/ch-labs/lab-10-quantum-error-correction",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -40,8 +52,8 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/quantum-computing-labs/quantum-lab.png";
 
-const startLearningCTA: GeneralLink = {
-  url: QuantumComputingLabs.Lab1,
+const startLearningCTA: Link = {
+  url: QuantumComputingLabsUrl.Lab1,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -51,68 +63,68 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const courses: Course[] = [
   {
     image: "lab-1.png",
     label: "Lab 1 Quantum Circuits",
     segment: { cta: "lab-1", location: "course" },
-    url: QuantumComputingLabs.Lab1,
+    url: QuantumComputingLabsUrl.Lab1,
   },
   {
     image: "lab-2.png",
     label: "Lab 2 Single Qubit Gates",
     segment: { cta: "lab-2", location: "course" },
-    url: QuantumComputingLabs.Lab2,
+    url: QuantumComputingLabsUrl.Lab2,
   },
   {
     image: "lab-3.png",
     label: "Lab 3 Quantum Measurments",
     segment: { cta: "lab-3", location: "course" },
-    url: QuantumComputingLabs.Lab3,
+    url: QuantumComputingLabsUrl.Lab3,
   },
   {
     image: "lab-4.png",
     label: "Lab 4 Bell Circuit & GHZ Circuit",
     segment: { cta: "lab-4", location: "course" },
-    url: QuantumComputingLabs.Lab4,
+    url: QuantumComputingLabsUrl.Lab4,
   },
   {
     image: "lab-5.png",
     label: "Lab 5 Accuracy of Quantum Phase",
     segment: { cta: "lab-5", location: "course" },
-    url: QuantumComputingLabs.Lab5,
+    url: QuantumComputingLabsUrl.Lab5,
   },
   {
     image: "lab-6.png",
     label: "Lab 6 Iterative Quantum Phase Estimation",
     segment: { cta: "lab-6", location: "course" },
-    url: QuantumComputingLabs.Lab6,
+    url: QuantumComputingLabsUrl.Lab6,
   },
   {
     image: "lab-7.png",
     label: "Lab 7 Scalable Shor’s Algorithm",
     segment: { cta: "lab-7", location: "course" },
-    url: QuantumComputingLabs.Lab7,
+    url: QuantumComputingLabsUrl.Lab7,
   },
   {
     image: "lab-8.png",
     label: "Lab 8 Grover’s Search With an Unknown Number of Solutions",
     segment: { cta: "lab-8", location: "course" },
-    url: QuantumComputingLabs.Lab8,
+    url: QuantumComputingLabsUrl.Lab8,
   },
   {
     image: "lab-9.png",
     label: "Lab 9 Quantum Simulation as a Search Algorithm",
     segment: { cta: "lab-9", location: "course" },
-    url: QuantumComputingLabs.Lab9,
+    url: QuantumComputingLabsUrl.Lab9,
   },
   {
     image: "lab-10.png",
     label: "Lab 10 Quantum Error Correction",
     segment: { cta: "lab-10", location: "course" },
-    url: QuantumComputingLabs.Lab10,
+    url: QuantumComputingLabsUrl.Lab10,
   },
 ];
 

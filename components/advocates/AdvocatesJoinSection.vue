@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 interface Benefit {
   icon: string;
@@ -56,7 +56,7 @@ const advocateBenefits: Benefit[] = [
   },
 ];
 
-const joinAction: GeneralLink = {
+const joinAction: Link = {
   url: "https://qisk.it/advocateapplication",
   label: "Join the program",
   segment: { cta: "join-the-program", location: "join-section" },

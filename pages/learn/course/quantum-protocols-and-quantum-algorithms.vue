@@ -17,10 +17,26 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { QuantumProtocolsAndQuantumAlgorithmsUrl } from "~/constants/appLinks";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumProtocolsAndQuantumAlgorithmsUrl {
+  DefiningQuantumCircuits = "https://learn.qiskit.org/course/ch-algorithms/quantum-circuits",
+  DeutschJozsaAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/deutsch-jozsa-algorithm",
+  BernsteinVaziraniAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/bernstein-vazirani-algorithm",
+  SimonsAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/simons-algorithm",
+  QuantumFourierTransformation = "https://learn.qiskit.org/course/ch-algorithms/quantum-fourier-transform",
+  QuantumPhaseEstimation = "https://learn.qiskit.org/course/ch-algorithms/quantum-phase-estimation",
+  ShorsAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/shors-algorithm",
+  GroversAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/grovers-algorithm",
+  QuantumCounting = "https://learn.qiskit.org/course/ch-algorithms/quantum-counting",
+  QuantumTeleportation = "https://learn.qiskit.org/course/ch-algorithms/quantum-teleportation",
+  SuperdenseCoding = "https://learn.qiskit.org/course/ch-algorithms/superdense-coding",
+  QuantumKeyDistribution = "https://learn.qiskit.org/course/ch-algorithms/quantum-key-distribution",
+  QuantumWalkSearchAlgorithm = "https://learn.qiskit.org/course/ch-algorithms/quantum-walk-search-algorithm",
+  HiddenShiftProblem = "https://learn.qiskit.org/course/ch-algorithms/hidden-shift-problem",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -42,7 +58,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: QuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
   label: "Start learning",
   segment: {

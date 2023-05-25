@@ -1,6 +1,6 @@
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
-type RecommendedReading = GeneralLink & {
+type RecommendedReading = Link & {
   description?: string;
   author?: string;
 };

@@ -46,7 +46,7 @@
 import EventsCalendarsAppleInstructions from "~/components/Events/Calendars/EventsCalendarsAppleInstructions.vue";
 import EventsCalendarsGoogleInstructions from "~/components/Events/Calendars/EventsCalendarsGoogleInstructions.vue";
 import EventsCalendarsOutlookInstructions from "~/components/Events/Calendars/EventsCalendarsOutlookInstructions.vue";
-import type { GeneralLink } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 
 const calendarsInstructions = [
   {
@@ -65,7 +65,7 @@ const calendarsInstructions = [
 
 const qiskitCalendarSyncLink = "https://qisk.it/calendar-sync";
 
-const qiskitCalendarLink: GeneralLink = {
+const qiskitCalendarLink: Link = {
   url: "https://qisk.it/calendar",
   label: "https://qisk.it/calendar",
   segment: {

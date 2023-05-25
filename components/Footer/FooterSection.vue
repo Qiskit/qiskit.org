@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { NavLink } from "~/constants/menuLinks";
+import type { LinkWithIcon } from "~/types/links";
 
 interface Props {
   title: string;
-  elements: NavLink[];
+  elements: LinkWithIcon[];
   iconsOnly?: boolean;
   theme?: "light" | "dark";
 }

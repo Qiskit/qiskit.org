@@ -17,9 +17,16 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { QuantumHardwareCircuitsUrl } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumHardwareCircuitsUrl {
+  Introduction = "https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code",
+  MeasurementErrorMitigation = "https://learn.qiskit.org/course/quantum-hardware/measurement-error-mitigation",
+  RandomizedBenchmarking = "https://learn.qiskit.org/course/quantum-hardware/randomized-benchmarking",
+  MeasuringQuantumVolume = "https://learn.qiskit.org/course/quantum-hardware/measuring-quantum-volume",
+  DensityMatrixAndMixedStates = "https://learn.qiskit.org/course/quantum-hardware/density-matrix",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -41,7 +48,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: QuantumHardwareCircuitsUrl.Introduction,
   label: "Start learning",
   segment: {
@@ -52,7 +59,7 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const courses: Course[] = [
   {

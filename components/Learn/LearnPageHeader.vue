@@ -7,25 +7,21 @@
         </div>
         <div>
           <h1 class="learn-header__headline">Qiskit Textbook</h1>
-          <ClientOnly>
-            <qiskit-mega-menu-dropdown
-              :id="appMegaDropdownMenuId"
-              class="learn-header__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
-              :content.prop="dropdownMenuContent"
-              segment-component-name="Textbook mega menu"
-              :track-performed-search="trackPerformedSearch"
-            />
-          </ClientOnly>
+          <LearnMegaMenu
+            id="learn-header__mega-dropdown-menu"
+            classes="learn-header__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
+          />
         </div>
         <UiCta
           class="learn-header__cta"
-          :label="startLearningCTA.label"
-          :segment="startLearningCTA.segment"
-          :url="startLearningCTA.url"
+          label="Start learning"
+          :segment="{ cta: 'start-learning', location: 'header' }"
+          url="/learn/course/introduction-course"
         />
       </div>
     </div>
     <transition name="scroll-in">
+      <!-- FIX: This is never rendered -->
       <LearnContentMenuSection
         v-if="!appMegaDropdownMenuIsVisible"
         class="learn-header__dropdown-fixed"
@@ -35,21 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { LEARN_START_LEARNING } from "~/constants/appLinks";
-import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
-
-const startLearningCTA = LEARN_START_LEARNING;
-const dropdownMenuContent = LEARN_MEGA_MENU;
-
 const appMegaDropdownMenuIsVisible = ref(true);
-
-const appMegaDropdownMenuId = "learn-header__mega-dropdown-menu";
-
-// TODO: Refactor tracking
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function trackPerformedSearch(uiElement: string, field: string) {
-  // this.$trackPerformedSearch(uiElement, field);
-}
 </script>
 
 <style lang="scss" scoped>

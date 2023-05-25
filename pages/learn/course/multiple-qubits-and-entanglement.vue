@@ -17,10 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { MultipleQubitsAndEntanglementUrl } from "~/constants/appLinks";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum MultipleQubitsAndEntanglementUrl {
+  Introduction = "https://learn.qiskit.org/course/ch-gates/introduction",
+  MultipleQubitsAndEntangledStates = "https://learn.qiskit.org/course/ch-gates/multiple-qubits-and-entangled-states",
+  PhaseKickback = "https://learn.qiskit.org/course/ch-gates/phase-kickback",
+  BasicCircuitIdentities = "https://learn.qiskit.org/course/ch-gates/basic-circuit-identities",
+  ProvingUniversality = "https://learn.qiskit.org/course/ch-gates/proving-universality",
+  ClassicalComputationOnAQuantumComputer = "https://learn.qiskit.org/course/ch-gates/classical-computation-on-a-quantum-computer",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -42,7 +50,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: MultipleQubitsAndEntanglementUrl.Introduction,
   label: "Start learning",
   segment: {
