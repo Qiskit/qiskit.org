@@ -4,6 +4,7 @@
     :image="image"
     :title="name"
     :tags="formattedRegion"
+    image-description="Advocate Picture"
   >
     <div v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
