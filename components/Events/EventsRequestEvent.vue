@@ -5,15 +5,12 @@
       We can help you bring Qiskit experts to your campus for guest lectures,
       hackathons, and other events.
     </p>
-    <UiCta v-bind="eventRequestLink" />
+    <UiCta
+      label="Request an event"
+      url="https://airtable.com/shrRP0Td8TN4ttlFx"
+    />
   </div>
 </template>
-
-<script setup lang="ts">
-import { EVENT_REQUEST_LINK } from "~/constants/appLinks";
-
-const eventRequestLink = EVENT_REQUEST_LINK;
-</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";

@@ -1,4 +1,34 @@
-import { NavLink } from "~/constants/menuLinks";
+<template>
+  <ClientOnly>
+    <qiskit-mega-menu-dropdown
+      :id="id"
+      :class="classes"
+      :content.prop="learnMegaMenuContent"
+      segment-component-name="Textbook mega menu"
+      :track-performed-search="trackPerformedSearch"
+    />
+  </ClientOnly>
+</template>
+
+<script setup lang="ts">
+import { Link } from "~/types/links";
+
+interface Props {
+  classes?: string;
+  id?: string;
+}
+
+interface MegaDropdownMenuGroup {
+  title: Link;
+  content: Link[];
+}
+
+interface MegaDropdownMenuSection {
+  title: string;
+  content: MegaDropdownMenuGroup[];
+}
+
+defineProps<Props>();
 
 const wholeSection = "whole-section";
 const sectionBasicsCourse = "basics-course";
@@ -35,11 +65,6 @@ const pathProblemSets = "/problem-sets";
 const pathSummerSchool = "/summer-school";
 
 const tutorialsBaseUrl = "https://qiskit.org/documentation/tutorials";
-
-type MegaDropdownMenuGroup = {
-  title: NavLink;
-  content: NavLink[];
-};
 
 const BASICS_COURSE: MegaDropdownMenuGroup = {
   title: {
@@ -1766,13 +1791,6 @@ const SUMMER_SCHOOL_2022: MegaDropdownMenuGroup = {
   ],
 };
 
-type MegaDropdownMenuSection = {
-  title: string;
-  content: MegaDropdownMenuGroup[];
-};
-
-type MegaDropdownMenuContent = MegaDropdownMenuSection[];
-
 const COURSES_SECTION: MegaDropdownMenuSection = {
   title: "Courses",
   content: [BASICS_COURSE, ALGORITHM_DESIGN, INTRODUCTION_COURSE, QML_COURSE],
@@ -1811,11 +1829,16 @@ const SUMMER_SCHOOL_SECTION: MegaDropdownMenuSection = {
   content: [SUMMER_SCHOOL_2020, SUMMER_SCHOOL_2021, SUMMER_SCHOOL_2022],
 };
 
-const LEARN_MEGA_MENU: MegaDropdownMenuContent = [
+const learnMegaMenuContent: MegaDropdownMenuSection[] = [
   COURSES_SECTION,
   CHAPTERS_SECTION,
   TUTORIALS_SECTION,
   SUMMER_SCHOOL_SECTION,
 ];
 
-export { LEARN_MEGA_MENU };
+// TODO: Refactor tracking
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function trackPerformedSearch(uiElement: string, field: string) {
+  // this.$trackPerformedSearch(uiElement, field);
+}
+</script>

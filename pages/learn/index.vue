@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { SOCIAL_MEDIA } from "~/constants/menuLinks";
+import { SocialMedia } from "~/constants/links";
 import type { DescriptionCard } from "~/types/uiComponents";
 
 definePageMeta({
@@ -35,21 +35,21 @@ const helpfulResources: DescriptionCard[] = [
     },
   },
   {
-    title: SOCIAL_MEDIA.support.label,
+    title: SocialMedia.support.label,
     description:
       "If you need support on anything relating to using and developing Qiskit, you can use the following forums to direct your issue / queries to the appropriate audience.",
     cta: {
-      url: SOCIAL_MEDIA.support.url,
+      url: SocialMedia.support.url,
       label: "Visit Support Channels",
       segment: { cta: "support-channels", location: "helpful-resources" },
     },
   },
   {
-    title: SOCIAL_MEDIA.slack.label,
+    title: SocialMedia.slack.label,
     description:
       "The Slack community is a great place to engage in discussion on research and quantum development.",
     cta: {
-      url: SOCIAL_MEDIA.slack.url,
+      url: SocialMedia.slack.url,
       label: "Visit Slack",
       segment: { cta: "slack", location: "helpful-resources" },
     },

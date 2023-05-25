@@ -1,4 +1,4 @@
-import type { GeneralLink } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 
 export interface ProviderCodeExample {
   name: string;
@@ -10,9 +10,9 @@ export interface Provider {
   title: string;
   description: string;
   installation: string;
-  websiteCta?: GeneralLink;
-  docsCta?: GeneralLink;
-  sourceCta?: GeneralLink;
+  websiteCta?: Link;
+  docsCta?: Link;
+  sourceCta?: Link;
   codeExamples: ProviderCodeExample[];
 }
 

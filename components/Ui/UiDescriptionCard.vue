@@ -18,10 +18,10 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 interface Props {
-  cta: GeneralLink;
+  cta: Link;
   description: string;
   title: string;
 }

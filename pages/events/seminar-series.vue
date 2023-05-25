@@ -89,9 +89,12 @@
         <UiCta
           class="seminar-series-page__past-events-cta"
           kind="ghost"
-          :label="showMorePastEventsCta.label"
-          :segment="showMorePastEventsCta.segment"
-          :url="showMorePastEventsCta.url"
+          label="Explore Full Seminar Archive"
+          :segment="{
+            cta: 'youtube-playlist',
+            location: 'past-events-section',
+          }"
+          :url="playlistUrl"
         />
       </UiDataTableSection>
 
@@ -109,10 +112,7 @@ import type { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
 import type { TableRowElement } from "~/components/Ui/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
-import {
-  SEMINAR_SERIES_ALL_EPISODES_CTA,
-  SEMINAR_SERIES_FULL_ARCHIVE_CTA,
-} from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -123,6 +123,9 @@ definePageMeta({
 useHead({
   title: "Qiskit Seminar Series",
 });
+
+const playlistUrl =
+  "https://www.youtube.com/playlist?list=PLOFEBzvs-Vvr0uEoGFo08n4-WrM_8fft2";
 
 // Data for the header section
 const headerTitle = "Quantum Information Science Seminar Series";
@@ -135,12 +138,10 @@ const headerDescription = [
   "Join us live every Friday at 12:00 PM ET.",
 ];
 
-const headerCTA = {
-  ...SEMINAR_SERIES_ALL_EPISODES_CTA,
-  segment: {
-    cta: "talk-on-youtube",
-    location: "header",
-  },
+const headerCTA: Link = {
+  label: "Go to YouTube playlist",
+  segment: { cta: "talk-on-youtube", location: "header" },
+  url: playlistUrl,
 };
 
 // When there are no upcoming events, the JSON file is filled with []
@@ -206,7 +207,6 @@ const pastEventsDataTable = dataPerRow(
   pastSeminarSeriesEvents,
   "past-events-section"
 );
-const showMorePastEventsCta = SEMINAR_SERIES_FULL_ARCHIVE_CTA;
 
 // Data for the helpful resources section
 const helpfulResources: DescriptionCard[] = [
