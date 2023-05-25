@@ -21,8 +21,11 @@
           <UiLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
           </UiLink>
-          for more details and updates. For any questions, please check out our
-          FAQ below!
+          for updates and
+          <UiLink v-bind="headerData.researchBlogLink">
+            read the announcement blog
+          </UiLink>
+          for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
         <UiCta class="summer-school-page__cta" v-bind="header.cta" />
