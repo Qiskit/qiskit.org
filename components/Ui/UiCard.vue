@@ -18,6 +18,7 @@
       /> -->
       <img
         class="card__image"
+        :alt="imageDescription"
         :class="imageContain ? 'card__image_contain' : null"
         :src="image"
       />
@@ -93,6 +94,7 @@ interface Props {
   ctaLabel?: string;
   image?: string;
   imageContain?: boolean;
+  imageDescription?: string;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
   tags?: string[];
@@ -107,6 +109,7 @@ const props = withDefaults(defineProps<Props>(), {
   ctaLabel: "",
   image: "",
   imageContain: false,
+  imageDescription: "No description available",
   segment: undefined,
   subtitle: "",
   tags: () => [],
