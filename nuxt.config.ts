@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         ? "ffdYLviQze3kzomaINXNk6NwpY9LlXcw"
         : "zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H",
       isAnalyticsEnabled: true,
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || "https://qiskit.org",
+      siteUrl: "https://qiskit.org",
     },
   },
 
