@@ -8,12 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import {
-  useSchemaOrg,
-  defineWebSite,
-  defineWebPage,
-  defineOrganization,
-} from "@unhead/schema-org-vue";
 interface PackageInfo {
   info: {
     version: string;
