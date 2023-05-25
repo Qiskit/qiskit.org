@@ -45,21 +45,27 @@
 
 <script setup lang="ts">
 // import "@carbon/web-components/es/components/tabs/index.js";
+
 interface codeExample {
   name: string;
   runMethod: string;
   fullCode: string;
 }
+
 interface Props {
   installCode: string;
   providerTitle: string;
   codeExamples: codeExample[];
 }
+
 const props = defineProps<Props>();
+
 const activeTabLabel = ref(props.codeExamples[0].name);
+
 function updateSelectedTab(e: { detail: { item: { value: string } } }) {
   activeTabLabel.value = e.detail.item.value;
 }
+
 watch(
   () => props.installCode,
   () => {
@@ -71,13 +77,17 @@ watch(
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+
 .providers-code-examples {
   --cds-heading-01-font-weight: 500;
+
   padding: carbon.$spacing-05;
+
   &__container {
     background-color: qiskit.$background-color-lighter;
     padding: carbon.$spacing-05;
   }
+
   &__section {
     &:not(:last-child) {
       margin-bottom: carbon.$spacing-07;
