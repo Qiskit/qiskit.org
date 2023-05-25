@@ -1,22 +1,5 @@
 <template>
-  <section id="meet-the-advocates" class="cds--grid meet-the-advocates">
-    <h2>Meet the Advocates</h2>
-    <div class="cds--row">
-      <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-        <p>
-          Qiskit advocates are some of the finest minds in quantum computing,
-          all over the world. If you are interested in getting involved with the
-          quantum computing community, reach out to an advocate local to your
-          area.
-        </p>
-        <p>
-          <UiLink :url="joinSlackLink">
-            Sign-up for the Qiskit Slack workspace
-          </UiLink>
-          to reach the advocates and join the conversation.
-        </p>
-      </div>
-    </div>
+  <section id="meet-the-advocates" class="meet-the-advocates">
     <UiFiltersResultsLayout class="meet-the-advocates__filters-result-section">
       <template #filters-on-m-l-screen>
         <UiFieldset :label="filter.label">
@@ -66,7 +49,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/checkbox/index.js";
 import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
 import rawAdvocates from "~/content/advocates/advocates.json";
 
@@ -115,19 +97,14 @@ function updateRegionFilters(newRegionFilters: string) {
     newRegionFilters === "" ? [] : newRegionFilters.split(",");
   regionFilters.value = newRegionFiltersAsArray;
 }
-
-// TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
-const joinSlackLink = "https://qisk.it/join-slack";
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
 .meet-the-advocates {
-  margin-top: carbon.$spacing-12;
-
   &__filters-result-section {
-    margin-top: carbon.$spacing-10;
+    margin-top: carbon.$spacing-08;
   }
 }
 </style>
