@@ -21,15 +21,14 @@
           <UiLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
           </UiLink>
-          for more details and updates. For any questions, please check out our
-          FAQ below!
+          for updates and
+          <UiLink v-bind="headerData.researchBlogLink">
+            read the announcement blog
+          </UiLink>
+          for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta
-          class="summer-school-page__cta"
-          v-bind="header.cta"
-          kind="secondary"
-        />
+        <UiCta class="summer-school-page__cta" v-bind="header.cta" />
       </template>
       <template #card>
         <EventsItemCard v-bind="headerData.card" vertical-layout>
@@ -187,7 +186,6 @@ const helpfulResourcesData = helpfulResources;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .summer-school-page {
   display: flex;
@@ -224,12 +222,6 @@ const helpfulResourcesData = helpfulResources;
 
   &__cta {
     margin-top: carbon.$spacing-07;
-    pointer-events: none;
-    color: qiskit.$text-color-light;
-
-    &:deep(.cta__icon) {
-      display: none;
-    }
   }
 }
 </style>
