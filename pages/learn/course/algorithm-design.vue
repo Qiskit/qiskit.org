@@ -69,7 +69,7 @@ const links: RecommendedReading[] = [
     },
   },
   {
-    url: "https://quantum-computing.ibm.com/lab/docs/iql/runtime/",
+    url: "https://qiskit.org/ecosystem/ibm-runtime/",
     author: "",
     label: "Qiskit Runtime Overview",
     description: "Explore Qiskit Runtime service documentation and tutorials.",
