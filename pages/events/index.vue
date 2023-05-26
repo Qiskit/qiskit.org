@@ -82,6 +82,7 @@
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
+                :alt-text="altTextSorting(eventItem)"
                 :location="eventItem.location"
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
@@ -199,7 +200,20 @@ const filteredEvents = computed(() => {
     });
   }
 });
-
+function altTextSorting(event: any){
+  if (event.title.includes('Seminar')){
+    if (event.speaker !== ""){
+      return event.speaker + " photo"
+    }
+    else{
+      return "Seminar speaker photo"
+    }
+  }
+  else{
+    return event.title + " event picture"
+  }
+  
+}
 const noEvents = computed(() => filteredEvents.value.length === 0);
 
 const regionFiltersAsString = computed(() => regionFilters.value.join(","));
