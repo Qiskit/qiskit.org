@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-  Welcome to <a href="https://qiskit.org">Qiskit.org</a>
+  Welcome to <a href="https://qiskit.org">Qiskit.org!</a>
 </h1>
 <p align="center">
 Qiskit is an open-source quantum computing software development framework for leveraging today's quantum processors in research, education, and business.
