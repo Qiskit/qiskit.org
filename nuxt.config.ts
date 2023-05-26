@@ -23,15 +23,16 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Keys within public are also exposed client-side
     public: {
-      analyticsScriptUrl: IS_PRODUCTION
-        ? "https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"
-        : "https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js",
-      analyticsKey: IS_PRODUCTION
-        ? "ffdYLviQze3kzomaINXNk6NwpY9LlXcw"
-        : "zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H",
-      isAnalyticsEnabled: true,
+      IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY: "",
+      IBM_ANALYTICS_SEGMENT_INSTANCE_ID: "",
+      IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY: "",
+      IBM_ANALYTICS_SEGMENT_ENABLED: IS_PRODUCTION,
+      IBM_ANALYTICS_SEGMENT_PRODUCT_CODE: "",
+      IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE: "",
+      IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE: "",
+      IBM_ANALYTICS_SEGMENT_SCRIPT_SRC: "",
+      IBM_ANALYTICS_SEGMENT_UT30: "",
       siteUrl: "https://qiskit.org",
     },
   },

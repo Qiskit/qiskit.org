@@ -1,4 +1,7 @@
-import type { CtaClickedEventSegmentSchema } from "~/types/segment";
+import type {
+  CtaClickedEventSegmentSchema,
+  PageLoadedEventSegmentSchema,
+} from "~/types/segment";
 
 /**
  * Set of configuration objects and flags required by Bluemix Analytics.
@@ -20,36 +23,25 @@ declare global {
   interface Window extends AnalyticsContext {}
 }
 
-function getOrFailProductTitle(digitalData: any): string {
-  return assertCanGet(
-    () => digitalData.page.pageInfo.productTitle,
-    "`digitalData.page.pageInfo.productTitle` is missing"
-  );
-}
-
-function getOrFailCategory(digitalData: any): string {
-  return assertCanGet(
-    () => digitalData.page.pageInfo.analytics.category,
-    "`digitalData.page.pageInfo.analytics.category` is missing"
-  );
-}
-
-function assertCanGet<T>(getter: () => T, error: string): T {
-  let result;
-  try {
-    result = getter();
-  } catch (ex) {}
-  if (!result) {
-    throw new Error(error);
-  }
-  return result;
-}
-
 /**
- * Minimum configutarion for the analytics system.
- * @param key public key to send analytics
+ * Minimum configuration for the analytics system.
+ * @param category Common Schema category
+ * @param instanceId Common Schema instance ID
+ * @param key Segment analytics public key
+ * @param productCode Common Schema product code
+ * @param productCodeType Common Schema product code type
+ * @param productTitle Common Schema product title
+ * @param UT30 Common Schema UT30
  */
-function configureAnalytics(key: string) {
+function configureAnalytics(
+  category: string,
+  instanceId: string,
+  key: string,
+  productCode: string,
+  productCodeType: string,
+  productTitle: string,
+  UT30: string
+) {
   window._analytics = {
     segment_key: key,
     coremetrics: false,
@@ -64,9 +56,13 @@ function configureAnalytics(key: string) {
   window.digitalData = {
     page: {
       pageInfo: {
-        productTitle: "IBM Q Experience",
+        instanceId,
+        productCode,
+        productCodeType,
+        productTitle,
+        UT30,
         analytics: {
-          category: "Qiskit.org",
+          category,
         },
       },
     },
@@ -104,20 +100,28 @@ function trackPage(
   routeName: string,
   title: string
 ) {
+  const runtimeConfig = useRuntimeConfig();
   const { bluemixAnalytics, digitalData } = context;
 
   if (!bluemixAnalytics || !digitalData) {
     return;
   }
 
-  const category = getOrFailCategory(digitalData);
-  const productTitle = getOrFailProductTitle(digitalData);
-
-  bluemixAnalytics.pageEvent(category, routeName, {
+  const category =
+    runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY;
+  const segmentOptions: PageLoadedEventSegmentSchema = {
+    category,
+    instanceId: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_INSTANCE_ID,
     navigationType: "pushState",
-    productTitle,
+    productCode: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE,
+    productCodeType:
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE,
+    productTitle: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE,
     title,
-  });
+    UT30: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_UT30,
+  };
+
+  bluemixAnalytics.pageEvent(category, routeName, segmentOptions);
 }
 
 /**
@@ -131,20 +135,23 @@ function trackClickEvent(
   cta: string,
   location: string
 ) {
+  const runtimeConfig = useRuntimeConfig();
   const { bluemixAnalytics, digitalData } = context;
 
   if (!bluemixAnalytics || !digitalData) {
     return;
   }
 
-  const productTitle = getOrFailProductTitle(digitalData);
-  const category = getOrFailCategory(digitalData);
-
   const segmentOptions: CtaClickedEventSegmentSchema = {
-    category,
+    category: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY,
     CTA: cta,
+    instanceId: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_INSTANCE_ID,
     location,
-    productTitle,
+    productCode: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE,
+    productCodeType:
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE,
+    productTitle: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE,
+    UT30: runtimeConfig.public.IBM_ANALYTICS_SEGMENT_UT30,
   };
 
   bluemixAnalytics.trackEvent("CTA Clicked", segmentOptions);
@@ -179,11 +186,19 @@ export const useSegment = () => {
 
   const runtimeConfig = useRuntimeConfig();
 
-  if (runtimeConfig.public.isAnalyticsEnabled) {
-    configureAnalytics(runtimeConfig.public.analyticsKey);
+  if (runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ENABLED) {
+    configureAnalytics(
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_INSTANCE_ID,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE,
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_UT30
+    );
 
     useState("analyticsReady", () =>
-      installAnalytics(runtimeConfig.public.analyticsScriptUrl)
+      installAnalytics(runtimeConfig.public.IBM_ANALYTICS_SEGMENT_SCRIPT_SRC)
     );
   }
 
