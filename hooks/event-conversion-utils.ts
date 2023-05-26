@@ -249,6 +249,7 @@ class EventsAirtableRecords extends AirtableRecords {
       regions: (record.get(this.recordFields!.regions) as WorldRegion[]) || [
         WORLD_REGIONS.tbd,
       ],
+      speaker: (record.get(this.recordFields!.speaker) as string) || "",
       title: (record.get(this.recordFields!.name) as string) || "",
       to: (record.get(this.recordFields!.website) as string) || "",
       abstract: record.get(this.recordFields!.abstract) || "",
