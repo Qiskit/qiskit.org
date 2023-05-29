@@ -47,7 +47,7 @@
           <div
             v-for="advocate in filteredAdvocates"
             :key="advocate.name"
-            class="cds--col-max-8"
+            class="cds--col-sm-4 cds--col-xlg-8"
           >
             <AdvocatesItemCard
               :name="advocate.name"
