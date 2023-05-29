@@ -10,11 +10,11 @@
         <p>
           The Qiskit Global Summer School 2023 is a two-week intensive summer
           program designed to empower the quantum researchers and developers of
-          tomorrow with the skills and know-how to explore the world of quantum
-          computing and its applications. This fourth-annual summer school will
-          provide an introduction to quantum computing by taking on a
-          back-to-basics approach, with a specific look at making the transition
-          from theory to implementation.
+          tomorrow with the know-how to explore the world of quantum computing,
+          as well as refresh and sharpen the industry professional's skills.
+          This fourth-annual summer school will focus foundationally on quantum
+          computing by taking a <b>back-to-basics</b> approach, with a look at
+          making the <b>transition</b> from <b>theory to implementation</b>.
         </p>
         <p>
           Please follow
