@@ -40,7 +40,7 @@ const headerDescription = [
   aimed at self-learners from all backgrounds (technical and
   non-technical). The aim of this course is to give a solid
   understanding of the principles behind quantum computing,
-  focussing on developing intuition. After this course, you will
+  focusing on developing intuition. After this course, you will
   have a fair understanding of quantum computing and Qiskit, as well
   as a short project demonstrating it. You should then be able to
   jump straight into many of the other courses in this
