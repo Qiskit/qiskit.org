@@ -200,19 +200,16 @@ const filteredEvents = computed(() => {
     });
   }
 });
-function altTextSorting(event: any){
-  if (event.title.includes('Seminar')){
-    if (event.speaker !== ""){
-      return event.speaker + " photo"
+function altTextSorting(event: any) {
+  if (event.title.includes("Seminar")) {
+    if (event.speaker !== "") {
+      return event.speaker + " photo";
+    } else {
+      return "Seminar speaker photo";
     }
-    else{
-      return "Seminar speaker photo"
-    }
+  } else {
+    return event.title + " event picture";
   }
-  else{
-    return event.title + " event picture"
-  }
-  
 }
 const noEvents = computed(() => filteredEvents.value.length === 0);
 
