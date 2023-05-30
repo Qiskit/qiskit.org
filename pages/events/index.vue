@@ -64,7 +64,11 @@
         <template #results>
           <div v-if="noEvents" class="cds--row">
             <div class="cds--col-sm-4 cds--col-xlg-8">
-              <UiCard :image="emptyCard.img" :title="emptyCard.title">
+              <UiCard
+                :image="emptyCard.img"
+                image-description="Warning sing icon"
+                :title="emptyCard.title"
+              >
                 <div class="event-page__empty-card-description">
                   {{ emptyCard.description }}
                 </div>
