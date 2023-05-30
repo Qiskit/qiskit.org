@@ -1,7 +1,6 @@
 <template>
   <main>
-    <UiPageHeaderFixed class="ecosystem-header__hero">
-      <br />
+    <UiPageHeaderFixed>
       Explore
       <UiTypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
@@ -10,7 +9,7 @@
       <br />
       and the Qiskit community
     </UiPageHeaderFixed>
-    <section id="ecosystem" class="cds--grid ecosystem">
+    <section class="cds--grid">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
         <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
@@ -22,19 +21,14 @@
           </p>
         </div>
       </div>
-      <UiCta
-        class="ecosystem-header__cta"
-        :label="joinAction.label"
-        :url="joinAction.url"
-      />
-      <UiFiltersResultsLayout class="ecosystem__filters-result-section">
+      <UiCta :label="joinAction.label" :url="joinAction.url" />
+      <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
           <UiFieldset label="Tier">
             <client-only>
               <bx-checkbox
                 v-for="option in tiers"
                 :key="option.name"
-                class="ecosystem__filters-result-section__tiers"
                 :checked="isTierFilterChecked(option.name)"
                 :label-text="option.name"
                 :value="option.name"
@@ -58,10 +52,10 @@
             <div
               v-for="(member, index) in filteredMembers"
               :key="index"
-              class="cds--col-sm-4 cds--col-xlg-8"
+              class="ecosystem-page__project-card-wrapper cds--col-sm-4 cds--col-xlg-8"
             >
               <UiCard
-                class="project-card"
+                class="ecosystem-page__project-card"
                 :title="member.name"
                 :tags="member.labels"
                 :tooltip-tags="[
@@ -77,13 +71,13 @@
                 }"
                 :to="member.url"
               >
-                <div class="cds--row">
-                  <p class="project-card__license">
+                <div class="ecosystem-page__project-card__details">
+                  <p class="ecosystem-page__project-card__details__license">
                     {{ member.licence }}
                   </p>
-                  <div class="project-card__star">
+                  <div class="ecosystem-page__project-card__details__star">
                     <StarFilled16 />
-                    <p class="project-card__star-val">
+                    <p>
                       {{ member.stars }}
                     </p>
                   </div>
@@ -111,8 +105,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/accordion/index.js";
-// import "@carbon/web-components/es/components/checkbox/index.js";
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
@@ -222,46 +214,37 @@ const joinAction: Link = {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.ecosystem__filters-result-section {
-  margin-top: carbon.$spacing-10;
-}
+.ecosystem-page {
+  &__project-card {
+    &__details {
+      display: flex;
+      flex-wrap: wrap;
 
-.cds--col-sm-4 {
-  padding-bottom: carbon.$spacing-08;
-}
+      &__license {
+        font-size: 12px;
+        margin-right: carbon.$spacing-05;
+        margin-top: calc(carbon.$spacing-01 / 2);
+      }
 
-.card {
-  &__description {
-    .cds--row {
-      margin-left: 0;
+      &__star {
+        display: flex;
+        flex-direction: row;
+
+        svg {
+          margin-top: calc(carbon.$spacing-01 / 2);
+          margin-right: carbon.$spacing-01;
+          fill: carbon.$cool-gray-60;
+        }
+      }
+    }
+
+    :deep(.card__title) {
+      font-size: 1.25rem;
     }
   }
 
-  &__tags {
-    flex-direction: row;
-  }
-}
-
-.project-card {
-  &__license {
-    font-size: 12px;
-    margin-right: carbon.$spacing-05;
-    margin-top: calc(carbon.$spacing-01 / 2);
-  }
-
-  &__star {
-    display: flex;
-    flex-direction: row;
-
-    svg {
-      margin-top: calc(carbon.$spacing-01 / 2);
-      margin-right: carbon.$spacing-01;
-      fill: carbon.$cool-gray-60;
-    }
-  }
-
-  :deep(.card__title) {
-    font-size: 20px;
+  &__project-card-wrapper {
+    padding-bottom: carbon.$spacing-08;
   }
 }
 
