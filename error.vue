@@ -5,10 +5,17 @@
       <div class="cds--grid">
         <div class="cds--row">
           <div class="cds--col-lg-4">
-            <h1 class="error-page__title">404</h1>
-            <!-- eslint-disable vue/no-v-html -->
-            <p class="error-page__message" v-html="randomMessage" />
-            <!-- eslint-enable -->
+            <h1 class="error-page__title">{{ props.error?.statusCode }}</h1>
+            <p>
+              {{ props.error?.message }}
+            </p>
+            <p class="error-page__message">
+              Or as we like to say,
+              <!-- eslint-disable vue/no-v-html -->
+              <span v-html="randomMessage" />
+              <!-- eslint-enable -->
+            </p>
+
             <UiCta
               :label="BackToHomeCTA.label"
               :segment="BackToHomeCTA.segment"
@@ -39,6 +46,11 @@
 <script setup lang="ts">
 import { GeneralLink } from "./constants/appLinks";
 
+const props = defineProps({
+  // eslint-disable-next-line vue/require-default-prop
+  error: Object,
+});
+
 const BackToHomeCTA: GeneralLink = {
   url: "/",
   label: "Back to Qiskit.org home",
@@ -66,11 +78,11 @@ function getRandomInt(min: number, max: number) {
 }
 
 const messages = [
-  "Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in.",
-  "Looks like that URL is an <em><strong>entangled</strong></em> mess.",
-  "We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist.",
-  "You’ve reached the edge of the multi-verse.",
-  "There is content on this page in another dimension, but not this dimension.",
+  "this isn’t exactly a <em><strong>superposition</strong></em> to be in.",
+  "looks like something here is an <em><strong>entangled</strong></em> mess.",
+  "we apologize for the <em><strong>interference</strong></em> you’re seeing on this page.",
+  "you’ve reached the edge of the multi-verse.",
+  "this page loads fine another dimension, but not this dimension.",
 ];
 
 const randomMessage = computed(() => {
