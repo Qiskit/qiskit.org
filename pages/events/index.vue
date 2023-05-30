@@ -102,9 +102,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/checkbox/index.js";
-// import "@carbon/web-components/es/components/code-snippet/index.js";
-// import "@carbon/web-components/es/components/tabs/index.js";
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -273,72 +270,6 @@ const selectTab = (selectedTab: string) => {
   &__tabs {
     margin-top: carbon.$spacing-07;
     margin-bottom: carbon.$spacing-09;
-
-    .bx--tabs--scrollable__nav-link {
-      color: carbon.$black-100;
-      border-bottom-color: qiskit.$border-color;
-    }
-
-    .bx--tabs--scrollable__nav-item--selected:not(
-        .bx--tabs--scrollable__nav-item--disabled
-      )
-      .bx--tabs--scrollable__nav-link {
-      border-bottom-color: qiskit.$border-color-secondary;
-    }
-
-    .bx--tabs--scrollable__nav-item:not(
-        .bx--tabs--scrollable__nav-item--disabled
-      )
-      .bx--tabs--scrollable__nav-link,
-    .bx--tabs--scrollable__nav-item:hover:not(
-        .bx--tabs--scrollable__nav-item--selected,
-        .bx--tabs--scrollable__nav-item--disabled
-      )
-      .bx--tabs--scrollable__nav-link {
-      color: qiskit.$text-color;
-    }
-
-    @include carbon.breakpoint-down(md) {
-      margin-bottom: 0;
-
-      .bx--tabs-trigger {
-        background-color: qiskit.$background-color-white;
-        border-bottom: 1px solid qiskit.$border-color;
-
-        &[class*="--open"] {
-          background-color: qiskit.$background-color-lighter;
-        }
-      }
-
-      .bx--tabs-trigger svg {
-        fill: carbon.$black-100;
-      }
-
-      .bx--tabs-trigger-text {
-        color: qiskit.$text-color;
-      }
-
-      .bx--tabs-trigger--open {
-        border-bottom: 1px solid qiskit.$border-color-quaternary;
-      }
-
-      .bx--tabs-trigger--open,
-      .bx--tabs--scrollable__nav-item {
-        background-color: qiskit.$background-color-lighter;
-      }
-
-      .bx--tabs--scrollable__nav-item:last-child
-        .bx--tabs--scrollable__nav-link {
-        border-bottom: none;
-      }
-
-      .bx--tabs--scrollable__nav-item:hover:not(
-          .bx--tabs--scrollable__nav-item--selected,
-          .bx--tabs--scrollable__nav-item--disabled
-        ) {
-        background-color: qiskit.$background-color-light;
-      }
-    }
   }
 
   &__main-content {
