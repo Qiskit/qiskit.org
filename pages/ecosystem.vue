@@ -137,10 +137,12 @@
                 </template>
                 <template v-else>
                   <div class="cds--col-sm-4 cds--col-lg-8">
-                    <h4>
-                      Try using wider search criteria, or consider submitting
-                      your own project.
-                    </h4>
+                    <p>
+                      Try using wider search criteria, or consider
+                      <UiLink v-bind="joinAction"
+                        >joining the ecosystem.
+                      </UiLink>
+                    </p>
                   </div>
                 </template>
               </div>
