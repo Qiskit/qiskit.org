@@ -30,24 +30,28 @@
       <div class="ecosystem__tiers">
         <client-only>
           <div class="cds--row">
-            <bx-tabs
-              trigger-content="Select an item"
-              value="Main"
-              @bx-tabs-selected="selectTab($event.target.value)"
-            >
-              <bx-tab
-                v-for="tierName in tiersNames"
-                :id="`tab${tierName}`"
-                :key="tierName"
-                :target="`panel${tierName}`"
-                :value="`${tierName}`"
+            <div class="cds--col">
+              <bx-tabs
+                trigger-content="Select an item"
+                value="Main"
+                @bx-tabs-selected="selectTab($event.target.value)"
               >
-                {{ tierName }}
-              </bx-tab>
-            </bx-tabs>
+                <bx-tab
+                  v-for="tierName in tiersNames"
+                  :id="`tab${tierName}`"
+                  :key="tierName"
+                  :target="`panel${tierName}`"
+                  :value="`${tierName}`"
+                >
+                  {{ tierName }}
+                </bx-tab>
+              </bx-tabs>
+            </div>
           </div>
           <div class="cds--row">
-            <div class="cds--col-lg-3 ecosystem__filters">
+            <div
+              class="ecosystem__filters cds--col-xlg-2 cds--col-lg-4 cds--col-md-2 cds--col-sm-0"
+            >
               <UiFieldset label="Labels">
                 <client-only>
                   <bx-checkbox
@@ -64,7 +68,7 @@
                 </client-only>
               </UiFieldset>
             </div>
-            <div class="cds--col-lg-13">
+            <div class="cds--col-lg-14 cds--col-md-6">
               <bx-search
                 class="ecosystem__search"
                 placeholder="Search using keywords like algorithms, simulator, or machine learning"
