@@ -2,7 +2,14 @@
   <section class="mosaic">
     <dl class="mosaic__layout">
       <div
-        v-for="{ position, title, description, image, cta } in mosaicElements"
+        v-for="{
+          position,
+          title,
+          description,
+          image,
+          alt,
+          cta,
+        } in mosaicElements"
         :key="title"
         class="mosaic__element"
         :class="`mosaic__element_${position}`"
@@ -34,6 +41,7 @@
             format="webp"
             sizes="sm:350px md:700px"
             :src="image"
+            :alt="alt"
           />
         </div>
       </div>
