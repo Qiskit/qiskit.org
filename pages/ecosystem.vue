@@ -65,7 +65,7 @@
               <div class="cds--row ecosystem__members">
                 <div
                   v-for="member in filteredMembers"
-                  :key="member.title"
+                  :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
                 >
                   <UiCard
@@ -131,6 +131,10 @@ import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import type { Member, Tier } from "~/types/ecosystem";
 
+interface MembersByTier {
+  [key: string]: Member[];
+}
+
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
 
@@ -156,6 +160,10 @@ const searchedText = ref<string>("");
 
 const tiersNames = tiers.map((tier) => tier.name);
 
+const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
+  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
+}, {});
+
 const selectTab = (tab: string) => {
   selectedTab.value = tab;
 };
@@ -169,16 +177,14 @@ const filteredMembers = computed(() => {
 
   return searchedText.value === ""
     ? filteredMembersByTier
-    : filteredMembersByTier.filter((member) =>
-        member.description
-          .toLowerCase()
-          .includes(searchedText.value.toLowerCase())
+    : filteredMembersByTier.filter(
+        (member) =>
+          member.description
+            .toLowerCase()
+            .includes(searchedText.value.toLowerCase()) ||
+          member.name.toLowerCase().includes(searchedText.value.toLowerCase())
       );
 });
-
-const membersByTier = tiersNames.reduce((acc, tierName) => {
-  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
-}, {});
 
 function getMembersByTier(tier: Member["tier"]) {
   return members.filter((member) => member.tier === tier);
