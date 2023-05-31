@@ -312,6 +312,7 @@ const joinAction: Link = {
 
     &__multiselect {
       display: none;
+
       @include carbon.breakpoint-down(md) {
         display: block;
       }
