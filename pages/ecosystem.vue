@@ -50,23 +50,31 @@
           </div>
           <div class="cds--row">
             <div
-              class="ecosystem__filters cds--col-xlg-2 cds--col-lg-4 cds--col-md-2 cds--col-sm-0"
+              class="ecosystem__filters cds--col-xlg-2 cds--col-lg-4 cds--col-md-2"
             >
-              <UiFieldset label="Labels">
-                <client-only>
-                  <bx-checkbox
-                    v-for="label in projectLabels"
-                    :key="label"
-                    :checked="isLabelFilterChecked(label)"
-                    class="ecosystem__filters-result-section__tiers"
-                    :label-text="label"
-                    :value="label"
-                    @bx-checkbox-changed="
-                      updateLabelFilter(label, $event.target.checked)
-                    "
-                  />
-                </client-only>
-              </UiFieldset>
+              <div class="ecosystem__filters__checkboxes">
+                <UiFieldset label="Labels">
+                  <client-only>
+                    <bx-checkbox
+                      v-for="label in projectLabels"
+                      :key="label"
+                      :checked="isLabelFilterChecked(label)"
+                      :label-text="label"
+                      :value="label"
+                      @bx-checkbox-changed="
+                        updateLabelFilter(label, $event.target.checked)
+                      "
+                    />
+                  </client-only>
+                </UiFieldset>
+              </div>
+              <div class="ecosystem__filters__multiselect">
+                <UiMultiSelect
+                  label="Labels"
+                  value=" "
+                  :options="projectLabels"
+                />
+              </div>
             </div>
             <div class="cds--col-lg-14 cds--col-md-6">
               <bx-search
@@ -135,8 +143,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/accordion/index.js";
-// import "@carbon/web-components/es/components/checkbox/index.js";
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
@@ -274,6 +280,19 @@ const joinAction: Link = {
 
   &__filters {
     margin-top: carbon.$spacing-07;
+
+    &__checkboxes {
+      @include carbon.breakpoint-down(md) {
+        display: none;
+      }
+    }
+
+    &__multiselect {
+      display: none;
+      @include carbon.breakpoint-down(md) {
+        display: block;
+      }
+    }
   }
 
   &__members {
