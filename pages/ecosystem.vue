@@ -22,6 +22,23 @@
         </div>
       </div>
       <UiCta :label="joinAction.label" :url="joinAction.url" />
+      <div class="ecosystem-page__tabs">
+        <client-only>
+          <bx-tabs
+            :value="tiers[0].name"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
+            <bx-tab
+              v-for="tier in tiers"
+              :id="`tab-${tier.name}`"
+              :key="tier.name"
+              :value="tier.name"
+            >
+              {{ tier.name }}
+            </bx-tab>
+          </bx-tabs>
+        </client-only>
+      </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
           <UiFieldset label="Tier">
@@ -131,6 +148,11 @@ useHead({
   ],
 });
 
+const { trackClickEvent } = useSegment();
+
+const activeTab = ref<string>(tiers[0].name);
+const tabsIsDirty = ref(false);
+
 const tierFilters = ref<string[]>([]);
 
 const tierFiltersAsString = computed(() => tierFilters.value.join(","));
@@ -140,11 +162,7 @@ const filteredMembers = computed(() => {
     return [];
   }
 
-  const noTierFilters = tierFilters.value.length === 0;
-
-  return noTierFilters
-    ? members
-    : members.filter((member) => tierFilters.value.includes(member.tier));
+  return members.filter((member) => member.tier === activeTab.value);
 });
 
 const tiersNames = computed(() => tiers.map((tier) => tier.name));
@@ -187,6 +205,16 @@ function getTierDescription(tierName: string): string {
   const tier = tiers.find((tier: any) => tier.name === tierName);
   return tier!.description || "";
 }
+
+const selectTab = (selectedTab: string) => {
+  activeTab.value = selectedTab;
+
+  if (tabsIsDirty) {
+    trackClickEvent(`${selectedTab}`, "ecosystem-list");
+  }
+
+  tabsIsDirty.value = true;
+};
 
 function updateTierFilter(filterValue: string, isChecked: boolean) {
   isChecked
@@ -245,6 +273,11 @@ const joinAction: Link = {
 
   &__project-card-wrapper {
     padding-bottom: carbon.$spacing-08;
+  }
+
+  &__tabs {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-09;
   }
 }
 
