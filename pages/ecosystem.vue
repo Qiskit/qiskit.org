@@ -165,7 +165,7 @@ const filteredMembers = computed(() => {
     return [];
   }
 
-  const filteredMembersByTier = membersByTier[selectedTab.value]
+  const filteredMembersByTier = membersByTier[selectedTab.value];
 
   return searchedText.value === ""
     ? filteredMembersByTier
@@ -173,7 +173,7 @@ const filteredMembers = computed(() => {
         member.description
           .toLowerCase()
           .includes(searchedText.value.toLowerCase())
-  );
+      );
 });
 
 const membersByTier = tiersNames.reduce((acc, tierName) => {
