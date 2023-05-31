@@ -56,7 +56,7 @@
                 <UiFieldset label="Labels">
                   <client-only>
                     <bx-checkbox
-                      v-for="label in projectLabels"
+                      v-for="label in sortedProjectLabels"
                       :key="label"
                       :checked="isLabelFilterChecked(label)"
                       :label-text="label"
@@ -185,8 +185,8 @@ const searchedText = ref<string>("");
 
 const tiersNames = tiers.map((tier) => tier.name);
 const membersLabels = members.map((member) => member.labels);
-
 const projectLabels = Array.from(new Set(membersLabels.flat()));
+const sortedProjectLabels = projectLabels.sort((a, b) => a.localeCompare(b));
 
 const selectTab = (tab: string) => {
   selectedTab.value = tab;
