@@ -29,7 +29,11 @@
       />
       <div class="ecosystem__tiers">
         <client-only>
-          <bx-tabs trigger-content="Select an item" value="Main">
+          <bx-tabs
+            trigger-content="Select an item"
+            value="Main"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
             <bx-tab
               v-for="tierName in tiersNames"
               :id="`tab${tierName}`"
@@ -48,56 +52,69 @@
             role="tabpanel"
             :aria-labelledby="`tab${tierName}`"
           >
-            <div class="cds--row">
-              <div
-                v-for="(member, index) in getMembersByTier(tierName)"
-                :key="index"
-                class="cds--col-sm-4 cds--col-xlg-8"
-              >
-                <UiCard
-                  class="project-card"
-                  :title="member.name"
-                  :tags="member.labels"
-                  :tooltip-tags="[
-                    {
-                      label: member.tier,
-                      description: getTierDescription(member.tier),
-                    },
-                  ]"
-                  cta-label="Go to repo"
-                  :segment="{
-                    cta: `go-to-repo-${member.name}`,
-                    location: 'ecosystem-card',
-                  }"
-                  :to="member.url"
+            <bx-data-table page-size="2" start="0">
+              <bx-table-toolbar role="section">
+                <bx-table-toolbar-content tabindex="">
+                  <bx-table-toolbar-search
+                    role="search"
+                    @bx-search-input="searchOnMembers($event.detail.value)"
+                  ></bx-table-toolbar-search>
+                </bx-table-toolbar-content>
+              </bx-table-toolbar>
+
+              <div class="cds--row ecosystem__members">
+                <div
+                  v-for="member in filteredMembers"
+                  :key="member.title"
+                  class="cds--col-sm-4 cds--col-xlg-8"
                 >
-                  <div class="cds--row">
-                    <p class="project-card__license">
-                      {{ member.licence }}
-                    </p>
-                    <div class="project-card__star">
-                      <StarFilled16 />
-                      <p class="project-card__star-val">
-                        {{ member.stars }}
-                      </p>
-                    </div>
-                  </div>
-                  <p>
-                    {{ member.description }}
-                  </p>
-                </UiCard>
-                <bx-accordion v-if="member.testsResults.length != 0">
-                  <bx-accordion-item
-                    class="bx-accordion__item"
-                    :title-text="`Test Results (${formatTimestamp(
-                      member.updatedAt
-                    )})`"
+                  <UiCard
+                    class="project-card"
+                    :title="member.name"
+                    :tags="member.labels"
+                    :tooltip-tags="[
+                      {
+                        label: member.tier,
+                        description: getTierDescription(member.tier),
+                      },
+                    ]"
+                    cta-label="Go to repo"
+                    :segment="{
+                      cta: `go-to-repo-${member.name}`,
+                      location: 'ecosystem-card',
+                    }"
+                    :to="member.url"
                   >
-                    <EcosystemTestTable :filtered-data="getTestRows(member)" />
-                  </bx-accordion-item>
-                </bx-accordion>
+                    <div class="cds--row">
+                      <p class="project-card__license">
+                        {{ member.licence }}
+                      </p>
+                      <div class="project-card__star">
+                        <StarFilled16 />
+                        <p class="project-card__star-val">
+                          {{ member.stars }}
+                        </p>
+                      </div>
+                    </div>
+                    <p>
+                      {{ member.description }}
+                    </p>
+                  </UiCard>
+                  <bx-accordion v-if="member.testsResults.length != 0">
+                    <bx-accordion-item
+                      class="bx-accordion__item"
+                      :title-text="`Test Results (${formatTimestamp(
+                        member.updatedAt
+                      )})`"
+                    >
+                      <EcosystemTestTable
+                        :filtered-data="getTestRows(member)"
+                      />
+                    </bx-accordion-item>
+                  </bx-accordion>
+                </div>
               </div>
-            </div>
+            </bx-data-table>
           </div>
         </client-only>
       </div>
@@ -134,25 +151,38 @@ useHead({
   ],
 });
 
-const tierFilters = ref<string[]>([]);
+const selectedTab = ref<string>("Main");
+const searchedText = ref<string>("");
+
+const tiersNames = tiers.map((tier) => tier.name);
+
+const selectTab = (tab: string) => {
+  selectedTab.value = tab;
+};
 
 const filteredMembers = computed(() => {
   if (!members) {
     return [];
   }
 
-  const noTierFilters = tierFilters.value.length === 0;
+  const filteredMembersByTier = membersByTier[selectedTab.value]
 
-  return noTierFilters
-    ? members
-    : members.filter((member) => tierFilters.value.includes(member.tier));
+  return searchedText.value === ""
+    ? filteredMembersByTier
+    : filteredMembersByTier.filter((member) =>
+        member.description
+          .toLowerCase()
+          .includes(searchedText.value.toLowerCase())
+  );
 });
+
+const membersByTier = tiersNames.reduce((acc, tierName) => {
+  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
+}, {});
 
 function getMembersByTier(tier: Member["tier"]) {
   return members.filter((member) => member.tier === tier);
 }
-
-const tiersNames = computed(() => tiers.map((tier) => tier.name));
 
 function formatTimestamp(timestamp: number): string {
   return new Date(timestamp * 1000).toLocaleString("en-UK", {
@@ -193,22 +223,9 @@ function getTierDescription(tierName: string): string {
   return tier!.description || "";
 }
 
-function updateTierFilter(filterValue: string, isChecked: boolean) {
-  isChecked
-    ? tierFilters.value.push(filterValue)
-    : (tierFilters.value = tierFilters.value.filter(
-        (tier: any) => tier !== filterValue
-      ));
+function searchOnMembers(inputText: string) {
+  searchedText.value = inputText;
 }
-
-function updateTierFilters(newTierFilters: string) {
-  const newTierFiltersAsArray =
-    newTierFilters === "" ? [] : newTierFilters.split(",");
-  tierFilters.value = newTierFiltersAsArray;
-}
-
-const isTierFilterChecked = (filterValue: string): boolean =>
-  tierFilters.value.includes(filterValue);
 
 const joinAction: Link = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
@@ -226,6 +243,10 @@ const joinAction: Link = {
 
   &__tier-panel {
     margin-top: carbon.$spacing-07;
+  }
+
+  &__members {
+    margin-top: carbon.$spacing-06;
   }
 }
 
