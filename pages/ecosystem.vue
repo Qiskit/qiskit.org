@@ -52,69 +52,62 @@
             role="tabpanel"
             :aria-labelledby="`tab${tierName}`"
           >
-            <bx-data-table page-size="2" start="0">
-              <bx-table-toolbar role="section">
-                <bx-table-toolbar-content tabindex="">
-                  <bx-table-toolbar-search
-                    role="search"
-                    @bx-search-input="searchOnMembers($event.detail.value)"
-                  ></bx-table-toolbar-search>
-                </bx-table-toolbar-content>
-              </bx-table-toolbar>
+            <bx-search
+              class="ecosystem__search"
+              placeholder="Search using keywords like algorithms, simulator, or machine learning"
+              @bx-search-input="searchOnMembers($event.detail.value)"
+            />
 
-              <div class="cds--row ecosystem__members">
-                <div
-                  v-for="member in filteredMembers"
-                  :key="member.name"
-                  class="cds--col-sm-4 cds--col-xlg-8"
+            <div class="cds--row ecosystem__members">
+              <div
+                v-for="member in filteredMembers"
+                :key="member.name"
+                class="cds--col-sm-4 cds--col-xlg-8"
+              >
+                <UiCard
+                  class="project-card"
+                  :title="member.name"
+                  :tags="member.labels"
+                  :tooltip-tags="[
+                    {
+                      label: member.tier,
+                      description: getTierDescription(member.tier),
+                    },
+                  ]"
+                  cta-label="Go to repo"
+                  :segment="{
+                    cta: `go-to-repo-${member.name}`,
+                    location: 'ecosystem-card',
+                  }"
+                  :to="member.url"
                 >
-                  <UiCard
-                    class="project-card"
-                    :title="member.name"
-                    :tags="member.labels"
-                    :tooltip-tags="[
-                      {
-                        label: member.tier,
-                        description: getTierDescription(member.tier),
-                      },
-                    ]"
-                    cta-label="Go to repo"
-                    :segment="{
-                      cta: `go-to-repo-${member.name}`,
-                      location: 'ecosystem-card',
-                    }"
-                    :to="member.url"
-                  >
-                    <div class="cds--row">
-                      <p class="project-card__license">
-                        {{ member.licence }}
-                      </p>
-                      <div class="project-card__star">
-                        <StarFilled16 />
-                        <p class="project-card__star-val">
-                          {{ member.stars }}
-                        </p>
-                      </div>
-                    </div>
-                    <p>
-                      {{ member.description }}
+                  <div class="cds--row">
+                    <p class="project-card__license">
+                      {{ member.licence }}
                     </p>
-                  </UiCard>
-                  <bx-accordion v-if="member.testsResults.length != 0">
-                    <bx-accordion-item
-                      class="bx-accordion__item"
-                      :title-text="`Test Results (${formatTimestamp(
-                        member.updatedAt
-                      )})`"
-                    >
-                      <EcosystemTestTable
-                        :filtered-data="getTestRows(member)"
-                      />
-                    </bx-accordion-item>
-                  </bx-accordion>
-                </div>
+                    <div class="project-card__star">
+                      <StarFilled16 />
+                      <p class="project-card__star-val">
+                        {{ member.stars }}
+                      </p>
+                    </div>
+                  </div>
+                  <p>
+                    {{ member.description }}
+                  </p>
+                </UiCard>
+                <bx-accordion v-if="member.testsResults.length != 0">
+                  <bx-accordion-item
+                    class="bx-accordion__item"
+                    :title-text="`Test Results (${formatTimestamp(
+                      member.updatedAt
+                    )})`"
+                  >
+                    <EcosystemTestTable :filtered-data="getTestRows(member)" />
+                  </bx-accordion-item>
+                </bx-accordion>
               </div>
-            </bx-data-table>
+            </div>
           </div>
         </client-only>
       </div>
@@ -249,6 +242,11 @@ const joinAction: Link = {
 
   &__tier-panel {
     margin-top: carbon.$spacing-07;
+  }
+
+  &__search {
+    --cds-field-01: #{carbon.$cool-gray-10};
+    --cds-field-04: #{carbon.$cool-gray-30};
   }
 
   &__members {
