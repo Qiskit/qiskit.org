@@ -1,3 +1,9 @@
+# This Action builds the example docs in pull requests so that we can view a live preview.
+# It uses IBM Cloud to build the Dockerfile at the root of the repository.
+#
+# Due to security, this can only run on branches of qiskit.org, i.e. not on forks.
+# We skip the actions if running on a fork.
+
 name: Preview
 
 on:
@@ -6,27 +12,34 @@ on:
 
 jobs:
   setup:
-    # this job requires secrets, which cannot be shared with forks
-    # so run only from the original repository
     if: |
       (github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize') &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.user.login != 'dependabot[bot]'
     uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
+    env:
+      SEGMENT_ANALYTICS_CATEGORY: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY }}
+      SEGMENT_INSTANCE_ID: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_INSTANCE_ID }}
+      SEGMENT_ANALYTICS_KEY: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY_STAGING }}
+      SEGMENT_PRODUCT_CODE: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE }}
+      SEGMENT_PRODUCT_CODE_TYPE: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE }}
+      SEGMENT_PRODUCT_TITLE: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE }}
+      SEGMENT_SCRIPT_SRC: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_SCRIPT_SRC_STAGING }}
+      SEGMENT_UT30: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_UT30 }}
     with:
       code_engine_project: qiskit.org-preview
       docker_image_name: qiskit-org
       docker_image_port: "3000"
       build_args: |
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY }}
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_INSTANCE_ID: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_INSTANCE_ID }}
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY_STAGING }}
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_CATEGORY: $SEGMENT_ANALYTICS_CATEGORY
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_INSTANCE_ID: $SEGMENT_INSTANCE_ID
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ANALYTICS_KEY: $SEGMENT_ANALYTICS_KEY_STAGING
         NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_ENABLED: true
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE }}
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE }}
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE }}
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_SCRIPT_SRC: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_SCRIPT_SRC_STAGING }}
-        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_UT30: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_UT30 }}
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE: $SEGMENT_PRODUCT_CODE
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE: $SEGMENT_PRODUCT_CODE_TYPE
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE: $SEGMENT_PRODUCT_TITLE
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_SCRIPT_SRC: $SEGMENT_SCRIPT_SRC_STAGING
+        NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_UT30: $SEGMENT_UT30
     secrets:
       ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
       ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
@@ -42,8 +55,6 @@ jobs:
       NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_UT30: ${{ secrets.NUXT_PUBLIC_IBM_ANALYTICS_SEGMENT_UT30 }}
 
   teardown:
-    # this job requires secrets, which cannot be shared with forks
-    # so run only from the original repository
     if: |
       github.event.action == 'closed' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
