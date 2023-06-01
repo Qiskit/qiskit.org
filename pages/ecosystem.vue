@@ -44,6 +44,11 @@
               {{ tierName }}
             </bx-tab>
           </bx-tabs>
+          <bx-search
+            class="ecosystem__search"
+            placeholder="Search using keywords like algorithms, simulator, or machine learning"
+            @bx-search-input="searchOnMembers($event.detail.value)"
+          />
           <div
             v-for="tierName in tiersNames"
             :id="`panel${tierName}`"
@@ -52,12 +57,6 @@
             role="tabpanel"
             :aria-labelledby="`tab${tierName}`"
           >
-            <bx-search
-              class="ecosystem__search"
-              placeholder="Search using keywords like algorithms, simulator, or machine learning"
-              @bx-search-input="searchOnMembers($event.detail.value)"
-            />
-
             <div class="cds--row ecosystem__members">
               <div
                 v-for="member in filteredMembers"
@@ -245,6 +244,7 @@ const joinAction: Link = {
   }
 
   &__search {
+    margin-top: carbon.$spacing-06;
     --cds-field-01: #{carbon.$cool-gray-10};
     --cds-field-04: #{carbon.$cool-gray-30};
   }
