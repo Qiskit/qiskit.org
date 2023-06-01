@@ -33,7 +33,7 @@
       <template #card>
         <EventsItemCard
           v-bind="headerData.card"
-          :alt-text="header.card.alt"
+          :alt-text="header.card.altText"
           vertical-layout
         >
           {{ headerData.card.description }}

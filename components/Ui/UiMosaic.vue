@@ -7,7 +7,7 @@
           title,
           description,
           image,
-          alt,
+          altText,
           cta,
         } in mosaicElements"
         :key="title"
@@ -41,7 +41,7 @@
             format="webp"
             sizes="sm:350px md:700px"
             :src="image"
-            :alt="alt"
+            :alt="altText"
           />
         </div>
       </div>

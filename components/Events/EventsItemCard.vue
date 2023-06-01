@@ -8,7 +8,7 @@
     :cta-label="ctaLabel"
     :segment="segment"
     :vertical-layout="verticalLayout"
-    :alt="alt"
+    :alt-text="altText"
   >
     <div class="item-card__description">
       <slot v-if="$slots.default" />
@@ -45,7 +45,7 @@ interface Props {
   types?: string[];
   title: string;
   image: string;
-  alt: string;
+  altText: string;
   institution?: string;
   location?: string;
   date?: string;
@@ -58,7 +58,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   types: () => [],
-  alt: "Event image",
+  altText: "Event image",
   institution: "",
   ctaLabel: "Join the event",
   date: undefined,

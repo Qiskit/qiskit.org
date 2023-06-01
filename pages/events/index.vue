@@ -86,7 +86,7 @@
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
-                :alt="getEventAltText(eventItem)"
+                :alt-text="getEventAltText(eventItem)"
                 :location="eventItem.location"
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
