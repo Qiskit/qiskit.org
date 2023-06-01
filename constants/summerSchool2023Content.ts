@@ -28,7 +28,7 @@ const header = {
   cardSectionHeading: "About the event:",
   card: {
     image: "/images/events/summer-school-2023/summer-school-2023-logo.png",
-    alt: "summer School logo: Cnot gate next to a Haddamard gate.",
+    alt: "Summer School logo: Cnot gate next to a Haddamard gate.",
     title: "Qiskit Global Summer School 2023: Theory To Implementation",
     description:
       "The Qiskit Global Summer School returns as a two-week intensive course focused on the foundations of quantum computing and more!",
