@@ -86,7 +86,7 @@
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
-                :alt-text="getEventAltText(eventItem)"
+                :alt="getEventAltText(eventItem)"
                 :location="eventItem.location"
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
@@ -205,7 +205,7 @@ const filteredEvents = computed(() => {
   }
 });
 function getEventAltText(event: any) {
-  if (event.title.includes("Seminar")) {
+  if (event.types[0] === "Talks") {
     if (event.speaker !== "") {
       return event.speaker + " photo";
     } else {
