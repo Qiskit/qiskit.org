@@ -4,6 +4,7 @@
     :image="image"
     :title="name"
     :tags="formattedRegion"
+    :alt-text="`${name} profile photo`"
   >
     <div v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />

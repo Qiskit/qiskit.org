@@ -27,6 +27,7 @@
         format="webp"
         sizes="sm:500px md:700 xl:1000"
         src="/images/landing-page/learn-image.jpg"
+        alt="Group of students looking into a laptop"
       />
     </div>
   </article>

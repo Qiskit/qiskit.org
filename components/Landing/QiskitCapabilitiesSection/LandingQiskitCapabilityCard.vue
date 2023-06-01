@@ -7,6 +7,7 @@
           format="webp"
           :src="thumbnailResource"
           width="160px"
+          alt=""
         />
       </div>
       <div class="qiskit-capability-card__copy">
@@ -18,6 +19,7 @@
           format="webp"
           :src="thumbnailResource"
           width="160px"
+          alt=""
         />
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
