@@ -66,7 +66,7 @@
             <div class="cds--col-sm-4 cds--col-xlg-8">
               <UiCard
                 :image="emptyCard.img"
-                image-description="Warning sign icon"
+                alt-text="Warning sign icon"
                 :title="emptyCard.title"
               >
                 <div class="event-page__empty-card-description">
