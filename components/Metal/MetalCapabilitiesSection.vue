@@ -28,6 +28,7 @@
           >
             <video
               class="capabilities-section__video"
+              alt="short Video showcasing the GUI"
               loop
               autoplay
               muted

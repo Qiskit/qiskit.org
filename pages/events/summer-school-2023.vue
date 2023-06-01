@@ -31,7 +31,11 @@
         <UiCta class="summer-school-page__cta" v-bind="header.cta" />
       </template>
       <template #card>
-        <EventsItemCard v-bind="headerData.card" vertical-layout>
+        <EventsItemCard
+          v-bind="headerData.card"
+          :alt-text="header.card.altText"
+          vertical-layout
+        >
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>

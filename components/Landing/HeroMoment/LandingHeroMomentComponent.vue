@@ -33,6 +33,7 @@
           format="webp"
           sizes="lg:500px xl:850px"
           src="/images/landing-page/hero-illustration.png"
+          alt="Drawing of two people working on a Quantum Computer"
         />
       </div>
     </MetalGrid>
