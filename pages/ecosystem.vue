@@ -76,75 +76,85 @@
                 />
               </div>
             </div>
-            <div class="cds--col-lg-14 cds--col-md-6">
+            <div class="cds--col-xlg-14 cds--col-lg-12 cds--col-md-6">
               <bx-search
                 class="ecosystem__search"
                 placeholder="Search using keywords like algorithms, simulator, or machine learning"
                 @bx-search-input="searchOnMembers($event.detail.value)"
               />
-              <div class="ecosystem__tier-panel cds--row" role="tabpanel">
-                <template v-if="filteredMembers.length > 0">
-                  <div
-                    v-for="member in filteredMembers"
-                    :key="member.name"
-                    class="cds--col-sm-4 cds--col-lg-8"
-                  >
-                    <UiCard
-                      class="project-card"
-                      :title="member.name"
-                      :tags="member.labels"
-                      :tooltip-tags="[
-                        {
-                          label: member.tier,
-                          description: getTierDescription(member.tier),
-                        },
-                      ]"
-                      cta-label="Go to repo"
-                      :segment="{
-                        cta: `go-to-repo-${member.name}`,
-                        location: 'ecosystem-card',
-                      }"
-                      :to="member.url"
-                    >
-                      <div class="cds--row">
-                        <p class="project-card__license">
-                          {{ member.licence }}
-                        </p>
-                        <div class="project-card__star">
-                          <StarFilled16 />
-                          <p class="project-card__star-val">
-                            {{ member.stars }}
-                          </p>
-                        </div>
-                      </div>
-                      <p>
-                        {{ member.description }}
-                      </p>
-                    </UiCard>
-                    <bx-accordion v-if="member.testsResults.length != 0">
-                      <bx-accordion-item
-                        class="bx-accordion__item"
-                        :title-text="`Test Results (${formatTimestamp(
-                          member.updatedAt
-                        )})`"
+              <div class="ecosystem__tier-panel">
+                <div
+                  v-for="tierName in tiersNames"
+                  :id="`panel${tierName}`"
+                  :key="tierName"
+                  role="tabpanel"
+                  :aria-labelledby="`tab${tierName}`"
+                >
+                  <template v-if="filteredMembers.length > 0">
+                    <div class="cds--row ecosystem__members">
+                      <div
+                        v-for="member in filteredMembers"
+                        :key="member.name"
+                        class="cds--col-sm-4 cds--col-xlg-8"
                       >
-                        <EcosystemTestTable
-                          :filtered-data="getTestRows(member)"
-                        />
-                      </bx-accordion-item>
-                    </bx-accordion>
-                  </div>
-                </template>
-                <template v-else>
-                  <div class="cds--col-sm-4 cds--col-lg-8">
-                    <p>
-                      Try using wider search criteria, or consider
-                      <UiLink v-bind="joinAction"
-                        >joining the ecosystem.
-                      </UiLink>
-                    </p>
-                  </div>
-                </template>
+                        <UiCard
+                          class="project-card"
+                          :title="member.name"
+                          :tags="member.labels"
+                          :tooltip-tags="[
+                            {
+                              label: member.tier,
+                              description: getTierDescription(member.tier),
+                            },
+                          ]"
+                          cta-label="Go to repo"
+                          :segment="{
+                            cta: `go-to-repo-${member.name}`,
+                            location: 'ecosystem-card',
+                          }"
+                          :to="member.url"
+                        >
+                          <div class="cds--row">
+                            <p class="project-card__license">
+                              {{ member.licence }}
+                            </p>
+                            <div class="project-card__star">
+                              <StarFilled16 />
+                              <p class="project-card__star-val">
+                                {{ member.stars }}
+                              </p>
+                            </div>
+                          </div>
+                          <p>
+                            {{ member.description }}
+                          </p>
+                        </UiCard>
+                        <bx-accordion v-if="member.testsResults.length != 0">
+                          <bx-accordion-item
+                            class="bx-accordion__item"
+                            :title-text="`Test Results (${formatTimestamp(
+                              member.updatedAt
+                            )})`"
+                          >
+                            <EcosystemTestTable
+                              :filtered-data="getTestRows(member)"
+                            />
+                          </bx-accordion-item>
+                        </bx-accordion>
+                      </div>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div class="cds--col">
+                      <p>
+                        Try using wider search criteria, or consider
+                        <UiLink v-bind="joinAction"
+                          >joining the ecosystem.
+                        </UiLink>
+                      </p>
+                    </div>
+                  </template>
+                </div>
               </div>
             </div>
           </div>
