@@ -309,19 +309,19 @@ const joinAction: Link = {
 
   &__filters {
     margin-top: carbon.$spacing-07;
-  }
 
-  &__checkboxes {
-    @include carbon.breakpoint-down(md) {
-      display: none;
+    &__checkboxes {
+      @include carbon.breakpoint-down(md) {
+        display: none;
+      }
     }
-  }
 
-  &__multiselect {
-    display: none;
+    &__multiselect {
+      display: none;
 
-    @include carbon.breakpoint-down(md) {
-      display: block;
+      @include carbon.breakpoint-down(md) {
+        display: block;
+      }
     }
   }
 
