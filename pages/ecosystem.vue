@@ -245,6 +245,7 @@ const joinAction: Link = {
 
   &__search {
     margin-top: carbon.$spacing-06;
+
     --cds-field-01: #{carbon.$cool-gray-10};
     --cds-field-04: #{carbon.$cool-gray-30};
   }
