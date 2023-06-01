@@ -58,7 +58,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   types: () => [],
-  alt: "Event or seminar image",
+  alt: "Event image",
   institution: "",
   ctaLabel: "Join the event",
   date: undefined,
