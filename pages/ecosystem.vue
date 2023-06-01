@@ -86,7 +86,7 @@
                 <template v-if="filteredMembers.length > 0">
                   <div
                     v-for="member in filteredMembers"
-                    :key="member.title"
+                    :key="member.name"
                     class="cds--col-sm-4 cds--col-lg-8"
                   >
                     <UiCard
@@ -161,6 +161,10 @@ import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import type { Member, Tier } from "~/types/ecosystem";
 
+interface MembersByTier {
+  [key: string]: Member[];
+}
+
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
 
@@ -189,6 +193,10 @@ const tiersNames = tiers.map((tier) => tier.name);
 const membersLabels = members.map((member) => member.labels);
 const projectLabels = Array.from(new Set(membersLabels.flat()));
 const sortedProjectLabels = projectLabels.sort((a, b) => a.localeCompare(b));
+
+const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
+  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
+}, {});
 
 const selectTab = (tab: string) => {
   selectedTab.value = tab;
@@ -219,10 +227,6 @@ const filteredMembers = computed(() => {
 
   return result;
 });
-
-const membersByTier = tiersNames.reduce((acc, tierName) => {
-  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
-}, {});
 
 function getMembersByTier(tier: Member["tier"]) {
   return members.filter((member) => member.tier === tier);
@@ -305,31 +309,31 @@ const joinAction: Link = {
 
   &__filters {
     margin-top: carbon.$spacing-07;
+  }
 
-    &__checkboxes {
-      @include carbon.breakpoint-down(md) {
-        display: none;
-      }
-    }
-
-    &__multiselect {
+  &__checkboxes {
+    @include carbon.breakpoint-down(md) {
       display: none;
-
-      @include carbon.breakpoint-down(md) {
-        display: block;
-      }
     }
+  }
+
+  &__multiselect {
+    display: none;
+
+    @include carbon.breakpoint-down(md) {
+      display: block;
+    }
+  }
+
+  &__search {
+    margin-top: carbon.$spacing-06;
+
+    --cds-field-01: #{carbon.$cool-gray-10};
+    --cds-field-04: #{carbon.$cool-gray-30};
   }
 
   &__members {
     margin-top: carbon.$spacing-06;
-  }
-
-  &__search {
-    --cds-field-01: #{carbon.$cool-gray-10};
-    --cds-field-04: #{carbon.$cool-gray-30};
-
-    margin-top: carbon.$spacing-07;
   }
 }
 
