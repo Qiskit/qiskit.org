@@ -86,7 +86,7 @@
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
-                :alt-text="altTextSorting(eventItem)"
+                :alt-text="getEventAltText(eventItem)"
                 :location="eventItem.location"
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
@@ -204,7 +204,7 @@ const filteredEvents = computed(() => {
     });
   }
 });
-function altTextSorting(event: any) {
+function getEventAltText(event: any) {
   if (event.title.includes("Seminar")) {
     if (event.speaker !== "") {
       return event.speaker + " photo";
