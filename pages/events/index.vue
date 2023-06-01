@@ -207,12 +207,12 @@ const filteredEvents = computed(() => {
 function getEventAltText(event: any) {
   if (event.types[0] === "Talks") {
     if (event.speaker !== "") {
-      return event.speaker + " photo";
+      return `${event.speaker} profile photo`;
     } else {
       return "Seminar speaker photo";
     }
   } else {
-    return event.title + " event picture";
+    return `${event.title} event picture`;
   }
 }
 const noEvents = computed(() => filteredEvents.value.length === 0);
