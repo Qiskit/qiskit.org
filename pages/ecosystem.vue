@@ -27,85 +27,89 @@
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <UiFiltersResultsLayout class="ecosystem__filters-result-section">
-        <template #filters-on-m-l-screen>
-          <UiFieldset label="Tier">
-            <client-only>
-              <bx-checkbox
-                v-for="option in tiers"
-                :key="option.name"
-                class="ecosystem__filters-result-section__tiers"
-                :checked="isTierFilterChecked(option.name)"
-                :label-text="option.name"
-                :value="option.name"
-                @bx-checkbox-changed="
-                  updateTierFilter(option.name, $event.target.checked)
-                "
-              />
-            </client-only>
-          </UiFieldset>
-        </template>
-        <template #filters-on-s-screen>
-          <UiMultiSelect
-            label="Tier"
-            :options="tiersNames"
-            :value="tierFiltersAsString"
-            @change-selection="updateTierFilters($event)"
-          />
-        </template>
-        <template #results>
-          <div class="cds--row">
-            <div
-              v-for="(member, index) in filteredMembers"
-              :key="index"
-              class="cds--col-sm-4 cds--col-xlg-8"
+      <div class="ecosystem__tiers">
+        <client-only>
+          <bx-tabs
+            trigger-content="Select an item"
+            value="Main"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
+            <bx-tab
+              v-for="tierName in tiersNames"
+              :id="`tab${tierName}`"
+              :key="tierName"
+              :target="`panel${tierName}`"
+              :value="`${tierName}`"
             >
-              <UiCard
-                class="project-card"
-                :title="member.name"
-                :tags="member.labels"
-                :tooltip-tags="[
-                  {
-                    label: member.tier,
-                    description: getTierDescription(member.tier),
-                  },
-                ]"
-                cta-label="Go to repo"
-                :segment="{
-                  cta: `go-to-repo-${member.name}`,
-                  location: 'ecosystem-card',
-                }"
-                :to="member.url"
+              {{ tierName }}
+            </bx-tab>
+          </bx-tabs>
+          <bx-search
+            class="ecosystem__search"
+            placeholder="Search using keywords like algorithms, simulator, or machine learning"
+            @bx-search-input="searchOnMembers($event.detail.value)"
+          />
+          <div
+            v-for="tierName in tiersNames"
+            :id="`panel${tierName}`"
+            :key="tierName"
+            class="ecosystem__tier-panel"
+            role="tabpanel"
+            :aria-labelledby="`tab${tierName}`"
+          >
+            <div class="cds--row ecosystem__members">
+              <div
+                v-for="member in filteredMembers"
+                :key="member.name"
+                class="cds--col-sm-4 cds--col-xlg-8"
               >
-                <div class="cds--row">
-                  <p class="project-card__license">
-                    {{ member.licence }}
-                  </p>
-                  <div class="project-card__star">
-                    <StarFilled16 />
-                    <p class="project-card__star-val">
-                      {{ member.stars }}
-                    </p>
-                  </div>
-                </div>
-                <p>
-                  {{ member.description }}
-                </p>
-              </UiCard>
-              <bx-accordion v-if="member.testsResults.length != 0">
-                <bx-accordion-item
-                  class="bx-accordion__item"
-                  :title-text="`Test Results (${formatTimestamp(
-                    member.updatedAt
-                  )})`"
+                <UiCard
+                  class="project-card"
+                  :title="member.name"
+                  :tags="member.labels"
+                  :tooltip-tags="[
+                    {
+                      label: member.tier,
+                      description: getTierDescription(member.tier),
+                    },
+                  ]"
+                  cta-label="Go to repo"
+                  :segment="{
+                    cta: `go-to-repo-${member.name}`,
+                    location: 'ecosystem-card',
+                  }"
+                  :to="member.url"
                 >
-                  <EcosystemTestTable :filtered-data="getTestRows(member)" />
-                </bx-accordion-item>
-              </bx-accordion>
+                  <div class="cds--row">
+                    <p class="project-card__license">
+                      {{ member.licence }}
+                    </p>
+                    <div class="project-card__star">
+                      <StarFilled16 />
+                      <p class="project-card__star-val">
+                        {{ member.stars }}
+                      </p>
+                    </div>
+                  </div>
+                  <p>
+                    {{ member.description }}
+                  </p>
+                </UiCard>
+                <bx-accordion v-if="member.testsResults.length != 0">
+                  <bx-accordion-item
+                    class="bx-accordion__item"
+                    :title-text="`Test Results (${formatTimestamp(
+                      member.updatedAt
+                    )})`"
+                  >
+                    <EcosystemTestTable :filtered-data="getTestRows(member)" />
+                  </bx-accordion-item>
+                </bx-accordion>
+              </div>
             </div>
           </div>
-        </template>
-      </UiFiltersResultsLayout>
+        </client-only>
+      </div>
     </section>
   </main>
 </template>
@@ -118,6 +122,10 @@ import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import type { Member, Tier } from "~/types/ecosystem";
+
+interface MembersByTier {
+  [key: string]: Member[];
+}
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
@@ -139,23 +147,40 @@ useHead({
   ],
 });
 
-const tierFilters = ref<string[]>([]);
+const selectedTab = ref<string>("Main");
+const searchedText = ref<string>("");
 
-const tierFiltersAsString = computed(() => tierFilters.value.join(","));
+const tiersNames = tiers.map((tier) => tier.name);
+
+const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
+  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
+}, {});
+
+const selectTab = (tab: string) => {
+  selectedTab.value = tab;
+};
 
 const filteredMembers = computed(() => {
   if (!members) {
     return [];
   }
 
-  const noTierFilters = tierFilters.value.length === 0;
+  const filteredMembersByTier = membersByTier[selectedTab.value];
 
-  return noTierFilters
-    ? members
-    : members.filter((member) => tierFilters.value.includes(member.tier));
+  return searchedText.value === ""
+    ? filteredMembersByTier
+    : filteredMembersByTier.filter(
+        (member) =>
+          member.description
+            .toLowerCase()
+            .includes(searchedText.value.toLowerCase()) ||
+          member.name.toLowerCase().includes(searchedText.value.toLowerCase())
+      );
 });
 
-const tiersNames = computed(() => tiers.map((tier) => tier.name));
+function getMembersByTier(tier: Member["tier"]) {
+  return members.filter((member) => member.tier === tier);
+}
 
 function formatTimestamp(timestamp: number): string {
   return new Date(timestamp * 1000).toLocaleString("en-UK", {
@@ -196,22 +221,9 @@ function getTierDescription(tierName: string): string {
   return tier!.description || "";
 }
 
-function updateTierFilter(filterValue: string, isChecked: boolean) {
-  isChecked
-    ? tierFilters.value.push(filterValue)
-    : (tierFilters.value = tierFilters.value.filter(
-        (tier: any) => tier !== filterValue
-      ));
+function searchOnMembers(inputText: string) {
+  searchedText.value = inputText;
 }
-
-function updateTierFilters(newTierFilters: string) {
-  const newTierFiltersAsArray =
-    newTierFilters === "" ? [] : newTierFilters.split(",");
-  tierFilters.value = newTierFiltersAsArray;
-}
-
-const isTierFilterChecked = (filterValue: string): boolean =>
-  tierFilters.value.includes(filterValue);
 
 const joinAction: Link = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
@@ -222,8 +234,25 @@ const joinAction: Link = {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.ecosystem__filters-result-section {
-  margin-top: carbon.$spacing-10;
+.ecosystem {
+  &__tiers {
+    margin-top: carbon.$spacing-10;
+  }
+
+  &__tier-panel {
+    margin-top: carbon.$spacing-07;
+  }
+
+  &__search {
+    margin-top: carbon.$spacing-06;
+
+    --cds-field-01: #{carbon.$cool-gray-10};
+    --cds-field-04: #{carbon.$cool-gray-30};
+  }
+
+  &__members {
+    margin-top: carbon.$spacing-06;
+  }
 }
 
 .cds--col-sm-4 {
