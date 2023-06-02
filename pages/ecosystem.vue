@@ -27,7 +27,7 @@
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <div class="ecosystem__tiers cds--grid cds--no-gutter">
+      <div class="ecosystem__tiers">
         <client-only>
           <bx-tabs
             trigger-content="Select an item"
