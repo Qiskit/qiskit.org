@@ -166,7 +166,7 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 
   &__header {
-    display: flex;
+    //display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: carbon.$spacing-03;
