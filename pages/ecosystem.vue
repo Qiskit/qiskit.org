@@ -128,6 +128,7 @@
 // import "@carbon/web-components/es/components/accordion/index.js";
 // import "@carbon/web-components/es/components/checkbox/index.js";
 import sortBy from "lodash/sortBy";
+import reverse from "lodash/reverse";
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
@@ -191,11 +192,11 @@ const filteredMembers = computed(() => {
 });
 
 function sortMembers(membersToSort: Member[]) {
-  return sortBy(membersToSort, [
-    function (m) {
-      return m[sortByValue.value];
-    },
-  ]);
+  const membersOnAscOrder = sortBy(membersToSort, [`${sortByValue.value}`]);
+
+  return sortByValue.value === "stars"
+    ? reverse(membersOnAscOrder)
+    : membersOnAscOrder;
 }
 
 function setSortValue(inputValue: string) {
