@@ -192,7 +192,9 @@ const filteredMembers = computed(() => {
 });
 
 function sortMembers(membersToSort: Member[]) {
-  const membersOnAscOrder = sortBy(membersToSort, [`${sortByValue.value}`]);
+  const membersOnAscOrder = sortBy(membersToSort, [
+    `${sortByValue.value}`,
+  ]) as Member[];
 
   return sortByValue.value === "stars"
     ? reverse(membersOnAscOrder)
