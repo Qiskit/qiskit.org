@@ -27,7 +27,7 @@
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <div class="ecosystem__tiers">
+      <div class="ecosystem__tiers cds--grid cds--no-gutter">
         <client-only>
           <bx-tabs
             trigger-content="Select an item"
@@ -45,13 +45,14 @@
             </bx-tab>
           </bx-tabs>
           <div class="ecosystem__toolbar cds--row">
-            <bx-search
-              class="ecosystem__search cds--col-lg-14 cds--col-md-6"
-              placeholder="Search using keywords like algorithms, simulator, or machine learning"
-              @bx-search-input="searchOnMembers($event.detail.value)"
-            />
+            <div class="ecosystem__search cds--col-lg-14 cds--col-md-6">
+              <bx-search
+                placeholder="Search using keywords like algorithms, simulator, or machine learning"
+                @bx-search-input="searchOnMembers($event.detail.value)"
+              />
+            </div>
             <bx-dropdown
-              class="cds--col-lg-2 cds--col-md-2"
+              class="ecosystem__sort-dropdown cds--col-lg-2 cds--col-md-2"
               trigger-content="&#x21c5; Sort by ..."
               @bx-dropdown-selected="setSortValue($event.detail.item.value)"
             >
@@ -274,9 +275,14 @@ const joinAction: Link = {
     margin-top: carbon.$spacing-06;
   }
 
-  &__search {
+  &__search,
+  &__sort-dropdown {
     --cds-field-01: #{carbon.$cool-gray-10};
     --cds-field-04: #{carbon.$cool-gray-30};
+  }
+
+  &__sort-dropdown {
+    --cds-text-01: #{carbon.$cool-gray-60};
   }
 
   &__members {
