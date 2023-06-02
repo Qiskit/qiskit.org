@@ -68,13 +68,6 @@
                   </client-only>
                 </UiFieldset>
               </div>
-              <div class="ecosystem__filters__multiselect">
-                <UiMultiSelect
-                  label="Labels"
-                  value=" "
-                  :options="projectLabels"
-                />
-              </div>
             </div>
             <div class="cds--col-xlg-14 cds--col-lg-12 cds--col-md-6">
               <bx-search
@@ -323,14 +316,6 @@ const joinAction: Link = {
     &__checkboxes {
       @include carbon.breakpoint-down(md) {
         display: none;
-      }
-    }
-
-    &__multiselect {
-      display: none;
-
-      @include carbon.breakpoint-down(md) {
-        display: block;
       }
     }
   }
