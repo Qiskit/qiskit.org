@@ -20,8 +20,15 @@ definePageMeta({
   routeName: "qiskit-landing-page",
 });
 
-useHead({
+useSeoMeta({
   title: "Qiskit",
+  ogTitle: "Qiskit",
+  description:
+    "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.",
+  ogDescription:
+    "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.",
+  ogImage: "public/images/qiskit-logo.png",
+  ogUrl: "https://qiskit.org/",
 });
 
 const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
