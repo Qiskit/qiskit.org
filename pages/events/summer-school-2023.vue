@@ -124,65 +124,14 @@ const image =
   "https://qiskit.org/images/events/summer-school-2023/summer-school-2023-logo.png";
 const pageUrl = "https://qiskit.org/events/summer-school-2023";
 
-useHead({
+useSeoMeta({
   title,
-  meta: [
-    {
-      hid: "twitter:title",
-      name: "twitter:title",
-      content: title,
-    },
-    {
-      hid: "twitter:description",
-      name: "twitter:description",
-      content: description,
-    },
-    {
-      hid: "twitter:image",
-      name: "twitter:image",
-      content: image,
-    },
-    {
-      hid: "twitter:image:alt",
-      name: "twitter:image:alt",
-      content: title,
-    },
-    {
-      hid: "og:title",
-      property: "og:title",
-      content: title,
-    },
-    {
-      hid: "og:description",
-      property: "og:description",
-      content: description,
-    },
-    {
-      hid: "og:url",
-      property: "og:url",
-      content: pageUrl,
-    },
-    {
-      hid: "og:type",
-      property: "og:type",
-      content: "article",
-    },
-    {
-      hid: "og:image",
-      property: "og:image",
-      content: image,
-    },
-    {
-      hid: "og:image:secure_url",
-      property: "og:image:secure_url",
-      content: image,
-    },
-    {
-      hid: "og:image:alt",
-      property: "og:image:alt",
-      content: title,
-    },
-  ],
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
 });
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
