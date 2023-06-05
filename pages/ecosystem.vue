@@ -129,15 +129,15 @@ definePageMeta({
   routeName: "ecosystem",
 });
 
-useHead({
+useSeoMeta({
   title: "Qiskit Ecosystem",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
-    },
-  ],
+  ogTitle: "Qiskit Ecosystem",
+  description:
+    "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
+  ogDescription:
+    "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
+  ogImage: "public/images/qiskit-logo.png",
+  ogUrl: "https://qiskit.org/ecosystem/",
 });
 
 const tierFilters = ref<string[]>([]);
