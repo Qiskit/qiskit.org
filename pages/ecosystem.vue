@@ -53,7 +53,8 @@
             </div>
             <bx-dropdown
               class="ecosystem__sort-dropdown cds--col-lg-2 cds--col-md-2"
-              trigger-content="&#x21c5; Sort by ..."
+              label-text="Sort by"
+              :value="sortByValue"
               @bx-dropdown-selected="setSortValue($event.detail.item.value)"
             >
               <bx-dropdown-item value="name">Name</bx-dropdown-item>
@@ -162,7 +163,7 @@ useHead({
 
 const selectedTab = ref<string>("Main");
 const searchedText = ref<string>("");
-const sortByValue = ref<string>("");
+const sortByValue = ref<string>("name");
 
 const tiersNames = tiers.map((tier) => tier.name);
 
@@ -275,16 +276,21 @@ const joinAction: Link = {
     margin-top: carbon.$spacing-06;
   }
 
-  &__search,
-  &__sort-dropdown {
+  &__search {
     margin-top: carbon.$spacing-06;
 
     --cds-field-01: #{carbon.$cool-gray-10};
     --cds-field-04: #{carbon.$cool-gray-30};
+
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-05;
+    }
   }
 
   &__sort-dropdown {
     --cds-text-01: #{carbon.$cool-gray-60};
+    --cds-field-01: #{carbon.$cool-gray-10};
+    --cds-field-04: #{carbon.$cool-gray-30};
   }
 
   &__members {
