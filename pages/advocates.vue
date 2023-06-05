@@ -20,14 +20,14 @@ definePageMeta({
   routeName: "advocates",
 });
 
-useHead({
+useSeoMeta({
   title: "Qiskit Advocates",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.",
-    },
-  ],
+  ogTitle: "Qiskit Advocates",
+  description:
+    "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.",
+  ogDescription:
+    "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.",
+  ogImage: "public/images/qiskit-logo.png",
+  ogUrl: "https://qiskit.org/advocates/",
 });
 </script>
