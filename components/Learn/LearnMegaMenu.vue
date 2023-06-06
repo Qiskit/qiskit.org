@@ -32,6 +32,7 @@ defineProps<Props>();
 
 const wholeSection = "whole-section";
 const sectionBasicsCourse = "basics-course";
+const sectionAlgorithmFundamentalsCourse = "algorithm-fundamentals-course";
 const sectionIntroductionCourse = "introduction-course";
 const sectionQMLCourse = "quantum-machine-learning";
 const sectionPrerequisites = "prerequisites";
@@ -49,6 +50,7 @@ const sectionProblemSets = "problem-sets";
 
 const baseUrl = "https://learn.qiskit.org";
 const pathBasicsCourse = "/course/basics";
+const pathAlgorithmFundamentalsCourse = "/course/algorithms";
 const pathAlgorithmDesign = "/course/algorithm-design";
 const pathIntroductionCourse = "/course/introduction";
 const pathQuantumMachineLearning = "/course/machine-learning";
@@ -106,6 +108,27 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       segment: {
         cta: "entanglement_in_action",
         location: sectionBasicsCourse,
+      },
+    },
+  ],
+};
+
+const ALGORITHM_FUNDAMENTALS_COURSE: MegaDropdownMenuGroup = {
+  title: {
+    label: "Fundamentals of quantum algorithms",
+    url: `${baseUrl}${pathAlgorithmFundamentalsCourse}`,
+    segment: {
+      cta: wholeSection,
+      location: sectionAlgorithmFundamentalsCourse,
+    },
+  },
+  content: [
+    {
+      label: "Quantum query algorithms",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/quantum-query-algorithms`,
+      segment: {
+        cta: "quantum_query_algorithms",
+        location: sectionAlgorithmFundamentalsCourse,
       },
     },
   ],
@@ -1793,7 +1816,13 @@ const SUMMER_SCHOOL_2022: MegaDropdownMenuGroup = {
 
 const COURSES_SECTION: MegaDropdownMenuSection = {
   title: "Courses",
-  content: [BASICS_COURSE, ALGORITHM_DESIGN, INTRODUCTION_COURSE, QML_COURSE],
+  content: [
+    BASICS_COURSE,
+    ALGORITHM_FUNDAMENTALS_COURSE,
+    ALGORITHM_DESIGN,
+    INTRODUCTION_COURSE,
+    QML_COURSE,
+  ],
 };
 
 const CHAPTERS_SECTION: MegaDropdownMenuSection = {
