@@ -32,6 +32,7 @@
           <div class="cds--row">
             <div class="cds--col">
               <bx-tabs
+                class="ecosystem__tiers__tabs"
                 trigger-content="Select an item"
                 value="Main"
                 @bx-tabs-selected="selectTab($event.target.value)"
@@ -48,111 +49,117 @@
               </bx-tabs>
             </div>
           </div>
-          <div class="cds--row">
-            <div
-              class="ecosystem__filters cds--col-xlg-2 cds--col-lg-4 cds--col-md-2"
-            >
-              <div class="ecosystem__filters__checkboxes">
-                <UiFieldset label="Labels">
-                  <client-only>
-                    <bx-checkbox
-                      v-for="label in sortedProjectLabels"
-                      :key="label"
-                      :checked="isLabelFilterChecked(label)"
-                      :label-text="label"
-                      :value="label"
-                      @bx-checkbox-changed="
-                        updateLabelFilter(label, $event.target.checked)
-                      "
-                    />
-                  </client-only>
-                </UiFieldset>
-              </div>
-            </div>
-            <div class="cds--col-xlg-14 cds--col-lg-12 cds--col-md-6">
-              <bx-search
-                class="ecosystem__search"
-                placeholder="Search using keywords like algorithms, simulator, or machine learning"
-                @bx-search-input="searchOnMembers($event.detail.value)"
-              />
-              <div class="ecosystem__tier-panel">
-                <div
-                  v-for="tierName in tiersNames"
-                  :id="`panel${tierName}`"
-                  :key="tierName"
-                  role="tabpanel"
-                  :aria-labelledby="`tab${tierName}`"
-                >
-                  <template v-if="filteredMembers.length > 0">
-                    <div class="cds--row ecosystem__members">
-                      <div
-                        v-for="member in filteredMembers"
-                        :key="member.name"
-                        class="cds--col-sm-4 cds--col-xlg-8"
-                      >
-                        <UiCard
-                          class="project-card"
-                          :title="member.name"
-                          :tags="member.labels"
-                          :tooltip-tags="[
-                            {
-                              label: member.tier,
-                              description: getTierDescription(member.tier),
-                            },
-                          ]"
-                          cta-label="Go to repo"
-                          :segment="{
-                            cta: `go-to-repo-${member.name}`,
-                            location: 'ecosystem-card',
-                          }"
-                          :to="member.url"
-                        >
-                          <div class="cds--row">
-                            <p class="project-card__license">
-                              {{ member.licence }}
-                            </p>
-                            <div class="project-card__star">
-                              <StarFilled16 />
-                              <p class="project-card__star-val">
-                                {{ member.stars }}
-                              </p>
-                            </div>
-                          </div>
-                          <p>
-                            {{ member.description }}
-                          </p>
-                        </UiCard>
-                        <bx-accordion v-if="member.testsResults.length != 0">
-                          <bx-accordion-item
-                            class="bx-accordion__item"
-                            :title-text="`Test Results (${formatTimestamp(
-                              member.updatedAt
-                            )})`"
-                          >
-                            <EcosystemTestTable
-                              :filtered-data="getTestRows(member)"
-                            />
-                          </bx-accordion-item>
-                        </bx-accordion>
-                      </div>
-                    </div>
-                  </template>
-                  <template v-else>
-                    <div class="cds--col">
-                      <p>
-                        Try using wider search criteria, or consider
-                        <UiLink v-bind="joinAction"
-                          >joining the ecosystem.
-                        </UiLink>
-                      </p>
-                    </div>
-                  </template>
-                </div>
-              </div>
-            </div>
-          </div>
         </client-only>
       </div>
+      <UiFiltersResultsLayout>
+        <template #filters-on-m-l-screen>
+          <div class="ecosystem__filters">
+            <UiFieldset label="Labels">
+              <client-only>
+                <bx-checkbox
+                  v-for="label in sortedProjectLabels"
+                  :key="label"
+                  :checked="isLabelFilterChecked(label)"
+                  :label-text="label"
+                  :value="label"
+                  @bx-checkbox-changed="
+                    updateLabelFilter(label, $event.target.checked)
+                  "
+                />
+              </client-only>
+            </UiFieldset>
+          </div>
+        </template>
+        <template #filters-on-s-screen>
+          <div class="ecosystem__filters__multiselect">
+            <UiMultiSelect
+              label="Labels"
+              :options="sortedProjectLabels"
+              :value="labelFiltersAsString"
+              @change-selection="updateLabelFilters($event)"
+            />
+          </div>
+        </template>
+        <template #results>
+          <bx-search
+            class="ecosystem__search"
+            placeholder="Search using keywords like algorithms, simulator, or machine learning"
+            @bx-search-input="searchOnMembers($event.detail.value)"
+          />
+          <div class="ecosystem__tier-panel">
+            <div
+              v-for="tierName in tiersNames"
+              :id="`panel${tierName}`"
+              :key="tierName"
+              role="tabpanel"
+              :aria-labelledby="`tab${tierName}`"
+            >
+              <template v-if="filteredMembers.length > 0">
+                <div class="cds--row ecosystem__members">
+                  <div
+                    v-for="member in filteredMembers"
+                    :key="member.name"
+                    class="cds--col-sm-4 cds--col-xlg-8"
+                  >
+                    <UiCard
+                      class="project-card"
+                      :title="member.name"
+                      :tags="member.labels"
+                      :tooltip-tags="[
+                        {
+                          label: member.tier,
+                          description: getTierDescription(member.tier),
+                        },
+                      ]"
+                      cta-label="Go to repo"
+                      :segment="{
+                        cta: `go-to-repo-${member.name}`,
+                        location: 'ecosystem-card',
+                      }"
+                      :to="member.url"
+                    >
+                      <div class="cds--row">
+                        <p class="project-card__license">
+                          {{ member.licence }}
+                        </p>
+                        <div class="project-card__star">
+                          <StarFilled16 />
+                          <p class="project-card__star-val">
+                            {{ member.stars }}
+                          </p>
+                        </div>
+                      </div>
+                      <p>
+                        {{ member.description }}
+                      </p>
+                    </UiCard>
+                    <bx-accordion v-if="member.testsResults.length != 0">
+                      <bx-accordion-item
+                        class="bx-accordion__item"
+                        :title-text="`Test Results (${formatTimestamp(
+                          member.updatedAt
+                        )})`"
+                      >
+                        <EcosystemTestTable
+                          :filtered-data="getTestRows(member)"
+                        />
+                      </bx-accordion-item>
+                    </bx-accordion>
+                  </div>
+                </div>
+              </template>
+              <template v-else>
+                <div class="cds--col">
+                  <p>
+                    Try using wider search criteria, or consider
+                    <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
+                  </p>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </UiFiltersResultsLayout>
     </section>
   </main>
 </template>
@@ -191,6 +198,8 @@ useHead({
 const labelFilters = ref<string[]>([]);
 const selectedTab = ref<string>("Main");
 const searchedText = ref<string>("");
+
+const labelFiltersAsString = computed(() => labelFilters.value.join(","));
 
 const tiersNames = tiers.map((tier) => tier.name);
 const membersLabels = members.map((member) => member.labels);
@@ -285,6 +294,12 @@ function updateLabelFilter(filterValue: string, isChecked: boolean) {
   }
 }
 
+function updateLabelFilters(newLabelFilters: string) {
+  const newLabelFiltersAsArray =
+    newLabelFilters === "" ? [] : newLabelFilters.split(",");
+  labelFilters.value = newLabelFiltersAsArray;
+}
+
 function searchOnMembers(inputText: string) {
   searchedText.value = inputText;
 }
@@ -317,6 +332,10 @@ const joinAction: Link = {
       @include carbon.breakpoint-down(md) {
         display: none;
       }
+    }
+
+    &__multiselect {
+      margin-top: carbon.$spacing-05;
     }
   }
 
