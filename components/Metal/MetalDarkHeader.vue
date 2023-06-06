@@ -135,15 +135,18 @@
           format="webp"
           sizes="sm:500px md:700px lg:900px"
           src="/images/metal/hero/cryo.png"
+          alt="drawing of the inside of a Quantum computer focused on the chip"
         />
         <nuxt-img
           class="dark-header__media-transmon-outline"
           src="/images/metal/hero/transmon.svg"
+          alt="drawing of the inside of a Quantum computer focused on the chip"
         />
         <nuxt-img
           class="dark-header__media-transmon"
           format="webp"
           src="/images/metal/hero/transmon.png"
+          alt="drawing of the inside of a Quantum computer focused on the chip"
         />
       </div>
     </div>
