@@ -9,6 +9,7 @@
           class="feature-card__image"
           format="webp"
           sizes="sm:300px md:600px lg:300px"
+          alt=""
           :src="image"
         />
       </div>
