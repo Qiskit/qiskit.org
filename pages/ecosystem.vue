@@ -76,6 +76,7 @@
                   location: 'ecosystem-card',
                 }"
                 :to="member.url"
+                :secondary-cta="getSecondaryCta(member)"
               >
                 <div class="cds--row">
                   <p class="project-card__license">
@@ -217,6 +218,19 @@ const joinAction: Link = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
 };
+
+function getSecondaryCta(member: Member) {
+  return member.website
+    ? {
+        label: "Website",
+        url: member.website,
+        segment: {
+          cta: `go-to-website-${member.name}`,
+          location: "ecosystem-card",
+        },
+      }
+    : null;
+}
 </script>
 
 <style lang="scss" scoped>

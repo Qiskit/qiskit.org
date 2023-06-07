@@ -62,15 +62,24 @@
         <div class="card__description">
           <slot />
         </div>
-        <UiCta
-          v-if="to"
-          class="card__cta"
-          is-wider
-          kind="ghost"
-          :label="ctaLink.label"
-          :segment="ctaLink.segment"
-          :url="ctaLink.url"
-        />
+        <div class="card__ctas">
+          <UiCta
+            v-if="to"
+            is-wider
+            kind="ghost"
+            :label="ctaLink.label"
+            :segment="ctaLink.segment"
+            :url="ctaLink.url"
+          />
+          <UiCta
+            v-if="secondaryCta"
+            is-wider
+            kind="ghost"
+            :label="secondaryCta.label"
+            :segment="secondaryCta.segment"
+            :url="secondaryCta.url"
+          />
+        </div>
       </div>
     </div>
   </article>
@@ -80,6 +89,7 @@
 // import "@carbon/web-components/es/components/tag/tag.js";
 // import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
 import Information16 from "@carbon/icons-vue/lib/information/16";
+import { Link } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 export interface TagTooltip {
@@ -100,6 +110,7 @@ interface Props {
   tags?: string[];
   title: string;
   to?: string;
+  secondaryCta?: Link | null;
   tooltipTags?: TagTooltip[];
   verticalLayout?: boolean;
 }
@@ -114,6 +125,7 @@ const props = withDefaults(defineProps<Props>(), {
   subtitle: "",
   tags: () => [],
   to: "",
+  secondaryCta: undefined,
   tooltipTags: () => [],
   verticalLayout: false,
 });
@@ -181,6 +193,12 @@ function hasTags(tags: string[] | TagTooltip[]) {
     justify-content: space-between;
   }
 
+  &__ctas {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 0;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -223,7 +241,8 @@ function hasTags(tags: string[] | TagTooltip[]) {
       padding: carbon.$spacing-05;
     }
 
-    &__cta {
+    &__ctas {
+      display: flex;
       padding-bottom: 0;
     }
 
