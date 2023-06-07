@@ -44,11 +44,23 @@
               {{ tierName }}
             </bx-tab>
           </bx-tabs>
-          <bx-search
-            class="ecosystem__search"
-            placeholder="Search using keywords like algorithms, simulator, or machine learning"
-            @bx-search-input="searchOnMembers($event.detail.value)"
-          />
+          <div class="ecosystem__toolbar cds--row">
+            <div class="ecosystem__search cds--col-lg-14 cds--col-md-6">
+              <bx-search
+                placeholder="Search using keywords like algorithms, simulator, or machine learning"
+                @bx-search-input="searchOnMembers($event.detail.value)"
+              />
+            </div>
+            <bx-dropdown
+              class="ecosystem__sort-dropdown cds--col-lg-2 cds--col-md-2"
+              label-text="Sort by"
+              :value="sortByValue"
+              @bx-dropdown-selected="setSortValue($event.detail.item.value)"
+            >
+              <bx-dropdown-item value="name">Name</bx-dropdown-item>
+              <bx-dropdown-item value="stars">Stars</bx-dropdown-item>
+            </bx-dropdown>
+          </div>
           <div
             v-for="tierName in tiersNames"
             :id="`panel${tierName}`"
@@ -59,7 +71,7 @@
           >
             <div class="cds--row ecosystem__members">
               <div
-                v-for="member in filteredMembers"
+                v-for="member in sortMembers(filteredMembers)"
                 :key="member.name"
                 class="cds--col-sm-4 cds--col-xlg-8"
               >
@@ -117,6 +129,8 @@
 <script setup lang="ts">
 // import "@carbon/web-components/es/components/accordion/index.js";
 // import "@carbon/web-components/es/components/checkbox/index.js";
+import sortBy from "lodash/sortBy";
+import reverse from "lodash/reverse";
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
@@ -149,6 +163,7 @@ useHead({
 
 const selectedTab = ref<string>("Main");
 const searchedText = ref<string>("");
+const sortByValue = ref<string>("name");
 
 const tiersNames = tiers.map((tier) => tier.name);
 
@@ -177,6 +192,20 @@ const filteredMembers = computed(() => {
           member.name.toLowerCase().includes(searchedText.value.toLowerCase())
       );
 });
+
+function sortMembers(membersToSort: Member[]) {
+  const membersOnAscOrder = sortBy(membersToSort, [
+    `${sortByValue.value}`,
+  ]) as Member[];
+
+  return sortByValue.value === "stars"
+    ? reverse(membersOnAscOrder)
+    : membersOnAscOrder;
+}
+
+function setSortValue(inputValue: string) {
+  sortByValue.value = inputValue;
+}
 
 function getMembersByTier(tier: Member["tier"]) {
   return members.filter((member) => member.tier === tier);
@@ -243,9 +272,23 @@ const joinAction: Link = {
     margin-top: carbon.$spacing-07;
   }
 
+  &__toolbar {
+    margin-top: carbon.$spacing-06;
+  }
+
   &__search {
     margin-top: carbon.$spacing-06;
 
+    --cds-field-01: #{carbon.$cool-gray-10};
+    --cds-field-04: #{carbon.$cool-gray-30};
+
+    @include carbon.breakpoint-down(md) {
+      margin-bottom: carbon.$spacing-05;
+    }
+  }
+
+  &__sort-dropdown {
+    --cds-text-01: #{carbon.$cool-gray-60};
     --cds-field-01: #{carbon.$cool-gray-10};
     --cds-field-04: #{carbon.$cool-gray-30};
   }
