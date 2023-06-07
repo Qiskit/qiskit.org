@@ -69,8 +69,10 @@ definePageMeta({
 useSeoMeta({
   title: "Qiskit Providers",
   ogTitle: "Qiskit Providers",
-  description: "All the ways you can run Qiskit with",
-  ogDescription: "All the ways you can run Qiskit with",
+  description:
+    "All the ways you can run Qiskit with! from Local Simulators to real Quantum Hardware",
+  ogDescription:
+    "All the ways you can run Qiskit with! from Local Simulators to real Quantum Hardware",
   ogImage: "/images/metal/hero/cryo.png",
   ogUrl: "https://qiskit.org/providers/",
 });

@@ -133,9 +133,9 @@ useSeoMeta({
   title: "Qiskit Ecosystem",
   ogTitle: "Qiskit Ecosystem",
   description:
-    "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
+    "The Ecosystem consists of projects, tools, utilities, tutorials... From a broad community of developers and researchers. Learn what can be done using Qiskit!",
   ogDescription:
-    "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
+    "The Ecosystem consists of projects, tools, utilities, tutorials... From a broad community of developers and researchers. Learn what can be done using Qiskit!",
   ogImage: "/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/ecosystem/",
 });
