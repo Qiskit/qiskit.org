@@ -370,6 +370,7 @@ const joinAction: Link = {
 
   &__toolbar {
     margin-top: carbon.$spacing-06;
+
     @include carbon.breakpoint-down(md) {
       margin-top: initial;
     }
