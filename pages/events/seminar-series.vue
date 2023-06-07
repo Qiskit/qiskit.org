@@ -125,7 +125,7 @@ useSeoMeta({
   ogTitle: "Qiskit Seminar Series",
   description: "Join us live every Friday at 12:00 PM ET.",
   ogDescription: "Join us live every Friday at 12:00 PM ET.",
-  ogImage: "public/images/qiskit-logo.png",
+  ogImage: "/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/events/seminar-series/",
 });
 

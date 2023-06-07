@@ -135,7 +135,7 @@ useSeoMeta({
   ogTitle: "Qiskit Events",
   description: "All past and upcoming events Qiskit related!",
   ogDescription: "All past and upcoming events Qiskit related!",
-  ogImage: "public/images/qiskit-logo.png",
+  ogImage: "/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/events/",
 });
 
