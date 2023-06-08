@@ -102,25 +102,22 @@
                 v-if="filteredMembers.length > 0"
                 class="cds--row ecosystem__members"
               >
-                <div
+                <EcosystemItemCard
                   v-for="member in sortMembers(filteredMembers)"
                   :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
-                >
-                  <EcosystemItemCard
-                    :name="member.name"
-                    :labels="member.labels"
-                    :tier="member.tier"
-                    :tier-description="getTierDescription(member.tier)"
-                    :url="member.url"
-                    :website="member.website"
-                    :licence="member.licence"
-                    :stars="member.stars"
-                    :description="member.description"
-                    :tests-results="member.testsResults"
-                    :updated-at="member.updatedAt"
-                  />
-                </div>
+                  :name="member.name"
+                  :labels="member.labels"
+                  :tier="member.tier"
+                  :tier-description="getTierDescription(member.tier)"
+                  :url="member.url"
+                  :website="member.website"
+                  :licence="member.licence"
+                  :stars="member.stars"
+                  :description="member.description"
+                  :tests-results="member.testsResults"
+                  :updated-at="member.updatedAt"
+                />
               </div>
               <p v-else class="cds--col">
                 Try using wider search criteria, or consider
