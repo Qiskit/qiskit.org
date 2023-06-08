@@ -113,51 +113,19 @@
                     :key="member.name"
                     class="cds--col-sm-4 cds--col-xlg-8"
                   >
-                    <UiCard
-                      class="project-card"
-                      :title="member.name"
-                      :tags="member.labels"
-                      :tooltip-tags="[
-                        {
-                          label: member.tier,
-                          description: getTierDescription(member.tier),
-                        },
-                      ]"
-                      cta-label="Go to repo"
-                      :segment="{
-                        cta: `go-to-repo-${member.name}`,
-                        location: 'ecosystem-card',
-                      }"
-                      :to="member.url"
-                      :secondary-cta="getSecondaryCta(member)"
-                    >
-                      <div class="cds--row">
-                        <p class="project-card__license">
-                          {{ member.licence }}
-                        </p>
-                        <div class="project-card__star">
-                          <StarFilled16 />
-                          <p class="project-card__star-val">
-                            {{ member.stars }}
-                          </p>
-                        </div>
-                      </div>
-                      <p>
-                        {{ member.description }}
-                      </p>
-                    </UiCard>
-                    <bx-accordion v-if="member.testsResults.length != 0">
-                      <bx-accordion-item
-                        class="bx-accordion__item"
-                        :title-text="`Test Results (${formatTimestamp(
-                          member.updatedAt
-                        )})`"
-                      >
-                        <EcosystemTestTable
-                          :filtered-data="getTestRows(member)"
-                        />
-                      </bx-accordion-item>
-                    </bx-accordion>
+                    <EcosystemItemCard
+                      :name="member.name"
+                      :labels="member.labels"
+                      :tier="member.tier"
+                      :tier-description="getTierDescription(member.tier)"
+                      :url="member.url"
+                      :website="member.website"
+                      :licence="member.licence"
+                      :stars="member.stars"
+                      :description="member.description"
+                      :tests-results="member.testsResults"
+                      :updated-at="member.updatedAt"
+                    />
                   </div>
                 </div>
               </template>
@@ -180,7 +148,6 @@
 <script setup lang="ts">
 import sortBy from "lodash/sortBy";
 import reverse from "lodash/reverse";
-import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
@@ -274,45 +241,6 @@ function getMembersByTier(tier: Member["tier"]) {
   return members.filter((member) => member.tier === tier);
 }
 
-function formatTimestamp(timestamp: number): string {
-  return new Date(timestamp * 1000).toLocaleString("en-UK", {
-    timeZone: "UTC",
-  });
-}
-
-function getTestRows(member: Member) {
-  if (member.testsResults) {
-    return member.testsResults.map((res) => {
-      const timestamp = formatTimestamp(res.timestamp);
-      // Convert package name to title case
-      let packageName;
-      if (res.package) {
-        packageName = res.package
-          .replaceAll("-", " ")
-          .split(" ")
-          .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-          .join(" ");
-      }
-
-      return {
-        packageName,
-        packageVersion: res.packageVersion,
-        testType: res.testType,
-        passed: res.passed,
-        timestamp,
-        logsLink: res.logsLink,
-      };
-    });
-  }
-
-  return [];
-}
-
-function getTierDescription(tierName: string): string {
-  const tier = tiers.find((tier: any) => tier.name === tierName);
-  return tier!.description || "";
-}
-
 function updateLabelFilter(filterValue: string, isChecked: boolean) {
   if (isChecked) {
     labelFilters.value.push(filterValue);
@@ -322,6 +250,11 @@ function updateLabelFilter(filterValue: string, isChecked: boolean) {
       labelFilters.value.splice(index, 1);
     }
   }
+}
+
+function getTierDescription(tierName: string): string {
+  const tier = tiers.find((tier: any) => tier.name === tierName);
+  return tier?.description || "";
 }
 
 function updateLabelFilters(newLabelFilters: string) {
@@ -341,19 +274,6 @@ const joinAction: Link = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
 };
-
-function getSecondaryCta(member: Member) {
-  return member.website
-    ? {
-        label: "Website",
-        url: member.website,
-        segment: {
-          cta: `go-to-website-${member.name}`,
-          location: "ecosystem-card",
-        },
-      }
-    : null;
-}
 </script>
 
 <style lang="scss" scoped>
@@ -425,29 +345,6 @@ function getSecondaryCta(member: Member) {
 
   &__tags {
     flex-direction: row;
-  }
-}
-
-.project-card {
-  &__license {
-    font-size: 12px;
-    margin-right: carbon.$spacing-05;
-    margin-top: calc(carbon.$spacing-01 / 2);
-  }
-
-  &__star {
-    display: flex;
-    flex-direction: row;
-
-    svg {
-      margin-top: calc(carbon.$spacing-01 / 2);
-      margin-right: carbon.$spacing-01;
-      fill: carbon.$cool-gray-60;
-    }
-  }
-
-  :deep(.card__title) {
-    font-size: 20px;
   }
 }
 
