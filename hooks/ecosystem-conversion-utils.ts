@@ -1,13 +1,15 @@
 import axios from "axios";
 import camelCase from "lodash/camelCase";
 
+import { Member } from "~/types/ecosystem";
+
 async function fetchMembers() {
   try {
     // from ecosystem main
     const res = await axios.get(
       "https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/members.json"
     );
-    const membersArray: Object[] = [];
+    const membersArray: Member[] = [];
     Object.values(res.data).forEach((tier: any) => {
       Object.values(tier).forEach((member: any) => {
         membersArray.push(member);
