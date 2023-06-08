@@ -13,14 +13,12 @@
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
-        <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-          <p>
-            The Ecosystem consists of projects, tools, utilities, libraries and
-            tutorials from a broad community of developers and researchers. The
-            goal of the Ecosystem is to celebrate, support and accelerate
-            development of quantum technologies using Qiskit.
-          </p>
-        </div>
+        <p class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
+          The Ecosystem consists of projects, tools, utilities, libraries and
+          tutorials from a broad community of developers and researchers. The
+          goal of the Ecosystem is to celebrate, support and accelerate
+          development of quantum technologies using Qiskit.
+        </p>
       </div>
       <UiCta
         class="ecosystem-header__cta"
@@ -29,46 +27,40 @@
       />
       <div class="ecosystem__tiers">
         <client-only>
-          <div class="cds--row">
-            <div class="cds--col">
-              <bx-tabs
-                class="ecosystem__tiers__tabs"
-                trigger-content="Select an item"
-                value="Main"
-                @bx-tabs-selected="selectTab($event.target.value)"
-              >
-                <bx-tab
-                  v-for="tierName in tiersNames"
-                  :id="`tab${tierName}`"
-                  :key="tierName"
-                  :target="`panel${tierName}`"
-                  :value="`${tierName}`"
-                >
-                  {{ tierName }}
-                </bx-tab>
-              </bx-tabs>
-            </div>
-          </div>
+          <bx-tabs
+            class="ecosystem__tiers__tabs"
+            trigger-content="Select an item"
+            value="Main"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
+            <bx-tab
+              v-for="tierName in tiersNames"
+              :id="`tab${tierName}`"
+              :key="tierName"
+              :target="`panel${tierName}`"
+              :value="`${tierName}`"
+            >
+              {{ tierName }}
+            </bx-tab>
+          </bx-tabs>
         </client-only>
       </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
-          <div class="ecosystem__filters">
-            <UiFieldset label="Labels">
-              <client-only>
-                <bx-checkbox
-                  v-for="label in sortedProjectLabels"
-                  :key="label"
-                  :checked="isLabelFilterChecked(label)"
-                  :label-text="label"
-                  :value="label"
-                  @bx-checkbox-changed="
-                    updateLabelFilter(label, $event.target.checked)
-                  "
-                />
-              </client-only>
-            </UiFieldset>
-          </div>
+          <UiFieldset class="ecosystem__filters" label="Labels">
+            <client-only>
+              <bx-checkbox
+                v-for="label in sortedProjectLabels"
+                :key="label"
+                :checked="isLabelFilterChecked(label)"
+                :label-text="label"
+                :value="label"
+                @bx-checkbox-changed="
+                  updateLabelFilter(label, $event.target.checked)
+                "
+              />
+            </client-only>
+          </UiFieldset>
         </template>
         <template #filters-on-s-screen>
           <div class="ecosystem__filters__multiselect">
@@ -106,37 +98,34 @@
               role="tabpanel"
               :aria-labelledby="`tab${tierName}`"
             >
-              <template v-if="filteredMembers.length > 0">
-                <div class="cds--row ecosystem__members">
-                  <div
-                    v-for="member in sortMembers(filteredMembers)"
-                    :key="member.name"
-                    class="cds--col-sm-4 cds--col-xlg-8"
-                  >
-                    <EcosystemItemCard
-                      :name="member.name"
-                      :labels="member.labels"
-                      :tier="member.tier"
-                      :tier-description="getTierDescription(member.tier)"
-                      :url="member.url"
-                      :website="member.website"
-                      :licence="member.licence"
-                      :stars="member.stars"
-                      :description="member.description"
-                      :tests-results="member.testsResults"
-                      :updated-at="member.updatedAt"
-                    />
-                  </div>
+              <div
+                v-if="filteredMembers.length > 0"
+                class="cds--row ecosystem__members"
+              >
+                <div
+                  v-for="member in sortMembers(filteredMembers)"
+                  :key="member.name"
+                  class="cds--col-sm-4 cds--col-xlg-8"
+                >
+                  <EcosystemItemCard
+                    :name="member.name"
+                    :labels="member.labels"
+                    :tier="member.tier"
+                    :tier-description="getTierDescription(member.tier)"
+                    :url="member.url"
+                    :website="member.website"
+                    :licence="member.licence"
+                    :stars="member.stars"
+                    :description="member.description"
+                    :tests-results="member.testsResults"
+                    :updated-at="member.updatedAt"
+                  />
                 </div>
-              </template>
-              <template v-else>
-                <div class="cds--col">
-                  <p>
-                    Try using wider search criteria, or consider
-                    <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
-                  </p>
-                </div>
-              </template>
+              </div>
+              <p v-else class="cds--col">
+                Try using wider search criteria, or consider
+                <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
+              </p>
             </div>
           </div>
         </template>
