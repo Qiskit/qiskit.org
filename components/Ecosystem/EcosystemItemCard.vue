@@ -138,4 +138,15 @@ function formatTimestamp(timestamp: number): string {
     font-size: 20px;
   }
 }
+
+.bx-accordion__item {
+  &::part(content) {
+    margin: 0;
+    padding: 0;
+  }
+
+  &::part(expando) {
+    background-color: carbon.$cool-gray-20;
+  }
+}
 </style>

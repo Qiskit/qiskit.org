@@ -335,15 +335,4 @@ const joinAction: Link = {
 .cds--col-sm-4 {
   padding-bottom: carbon.$spacing-08;
 }
-
-.bx-accordion__item {
-  &::part(content) {
-    margin: 0;
-    padding: 0;
-  }
-
-  &::part(expando) {
-    background-color: carbon.$cool-gray-20;
-  }
-}
 </style>
