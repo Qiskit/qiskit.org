@@ -336,18 +336,6 @@ const joinAction: Link = {
   padding-bottom: carbon.$spacing-08;
 }
 
-.card {
-  &__description {
-    .cds--row {
-      margin-left: 0;
-    }
-  }
-
-  &__tags {
-    flex-direction: row;
-  }
-}
-
 .bx-accordion__item {
   &::part(content) {
     margin: 0;
