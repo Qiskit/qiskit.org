@@ -70,9 +70,9 @@ useSeoMeta({
   title: "Qiskit Providers",
   ogTitle: "Qiskit Providers",
   description:
-    "All the ways you can run Qiskit with! from Local Simulators to real Quantum Hardware",
+    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
   ogDescription:
-    "All the ways you can run Qiskit with! from Local Simulators to real Quantum Hardware",
+    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
   ogImage: "/images/metal/hero/cryo.png",
   ogUrl: "https://qiskit.org/providers/",
 });
