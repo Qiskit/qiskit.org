@@ -47,28 +47,28 @@
       </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
-          <UiFieldset class="ecosystem__filters" label="Labels">
+          <UiFieldset class="ecosystem__categories" label="Category">
             <client-only>
               <bx-checkbox
-                v-for="label in sortedProjectLabels"
-                :key="label"
-                :checked="isLabelFilterChecked(label)"
-                :label-text="label"
-                :value="label"
+                v-for="category in sortedMembersCategories"
+                :key="category"
+                :checked="isCategoryFilterChecked(category)"
+                :label-text="category"
+                :value="category"
                 @bx-checkbox-changed="
-                  updateLabelFilter(label, $event.target.checked)
+                  updateCategoryFilter(category, $event.target.checked)
                 "
               />
             </client-only>
           </UiFieldset>
         </template>
         <template #filters-on-s-screen>
-          <div class="ecosystem__filters__multiselect">
+          <div class="ecosystem__categories__multiselect">
             <UiMultiSelect
-              label="Labels"
-              :options="sortedProjectLabels"
-              :value="labelFiltersAsString"
-              @change-selection="updateLabelFilters($event)"
+              label="Category"
+              :options="sortedMembersCategories"
+              :value="categoryFiltersAsString"
+              @change-selection="updateCategoryFilters($event)"
             />
           </div>
         </template>
@@ -83,7 +83,7 @@
             <bx-dropdown
               class="ecosystem__sort-dropdown cds--col-lg-3 cds--col-md-2"
               label-text="Sort by"
-              :value="sortByValue"
+              :value="propToSortBy"
               @bx-dropdown-selected="setSortValue($event.detail.item.value)"
             >
               <bx-dropdown-item value="name">Name</bx-dropdown-item>
@@ -146,6 +146,11 @@ interface MembersByTier {
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
 
+const joinAction: Link = {
+  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
+  label: "Join the ecosystem",
+};
+
 definePageMeta({
   layout: "default-max",
   pageTitle: "Qiskit Ecosystem",
@@ -163,25 +168,24 @@ useHead({
   ],
 });
 
-const labelFilters = ref<string[]>([]);
+const categoryFilters = ref<string[]>([]);
 const selectedTab = ref<string>("Main");
 const searchedText = ref<string>("");
-const sortByValue = ref<string>("name");
-
-const labelFiltersAsString = computed(() => labelFilters.value.join(","));
+const propToSortBy = ref<string>("name");
 
 const tiersNames = tiers.map((tier) => tier.name);
-const membersLabels = members.map((member) => member.labels);
-const projectLabels = Array.from(new Set(membersLabels.flat()));
-const sortedProjectLabels = projectLabels.sort((a, b) => a.localeCompare(b));
-
+const membersCategories = members.map((member) => member.labels);
+const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
+  (a, b) => a.localeCompare(b)
+);
 const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
-  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
+  return {
+    ...acc,
+    ...{ [tierName]: members.filter((member) => member.tier === tierName) },
+  };
 }, {});
 
-const selectTab = (tab: string) => {
-  selectedTab.value = tab;
-};
+const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
 const filteredMembers = computed(() => {
   if (!members) {
@@ -200,42 +204,17 @@ const filteredMembers = computed(() => {
     );
   }
 
-  if (labelFilters.value.length > 0) {
+  if (categoryFilters.value.length > 0) {
     result = result.filter((member) =>
-      labelFilters.value.every((filter) => member.labels.includes(filter))
+      categoryFilters.value.every((filter) => member.labels.includes(filter))
     );
   }
 
   return result;
 });
 
-function sortMembers(membersToSort: Member[]) {
-  const membersOnAscOrder = sortBy(membersToSort, [
-    `${sortByValue.value}`,
-  ]) as Member[];
-
-  return sortByValue.value === "stars"
-    ? reverse(membersOnAscOrder)
-    : membersOnAscOrder;
-}
-
-function setSortValue(inputValue: string) {
-  sortByValue.value = inputValue;
-}
-
-function getMembersByTier(tier: Member["tier"]) {
-  return members.filter((member) => member.tier === tier);
-}
-
-function updateLabelFilter(filterValue: string, isChecked: boolean) {
-  if (isChecked) {
-    labelFilters.value.push(filterValue);
-  } else {
-    const index = labelFilters.value.indexOf(filterValue);
-    if (index !== -1) {
-      labelFilters.value.splice(index, 1);
-    }
-  }
+function selectTab(tab: string) {
+  selectedTab.value = tab;
 }
 
 function getTierDescription(tierName: string): string {
@@ -243,23 +222,44 @@ function getTierDescription(tierName: string): string {
   return tier?.description || "";
 }
 
-function updateLabelFilters(newLabelFilters: string) {
-  const newLabelFiltersAsArray =
-    newLabelFilters === "" ? [] : newLabelFilters.split(",");
-  labelFilters.value = newLabelFiltersAsArray;
+function setSortValue(inputValue: string) {
+  propToSortBy.value = inputValue;
+}
+
+function updateCategoryFilter(filterValue: string, isChecked: boolean) {
+  if (isChecked) {
+    categoryFilters.value.push(filterValue);
+  } else {
+    const index = categoryFilters.value.indexOf(filterValue);
+    if (index !== -1) {
+      categoryFilters.value.splice(index, 1);
+    }
+  }
+}
+
+function updateCategoryFilters(newCategoryFilters: string) {
+  const newCategoryFiltersAsArray =
+    newCategoryFilters === "" ? [] : newCategoryFilters.split(",");
+  categoryFilters.value = newCategoryFiltersAsArray;
+}
+
+function isCategoryFilterChecked(filterValue: string): boolean {
+  return categoryFilters.value.includes(filterValue);
 }
 
 function searchOnMembers(inputText: string) {
   searchedText.value = inputText;
 }
 
-const isLabelFilterChecked = (filterValue: string): boolean =>
-  labelFilters.value.includes(filterValue);
+function sortMembers(membersToSort: Member[]) {
+  const membersOnAscOrder = sortBy(membersToSort, [
+    `${propToSortBy.value}`,
+  ]) as Member[];
 
-const joinAction: Link = {
-  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
-  label: "Join the ecosystem",
-};
+  return propToSortBy.value === "stars"
+    ? reverse(membersOnAscOrder)
+    : membersOnAscOrder;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -274,7 +274,7 @@ const joinAction: Link = {
     margin-top: carbon.$spacing-07;
   }
 
-  &__filters {
+  &__categories {
     margin-top: carbon.$spacing-07;
 
     &__checkboxes {
