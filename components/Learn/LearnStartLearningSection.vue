@@ -524,7 +524,7 @@ const teachingSections: TeachingSection[] = [
       {
         title: "Introduction to Quantum Algorithms",
         instructor: "Peter Shor",
-        university: "Masachussetts Institute of Technology",
+        university: "Massachusetts Institute of Technology",
         cta: {
           label: "Go to this course",
           url: "https://learn.qiskit.org/syllabus/CFH-KBT",
