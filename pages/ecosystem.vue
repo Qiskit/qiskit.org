@@ -133,9 +133,9 @@ useSeoMeta({
   title: "Qiskit Ecosystem",
   ogTitle: "Qiskit Ecosystem",
   description:
-    "The Ecosystem consists of projects, tools, utilities, tutorials... From a broad community of developers and researchers. Learn what can be done using Qiskit!",
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
   ogDescription:
-    "The Ecosystem consists of projects, tools, utilities, tutorials... From a broad community of developers and researchers. Learn what can be done using Qiskit!",
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
   ogImage: "/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/ecosystem/",
 });
