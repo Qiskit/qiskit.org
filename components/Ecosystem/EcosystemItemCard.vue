@@ -2,40 +2,40 @@
   <article>
     <UiCard
       class="ecosystem-item-card"
-      :title="name"
-      :tags="labels"
+      :title="member.name"
+      :tags="member.labels"
       :tooltip-tags="[
         {
-          label: tier,
+          label: member.tier,
           description: tierDescription,
         },
       ]"
       cta-label="Go to repo"
       :segment="{
-        cta: `go-to-repo-${name}`,
+        cta: `go-to-repo-${member.name}`,
         location: 'ecosystem-card',
       }"
-      :to="url"
+      :to="member.url"
       :secondary-cta="websiteCta"
     >
       <div class="cds--row">
         <span class="ecosystem-item-card__licence">
-          {{ licence }}
+          {{ member.licence }}
         </span>
         <span class="ecosystem-item-card__stars">
-          <StarFilled16 /> {{ stars }}
+          <StarFilled16 /> {{ member.stars }}
         </span>
       </div>
       <p class="ecosystem-item-card__description">
-        {{ description }}
+        {{ member.description }}
       </p>
     </UiCard>
     <bx-accordion v-if="hasTestsResults">
       <bx-accordion-item
         class="bx-accordion__item"
-        :title-text="`Test Results (${formatTimestamp(updatedAt)})`"
+        :title-text="`Test Results (${formatTimestamp(member.updatedAt)})`"
       >
-        <EcosystemTestTable :filtered-data="getTestRows()" />
+        <EcosystemTestTable :filtered-data="testRows" />
       </bx-accordion-item>
     </bx-accordion>
   </article>
@@ -52,36 +52,24 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {});
 
-// eslint-disable-next-line vue/no-setup-props-destructure
-const {
-  name,
-  website,
-  labels,
-  tier,
-  url,
-  licence,
-  stars,
-  description,
-  testsResults,
-  updatedAt,
-} = props.member;
+const websiteCta = computed(() =>
+  props.member.website
+    ? {
+        label: "Website",
+        url: props.member.website,
+        segment: {
+          cta: `go-to-website-${props.member.name}`,
+          location: "ecosystem-card",
+        },
+      }
+    : null
+);
 
-const websiteCta = website
-  ? {
-      label: "Website",
-      url: website,
-      segment: {
-        cta: `go-to-website-${name}`,
-        location: "ecosystem-card",
-      },
-    }
-  : null;
+const hasTestsResults = computed(() => props.member.testsResults.length !== 0);
 
-const hasTestsResults = testsResults.length !== 0;
-
-function getTestRows() {
-  if (testsResults) {
-    return testsResults.map((res) => {
+const testRows = computed(() => {
+  if (props.member.testsResults) {
+    return props.member.testsResults.map((res) => {
       const timestamp = formatTimestamp(res.timestamp);
       // Convert package name to title case
       let packageName;
@@ -105,7 +93,7 @@ function getTestRows() {
   }
 
   return [];
-}
+});
 
 function formatTimestamp(timestamp: number): string {
   return new Date(timestamp * 1000).toLocaleString("en-UK", {
