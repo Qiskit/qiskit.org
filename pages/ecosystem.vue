@@ -13,14 +13,12 @@
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
-        <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-          <p>
-            The Ecosystem consists of projects, tools, utilities, libraries and
-            tutorials from a broad community of developers and researchers. The
-            goal of the Ecosystem is to celebrate, support and accelerate
-            development of quantum technologies using Qiskit.
-          </p>
-        </div>
+        <p class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
+          The Ecosystem consists of projects, tools, utilities, libraries and
+          tutorials from a broad community of developers and researchers. The
+          goal of the Ecosystem is to celebrate, support and accelerate
+          development of quantum technologies using Qiskit.
+        </p>
       </div>
       <UiCta
         class="ecosystem-header__cta"
@@ -29,54 +27,48 @@
       />
       <div class="ecosystem__tiers">
         <client-only>
-          <div class="cds--row">
-            <div class="cds--col">
-              <bx-tabs
-                class="ecosystem__tiers__tabs"
-                trigger-content="Select an item"
-                value="Main"
-                @bx-tabs-selected="selectTab($event.target.value)"
-              >
-                <bx-tab
-                  v-for="tierName in tiersNames"
-                  :id="`tab${tierName}`"
-                  :key="tierName"
-                  :target="`panel${tierName}`"
-                  :value="`${tierName}`"
-                >
-                  {{ tierName }}
-                </bx-tab>
-              </bx-tabs>
-            </div>
-          </div>
+          <bx-tabs
+            class="ecosystem__tiers__tabs"
+            trigger-content="Select an item"
+            value="Main"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
+            <bx-tab
+              v-for="tierName in tiersNames"
+              :id="`tab${tierName}`"
+              :key="tierName"
+              :target="`panel${tierName}`"
+              :value="`${tierName}`"
+            >
+              {{ tierName }}
+            </bx-tab>
+          </bx-tabs>
         </client-only>
       </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
-          <div class="ecosystem__filters">
-            <UiFieldset label="Labels">
-              <client-only>
-                <bx-checkbox
-                  v-for="label in sortedProjectLabels"
-                  :key="label"
-                  :checked="isLabelFilterChecked(label)"
-                  :label-text="label"
-                  :value="label"
-                  @bx-checkbox-changed="
-                    updateLabelFilter(label, $event.target.checked)
-                  "
-                />
-              </client-only>
-            </UiFieldset>
-          </div>
+          <UiFieldset class="ecosystem__categories" label="Category">
+            <client-only>
+              <bx-checkbox
+                v-for="category in sortedMembersCategories"
+                :key="category"
+                :checked="isCategoryFilterChecked(category)"
+                :label-text="category"
+                :value="category"
+                @bx-checkbox-changed="
+                  updateCategoryFilter(category, $event.target.checked)
+                "
+              />
+            </client-only>
+          </UiFieldset>
         </template>
         <template #filters-on-s-screen>
-          <div class="ecosystem__filters__multiselect">
+          <div class="ecosystem__categories__multiselect">
             <UiMultiSelect
-              label="Labels"
-              :options="sortedProjectLabels"
-              :value="labelFiltersAsString"
-              @change-selection="updateLabelFilters($event)"
+              label="Category"
+              :options="sortedMembersCategories"
+              :value="categoryFiltersAsString"
+              @change-selection="updateCategoryFilters($event)"
             />
           </div>
         </template>
@@ -91,7 +83,7 @@
             <bx-dropdown
               class="ecosystem__sort-dropdown cds--col-lg-3 cds--col-md-2"
               label-text="Sort by"
-              :value="sortByValue"
+              :value="propToSortBy"
               @bx-dropdown-selected="setSortValue($event.detail.item.value)"
             >
               <bx-dropdown-item value="name">Name</bx-dropdown-item>
@@ -106,69 +98,22 @@
               role="tabpanel"
               :aria-labelledby="`tab${tierName}`"
             >
-              <template v-if="filteredMembers.length > 0">
-                <div class="cds--row ecosystem__members">
-                  <div
-                    v-for="member in sortMembers(filteredMembers)"
-                    :key="member.name"
-                    class="cds--col-sm-4 cds--col-xlg-8"
-                  >
-                    <UiCard
-                      class="project-card"
-                      :title="member.name"
-                      :tags="member.labels"
-                      :tooltip-tags="[
-                        {
-                          label: member.tier,
-                          description: getTierDescription(member.tier),
-                        },
-                      ]"
-                      cta-label="Go to repo"
-                      :segment="{
-                        cta: `go-to-repo-${member.name}`,
-                        location: 'ecosystem-card',
-                      }"
-                      :to="member.url"
-                      :secondary-cta="getSecondaryCta(member)"
-                    >
-                      <div class="cds--row">
-                        <p class="project-card__license">
-                          {{ member.licence }}
-                        </p>
-                        <div class="project-card__star">
-                          <StarFilled16 />
-                          <p class="project-card__star-val">
-                            {{ member.stars }}
-                          </p>
-                        </div>
-                      </div>
-                      <p>
-                        {{ member.description }}
-                      </p>
-                    </UiCard>
-                    <bx-accordion v-if="member.testsResults.length != 0">
-                      <bx-accordion-item
-                        class="bx-accordion__item"
-                        :title-text="`Test Results (${formatTimestamp(
-                          member.updatedAt
-                        )})`"
-                      >
-                        <EcosystemTestTable
-                          :filtered-data="getTestRows(member)"
-                        />
-                      </bx-accordion-item>
-                    </bx-accordion>
-                  </div>
-                </div>
-              </template>
-              <template v-else>
-                <div class="cds--col">
-                  <p>
-                    Try using wider search criteria, or consider
-                    <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
-                  </p>
-                </div>
-              </template>
+              <div
+                v-if="filteredMembers.length > 0"
+                class="cds--row ecosystem__members"
+              >
+                <EcosystemItemCard
+                  v-for="member in sortMembers(filteredMembers)"
+                  :key="member.name"
+                  class="cds--col-sm-4 cds--col-xlg-8"
+                  :member="member"
+                  :tier-description="getTierDescription(member.tier)"
+                />
+              </div>
+              <p v-else class="cds--col">
+                Try using wider search criteria, or consider
+                <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
+              </p>
             </div>
           </div>
         </template>
@@ -180,7 +125,6 @@
 <script setup lang="ts">
 import sortBy from "lodash/sortBy";
 import reverse from "lodash/reverse";
-import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
@@ -192,6 +136,11 @@ interface MembersByTier {
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
+
+const joinAction: Link = {
+  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
+  label: "Join the ecosystem",
+};
 
 definePageMeta({
   layout: "default-max",
@@ -210,25 +159,24 @@ useHead({
   ],
 });
 
-const labelFilters = ref<string[]>([]);
+const categoryFilters = ref<string[]>([]);
 const selectedTab = ref<string>("Main");
 const searchedText = ref<string>("");
-const sortByValue = ref<string>("name");
-
-const labelFiltersAsString = computed(() => labelFilters.value.join(","));
+const propToSortBy = ref<string>("name");
 
 const tiersNames = tiers.map((tier) => tier.name);
-const membersLabels = members.map((member) => member.labels);
-const projectLabels = Array.from(new Set(membersLabels.flat()));
-const sortedProjectLabels = projectLabels.sort((a, b) => a.localeCompare(b));
-
+const membersCategories = members.map((member) => member.labels);
+const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
+  (a, b) => a.localeCompare(b)
+);
 const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
-  return { ...acc, ...{ [tierName]: getMembersByTier(tierName) } };
+  return {
+    ...acc,
+    ...{ [tierName]: members.filter((member) => member.tier === tierName) },
+  };
 }, {});
 
-const selectTab = (tab: string) => {
-  selectedTab.value = tab;
-};
+const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
 const filteredMembers = computed(() => {
   if (!members) {
@@ -247,112 +195,61 @@ const filteredMembers = computed(() => {
     );
   }
 
-  if (labelFilters.value.length > 0) {
+  if (categoryFilters.value.length > 0) {
     result = result.filter((member) =>
-      labelFilters.value.every((filter) => member.labels.includes(filter))
+      categoryFilters.value.every((filter) => member.labels.includes(filter))
     );
   }
 
   return result;
 });
 
-function sortMembers(membersToSort: Member[]) {
-  const membersOnAscOrder = sortBy(membersToSort, [
-    `${sortByValue.value}`,
-  ]) as Member[];
-
-  return sortByValue.value === "stars"
-    ? reverse(membersOnAscOrder)
-    : membersOnAscOrder;
-}
-
-function setSortValue(inputValue: string) {
-  sortByValue.value = inputValue;
-}
-
-function getMembersByTier(tier: Member["tier"]) {
-  return members.filter((member) => member.tier === tier);
-}
-
-function formatTimestamp(timestamp: number): string {
-  return new Date(timestamp * 1000).toLocaleString("en-UK", {
-    timeZone: "UTC",
-  });
-}
-
-function getTestRows(member: Member) {
-  if (member.testsResults) {
-    return member.testsResults.map((res) => {
-      const timestamp = formatTimestamp(res.timestamp);
-      // Convert package name to title case
-      let packageName;
-      if (res.package) {
-        packageName = res.package
-          .replaceAll("-", " ")
-          .split(" ")
-          .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-          .join(" ");
-      }
-
-      return {
-        packageName,
-        packageVersion: res.packageVersion,
-        testType: res.testType,
-        passed: res.passed,
-        timestamp,
-        logsLink: res.logsLink,
-      };
-    });
-  }
-
-  return [];
+function selectTab(tab: string) {
+  selectedTab.value = tab;
 }
 
 function getTierDescription(tierName: string): string {
   const tier = tiers.find((tier: any) => tier.name === tierName);
-  return tier!.description || "";
+  return tier?.description || "";
 }
 
-function updateLabelFilter(filterValue: string, isChecked: boolean) {
+function setSortValue(inputValue: string) {
+  propToSortBy.value = inputValue;
+}
+
+function updateCategoryFilter(filterValue: string, isChecked: boolean) {
   if (isChecked) {
-    labelFilters.value.push(filterValue);
+    categoryFilters.value.push(filterValue);
   } else {
-    const index = labelFilters.value.indexOf(filterValue);
+    const index = categoryFilters.value.indexOf(filterValue);
     if (index !== -1) {
-      labelFilters.value.splice(index, 1);
+      categoryFilters.value.splice(index, 1);
     }
   }
 }
 
-function updateLabelFilters(newLabelFilters: string) {
-  const newLabelFiltersAsArray =
-    newLabelFilters === "" ? [] : newLabelFilters.split(",");
-  labelFilters.value = newLabelFiltersAsArray;
+function updateCategoryFilters(newCategoryFilters: string) {
+  const newCategoryFiltersAsArray =
+    newCategoryFilters === "" ? [] : newCategoryFilters.split(",");
+  categoryFilters.value = newCategoryFiltersAsArray;
+}
+
+function isCategoryFilterChecked(filterValue: string): boolean {
+  return categoryFilters.value.includes(filterValue);
 }
 
 function searchOnMembers(inputText: string) {
   searchedText.value = inputText;
 }
 
-const isLabelFilterChecked = (filterValue: string): boolean =>
-  labelFilters.value.includes(filterValue);
+function sortMembers(membersToSort: Member[]) {
+  const membersOnAscOrder = sortBy(membersToSort, [
+    `${propToSortBy.value}`,
+  ]) as Member[];
 
-const joinAction: Link = {
-  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
-  label: "Join the ecosystem",
-};
-
-function getSecondaryCta(member: Member) {
-  return member.website
-    ? {
-        label: "Website",
-        url: member.website,
-        segment: {
-          cta: `go-to-website-${member.name}`,
-          location: "ecosystem-card",
-        },
-      }
-    : null;
+  return propToSortBy.value === "stars"
+    ? reverse(membersOnAscOrder)
+    : membersOnAscOrder;
 }
 </script>
 
@@ -368,7 +265,7 @@ function getSecondaryCta(member: Member) {
     margin-top: carbon.$spacing-07;
   }
 
-  &__filters {
+  &__categories {
     margin-top: carbon.$spacing-07;
 
     &__checkboxes {
@@ -414,51 +311,5 @@ function getSecondaryCta(member: Member) {
 
 .cds--col-sm-4 {
   padding-bottom: carbon.$spacing-08;
-}
-
-.card {
-  &__description {
-    .cds--row {
-      margin-left: 0;
-    }
-  }
-
-  &__tags {
-    flex-direction: row;
-  }
-}
-
-.project-card {
-  &__license {
-    font-size: 12px;
-    margin-right: carbon.$spacing-05;
-    margin-top: calc(carbon.$spacing-01 / 2);
-  }
-
-  &__star {
-    display: flex;
-    flex-direction: row;
-
-    svg {
-      margin-top: calc(carbon.$spacing-01 / 2);
-      margin-right: carbon.$spacing-01;
-      fill: carbon.$cool-gray-60;
-    }
-  }
-
-  :deep(.card__title) {
-    font-size: 20px;
-  }
-}
-
-.bx-accordion__item {
-  &::part(content) {
-    margin: 0;
-    padding: 0;
-  }
-
-  &::part(expando) {
-    background-color: carbon.$cool-gray-20;
-  }
 }
 </style>
