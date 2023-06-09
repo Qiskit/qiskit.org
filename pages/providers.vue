@@ -1,8 +1,8 @@
 <template>
   <div class="providers-page">
     <UiPageHeaderFixed>
-      Run Qiskit compiled circuits on
-      <UiTypewriterEffect :values="['real hardware', 'simulators']" />
+      Run Qiskit compiled <br />circuits on
+      <br /><UiTypewriterEffect :values="['real hardware', 'simulators']" />
     </UiPageHeaderFixed>
     <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">

@@ -3,8 +3,8 @@
     <UiPageHeaderFixed>
       Join
       <UiTypewriterEffect
-        :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
-      />
+      :values="['unconferences']"
+      /><br/>
       from the world&rsquo;s largest quantum computing community
     </UiPageHeaderFixed>
     <div class="cds--grid">

@@ -1,14 +1,12 @@
 <template>
   <main>
     <UiPageHeaderFixed class="ecosystem-header__hero">
-      <br />
-      Explore
+      Explore<br/>
       <UiTypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
-      from Qiskit
-      <br />
-      and the Qiskit community
+      <br/>
+      from Qiskit and the Qiskit community
     </UiPageHeaderFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
