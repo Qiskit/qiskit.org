@@ -15,9 +15,11 @@
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .page-header-fixed {
-  @include qiskit.responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg",
+  @include qiskit.responsive-grid-bg-strip(
+    "/images/grid/grid-hero-learn.svg",
     auto,
-    28rem);
+    28rem
+  );
 
   align-items: center;
   display: flex;
