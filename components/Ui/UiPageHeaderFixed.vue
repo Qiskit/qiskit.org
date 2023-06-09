@@ -1,5 +1,5 @@
 <template>
-  <header class="page-header-fixed" id="test-id">
+  <header class="page-header-fixed">
     <div class="cds--grid page-header-fixed__container">
       <div class="cds--row">
         <h1 class="cds--col-sm cds--col-md-7 cds--col-lg-10 cds--col-max-10">
