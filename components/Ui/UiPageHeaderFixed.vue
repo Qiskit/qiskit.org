@@ -1,8 +1,8 @@
 <template>
-  <header class="page-header-fixed">
+  <header class="page-header-fixed" id="test-id">
     <div class="cds--grid page-header-fixed__container">
       <div class="cds--row">
-        <h1 class="cds--col-sm cds--col-md-6 cds--col-lg-10 cds--col-max-8">
+        <h1 class="cds--col-sm cds--col-md-7 cds--col-lg-10 cds--col-max-10">
           <slot />
         </h1>
       </div>
@@ -15,11 +15,9 @@
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .page-header-fixed {
-  @include qiskit.responsive-grid-bg-strip(
-    "/images/grid/grid-hero-learn.svg",
+  @include qiskit.responsive-grid-bg-strip("/images/grid/grid-hero-learn.svg",
     auto,
-    28rem
-  );
+    28rem);
 
   align-items: center;
   display: flex;

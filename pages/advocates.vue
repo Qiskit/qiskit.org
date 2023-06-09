@@ -4,9 +4,8 @@
       Connect with the<br />
       <UiTypewriterEffect
         :values="['enthusiasts', 'advocates', 'mentors', 'experts']"
-      />
-      from within<br />
-      the Qiskit community
+      /><br />
+      within the Qiskit community
     </UiPageHeaderFixed>
     <AdvocatesJoinSection />
     <AdvocatesMeetTheAdvocates />
