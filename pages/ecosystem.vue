@@ -106,17 +106,8 @@
                   v-for="member in sortMembers(filteredMembers)"
                   :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
-                  :name="member.name"
-                  :labels="member.labels"
-                  :tier="member.tier"
+                  :member="member"
                   :tier-description="getTierDescription(member.tier)"
-                  :url="member.url"
-                  :website="member.website"
-                  :licence="member.licence"
-                  :stars="member.stars"
-                  :description="member.description"
-                  :tests-results="member.testsResults"
-                  :updated-at="member.updatedAt"
                 />
               </div>
               <p v-else class="cds--col">

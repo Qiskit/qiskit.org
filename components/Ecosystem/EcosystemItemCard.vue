@@ -35,7 +35,7 @@
         class="bx-accordion__item"
         :title-text="`Test Results (${formatTimestamp(updatedAt)})`"
       >
-        <EcosystemTestTable :filtered-data="testRows" />
+        <EcosystemTestTable :filtered-data="getTestRows()" />
       </bx-accordion-item>
     </bx-accordion>
   </article>
@@ -46,39 +46,40 @@ import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import { Member } from "~/types/ecosystem";
 
 interface Props {
-  name: Member["name"];
-  labels: Member["labels"];
-  tier: Member["tier"];
+  member: Member;
   tierDescription: string;
-  url: Member["url"];
-  website: Member["website"];
-  licence: Member["licence"];
-  stars: Member["stars"];
-  description: Member["description"];
-  testsResults: Member["testsResults"];
-  updatedAt: Member["updatedAt"];
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  website: undefined,
-});
+const props = withDefaults(defineProps<Props>(), {});
 
-const websiteCta = computed(() =>
-  props.website
-    ? {
-        label: "Website",
-        url: props.website,
-        segment: {
-          cta: `go-to-website-${props.name}`,
-          location: "ecosystem-card",
-        },
-      }
-    : null
-);
+// eslint-disable-next-line vue/no-setup-props-destructure
+const {
+  name,
+  website,
+  labels,
+  tier,
+  url,
+  licence,
+  stars,
+  description,
+  testsResults,
+  updatedAt,
+} = props.member;
 
-const testRows = computed(() => {
-  if (props.testsResults) {
-    return props.testsResults.map((res) => {
+const websiteCta = website
+  ? {
+      label: "Website",
+      url: website,
+      segment: {
+        cta: `go-to-website-${name}`,
+        location: "ecosystem-card",
+      },
+    }
+  : null;
+
+function getTestRows() {
+  if (testsResults) {
+    return testsResults.map((res) => {
       const timestamp = formatTimestamp(res.timestamp);
       // Convert package name to title case
       let packageName;
@@ -102,7 +103,7 @@ const testRows = computed(() => {
   }
 
   return [];
-});
+}
 
 function formatTimestamp(timestamp: number): string {
   return new Date(timestamp * 1000).toLocaleString("en-UK", {
