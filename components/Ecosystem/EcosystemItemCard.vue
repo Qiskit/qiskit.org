@@ -30,7 +30,7 @@
         {{ description }}
       </p>
     </UiCard>
-    <bx-accordion v-if="testsResults.length != 0">
+    <bx-accordion v-if="hasTestsResults">
       <bx-accordion-item
         class="bx-accordion__item"
         :title-text="`Test Results (${formatTimestamp(updatedAt)})`"
@@ -76,6 +76,8 @@ const websiteCta = website
       },
     }
   : null;
+
+const hasTestsResults = testsResults.length !== 0;
 
 function getTestRows() {
   if (testsResults) {
