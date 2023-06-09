@@ -4,7 +4,7 @@ import fetchAdvocates from "./hooks/update-advocates";
 import fetchFallFestEvents from "./hooks/update-fall-fest-events";
 import { generateMocks } from "./hooks/mock/mock-service";
 
-const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
+const { AIRTABLE_ACCESS_TOKEN, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
   process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 const siteUrl = SITE_URL || "https://qiskit.org";
@@ -88,10 +88,10 @@ async function generateContent() {
     return;
   }
 
-  if (AIRTABLE_API_KEY) {
+  if (AIRTABLE_ACCESS_TOKEN) {
     // eslint-disable-next-line no-console
     console.info("Generating the events content...");
-    await fetchEvents(AIRTABLE_API_KEY, "./content/events");
+    await fetchEvents(AIRTABLE_ACCESS_TOKEN, "./content/events");
 
     // eslint-disable-next-line no-console
     console.info("Generating the fall fest events content...");
@@ -99,11 +99,11 @@ async function generateContent() {
 
     // eslint-disable-next-line no-console
     console.info("Generating the advocates content...");
-    await fetchAdvocates(AIRTABLE_API_KEY, "./content/advocates");
+    await fetchAdvocates(AIRTABLE_ACCESS_TOKEN, "./content/advocates");
   } else {
     // eslint-disable-next-line no-console
     console.warn(
-      "No AIRTABLE_API_KEY environment variable found. Skipping content generation."
+      "No AIRTABLE_ACCESS_TOKEN environment variable found. Skipping content generation."
     );
   }
 }

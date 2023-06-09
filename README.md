@@ -91,10 +91,10 @@ Qiskit.org integrates with the tools used by the IBM Quantum Community Team to g
 GENERATE_CONTENT=1 npm run dev
 ```
 
-Notice that, for communicating with the team tools, API keys may be required. It is the case of dealing with Airtable for the generation of the event index. If you think you should have access to these tables, talk to the Events Squad in the Community Team, get your developer API key and set the `AIRTABLE_API_KEY` environment variable to this value:
+Notice that, for communicating with the team tools, API keys may be required. It is the case of dealing with Airtable for the generation of the event index. If you think you should have access to these tables, talk to the Events Squad in the Community Team, generate an Airtable access token and set the `AIRTABLE_ACCESS_TOKEN` environment variable to this value:
 
 ```shell
-GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
+GENERATE_CONTENT=1 AIRTABLE_ACCESS_TOKEN=<your airtable api key> npm run dev
 ```
 
 #### 🥸 Mocking content
