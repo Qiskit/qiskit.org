@@ -28,7 +28,11 @@
           for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta class="summer-school-page__cta" v-bind="header.cta" />
+        <UiCta
+          class="summer-school-page__cta summer-school-page__cta_disabled"
+          v-bind="header.cta"
+          kind="secondary"
+        />
       </template>
       <template #card>
         <EventsItemCard
@@ -227,6 +231,16 @@ const helpfulResourcesData = helpfulResources;
 
   &__cta {
     margin-top: carbon.$spacing-07;
+
+    &_disabled {
+      pointer-events: none;
+      color: qiskit.$text-color-light;
+      width: fit-content;
+
+      &:deep(.cta__icon) {
+        display: none;
+      }
+    }
   }
 }
 </style>
