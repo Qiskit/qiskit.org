@@ -50,7 +50,7 @@ interface Props {
   tierDescription: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {});
+const props = defineProps<Props>();
 
 const websiteCta = computed(() =>
   props.member.website
