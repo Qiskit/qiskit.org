@@ -39,7 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "./constants/appLinks";
+import { NuxtError } from "#app";
+import { Link } from "~/types/links";
 
 const props = defineProps({
   // eslint-disable-next-line vue/require-default-prop
