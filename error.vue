@@ -8,10 +8,8 @@
             <h1 class="error-page__title">{{ error.statusCode }}</h1>
             <p>{{ error.message }}</p>
             <p class="error-page__message">
-              Or as we like to say,
-              <!-- eslint-disable vue/no-v-html -->
-              <span v-html="randomMessage" />
-              <!-- eslint-enable -->
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              Or as we like to say, <span v-html="randomMessage" />
             </p>
 
             <UiCta
