@@ -89,7 +89,7 @@ const messages = [
   "this page loads fine another dimension, but not this dimension.",
 ];
 
-const randomMessage = computed(() => {
+const randomMessage = computed<string>(() => {
   const randomIndex = Math.floor(Math.random() * messages.length);
   return messages[randomIndex];
 });
