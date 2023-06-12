@@ -72,7 +72,7 @@ const prerequisites: Prerequisite[] = [
       cta: "basics-quantum-information",
       location: "prerequisite-material",
     },
-    url: "https://qiskit.org/learn/course/basics-quantum-information",
+    url: "/learn/course/basics-quantum-information",
   },
 ];
 
