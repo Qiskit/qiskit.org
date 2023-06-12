@@ -47,6 +47,14 @@ const props = defineProps({
   error: Object,
 });
 
+const pageTitle = computed<string>(() => {
+  return props.error.statusMessage ?? "Error";
+});
+
+useHead({
+  title: pageTitle,
+});
+
 const BackToHomeCTA: GeneralLink = {
   url: "/",
   label: "Back to Qiskit.org home",
