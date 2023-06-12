@@ -6,9 +6,7 @@
         <div class="cds--row">
           <div class="cds--col-lg-4">
             <h1 class="error-page__title">{{ error.statusCode }}</h1>
-            <p>
-              {{ props.error?.message }}
-            </p>
+            <p>{{ error.message }}</p>
             <p class="error-page__message">
               Or as we like to say,
               <!-- eslint-disable vue/no-v-html -->
