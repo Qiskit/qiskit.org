@@ -55,7 +55,7 @@ useHead({
   title: pageTitle,
 });
 
-const BackToHomeCTA: GeneralLink = {
+const backToHomeCta: Link = {
   url: "/",
   label: "Back to Qiskit.org home",
   segment: {
