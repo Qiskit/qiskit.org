@@ -18,9 +18,9 @@
             />
             <UiCta
               class="error-page__ghost-btn"
-              :label="BackToDocsHome.label"
-              :segment="BackToDocsHome.segment"
-              :url="BackToDocsHome.url"
+              :label="backToDocsCta.label"
+              :segment="backToDocsCta.segment"
+              :url="backToDocsCta.url"
               kind="ghost"
             />
           </div>
