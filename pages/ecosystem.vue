@@ -43,6 +43,13 @@
               {{ tierName }} ({{ getFilteredResultsCount(tierName) }})
             </bx-tab>
           </bx-tabs>
+          <div class="cds--row">
+            <div class="cds--col">
+              <div class="ecosystem__tiers__description">
+                {{ selectedTierDescription }}
+              </div>
+            </div>
+          </div>
         </client-only>
       </div>
       <UiFiltersResultsLayout>
@@ -178,6 +185,11 @@ const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
 
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
+const selectedTierDescription = computed(() => {
+  const tier = tiers.find((tier) => tier.name === selectedTab.value);
+  return tier?.description || "";
+});
+
 const filteredMembers = computed(() => {
   if (!members) {
     return [];
@@ -268,6 +280,10 @@ function getFilteredResultsCount(tierName: string): number {
 .ecosystem {
   &__tiers {
     margin-top: carbon.$spacing-10;
+
+    &__description {
+      padding-top: carbon.$spacing-05;
+    }
   }
 
   &__tier-panel {

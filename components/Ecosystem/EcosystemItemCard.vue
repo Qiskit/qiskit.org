@@ -4,10 +4,9 @@
       class="ecosystem-item-card"
       :title="member.name"
       :tags="member.labels"
-      :tooltip-tags="[
+      :primary-tags="[
         {
           label: member.tier,
-          description: tierDescription,
         },
       ]"
       cta-label="Go to repo"
