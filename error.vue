@@ -11,7 +11,6 @@
               <!-- eslint-disable-next-line vue/no-v-html -->
               Or as we like to say, <span v-html="randomMessage" />
             </p>
-
             <UiCta
               :label="backToHomeCta.label"
               :segment="backToHomeCta.segment"
