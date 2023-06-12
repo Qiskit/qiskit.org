@@ -13,9 +13,9 @@
             </p>
 
             <UiCta
-              :label="BackToHomeCTA.label"
-              :segment="BackToHomeCTA.segment"
-              :url="BackToHomeCTA.url"
+              :label="backToHomeCta.label"
+              :segment="backToHomeCta.segment"
+              :url="backToHomeCta.url"
             />
             <UiCta
               class="error-page__ghost-btn"
