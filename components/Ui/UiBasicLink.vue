@@ -18,13 +18,11 @@
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
-  isStatic?: boolean;
   segment?: CtaClickedEventProp | undefined;
   url?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isStatic: false,
   segment: undefined,
   url: "",
 });
@@ -51,11 +49,7 @@ const hasLink = computed(() => !!props.url);
 
 const isAnchor = computed(() => {
   return (
-    isExternal.value ||
-    isMail.value ||
-    isIdAnchor.value ||
-    isInternal.value ||
-    props.isStatic
+    isExternal.value || isMail.value || isIdAnchor.value || isInternal.value
   );
 });
 
