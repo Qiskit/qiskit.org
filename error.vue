@@ -64,7 +64,7 @@ const backToHomeCta: Link = {
   },
 };
 
-const BackToDocsHome: GeneralLink = {
+const backToDocsCta: Link = {
   url: "/documentation",
   label: "Back to Qiskit Documentation",
   segment: {
