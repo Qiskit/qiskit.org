@@ -272,8 +272,8 @@ bx-tooltip-icon {
   &__custom-pill {
     @include carbon.type-style("label-01");
 
-    background-color: qiskit.$tag-background-color;
-    color: qiskit.$tag-text-color;
+    background-color: qiskit.$main-tag-background-color;
+    color: qiskit.$main-tag-text-color;
     display: inline-flex;
     min-width: 0;
     max-width: 100%;
