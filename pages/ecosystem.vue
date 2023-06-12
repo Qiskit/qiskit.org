@@ -40,7 +40,7 @@
               :target="`panel${tierName}`"
               :value="`${tierName}`"
             >
-              {{ tierName }}
+              {{ tierName }} ({{ getFilteredResultsCount(tierName) }})
             </bx-tab>
           </bx-tabs>
         </client-only>
@@ -184,8 +184,11 @@ const filteredMembers = computed(() => {
   }
 
   const filteredMembersByTier = membersByTier[selectedTab.value];
+  return filterMembers(filteredMembersByTier);
+});
 
-  let result = filteredMembersByTier;
+function filterMembers(membersToFilter: Member[]): Member[] {
+  let result = membersToFilter;
 
   if (searchedText.value !== "") {
     result = result.filter((member) =>
@@ -202,7 +205,7 @@ const filteredMembers = computed(() => {
   }
 
   return result;
-});
+}
 
 function selectTab(tab: string) {
   selectedTab.value = tab;
@@ -250,6 +253,12 @@ function sortMembers(membersToSort: Member[]) {
   return propToSortBy.value === "stars"
     ? reverse(membersOnAscOrder)
     : membersOnAscOrder;
+}
+
+function getFilteredResultsCount(tierName: string): number {
+  const filteredMembersByTier = membersByTier[tierName];
+  const filteredMembersCount = filterMembers(filteredMembersByTier).length;
+  return filteredMembersCount;
 }
 </script>
 
