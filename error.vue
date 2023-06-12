@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <FooterComponent old-container theme="light" />
+    <FooterComponent />
   </div>
 </template>
 
