@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { SocialMedia } from "~/constants/links";
-import type { DescriptionCard } from "~/types/uiComponents";
+import { DescriptionCard } from "~/types/uiComponents";
 
 definePageMeta({
   layout: "default-max",

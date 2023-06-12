@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import type { MosaicElement } from "~/types/uiComponents";
+import { MosaicElement } from "~/types/uiComponents";
 
 interface Props {
   mosaicElements: MosaicElement[];

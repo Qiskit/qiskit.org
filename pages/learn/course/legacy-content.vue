@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Course, Prerequisite } from "constants/learnContent";
+import { Course, Prerequisite } from "constants/learnContent";
 import { TextLink } from "~/types/links";
 
 enum LegacyContentUrl {

@@ -53,12 +53,12 @@
 </template>
 
 <script setup lang="ts">
-import type {
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
+import {
   Provider,
   ProvidersSection,
   TableOfContentEntry,
 } from "~/types/providers";
-import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({
   layout: "default-max",

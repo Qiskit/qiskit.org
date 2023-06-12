@@ -115,7 +115,7 @@
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
-import type { Member, Tier } from "~/types/ecosystem";
+import { Member, Tier } from "~/types/ecosystem";
 import { TextLink } from "~/types/links";
 
 const members = rawMembers as Member[];

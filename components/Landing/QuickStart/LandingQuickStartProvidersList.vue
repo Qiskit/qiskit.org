@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { TextLink } from "~/types/links";
-import type { Provider } from "~/types/providers";
+import { Provider } from "~/types/providers";
 
 interface Props {
   providersList: Provider[];

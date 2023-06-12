@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
+import { Course, Prerequisite } from "~/constants/learnContent";
 import { LearnStartLearningUrl } from "~/constants/links";
-import type { Course, Prerequisite } from "constants/learnContent";
 import { TextLink } from "~/types/links";
 
 definePageMeta({

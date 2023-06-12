@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { RecommendedReading } from "~/types/learn";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { Course, Prerequisite } from "~/constants/learnContent";
+import { RecommendedReading } from "~/types/learn";
 import { TextLink } from "~/types/links";
 
 enum PrerequisitesUrl {

@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RecommendedReading } from "~/types/learn";
+import { RecommendedReading } from "~/types/learn";
 
 interface Props {
   links: RecommendedReading[];
