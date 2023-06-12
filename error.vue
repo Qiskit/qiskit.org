@@ -25,8 +25,10 @@
             />
           </div>
           <div class="cds--col-lg-8">
-            <img
+            <nuxt-img
               class="error-page__img"
+              format="webp"
+              sizes="sm:300px md:650px lg:500px xl:750px"
               :src="errorImgSrc"
               alt="Playful illustration of a cat in a cardboard box"
             />
