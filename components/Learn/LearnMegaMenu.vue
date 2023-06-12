@@ -125,7 +125,7 @@ const ALGORITHM_FUNDAMENTALS_COURSE: MegaDropdownMenuGroup = {
   content: [
     {
       label: "Quantum query algorithms",
-      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/quantum-query-algorithms`,
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/query-algorithms`,
       segment: {
         cta: "quantum_query_algorithms",
         location: sectionAlgorithmFundamentalsCourse,

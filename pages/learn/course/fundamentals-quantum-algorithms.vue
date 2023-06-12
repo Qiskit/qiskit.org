@@ -42,7 +42,7 @@ const headerDescription = [
   `This unit, "Fundamentals of quantum algorithms", explores computational
   advantages of quantum information, including what we can do with quantum
   computers and their advantages over classical computers. The unit begins
-  with quatum query algorithms, which offer simple proof of concept
+  with quantum query algorithms, which offer simple proof of concept
   demonstrations for quantum algorithms, and then moves on to quantum
   algorithms for problems including integer factorization and searching, which
   are more representative of the types of computational problems that might be
@@ -132,8 +132,7 @@ const courses: Course[] = [
     label: "Quantum query algorithms",
     segment: { cta: "quantum-query-algorithms", location: "course" },
     url:
-      LearnStartLearningUrl.FundamentalsQuantumAlgorithms +
-      "/quantum-query-algorithms",
+      LearnStartLearningUrl.FundamentalsQuantumAlgorithms + "/query-algorithms",
   },
 ];
 
