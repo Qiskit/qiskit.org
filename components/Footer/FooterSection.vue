@@ -12,8 +12,8 @@
         :key="element.url"
         class="caption footer-section__link"
         :class="`footer-section__link_theme_${theme}`"
-        v-bind="element"
         kind="secondary"
+        :link="element"
       >
         <component
           :is="element.icon"

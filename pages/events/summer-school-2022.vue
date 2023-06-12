@@ -18,9 +18,7 @@
         </p>
         <p>
           Please follow
-          <UiLink v-bind="headerData.qiskitTwitterLink">
-            Qiskit Twitter
-          </UiLink>
+          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
           for more details and updates. For any questions, please check out our
           FAQ below!
         </p>

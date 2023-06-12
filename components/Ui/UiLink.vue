@@ -1,12 +1,21 @@
 <template>
-  <UiBasicLink class="link" :class="`link_${kind}`" v-bind="$attrs">
+  <UiBasicLink
+    class="link"
+    :class="`link_${kind}`"
+    :segment="link.segment"
+    :title="link.title"
+    :url="link.url"
+  >
     <slot />
   </UiBasicLink>
 </template>
 
 <script setup lang="ts">
+import { Link } from "~/types/links";
+
 interface Props {
   kind?: "primary" | "secondary";
+  link: Link;
 }
 
 withDefaults(defineProps<Props>(), {

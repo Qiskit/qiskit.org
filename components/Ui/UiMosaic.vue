@@ -25,8 +25,8 @@
             :class="`mosaic__element-copy-description_${position}`"
             v-html="description"
           />
-          <!-- estlint-enable -->
-          <UiLink v-if="cta" v-bind="cta" class="mosaic__element-copy-link">
+          <!-- eslint-enable vue/no-v-html -->
+          <UiLink v-if="cta" class="mosaic__element-copy-link" :link="cta">
             {{ cta.label }}
           </UiLink>
         </div>
