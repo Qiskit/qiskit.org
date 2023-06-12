@@ -120,7 +120,7 @@ const links: RecommendedReading[] = [
     author: "Richard Cleve,",
     label: "Quantum Information Processing — Quantum Algorithms III",
     segment: {
-      cta: "quantum-information-processing",
+      cta: "quantum-information-processing-III",
       location: "external-recommended-readings",
     },
   },
