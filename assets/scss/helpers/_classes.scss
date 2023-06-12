@@ -1,0 +1,29 @@
+@use "~/assets/scss/carbon.scss";
+
+$breakpoints: sm, md, lg, xlg, max;
+
+@each $breakpoint in $breakpoints {
+  .hide-in-#{$breakpoint},
+  .hide-in-#{$breakpoint}::after {
+    display: block;
+    @include carbon.breakpoint-down($breakpoint) {
+      display: none !important;
+    }
+
+    @include carbon.breakpoint-up($breakpoint) {
+      display: block;
+    }
+  }
+
+  .show-in-#{$breakpoint},
+  .show-in-#{$breakpoint}::after {
+    display: none;
+    @include carbon.breakpoint-down($breakpoint) {
+      display: block !important;
+    }
+
+    @include carbon.breakpoint-up($breakpoint) {
+      display: none;
+    }
+  }
+}
