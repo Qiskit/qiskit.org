@@ -6,7 +6,9 @@
         v-for="resource in resources"
         :key="resource.title"
         class="cds--col-lg-4 cds--col-md-4 helpful-resources-section__card"
-        v-bind="resource"
+        :cta="resource.cta"
+        :description="resource.description"
+        :title="resource.title"
       />
     </div>
   </section>

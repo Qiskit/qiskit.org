@@ -20,7 +20,11 @@
         :key="`benefit-${benefit.icon}`"
         class="cds--col-lg-4 cds--col-md-4 join-section__feature"
       >
-        <UiCompactFeature v-bind="benefit" />
+        <UiCompactFeature
+          :description="benefit.description"
+          :icon="benefit.icon"
+          :title="benefit.title"
+        />
       </div>
     </div>
   </section>

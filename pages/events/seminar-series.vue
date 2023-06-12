@@ -12,7 +12,15 @@
         />
       </template>
       <template #card>
-        <EventsItemCard v-bind="cardContent" vertical-layout />
+        <EventsItemCard
+          :date="cardContent.date"
+          :image="cardContent.image"
+          :institution="cardContent.institution"
+          :location="cardContent.location"
+          :title="cardContent.title"
+          :to="cardContent.to"
+          vertical-layout
+        />
       </template>
     </UiPageHeaderWithCard>
 

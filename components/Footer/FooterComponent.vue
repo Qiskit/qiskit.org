@@ -18,14 +18,16 @@
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
             class="cds--col-lg-3 cds--col-sm"
-            v-bind="sectionElements"
+            :elements="sectionElements.elements"
             :theme="theme"
+            :title="sectionElements.title"
           />
           <FooterSection
             class="cds--col-lg-3 cds--col-md page-footer__stay-connected"
-            v-bind="stayConnectedElements"
+            :elements="stayConnectedElements.elements"
             icons-only
             :theme="theme"
+            :title="stayConnectedElements.title"
           />
         </div>
       </div>
@@ -47,7 +49,7 @@
             :key="link.label"
             class="caption page-footer__secondary-link"
             :class="`page-footer__secondary-link_theme_${theme}`"
-            v-bind="link"
+            :url="link.url"
           >
             {{ link.label }}
           </UiBasicLink>
