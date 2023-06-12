@@ -11,12 +11,12 @@ interface Link {
   url: string;
 }
 
-interface LinkWithIcon extends Link {
-  icon?:
+interface IconLink extends Link {
+  icon:
     | typeof LogoMedium20
     | typeof LogoSlack20
     | typeof LogoTwitter20
     | typeof LogoYouTube20;
 }
 
-export { Link, LinkWithIcon };
+export { IconLink, Link };

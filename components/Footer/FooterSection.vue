@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import type { LinkWithIcon } from "~/types/links";
+import { IconLink } from "~/types/links";
 
 interface Props {
   title: string;
-  elements: LinkWithIcon[];
+  elements: IconLink[];
   iconsOnly?: boolean;
   theme?: "light" | "dark";
 }
