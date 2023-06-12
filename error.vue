@@ -5,7 +5,7 @@
       <div class="cds--grid">
         <div class="cds--row">
           <div class="cds--col-lg-4">
-            <h1 class="error-page__title">{{ props.error?.statusCode }}</h1>
+            <h1 class="error-page__title">{{ error.statusCode }}</h1>
             <p>
               {{ props.error?.message }}
             </p>
