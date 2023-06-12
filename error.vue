@@ -42,10 +42,11 @@
 import { NuxtError } from "#app";
 import { Link } from "~/types/links";
 
-const props = defineProps({
-  // eslint-disable-next-line vue/require-default-prop
-  error: Object,
-});
+interface Props {
+  error: NuxtError;
+}
+
+const props = defineProps<Props>();
 
 const pageTitle = computed<string>(() => {
   return props.error.statusMessage ?? "Error";
