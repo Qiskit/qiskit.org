@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import LogoGitHub32 from "@carbon/icons-vue/lib/logo--github/32";
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   version: string;
@@ -43,7 +43,7 @@ interface Props {
 
 defineProps<Props>();
 
-const githubRepoLink: Link = {
+const githubRepoLink: TextLink = {
   label: "GitHub",
   segment: { cta: "gitHub-repository", location: "version-info" },
   url: "https://github.com/Qiskit/qiskit",

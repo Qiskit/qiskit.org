@@ -112,13 +112,11 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/accordion/index.js";
-// import "@carbon/web-components/es/components/checkbox/index.js";
 import StarFilled16 from "@carbon/icons-vue/lib/star--filled/16";
-import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import type { Member, Tier } from "~/types/ecosystem";
+import { TextLink } from "~/types/links";
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
@@ -214,7 +212,7 @@ function updateTierFilters(newTierFilters: string) {
 const isTierFilterChecked = (filterValue: string): boolean =>
   tierFilters.value.includes(filterValue);
 
-const joinAction: Link = {
+const joinAction: TextLink = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
 };

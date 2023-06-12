@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   version: string;
@@ -49,7 +49,7 @@ interface Props {
 
 defineProps<Props>();
 
-const getStartedLink: Link = {
+const getStartedLink: TextLink = {
   url: "https://qiskit.org/documentation/getting_started.html",
   label: "Get started",
   segment: { cta: "get-started", location: "hero-moment" },

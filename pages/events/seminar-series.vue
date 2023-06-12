@@ -120,7 +120,7 @@ import type { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
 import type { TableRowElement } from "~/components/Ui/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
-import type { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -146,7 +146,7 @@ const headerDescription = [
   "Join us live every Friday at 12:00 PM ET.",
 ];
 
-const headerCTA: Link = {
+const headerCTA: TextLink = {
   label: "Go to YouTube playlist",
   segment: { cta: "talk-on-youtube", location: "header" },
   url: playlistUrl,

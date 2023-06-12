@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum GamesAndDemosUrl {
   HelloQiskit = "https://learn.qiskit.org/course/ch-demos/hello-qiskit",
@@ -46,7 +46,7 @@ const headerDescription = [
 ];
 const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: GamesAndDemosUrl.HelloQiskit,
   label: "Start learning",
   segment: {
@@ -57,7 +57,7 @@ const startLearningCTA: Link = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: Link[] = [];
+const links: TextLink[] = [];
 const courses: Course[] = [
   {
     image: "hello-qiskit.png",

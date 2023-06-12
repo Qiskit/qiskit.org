@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum QuantumHardwareCircuitsUrl {
   Introduction = "https://learn.qiskit.org/course/quantum-hardware/introduction-to-quantum-error-correction-via-the-repetition-code",
@@ -48,7 +48,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: QuantumHardwareCircuitsUrl.Introduction,
   label: "Start learning",
   segment: {
@@ -59,7 +59,7 @@ const startLearningCTA: Link = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: Link[] = [];
+const links: TextLink[] = [];
 
 const courses: Course[] = [
   {

@@ -86,10 +86,8 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/tag/tag.js";
-// import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
 import Information16 from "@carbon/icons-vue/lib/information/16";
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 export interface TagTooltip {
@@ -110,7 +108,7 @@ interface Props {
   tags?: string[];
   title: string;
   to?: string;
-  secondaryCta?: Link | null;
+  secondaryCta?: TextLink | null;
   tooltipTags?: TagTooltip[];
   verticalLayout?: boolean;
 }

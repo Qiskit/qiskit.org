@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import { LearnStartLearningUrl } from "~/constants/links";
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -45,7 +45,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.SummerSchool2022,
   label: "Start learning",
   segment: {
@@ -139,7 +139,7 @@ const courses: Course[] = [
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: Link[] = [];
+const links: TextLink[] = [];
 
 const prerequisites: Prerequisite[] = [
   {

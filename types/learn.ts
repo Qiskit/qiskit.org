@@ -1,6 +1,6 @@
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
-type RecommendedReading = Link & {
+type RecommendedReading = TextLink & {
   description?: string;
   author?: string;
 };

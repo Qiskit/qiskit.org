@@ -1,4 +1,4 @@
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 type MosaicElement = {
   position: string;
@@ -6,13 +6,13 @@ type MosaicElement = {
   description: string;
   image: string;
   altText: string;
-  cta?: Link;
+  cta?: TextLink;
 };
 
 type DescriptionCard = {
   title: string;
   description: string;
-  cta: Link;
+  cta: TextLink;
 };
 
 export { MosaicElement, DescriptionCard };

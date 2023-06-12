@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum QuantumProtocolsAndQuantumAlgorithmsUrl {
   DefiningQuantumCircuits = "https://learn.qiskit.org/course/ch-algorithms/quantum-circuits",
@@ -58,7 +58,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: QuantumProtocolsAndQuantumAlgorithmsUrl.DefiningQuantumCircuits,
   label: "Start learning",
   segment: {

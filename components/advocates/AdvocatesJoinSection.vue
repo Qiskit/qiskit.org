@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Benefit {
   icon: string;
@@ -60,7 +60,7 @@ const advocateBenefits: Benefit[] = [
   },
 ];
 
-const joinAction: Link = {
+const joinAction: TextLink = {
   url: "https://qisk.it/advocateapplication",
   label: "Join the program",
   segment: { cta: "join-the-program", location: "join-section" },

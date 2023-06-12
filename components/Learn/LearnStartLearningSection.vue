@@ -120,15 +120,14 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/tabs/index.js";
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 type Course = {
   image: string;
   title: string;
   subtitle?: string;
   description: string;
-  cta: Link;
+  cta: TextLink;
 };
 
 type LearningSection = {
@@ -141,7 +140,7 @@ type Syllabus = {
   title: string;
   instructor: string;
   university: string;
-  cta: Link;
+  cta: TextLink;
 };
 
 type TeachingSection = {

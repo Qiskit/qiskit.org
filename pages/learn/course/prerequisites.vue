@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum PrerequisitesUrl {
   SettingUp = "https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook",
@@ -45,7 +45,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/prerequisites/prerequisites.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: PrerequisitesUrl.Introduction,
   label: "Start learning",
   segment: {

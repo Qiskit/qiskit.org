@@ -27,16 +27,16 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 import type { ProviderCodeExample } from "~/types/providers";
 
 export interface AccordionLayoutProps {
   title: string;
   description: string;
   installation: string;
-  websiteCta: Link;
-  docsCta: Link;
-  sourceCta: Link;
+  websiteCta: TextLink;
+  docsCta: TextLink;
+  sourceCta: TextLink;
   codeExamples: ProviderCodeExample[];
 }
 

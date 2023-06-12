@@ -187,70 +187,76 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from "~/types/segment";
+import { Link } from "~/types/links";
 
-interface TrackedLink {
-  url: string;
-  segment: CtaClickedEventProp;
-}
-
-const pythonAndJupyter: TrackedLink = {
+const pythonAndJupyter: Link = {
+  title: "Introduction to Python and Jupyter Notebooks",
   url: "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
   segment: { cta: "textbook-python-and-jupyter-notebooks", location: "faq" },
 };
 
-const linearAlgebra: TrackedLink = {
+const linearAlgebra: Link = {
+  title: "Introduction to Linear Algebra for Quantum Computing",
   url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
   segment: { cta: "qiskit-linear-algebra", location: "faq" },
 };
 
-const basicsOfQuantumInformation: TrackedLink = {
+const basicsOfQuantumInformation: Link = {
+  title: "Basics of Quantum Information",
   url: "https://qiskit.org/learn/course/basics-quantum-information/",
   segment: { cta: "basics-of-quantum-information", location: "faq" },
 };
 
-const qCEducators: TrackedLink = {
+const qCEducators: Link = {
+  title: "IBM Quantum Educators Program",
   url: "https://quantum-computing.ibm.com/programs/educators",
   segment: { cta: "ibm-quantum-educators-program", location: "faq" },
 };
 
-const mailtoQCEducators: TrackedLink = {
+const mailtoQCEducators: Link = {
+  title: "Email IBM Quantum Educators Program",
   url: "mailto:quantum.education@us.ibm.com",
   segment: { cta: "mailto-quantum-educators-program", location: "faq" },
 };
 
-const twitterQiskit: TrackedLink = {
+const twitterQiskit: Link = {
+  title: "Qiskit Twitter",
   url: "https://twitter.com/qiskit",
   segment: { cta: "qiskit-twitter", location: "faq" },
 };
 
-const twitterIBMResearch: TrackedLink = {
+const twitterIBMResearch: Link = {
+  title: "IBM Research Twitter",
   url: "https://twitter.com/IBMResearch",
   segment: { cta: "ibmresearch-twitter", location: "faq" },
 };
 
-const githubQiskit: TrackedLink = {
+const githubQiskit: Link = {
+  title: "Qiskit GitHub",
   url: "https://github.com/Qiskit",
   segment: { cta: "qiskit-github", location: "faq" },
 };
 
-const mediumQiskit: TrackedLink = {
+const mediumQiskit: Link = {
+  title: "Qiskit Medium",
   url: "https://medium.com/qiskit",
   segment: { cta: "qiskit-medium", location: "faq" },
 };
 
-const qiskitSubscribe: TrackedLink = {
+const qiskitSubscribe: Link = {
+  title: "Subscribe to the Qiskit YouTube",
   url: "https://qisk.it/sub",
   segment: { cta: "qiskit-youtube-subscribe", location: "faq" },
 };
 
-// TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
-const joinQiskitSlack: TrackedLink = {
+const joinQiskitSlack: Link = {
+  title: "Join the Qiskit Slack",
   url: "https://qisk.it/join-slack",
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
 
-const qiskitEvents: TrackedLink = {
+const qiskitEvents: Link = {
+  title: "Qiskit Events",
   url: "https://qiskit.org/events",
   segment: { cta: "qiskit-org-events", location: "faq" },
 };

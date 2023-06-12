@@ -19,8 +19,8 @@
 <script setup lang="ts">
 import { LearnStartLearningUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -41,7 +41,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/algorithm-design/algorithm-design.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.AlgorithmDesign,
   label: "Start learning",
   segment: {

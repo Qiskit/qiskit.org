@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum QuantumStatesAndQubitsUrl {
   Introduction = "https://learn.qiskit.org/course/ch-states/introduction",
@@ -49,7 +49,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: QuantumStatesAndQubitsUrl.Introduction,
   label: "Start learning",
   segment: {
