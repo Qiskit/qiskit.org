@@ -25,7 +25,12 @@
         </li>
       </template>
     </ul>
-    <UiCta class="providers-list__btn" v-bind="providersPage" />
+    <UiCta
+      class="providers-list__btn"
+      :url="providersPage.url"
+      :label="providersPage.label"
+      :segment="providersPage.segment"
+    />
   </section>
 </template>
 

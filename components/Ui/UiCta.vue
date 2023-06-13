@@ -221,9 +221,11 @@ function isIdAnchor(url: string) {
     &#{$arrow-right-path} {
       transform: translate(4px, 0);
     }
+
     &#{$arrow-down-path} {
       transform: translate(0, 4px);
     }
+
     &#{$launch-path} {
       transform: translate(2px, -2px);
     }

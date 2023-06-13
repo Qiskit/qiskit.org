@@ -2,9 +2,9 @@
   <UiBasicLink
     class="link"
     :class="`link_${kind}`"
-    :segment="link.segment"
-    :title="link.title"
-    :url="link.url"
+    :segment="link?.segment"
+    :title="link?.title"
+    :url="link?.url"
   >
     <slot />
   </UiBasicLink>

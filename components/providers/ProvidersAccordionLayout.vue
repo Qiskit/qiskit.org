@@ -20,7 +20,10 @@
         v-for="cta in validCtas"
         :key="cta.label"
         kind="ghost"
-        v-bind="cta"
+        :url="cta.url"
+        :label="cta.label"
+        :segment="cta.segment"
+        :title="cta.title"
       />
     </div>
   </article>

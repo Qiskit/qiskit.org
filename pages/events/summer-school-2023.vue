@@ -28,7 +28,9 @@
         <p>See you soon!</p>
         <UiCta
           class="summer-school-page__cta summer-school-page__cta_disabled"
-          v-bind="header.cta"
+          :url="header.cta.url"
+          :label="header.cta.label"
+          :segment="header.cta.segment"
           kind="secondary"
         />
       </template>
