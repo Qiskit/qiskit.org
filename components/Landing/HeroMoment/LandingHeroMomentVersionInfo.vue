@@ -22,9 +22,9 @@
       <div class="qiskit-version-info__release-notes">
         <UiLink
           class="code"
-          label="GitHub"
-          url="https://qiskit.org/documentation/release_notes.html#notable-changes"
-          :segment="{ cta: 'release-notes', location: 'version-info' }"
+          :label="releaseNotesLink.label"
+          :url="releaseNotesLink.url"
+          :segment="releaseNotesLink.segment"
         >
           see release notes
         </UiLink>
@@ -47,6 +47,14 @@ const githubRepoLink: Link = {
   label: "GitHub",
   segment: { cta: "gitHub-repository", location: "version-info" },
   url: "https://github.com/Qiskit/qiskit",
+};
+
+const config = useRuntimeConfig();
+
+const releaseNotesLink: Link = {
+  label: "GitHub",
+  url: `${config.public.siteUrl}/documentation/release_notes.html#notable-changes`,
+  segment: { cta: "release-notes", location: "version-info" },
 };
 </script>
 
