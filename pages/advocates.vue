@@ -20,6 +20,8 @@ definePageMeta({
   routeName: "advocates",
 });
 
+const config = useRuntimeConfig();
+
 useSeoMeta({
   title: "Qiskit Advocates",
   ogTitle: "Qiskit Advocates",
@@ -27,7 +29,7 @@ useSeoMeta({
     "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
   ogDescription:
     "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
-  ogImage: "https://qiskit.org/images/qiskit-logo.png",
-  ogUrl: "https://qiskit.org/advocates/",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/advocates/`,
 });
 </script>

@@ -122,6 +122,7 @@ import type { Member, Tier } from "~/types/ecosystem";
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
+const config = useRuntimeConfig();
 
 definePageMeta({
   layout: "default-max",
@@ -136,8 +137,8 @@ useSeoMeta({
     "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
   ogDescription:
     "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
-  ogImage: "https://qiskit.org/images/qiskit-logo.png",
-  ogUrl: "https://qiskit.org/ecosystem/",
+  ogImage: `${config.public.siteUrl}images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/ecosystem/`,
 });
 
 const tierFilters = ref<string[]>([]);

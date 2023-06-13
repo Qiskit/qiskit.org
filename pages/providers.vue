@@ -66,6 +66,8 @@ definePageMeta({
   routeName: "providers",
 });
 
+const config = useRuntimeConfig();
+
 useSeoMeta({
   title: "Qiskit Providers",
   ogTitle: "Qiskit Providers",
@@ -73,8 +75,8 @@ useSeoMeta({
     "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
   ogDescription:
     "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
-  ogImage: "https://qiskit.org/images/metal/hero/cryo.png",
-  ogUrl: "https://qiskit.org/providers/",
+  ogImage: `${config.public.siteUrl}/images/metal/hero/cryo.png`,
+  ogUrl: `${config.public.siteUrl}/providers/`,
 });
 
 const { data: providersData } = await useAsyncData("providers", () =>

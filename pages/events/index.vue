@@ -129,6 +129,7 @@ definePageMeta({
 
 const pastEvents = rawPastEvents as CommunityEvent[];
 const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
+const config = useRuntimeConfig();
 
 useSeoMeta({
   title: "Qiskit Events",
@@ -137,8 +138,8 @@ useSeoMeta({
     "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
   ogDescription:
     "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
-  ogImage: "https://qiskit.org/images/qiskit-logo.png",
-  ogUrl: "https://qiskit.org/events/",
+  ogImage: `${config.public.siteUrl}/events/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/events/`,
 });
 
 const { trackClickEvent } = useSegment();

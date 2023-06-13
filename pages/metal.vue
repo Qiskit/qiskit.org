@@ -16,6 +16,8 @@ definePageMeta({
   routeName: "metal",
 });
 
+const config = useRuntimeConfig();
+
 useSeoMeta({
   title: "Qiskit Metal",
   ogTitle: "Qiskit Metal",
@@ -23,7 +25,7 @@ useSeoMeta({
     "A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum devices with ease: Qiskit Metal. ",
   ogDescription:
     "A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum devices with ease: Qiskit Metal. ",
-  ogImage: "https://qiskit.org/images/metal/hero/cryo.png",
-  ogUrl: "https://qiskit.org/metal",
+  ogImage: `${config.public.siteUrl}images/metal/hero/cryo.png`,
+  ogUrl: `${config.public.siteUrl}/metal`,
 });
 </script>
