@@ -129,7 +129,7 @@ const ctaLink = computed(() => ({
 }));
 
 // TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
-function hasTags(tags: string[] | PrimaryTag[]) {
+function hasTags(tags: string[]) {
   return Array.isArray(tags) && tags.length > 0;
 }
 </script>
