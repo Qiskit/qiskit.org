@@ -137,7 +137,7 @@ useSeoMeta({
     "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
   ogDescription:
     "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
-  ogImage: "/images/qiskit-logo.png",
+  ogImage: "https://qiskit.org/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/events/",
 });
 

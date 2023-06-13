@@ -73,7 +73,7 @@ useSeoMeta({
     "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
   ogDescription:
     "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
-  ogImage: "/images/metal/hero/cryo.png",
+  ogImage: "https://qiskit.org/images/metal/hero/cryo.png",
   ogUrl: "https://qiskit.org/providers/",
 });
 

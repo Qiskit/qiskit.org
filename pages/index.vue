@@ -27,7 +27,7 @@ useSeoMeta({
     "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.",
   ogDescription:
     "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.",
-  ogImage: "/images/qiskit-logo.png",
+  ogImage: "https://qiskit.org/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/",
 });
 

@@ -27,7 +27,7 @@ useSeoMeta({
     "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
   ogDescription:
     "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
-  ogImage: "/images/qiskit-logo.png",
+  ogImage: "https://qiskit.org/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/advocates/",
 });
 </script>

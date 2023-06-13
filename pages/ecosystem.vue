@@ -136,7 +136,7 @@ useSeoMeta({
     "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
   ogDescription:
     "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
-  ogImage: "/images/qiskit-logo.png",
+  ogImage: "https://qiskit.org/images/qiskit-logo.png",
   ogUrl: "https://qiskit.org/ecosystem/",
 });
 

@@ -23,7 +23,7 @@ useSeoMeta({
     "A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum devices with ease: Qiskit Metal. ",
   ogDescription:
     "A first-of-its-kind, open-source project for engineers and scientists to design superconducting quantum devices with ease: Qiskit Metal. ",
-  ogImage: "/images/metal/hero/cryo.png",
+  ogImage: "https://qiskit.org/images/metal/hero/cryo.png",
   ogUrl: "https://qiskit.org/metal",
 });
 </script>
