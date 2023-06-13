@@ -103,7 +103,7 @@ interface Props {
   title: string;
   to?: string;
   secondaryCta?: Link | null;
-  primaryTags?: PrimaryTag[];
+  primaryTag?: string;
   verticalLayout?: boolean;
 }
 
