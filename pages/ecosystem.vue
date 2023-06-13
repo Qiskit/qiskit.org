@@ -40,7 +40,7 @@
               :target="`panel${tierName}`"
               :value="`${tierName}`"
             >
-              {{ `${tierName} (${getFilteredResultsCount(tierName)})` }}
+              {{ `${tierName} (${getFilteredMembers(tierName).length})` }}
             </bx-tab>
           </bx-tabs>
           <div class="ecosystem__tiers__description">
@@ -102,11 +102,11 @@
               :aria-labelledby="`tab${tierName}`"
             >
               <div
-                v-if="filteredMembers.length > 0"
+                v-if="getFilteredMembers(tierName).length > 0"
                 class="cds--row ecosystem__members"
               >
                 <EcosystemItemCard
-                  v-for="member in sortMembers(filteredMembers)"
+                  v-for="member in sortMembers(getFilteredMembers(tierName))"
                   :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
                   :member="member"
@@ -186,17 +186,14 @@ const selectedTierDescription = computed(() => {
   return tier?.description || "";
 });
 
-const filteredMembers = computed(() => {
+function getFilteredMembers(tierName: string) {
   if (!members) {
     return [];
   }
 
-  const filteredMembersByTier = membersByTier[selectedTab.value];
-  return filterMembers(filteredMembersByTier);
-});
+  const filteredMembersByTier = membersByTier[tierName];
 
-function filterMembers(membersToFilter: Member[]): Member[] {
-  let result = membersToFilter;
+  let result = filteredMembersByTier;
 
   if (searchedText.value !== "") {
     result = result.filter((member) =>
@@ -261,12 +258,6 @@ function sortMembers(membersToSort: Member[]) {
   return propToSortBy.value === "stars"
     ? reverse(membersOnAscOrder)
     : membersOnAscOrder;
-}
-
-function getFilteredResultsCount(tierName: string): number {
-  const filteredMembersByTier = membersByTier[tierName];
-  const filteredMembersCount = filterMembers(filteredMembersByTier).length;
-  return filteredMembersCount;
 }
 </script>
 
