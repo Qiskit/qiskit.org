@@ -216,6 +216,8 @@ const pastEventsDataTable = dataPerRow(
   "past-events-section"
 );
 
+const config = useRuntimeConfig();
+
 // Data for the helpful resources section
 const helpfulResources: DescriptionCard[] = [
   {
@@ -249,7 +251,7 @@ const helpfulResources: DescriptionCard[] = [
     description:
       "If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.",
     cta: {
-      url: "https://qiskit.org/learn",
+      url: `${config.public.siteUrl}/learn`,
       label: "Start learning",
       segment: {
         cta: "qiskit-org-learn",

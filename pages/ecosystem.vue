@@ -271,10 +271,6 @@ function getSecondaryCta(member: Member) {
       fill: carbon.$cool-gray-60;
     }
   }
-
-  :deep(.card__title) {
-    font-size: 20px;
-  }
 }
 
 .bx-accordion__item {

@@ -63,7 +63,7 @@ withDefaults(defineProps<Props>(), {
     text-decoration: none;
     display: inline-block;
     width: 100%;
-    padding-bottom: carbon.$spacing-03;
+    margin-bottom: carbon.$spacing-04;
 
     &_theme_light {
       color: qiskit.$text-color-lighter;

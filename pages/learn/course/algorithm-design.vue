@@ -56,9 +56,11 @@ const externalRecommendedReadingsPreamble = `To make the most out of this
   course, we recommend familiarity with the basics of quantum information. You may
   also want to install Qiskit and the IBM Qiskit Runtime package:`;
 
+const config = useRuntimeConfig();
+
 const links: RecommendedReading[] = [
   {
-    url: "https://qiskit.org/learn/course/basics-quantum-information/",
+    url: `${config.public.siteUrl}/learn/course/basics-quantum-information/`,
     author: "",
     label: "Basics of quantum information",
     description: `Learn about single systems, multiple systems, quantum circuits,
@@ -69,7 +71,7 @@ const links: RecommendedReading[] = [
     },
   },
   {
-    url: "https://qiskit.org/ecosystem/ibm-runtime/",
+    url: `${config.public.siteUrl}/ecosystem/ibm-runtime/`,
     author: "",
     label: "Qiskit Runtime Overview",
     description: "Explore Qiskit Runtime service documentation and tutorials.",

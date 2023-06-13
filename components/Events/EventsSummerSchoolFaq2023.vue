@@ -203,7 +203,7 @@ const linearAlgebra: Link = {
 
 const basicsOfQuantumInformation: Link = {
   title: "Basics of Quantum Information",
-  url: "https://qiskit.org/learn/course/basics-quantum-information/",
+  url: `${config.public.siteUrl}/learn/course/basics-quantum-information/`,
   segment: { cta: "basics-of-quantum-information", location: "faq" },
 };
 
@@ -255,9 +255,9 @@ const joinQiskitSlack: Link = {
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
 
-const qiskitEvents: Link = {
+const qiskitEvents: TrackedLink = {
   title: "Qiskit Events",
-  url: "https://qiskit.org/events",
+  url: `${config.public.siteUrl}/events`,
   segment: { cta: "qiskit-org-events", location: "faq" },
 };
 </script>

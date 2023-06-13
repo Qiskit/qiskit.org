@@ -1,7 +1,5 @@
-import fs from "fs";
-import util from "util";
-
 import EventsAirtableRecords from "./event-conversion-utils";
+import { writeJSONToFile } from "./utils/conversion-utils";
 
 export default async function (apiKey: string, outputFolder: string) {
   const communityEventsAirtableRecords = new EventsAirtableRecords(
@@ -21,8 +19,6 @@ export default async function (apiKey: string, outputFolder: string) {
     await seminarSeriesEventsAirtableRecords.fetchSeminarSeriesEvents(31);
   const pastSeminarSeriesEvents =
     await seminarSeriesEventsAirtableRecords.fetchSeminarSeriesEvents(-62);
-
-  const writeFile = util.promisify(fs.writeFile);
 
   const eventsAndOutputFilename = [
     {
@@ -45,10 +41,7 @@ export default async function (apiKey: string, outputFolder: string) {
 
   await Promise.all(
     eventsAndOutputFilename.map((curr) =>
-      writeFile(
-        `${outputFolder}/${curr.outputFilename}`,
-        JSON.stringify(curr.events, null, 2)
-      )
+      writeJSONToFile(outputFolder, curr.outputFilename, curr.events)
     )
   );
 }

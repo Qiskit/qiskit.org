@@ -49,8 +49,10 @@ interface Props {
 
 defineProps<Props>();
 
+const config = useRuntimeConfig();
+
 const getStartedLink: TextLink = {
-  url: "https://qiskit.org/documentation/getting_started.html",
+  url: `${config.public.siteUrl}/documentation/getting_started.html`,
   label: "Get started",
   segment: { cta: "get-started", location: "hero-moment" },
 };
