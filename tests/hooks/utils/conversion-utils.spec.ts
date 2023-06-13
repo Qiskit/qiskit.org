@@ -4,7 +4,7 @@ import { describe, expect, test } from "vitest";
 import { writeJSONToFile } from "../../../hooks/utils/conversion-utils";
 
 describe("writeJSONToFile", () => {
-  test("gets the city from the record", async () => {
+  test("write a dummy json to a file", async () => {
     const mock = [
       {
         name: "Main",
