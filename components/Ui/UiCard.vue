@@ -166,6 +166,10 @@ function hasTags(tags: string[]) {
     }
   }
 
+  &__body {
+    overflow-wrap: break-word;
+  }
+
   &__content {
     padding: carbon.$spacing-05 carbon.$spacing-07;
     flex: 1;
