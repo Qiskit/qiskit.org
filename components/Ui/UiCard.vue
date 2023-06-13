@@ -44,15 +44,9 @@
               {{ tag }}
             </bx-tag>
           </div>
-          <div v-if="hasTags(primaryTags)" class="card__tags">
-            <div
-              v-for="tag in primaryTags"
-              :key="tag.label"
-              class="card__custom-pill"
-            >
-              {{ tag.label }}
-            </div>
-          </div>
+          <bx-tag class="card__tag" type="purple">
+            {{ primaryTag }}
+          </bx-tag>
         </div>
       </header>
       <div class="card__body">
@@ -85,11 +79,6 @@
 <script setup lang="ts">
 import { Link } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
-
-export interface PrimaryTag {
-  // the short string label for inside the tag
-  label: string;
-}
 
 interface Props {
   descriptionWholeSize?: boolean;
@@ -212,6 +201,10 @@ function hasTags(tags: string[]) {
     white-space: nowrap;
   }
 
+  &__tags {
+    margin-right: carbon.$spacing-03;
+  }
+
   &__title {
     flex: 1;
     margin-bottom: carbon.$spacing-02;
@@ -273,37 +266,6 @@ bx-tag {
   min-width: 0;
 
   &:last-child {
-    margin-right: 0;
-  }
-}
-</style>
-
-<style lang="scss">
-@use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/index.scss" as qiskit;
-
-.card {
-  &__custom-pill {
-    @include carbon.type-style("label-01");
-
-    background-color: qiskit.$tag-background-color;
-    color: qiskit.$tag-text-color;
-    display: inline-flex;
-    min-width: 0;
-    max-width: 100%;
-    min-height: 1.5rem;
-    align-items: center;
-    justify-content: center;
-    padding: carbon.$spacing-02 carbon.$spacing-03;
-    margin: carbon.$spacing-02 carbon.$spacing-03 carbon.$spacing-02
-      carbon.$spacing-03;
-    border-radius: 6.9375rem;
-    cursor: default;
-    vertical-align: middle;
-    word-break: break-word;
-  }
-
-  &__custom-pill:last-child {
     margin-right: 0;
   }
 }

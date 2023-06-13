@@ -4,11 +4,7 @@
       class="ecosystem-item-card"
       :title="member.name"
       :tags="member.labels"
-      :primary-tags="[
-        {
-          label: member.tier,
-        },
-      ]"
+      :primary-tag="member.tier"
       cta-label="Go to repo"
       :segment="{
         cta: `go-to-repo-${member.name}`,
