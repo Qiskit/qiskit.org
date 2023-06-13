@@ -5,24 +5,21 @@ import { writeJSONToFile } from "../../../hooks/utils/conversion-utils";
 
 describe("writeJSONToFile", () => {
   test("gets the city from the record", async () => {
-    const mock = {
-      id: 11,
-      title: "perfume Oil",
-      description: "Mega Discount, Impression of A...",
-      price: 13,
-      discountPercentage: 8.4,
-      rating: 4.26,
-      stock: 65,
-      brand: "Impression of Acqua Di Gio",
-      category: "fragrances",
-      thumbnail: "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
-      images: [
-        "https://i.dummyjson.com/data/products/11/1.jpg",
-        "https://i.dummyjson.com/data/products/11/2.jpg",
-        "https://i.dummyjson.com/data/products/11/3.jpg",
-        "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
-      ],
-    };
+    const mock = [
+      {
+        name: "Main",
+        description: "The main Qiskit packages maintained by IBM Quantum",
+      },
+      {
+        name: "Extensions",
+        description: "IBM Quantum supported Qiskit extensions",
+      },
+      {
+        name: "Community",
+        description:
+          "Software packages supported by the Qiskit community, not maintained by IBM Quantum",
+      },
+    ];
 
     await writeJSONToFile(__dirname, "mock.json", mock);
 
