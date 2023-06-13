@@ -2,18 +2,24 @@
   <article>
     <div class="qiskit-capability-card__container">
       <div class="qiskit-capability-card__thumbnail">
-        <img
+        <nuxt-img
           class="qiskit-capability-card__thumbnail__media"
+          format="webp"
           :src="thumbnailResource"
+          width="160px"
+          alt=""
         />
       </div>
       <div class="qiskit-capability-card__copy">
         <h3 class="qiskit-capability-card__title">
           {{ title }}
         </h3>
-        <img
+        <nuxt-img
           class="qiskit-capability-card__thumbnail__mobile"
+          format="webp"
           :src="thumbnailResource"
+          width="160px"
+          alt=""
         />
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
@@ -31,13 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 interface Props {
   thumbnailResource: string;
   title: string;
   description: string;
-  link?: GeneralLink | undefined;
+  link?: Link | undefined;
 }
 
 withDefaults(defineProps<Props>(), {
@@ -77,7 +83,6 @@ $card-img-width: 10rem;
 
     &__media {
       display: block;
-      width: 100%;
       width: $card-img-width;
     }
 

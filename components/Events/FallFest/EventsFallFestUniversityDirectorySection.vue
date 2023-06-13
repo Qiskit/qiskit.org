@@ -42,14 +42,14 @@
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 type University = {
   image: string;
   title: string;
   detail: string;
   startDate: string;
-  cta: GeneralLink;
+  cta: Link;
 };
 
 const universities: University[] = [

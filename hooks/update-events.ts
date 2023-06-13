@@ -9,7 +9,7 @@ export default async function (apiKey: string, outputFolder: string) {
     "Add to Event Site"
   );
   const upcomingCommunityEvents =
-    await communityEventsAirtableRecords.fetchCommunityEvents(31);
+    await communityEventsAirtableRecords.fetchCommunityEvents(62);
   const pastCommunityEvents =
     await communityEventsAirtableRecords.fetchCommunityEvents(-31);
 

@@ -8,26 +8,38 @@
       </template>
       <template #description>
         <p>
-          The Qiskit Global Summer School 2022 is a two-week intensive summer
+          The Qiskit Global Summer School 2023 is a two-week intensive summer
           program designed to empower the quantum researchers and developers of
-          tomorrow with the skills and know-how to explore the world of quantum
-          computing and its applications. This third-annual summer school will
-          provide a focused introduction to quantum computing and its
-          applications to quantum simulation, with a specific focus on quantum
-          chemistry.
+          tomorrow with the know-how to explore the world of quantum computing,
+          as well as refresh and sharpen the industry professional's skills.
+          This fourth-annual summer school will focus foundationally on quantum
+          computing by taking a <b>back-to-basics</b> approach, with a look at
+          making the <b>transition</b> from <b>theory to implementation</b>.
         </p>
         <p>
           Please follow
           <UiLink v-bind="headerData.qiskitTwitterLink">
             Qiskit Twitter
           </UiLink>
-          for more details and updates. For any questions, please check out our
-          FAQ below!
+          for updates and
+          <UiLink v-bind="headerData.researchBlogLink">
+            read the announcement blog
+          </UiLink>
+          for more details. For any questions, please check out our FAQ below!
         </p>
-        <p>See you next year!</p>
+        <p>See you soon!</p>
+        <UiCta
+          class="summer-school-page__cta summer-school-page__cta_disabled"
+          v-bind="header.cta"
+          kind="secondary"
+        />
       </template>
       <template #card>
-        <EventsItemCard v-bind="headerData.card" vertical-layout>
+        <EventsItemCard
+          v-bind="headerData.card"
+          :alt-text="header.card.altText"
+          vertical-layout
+        >
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>
@@ -80,7 +92,7 @@
         </div>
       </section>
 
-      <EventsSummerSchoolFaq class="summer-school-page__section" />
+      <EventsSummerSchoolFaq2023 class="summer-school-page__section" />
 
       <UiHelpfulResourcesSection
         class="summer-school-page__section"
@@ -92,25 +104,25 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/tabs/index.js";
 import {
   header,
   mosaic,
   agenda,
   helpfulResources,
-} from "~/constants/summerSchool2022Content";
+} from "~/constants/summerSchool2023Content";
 
 definePageMeta({
   layout: "default-max",
-  pageTitle: "Qiskit Global Summer School 2022",
-  routeName: "summer-school",
+  pageTitle: "Qiskit Global Summer School 2023",
+  routeName: "/events/summer-school-2023",
 });
 
-const title = "Qiskit Global Summer School 2022";
-const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
-designed to empower the next generation of quantum researchers and developers with the skills
-and know-how to explore quantum applications on their own`;
-const image = "/images/events/summer-school/summer-school-logo.png";
+const title = "Qiskit Global Summer School 2023";
+const description =
+  "The Qiskit Global Summer School 2023 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
+const image =
+  "https://qiskit.org/images/events/summer-school-2023/summer-school-2023-logo.png";
+const pageUrl = "https://qiskit.org/events/summer-school-2023";
 
 useHead({
   title,
@@ -146,6 +158,16 @@ useHead({
       content: description,
     },
     {
+      hid: "og:url",
+      property: "og:url",
+      content: pageUrl,
+    },
+    {
+      hid: "og:type",
+      property: "og:type",
+      content: "article",
+    },
+    {
       hid: "og:image",
       property: "og:image",
       content: image,
@@ -172,6 +194,7 @@ const helpfulResourcesData = helpfulResources;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .summer-school-page {
   display: flex;
@@ -203,6 +226,20 @@ const helpfulResourcesData = helpfulResources;
   &__content {
     @include carbon.breakpoint-down(lg) {
       max-width: 100%;
+    }
+  }
+
+  &__cta {
+    margin-top: carbon.$spacing-07;
+
+    &_disabled {
+      pointer-events: none;
+      color: qiskit.$text-color-light;
+      width: fit-content;
+
+      &:deep(.cta__icon) {
+        display: none;
+      }
     }
   }
 }

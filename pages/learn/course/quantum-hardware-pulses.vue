@@ -17,9 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { QuantumHardwarePulsesUrl } from "~/constants/appLinks";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumHardwarePulsesUrl {
+  CalibratingQubitsWithQiskitPulse = "https://learn.qiskit.org/course/quantum-hardware-pulses/calibrating-qubits-using-qiskit-pulse",
+  AccessingHigherEnergyStates = "https://learn.qiskit.org/course/quantum-hardware-pulses/accessing-higher-energy-states-with-qiskit-pulse",
+  IntroductionToTransmonPhysics = "https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics",
+  CircuitQuantumElectrodynamics = "https://learn.qiskit.org/course/quantum-hardware-pulses/circuit-quantum-electrodynamics",
+  ExploringTheJaynesCummingsHamiltonianWithQiskitPulse = "https://learn.qiskit.org/course/quantum-hardware-pulses/exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse",
+  MeasuringTheQubitacStakShift = "https://learn.qiskit.org/course/quantum-hardware-pulses/measuring-the-qubit-ac-stark-shift",
+  HamiltonianTomography = "https://learn.qiskit.org/course/quantum-hardware-pulses/hamiltonian-tomography",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -41,7 +50,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: QuantumHardwarePulsesUrl.CalibratingQubitsWithQiskitPulse,
   label: "Start learning",
   segment: {
@@ -52,7 +61,7 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const courses: Course[] = [
   {

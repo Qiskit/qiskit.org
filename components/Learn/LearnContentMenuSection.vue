@@ -1,30 +1,12 @@
 <template>
   <section class="content-menu-section">
     <div class="content-menu-section__container">
-      <ClientOnly>
-        <qiskit-mega-menu-dropdown
-          :content.prop="dropdownMenuContent"
-          class="content-menu-section__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
-          segment-component-name="Textbook mega menu"
-          :track-performed-search="trackPerformedSearch"
-        />
-      </ClientOnly>
+      <LearnMegaMenu
+        classes="content-menu-section__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
+      />
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-// import "@qiskit/web-components/mega-menu-dropdown";
-import { LEARN_MEGA_MENU } from "~/constants/megaMenuLinks";
-
-const dropdownMenuContent = LEARN_MEGA_MENU;
-
-// TODO: Refactor tracking
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function trackPerformedSearch(uiElement: string, field: string) {
-  // this.$trackPerformedSearch(uiElement, field);
-}
-</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
@@ -39,9 +21,9 @@ function trackPerformedSearch(uiElement: string, field: string) {
 
     max-width: qiskit.$max-size;
   }
+}
 
-  qiskit-mega-menu-dropdown {
-    --qiskit-color-input-background: transparent;
-  }
+:deep(qiskit-mega-menu-dropdown) {
+  --qiskit-color-input-background: transparent;
 }
 </style>

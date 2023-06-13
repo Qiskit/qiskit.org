@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { StartLearningUrl } from "~/constants/appLinks";
+import { LearnStartLearningUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -45,8 +45,8 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/basics-quantum-information/atom.png";
 
-const startLearningCTA: GeneralLink = {
-  url: StartLearningUrl.BasicsQuantumInformation,
+const startLearningCTA: Link = {
+  url: LearnStartLearningUrl.BasicsQuantumInformation,
   label: "Start learning",
   segment: {
     cta: "basics-quantum-information",
@@ -136,25 +136,27 @@ const courses: Course[] = [
     image: "single-systems-preview.png",
     label: "Single systems",
     segment: { cta: "single-systems", location: "course" },
-    url: StartLearningUrl.BasicsQuantumInformation + "/single-systems",
+    url: LearnStartLearningUrl.BasicsQuantumInformation + "/single-systems",
   },
   {
     image: "multiple-systems-preview.png",
     label: "Multiple systems",
     segment: { cta: "multiple-systems", location: "course" },
-    url: StartLearningUrl.BasicsQuantumInformation + "/multiple-systems",
+    url: LearnStartLearningUrl.BasicsQuantumInformation + "/multiple-systems",
   },
   {
     image: "quantum-circuits-preview.png",
     label: "Quantum circuits",
     segment: { cta: "quantum-circuits", location: "course" },
-    url: StartLearningUrl.BasicsQuantumInformation + "/quantum-circuits",
+    url: LearnStartLearningUrl.BasicsQuantumInformation + "/quantum-circuits",
   },
   {
     image: "entanglement-in-action-preview.png",
     label: "Entanglement in action",
     segment: { cta: "entanglement-in-action", location: "course" },
-    url: StartLearningUrl.BasicsQuantumInformation + "/entanglement-in-action",
+    url:
+      LearnStartLearningUrl.BasicsQuantumInformation +
+      "/entanglement-in-action",
   },
 ];
 

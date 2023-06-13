@@ -4,12 +4,13 @@
     :image="image"
     :title="name"
     :tags="formattedRegion"
+    :alt-text="`${name} profile photo`"
   >
     <div v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </div>
-    <div class="advocate-card__contact">
+    <div v-if="slackUsername" class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
       <UiLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
@@ -64,8 +65,8 @@ const location = computed(() =>
     align-items: center;
   }
 
-  &__location {
-    margin-bottom: carbon.$spacing-03;
+  &__contact {
+    margin-top: carbon.$spacing-03;
   }
 
   &__icon {

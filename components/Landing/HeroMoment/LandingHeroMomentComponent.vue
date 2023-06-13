@@ -28,13 +28,20 @@
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
         />
+        <nuxt-img
+          class="hero-moment__container__image"
+          format="webp"
+          sizes="lg:500px xl:850px"
+          src="/images/landing-page/hero-illustration.png"
+          alt="Drawing of two people working on a Quantum Computer"
+        />
       </div>
     </MetalGrid>
   </article>
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 interface Props {
   version: string;
@@ -42,12 +49,13 @@ interface Props {
 
 defineProps<Props>();
 
-const getStartedLink: GeneralLink = {
+const getStartedLink: Link = {
   url: "https://qiskit.org/documentation/getting_started.html",
   label: "Get started",
   segment: { cta: "get-started", location: "hero-moment" },
 };
 
+// TODO: Fix hydration text content mismatch
 const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 </script>
 
@@ -78,16 +86,26 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
   }
 
   &__container {
-    background-image: url("/images/landing-page/hero-illustration.png");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: contain;
     height: 100%;
+    overflow: hidden;
     padding-top: carbon.$spacing-10;
     pointer-events: none;
+    position: relative;
 
     @include carbon.breakpoint-down(md) {
       background-image: none;
+    }
+
+    &__image {
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+
+      @include carbon.breakpoint-down(md) {
+        display: none;
+      }
     }
   }
 

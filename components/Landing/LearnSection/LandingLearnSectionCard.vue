@@ -21,14 +21,22 @@
         </div>
       </div>
     </div>
-    <div class="cds--col-md learn-card__media" />
+    <div class="cds--col-md learn-card__media">
+      <nuxt-img
+        class="learn-card__media__image"
+        format="webp"
+        sizes="sm:500px md:700 xl:1000"
+        src="/images/landing-page/learn-image.jpg"
+        alt="Group of students looking into a laptop"
+      />
+    </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
-const learnLink: GeneralLink = {
+const learnLink: Link = {
   url: "/learn",
   label: "Get learning",
   segment: { cta: "get-learning", location: "learn-card" },
@@ -95,11 +103,17 @@ const learnLink: GeneralLink = {
   }
 
   &__media {
-    background-image: url("/images/landing-page/learn-image.jpg");
-    background-position: center 25%;
-    background-size: cover;
-    flex: 1;
     min-height: 12rem;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+
+    &__image {
+      height: 135%;
+      object-fit: cover;
+      position: absolute;
+      width: 100%;
+    }
   }
 
   &__cta {

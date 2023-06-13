@@ -17,10 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { QuantumStatesAndQubitsUrl } from "~/constants/appLinks";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum QuantumStatesAndQubitsUrl {
+  Introduction = "https://learn.qiskit.org/course/ch-states/introduction",
+  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/the-atoms-of-computation",
+  RepresentingQubitStates = "https://learn.qiskit.org/course/ch-states/representing-qubit-states",
+  SingleQubitGates = "https://learn.qiskit.org/course/ch-states/single-qubit-gates",
+  CaseForQuantum = "https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -42,7 +49,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: QuantumStatesAndQubitsUrl.Introduction,
   label: "Start learning",
   segment: {

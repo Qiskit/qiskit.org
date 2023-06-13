@@ -1,17 +1,18 @@
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 type MosaicElement = {
   position: string;
   title: string;
   description: string;
   image: string;
-  cta?: GeneralLink;
+  altText: string;
+  cta?: Link;
 };
 
 type DescriptionCard = {
   title: string;
   description: string;
-  cta: GeneralLink;
+  cta: Link;
 };
 
 export { MosaicElement, DescriptionCard };

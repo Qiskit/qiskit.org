@@ -2,7 +2,7 @@
   <article class="cds--grid page-section qiskit-capabilities-section">
     <h2>What Can Qiskit Do</h2>
     <div class="cds--row qiskit-capabilities-section__container">
-      <LandingQiskitCapabilityCard
+      <LandingQiskitCapabilitiesSectionCard
         v-for="item in capabilities"
         :id="item.title"
         :key="item.title"

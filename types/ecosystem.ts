@@ -1,5 +1,5 @@
 interface TestResult {
-  testType: string;
+  testType: "development" | "last passing version" | "stable" | "standard";
   passed: boolean;
   package: string;
   packageVersion: string;
@@ -9,9 +9,34 @@ interface TestResult {
   packageCommitHash: string;
 }
 
+type StylesResults = {
+  styleType: string;
+  passed: boolean;
+};
+
+type CoveragesResults = {
+  coverageType: string;
+  passed: boolean;
+};
+
+type ProjectLanguage = {
+  name: string;
+  versions: string[];
+};
+
+type ProjectConfig = {
+  language: ProjectLanguage;
+  dependenciesFiles: string[];
+  extraDependencies: string[];
+  testsCommand: string[];
+  stylesCheckCommand: string[];
+  coveragesCheckCommand: string[];
+};
+
 interface Member {
   name: string;
   url: string;
+  website?: string;
   description: string;
   licence: string;
   contactInfo: string | null;
@@ -21,21 +46,11 @@ interface Member {
   createdAt: number;
   updatedAt: number;
   testsResults: TestResult[];
-  stylesResults?: any[];
-  coveragesResults?: any[];
-  configuration?: {
-    language: {
-      name: string;
-      versions: string[];
-    };
-    dependenciesFiles: string[];
-    extraDependencies: string[];
-    testsCommand: string[];
-    stylesCheckCommand: string[];
-    coveragesCheckCommand: string[];
-  } | null;
-  historicalTestResults?: any[];
-  tier: string;
+  stylesResults?: StylesResults[];
+  coveragesResults?: CoveragesResults[];
+  configuration?: ProjectConfig | null;
+  historicalTestResults?: TestResult[];
+  tier: "Main" | "Community" | "Extensions";
   skipTests: boolean;
   stars: number;
 }

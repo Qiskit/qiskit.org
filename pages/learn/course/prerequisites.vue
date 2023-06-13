@@ -17,10 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { PrerequisitesUrl } from "~/constants/appLinks";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
+
+enum PrerequisitesUrl {
+  SettingUp = "https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook",
+  Introduction = "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
+}
 
 definePageMeta({
   layout: "default-max",
@@ -41,7 +45,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/prerequisites/prerequisites.png";
 
-const startLearningCTA: GeneralLink = {
+const startLearningCTA: Link = {
   url: PrerequisitesUrl.Introduction,
   label: "Start learning",
   segment: {

@@ -6,14 +6,23 @@
       'card_description-whole-size': descriptionWholeSize,
     }"
   >
-    <div
-      v-if="image"
-      class="card__image"
-      :class="imageContain ? 'card__image_contain' : null"
-      :style="{
-        'background-image': `url(${image})`,
-      }"
-    />
+    <div v-if="image" class="card__image-container">
+      <!-- TODO: investigate why this particular img is not being populated in past Events tab-->
+      <!-- <nuxt-img
+        class="card__image"
+        :class="imageContain ? 'card__image_contain' : null"
+        format="webp"
+        loading="lazy"
+        sizes="sm:300px md:650px"
+        :src="image"
+      /> -->
+      <img
+        class="card__image"
+        :alt="altText"
+        :class="imageContain ? 'card__image_contain' : null"
+        :src="image"
+      />
+    </div>
     <div class="card__content">
       <header class="card__header">
         <div>
@@ -53,15 +62,24 @@
         <div class="card__description">
           <slot />
         </div>
-        <UiCta
-          v-if="to"
-          class="card__cta"
-          is-wider
-          kind="ghost"
-          :label="ctaLink.label"
-          :segment="ctaLink.segment"
-          :url="ctaLink.url"
-        />
+        <div class="card__ctas">
+          <UiCta
+            v-if="to"
+            is-wider
+            kind="ghost"
+            :label="ctaLink.label"
+            :segment="ctaLink.segment"
+            :url="ctaLink.url"
+          />
+          <UiCta
+            v-if="secondaryCta"
+            is-wider
+            kind="ghost"
+            :label="secondaryCta.label"
+            :segment="secondaryCta.segment"
+            :url="secondaryCta.url"
+          />
+        </div>
       </div>
     </div>
   </article>
@@ -71,6 +89,7 @@
 // import "@carbon/web-components/es/components/tag/tag.js";
 // import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
 import Information16 from "@carbon/icons-vue/lib/information/16";
+import { Link } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 export interface TagTooltip {
@@ -85,11 +104,13 @@ interface Props {
   ctaLabel?: string;
   image?: string;
   imageContain?: boolean;
+  altText?: string;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
   tags?: string[];
   title: string;
   to?: string;
+  secondaryCta?: Link | null;
   tooltipTags?: TagTooltip[];
   verticalLayout?: boolean;
 }
@@ -99,10 +120,12 @@ const props = withDefaults(defineProps<Props>(), {
   ctaLabel: "",
   image: "",
   imageContain: false,
+  altText: "No description available",
   segment: undefined,
   subtitle: "",
   tags: () => [],
   to: "",
+  secondaryCta: undefined,
   tooltipTags: () => [],
   verticalLayout: false,
 });
@@ -135,12 +158,22 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 
   &__image {
-    flex: 0 0 14rem;
     background-color: qiskit.$background-color-light;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+
+    &_contain {
+      background-color: transparent;
+      object-fit: contain;
+    }
+  }
+
+  &__image-container {
+    flex: 0 0 14rem;
     overflow: hidden;
+    position: relative;
 
     @include carbon.breakpoint-between(md, lg) {
       flex: 0 0 13rem;
@@ -150,11 +183,6 @@ function hasTags(tags: string[] | TagTooltip[]) {
       height: 13rem;
       width: auto;
     }
-
-    &_contain {
-      background-color: transparent;
-      background-size: contain;
-    }
   }
 
   &__content {
@@ -163,6 +191,12 @@ function hasTags(tags: string[] | TagTooltip[]) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__ctas {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 0;
   }
 
   &__header {
@@ -207,7 +241,8 @@ function hasTags(tags: string[] | TagTooltip[]) {
       padding: carbon.$spacing-05;
     }
 
-    &__cta {
+    &__ctas {
+      display: flex;
       padding-bottom: 0;
     }
 

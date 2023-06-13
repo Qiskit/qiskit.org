@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { StartLearningUrl } from "~/constants/appLinks";
+import { LearnStartLearningUrl } from "~/constants/links";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -45,8 +45,8 @@ const headerDescription = [
 const headerImg =
   "/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png";
 
-const startLearningCTA: GeneralLink = {
-  url: StartLearningUrl.SummerSchool2022,
+const startLearningCTA: Link = {
+  url: LearnStartLearningUrl.SummerSchool2022,
   label: "Start learning",
   segment: {
     cta: "introduction",
@@ -139,7 +139,7 @@ const courses: Course[] = [
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const prerequisites: Prerequisite[] = [
   {

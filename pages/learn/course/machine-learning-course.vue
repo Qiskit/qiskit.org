@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { StartLearningUrl } from "~/constants/appLinks";
+import { LearnStartLearningUrl } from "~/constants/links";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -51,8 +51,8 @@ through the Qiskit Advocate Mentoring Program.`,
 
 const headerImg = "/images/learn/course/machine-learning-course/header.png";
 
-const startLearningCTA: GeneralLink = {
-  url: StartLearningUrl.QML,
+const startLearningCTA: Link = {
+  url: LearnStartLearningUrl.QML,
   label: "Start learning",
   segment: {
     cta: "machine-learning",
@@ -62,7 +62,7 @@ const startLearningCTA: GeneralLink = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: GeneralLink[] = [];
+const links: Link[] = [];
 
 const prerequisites: Prerequisite[] = [];
 
@@ -71,7 +71,7 @@ const courses: Course[] = [
     image: "introduction.png",
     label: "Introduction",
     segment: { cta: "qml-introduction", location: "course" },
-    url: StartLearningUrl.QML,
+    url: LearnStartLearningUrl.QML,
   },
   {
     image: "parameterized-quantum-circuits.png",

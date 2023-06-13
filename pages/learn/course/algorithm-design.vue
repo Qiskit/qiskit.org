@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralLink } from "~/constants/appLinks";
-import { StartLearningUrl } from "~/constants/appLinks";
+import { LearnStartLearningUrl } from "~/constants/links";
 import type { RecommendedReading } from "~/types/learn";
+import type { Link } from "~/types/links";
 import type { Course, Prerequisite } from "constants/learnContent";
 
 definePageMeta({
@@ -41,8 +41,8 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/algorithm-design/algorithm-design.png";
 
-const startLearningCTA: GeneralLink = {
-  url: StartLearningUrl.AlgorithmDesign,
+const startLearningCTA: Link = {
+  url: LearnStartLearningUrl.AlgorithmDesign,
   label: "Start learning",
   segment: {
     cta: "algorithm-design-cta",
@@ -69,7 +69,7 @@ const links: RecommendedReading[] = [
     },
   },
   {
-    url: "https://quantum-computing.ibm.com/lab/docs/iql/runtime/",
+    url: "https://qiskit.org/ecosystem/ibm-runtime/",
     author: "",
     label: "Qiskit Runtime Overview",
     description: "Explore Qiskit Runtime service documentation and tutorials.",
@@ -91,49 +91,49 @@ const courses: Course[] = [
     image: "variational.png",
     label: "Variational algorithms",
     segment: { cta: "variational-algorithms", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/",
   },
   {
     image: "reference.png",
     label: "Reference states",
     segment: { cta: "reference-states", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/reference",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/reference",
   },
   {
     image: "ansatz.png",
     label: "Ansatze and variational forms",
     segment: { cta: "ansatz", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/ansatz",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/ansatz",
   },
   {
     image: "cost_function.png",
     label: "Cost functions",
     segment: { cta: "cost-functions", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/cost_function",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/cost_function",
   },
   {
     image: "optimization.png",
     label: "Optimization loops",
     segment: { cta: "optimization", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/optimization",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/optimization",
   },
   {
     image: "instances.png",
     label: "Instances and extensions",
     segment: { cta: "instances", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/instances",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/instances",
   },
   {
     image: "examples.png",
     label: "Examples and applications",
     segment: { cta: "examples", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/applications",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/applications",
   },
   {
     image: "badge.png",
     label: "Earn your badge",
     segment: { cta: "badge", location: "course" },
-    url: StartLearningUrl.AlgorithmDesign + "/badge",
+    url: LearnStartLearningUrl.AlgorithmDesign + "/badge",
   },
 ];
 

@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { NavLink } from "~/constants/menuLinks";
+import type { LinkWithIcon } from "~/types/links";
 
 interface Props {
   title: string;
-  elements: NavLink[];
+  elements: LinkWithIcon[];
   iconsOnly?: boolean;
   theme?: "light" | "dark";
 }
@@ -63,7 +63,7 @@ withDefaults(defineProps<Props>(), {
     text-decoration: none;
     display: inline-block;
     width: 100%;
-    padding-bottom: carbon.$spacing-03;
+    margin-bottom: carbon.$spacing-04;
 
     &_theme_light {
       color: qiskit.$text-color-lighter;

@@ -64,7 +64,11 @@
         <template #results>
           <div v-if="noEvents" class="cds--row">
             <div class="cds--col-sm-4 cds--col-xlg-8">
-              <UiCard :image="emptyCard.img" :title="emptyCard.title">
+              <UiCard
+                :image="emptyCard.img"
+                alt-text="Warning sign icon"
+                :title="emptyCard.title"
+              >
                 <div class="event-page__empty-card-description">
                   {{ emptyCard.description }}
                 </div>
@@ -82,6 +86,7 @@
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
+                :alt-text="getEventAltText(eventItem)"
                 :location="eventItem.location"
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
@@ -199,7 +204,17 @@ const filteredEvents = computed(() => {
     });
   }
 });
-
+function getEventAltText(event: any) {
+  if (event.types[0] === "Talks") {
+    if (event.speaker !== "") {
+      return `${event.speaker} profile photo`;
+    } else {
+      return "Seminar speaker photo";
+    }
+  } else {
+    return `${event.title} event picture`;
+  }
+}
 const noEvents = computed(() => filteredEvents.value.length === 0);
 
 const regionFiltersAsString = computed(() => regionFilters.value.join(","));

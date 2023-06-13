@@ -17,14 +17,14 @@
 
 <script setup lang="ts">
 // import "@carbon/web-components/es/components/data-table/index.js";
-import { GeneralLink } from "~/constants/appLinks";
+import { Link } from "~/types/links";
 
 export interface TableRowElement {
   addTooltip?: boolean;
   component?: string;
   packageName?: string;
   styles?: string;
-  data: string | GeneralLink;
+  data: string | Link;
 }
 
 interface Props {

@@ -44,6 +44,7 @@ type CommunityEvent = {
   // See also:
   // https://github.com/Qiskit/qiskit.org/issues/527
   location: string;
+  speaker: string;
   regions: WorldRegion[];
   date: string;
   startDate: string;

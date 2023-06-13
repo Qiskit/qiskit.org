@@ -1,18 +1,28 @@
 <template>
   <div class="qiskit-version-info">
-    <UiLink v-bind="githubRepoLink">
+    <UiLink
+      :label="githubRepoLink.label"
+      :segment="githubRepoLink.segment"
+      :url="githubRepoLink.url"
+    >
       <LogoGitHub32 class="qiskit-version-info__github-icon" />
     </UiLink>
     <div class="qiskit-version-info__content">
       <div class="qiskit-version-info__version-string">
-        <UiLink class="code" kind="secondary" v-bind="githubRepoLink">
+        <UiLink
+          class="code"
+          kind="secondary"
+          :label="githubRepoLink.label"
+          :segment="githubRepoLink.segment"
+          :url="githubRepoLink.url"
+        >
           qiskit {{ version }}
         </UiLink>
       </div>
       <div class="qiskit-version-info__release-notes">
         <UiLink
           class="code"
-          v-bind="githubRepoLink"
+          label="GitHub"
           url="https://qiskit.org/documentation/release_notes.html#notable-changes"
           :segment="{ cta: 'release-notes', location: 'version-info' }"
         >
@@ -25,7 +35,7 @@
 
 <script setup lang="ts">
 import LogoGitHub32 from "@carbon/icons-vue/lib/logo--github/32";
-import { GITHUB_REPOSITORY } from "~/constants/menuLinks";
+import { Link } from "~/types/links";
 
 interface Props {
   version: string;
@@ -33,7 +43,11 @@ interface Props {
 
 defineProps<Props>();
 
-const githubRepoLink = GITHUB_REPOSITORY;
+const githubRepoLink: Link = {
+  label: "GitHub",
+  segment: { cta: "gitHub-repository", location: "version-info" },
+  url: "https://github.com/Qiskit/qiskit",
+};
 </script>
 
 <style lang="scss" scoped>
