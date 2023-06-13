@@ -43,12 +43,8 @@
               {{ `${tierName} (${getFilteredResultsCount(tierName)})` }}
             </bx-tab>
           </bx-tabs>
-          <div class="cds--row">
-            <div class="cds--col">
-              <div class="ecosystem__tiers__description">
-                {{ selectedTierDescription }}
-              </div>
-            </div>
+          <div class="ecosystem__tiers__description">
+            {{ selectedTierDescription }}
           </div>
         </client-only>
       </div>
