@@ -85,6 +85,8 @@ withDefaults(defineProps<Props>(), {
   theme: "light",
 });
 
+const config = useRuntimeConfig();
+
 const footerElements: LinksGroup[] = [
   {
     title: "Learn",
@@ -95,7 +97,7 @@ const footerElements: LinksGroup[] = [
       },
       {
         label: "Tutorials",
-        url: "https://qiskit.org/documentation/tutorials.html",
+        url: `${config.public.siteUrl}/documentation/tutorials.html`,
         segment: {
           cta: "tutorials",
           location: "menu",
@@ -139,7 +141,7 @@ const footerElements: LinksGroup[] = [
       SocialMedia.support,
       {
         label: "Documentation",
-        url: "https://qiskit.org/documentation/",
+        url: `${config.public.siteUrl}/documentation/`,
       },
     ],
   },

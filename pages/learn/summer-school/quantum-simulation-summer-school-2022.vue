@@ -141,6 +141,8 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: Link[] = [];
 
+const config = useRuntimeConfig();
+
 const prerequisites: Prerequisite[] = [
   {
     title: "Multiplying matrices by matrices",
@@ -170,7 +172,7 @@ const prerequisites: Prerequisite[] = [
       cta: "introduction-course",
       location: "related-material",
     },
-    url: "https://qiskit.org/learn/course/introduction-course",
+    url: `${config.public.siteUrl}/learn/course/introduction-course`,
   },
 ];
 

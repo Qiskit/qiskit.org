@@ -28,62 +28,32 @@
           for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta
-          class="summer-school-page__cta summer-school-page__cta_disabled"
-          v-bind="header.cta"
-          kind="secondary"
-        />
+        <UiCta class="summer-school-page__cta summer-school-page__cta_disabled" v-bind="header.cta" kind="secondary" />
       </template>
       <template #card>
-        <EventsItemCard
-          v-bind="headerData.card"
-          :alt-text="header.card.altText"
-          vertical-layout
-        >
+        <EventsItemCard v-bind="headerData.card" :alt-text="header.card.altText" vertical-layout>
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>
     </UiPageHeaderWithCard>
 
     <div class="cds--grid summer-school-page__content">
-      <UiMosaicSection
-        class="summer-school-page__section"
-        :title="mosaicData.title"
-        :elements="mosaicData.tiles"
-      />
+      <UiMosaicSection class="summer-school-page__section" :title="mosaicData.title" :elements="mosaicData.tiles" />
 
       <section class="summer-school-page__section">
         <h2 v-text="agendaData.title" />
         <p v-text="agendaData.subtitle" />
         <bx-tabs trigger-content="Select an item" value="Week 1">
-          <bx-tab
-            v-for="week in agendaData.weeks"
-            :key="week.tabName"
-            :target="week.tabName"
-            :value="week.tabName"
-          >
+          <bx-tab v-for="week in agendaData.weeks" :key="week.tabName" :target="week.tabName" :value="week.tabName">
             {{ week.tabName }}
           </bx-tab>
         </bx-tabs>
         <div class="summer-school-page__agenda">
-          <div
-            v-for="week in agendaData.weeks"
-            :id="week.tabName"
-            :key="week.tabName"
-            class="summer-school-page__agenda__table"
-            role="tabpanel"
-            :aria-labelledby="week.tabName"
-            hidden
-          >
+          <div v-for="week in agendaData.weeks" :id="week.tabName" :key="week.tabName"
+            class="summer-school-page__agenda__table" role="tabpanel" :aria-labelledby="week.tabName" hidden>
             <UiDataTable :columns="agendaColumnsDataTable">
-              <bx-table-row
-                v-for="(row, rowIndex) in week.tableData"
-                :key="`${rowIndex}`"
-              >
-                <bx-table-cell
-                  v-for="({ styles, data }, elementIndex) in row"
-                  :key="`${elementIndex}`"
-                >
+              <bx-table-row v-for="(row, rowIndex) in week.tableData" :key="`${rowIndex}`">
+                <bx-table-cell v-for="({ styles, data }, elementIndex) in row" :key="`${elementIndex}`">
                   <span :style="styles">{{ data }}</span>
                 </bx-table-cell>
               </bx-table-row>
@@ -94,11 +64,8 @@
 
       <EventsSummerSchoolFaq2023 class="summer-school-page__section" />
 
-      <UiHelpfulResourcesSection
-        class="summer-school-page__section"
-        :title="helpfulResourcesData.title"
-        :resources="helpfulResourcesData.resources"
-      />
+      <UiHelpfulResourcesSection class="summer-school-page__section" :title="helpfulResourcesData.title"
+        :resources="helpfulResourcesData.resources" />
     </div>
   </main>
 </template>
@@ -117,12 +84,13 @@ definePageMeta({
   routeName: "/events/summer-school-2023",
 });
 
+const config = useRuntimeConfig();
+
 const title = "Qiskit Global Summer School 2023";
 const description =
   "The Qiskit Global Summer School 2023 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
-const image =
-  "https://qiskit.org/images/events/summer-school-2023/summer-school-2023-logo.png";
-const pageUrl = "https://qiskit.org/events/summer-school-2023";
+const image = `${config.public.siteUrl}/images/events/summer-school-2023/summer-school-2023-logo.png"`;
+const pageUrl = `${config.public.siteUrl}/events/summer-school-2023"`;
 
 useHead({
   title,
