@@ -44,7 +44,7 @@
             </bx-tab>
           </bx-tabs>
           <div class="ecosystem__tiers__description">
-            {{ selectedTierDescription }}
+            {{ getSelectedTierDescription() }}
           </div>
         </client-only>
       </div>
@@ -110,7 +110,6 @@
                   :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
                   :member="member"
-                  :tier-description="getTierDescription(member.tier)"
                 />
               </div>
               <p v-else class="cds--col">
@@ -181,10 +180,10 @@ const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
 
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
-const selectedTierDescription = computed(() => {
+function getSelectedTierDescription() {
   const tier = tiers.find((tier) => tier.name === selectedTab.value);
   return tier?.description || "";
-});
+}
 
 function getFilteredMembers(tierName: string) {
   if (!members) {
@@ -214,11 +213,6 @@ function getFilteredMembers(tierName: string) {
 
 function selectTab(tab: string) {
   selectedTab.value = tab;
-}
-
-function getTierDescription(tierName: string): string {
-  const tier = tiers.find((tier: any) => tier.name === tierName);
-  return tier?.description || "";
 }
 
 function setSortValue(inputValue: string) {

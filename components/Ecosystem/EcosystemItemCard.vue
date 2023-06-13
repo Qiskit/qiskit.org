@@ -42,7 +42,6 @@ import { Member } from "~/types/ecosystem";
 
 interface Props {
   member: Member;
-  tierDescription: string;
 }
 
 const props = defineProps<Props>();
