@@ -125,6 +125,7 @@ const description =
 const image = `${config.public.siteUrl}/images/events/summer-school-2023/summer-school-2023-logo.png`;
 const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
 
+
 useSeoMeta({
   title,
   ogTitle: title,

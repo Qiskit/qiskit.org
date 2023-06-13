@@ -36,8 +36,10 @@
 </template>
 
 <script setup lang="ts">
+const config = useRuntimeConfig();
+
 const joinWaitingListLink = {
-  url: "https://qiskit.org/documentation/metal",
+  url: `${config.public.siteUrl}/documentation/metal`,
   label: "Get started now",
 };
 </script>

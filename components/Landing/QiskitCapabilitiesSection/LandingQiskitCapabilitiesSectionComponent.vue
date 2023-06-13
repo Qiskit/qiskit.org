@@ -31,6 +31,8 @@ interface QiskitCapability {
   segment?: CtaClickedEventProp;
 }
 
+const config = useRuntimeConfig();
+
 const capabilities: QiskitCapability[] = [
   {
     title: "Circuit Library",
@@ -38,7 +40,7 @@ const capabilities: QiskitCapability[] = [
       "Qiskit includes a comprehensive set of quantum gates and a variety of pre-built circuits so users at all levels can use Qiskit for research and application development.",
     thumbnailResource: "/images/landing-page/feature-circuit.png",
     link: {
-      url: "https://qiskit.org/documentation/apidoc/circuit_library.html",
+      url: `${config.public.siteUrl}/documentation/apidoc/circuit_library.html`,
       label: "Learn more",
       segment: { cta: "circuit-library", location: "homepage-capabilities" },
     },
@@ -49,7 +51,7 @@ const capabilities: QiskitCapability[] = [
       "The transpiler translates Qiskit code into an optimized circuit using a backend’s native gate set, allowing users to program for any quantum processor. Users can transpile with Qiskit's default optimization, use a custom configuration or develop their own plugin.",
     thumbnailResource: "/images/landing-page/transpiler.png",
     link: {
-      url: "https://qiskit.org/documentation/apidoc/transpiler.html",
+      url: `${config.public.siteUrl}/documentation/apidoc/transpiler.html`,
       label: "Learn more",
       segment: { cta: "transpiler", location: "homepage-capabilities" },
     },
@@ -74,7 +76,7 @@ const capabilities: QiskitCapability[] = [
       "Ready to explore Qiskit’s capabilities for yourself? Learn how to run Qiskit in the cloud or your local Python environment.",
     thumbnailResource: "/images/landing-page/med_02_1.png",
     link: {
-      url: "https://qiskit.org/documentation/getting_started.html",
+      url: `${config.public.siteUrl}/documentation/getting_started.html`,
       label: "Learn more",
       segment: { cta: "try-it-yourself", location: "homepage-capabilities" },
     },
