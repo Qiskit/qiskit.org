@@ -217,8 +217,6 @@ const pastEventsDataTable = dataPerRow(
   "past-events-section"
 );
 
-const config = useRuntimeConfig();
-
 // Data for the helpful resources section
 const helpfulResources: DescriptionCard[] = [
   {
