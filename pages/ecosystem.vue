@@ -40,7 +40,7 @@
               :target="`panel${tierName}`"
               :value="`${tierName}`"
             >
-              {{ tierName }} ({{ getFilteredResultsCount(tierName) }})
+              {{ `${tierName} (${getFilteredResultsCount(tierName)})` }}
             </bx-tab>
           </bx-tabs>
           <div class="cds--row">
