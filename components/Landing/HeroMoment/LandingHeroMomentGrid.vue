@@ -1,27 +1,26 @@
 <template>
-  <section class="metal-grid">
-    <div class="metal-grid__container">
+  <section class="landing-hero-moment-grid">
+    <div class="landing-hero-moment-grid__container">
       <div
         v-for="(row, index) in positions"
         :key="getRowId(index)"
-        class="metal-grid__row"
+        class="landing-hero-moment-grid__row"
       >
         <div
           v-for="pos in row"
           :key="getPosId(pos)"
-          class="metal-grid__cell"
+          class="landing-hero-moment-grid__cell"
           :class="{
-            'metal-grid__cell_decoherent': pos.isDecoherent,
+            'landing-hero-moment-grid__cell_decoherent': pos.isDecoherent,
           }"
-          @click="triggerAnimation(pos)"
         />
       </div>
     </div>
     <div
       ref="slot-container"
-      class="metal-grid__slot-container"
+      class="landing-hero-moment-grid__slot-container"
       :class="{
-        'metal-grid__slot-container_hidden': slotContainerIsHidden,
+        'landing-hero-moment-grid__slot-container_hidden': slotContainerIsHidden,
       }"
     >
       <slot />
@@ -105,7 +104,7 @@ function getRowId(index: number): string {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.metal-grid {
+.landing-hero-moment-grid {
   position: relative;
   height: 100%;
   width: 100%;
