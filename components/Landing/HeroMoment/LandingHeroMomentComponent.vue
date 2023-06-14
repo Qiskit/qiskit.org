@@ -1,6 +1,6 @@
 <template>
   <article class="hero-moment">
-    <MetalGrid>
+    <LandingHeroMomentGrid>
       <div class="cds--grid hero-moment__container">
         <LandingHeroMomentVersionInfo
           class="hero-moment__version-info"
@@ -36,7 +36,7 @@
           alt="Drawing of two people working on a Quantum Computer"
         />
       </div>
-    </MetalGrid>
+    </LandingHeroMomentGrid>
   </article>
 </template>
 
@@ -49,8 +49,10 @@ interface Props {
 
 defineProps<Props>();
 
+const config = useRuntimeConfig();
+
 const getStartedLink: Link = {
-  url: "https://qiskit.org/documentation/getting_started.html",
+  url: `${config.public.siteUrl}/documentation/getting_started.html`,
   label: "Get started",
   segment: { cta: "get-started", location: "hero-moment" },
 };

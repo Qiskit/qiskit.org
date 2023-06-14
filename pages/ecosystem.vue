@@ -122,6 +122,7 @@ import type { Member, Tier } from "~/types/ecosystem";
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
+const config = useRuntimeConfig();
 
 definePageMeta({
   layout: "default-max",
@@ -129,15 +130,15 @@ definePageMeta({
   routeName: "ecosystem",
 });
 
-useHead({
+useSeoMeta({
   title: "Qiskit Ecosystem",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
-    },
-  ],
+  ogTitle: "Qiskit Ecosystem",
+  description:
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  ogDescription:
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/ecosystem/`,
 });
 
 const tierFilters = ref<string[]>([]);
@@ -272,10 +273,6 @@ function getSecondaryCta(member: Member) {
       margin-right: carbon.$spacing-01;
       fill: carbon.$cool-gray-60;
     }
-  }
-
-  :deep(.card__title) {
-    font-size: 20px;
   }
 }
 

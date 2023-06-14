@@ -256,9 +256,9 @@ const joinqiskitslack: TrackedLink = {
   url: "https://qisk.it/join-slack",
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
-
+const config = useRuntimeConfig();
 const qiskitEvents: TrackedLink = {
-  url: "https://qiskit.org/events",
+  url: `${config.public.siteUrl}/events`,
   segment: { cta: "qiskit-org-events", location: "faq" },
 };
 
