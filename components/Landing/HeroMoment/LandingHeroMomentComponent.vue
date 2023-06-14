@@ -8,14 +8,14 @@
         />
         <div class="cds--row">
           <h1
-            class="cds--col-md-4 cds--col-lg-9 cds--col-xlg-7 cds--col-max-7 hero-moment__title"
+            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-7 cds--col-max-7 hero-moment__title"
           >
             Your open source toolkit for useful quantum computing
           </h1>
         </div>
         <div class="cds--row">
           <p
-            class="cds--col-sm cds--col-md-4 cds--col-lg-6 cds--col-xlg-4 hero-moment__description"
+            class="cds--col-sm cds--col-md-3 cds--col-lg-5 cds--col-xlg-4 hero-moment__description"
           >
             Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
             with quantum computers at the level of pulses, circuits, and
@@ -32,8 +32,8 @@
           class="hero-moment__container__image"
           format="webp"
           sizes="lg:500px xl:850px"
-          src="/images/landing-page/hero-illustration.png"
-          alt="Drawing of two people working on a Quantum Computer"
+          src="/images/landing-page/new-hero-illustration.png"
+          alt="Illustration of a Quantum Computer computing, with a running job shown on a laptop"
         />
       </div>
     </LandingHeroMomentGrid>
