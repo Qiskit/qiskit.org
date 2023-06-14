@@ -1,8 +1,5 @@
 <template>
   <section class="metal-grid">
-    <div class="metal-grid__underlayer">
-      <MetalDarkHeader class="metal-grid__header" />
-    </div>
     <div class="metal-grid__container">
       <div
         v-for="(row, index) in positions"
@@ -14,7 +11,6 @@
           :key="getPosId(pos)"
           class="metal-grid__cell"
           :class="{
-            'metal-grid__cell_hidden': isHidden(pos),
             'metal-grid__cell_decoherent': pos.isDecoherent,
           }"
           @click="triggerAnimation(pos)"
@@ -53,8 +49,6 @@ const columnDecoherenceChance: Decoherences = {
   1: 0.7,
   2: 0.8,
 };
-
-const hiddenCells = ref<string[]>([]);
 
 const slotContainerIsHidden = ref(false);
 
@@ -96,10 +90,6 @@ const positions = computed<CellSpecification[][]>(() =>
     })()
   )
 );
-
-function isHidden(pos: CellSpecification): boolean {
-  return hiddenCells.value.includes(getPosId(pos));
-}
 
 function getPosId(pos: CellSpecification): string {
   return `cell-${pos.c}-${pos.r}`;
