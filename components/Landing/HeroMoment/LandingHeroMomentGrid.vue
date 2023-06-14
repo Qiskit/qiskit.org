@@ -20,7 +20,8 @@
       ref="slot-container"
       class="landing-hero-moment-grid__slot-container"
       :class="{
-        'landing-hero-moment-grid__slot-container_hidden': slotContainerIsHidden,
+        'landing-hero-moment-grid__slot-container_hidden':
+          slotContainerIsHidden,
       }"
     >
       <slot />
