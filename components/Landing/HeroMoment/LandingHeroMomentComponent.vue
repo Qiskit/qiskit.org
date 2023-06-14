@@ -10,7 +10,7 @@
           <h1
             class="cds--col-md-4 cds--col-lg-9 cds--col-xlg-7 cds--col-max-7 hero-moment__title"
           >
-            Open-Source Quantum Development
+            Your open source toolkit for useful quantum computing
           </h1>
         </div>
         <div class="cds--row">
