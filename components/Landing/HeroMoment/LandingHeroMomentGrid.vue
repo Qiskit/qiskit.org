@@ -1,32 +1,27 @@
 <template>
-  <section class="metal-grid">
-    <div class="metal-grid__underlayer">
-      <MetalDarkHeader class="metal-grid__header" />
-    </div>
-    <div class="metal-grid__container">
+  <section class="landing-hero-moment-grid">
+    <div class="landing-hero-moment-grid__container">
       <div
         v-for="(row, index) in positions"
         :key="getRowId(index)"
-        class="metal-grid__row"
+        class="landing-hero-moment-grid__row"
       >
         <div
           v-for="pos in row"
           :key="getPosId(pos)"
-          class="metal-grid__cell"
+          class="landing-hero-moment-grid__cell"
           :class="{
-            'metal-grid__cell_trigger': isTrigger(pos),
-            'metal-grid__cell_hidden': isHidden(pos),
-            'metal-grid__cell_decoherent': pos.isDecoherent,
+            'landing-hero-moment-grid__cell_decoherent': pos.isDecoherent,
           }"
-          @click="triggerAnimation(pos)"
         />
       </div>
     </div>
     <div
       ref="slot-container"
-      class="metal-grid__slot-container"
+      class="landing-hero-moment-grid__slot-container"
       :class="{
-        'metal-grid__slot-container_hidden': slotContainerIsHidden,
+        'landing-hero-moment-grid__slot-container_hidden':
+          slotContainerIsHidden,
       }"
     >
       <slot />
@@ -35,15 +30,8 @@
 </template>
 
 <script setup lang="ts">
-type CellCoordinates = { x: number; y: number };
 type CellSpecification = { c: number; r: number; isDecoherent?: boolean };
 type Decoherences = { [key: number]: number };
-
-const router = useRouter();
-
-const timeToRemoveNextCell = 5; // in ms
-const timeToLoadMetal = 50; // in ms
-const triggerPositionFromTopCenter: CellCoordinates = { x: -3, y: 2 };
 
 const noDecoherenceColumnCount = 30;
 const noDecoherenceRowCount = 11;
@@ -61,21 +49,6 @@ const columnDecoherenceChance: Decoherences = {
   1: 0.7,
   2: 0.8,
 };
-
-// XXX: Column count must be even
-const pattern: number[][] = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-  [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-  [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-]; // size 16x9
-
-const hiddenCells = ref<string[]>([]);
 
 const slotContainerIsHidden = ref(false);
 
@@ -118,71 +91,6 @@ const positions = computed<CellSpecification[][]>(() =>
   )
 );
 
-const fallingCells = computed<string[]>(() =>
-  Array.from(
-    (() => {
-      const centralColumn = Math.floor(noDecoherenceColumnCount / 2);
-      const [rowStart, rowEnd] = [1, pattern.length + 1];
-      const [columnStart, columnEnd] = [
-        centralColumn - pattern[0].length / 2,
-        centralColumn + pattern[0].length / 2,
-      ];
-
-      function* gen(): Iterable<string> {
-        for (let r = rowStart; r < rowEnd; r++) {
-          for (let c = columnStart; c < columnEnd; c++) {
-            const cellIsAlwaysVisible =
-              pattern[r - rowStart][c - columnStart] === 0;
-            if (cellIsAlwaysVisible) {
-              continue;
-            }
-            yield getPosId({ c, r });
-          }
-        }
-      }
-
-      return gen();
-    })()
-  )
-);
-
-function isHidden(pos: CellSpecification): boolean {
-  return hiddenCells.value.includes(getPosId(pos));
-}
-
-function isTrigger(pos: CellSpecification): boolean {
-  const centralColumn = Math.floor(noDecoherenceColumnCount / 2);
-  const { x: triggerX, y: triggerY } = triggerPositionFromTopCenter;
-  const { c, r } = pos;
-  return c === centralColumn + triggerX && r === triggerY;
-}
-
-function triggerAnimation(pos: CellSpecification) {
-  if (!isTrigger(pos)) {
-    return;
-  }
-  slotContainerIsHidden.value = true;
-  removeCell();
-}
-
-function removeCell() {
-  const length = fallingCells.value.length;
-  const noMoreCells = length === 0;
-
-  if (noMoreCells) {
-    setTimeout(() => {
-      router.push({ path: "/metal" });
-    }, timeToLoadMetal);
-    return;
-  }
-
-  const index = Math.floor(Math.random() * length);
-  const cellToHideId = fallingCells.value.splice(index, 1)[0];
-  hiddenCells.value.splice(0, 0, cellToHideId);
-
-  setTimeout(removeCell, timeToRemoveNextCell);
-}
-
 function getPosId(pos: CellSpecification): string {
   return `cell-${pos.c}-${pos.r}`;
 }
@@ -197,7 +105,7 @@ function getRowId(index: number): string {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.metal-grid {
+.landing-hero-moment-grid {
   position: relative;
   height: 100%;
   width: 100%;

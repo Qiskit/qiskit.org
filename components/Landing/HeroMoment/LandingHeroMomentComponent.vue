@@ -1,6 +1,6 @@
 <template>
   <article class="hero-moment">
-    <MetalGrid>
+    <LandingHeroMomentGrid>
       <div class="cds--grid hero-moment__container">
         <LandingHeroMomentVersionInfo
           class="hero-moment__version-info"
@@ -36,7 +36,7 @@
           alt="Drawing of two people working on a Quantum Computer"
         />
       </div>
-    </MetalGrid>
+    </LandingHeroMomentGrid>
   </article>
 </template>
 
