@@ -8,7 +8,7 @@
         />
         <div class="cds--row">
           <h1
-            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-7 cds--col-max-7 hero-moment__title"
+            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-6 cds--col-max-7 hero-moment__title"
           >
             Your open source toolkit for useful quantum computing
           </h1>

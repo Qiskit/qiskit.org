@@ -330,7 +330,6 @@ function getRowId(index: number): string {
   &__slot-container {
     pointer-events: none;
     position: absolute;
-    padding-top: carbon.$spacing-10;
     top: 0;
     left: 0;
     right: 0;
