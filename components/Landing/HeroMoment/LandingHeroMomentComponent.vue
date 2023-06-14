@@ -28,10 +28,8 @@
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
         />
-        <nuxt-img
+        <img
           class="hero-moment__container__image"
-          format="webp"
-          sizes="lg:500px xl:850px"
           src="/images/landing-page/new-hero-illustration.png"
           alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
