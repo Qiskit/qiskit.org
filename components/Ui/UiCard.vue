@@ -44,7 +44,7 @@
               {{ tag }}
             </bx-tag>
           </div>
-          <bx-tag class="card__tag" type="purple">
+          <bx-tag v-if="primaryTag" class="card__tag" type="purple">
             {{ primaryTag }}
           </bx-tag>
         </div>
