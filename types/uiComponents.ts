@@ -5,8 +5,8 @@ type MosaicElement = {
   title: string;
   description: string;
   image: string;
-  altText: string;
-  cta?: TextLink;
+  altText?: string;
+  cta?: Link;
 };
 
 type DescriptionCard = {

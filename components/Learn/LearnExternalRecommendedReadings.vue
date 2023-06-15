@@ -34,7 +34,7 @@
                   {{ link.label }}
                 </span>
               </UiLink>
-              <span v-if="link.description">- {{ link.description }}</span>
+              <span v-if="link.description"> - {{ link.description }}</span>
             </li>
           </ol>
         </div>
