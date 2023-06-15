@@ -13,7 +13,7 @@ async function fetchMembers() {
     Object.values(res.data).forEach((tier: any) => {
       Object.values(tier).forEach((member: any) => {
         // convert null to 0
-        if (member.stars === null) {
+        if (!member.stars) {
           member.stars = 0;
         }
         membersArray.push(member);
