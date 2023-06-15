@@ -18,7 +18,8 @@
           {{ member.licence }}
         </span>
         <span class="ecosystem-item-card__stars">
-          <StarFilled16 /> {{ member.stars }}
+          <StarFilled16 />
+          <span v-if="member.stars > 0">{{ member.stars }}</span>
         </span>
       </div>
       <p class="ecosystem-item-card__description">
