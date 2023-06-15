@@ -40,9 +40,12 @@
               :target="`panel${tierName}`"
               :value="`${tierName}`"
             >
-              {{ tierName }}
+              {{ `${tierName} (${getFilteredMembers(tierName).length})` }}
             </bx-tab>
           </bx-tabs>
+          <div class="ecosystem__tiers__description">
+            {{ getSelectedTierDescription() }}
+          </div>
         </client-only>
       </div>
       <UiFiltersResultsLayout>
@@ -99,15 +102,14 @@
               :aria-labelledby="`tab${tierName}`"
             >
               <div
-                v-if="filteredMembers.length > 0"
+                v-if="getFilteredMembers(tierName).length > 0"
                 class="cds--row ecosystem__members"
               >
                 <EcosystemItemCard
-                  v-for="member in sortMembers(filteredMembers)"
+                  v-for="member in sortMembers(getFilteredMembers(tierName))"
                   :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
                   :member="member"
-                  :tier-description="getTierDescription(member.tier)"
                 />
               </div>
               <p v-else class="cds--col">
@@ -178,12 +180,17 @@ const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
 
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
-const filteredMembers = computed(() => {
+function getSelectedTierDescription() {
+  const tier = tiers.find((tier) => tier.name === selectedTab.value);
+  return tier?.description || "";
+}
+
+function getFilteredMembers(tierName: string) {
   if (!members) {
     return [];
   }
 
-  const filteredMembersByTier = membersByTier[selectedTab.value];
+  const filteredMembersByTier = membersByTier[tierName];
 
   let result = filteredMembersByTier;
 
@@ -202,15 +209,10 @@ const filteredMembers = computed(() => {
   }
 
   return result;
-});
+}
 
 function selectTab(tab: string) {
   selectedTab.value = tab;
-}
-
-function getTierDescription(tierName: string): string {
-  const tier = tiers.find((tier: any) => tier.name === tierName);
-  return tier?.description || "";
 }
 
 function setSortValue(inputValue: string) {
@@ -259,6 +261,10 @@ function sortMembers(membersToSort: Member[]) {
 .ecosystem {
   &__tiers {
     margin-top: carbon.$spacing-10;
+
+    &__description {
+      padding-top: carbon.$spacing-05;
+    }
   }
 
   &__tier-panel {

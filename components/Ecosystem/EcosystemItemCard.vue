@@ -4,12 +4,7 @@
       class="ecosystem-item-card"
       :title="member.name"
       :tags="member.labels"
-      :tooltip-tags="[
-        {
-          label: member.tier,
-          description: tierDescription,
-        },
-      ]"
+      :primary-tag="member.tier"
       cta-label="Go to repo"
       :segment="{
         cta: `go-to-repo-${member.name}`,
@@ -47,7 +42,6 @@ import { Member } from "~/types/ecosystem";
 
 interface Props {
   member: Member;
-  tierDescription: string;
 }
 
 const props = defineProps<Props>();
