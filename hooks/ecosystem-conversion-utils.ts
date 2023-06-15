@@ -22,8 +22,7 @@ async function fetchMembers() {
     const convertedArray = membersArray.map((obj: any) => {
       return toCamelCase(obj);
     });
-    const shuffled = fyShuffle(convertedArray);
-    return shuffled;
+    return convertedArray;
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
@@ -41,16 +40,6 @@ async function fetchTiers() {
     // eslint-disable-next-line no-console
     console.error(err);
   }
-}
-
-function fyShuffle(array: any) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
 }
 
 function toCamelCase(obj: any): any {
