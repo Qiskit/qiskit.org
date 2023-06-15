@@ -12,7 +12,7 @@ async function fetchMembers() {
     const membersArray: Member[] = [];
     Object.values(res.data).forEach((tier: any) => {
       Object.values(tier).forEach((member: any) => {
-        // convert null to 0
+        // convert falsy values to 0, used for correct sorting on the Ecosystem page
         if (!member.stars) {
           member.stars = 0;
         }
