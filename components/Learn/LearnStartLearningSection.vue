@@ -149,6 +149,8 @@ type TeachingSection = {
   syllabi: Syllabus[];
 };
 
+const config = useRuntimeConfig();
+
 const learningSections: LearningSection[] = [
   {
     title: "Courses",
@@ -209,6 +211,22 @@ const learningSections: LearningSection[] = [
           label: "Go to this course",
           url: "/learn/course/machine-learning-course",
           segment: { cta: "machine-learning", location: "course" },
+        },
+      },
+      {
+        image: "/images/learn/course/fundamentals-quantum-algorithms/hero.png",
+        title: "Understanding quantum information and computation",
+        subtitle: "Unit 2: Fundamentals of quantum algorithms",
+        description: `Discover how we can use quantum systems to solve problems more
+          efficiently, including problems with real-world applications such as
+          searching and factoring.`,
+        cta: {
+          label: "Go to this course",
+          url: "/learn/course/fundamentals-quantum-algorithms",
+          segment: {
+            cta: "fundamentals-quantum-algorithms",
+            location: "course",
+          },
         },
       },
     ],
@@ -358,7 +376,7 @@ const learningSections: LearningSection[] = [
           "Comfortable with quantum computing, but new to Qiskit? Learn how to create simple quantum circuits, and visualize quantum states.",
         cta: {
           label: "View resource",
-          url: "https://qiskit.org/documentation/tutorials.html#quantum-circuits",
+          url: `${config.public.siteUrl}/documentation/tutorials.html#quantum-circuits`,
           segment: { cta: "quantum-circuits", location: "tutorials" },
         },
       },
@@ -369,7 +387,7 @@ const learningSections: LearningSection[] = [
           "Learn about the more advanced features of Qiskit's QuantumCircuit class, including how to create custom gates and how to use the transpiler to optimize your circuits and target different devices.",
         cta: {
           label: "View resource",
-          url: "https://qiskit.org/documentation/tutorials.html#advanced-circuits",
+          url: `${config.public.siteUrl}/documentation/tutorials.html#advanced-circuits`,
           segment: { cta: "advanced-circuits", location: "tutorials" },
         },
       },
@@ -380,7 +398,7 @@ const learningSections: LearningSection[] = [
           "Qiskit includes powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. These tutorials show you how to use advanced features of these simulators.",
         cta: {
           label: "View resource",
-          url: "https://qiskit.org/documentation/tutorials.html#classical-simulators",
+          url: `${config.public.siteUrl}/documentation/tutorials.html#classical-simulators`,
           segment: { cta: "classical-simulators", location: "tutorials" },
         },
       },
@@ -391,7 +409,7 @@ const learningSections: LearningSection[] = [
           "These tutorials show you how to use Qiskit's built-in algorithms. Qiskit supports classic algorithms such as Shor's and Grover's, as well as more recent developments such as VQE and QAOA.",
         cta: {
           label: "View resource",
-          url: "https://qiskit.org/documentation/tutorials.html#algorithms",
+          url: `${config.public.siteUrl}/documentation/tutorials.html#algorithms`,
           segment: { cta: "algorithms", location: "tutorials" },
         },
       },
@@ -402,7 +420,7 @@ const learningSections: LearningSection[] = [
           "Learn how Qiskit represents quantum operators, and how we can use these to build sophisticated quantum programs.",
         cta: {
           label: "View resource",
-          url: "https://qiskit.org/documentation/tutorials.html#operators",
+          url: `${config.public.siteUrl}/documentation/tutorials.html#operators`,
           segment: { cta: "operators", location: "tutorials" },
         },
       },
@@ -413,7 +431,7 @@ const learningSections: LearningSection[] = [
           "Learn about the Iterative Quantum Phase Estimation Algorithm and how you can program it in Qiskit.",
         cta: {
           label: "View resource",
-          url: "https://qiskit.org/documentation/tutorials.html#sample-algorithms-in-qiskit",
+          url: `${config.public.siteUrl}/documentation/tutorials.html#sample-algorithms-in-qiskit`,
           segment: {
             cta: "sample-algorithms-in-qiskit",
             location: "tutorials",
@@ -524,7 +542,7 @@ const teachingSections: TeachingSection[] = [
       {
         title: "Introduction to Quantum Algorithms",
         instructor: "Peter Shor",
-        university: "Masachussetts Institute of Technology",
+        university: "Massachusetts Institute of Technology",
         cta: {
           label: "Go to this course",
           url: "https://learn.qiskit.org/syllabus/CFH-KBT",

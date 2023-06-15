@@ -5,7 +5,7 @@ type MosaicElement = {
   title: string;
   description: string;
   image: string;
-  altText: string;
+  altText?: string;
   cta?: Link;
 };
 

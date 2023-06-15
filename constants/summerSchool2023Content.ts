@@ -18,8 +18,8 @@ const header = {
     },
   },
   cta: {
-    label: "Register now!",
-    url: "https://qisk.it/QGSS23REG",
+    label: "Last Chance Registration June 28, 9AM EST",
+    url: "",
     segment: {
       cta: "register",
       location: "header",
@@ -35,8 +35,8 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "https://qisk.it/QGSS23REG",
-    ctaLabel: "Learn more",
+    to: "",
+    ctaLabel: "",
     segment: {
       cta: "ibm-research-blog",
       location: "header",
@@ -72,7 +72,7 @@ const mosaic: MosaicSection = {
       position: "second",
       title: "Qiskit Textbook",
       description:
-        "The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
+        "The Qiskit Textbook is a free digital open-source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
       image: "/images/events/summer-school-2023/qiskit-textbook.jpg",
       altText: "",
       cta: {

@@ -138,6 +138,7 @@ interface MembersByTier {
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
+const config = useRuntimeConfig();
 
 const joinAction: Link = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
@@ -150,15 +151,15 @@ definePageMeta({
   routeName: "ecosystem",
 });
 
-useHead({
+useSeoMeta({
   title: "Qiskit Ecosystem",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
-    },
-  ],
+  ogTitle: "Qiskit Ecosystem",
+  description:
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  ogDescription:
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/ecosystem/`,
 });
 
 const categoryFilters = ref<string[]>([]);
@@ -317,5 +318,47 @@ function sortMembers(membersToSort: Member[]) {
 
 .cds--col-sm-4 {
   padding-bottom: carbon.$spacing-08;
+}
+
+.card {
+  &__description {
+    .cds--row {
+      margin-left: 0;
+    }
+  }
+
+  &__tags {
+    flex-direction: row;
+  }
+}
+
+.project-card {
+  &__license {
+    font-size: 12px;
+    margin-right: carbon.$spacing-05;
+    margin-top: calc(carbon.$spacing-01 / 2);
+  }
+
+  &__star {
+    display: flex;
+    flex-direction: row;
+
+    svg {
+      margin-top: calc(carbon.$spacing-01 / 2);
+      margin-right: carbon.$spacing-01;
+      fill: carbon.$cool-gray-60;
+    }
+  }
+}
+
+.bx-accordion__item {
+  &::part(content) {
+    margin: 0;
+    padding: 0;
+  }
+
+  &::part(expando) {
+    background-color: carbon.$cool-gray-20;
+  }
 }
 </style>
