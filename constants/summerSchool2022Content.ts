@@ -48,7 +48,7 @@ const mosaic: MosaicSection = {
       position: "first",
       title: "Qiskit Textbook",
       description:
-        "The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
+        "The Qiskit Textbook is a free digital open-source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
       image: "/images/events/seminar-series/mosaic-experts.png",
       cta: {
         url: "/learn",
