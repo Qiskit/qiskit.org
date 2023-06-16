@@ -125,8 +125,6 @@
 </template>
 
 <script setup lang="ts">
-import sortBy from "lodash/sortBy";
-import reverse from "lodash/reverse";
 import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
@@ -246,14 +244,11 @@ function searchOnMembers(inputText: string) {
 }
 
 function sortMembers(membersToSort: Member[]) {
-  const membersOnAscOrder = sortBy(membersToSort, [
-    (member) =>
-      propToSortBy.value === "name" ? member.name.toLowerCase() : member.stars,
-  ]);
+  if (propToSortBy.value === "name")
+    return membersToSort.sort((a, b) => a.name.localeCompare(b.name));
 
-  return propToSortBy.value === "stars"
-    ? reverse(membersOnAscOrder)
-    : membersOnAscOrder;
+  if (propToSortBy.value === "stars")
+    return membersToSort.sort((a, b) => b.stars - a.stars);
 }
 </script>
 
