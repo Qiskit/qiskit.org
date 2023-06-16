@@ -157,7 +157,7 @@
           If you want to collaborate and connect with other members of the
           community, and participate in some of the ongoing conversations about
           quantum computing, you will want to
-          <UiLink :link="joinqiskitslack">
+          <UiLink :link="joinQiskitSlack">
             check out our ever-growing Slack Community
           </UiLink>
           . From there you can connect with current and past interns, IBM
@@ -255,7 +255,7 @@ const qiskitSubscribe: Link = {
   segment: { cta: "qiskit-youtube-subscribe", location: "faq" },
 };
 
-const joinqiskitslack: Link = {
+const joinQiskitSlack: Link = {
   title: "Join Qiskit Slack",
   url: "https://qisk.it/join-slack",
   segment: { cta: "qiskit-slack-join", location: "faq" },
