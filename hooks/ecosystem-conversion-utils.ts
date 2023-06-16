@@ -19,10 +19,7 @@ async function fetchMembers() {
         membersArray.push(member);
       });
     });
-    const convertedArray = membersArray.map((obj: any) => {
-      return toCamelCase(obj);
-    });
-    return convertedArray;
+    return membersArray.map((obj: any) => toCamelCase(obj));
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
