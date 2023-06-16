@@ -247,8 +247,9 @@ function searchOnMembers(inputText: string) {
 
 function sortMembers(membersToSort: Member[]) {
   const membersOnAscOrder = sortBy(membersToSort, [
-    (member) => member.name.toLowerCase(),
-  ]) as Member[];
+    (member) =>
+      propToSortBy.value === "name" ? member.name.toLowerCase() : member.stars,
+  ]);
 
   return propToSortBy.value === "stars"
     ? reverse(membersOnAscOrder)
