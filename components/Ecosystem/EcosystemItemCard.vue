@@ -119,10 +119,6 @@ function formatTimestamp(timestamp: number): string {
   &__description {
     margin-top: carbon.$spacing-05;
   }
-
-  :deep(.card__title) {
-    font-size: 20px;
-  }
 }
 
 .bx-accordion__item {
