@@ -203,7 +203,7 @@ function getFilteredMembers(tierName: string) {
 
   if (categoryFilters.value.length > 0) {
     result = result.filter((member) =>
-      categoryFilters.value.every((filter) => member.labels.includes(filter))
+      categoryFilters.value.some((filter) => member.labels.includes(filter))
     );
   }
 
