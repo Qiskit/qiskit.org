@@ -34,16 +34,6 @@
           </h5>
         </div>
         <div class="cds--row">
-          <div v-if="hasTags(tags)" class="card__tags">
-            <bx-tag
-              v-for="tag in tags"
-              :key="tag"
-              class="card__tag"
-              type="purple"
-            >
-              {{ tag }}
-            </bx-tag>
-          </div>
           <div v-if="hasTags(tooltipTags)" class="card__tags">
             <div
               v-for="tag in tooltipTags"
@@ -59,6 +49,16 @@
         </div>
       </header>
       <div class="card__body">
+        <div v-if="hasTags(tags)" class="card__tags">
+          <bx-tag
+            v-for="tag in tags"
+            :key="tag"
+            class="card__tag"
+            type="purple"
+          >
+            {{ tag }}
+          </bx-tag>
+        </div>
         <div class="card__description">
           <slot />
         </div>
@@ -265,7 +265,7 @@ function hasTags(tags: string[] | TagTooltip[]) {
   }
 }
 
-.card_description-whole-size {
+.card_description-whole-size {pre
   .card {
     &__header {
       min-height: carbon.$spacing-09;
@@ -285,6 +285,7 @@ bx-tag {
   color: qiskit.$tag-text-color;
   margin-right: carbon.$spacing-03;
   margin-left: 0;
+  margin-bottom: carbon.$spacing-04;
   min-width: 0;
 
   &:last-child {
