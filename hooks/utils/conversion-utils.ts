@@ -8,5 +8,8 @@ export async function writeJSONToFile(
   filename: string,
   data: any
 ) {
+  if (!fs.existsSync(outputFolder)) {
+    fs.mkdirSync(outputFolder);
+  }
   await writeFile(`${outputFolder}/${filename}`, JSON.stringify(data, null, 2));
 }

@@ -2,7 +2,7 @@
   <header class="page-header-fixed">
     <div class="cds--grid page-header-fixed__container">
       <div class="cds--row">
-        <h1 class="cds--col-sm cds--col-md-6 cds--col-lg-10 cds--col-max-8">
+        <h1 class="cds--col-sm cds--col-md-10 cds--col-lg-10 cds--col-max-10">
           <slot />
         </h1>
       </div>
