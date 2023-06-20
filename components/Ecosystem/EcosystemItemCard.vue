@@ -13,7 +13,7 @@
       :to="member.url"
       :secondary-cta="websiteCta"
     >
-      <div class="cds--row">
+      <div class="ecosystem-item-card__details">
         <span class="ecosystem-item-card__licence">
           {{ member.licence }}
         </span>
@@ -104,7 +104,11 @@ function formatTimestamp(timestamp: number): string {
   &__licence {
     font-size: 12px;
     margin-right: carbon.$spacing-05;
-    margin-left: carbon.$spacing-05;
+
+    @include carbon.breakpoint-down(md) {
+      margin-right: initial;
+      margin-bottom: carbon.$spacing-02;
+    }
   }
 
   &__stars {
@@ -118,6 +122,16 @@ function formatTimestamp(timestamp: number): string {
 
   &__description {
     margin-top: carbon.$spacing-05;
+  }
+
+  &__details {
+    display: flex;
+    align-items: center;
+
+    @include carbon.breakpoint-down(md) {
+      flex-direction: column;
+      align-items: initial;
+    }
   }
 }
 
