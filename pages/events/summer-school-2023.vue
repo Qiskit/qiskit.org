@@ -36,6 +36,7 @@
       </template>
       <template #card>
         <EventsItemCard
+          class="summer-school-page__header-card"
           v-bind="headerData.card"
           :alt-text="header.card.altText"
           vertical-layout
@@ -190,6 +191,12 @@ const helpfulResourcesData = helpfulResources;
       &:deep(.cta__icon) {
         display: none;
       }
+    }
+  }
+
+  &__header-card {
+    :deep(.card__image-container) {
+      flex: 0 0 24rem;
     }
   }
 }

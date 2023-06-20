@@ -161,8 +161,7 @@ function hasTags(tags: string[]) {
     }
 
     @include carbon.breakpoint-down(md) {
-      height: 13rem;
-      width: auto;
+      flex: 0 0 24rem;
     }
   }
 
