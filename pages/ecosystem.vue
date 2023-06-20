@@ -1,14 +1,15 @@
 <template>
   <main>
     <UiPageHeaderFixed class="ecosystem-header__hero">
-      <br />
       Explore
+      <br class="show-in-md" />
       <UiTypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
-      from Qiskit
       <br />
-      and the Qiskit community
+      from Qiskit and the
+      <br />
+      Qiskit community
     </UiPageHeaderFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
@@ -234,6 +235,7 @@ function getSecondaryCta(member: Member) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/classes.scss";
 
 .ecosystem__filters-result-section {
   margin-top: carbon.$spacing-10;
