@@ -12,16 +12,16 @@
               Or as we like to say, <span v-html="randomMessage" />
             </p>
             <UiCta
-              :label="backToHomeCta.label"
-              :segment="backToHomeCta.segment"
-              :url="backToHomeCta.url"
-            />
-            <UiCta
-              class="error-page__ghost-btn"
+              v-if="isDocumentationError"
               :label="backToDocsCta.label"
               :segment="backToDocsCta.segment"
               :url="backToDocsCta.url"
-              kind="ghost"
+            />
+            <UiCta
+              v-else
+              :label="backToHomeCta.label"
+              :segment="backToHomeCta.segment"
+              :url="backToHomeCta.url"
             />
           </div>
           <div class="cds--col-lg-8">
@@ -46,6 +46,8 @@ interface Props {
   error: NuxtError;
 }
 
+const route = useRoute();
+
 const props = defineProps<Props>();
 
 const pageTitle = computed<string>(() => {
@@ -58,7 +60,7 @@ useHead({
 
 const backToHomeCta: Link = {
   url: "/",
-  label: "Back to Qiskit.org home",
+  label: "Back to Qiskit home page",
   segment: {
     cta: "back-to-home",
     location: "error-page",
@@ -67,12 +69,18 @@ const backToHomeCta: Link = {
 
 const backToDocsCta: Link = {
   url: "/documentation",
-  label: "Back to Qiskit Documentation",
+  label: "Back to Qiskit documentation",
   segment: {
     cta: "back-to-documentation",
     location: "error-page",
   },
 };
+
+const isDocumentationError = computed(() => {
+  return (
+    props.error.statusCode === 404 && route.path.startsWith("/documentation/")
+  );
+});
 
 const errorImgSrc = `/images/error-page/cat${getRandomInt(1, 9)}.png`;
 
@@ -119,10 +127,6 @@ function onClick(e: CustomEvent) {
   &__img {
     display: block;
     max-width: 100%;
-  }
-
-  &__ghost-btn {
-    padding: carbon.$spacing-05;
   }
 }
 
