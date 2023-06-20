@@ -44,7 +44,7 @@
               >Introduction to Quantum Computing and Quantum Hardware</UiLink
             >
             summer school lectures series by Zlatko Minev on superconducting
-            qubits. Also, check out the open source
+            qubits. Also, check out the open-source
             <UiLink
               url="https://learn.qiskit.org/course/quantum-hardware-pulses/introduction-to-transmon-physics"
               >Qiskit textbook</UiLink

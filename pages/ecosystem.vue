@@ -1,14 +1,15 @@
 <template>
   <main>
     <UiPageHeaderFixed class="ecosystem-header__hero">
-      <br />
       Explore
+      <br class="show-in-md" />
       <UiTypewriterEffect
         :values="['core packages', 'tools', 'prototypes', 'community projects']"
       />
-      from Qiskit
       <br />
-      and the Qiskit community
+      from Qiskit and the
+      <br />
+      Qiskit community
     </UiPageHeaderFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
@@ -122,6 +123,7 @@ import type { Member, Tier } from "~/types/ecosystem";
 
 const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
+const config = useRuntimeConfig();
 
 definePageMeta({
   layout: "default-max",
@@ -129,15 +131,15 @@ definePageMeta({
   routeName: "ecosystem",
 });
 
-useHead({
+useSeoMeta({
   title: "Qiskit Ecosystem",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The Ecosystem consists of projects, tools, utilities, libraries and tutorials from a broad community of developers and researchers. The goal of the Ecosystem is to celebrate, support and accelerate development of quantum technologies using Qiskit.",
-    },
-  ],
+  ogTitle: "Qiskit Ecosystem",
+  description:
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  ogDescription:
+    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/ecosystem/`,
 });
 
 const tierFilters = ref<string[]>([]);
@@ -235,6 +237,7 @@ function getSecondaryCta(member: Member) {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/classes.scss";
 
 .ecosystem__filters-result-section {
   margin-top: carbon.$spacing-10;

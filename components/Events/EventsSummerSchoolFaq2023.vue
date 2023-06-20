@@ -194,6 +194,8 @@ interface TrackedLink {
   segment: CtaClickedEventProp;
 }
 
+const config = useRuntimeConfig();
+
 const pythonAndJupyter: TrackedLink = {
   url: "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
   segment: { cta: "textbook-python-and-jupyter-notebooks", location: "faq" },
@@ -205,7 +207,7 @@ const linearAlgebra: TrackedLink = {
 };
 
 const basicsOfQuantumInformation: TrackedLink = {
-  url: "https://qiskit.org/learn/course/basics-quantum-information/",
+  url: `${config.public.siteUrl}/learn/course/basics-quantum-information/`,
   segment: { cta: "basics-of-quantum-information", location: "faq" },
 };
 
@@ -251,7 +253,7 @@ const joinQiskitSlack: TrackedLink = {
 };
 
 const qiskitEvents: TrackedLink = {
-  url: "https://qiskit.org/events",
+  url: `${config.public.siteUrl}/events`,
   segment: { cta: "qiskit-org-events", location: "faq" },
 };
 </script>

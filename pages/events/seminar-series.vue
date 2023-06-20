@@ -120,8 +120,17 @@ definePageMeta({
   routeName: "seminar-series",
 });
 
-useHead({
+const config = useRuntimeConfig();
+
+useSeoMeta({
   title: "Qiskit Seminar Series",
+  ogTitle: "Qiskit Seminar Series",
+  description:
+    "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!",
+  ogDescription:
+    "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/events/seminar-series/`,
 });
 
 const playlistUrl =
@@ -241,7 +250,7 @@ const helpfulResources: DescriptionCard[] = [
     description:
       "If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.",
     cta: {
-      url: "https://qiskit.org/learn",
+      url: `${config.public.siteUrl}/learn`,
       label: "Start learning",
       segment: {
         cta: "qiskit-org-learn",

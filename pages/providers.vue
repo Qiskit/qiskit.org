@@ -1,7 +1,10 @@
 <template>
   <div class="providers-page">
     <UiPageHeaderFixed>
-      Run Qiskit compiled circuits on
+      Run Qiskit compiled
+      <br />
+      circuits on
+      <br class="show-in-md" />
       <UiTypewriterEffect :values="['real hardware', 'simulators']" />
     </UiPageHeaderFixed>
     <section id="contentContainer" class="cds--grid page-section">
@@ -66,8 +69,17 @@ definePageMeta({
   routeName: "providers",
 });
 
-useHead({
+const config = useRuntimeConfig();
+
+useSeoMeta({
   title: "Qiskit Providers",
+  ogTitle: "Qiskit Providers",
+  description:
+    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
+  ogDescription:
+    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
+  ogImage: `${config.public.siteUrl}/images/metal/hero/cryo.png`,
+  ogUrl: `${config.public.siteUrl}/providers/`,
 });
 
 const { data: providersData } = await useAsyncData("providers", () =>
@@ -106,6 +118,7 @@ function asTabs(providers: Array<Provider>): Array<Provider> {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+@use "~/assets/scss/helpers/classes.scss";
 
 .providers-page {
   &__table-of-contents {

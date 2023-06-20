@@ -4,9 +4,8 @@
       Connect with the<br />
       <UiTypewriterEffect
         :values="['enthusiasts', 'advocates', 'mentors', 'experts']"
-      />
-      from within<br />
-      the Qiskit community
+      /><br />
+      within the Qiskit community
     </UiPageHeaderFixed>
     <AdvocatesJoinSection />
     <AdvocatesMeetTheAdvocates />
@@ -20,14 +19,16 @@ definePageMeta({
   routeName: "advocates",
 });
 
-useHead({
+const config = useRuntimeConfig();
+
+useSeoMeta({
   title: "Qiskit Advocates",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community.",
-    },
-  ],
+  ogTitle: "Qiskit Advocates",
+  description:
+    "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
+  ogDescription:
+    "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/advocates/`,
 });
 </script>
