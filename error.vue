@@ -12,16 +12,9 @@
               Or as we like to say, <span v-html="randomMessage" />
             </p>
             <UiCta
-              v-if="isDocumentationError"
-              :label="backToDocsCta.label"
-              :segment="backToDocsCta.segment"
-              :url="backToDocsCta.url"
-            />
-            <UiCta
-              v-else
-              :label="backToHomeCta.label"
-              :segment="backToHomeCta.segment"
-              :url="backToHomeCta.url"
+              :label="backToCta.label"
+              :segment="backToCta.segment"
+              :url="backToCta.url"
             />
           </div>
           <div class="cds--col-lg-8">
@@ -76,11 +69,9 @@ const backToDocsCta: Link = {
   },
 };
 
-const isDocumentationError = computed<boolean>(() => {
-  return (
-    props.error.statusCode === 404 && route.path.startsWith("/documentation/")
-  );
-});
+const backToCta = route.path.startsWith("/documentation/")
+  ? backToDocsCta
+  : backToHomeCta;
 
 const errorImgSrc = `/images/error-page/cat${getRandomInt(1, 9)}.png`;
 
