@@ -76,7 +76,7 @@ const backToDocsCta: Link = {
   },
 };
 
-const isDocumentationError = computed(() => {
+const isDocumentationError = computed<boolean>(() => {
   return (
     props.error.statusCode === 404 && route.path.startsWith("/documentation/")
   );
