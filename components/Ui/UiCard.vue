@@ -256,8 +256,8 @@ function hasTags(tags: string[]) {
   }
 }
 
-.card_description-whole-size {pre
-  .card {
+.card_description-whole-size {
+  pre .card {
     &__header {
       min-height: carbon.$spacing-09;
     }
