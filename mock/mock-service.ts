@@ -3,8 +3,7 @@ import path from "path";
 
 const mockBasePath =
   process.env.MOCK_BASE_PATH || path.join(__dirname, "content");
-const contentBasePath =
-  process.env.CONTENT_BASE_PATH || path.join(__dirname, "..", "content");
+const contentBasePath = path.join(__dirname, "..", "content");
 
 export async function generateMocks() {
   await copyFiles(mockBasePath, contentBasePath);
