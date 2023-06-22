@@ -37,6 +37,7 @@
       <template #card>
         <EventsItemCard
           :alt-text="header.card.altText"
+          class="summer-school-page__header-card"
           :cta-label="headerData.card.ctaLabel"
           :date="headerData.card.date"
           :image="headerData.card.image"
@@ -197,6 +198,12 @@ const helpfulResourcesData = helpfulResources;
       &:deep(.cta__icon) {
         display: none;
       }
+    }
+  }
+
+  &__header-card {
+    :deep(.card__image-container) {
+      flex: 0 0 24rem;
     }
   }
 }
