@@ -1,4 +1,4 @@
-import type { MosaicElement } from "~/types/uiComponents";
+import { MosaicElement } from "~/types/uiComponents";
 
 const header = {
   titleLine1: "Qiskit Global Summer School 2022:",

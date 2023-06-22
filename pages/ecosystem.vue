@@ -126,10 +126,10 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
-import type { Member, Tier } from "~/types/ecosystem";
+import { Member, Tier } from "~/types/ecosystem";
+import { TextLink } from "~/types/links";
 
 interface MembersByTier {
   [key: string]: Member[];
@@ -139,7 +139,7 @@ const members = rawMembers as Member[];
 const tiers = rawTiers as Tier[];
 const config = useRuntimeConfig();
 
-const joinAction: Link = {
+const joinAction: TextLink = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
 };

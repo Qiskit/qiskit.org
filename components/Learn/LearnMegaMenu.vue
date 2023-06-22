@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   classes?: string;
@@ -19,8 +19,8 @@ interface Props {
 }
 
 interface MegaDropdownMenuGroup {
-  title: Link;
-  content: Link[];
+  title: TextLink;
+  content: TextLink[];
 }
 
 interface MegaDropdownMenuSection {

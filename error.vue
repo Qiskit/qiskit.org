@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { NuxtError } from "#app";
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   error: NuxtError;
@@ -51,7 +51,7 @@ useHead({
   title: pageTitle,
 });
 
-const backToHomeCta: Link = {
+const backToHomeCta: TextLink = {
   url: "/",
   label: "Back to Qiskit home page",
   segment: {
@@ -60,7 +60,7 @@ const backToHomeCta: Link = {
   },
 };
 
-const backToDocsCta: Link = {
+const backToDocsCta: TextLink = {
   url: "/documentation",
   label: "Back to Qiskit documentation",
   segment: {

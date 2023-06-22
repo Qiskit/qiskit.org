@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
@@ -91,7 +91,7 @@ interface Props {
   tags?: string[];
   title: string;
   to?: string;
-  secondaryCta?: Link | null;
+  secondaryCta?: TextLink | null;
   primaryTag?: string;
   verticalLayout?: boolean;
 }

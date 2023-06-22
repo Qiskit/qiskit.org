@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import EventsAirtableRecords from "../../hooks/event-conversion-utils";
-import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from "../../types/events";
-import type { CommunityEvent } from "../../types/events";
+import {
+  CommunityEvent,
+  COMMUNITY_EVENT_TYPES,
+  WORLD_REGIONS,
+} from "../../types/events";
 
 describe("isEventInDateRange", () => {
   let eventsAirtableRecords: EventsAirtableRecords;
