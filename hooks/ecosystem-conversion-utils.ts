@@ -12,14 +12,14 @@ async function fetchMembers() {
     const membersArray: Member[] = [];
     Object.values(res.data).forEach((tier: any) => {
       Object.values(tier).forEach((member: any) => {
+        // convert falsy values to 0, used for correct sorting on the Ecosystem page
+        if (!member.stars) {
+          member.stars = 0;
+        }
         membersArray.push(member);
       });
     });
-    const convertedArray = membersArray.map((obj: any) => {
-      return toCamelCase(obj);
-    });
-    const shuffled = fyShuffle(convertedArray);
-    return shuffled;
+    return membersArray.map((obj: any) => toCamelCase(obj));
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
@@ -37,16 +37,6 @@ async function fetchTiers() {
     // eslint-disable-next-line no-console
     console.error(err);
   }
-}
-
-function fyShuffle(array: any) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
 }
 
 function toCamelCase(obj: any): any {
