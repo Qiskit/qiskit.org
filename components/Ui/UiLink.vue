@@ -3,6 +3,7 @@
     class="link"
     :class="`link_${kind}`"
     :segment="link?.segment"
+    :title="link?.title"
     :url="link?.url"
   >
     <slot />

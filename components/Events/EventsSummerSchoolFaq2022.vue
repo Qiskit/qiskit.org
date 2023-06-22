@@ -195,6 +195,8 @@
 <script setup lang="ts">
 import { Link } from "~/types/links";
 
+const config = useRuntimeConfig();
+
 const khanAcademy: Link = {
   title: "Khan Academy",
   url: "https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro",
@@ -261,8 +263,7 @@ const joinQiskitSlack: Link = {
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
 
-const config = useRuntimeConfig();
-const qiskitEvents: TrackedLink = {
+const qiskitEvents: Link = {
   title: "Qiskit Events",
   url: `${config.public.siteUrl}/events`,
   segment: { cta: "qiskit-org-events", location: "faq" },

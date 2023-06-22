@@ -7,6 +7,7 @@
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal ? '_blank' : undefined"
+    :title="title"
     @click="emit('click')"
     @mouseenter="$emit('mouseenter')"
   >
@@ -19,11 +20,13 @@ import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
   segment?: CtaClickedEventProp | undefined;
+  title?: string;
   url?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   segment: undefined,
+  title: undefined,
   url: "",
 });
 

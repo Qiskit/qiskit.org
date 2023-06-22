@@ -189,6 +189,8 @@
 <script setup lang="ts">
 import { Link } from "~/types/links";
 
+const config = useRuntimeConfig();
+
 const pythonAndJupyter: Link = {
   title: "Introduction to Python and Jupyter Notebooks",
   url: "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
@@ -255,7 +257,7 @@ const joinQiskitSlack: Link = {
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
 
-const qiskitEvents: TrackedLink = {
+const qiskitEvents: Link = {
   title: "Qiskit Events",
   url: `${config.public.siteUrl}/events`,
   segment: { cta: "qiskit-org-events", location: "faq" },
