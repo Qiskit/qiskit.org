@@ -1,4 +1,4 @@
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 enum LearnStartLearningUrl {
   Introduction = "https://learn.qiskit.org/course/introduction",
@@ -11,7 +11,7 @@ enum LearnStartLearningUrl {
   SummerSchool2022 = "https://learn.qiskit.org/summer-school/2022/",
 }
 
-const SocialMedia: { [key: string]: Link } = {
+const SocialMedia: { [key: string]: TextLink } = {
   github: {
     label: "GitHub",
     url: "https://github.com/Qiskit",

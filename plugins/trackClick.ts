@@ -1,6 +1,6 @@
-import type { ObjectDirective } from "vue";
+import { ObjectDirective } from "vue";
 
-import type { CtaClickedEventProp } from "@/types/segment";
+import { CtaClickedEventProp } from "@/types/segment";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive("track-click", <
