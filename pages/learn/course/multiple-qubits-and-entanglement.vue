@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { Course, Prerequisite } from "~/constants/learnContent";
+import { RecommendedReading } from "~/types/learn";
+import { TextLink } from "~/types/links";
 
 enum MultipleQubitsAndEntanglementUrl {
   Introduction = "https://learn.qiskit.org/course/ch-gates/introduction",
@@ -50,7 +50,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: MultipleQubitsAndEntanglementUrl.Introduction,
   label: "Start learning",
   segment: {

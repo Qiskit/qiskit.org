@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 import { LearnStartLearningUrl } from "~/constants/links";
-import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { Course, Prerequisite } from "constants/learnContent";
+import { RecommendedReading } from "~/types/learn";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -52,7 +52,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/fundamentals-quantum-algorithms/hero.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.FundamentalsQuantumAlgorithms,
   label: "Start learning",
   segment: {

@@ -45,16 +45,16 @@
 </template>
 
 <script setup lang="ts">
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "~/constants/learnContent";
+import { Course, Prerequisite } from "~/constants/learnContent";
+import { TextLink } from "~/types/links";
 
 interface Props {
   routeName: string; // TODO: Refactor tracking
   headerTitle: string;
   headerDescription: string[];
   headerImg: string;
-  startLearningCta: Link;
-  links: Link[];
+  startLearningCta: TextLink;
+  links: TextLink[];
   references: string[];
   externalRecommendedReadingsPreamble: string;
   courses: Course[];
@@ -64,9 +64,10 @@ interface Props {
 
 defineProps<Props>();
 
-const backToTextbookHomeLink: Link = {
+const backToTextbookHomeLink: TextLink = {
   url: "/learn",
   label: "Home",
+  title: "Back to Textbook Home",
   segment: {
     cta: "back-to-textbook-home",
     location: "header",

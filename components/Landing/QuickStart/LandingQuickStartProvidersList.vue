@@ -25,19 +25,24 @@
         </li>
       </template>
     </ul>
-    <UiCta class="providers-list__btn" v-bind="providersPage" />
+    <UiCta
+      class="providers-list__btn"
+      :url="providersPage.url"
+      :label="providersPage.label"
+      :segment="providersPage.segment"
+    />
   </section>
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
-import type { Provider } from "~/types/providers";
+import { TextLink } from "~/types/links";
+import { Provider } from "~/types/providers";
 
 interface Props {
   providersList: Provider[];
 }
 
-const providersPage: Link = {
+const providersPage: TextLink = {
   url: "/providers",
   label: "See all providers",
   segment: {

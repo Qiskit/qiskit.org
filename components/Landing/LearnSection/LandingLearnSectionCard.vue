@@ -34,9 +34,9 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
-const learnLink: Link = {
+const learnLink: TextLink = {
   url: "/learn",
   label: "Get learning",
   segment: { cta: "get-learning", location: "learn-card" },

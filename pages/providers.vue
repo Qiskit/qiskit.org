@@ -15,7 +15,11 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <UiCta v-bind="howToGuideLink" kind="ghost" />
+            <UiCta
+              :url="howToGuideLink.url"
+              :label="howToGuideLink.label"
+              kind="ghost"
+            />
           </div>
         </div>
         <div class="cds--col-md-5 cds--col-lg-13">
@@ -47,7 +51,8 @@
           </p>
           <UiCta
             class="providers-page__join-section__cta"
-            v-bind="howToGuideLink"
+            :url="howToGuideLink.url"
+            :label="howToGuideLink.label"
           />
         </div>
       </div>
@@ -56,12 +61,12 @@
 </template>
 
 <script setup lang="ts">
-import type {
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
+import {
   Provider,
   ProvidersSection,
   TableOfContentEntry,
 } from "~/types/providers";
-import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({
   layout: "default-max",
