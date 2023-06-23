@@ -26,7 +26,12 @@
           for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta class="summer-school-page__cta" v-bind="header.cta" />
+        <UiCta
+          class="summer-school-page__cta"
+          :url="headerCta.url"
+          :label="headerCta.label"
+          :segment="headerCta.segment"
+        />
       </template>
       <template #card>
         <EventsItemCard
@@ -139,6 +144,7 @@ useSeoMeta({
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
+const headerCta = headerData.cta;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
