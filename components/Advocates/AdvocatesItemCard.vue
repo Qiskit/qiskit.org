@@ -3,14 +3,13 @@
     class="advocate-card"
     :image="image"
     :title="name"
-    :tags="formattedRegion"
-    :alt-text="`${name} profile photo`"
+    :primary-tag="formattedRegion"
   >
     <div v-if="location" class="advocate-card__location">
       <Map20 class="advocate-card__icon" />
       {{ location }}
     </div>
-    <div v-if="slackUsername" class="advocate-card__contact">
+    <div class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
       <UiLink :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
@@ -42,7 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 // Tags on AppCard is an Array
-const formattedRegion = computed(() => (props.region ? [props.region] : []));
+const formattedRegion = computed(() => (props.region ? props.region : []));
 
 const location = computed(() =>
   [props.city, props.country].filter((e) => !!e).join(", ")
@@ -65,8 +64,8 @@ const location = computed(() =>
     align-items: center;
   }
 
-  &__contact {
-    margin-top: carbon.$spacing-03;
+  &__location {
+    margin-bottom: carbon.$spacing-03;
   }
 
   &__icon {
