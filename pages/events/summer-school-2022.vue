@@ -18,16 +18,24 @@
         </p>
         <p>
           Please follow
-          <UiLink v-bind="headerData.qiskitTwitterLink">
-            Qiskit Twitter
-          </UiLink>
+          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
           for more details and updates. For any questions, please check out our
           FAQ below!
         </p>
         <p>See you next year!</p>
       </template>
       <template #card>
-        <EventsItemCard v-bind="headerData.card" vertical-layout>
+        <EventsItemCard
+          :cta-label="headerData.card.ctaLabel"
+          :date="headerData.card.date"
+          :image="headerData.card.image"
+          :location="headerData.card.location"
+          :segment="headerData.card.segment"
+          :time="headerData.card.time"
+          :title="headerData.card.title"
+          :to="headerData.card.to"
+          vertical-layout
+        >
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>

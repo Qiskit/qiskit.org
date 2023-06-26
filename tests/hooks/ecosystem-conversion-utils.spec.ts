@@ -26,11 +26,13 @@ describe("fetchMembers", () => {
       name: string;
       tier: string;
       testsResults: string;
+      stars: number;
     }[] = [
       {
         name: "member1",
         tier: "MAIN",
         testsResults: "",
+        stars: 0,
       },
     ];
 

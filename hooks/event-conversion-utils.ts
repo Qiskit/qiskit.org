@@ -5,7 +5,7 @@ import {
   CommunityEventType,
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
-  type WorldRegion,
+  WorldRegion,
   WORLD_REGIONS,
 } from "../types/events";
 import {

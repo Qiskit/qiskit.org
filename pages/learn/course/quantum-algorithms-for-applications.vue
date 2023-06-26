@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum QuantumAlgorithmsForApplicationsUrl {
   SolvingLinearSystemsOfEquationsUsingHHL = "https://learn.qiskit.org/course/ch-applications/solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation",
@@ -53,7 +53,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: QuantumAlgorithmsForApplicationsUrl.SolvingLinearSystemsOfEquationsUsingHHL,
   label: "Start learning",
   segment: {
@@ -64,7 +64,7 @@ const startLearningCTA: Link = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: Link[] = [];
+const links: TextLink[] = [];
 
 const courses: Course[] = [
   {

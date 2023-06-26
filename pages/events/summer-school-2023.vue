@@ -18,11 +18,9 @@
         </p>
         <p>
           Please follow
-          <UiLink v-bind="headerData.qiskitTwitterLink">
-            Qiskit Twitter
-          </UiLink>
+          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
           for updates and
-          <UiLink v-bind="headerData.researchBlogLink">
+          <UiLink :link="headerData.researchBlogLink">
             read the announcement blog
           </UiLink>
           for more details. For any questions, please check out our FAQ below!
@@ -30,14 +28,24 @@
         <p>See you soon!</p>
         <UiCta
           class="summer-school-page__cta summer-school-page__cta_disabled"
-          v-bind="header.cta"
+          :url="header.cta.url"
+          :label="header.cta.label"
+          :segment="header.cta.segment"
           kind="secondary"
         />
       </template>
       <template #card>
         <EventsItemCard
-          v-bind="headerData.card"
           :alt-text="header.card.altText"
+          class="summer-school-page__header-card"
+          :cta-label="headerData.card.ctaLabel"
+          :date="headerData.card.date"
+          :image="headerData.card.image"
+          :location="headerData.card.location"
+          :segment="headerData.card.segment"
+          :time="headerData.card.time"
+          :title="headerData.card.title"
+          :to="headerData.card.to"
           vertical-layout
         >
           {{ headerData.card.description }}
@@ -190,6 +198,12 @@ const helpfulResourcesData = helpfulResources;
       &:deep(.cta__icon) {
         display: none;
       }
+    }
+  }
+
+  &__header-card {
+    :deep(.card__image-container) {
+      flex: 0 0 24rem;
     }
   }
 }

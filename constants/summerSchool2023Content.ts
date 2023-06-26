@@ -1,4 +1,4 @@
-import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
+import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 const header = {
   titleLine1: "Qiskit Global Summer School 2023:",

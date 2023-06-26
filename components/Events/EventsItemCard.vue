@@ -45,7 +45,7 @@ interface Props {
   types?: string[];
   title: string;
   image: string;
-  altText: string;
+  altText?: string;
   institution?: string;
   location?: string;
   date?: string;
