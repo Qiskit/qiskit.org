@@ -2,22 +2,6 @@
   <header class="page-header">
     <div class="cds--grid">
       <div class="cds--row">
-        <main class="cds--col page-header__main">
-          <div>
-            <h1 class="page-header__headline">
-              <slot name="title" />
-            </h1>
-            <div class="page-header__description">
-              <slot name="description" />
-            </div>
-          </div>
-          <UiCta
-            v-if="cta"
-            :label="cta.label"
-            :segment="cta.segment"
-            :url="cta.url"
-          />
-        </main>
         <aside class="cds--col-lg-5 cds--col-md-4 page-header__aside">
           <div>
             <div class="page-header__card-title-wrapper">
@@ -29,6 +13,22 @@
       </div>
     </div>
   </header>
+  <main class="cds--col page-header__main">
+    <div>
+      <h1 class="page-header__headline">
+        <slot name="title" />
+      </h1>
+      <div class="page-header__description">
+        <slot name="description" />
+      </div>
+    </div>
+    <UiCta
+      v-if="cta"
+      :label="cta.label"
+      :segment="cta.segment"
+      :url="cta.url"
+    />
+  </main>
 </template>
 
 <script setup lang="ts">
