@@ -2,7 +2,9 @@
   <div class="event-page">
     <UiPageHeaderFixed>
       Join
-      <UiTypewriterEffect :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']" />
+      <UiTypewriterEffect
+        :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
+      />
       <br class="show-in-md" />
       from the
       <br class="hide-in-md" />
@@ -13,7 +15,10 @@
     <div class="cds--grid">
       <div class="event-page__tabs">
         <client-only>
-          <bx-tabs value="upcoming" @bx-tabs-selected="selectTab($event.target.value)">
+          <bx-tabs
+            value="upcoming"
+            @bx-tabs-selected="selectTab($event.target.value)"
+          >
             <bx-tab id="tab-1" value="upcoming">Upcoming events</bx-tab>
             <bx-tab id="tab-2" value="past">Past events</bx-tab>
             <bx-tab id="tab-3" value="calendar">Calendar</bx-tab>
@@ -21,34 +26,54 @@
         </client-only>
       </div>
       <div v-if="showCalendar">
-        <iframe class="event-page__calendar"
-          src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on" width="100%"
-          height="560" />
+        <iframe
+          class="event-page__calendar"
+          src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
+          width="100%"
+          height="560"
+        />
         <EventsFollowCalendar />
         <EventsRequestEvent />
       </div>
       <UiFiltersResultsLayout v-else>
         <template #filters-on-m-l-screen>
-          <UiFieldset v-for="filter in extraFilters" :key="filter.label" :label="filter.label">
+          <UiFieldset
+            v-for="filter in extraFilters"
+            :key="filter.label"
+            :label="filter.label"
+          >
             <client-only>
-              <bx-checkbox v-for="option in filter.options" :key="option"
-                :checked="isFilterChecked(filter.filterType, option)" :label-text="option" :value="option"
+              <bx-checkbox
+                v-for="option in filter.options"
+                :key="option"
+                :checked="isFilterChecked(filter.filterType, option)"
+                :label-text="option"
+                :value="option"
                 @bx-checkbox-changed="
                   updateFilter(filter.filterType, option, $event.target.checked)
-                  " />
+                "
+              />
             </client-only>
           </UiFieldset>
         </template>
         <template #filters-on-s-screen>
           <div v-for="filter in extraFilters" :key="filter.label">
-            <UiMultiSelect :label="filter.label" :options="filter.options" :value="getCheckedFilters(filter.filterType)"
-              @change-selection="updateWholeFilter(filter.filterType, $event)" />
+            <UiMultiSelect
+              :label="filter.label"
+              :options="filter.options"
+              :value="getCheckedFilters(filter.filterType)"
+              @change-selection="updateWholeFilter(filter.filterType, $event)"
+            />
           </div>
         </template>
         <template #results>
           <div v-if="noEvents" class="cds--row">
             <div class="cds--col-sm-4 cds--col-xlg-8">
-              <UiCard :image="emptyCard.img" alt-text="Warning sign icon" :title="emptyCard.title">
+              <UiCard
+                :image="emptyCard.img"
+                alt-text="Warning sign icon"
+                :title="emptyCard.title"
+              >
                 <div class="event-page__empty-card-description">
                   {{ emptyCard.description }}
                 </div>
@@ -56,10 +81,22 @@
             </div>
           </div>
           <div v-else class="cds--row">
-            <div v-for="(eventItem, index) in filteredEvents" :key="index" class="cds--col-sm-4 cds--col-xlg-8">
-              <EventsItemCard class="event-page__card" :types="eventItem.types" :title="eventItem.title"
-                :image="eventItem.image" :alt-text="getEventAltText(eventItem)" :location="eventItem.location"
-                :date="eventItem.date" :time="eventItem.startDateAndTime" :to="eventItem.to">
+            <div
+              v-for="(eventItem, index) in filteredEvents"
+              :key="index"
+              class="cds--col-sm-4 cds--col-xlg-8"
+            >
+              <EventsItemCard
+                class="event-page__card"
+                :types="eventItem.types"
+                :title="eventItem.title"
+                :image="eventItem.image"
+                :alt-text="getEventAltText(eventItem)"
+                :location="eventItem.location"
+                :date="eventItem.date"
+                :time="eventItem.startDateAndTime"
+                :to="eventItem.to"
+              >
                 {{ eventItem.abstract }}
               </EventsItemCard>
             </div>
@@ -244,22 +281,26 @@ const selectTab = (selectedTab: string) => {
 };
 
 const createEventSchema = (events: CommunityEvent[]) => {
-  const entities = events.
-    filter(event => event.startDate)
+  const entities = events
+    .filter((event) => event.startDate)
     .map((event) => {
       const location = ["YouTube", "Virtual"].includes(event.location)
         ? {
-          "@type": "VirtualLocation",
-          name: event.location,
-          url: event.to
-        }
+            "@type": "VirtualLocation",
+            name: event.location,
+            url: event.to,
+          }
         : {
-          "@type": "Place",
-          name: event.location,
-          address: event.location,
-          url: event.to
-        };
-      const eventAttendanceMode = ["YouTube", "Virtual"].includes(event.location) ? "OnlineEventAttendanceMode" : "OfflineEventAttendanceMode";
+            "@type": "Place",
+            name: event.location,
+            address: event.location,
+            url: event.to,
+          };
+      const eventAttendanceMode = ["YouTube", "Virtual"].includes(
+        event.location
+      )
+        ? "OnlineEventAttendanceMode"
+        : "OfflineEventAttendanceMode";
 
       const schemaEvent: any = {
         "@type": "Event",
@@ -270,9 +311,9 @@ const createEventSchema = (events: CommunityEvent[]) => {
         image: event.image,
         eventAttendanceMode,
         organizer: {
-          name: 'IBM Quantum',
-          url: 'https://ibm.com/quantum'
-        }
+          name: "IBM Quantum",
+          url: "https://ibm.com/quantum",
+        },
       };
 
       if (event.speaker) {
@@ -290,18 +331,18 @@ const createEventSchema = (events: CommunityEvent[]) => {
   };
 };
 
-let script = [];
+const script = [];
 
 script.push({
-  hid: 'schemaEvent',
+  hid: "schemaEvent",
   children: createEventSchema(events.value),
-  type: 'application/ld+json'
+  type: "application/ld+json",
 });
 
-console.log('scripts', script);
+console.log("scripts", script);
 
 useHead({
-  script
+  script,
 });
 </script>
 
@@ -332,13 +373,22 @@ useHead({
       border-bottom-color: qiskit.$border-color;
     }
 
-    .bx--tabs--scrollable__nav-item--selected:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
+    .bx--tabs--scrollable__nav-item--selected:not(
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link {
       border-bottom-color: qiskit.$border-color-secondary;
     }
 
-    .bx--tabs--scrollable__nav-item:not(.bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link,
-    .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected,
-      .bx--tabs--scrollable__nav-item--disabled) .bx--tabs--scrollable__nav-link {
+    .bx--tabs--scrollable__nav-item:not(
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link,
+    .bx--tabs--scrollable__nav-item:hover:not(
+        .bx--tabs--scrollable__nav-item--selected,
+        .bx--tabs--scrollable__nav-item--disabled
+      )
+      .bx--tabs--scrollable__nav-link {
       color: qiskit.$text-color;
     }
 
@@ -371,12 +421,15 @@ useHead({
         background-color: qiskit.$background-color-lighter;
       }
 
-      .bx--tabs--scrollable__nav-item:last-child .bx--tabs--scrollable__nav-link {
+      .bx--tabs--scrollable__nav-item:last-child
+        .bx--tabs--scrollable__nav-link {
         border-bottom: none;
       }
 
-      .bx--tabs--scrollable__nav-item:hover:not(.bx--tabs--scrollable__nav-item--selected,
-        .bx--tabs--scrollable__nav-item--disabled) {
+      .bx--tabs--scrollable__nav-item:hover:not(
+          .bx--tabs--scrollable__nav-item--selected,
+          .bx--tabs--scrollable__nav-item--disabled
+        ) {
         background-color: qiskit.$background-color-light;
       }
     }
