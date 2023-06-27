@@ -1,8 +1,8 @@
 <template>
   <article class="hero-moment">
-    <LandingHeroMomentGrid>
+    <HomeLeadSpaceBackgroundGrid>
       <div class="cds--grid hero-moment__container">
-        <LandingHeroMomentVersionInfo
+        <HomeLeadSpaceVersion
           class="hero-moment__version-info"
           :version="version"
         />
@@ -34,7 +34,7 @@
           alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
       </div>
-    </LandingHeroMomentGrid>
+    </HomeLeadSpaceBackgroundGrid>
   </article>
 </template>
 

@@ -19,12 +19,12 @@
     </div>
     <div class="cds--row">
       <div class="cds--col-md-8 cds--col-lg-8">
-        <LandingQuickStartProvidersList
+        <HomeQuickStartProvidersList
           :providers-list="providersData"
           @select-provider="updateSelectedProvider($event)"
         />
       </div>
-      <LandingQuickStartProvidersCodeExamples
+      <HomeQuickStartProvidersCode
         class="cds--col-md-8 cds--col-lg-8"
         :install-code="providersData[selectedProviderIndex].installation"
         :code-examples="providersData[selectedProviderIndex].codeExamples"
