@@ -12,7 +12,7 @@
         />
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :date="cardContent.date"
           :image="cardContent.image"
           :institution="cardContent.institution"

@@ -25,7 +25,7 @@
         <p>See you next year!</p>
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :cta-label="headerData.card.ctaLabel"
           :date="headerData.card.date"
           :image="headerData.card.image"
@@ -37,7 +37,7 @@
           vertical-layout
         >
           {{ headerData.card.description }}
-        </EventsItemCard>
+        </EventsCard>
       </template>
     </UiPageHeaderWithCard>
 

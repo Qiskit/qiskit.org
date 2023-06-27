@@ -34,7 +34,7 @@
         />
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :alt-text="header.card.altText"
           class="summer-school-page__header-card"
           :cta-label="headerData.card.ctaLabel"
@@ -48,7 +48,7 @@
           vertical-layout
         >
           {{ headerData.card.description }}
-        </EventsItemCard>
+        </EventsCard>
       </template>
     </UiPageHeaderWithCard>
 

@@ -43,23 +43,23 @@
 </template>
 
 <script setup lang="ts">
-import EventsCalendarsAppleInstructions from "~/components/Events/Calendars/EventsCalendarsAppleInstructions.vue";
-import EventsCalendarsGoogleInstructions from "~/components/Events/Calendars/EventsCalendarsGoogleInstructions.vue";
-import EventsCalendarsOutlookInstructions from "~/components/Events/Calendars/EventsCalendarsOutlookInstructions.vue";
+import EventsFollowOurCalendarInstructionsApple from "~/components/Events/FollowOurCalendar/Instructions/EventsFollowOurCalendarInstructionsApple.vue";
+import EventsFollowOurCalendarInstructionsGoogle from "~/components/Events/FollowOurCalendar/Instructions/EventsFollowOurCalendarInstructionsGoogle.vue";
+import EventsFollowOurCalendarInstructionsOutlook from "~/components/Events/FollowOurCalendar/Instructions/EventsFollowOurCalendarInstructionsOutlook.vue";
 import { TextLink } from "~/types/links";
 
 const calendarsInstructions = [
   {
     name: "Google",
-    instructions: EventsCalendarsGoogleInstructions,
+    instructions: EventsFollowOurCalendarInstructionsGoogle,
   },
   {
     name: "Outlook",
-    instructions: EventsCalendarsOutlookInstructions,
+    instructions: EventsFollowOurCalendarInstructionsOutlook,
   },
   {
     name: "Apple",
-    instructions: EventsCalendarsAppleInstructions,
+    instructions: EventsFollowOurCalendarInstructionsApple,
   },
 ];
 

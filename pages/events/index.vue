@@ -32,8 +32,8 @@
           width="100%"
           height="560"
         />
-        <EventsFollowCalendar />
-        <EventsRequestEvent />
+        <EventsFollowOurCalendar />
+        <EventsRequest />
       </div>
       <UiFiltersResultsLayout v-else>
         <template #filters-on-m-l-screen>
@@ -86,7 +86,7 @@
               :key="index"
               class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <EventsItemCard
+              <EventsCard
                 class="event-page__card"
                 :types="eventItem.types"
                 :title="eventItem.title"
@@ -98,13 +98,13 @@
                 :to="eventItem.to"
               >
                 {{ eventItem.abstract }}
-              </EventsItemCard>
+              </EventsCard>
             </div>
           </div>
         </template>
         <template #extra-info>
-          <EventsFollowCalendar id="follow-our-event-calendar" />
-          <EventsRequestEvent />
+          <EventsFollowOurCalendar id="follow-our-event-calendar" />
+          <EventsRequest />
         </template>
       </UiFiltersResultsLayout>
     </div>

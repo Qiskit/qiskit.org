@@ -20,7 +20,7 @@
         </p>
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :cta-label="headerData.card.ctaLabel"
           :image="headerData.card.image"
           :location="headerData.card.location"
@@ -31,7 +31,7 @@
           vertical-layout
         >
           {{ headerData.card.description }}
-        </EventsItemCard>
+        </EventsCard>
       </template>
     </UiPageHeaderWithCard>
 
