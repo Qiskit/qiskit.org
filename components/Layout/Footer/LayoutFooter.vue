@@ -14,7 +14,7 @@
               :class="`page-footer__logo_theme_${theme}`"
             />
           </div>
-          <FooterSection
+          <LayoutFooterLinksGroup
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
             class="cds--col-lg-3 cds--col-sm"
@@ -22,7 +22,7 @@
             :theme="theme"
             :title="sectionElements.title"
           />
-          <FooterSection
+          <LayoutFooterLinksGroup
             class="cds--col-lg-3 cds--col-md page-footer__stay-connected"
             :elements="stayConnectedElements.elements"
             icons-only

@@ -1,6 +1,6 @@
 <template>
   <div class="event-page">
-    <UiPageHeaderFixed>
+    <LeadSpaceFixed>
       Join
       <UiTypewriterEffect
         :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
@@ -11,7 +11,7 @@
       world&rsquo;s largest quantum
       <br class="hide-in-md" />
       computing community
-    </UiPageHeaderFixed>
+    </LeadSpaceFixed>
     <div class="cds--grid">
       <div class="event-page__tabs">
         <client-only>

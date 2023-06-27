@@ -1,6 +1,6 @@
 <template>
   <main class="event-page seminar-series-page">
-    <UiPageHeaderWithCard :cta="headerCTA" :card-title="headerCardTitle">
+    <LeadSpaceWithCard :cta="headerCTA" :card-title="headerCardTitle">
       <template #title>
         {{ headerTitle }}
       </template>
@@ -22,7 +22,7 @@
           vertical-layout
         />
       </template>
-    </UiPageHeaderWithCard>
+    </LeadSpaceWithCard>
 
     <div class="cds--grid">
       <UiMosaicSection

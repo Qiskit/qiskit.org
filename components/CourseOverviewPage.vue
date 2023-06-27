@@ -1,7 +1,7 @@
 <template>
   <main class="course-overview-page">
     <LearnContentMenuSection class="course-overview-page__content-menu" />
-    <UiPageHeaderWithImage
+    <LeadSpaceWithImage
       :cta="startLearningCta"
       :back-link="backToTextbookHomeLink"
     >
@@ -23,7 +23,7 @@
           :src="headerImg"
         />
       </template>
-    </UiPageHeaderWithImage>
+    </LeadSpaceWithImage>
     <LearnPrerequisiteMaterialSection
       v-if="prerequisites.length > 0"
       class="course-overview-page__section"
