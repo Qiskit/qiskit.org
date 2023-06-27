@@ -7,7 +7,7 @@
       /><br />
       within the Qiskit community
     </UiPageHeaderFixed>
-    <AdvocatesJoinSection />
+    <AdvocatesJoin />
     <AdvocatesMeetTheAdvocates />
   </main>
 </template>

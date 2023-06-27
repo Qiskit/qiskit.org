@@ -49,7 +49,7 @@
             :key="advocate.name"
             class="cds--col-sm-4 cds--col-xlg-8"
           >
-            <AdvocatesItemCard
+            <AdvocatesMeetTheAdvocatesCard
               :name="advocate.name"
               :image="advocate.image"
               :city="advocate.city"
