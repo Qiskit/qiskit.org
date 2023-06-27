@@ -31,7 +31,7 @@
         class="bx-accordion__item"
         :title-text="`Test Results (${formatTimestamp(member.updatedAt)})`"
       >
-        <EcosystemTestTable :filtered-data="testRows" />
+        <EcosystemCardTestResults :filtered-data="testRows" />
       </bx-accordion-item>
     </bx-accordion>
   </article>

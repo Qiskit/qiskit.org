@@ -106,7 +106,7 @@
                 v-if="getFilteredMembers(tierName).length > 0"
                 class="cds--row ecosystem__members"
               >
-                <EcosystemItemCard
+                <EcosystemCard
                   v-for="member in sortMembers(getFilteredMembers(tierName))"
                   :key="member.name"
                   class="cds--col-sm-4 cds--col-xlg-8"
