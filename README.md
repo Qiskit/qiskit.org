@@ -48,6 +48,7 @@ Qiskit is an open-source quantum computing software development framework for le
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [💻 Technology Used](#-technology-used)
 - [🏭 Content Generation](#-content-generation)
+- [🏷️ Naming Conventions](#️-naming-conventions)
 - [✏️ How to Contribute](#️-how-to-contribute)
 - [🗓 Open Backlog](#-open-backlog)
 - [👩‍💻 Maintainers](#-maintainers)
@@ -98,6 +99,23 @@ Notice that, for communicating with the team tools, API keys may be required. It
 ```shell
 GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
 ```
+
+<br/>
+
+## 🏷️ Naming Conventions
+
+### Nuxt Components
+
+When working with files in the `components/` directory, please adhere to the following naming conventions:
+
+- Component files and directories should be named using PascalCase.
+- Always use multi-word names.
+- Simplify component names where possible, for example, `EventsItemCard` can be named `EventsCard`.
+- Group related components in folders when more than one component refers to the same concept.
+- When naming the component `.vue` files, include the whole path to make it easier to locate the components.
+- Generic components that can be reused across multiple pages should be placed in the `components/Ui/` directory.
+- Components specific to a page should be placed in their respective directory, such as `components/Events/` for events-specific components.
+- Avoid appending "Section" to component names, as it is usually implied that the component represents a section of the page.
 
 <br/>
 
