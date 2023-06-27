@@ -339,8 +339,6 @@ script.push({
   type: "application/ld+json",
 });
 
-console.log("scripts", script);
-
 useHead({
   script,
 });
