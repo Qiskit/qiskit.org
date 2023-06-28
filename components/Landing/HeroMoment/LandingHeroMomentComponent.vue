@@ -42,32 +42,17 @@
         />
         <img
           class="hero-moment__container__image"
-          src="/images/landing-page/new-hero-illustration.png"
+          src="/images/landing-page/cryo-new.png"
           alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
-        <nuxt-img
-          class="hero-moment__container__image"
-          format="webp"
-          src="/images/landing-page/cryo.png"
-          alt="A visual composition of a sketched a quantum computer"
-        />
         <div class="hero-moment__container__laptop">
-          <nuxt-img
+          <img
             class="hero-moment__container__laptop__frame"
-            format="webp"
-            src="/images/landing-page/laptop.png"
-            :alt="`A laptop with the following code sample: ${heroCodeSnippet}`"
+            src="/images/landing-page/laptop-frame.png"
+            alt="Laptop"
           />
           <code class="hero-moment__container__laptop__code">
-            <pre
-              v-for="(line, index) in heroCodeSnippet.split('\n')"
-              :key="index"
-              :class="{
-                'hero-moment__container__laptop__code__comment':
-                  line.startsWith('#'),
-              }"
-              v-text="line"
-            />
+            <pre>{{ heroCodeSnippet }}</pre>
           </code>
         </div>
       </div>
@@ -94,18 +79,17 @@ const getStartedLink: TextLink = {
 
 // TODO: Fix hydration text content mismatch
 const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
-const heroCodeSnippet = `# Build a circuit
+const heroCodeSnippet = `from <quantum provider> import Sampler
+sampler = Sampler()
+
+# Build circuit
 from qiskit import QuantumCircuit
 circuit = QuantumCircuit(2, 2)
 circuit.h(0)
 circuit.cx(0,1)
 circuit.measure([0,1], [0,1])
- 
-# Connect to your quantum provider
-from <quantum provider> import Sampler
-sampler = Sampler()
- 
-# Run the circuit and get the result
+
+# Run the circuit and get result distribution
 job = sampler.run(circuit)
 quasi_dist = job.result().quasi_dists[0]
 print(quasi_dist)`;
@@ -153,7 +137,7 @@ print(quasi_dist)`;
       height: auto;
       width: 60%;
       position: absolute;
-      right: 9%;
+      right: 15%;
       top: 0;
       z-index: -1;
 
@@ -161,9 +145,8 @@ print(quasi_dist)`;
         display: none;
       }
     }
-
     &__laptop {
-      width: 55%;
+      width: 773px;
       position: absolute;
       right: 3%;
       top: 0;
@@ -174,23 +157,28 @@ print(quasi_dist)`;
         display: none;
       }
 
+      @include carbon.breakpoint-down(xlg) {
+        width: 595px;
+      }
+
       &__frame {
         height: 100%;
         width: 100%;
       }
-
       &__code {
         position: absolute;
-        left: 16%;
-        top: 23%;
+        left: 87px;
+        top: 119px;
+        width: 598px;
+        height: 368px;
+        background-color: #fff;
+        padding: 15px;
 
-        @include carbon.breakpoint-up(xlg) {
-          left: 16%;
-          top: 21%;
-        }
-
-        &__comment {
-          color: qiskit.$text-active-color;
+        @include carbon.breakpoint-down(xlg) {
+          left: 68px;
+          top: 105px;
+          width: 460px;
+          height: 284px;
         }
       }
     }
