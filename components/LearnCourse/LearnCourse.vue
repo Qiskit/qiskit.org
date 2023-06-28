@@ -29,14 +29,14 @@
       class="course-overview-page__section"
       :data="prerequisites"
     />
-    <LearnExternalRecommendedReadings
+    <LearnCourseRecommendedReadings
       v-if="links.length > 0 || references.length > 0"
       class="course-overview-page__section"
       :links="links"
       :references="references"
       :preamble="externalRecommendedReadingsPreamble"
     />
-    <LearnCoursePagesSection
+    <LearnCoursePages
       class="course-overview-page__section"
       :courses="courses"
       :img-base="imageUrlBase"
