@@ -2,7 +2,7 @@
   <nav class="table-of-contents">
     <!-- Needed to avoid multiline to remove blank space around the content. -->
     <!-- eslint-disable vue/multiline-html-element-content-newline -->
-    <UiBasicLink
+    <UiLink
       v-for="entry in entries"
       :key="entry.sectionId || entry.title"
       class="table-of-contents__entry"
@@ -11,7 +11,7 @@
         'table-of-contents__entry_second-level': entry.isSecondary,
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
-      >{{ entry.title }}</UiBasicLink
+      >{{ entry.title }}</UiLink
     >
     <!-- eslint-enable -->
   </nav>

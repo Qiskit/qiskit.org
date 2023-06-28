@@ -75,14 +75,14 @@
                 v-for="({ styles, data, link }, elementIndex) in row"
                 :key="`${elementIndex}`"
               >
-                <UiLink
+                <UiLinkText
                   v-if="link"
                   class="fall-fest-page__table-link"
                   :style="styles"
                   :url="link"
                 >
                   Link to event
-                </UiLink>
+                </UiLinkText>
                 <span v-else :style="styles">{{ data }}</span>
               </bx-table-cell>
             </bx-table-row>
@@ -90,7 +90,7 @@
         </div>
       </section>
 
-      <UiHelpfulResourcesSection
+      <UiHelpfulResources
         class="fall-fest-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"

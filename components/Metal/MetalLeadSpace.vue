@@ -1,6 +1,6 @@
 <template>
   <header class="dark-header">
-    <UiNavBackLink label="Back to Qiskit.org" theme="dark" url="/" />
+    <UiLinkBack label="Back to Qiskit.org" theme="dark" url="/" />
 
     <div class="dark-header__container">
       <svg

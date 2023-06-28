@@ -1,5 +1,5 @@
 <template>
-  <UiBasicLink
+  <UiLink
     class="link"
     :class="`link_${kind}`"
     :segment="link?.segment"
@@ -7,7 +7,7 @@
     :url="link?.url"
   >
     <slot />
-  </UiBasicLink>
+  </UiLink>
 </template>
 
 <script setup lang="ts">

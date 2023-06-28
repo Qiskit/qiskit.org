@@ -44,7 +44,7 @@
           ©Qiskit | All Rights Reserved
         </div>
         <div class="page-footer__secondary-links">
-          <UiBasicLink
+          <UiLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
             class="caption page-footer__secondary-link"
@@ -52,7 +52,7 @@
             :url="link.url"
           >
             {{ link.label }}
-          </UiBasicLink>
+          </UiLink>
         </div>
       </div>
     </section>

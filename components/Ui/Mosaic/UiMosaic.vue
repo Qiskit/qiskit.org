@@ -26,9 +26,9 @@
             v-html="description"
           />
           <!-- eslint-enable vue/no-v-html -->
-          <UiLink v-if="cta" class="mosaic__element-copy-link" :link="cta">
+          <UiLinkText v-if="cta" class="mosaic__element-copy-link" :link="cta">
             {{ cta.label }}
-          </UiLink>
+          </UiLinkText>
         </div>
         <div
           v-if="image"

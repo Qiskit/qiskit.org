@@ -2,11 +2,11 @@
   <bx-ordered-list>
     <bx-list-item>
       Open your Google Calendar by visiting
-      <UiLink
+      <UiLinkText
         url="https://calendar.google.com/calendar/u/0/r/settings/addbyurl?pli=1"
       >
         this link
-      </UiLink>
+      </UiLinkText>
     </bx-list-item>
     <bx-list-item
       >Paste the events subscription link you copied above</bx-list-item

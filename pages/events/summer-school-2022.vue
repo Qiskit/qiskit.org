@@ -18,7 +18,9 @@
         </p>
         <p>
           Please follow
-          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
+          <UiLinkText :link="headerData.qiskitTwitterLink"
+            >Qiskit Twitter</UiLinkText
+          >
           for more details and updates. For any questions, please check out our
           FAQ below!
         </p>
@@ -90,7 +92,7 @@
 
       <EventsSummerSchoolFaq2022 class="summer-school-page__section" />
 
-      <UiHelpfulResourcesSection
+      <UiHelpfulResources
         class="summer-school-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"

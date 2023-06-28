@@ -106,7 +106,7 @@
         />
       </UiDataTableSection>
 
-      <UiHelpfulResourcesSection
+      <UiHelpfulResources
         class="seminar-series-page__section"
         :resources="helpfulResources"
       />

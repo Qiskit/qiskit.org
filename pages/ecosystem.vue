@@ -115,7 +115,9 @@
               </div>
               <p v-else class="cds--col">
                 Try using wider search criteria, or consider
-                <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
+                <UiLinkText v-bind="joinAction"
+                  >joining the ecosystem.
+                </UiLinkText>
               </p>
             </div>
           </div>

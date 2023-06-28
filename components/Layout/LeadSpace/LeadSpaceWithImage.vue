@@ -2,7 +2,7 @@
   <header class="page-header-with-img">
     <div class="cds--grid">
       <div v-if="backLink" class="cds--row page-header-with-img__back-link">
-        <UiNavBackLink
+        <UiLinkBack
           :label="backLink.label"
           :segment="backLink.segment"
           :url="backLink.url"

@@ -2,7 +2,7 @@
   <main class="learn-page">
     <LearnLeadSpace />
     <LearnStartLearning class="learn-page__section" />
-    <UiHelpfulResourcesSection
+    <UiHelpfulResources
       class="learn-page__section"
       :resources="helpfulResources"
     />

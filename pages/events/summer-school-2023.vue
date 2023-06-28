@@ -18,11 +18,13 @@
         </p>
         <p>
           Please follow
-          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
+          <UiLinkText :link="headerData.qiskitTwitterLink"
+            >Qiskit Twitter</UiLinkText
+          >
           for updates and
-          <UiLink :link="headerData.researchBlogLink">
+          <UiLinkText :link="headerData.researchBlogLink">
             read the announcement blog
-          </UiLink>
+          </UiLinkText>
           for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
@@ -101,7 +103,7 @@
 
       <EventsSummerSchoolFaq2023 class="summer-school-page__section" />
 
-      <UiHelpfulResourcesSection
+      <UiHelpfulResources
         class="summer-school-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"

@@ -4,7 +4,9 @@
     <p class="event-page__section__description">
       Stay up to date with all of our scheduled events by following our
       calendar. You can view the calendar by visiting
-      <UiLink :link="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</UiLink
+      <UiLinkText :link="qiskitCalendarLink">{{
+        qiskitCalendarLink.label
+      }}</UiLinkText
       >, or subscribe to it by adding to the calendar app of your choice.
     </p>
     <div class="event-page__tabs">

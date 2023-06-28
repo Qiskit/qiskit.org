@@ -12,9 +12,9 @@
     </div>
     <div v-if="slackUsername" class="advocate-card__contact">
       <LogoSlack20 class="advocate-card__icon" />
-      <UiLink :url="`https://qiskit.slack.com/team/${slackId}`">
+      <UiLinkText :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
-      </UiLink>
+      </UiLinkText>
     </div>
   </UiCard>
 </template>

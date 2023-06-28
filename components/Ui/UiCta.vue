@@ -1,5 +1,5 @@
 <template>
-  <UiBasicLink
+  <UiLink
     ref="link"
     class="cta"
     :class="[
@@ -20,7 +20,7 @@
       class="cta__icon"
       :class="`cta__icon_${iconPerLinkType}`"
     />
-  </UiBasicLink>
+  </UiLink>
 </template>
 
 <script setup lang="ts">

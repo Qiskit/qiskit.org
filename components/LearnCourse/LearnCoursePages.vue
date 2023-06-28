@@ -9,7 +9,7 @@
             :key="label"
             class="course"
           >
-            <UiBasicLink
+            <UiLink
               class="course__entry"
               :class="{ active: label === activeCourseLabel }"
               :segment="segment"
@@ -17,7 +17,7 @@
               @mouseenter="selectCourse(label)"
             >
               {{ label }}
-            </UiBasicLink>
+            </UiLink>
           </li>
         </ul>
       </nav>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div v-if="activeCourse" class="course-pages-section__main__preview">
-        <UiBasicLink :url="activeCourse.url">
+        <UiLink :url="activeCourse.url">
           <!-- TODO: investigate why this particular img is not being populated -->
           <!-- <nuxt-img
             class="course-pages-section__main__preview__image"
@@ -42,7 +42,7 @@
             class="course-pages-section__main__preview__image"
             :src="activeCoursePreviewImage"
           />
-        </UiBasicLink>
+        </UiLink>
         <UiCta
           label="Go to page"
           class="course-pages-section__main__preview__cta"
