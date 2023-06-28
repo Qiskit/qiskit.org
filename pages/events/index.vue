@@ -279,69 +279,6 @@ const selectTab = (selectedTab: string) => {
 
   tabsIsDirty.value = true;
 };
-
-const createEventSchema = (events: CommunityEvent[]) => {
-  const entities = events
-    .filter((event) => event.startDate)
-    .map((event) => {
-      const location = ["YouTube", "Virtual"].includes(event.location)
-        ? {
-            "@type": "VirtualLocation",
-            name: event.location,
-            url: event.to,
-          }
-        : {
-            "@type": "Place",
-            name: event.location,
-            address: event.location,
-            url: event.to,
-          };
-      const eventAttendanceMode = ["YouTube", "Virtual"].includes(
-        event.location
-      )
-        ? "OnlineEventAttendanceMode"
-        : "OfflineEventAttendanceMode";
-
-      const schemaEvent: any = {
-        "@type": "Event",
-        location,
-        name: event.title,
-        startDate: event.startDate,
-        endDate: event.endDate,
-        image: event.image,
-        eventAttendanceMode,
-        organizer: {
-          name: "IBM Quantum",
-          url: "https://ibm.com/quantum",
-        },
-      };
-
-      if (event.speaker) {
-        schemaEvent.performer = event.speaker;
-      }
-
-      return schemaEvent;
-    });
-
-  return {
-    // Returns our LD+JSON FAQPage schema using our entities array that we created above.
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    mainEntity: entities,
-  };
-};
-
-const script = [];
-
-script.push({
-  hid: "schemaEvent",
-  children: createEventSchema(events.value),
-  type: "application/ld+json",
-});
-
-useHead({
-  script,
-});
 </script>
 
 <style lang="scss" scoped>
