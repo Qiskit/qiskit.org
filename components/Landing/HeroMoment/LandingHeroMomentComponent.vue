@@ -204,6 +204,8 @@ print(quasi_dist)`;
     margin-bottom: carbon.$spacing-06;
     font-weight: 500;
     font-size: 7rem;
+    display: flex;
+    align-items: center;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
