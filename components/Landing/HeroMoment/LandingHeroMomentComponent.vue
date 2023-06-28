@@ -145,6 +145,7 @@ print(quasi_dist)`;
         display: none;
       }
     }
+
     &__laptop {
       width: 773px;
       position: absolute;
@@ -165,6 +166,7 @@ print(quasi_dist)`;
         height: 100%;
         width: 100%;
       }
+
       &__code {
         position: absolute;
         left: 87px;
