@@ -106,6 +106,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 
     @include carbon.breakpoint-down(md) {
       background-image: none;
+      padding-top: carbon.$spacing-05;
     }
 
     &__image {
@@ -155,6 +156,10 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     &__logo {
       width: 130px;
       margin-right: carbon.$spacing-05;
+
+      @include carbon.breakpoint-down(md) {
+        display: none;
+      }
     }
   }
 
@@ -181,7 +186,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     }
 
     @include carbon.breakpoint-up(md) {
-      margin-bottom: carbon.$spacing-07;
+      margin-bottom: carbon.$spacing-04;
     }
 
     @include carbon.breakpoint-up(lg) {
