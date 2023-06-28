@@ -12,7 +12,7 @@
         quantum chip development from concept to fabrication in a simple and
         open framework.
       </p>
-      <MetalFeatureCard
+      <MetalFeaturesCard
         v-for="feature in metalFeatures"
         :key="feature.title"
         class="features-section__card"

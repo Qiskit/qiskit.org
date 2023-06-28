@@ -4,7 +4,7 @@
       <h2>Our vision</h2>
       <div class="capabilities-section__capabilities">
         <div class="capabilities-section__content">
-          <MetalCapabilityCard
+          <MetalCapabilitiesCard
             v-for="item in capabilities"
             :id="item.title"
             :key="item.title"
