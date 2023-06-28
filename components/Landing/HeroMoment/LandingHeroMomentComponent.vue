@@ -238,10 +238,7 @@ print(quasi_dist)`;
 
     &__title {
       color: carbon.$gray-80;
-<<<<<<< HEAD
       font-size: carbon.type-scale(4);
-=======
->>>>>>> 6f79b3ecf (change paragraphs for titles in hero)
     }
 
     &__divider {
@@ -253,10 +250,7 @@ print(quasi_dist)`;
     &__content {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
-<<<<<<< HEAD
       font-size: carbon.type-scale(4);
-=======
->>>>>>> 6f79b3ecf (change paragraphs for titles in hero)
     }
 
     @include carbon.breakpoint-up(md) {
