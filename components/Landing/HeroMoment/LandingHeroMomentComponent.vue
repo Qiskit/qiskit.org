@@ -17,9 +17,9 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 hero-moment__description"
           >
-            <p class="hero-moment__description__title">
+            <h3 class="hero-moment__description__title">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
-            </p>
+            </h3>
             <hr class="hero-moment__description__divider" />
             <ol class="hero-moment__description__content">
               <li>open-source toolkit for useful quantum computing.</li>
@@ -238,7 +238,10 @@ print(quasi_dist)`;
 
     &__title {
       color: carbon.$gray-80;
+<<<<<<< HEAD
       font-size: carbon.type-scale(4);
+=======
+>>>>>>> 6f79b3ecf (change paragraphs for titles in hero)
     }
 
     &__divider {
@@ -250,7 +253,10 @@ print(quasi_dist)`;
     &__content {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
+<<<<<<< HEAD
       font-size: carbon.type-scale(4);
+=======
+>>>>>>> 6f79b3ecf (change paragraphs for titles in hero)
     }
 
     @include carbon.breakpoint-up(md) {
