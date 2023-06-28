@@ -2,7 +2,14 @@
   <section class="mosaic">
     <dl class="mosaic__layout">
       <div
-        v-for="{ position, title, description, image, cta } in mosaicElements"
+        v-for="{
+          position,
+          title,
+          description,
+          image,
+          altText,
+          cta,
+        } in mosaicElements"
         :key="title"
         class="mosaic__element"
         :class="`mosaic__element_${position}`"
@@ -18,8 +25,8 @@
             :class="`mosaic__element-copy-description_${position}`"
             v-html="description"
           />
-          <!-- estlint-enable -->
-          <UiLink v-if="cta" v-bind="cta" class="mosaic__element-copy-link">
+          <!-- eslint-enable vue/no-v-html -->
+          <UiLink v-if="cta" class="mosaic__element-copy-link" :link="cta">
             {{ cta.label }}
           </UiLink>
         </div>
@@ -34,6 +41,7 @@
             format="webp"
             sizes="sm:350px md:700px"
             :src="image"
+            :alt="altText"
           />
         </div>
       </div>
@@ -42,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import type { MosaicElement } from "~/types/uiComponents";
+import { MosaicElement } from "~/types/uiComponents";
 
 interface Props {
   mosaicElements: MosaicElement[];

@@ -12,8 +12,8 @@
         :key="element.url"
         class="caption footer-section__link"
         :class="`footer-section__link_theme_${theme}`"
-        v-bind="element"
         kind="secondary"
+        :link="element"
       >
         <component
           :is="element.icon"
@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import type { LinkWithIcon } from "~/types/links";
+import { IconLink } from "~/types/links";
 
 interface Props {
   title: string;
-  elements: LinkWithIcon[];
+  elements: IconLink[];
   iconsOnly?: boolean;
   theme?: "light" | "dark";
 }
@@ -63,7 +63,7 @@ withDefaults(defineProps<Props>(), {
     text-decoration: none;
     display: inline-block;
     width: 100%;
-    padding-bottom: carbon.$spacing-03;
+    margin-bottom: carbon.$spacing-04;
 
     &_theme_light {
       color: qiskit.$text-color-lighter;

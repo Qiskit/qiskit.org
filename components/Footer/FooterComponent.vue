@@ -18,14 +18,16 @@
             v-for="sectionElements in footerElements"
             :key="sectionElements.title"
             class="cds--col-lg-3 cds--col-sm"
-            v-bind="sectionElements"
+            :elements="sectionElements.elements"
             :theme="theme"
+            :title="sectionElements.title"
           />
           <FooterSection
             class="cds--col-lg-3 cds--col-md page-footer__stay-connected"
-            v-bind="stayConnectedElements"
+            :elements="stayConnectedElements.elements"
             icons-only
             :theme="theme"
+            :title="stayConnectedElements.title"
           />
         </div>
       </div>
@@ -47,7 +49,7 @@
             :key="link.label"
             class="caption page-footer__secondary-link"
             :class="`page-footer__secondary-link_theme_${theme}`"
-            v-bind="link"
+            :url="link.url"
           >
             {{ link.label }}
           </UiBasicLink>
@@ -63,7 +65,7 @@ import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
 import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
 import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
 import { SocialMedia } from "~/constants/links";
-import type { Link, LinkWithIcon } from "~/types/links";
+import { IconLink, TextLink } from "~/types/links";
 
 interface Props {
   oldContainer?: boolean;
@@ -72,18 +74,20 @@ interface Props {
 
 interface LinksGroup {
   title: string;
-  elements: Link[];
+  elements: TextLink[];
 }
 
 interface LinksWithIconGroup {
   title: string;
-  elements: LinkWithIcon[];
+  elements: IconLink[];
 }
 
 withDefaults(defineProps<Props>(), {
   oldContainer: false,
   theme: "light",
 });
+
+const config = useRuntimeConfig();
 
 const footerElements: LinksGroup[] = [
   {
@@ -95,7 +99,7 @@ const footerElements: LinksGroup[] = [
       },
       {
         label: "Tutorials",
-        url: "https://qiskit.org/documentation/tutorials.html",
+        url: `${config.public.siteUrl}/documentation/tutorials.html`,
         segment: {
           cta: "tutorials",
           location: "menu",
@@ -139,7 +143,7 @@ const footerElements: LinksGroup[] = [
       SocialMedia.support,
       {
         label: "Documentation",
-        url: "https://qiskit.org/documentation/",
+        url: `${config.public.siteUrl}/documentation/`,
       },
     ],
   },
@@ -167,7 +171,7 @@ const stayConnectedElements: LinksWithIconGroup = {
   ],
 };
 
-const secondaryFooterLinks: Link[] = [
+const secondaryFooterLinks: TextLink[] = [
   {
     label: "Terms of use",
     url: "https://www.ibm.com/legal?lnk=flg-tous-usen",

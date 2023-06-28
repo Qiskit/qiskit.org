@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { SocialMedia } from "~/constants/links";
-import type { DescriptionCard } from "~/types/uiComponents";
+import { DescriptionCard } from "~/types/uiComponents";
 
 definePageMeta({
   layout: "default-max",
@@ -22,6 +22,7 @@ definePageMeta({
 useHead({
   title: "Qiskit Textbook",
 });
+const config = useRuntimeConfig();
 
 const helpfulResources: DescriptionCard[] = [
   {
@@ -29,7 +30,7 @@ const helpfulResources: DescriptionCard[] = [
     description:
       "The Qiskit Documentation is the right place for you if you are looking for the installation guide, release notes, or API references.",
     cta: {
-      url: "https://qiskit.org/documentation/",
+      url: `${config.public.siteUrl}/documentation/`,
       label: "Go to documentation",
       segment: { cta: "documentation", location: "helpful-resources" },
     },

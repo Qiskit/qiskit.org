@@ -1,31 +1,16 @@
 <template>
   <div class="qiskit-version-info">
-    <UiLink
-      :label="githubRepoLink.label"
-      :segment="githubRepoLink.segment"
-      :url="githubRepoLink.url"
-    >
+    <UiLink :link="githubRepoLink">
       <LogoGitHub32 class="qiskit-version-info__github-icon" />
     </UiLink>
     <div class="qiskit-version-info__content">
       <div class="qiskit-version-info__version-string">
-        <UiLink
-          class="code"
-          kind="secondary"
-          :label="githubRepoLink.label"
-          :segment="githubRepoLink.segment"
-          :url="githubRepoLink.url"
-        >
+        <UiLink class="code" kind="secondary" :link="githubRepoLink">
           qiskit {{ version }}
         </UiLink>
       </div>
       <div class="qiskit-version-info__release-notes">
-        <UiLink
-          class="code"
-          label="GitHub"
-          url="https://qiskit.org/documentation/release_notes.html#notable-changes"
-          :segment="{ cta: 'release-notes', location: 'version-info' }"
-        >
+        <UiLink class="code" :link="releaseNotesLink">
           see release notes
         </UiLink>
       </div>
@@ -44,9 +29,17 @@ interface Props {
 defineProps<Props>();
 
 const githubRepoLink: Link = {
-  label: "GitHub",
   segment: { cta: "gitHub-repository", location: "version-info" },
+  title: "GitHub",
   url: "https://github.com/Qiskit/qiskit",
+};
+
+const config = useRuntimeConfig();
+
+const releaseNotesLink: Link = {
+  segment: { cta: "release-notes", location: "version-info" },
+  title: "GitHub",
+  url: `${config.public.siteUrl}/documentation/release_notes.html#notable-changes`,
 };
 </script>
 

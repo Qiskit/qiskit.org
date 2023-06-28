@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
+import { Course, Prerequisite } from "~/constants/learnContent";
 import { LearnStartLearningUrl } from "~/constants/links";
-import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { RecommendedReading } from "~/types/learn";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -41,7 +41,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/algorithm-design/algorithm-design.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.AlgorithmDesign,
   label: "Start learning",
   segment: {
@@ -56,9 +56,11 @@ const externalRecommendedReadingsPreamble = `To make the most out of this
   course, we recommend familiarity with the basics of quantum information. You may
   also want to install Qiskit and the IBM Qiskit Runtime package:`;
 
+const config = useRuntimeConfig();
+
 const links: RecommendedReading[] = [
   {
-    url: "https://qiskit.org/learn/course/basics-quantum-information/",
+    url: `${config.public.siteUrl}/learn/course/basics-quantum-information/`,
     author: "",
     label: "Basics of quantum information",
     description: `Learn about single systems, multiple systems, quantum circuits,
@@ -69,7 +71,7 @@ const links: RecommendedReading[] = [
     },
   },
   {
-    url: "https://qiskit.org/ecosystem/ibm-runtime/",
+    url: `${config.public.siteUrl}/ecosystem/ibm-runtime/`,
     author: "",
     label: "Qiskit Runtime Overview",
     description: "Explore Qiskit Runtime service documentation and tutorials.",

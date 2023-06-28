@@ -1,7 +1,10 @@
 <template>
   <div class="providers-page">
     <UiPageHeaderFixed>
-      Run Qiskit compiled circuits on
+      Run Qiskit compiled
+      <br />
+      circuits on
+      <br class="show-in-md" />
       <UiTypewriterEffect :values="['real hardware', 'simulators']" />
     </UiPageHeaderFixed>
     <section id="contentContainer" class="cds--grid page-section">
@@ -12,7 +15,11 @@
               :entries="tocEntries"
               :active-section="activeSection"
             />
-            <UiCta v-bind="howToGuideLink" kind="ghost" />
+            <UiCta
+              :url="howToGuideLink.url"
+              :label="howToGuideLink.label"
+              kind="ghost"
+            />
           </div>
         </div>
         <div class="cds--col-md-5 cds--col-lg-13">
@@ -44,7 +51,8 @@
           </p>
           <UiCta
             class="providers-page__join-section__cta"
-            v-bind="howToGuideLink"
+            :url="howToGuideLink.url"
+            :label="howToGuideLink.label"
           />
         </div>
       </div>
@@ -53,12 +61,12 @@
 </template>
 
 <script setup lang="ts">
-import type {
+import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
+import {
   Provider,
   ProvidersSection,
   TableOfContentEntry,
 } from "~/types/providers";
-import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
 
 definePageMeta({
   layout: "default-max",
@@ -66,8 +74,17 @@ definePageMeta({
   routeName: "providers",
 });
 
-useHead({
+const config = useRuntimeConfig();
+
+useSeoMeta({
   title: "Qiskit Providers",
+  ogTitle: "Qiskit Providers",
+  description:
+    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
+  ogDescription:
+    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
+  ogImage: `${config.public.siteUrl}/images/metal/hero/cryo.png`,
+  ogUrl: `${config.public.siteUrl}/providers/`,
 });
 
 const { data: providersData } = await useAsyncData("providers", () =>
@@ -106,6 +123,7 @@ function asTabs(providers: Array<Provider>): Array<Provider> {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+@use "~/assets/scss/helpers/classes.scss";
 
 .providers-page {
   &__table-of-contents {

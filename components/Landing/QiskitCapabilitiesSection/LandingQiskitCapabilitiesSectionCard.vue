@@ -7,6 +7,7 @@
           format="webp"
           :src="thumbnailResource"
           width="160px"
+          alt=""
         />
       </div>
       <div class="qiskit-capability-card__copy">
@@ -18,6 +19,7 @@
           format="webp"
           :src="thumbnailResource"
           width="160px"
+          alt=""
         />
         <div class="qiskit-capability-card__description">
           <p v-text="description" />
@@ -35,13 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   thumbnailResource: string;
   title: string;
   description: string;
-  link?: Link | undefined;
+  link?: TextLink | undefined;
 }
 
 withDefaults(defineProps<Props>(), {

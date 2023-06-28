@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
+import { Course, Prerequisite } from "~/constants/learnContent";
 import { LearnStartLearningUrl } from "~/constants/links";
-import type { RecommendedReading } from "~/types/learn";
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { RecommendedReading } from "~/types/learn";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -40,7 +40,7 @@ const headerDescription = [
   aimed at self-learners from all backgrounds (technical and
   non-technical). The aim of this course is to give a solid
   understanding of the principles behind quantum computing,
-  focussing on developing intuition. After this course, you will
+  focusing on developing intuition. After this course, you will
   have a fair understanding of quantum computing and Qiskit, as well
   as a short project demonstrating it. You should then be able to
   jump straight into many of the other courses in this
@@ -51,7 +51,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/introduction-course/header.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.Introduction,
   label: "Start learning",
   segment: {

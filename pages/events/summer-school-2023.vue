@@ -10,28 +10,44 @@
         <p>
           The Qiskit Global Summer School 2023 is a two-week intensive summer
           program designed to empower the quantum researchers and developers of
-          tomorrow with the skills and know-how to explore the world of quantum
-          computing and its applications. This fourth-annual summer school will
-          provide an introduction to quantum computing by taking on a
-          back-to-basics approach, with a specific look at making the transition
-          from theory to implementation.
+          tomorrow with the know-how to explore the world of quantum computing,
+          as well as refresh and sharpen the industry professional's skills.
+          This fourth-annual summer school will focus foundationally on quantum
+          computing by taking a <b>back-to-basics</b> approach, with a look at
+          making the <b>transition</b> from <b>theory to implementation</b>.
         </p>
         <p>
           Please follow
-          <UiLink v-bind="headerData.qiskitTwitterLink">
-            Qiskit Twitter
-          </UiLink>
+          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
           for updates and
-          <UiLink v-bind="headerData.researchBlogLink">
+          <UiLink :link="headerData.researchBlogLink">
             read the announcement blog
           </UiLink>
           for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
-        <UiCta class="summer-school-page__cta" v-bind="header.cta" />
+        <UiCta
+          class="summer-school-page__cta summer-school-page__cta_disabled"
+          :url="header.cta.url"
+          :label="header.cta.label"
+          :segment="header.cta.segment"
+          kind="secondary"
+        />
       </template>
       <template #card>
-        <EventsItemCard v-bind="headerData.card" vertical-layout>
+        <EventsItemCard
+          :alt-text="header.card.altText"
+          class="summer-school-page__header-card"
+          :cta-label="headerData.card.ctaLabel"
+          :date="headerData.card.date"
+          :image="headerData.card.image"
+          :location="headerData.card.location"
+          :segment="headerData.card.segment"
+          :time="headerData.card.time"
+          :title="headerData.card.title"
+          :to="headerData.card.to"
+          vertical-layout
+        >
           {{ headerData.card.description }}
         </EventsItemCard>
       </template>
@@ -109,72 +125,22 @@ definePageMeta({
   routeName: "/events/summer-school-2023",
 });
 
+const config = useRuntimeConfig();
+
 const title = "Qiskit Global Summer School 2023";
 const description =
   "The Qiskit Global Summer School 2023 is a two-week intensive summer school designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
-const image =
-  "https://qiskit.org/images/events/summer-school-2023/summer-school-2023-logo.png";
-const pageUrl = "https://qiskit.org/events/summer-school-2023";
+const image = `${config.public.siteUrl}/images/events/summer-school-2023/summer-school-2023-logo.png`;
+const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
 
-useHead({
+useSeoMeta({
   title,
-  meta: [
-    {
-      hid: "twitter:title",
-      name: "twitter:title",
-      content: title,
-    },
-    {
-      hid: "twitter:description",
-      name: "twitter:description",
-      content: description,
-    },
-    {
-      hid: "twitter:image",
-      name: "twitter:image",
-      content: image,
-    },
-    {
-      hid: "twitter:image:alt",
-      name: "twitter:image:alt",
-      content: title,
-    },
-    {
-      hid: "og:title",
-      property: "og:title",
-      content: title,
-    },
-    {
-      hid: "og:description",
-      property: "og:description",
-      content: description,
-    },
-    {
-      hid: "og:url",
-      property: "og:url",
-      content: pageUrl,
-    },
-    {
-      hid: "og:type",
-      property: "og:type",
-      content: "article",
-    },
-    {
-      hid: "og:image",
-      property: "og:image",
-      content: image,
-    },
-    {
-      hid: "og:image:secure_url",
-      property: "og:image:secure_url",
-      content: image,
-    },
-    {
-      hid: "og:image:alt",
-      property: "og:image:alt",
-      content: title,
-    },
-  ],
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
 });
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
@@ -186,6 +152,7 @@ const helpfulResourcesData = helpfulResources;
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .summer-school-page {
   display: flex;
@@ -222,6 +189,22 @@ const helpfulResourcesData = helpfulResources;
 
   &__cta {
     margin-top: carbon.$spacing-07;
+
+    &_disabled {
+      pointer-events: none;
+      color: qiskit.$text-color-light;
+      width: fit-content;
+
+      &:deep(.cta__icon) {
+        display: none;
+      }
+    }
+  }
+
+  &__header-card {
+    :deep(.card__image-container) {
+      flex: 0 0 24rem;
+    }
   }
 }
 </style>

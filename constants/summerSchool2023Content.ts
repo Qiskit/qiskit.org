@@ -1,4 +1,4 @@
-import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
+import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 const header = {
   titleLine1: "Qiskit Global Summer School 2023:",
@@ -18,8 +18,8 @@ const header = {
     },
   },
   cta: {
-    label: "Register now!",
-    url: "https://qisk.it/QGSS23REG",
+    label: "Last Chance Registration June 28, 9AM EST",
+    url: "",
     segment: {
       cta: "register",
       location: "header",
@@ -28,14 +28,15 @@ const header = {
   cardSectionHeading: "About the event:",
   card: {
     image: "/images/events/summer-school-2023/summer-school-2023-logo.png",
+    altText: "Summer School logo: Cnot gate next to a Haddamard gate.",
     title: "Qiskit Global Summer School 2023: Theory To Implementation",
     description:
       "The Qiskit Global Summer School returns as a two-week intensive course focused on the foundations of quantum computing and more!",
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "https://qisk.it/QGSS23REG",
-    ctaLabel: "Learn more",
+    to: "",
+    ctaLabel: "",
     segment: {
       cta: "ibm-research-blog",
       location: "header",
@@ -57,6 +58,7 @@ const mosaic: MosaicSection = {
       description:
         "Join us for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!",
       image: "/images/learn/other-platforms/youtube.png",
+      altText: "",
       cta: {
         url: "https://www.youtube.com/@qiskit",
         label: "Watch and subscribe",
@@ -70,8 +72,9 @@ const mosaic: MosaicSection = {
       position: "second",
       title: "Qiskit Textbook",
       description:
-        "The Qiskit Textbook is a free digital open source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
+        "The Qiskit Textbook is a free digital open-source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
       image: "/images/events/summer-school-2023/qiskit-textbook.jpg",
+      altText: "",
       cta: {
         url: "/learn",
         label: "Read the Textbook",
@@ -87,6 +90,7 @@ const mosaic: MosaicSection = {
       description:
         "IBM offers cloud access to the most advanced quantum computers available. Learn, develop, and run programs with our quantum applications and systems.",
       image: "/images/events/summer-school-2022/chip.png",
+      altText: "",
       cta: {
         url: "https://quantum-computing.ibm.com/login",
         label: "Explore IBM Quantum",
@@ -103,6 +107,7 @@ const mosaic: MosaicSection = {
         "The Qiskit Global Summer School 2021 coursework, lab, and lecture materials are now available online.",
       image:
         "/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png",
+      altText: "",
       cta: {
         url: "https://qiskit.org/learn/summer-school/quantum-computing-and-quantum-learning-2021",
         label: "Start the course",

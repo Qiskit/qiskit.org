@@ -18,6 +18,7 @@
       /> -->
       <img
         class="card__image"
+        :alt="altText"
         :class="imageContain ? 'card__image_contain' : null"
         :src="image"
       />
@@ -43,62 +44,55 @@
               {{ tag }}
             </bx-tag>
           </div>
-          <div v-if="hasTags(tooltipTags)" class="card__tags">
-            <div
-              v-for="tag in tooltipTags"
-              :key="tag.label"
-              class="card__custom-pill"
-            >
-              {{ tag.label }}
-              <bx-tooltip-icon :body-text="tag.description" direction="bottom">
-                <Information16 class="card__tooltip__icon" />
-              </bx-tooltip-icon>
-            </div>
-          </div>
+          <bx-tag v-if="primaryTag" class="card__tag" type="purple">
+            {{ primaryTag }}
+          </bx-tag>
         </div>
       </header>
       <div class="card__body">
         <div class="card__description">
           <slot />
         </div>
-        <UiCta
-          v-if="to"
-          class="card__cta"
-          is-wider
-          kind="ghost"
-          :label="ctaLink.label"
-          :segment="ctaLink.segment"
-          :url="ctaLink.url"
-        />
+        <div class="card__ctas">
+          <UiCta
+            v-if="to"
+            is-wider
+            kind="ghost"
+            :label="ctaLink.label"
+            :segment="ctaLink.segment"
+            :url="ctaLink.url"
+          />
+          <UiCta
+            v-if="secondaryCta"
+            is-wider
+            kind="ghost"
+            :label="secondaryCta.label"
+            :segment="secondaryCta.segment"
+            :url="secondaryCta.url"
+          />
+        </div>
       </div>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/tag/tag.js";
-// import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
-import Information16 from "@carbon/icons-vue/lib/information/16";
+import { TextLink } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
-
-export interface TagTooltip {
-  // the short string label for inside the tag
-  label: string;
-  // the description for the tooltip
-  description: string;
-}
 
 interface Props {
   descriptionWholeSize?: boolean;
   ctaLabel?: string;
   image?: string;
   imageContain?: boolean;
+  altText?: string;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
   tags?: string[];
   title: string;
   to?: string;
-  tooltipTags?: TagTooltip[];
+  secondaryCta?: TextLink | null;
+  primaryTag?: string;
   verticalLayout?: boolean;
 }
 
@@ -107,11 +101,13 @@ const props = withDefaults(defineProps<Props>(), {
   ctaLabel: "",
   image: "",
   imageContain: false,
+  altText: "No description available",
   segment: undefined,
   subtitle: "",
   tags: () => [],
   to: "",
-  tooltipTags: () => [],
+  secondaryCta: undefined,
+  primaryTag: undefined,
   verticalLayout: false,
 });
 
@@ -122,7 +118,7 @@ const ctaLink = computed(() => ({
 }));
 
 // TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
-function hasTags(tags: string[] | TagTooltip[]) {
+function hasTags(tags: string[]) {
   return Array.isArray(tags) && tags.length > 0;
 }
 </script>
@@ -165,9 +161,12 @@ function hasTags(tags: string[] | TagTooltip[]) {
     }
 
     @include carbon.breakpoint-down(md) {
-      height: 13rem;
-      width: auto;
+      flex: 0 0 24rem;
     }
+  }
+
+  &__body {
+    overflow-wrap: break-word;
   }
 
   &__content {
@@ -176,6 +175,12 @@ function hasTags(tags: string[] | TagTooltip[]) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__ctas {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 0;
   }
 
   &__header {
@@ -199,16 +204,13 @@ function hasTags(tags: string[] | TagTooltip[]) {
     white-space: nowrap;
   }
 
+  &__tags {
+    margin-right: carbon.$spacing-03;
+  }
+
   &__title {
     flex: 1;
     margin-bottom: carbon.$spacing-02;
-  }
-
-  &__tooltip {
-    &__icon {
-      fill: carbon.$white;
-      margin-left: carbon.$spacing-02;
-    }
   }
 }
 
@@ -220,7 +222,8 @@ function hasTags(tags: string[] | TagTooltip[]) {
       padding: carbon.$spacing-05;
     }
 
-    &__cta {
+    &__ctas {
+      display: flex;
       padding-bottom: 0;
     }
 
@@ -266,43 +269,6 @@ bx-tag {
   min-width: 0;
 
   &:last-child {
-    margin-right: 0;
-  }
-}
-
-bx-tooltip-icon {
-  --cds-inverse-02: #{carbon.$cool-gray-90};
-
-  line-height: 0;
-}
-</style>
-
-<style lang="scss">
-@use "~/assets/scss/carbon.scss";
-@use "~/assets/scss/helpers/index.scss" as qiskit;
-
-.card {
-  &__custom-pill {
-    @include carbon.type-style("label-01");
-
-    background-color: qiskit.$tag-background-color;
-    color: qiskit.$tag-text-color;
-    display: inline-flex;
-    min-width: 0;
-    max-width: 100%;
-    min-height: 1.5rem;
-    align-items: center;
-    justify-content: center;
-    padding: carbon.$spacing-02 carbon.$spacing-03;
-    margin: carbon.$spacing-02 carbon.$spacing-03 carbon.$spacing-02
-      carbon.$spacing-03;
-    border-radius: 6.9375rem;
-    cursor: default;
-    vertical-align: middle;
-    word-break: break-word;
-  }
-
-  &__custom-pill:last-child {
     margin-right: 0;
   }
 }

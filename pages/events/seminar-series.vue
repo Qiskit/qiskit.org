@@ -12,7 +12,15 @@
         />
       </template>
       <template #card>
-        <EventsItemCard v-bind="cardContent" vertical-layout />
+        <EventsItemCard
+          :date="cardContent.date"
+          :image="cardContent.image"
+          :institution="cardContent.institution"
+          :location="cardContent.location"
+          :title="cardContent.title"
+          :to="cardContent.to"
+          vertical-layout
+        />
       </template>
     </UiPageHeaderWithCard>
 
@@ -107,12 +115,12 @@
 </template>
 
 <script setup lang="ts">
-import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
-import type { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-import type { TableRowElement } from "~/components/Ui/UiDataTable.vue";
+import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
+import { TableRowElement } from "~/components/Ui/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
-import type { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
+import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 definePageMeta({
   layout: "default-max",
@@ -120,8 +128,17 @@ definePageMeta({
   routeName: "seminar-series",
 });
 
-useHead({
+const config = useRuntimeConfig();
+
+useSeoMeta({
   title: "Qiskit Seminar Series",
+  ogTitle: "Qiskit Seminar Series",
+  description:
+    "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!",
+  ogDescription:
+    "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/events/seminar-series/`,
 });
 
 const playlistUrl =
@@ -138,7 +155,7 @@ const headerDescription = [
   "Join us live every Friday at 12:00 PM ET.",
 ];
 
-const headerCTA: Link = {
+const headerCTA: TextLink = {
   label: "Go to YouTube playlist",
   segment: { cta: "talk-on-youtube", location: "header" },
   url: playlistUrl,
@@ -241,7 +258,7 @@ const helpfulResources: DescriptionCard[] = [
     description:
       "If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.",
     cta: {
-      url: "https://qiskit.org/learn",
+      url: `${config.public.siteUrl}/learn`,
       label: "Start learning",
       segment: {
         cta: "qiskit-org-learn",

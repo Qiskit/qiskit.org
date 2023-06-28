@@ -34,7 +34,7 @@
                   {{ link.label }}
                 </span>
               </UiLink>
-              <span v-if="link.description">- {{ link.description }}</span>
+              <span v-if="link.description"> - {{ link.description }}</span>
             </li>
           </ol>
         </div>
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RecommendedReading } from "~/types/learn";
+import { RecommendedReading } from "~/types/learn";
 
 interface Props {
   links: RecommendedReading[];

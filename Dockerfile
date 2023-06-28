@@ -2,22 +2,25 @@
 
 FROM node:18-alpine AS build
 
+ARG SITE_URL
+ENV SITE_URL=$SITE_URL
+
+ARG AIRTABLE_API_KEY
+ENV AIRTABLE_API_KEY=$AIRTABLE_API_KEY
+
 WORKDIR /qiskit.org
 
 COPY . .
 
 RUN npm ci
-RUN npm run build
+RUN npm run generate
 
 # Serve
+FROM nginx:alpine AS serve
 
-FROM node:18-alpine
+WORKDIR /app
 
-COPY --from=build /qiskit.org/.output ./.output/
+COPY --from=build /qiskit.org/.output/public /usr/share/nginx/html/
+COPY ./nginx.preview.conf /etc/nginx/nginx.conf
 
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
-
-EXPOSE 3000
-
-CMD ["node", ".output/server/index.mjs"]
+EXPOSE 80

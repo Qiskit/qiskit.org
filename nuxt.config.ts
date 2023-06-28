@@ -3,7 +3,7 @@ import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
 import pkg from "./package.json";
 
-const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV } = process.env;
+const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL } = process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -33,7 +33,7 @@ export default defineNuxtConfig({
       IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE: "",
       IBM_ANALYTICS_SEGMENT_SCRIPT_SRC: "",
       IBM_ANALYTICS_SEGMENT_UT30: "",
-      siteUrl: "https://qiskit.org",
+      siteUrl: SITE_URL || "https://qiskit.org",
     },
   },
 
@@ -48,6 +48,7 @@ export default defineNuxtConfig({
   },
 
   image: {
+    inject: true,
     screens: {
       sm: 320,
       md: 672,

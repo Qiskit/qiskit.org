@@ -5,7 +5,12 @@
       <UiTypewriterEffect
         :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
       />
-      from the world&rsquo;s largest quantum computing community
+      <br class="show-in-md" />
+      from the
+      <br class="hide-in-md" />
+      world&rsquo;s largest quantum
+      <br class="hide-in-md" />
+      computing community
     </UiPageHeaderFixed>
     <div class="cds--grid">
       <div class="event-page__tabs">
@@ -64,7 +69,11 @@
         <template #results>
           <div v-if="noEvents" class="cds--row">
             <div class="cds--col-sm-4 cds--col-xlg-8">
-              <UiCard :image="emptyCard.img" :title="emptyCard.title">
+              <UiCard
+                :image="emptyCard.img"
+                alt-text="Warning sign icon"
+                :title="emptyCard.title"
+              >
                 <div class="event-page__empty-card-description">
                   {{ emptyCard.description }}
                 </div>
@@ -82,6 +91,7 @@
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
+                :alt-text="getEventAltText(eventItem)"
                 :location="eventItem.location"
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
@@ -124,9 +134,17 @@ definePageMeta({
 
 const pastEvents = rawPastEvents as CommunityEvent[];
 const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
+const config = useRuntimeConfig();
 
-useHead({
+useSeoMeta({
   title: "Qiskit Events",
+  ogTitle: "Qiskit Events",
+  description:
+    "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
+  ogDescription:
+    "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
+  ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
+  ogUrl: `${config.public.siteUrl}/events/`,
 });
 
 const { trackClickEvent } = useSegment();
@@ -199,7 +217,17 @@ const filteredEvents = computed(() => {
     });
   }
 });
-
+function getEventAltText(event: any) {
+  if (event.types[0] === "Talks") {
+    if (event.speaker !== "") {
+      return `${event.speaker} profile photo`;
+    } else {
+      return "Seminar speaker photo";
+    }
+  } else {
+    return `${event.title} event picture`;
+  }
+}
 const noEvents = computed(() => filteredEvents.value.length === 0);
 
 const regionFiltersAsString = computed(() => regionFilters.value.join(","));
@@ -256,6 +284,7 @@ const selectTab = (selectedTab: string) => {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
+@use "~/assets/scss/helpers/classes.scss";
 
 .event-page {
   &__card {

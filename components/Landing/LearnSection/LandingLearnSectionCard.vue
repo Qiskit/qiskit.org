@@ -27,15 +27,16 @@
         format="webp"
         sizes="sm:500px md:700 xl:1000"
         src="/images/landing-page/learn-image.jpg"
+        alt="Group of students looking into a laptop"
       />
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
-const learnLink: Link = {
+const learnLink: TextLink = {
   url: "/learn",
   label: "Get learning",
   segment: { cta: "get-learning", location: "learn-card" },

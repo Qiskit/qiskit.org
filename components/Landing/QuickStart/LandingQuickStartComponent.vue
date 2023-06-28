@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ProviderParsedContent } from "~/types/providers";
+import { ProviderParsedContent } from "~/types/providers";
 
 const { data: providerData } = await useAsyncData("providers-quick-start", () =>
   queryContent<ProviderParsedContent>("/providers/quick-start/data").findOne()

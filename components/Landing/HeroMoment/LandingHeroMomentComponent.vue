@@ -1,6 +1,6 @@
 <template>
   <article class="hero-moment">
-    <MetalGrid>
+    <LandingHeroMomentGrid>
       <div class="cds--grid hero-moment__container">
         <LandingHeroMomentVersionInfo
           class="hero-moment__version-info"
@@ -8,14 +8,14 @@
         />
         <div class="cds--row">
           <h1
-            class="cds--col-md-4 cds--col-lg-9 cds--col-xlg-7 cds--col-max-7 hero-moment__title"
+            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-6 cds--col-max-7 hero-moment__title"
           >
-            Open-Source Quantum Development
+            Your open-source toolkit for useful quantum computing
           </h1>
         </div>
         <div class="cds--row">
           <p
-            class="cds--col-sm cds--col-md-4 cds--col-lg-6 cds--col-xlg-4 hero-moment__description"
+            class="cds--col-sm cds--col-md-3 cds--col-lg-5 cds--col-xlg-4 hero-moment__description"
           >
             Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
             with quantum computers focus in how build circuits and optimize them
@@ -29,19 +29,18 @@
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
         />
-        <nuxt-img
+        <img
           class="hero-moment__container__image"
-          format="webp"
-          sizes="lg:500px xl:850px"
-          src="/images/landing-page/hero-illustration.png"
+          src="/images/landing-page/new-hero-illustration.png"
+          alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
       </div>
-    </MetalGrid>
+    </LandingHeroMomentGrid>
   </article>
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   version: string;
@@ -49,8 +48,10 @@ interface Props {
 
 defineProps<Props>();
 
-const getStartedLink: Link = {
-  url: "https://qiskit.org/documentation/getting_started.html",
+const config = useRuntimeConfig();
+
+const getStartedLink: TextLink = {
+  url: `${config.public.siteUrl}/documentation/getting_started.html`,
   label: "Get started",
   segment: { cta: "get-started", location: "hero-moment" },
 };

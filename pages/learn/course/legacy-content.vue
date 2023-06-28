@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 enum LegacyContentUrl {
   Prerequisites = "https://learn.qiskit.org/v1/course/ch-prerequisites/",
@@ -60,7 +60,7 @@ const headerDescription = [
 
 const headerImg = "/images/learn/course/legacy-content/legacy-content.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LegacyContentUrl.QuantumStatesAndQubits,
   label: "Go to v1/course/ch-states",
   segment: {
@@ -71,7 +71,7 @@ const startLearningCTA: Link = {
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: Link[] = [];
+const links: TextLink[] = [];
 
 const courses: Course[] = [
   {

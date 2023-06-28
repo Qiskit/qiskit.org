@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
+import { Course, Prerequisite } from "~/constants/learnContent";
 import { LearnStartLearningUrl } from "~/constants/links";
-import type { Link } from "~/types/links";
-import type { Course, Prerequisite } from "constants/learnContent";
+import { TextLink } from "~/types/links";
 
 definePageMeta({
   layout: "default-max",
@@ -45,7 +45,7 @@ const headerDescription = [
 const headerImg =
   "/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png";
 
-const startLearningCTA: Link = {
+const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.SummerSchool2022,
   label: "Start learning",
   segment: {
@@ -139,7 +139,9 @@ const courses: Course[] = [
 
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
-const links: Link[] = [];
+const links: TextLink[] = [];
+
+const config = useRuntimeConfig();
 
 const prerequisites: Prerequisite[] = [
   {
@@ -170,7 +172,7 @@ const prerequisites: Prerequisite[] = [
       cta: "introduction-course",
       location: "related-material",
     },
-    url: "https://qiskit.org/learn/course/introduction-course",
+    url: `${config.public.siteUrl}/learn/course/introduction-course`,
   },
 ];
 

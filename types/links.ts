@@ -5,18 +5,21 @@ import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Link {
-  label: string;
   segment?: CtaClickedEventProp;
   title?: string;
   url: string;
 }
 
-interface LinkWithIcon extends Link {
-  icon?:
+interface IconLink extends Link {
+  icon:
     | typeof LogoMedium20
     | typeof LogoSlack20
     | typeof LogoTwitter20
     | typeof LogoYouTube20;
 }
 
-export { Link, LinkWithIcon };
+interface TextLink extends Link {
+  label: string;
+}
+
+export { IconLink, Link, TextLink };

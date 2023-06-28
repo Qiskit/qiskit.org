@@ -1,4 +1,4 @@
-import type { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 export interface ProviderCodeExample {
   name: string;
@@ -10,9 +10,9 @@ export interface Provider {
   title: string;
   description: string;
   installation: string;
-  websiteCta?: Link;
-  docsCta?: Link;
-  sourceCta?: Link;
+  websiteCta?: TextLink;
+  docsCta?: TextLink;
+  sourceCta?: TextLink;
   codeExamples: ProviderCodeExample[];
 }
 
