@@ -25,7 +25,6 @@
               <ol class="hero-moment__description__content">
                 <li>open-source toolkit for useful quantum computing</li>
                 <li>production-ready circuit compiler.</li>
-                <li>de-facto quantum framework</li>
               </ol>
             </h3>
           </div>
@@ -201,7 +200,7 @@ print(quasi_dist)`;
   &__title {
     margin-bottom: carbon.$spacing-06;
     font-weight: 500;
-    font-size: 7rem;
+    font-size: 5rem;
     display: flex;
     align-items: center;
 
@@ -211,6 +210,7 @@ print(quasi_dist)`;
 
     @include carbon.breakpoint-up(md) {
       margin-bottom: carbon.$spacing-07;
+      font-size: 7rem;
     }
 
     @include carbon.breakpoint-up(lg) {
@@ -218,11 +218,11 @@ print(quasi_dist)`;
     }
 
     &__logo {
-      width: 130px;
+      width: 65px;
       margin-right: carbon.$spacing-05;
 
-      @include carbon.breakpoint-down(md) {
-        display: none;
+      @include carbon.breakpoint-up(md) {
+        width: 130px;
       }
     }
   }
