@@ -230,6 +230,10 @@ print(quasi_dist)`;
     &__logo {
       width: 130px;
       margin-right: carbon.$spacing-05;
+
+      @include carbon.breakpoint-down(md) {
+        display: none;
+      }
     }
   }
 
