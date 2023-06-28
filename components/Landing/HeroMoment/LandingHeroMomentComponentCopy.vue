@@ -6,10 +6,6 @@
           <h1
             class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
           >
-            <img
-              src="/images/qiskit-logo.png"
-              class="hero-moment__title__logo"
-            />
             Qiskit
           </h1>
         </div>
@@ -17,17 +13,14 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
           >
-            <h3 class="hero-moment__description__title">
+            <p>
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
-            </h3>
-            <hr class="hero-moment__description__divider" />
-            <h3>
-              <ol class="hero-moment__description__content">
-                <li>open-source toolkit for useful quantum computing</li>
-                <li>production-ready circuit compiler.</li>
-                <li>de-facto quantum framework</li>
-              </ol>
-            </h3>
+            </p>
+            <hr />
+            <ol>
+              <li>open-source toolkit for useful quantum computing</li>
+              <li>production-ready circuit compiler.</li>
+            </ol>
           </div>
         </div>
         <UiCta
@@ -42,19 +35,9 @@
         />
         <img
           class="hero-moment__container__image"
-          src="/images/landing-page/cryo-new.png"
+          src="/images/landing-page/new-hero-illustration.png"
           alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
-        <div class="hero-moment__container__laptop">
-          <img
-            class="hero-moment__container__laptop__frame"
-            src="/images/landing-page/laptop-frame.png"
-            alt="Laptop"
-          />
-          <code class="hero-moment__container__laptop__code">
-            <pre>{{ heroCodeSnippet }}</pre>
-          </code>
-        </div>
       </div>
     </LandingHeroMomentGrid>
   </article>
@@ -79,20 +62,6 @@ const getStartedLink: TextLink = {
 
 // TODO: Fix hydration text content mismatch
 const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
-const heroCodeSnippet = `from <quantum provider> import Sampler
-sampler = Sampler()
-
-# Build circuit
-from qiskit import QuantumCircuit
-circuit = QuantumCircuit(2, 2)
-circuit.h(0)
-circuit.cx(0,1)
-circuit.measure([0,1], [0,1])
-
-# Run the circuit and get result distribution
-job = sampler.run(circuit)
-quasi_dist = job.result().quasi_dists[0]
-print(quasi_dist)`;
 </script>
 
 <style lang="scss">
@@ -130,56 +99,17 @@ print(quasi_dist)`;
 
     @include carbon.breakpoint-down(md) {
       background-image: none;
-      padding-top: carbon.$spacing-05;
     }
 
     &__image {
-      height: auto;
-      width: 60%;
+      height: 100%;
       position: absolute;
-      right: 15%;
+      right: 0;
       top: 0;
       z-index: -1;
 
       @include carbon.breakpoint-down(lg) {
         display: none;
-      }
-    }
-    &__laptop {
-      width: 773px;
-      position: absolute;
-      right: 3%;
-      top: 0;
-      z-index: -1;
-      padding-top: carbon.$spacing-10;
-
-      @include carbon.breakpoint-down(lg) {
-        display: none;
-      }
-
-      @include carbon.breakpoint-down(xlg) {
-        width: 595px;
-      }
-
-      &__frame {
-        height: 100%;
-        width: 100%;
-      }
-      &__code {
-        position: absolute;
-        left: 87px;
-        top: 119px;
-        width: 598px;
-        height: 368px;
-        background-color: #fff;
-        padding: 15px;
-
-        @include carbon.breakpoint-down(xlg) {
-          left: 68px;
-          top: 105px;
-          width: 460px;
-          height: 284px;
-        }
       }
     }
   }
@@ -200,8 +130,6 @@ print(quasi_dist)`;
     margin-bottom: carbon.$spacing-06;
     font-weight: 500;
     font-size: 7rem;
-    display: flex;
-    align-items: center;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
@@ -214,15 +142,6 @@ print(quasi_dist)`;
     @include carbon.breakpoint-up(lg) {
       margin-bottom: carbon.$spacing-08;
     }
-
-    &__logo {
-      width: 130px;
-      margin-right: carbon.$spacing-05;
-
-      @include carbon.breakpoint-down(md) {
-        display: none;
-      }
-    }
   }
 
   &__description {
@@ -232,23 +151,25 @@ print(quasi_dist)`;
     // when decomissioning the Metal page.
     pointer-events: auto;
 
-    &__title {
+    p {
       color: carbon.$gray-80;
+      font-size: 1.3rem;
     }
 
-    &__divider {
+    hr {
       border: 1px solid carbon.$gray-80;
-      border-width: 1px 0 0;
+      border-width: 1px 0 0 0;
       margin: 0 0 carbon.$spacing-05 0;
     }
 
-    &__content {
+    ol {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
+      font-size: 1.3rem;
     }
 
     @include carbon.breakpoint-up(md) {
-      margin-bottom: carbon.$spacing-04;
+      margin-bottom: carbon.$spacing-07;
     }
 
     @include carbon.breakpoint-up(lg) {
