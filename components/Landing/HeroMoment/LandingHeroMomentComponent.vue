@@ -17,11 +17,11 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
           >
-            <p class="hero-moment__description__paragraph">
+            <p class="hero-moment__description__title">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
             </p>
             <hr class="hero-moment__description__divider" />
-            <ol class="hero-moment__description__list">
+            <ol class="hero-moment__description__content">
               <li>open-source toolkit for useful quantum computing</li>
               <li>production-ready circuit compiler.</li>
             </ol>
@@ -162,7 +162,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     // when decomissioning the Metal page.
     pointer-events: auto;
 
-    &__paragraph {
+    &__title {
       color: carbon.$gray-80;
       font-size: 1.3rem;
     }
@@ -173,7 +173,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
       margin: 0 0 carbon.$spacing-05 0;
     }
 
-    &__list {
+    &__content {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
       font-size: 1.3rem;
