@@ -4,7 +4,7 @@
       ref="canvasRef"
       class="dynamic-background-logo__background-canvas"
     />
-    <LearnSketchedLogo class="dynamic-background-logo__overlay" />
+    <LearnLeadSpaceLogoOverlay class="dynamic-background-logo__overlay" />
   </div>
 </template>
 

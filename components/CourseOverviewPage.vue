@@ -1,6 +1,6 @@
 <template>
   <main class="course-overview-page">
-    <LearnContentMenuSection class="course-overview-page__content-menu" />
+    <LearnContentMenu class="course-overview-page__content-menu" />
     <LeadSpaceWithImage
       :cta="startLearningCta"
       :back-link="backToTextbookHomeLink"
@@ -24,7 +24,7 @@
         />
       </template>
     </LeadSpaceWithImage>
-    <LearnPrerequisiteMaterialSection
+    <LearnPrerequisiteMaterial
       v-if="prerequisites.length > 0"
       class="course-overview-page__section"
       :data="prerequisites"

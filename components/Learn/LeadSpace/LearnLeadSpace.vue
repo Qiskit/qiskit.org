@@ -3,7 +3,7 @@
     <div class="learn-header__container-wrapper">
       <div class="learn-header__container">
         <div class="learn-header__logo-container">
-          <LearnDynamicBackgroundLogo class="learn-header__logo" />
+          <LearnLeadSpaceLogo class="learn-header__logo" />
         </div>
         <div>
           <h1 class="learn-header__headline">Qiskit Textbook</h1>
@@ -22,7 +22,7 @@
     </div>
     <transition name="scroll-in">
       <!-- FIX: This is never rendered -->
-      <LearnContentMenuSection
+      <LearnContentMenu
         v-if="!appMegaDropdownMenuIsVisible"
         class="learn-header__dropdown-fixed"
       />
