@@ -17,14 +17,17 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
           >
-            <p class="hero-moment__description__title">
+            <h3 class="hero-moment__description__title">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
-            </p>
+            </h3>
             <hr class="hero-moment__description__divider" />
-            <ol class="hero-moment__description__content">
-              <li>open-source toolkit for useful quantum computing</li>
-              <li>production-ready circuit compiler.</li>
-            </ol>
+            <h3>
+              <ol class="hero-moment__description__content">
+                <li>open-source toolkit for useful quantum computing</li>
+                <li>production-ready circuit compiler.</li>
+                <li>de-facto quantum framework</li>
+              </ol>
+            </h3>
           </div>
         </div>
         <UiCta
@@ -164,7 +167,6 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 
     &__title {
       color: carbon.$gray-80;
-      font-size: 1.3rem;
     }
 
     &__divider {
@@ -176,7 +178,6 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     &__content {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
-      font-size: 1.3rem;
     }
 
     @include carbon.breakpoint-up(md) {
