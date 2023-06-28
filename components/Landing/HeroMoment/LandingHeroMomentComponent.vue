@@ -203,7 +203,7 @@ print(quasi_dist)`;
   &__title {
     margin-bottom: carbon.$spacing-06;
     font-weight: 500;
-    font-size: 7rem;
+    font-size: 5rem;
     display: flex;
     align-items: center;
 
@@ -213,6 +213,7 @@ print(quasi_dist)`;
 
     @include carbon.breakpoint-up(md) {
       margin-bottom: carbon.$spacing-07;
+      font-size: 7rem;
     }
 
     @include carbon.breakpoint-up(lg) {
