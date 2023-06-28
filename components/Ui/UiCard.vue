@@ -78,6 +78,7 @@
 
 <script setup lang="ts">
 import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
@@ -93,6 +94,8 @@ interface Props {
   to?: string;
   secondaryCta?: Link | null;
   primaryTag?: string[];
+  secondaryCta?: TextLink | null;
+  primaryTag?: string;
   verticalLayout?: boolean;
 }
 
@@ -161,10 +164,13 @@ function hasTags(tags: string[]) {
     }
 
     @include carbon.breakpoint-down(md) {
-      height: 13rem;
-      width: auto;
+      flex: 0 0 24rem;
     }
   }
+  &__body {
+    overflow-wrap: break-word;
+  }
+
   &__body {
     overflow-wrap: break-word;
   }

@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CtaClickedEventProp } from "~/types/segment";
+import { CtaClickedEventProp } from "~/types/segment";
 
 interface QiskitCapability {
   title: string;

@@ -1,4 +1,4 @@
-import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
+import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 const header = {
   titleLine1: "Qiskit Global Summer School 2023:",
@@ -18,8 +18,8 @@ const header = {
     },
   },
   cta: {
-    label: "Last Chance Registration June 28, 9AM EST",
-    url: "",
+    label: "Register now!",
+    url: "https://qisk.it/QGSS23REG",
     segment: {
       cta: "register",
       location: "header",
@@ -35,8 +35,8 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "",
-    ctaLabel: "",
+    to: "https://qisk.it/QGSS23REG",
+    ctaLabel: "Learn more",
     segment: {
       cta: "ibm-research-blog",
       location: "header",

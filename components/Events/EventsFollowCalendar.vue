@@ -4,7 +4,7 @@
     <p class="event-page__section__description">
       Stay up to date with all of our scheduled events by following our
       calendar. You can view the calendar by visiting
-      <UiLink v-bind="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</UiLink
+      <UiLink :link="qiskitCalendarLink">{{ qiskitCalendarLink.label }}</UiLink
       >, or subscribe to it by adding to the calendar app of your choice.
     </p>
     <div class="event-page__tabs">
@@ -46,7 +46,7 @@
 import EventsCalendarsAppleInstructions from "~/components/Events/Calendars/EventsCalendarsAppleInstructions.vue";
 import EventsCalendarsGoogleInstructions from "~/components/Events/Calendars/EventsCalendarsGoogleInstructions.vue";
 import EventsCalendarsOutlookInstructions from "~/components/Events/Calendars/EventsCalendarsOutlookInstructions.vue";
-import type { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 const calendarsInstructions = [
   {
@@ -65,12 +65,13 @@ const calendarsInstructions = [
 
 const qiskitCalendarSyncLink = "https://qisk.it/calendar-sync";
 
-const qiskitCalendarLink: Link = {
+const qiskitCalendarLink: TextLink = {
   url: "https://qisk.it/calendar",
   label: "https://qisk.it/calendar",
   segment: {
     cta: "qiskit-calendar",
     location: "events-page",
   },
+  title: "Qiskit events calendar",
 };
 </script>
