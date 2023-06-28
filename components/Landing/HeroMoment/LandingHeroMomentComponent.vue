@@ -3,25 +3,25 @@
     <LandingHeroMomentGrid>
       <div class="cds--grid hero-moment__container">
         <div class="cds--row">
-          <div class="cds--col-md-4 cds--col-lg-5 cds--col-max-7">
-            <h1 class="hero-moment__title">
-              <nuxt-img
-                class="hero-moment__title__logo"
-                src="/images/landing-page/logo_wordmark.svg"
-                alt="The Qiskit logo"
-              />
-            </h1>
-          </div>
+          <h1
+            class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
+          >
+            Qiskit
+          </h1>
         </div>
         <div class="cds--row">
           <div
-            class="cds--col-sm cds--col-md-4 cds--col-lg-5 hero-moment__description"
+            class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
           >
-            Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
-            with quantum computers focus in how build circuits and optimize them
-            using the last transpiler passes, and bringing access to the last
-            quantum hardware interfaces.
-          </p>
+            <p>
+              <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
+            </p>
+            <hr />
+            <ol>
+              <li>open-source toolkit for useful quantum computing</li>
+              <li>production-ready circuit compiler.</li>
+            </ol>
+          </div>
         </div>
         <UiCta
           class="hero-moment__cta"
@@ -32,6 +32,11 @@
         <LandingHeroMomentVersionInfo
           class="hero-moment__version-info"
           :version="version"
+        />
+        <img
+          class="hero-moment__container__image"
+          src="/images/landing-page/new-hero-illustration.png"
+          alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
         <nuxt-img
           class="hero-moment__container__image"
@@ -198,6 +203,8 @@ print(quasi_dist)`;
 
   &__title {
     margin-bottom: carbon.$spacing-06;
+    font-weight: 500;
+    font-size: 7rem;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
@@ -210,15 +217,6 @@ print(quasi_dist)`;
     @include carbon.breakpoint-up(lg) {
       margin-bottom: carbon.$spacing-08;
     }
-
-    &__logo {
-      width: 450px;
-      margin-right: carbon.$spacing-05;
-
-      @include carbon.breakpoint-down(md) {
-        width: 270px;
-      }
-    }
   }
 
   &__description {
@@ -228,21 +226,21 @@ print(quasi_dist)`;
     // when decomissioning the Metal page.
     pointer-events: auto;
 
-    &__title {
+    p {
       color: carbon.$gray-80;
-      font-size: carbon.type-scale(4);
+      font-size: 1.3rem;
     }
 
-    &__divider {
-      border: 0;
-      border-top: 1px solid carbon.$gray-80;
+    hr {
+      border: 1px solid carbon.$gray-80;
+      border-width: 1px 0 0 0;
       margin: 0 0 carbon.$spacing-05 0;
     }
 
-    &__content {
+    ol {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
-      font-size: carbon.type-scale(4);
+      font-size: 1.3rem;
     }
 
     @include carbon.breakpoint-up(md) {
