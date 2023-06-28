@@ -1,6 +1,6 @@
 <template>
   <main class="summer-school-page">
-    <LeadSpaceWithCard :card-title="headerData.cardSectionHeading">
+    <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
         <br />
@@ -52,7 +52,7 @@
           {{ headerData.card.description }}
         </EventsCard>
       </template>
-    </LeadSpaceWithCard>
+    </LayoutLeadSpaceWithCard>
 
     <div class="cds--grid summer-school-page__content">
       <UiMosaicSection

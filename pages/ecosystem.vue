@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LeadSpaceFixed class="ecosystem-header__hero">
+    <LayoutLeadSpaceFixed class="ecosystem-header__hero">
       Explore
       <br class="show-in-md" />
       <UiTypewriterEffect
@@ -10,7 +10,7 @@
       from Qiskit and the
       <br />
       Qiskit community
-    </LeadSpaceFixed>
+    </LayoutLeadSpaceFixed>
     <section id="ecosystem" class="cds--grid ecosystem">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">

@@ -1,6 +1,6 @@
 <template>
   <main class="fall-fest-page">
-    <LeadSpaceWithCard
+    <LayoutLeadSpaceWithCard
       :cta="headerData.cta"
       :card-title="headerData.cardSectionHeading"
     >
@@ -33,7 +33,7 @@
           {{ headerData.card.description }}
         </EventsCard>
       </template>
-    </LeadSpaceWithCard>
+    </LayoutLeadSpaceWithCard>
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">

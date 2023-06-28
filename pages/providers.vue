@@ -1,12 +1,12 @@
 <template>
   <div class="providers-page">
-    <LeadSpaceFixed>
+    <LayoutLeadSpaceFixed>
       Run Qiskit compiled
       <br />
       circuits on
       <br class="show-in-md" />
       <UiTypewriterEffect :values="['real hardware', 'simulators']" />
-    </LeadSpaceFixed>
+    </LayoutLeadSpaceFixed>
     <section id="contentContainer" class="cds--grid page-section">
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-3 cds--col-lg-3">
