@@ -116,7 +116,7 @@
 
 <script setup lang="ts">
 import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-import { TableRowElement } from "~/components/Ui/UiDataTable.vue";
+import { TableRowElement } from "~/components/Ui/DataTable/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
 import { TextLink } from "~/types/links";
