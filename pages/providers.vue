@@ -11,7 +11,7 @@
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-3 cds--col-lg-3">
           <div class="providers-page__table-of-contents">
-            <ProvidersTableOfContents
+            <ProvidersToc
               :entries="tocEntries"
               :active-section="activeSection"
             />
@@ -31,7 +31,7 @@
             :title="section.title"
             :description="section.description"
           >
-            <ProvidersContentAccordion
+            <ProvidersAccordion
               v-if="section.providers"
               class="providers-page__content-section-details"
               :tabs="asTabs(section.providers)"

@@ -14,7 +14,7 @@
           handleAccordionItemToggled({ changedIndex: index }, $event)
         "
       >
-        <ProvidersAccordionLayout
+        <ProvidersAccordionContent
           :title="tab.title"
           :description="tab.description"
           :installation="tab.installation"
