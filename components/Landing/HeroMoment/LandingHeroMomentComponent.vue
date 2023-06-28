@@ -6,6 +6,10 @@
           <h1
             class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
           >
+            <img
+              src="/images/qiskit-logo.png"
+              class="hero-moment__title__logo"
+            />
             Qiskit
           </h1>
         </div>
@@ -13,11 +17,11 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
           >
-            <p>
+            <p class="hero-moment__description__paragraph">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
             </p>
-            <hr />
-            <ol>
+            <hr class="hero-moment__description__divider" />
+            <ol class="hero-moment__description__list">
               <li>open-source toolkit for useful quantum computing</li>
               <li>production-ready circuit compiler.</li>
             </ol>
@@ -205,6 +209,8 @@ print(quasi_dist)`;
     margin-bottom: carbon.$spacing-06;
     font-weight: 500;
     font-size: 7rem;
+    display: flex;
+    align-items: center;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
@@ -217,6 +223,11 @@ print(quasi_dist)`;
     @include carbon.breakpoint-up(lg) {
       margin-bottom: carbon.$spacing-08;
     }
+
+    &__logo {
+      width: 130px;
+      margin-right: carbon.$spacing-05;
+    }
   }
 
   &__description {
@@ -226,18 +237,18 @@ print(quasi_dist)`;
     // when decomissioning the Metal page.
     pointer-events: auto;
 
-    p {
+    &__paragraph {
       color: carbon.$gray-80;
       font-size: 1.3rem;
     }
 
-    hr {
+    &__divider {
       border: 1px solid carbon.$gray-80;
       border-width: 1px 0 0 0;
       margin: 0 0 carbon.$spacing-05 0;
     }
 
-    ol {
+    &__list {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
       font-size: 1.3rem;
