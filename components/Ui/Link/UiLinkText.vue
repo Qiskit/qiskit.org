@@ -1,7 +1,7 @@
 <template>
   <UiLink
-    class="link"
-    :class="`link_${kind}`"
+    class="ui-link-text"
+    :class="`ui-link-text_${kind}`"
     :segment="link?.segment"
     :title="link?.title"
     :url="link?.url"
@@ -26,7 +26,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.link {
+.ui-link-text {
   // &_none is intentionally not resolved
 
   &_primary,

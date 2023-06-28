@@ -1,8 +1,8 @@
 <template>
-  <section class="early-access-section">
-    <div class="early-access-section__container">
+  <section class="metal-join-us">
+    <div class="metal-join-us__container">
       <h2>Join Us</h2>
-      <p class="early-access-section__description">
+      <p class="metal-join-us__description">
         We are thrilled to ask you to join this journey to revolutionize quantum
         devices. We will work closely to develop Metal and design quantum
         devices with it.
@@ -28,7 +28,7 @@ const joinSlackLink = {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.early-access-section {
+.metal-join-us {
   background-color: qiskit.$background-color-dark;
 
   &__container {

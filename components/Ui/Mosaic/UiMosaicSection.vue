@@ -1,14 +1,14 @@
 <template>
-  <section class="mosaic-section">
+  <section class="ui-mosaic-section">
     <div class="cds--row">
       <h2 class="cds--col-md-4 cds--col-lg-8" v-text="title" />
     </div>
-    <div v-if="description" class="cds--row mosaic-section__introduction">
+    <div v-if="description" class="cds--row ui-mosaic-section__introduction">
       <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-        <p class="mosaic-section__description" v-text="description" />
+        <p class="ui-mosaic-section__description" v-text="description" />
       </div>
     </div>
-    <UiMosaic class="mosaic-section__mosaic" :mosaic-elements="elements" />
+    <UiMosaic class="ui-mosaic-section__mosaic" :mosaic-elements="elements" />
     <slot />
   </section>
 </template>
@@ -30,7 +30,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
 
-.mosaic-section {
+.ui-mosaic-section {
   &__description {
     margin-bottom: 0;
   }

@@ -1,19 +1,19 @@
 <template>
-  <header class="learn-header">
-    <div class="learn-header__container-wrapper">
-      <div class="learn-header__container">
-        <div class="learn-header__logo-container">
-          <LearnLeadSpaceLogo class="learn-header__logo" />
+  <header class="learn-lead-space">
+    <div class="learn-lead-space__container-wrapper">
+      <div class="learn-lead-space__container">
+        <div class="learn-lead-space__logo-container">
+          <LearnLeadSpaceLogo class="learn-lead-space__logo" />
         </div>
         <div>
-          <h1 class="learn-header__headline">Qiskit Textbook</h1>
+          <h1 class="learn-lead-space__headline">Qiskit Textbook</h1>
           <LearnMegaMenu
-            id="learn-header__mega-dropdown-menu"
-            classes="learn-header__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
+            id="learn-lead-space__mega-dropdown-menu"
+            classes="learn-lead-space__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
           />
         </div>
         <UiCta
-          class="learn-header__cta"
+          class="learn-lead-space__cta"
           label="Start learning"
           :segment="{ cta: 'start-learning', location: 'header' }"
           url="/learn/course/introduction-course"
@@ -24,7 +24,7 @@
       <!-- FIX: This is never rendered -->
       <LearnContentMenu
         v-if="!appMegaDropdownMenuIsVisible"
-        class="learn-header__dropdown-fixed"
+        class="learn-lead-space__dropdown-fixed"
       />
     </transition>
   </header>
@@ -38,7 +38,7 @@ const appMegaDropdownMenuIsVisible = ref(true);
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.learn-header {
+.learn-lead-space {
   background: linear-gradient(
     315deg,
     carbon.$cool-gray-10 0%,

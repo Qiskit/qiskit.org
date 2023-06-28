@@ -1,13 +1,13 @@
 <template>
-  <header class="page-header">
+  <header class="layout-lead-space-with-card">
     <div class="cds--grid">
       <div class="cds--row">
-        <main class="cds--col page-header__main">
+        <main class="cds--col layout-lead-space-with-card__main">
           <div>
-            <h1 class="page-header__headline">
+            <h1 class="layout-lead-space-with-card__headline">
               <slot name="title" />
             </h1>
-            <div class="page-header__description">
+            <div class="layout-lead-space-with-card__description">
               <slot name="description" />
             </div>
           </div>
@@ -18,10 +18,15 @@
             :url="cta.url"
           />
         </main>
-        <aside class="cds--col-lg-5 cds--col-md-4 page-header__aside">
+        <aside
+          class="cds--col-lg-5 cds--col-md-4 layout-lead-space-with-card__aside"
+        >
           <div>
-            <div class="page-header__card-title-wrapper">
-              <div class="page-header__card-title" v-text="cardTitle" />
+            <div class="layout-lead-space-with-card__card-title-wrapper">
+              <div
+                class="layout-lead-space-with-card__card-title"
+                v-text="cardTitle"
+              />
             </div>
             <slot name="card" />
           </div>
@@ -47,7 +52,7 @@ defineProps<Props>();
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.page-header {
+.layout-lead-space-with-card {
   @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-learn.svg",
     auto,

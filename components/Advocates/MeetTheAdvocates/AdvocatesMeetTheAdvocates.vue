@@ -1,5 +1,8 @@
 <template>
-  <section id="meet-the-advocates" class="cds--grid meet-the-advocates">
+  <section
+    id="meet-the-advocates"
+    class="cds--grid advocates-meet-the-advocates"
+  >
     <h2>Meet the Advocates</h2>
     <div class="cds--row">
       <div class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
@@ -17,7 +20,9 @@
         </p>
       </div>
     </div>
-    <UiFiltersResultsLayout class="meet-the-advocates__filters-result-section">
+    <UiFiltersResultsLayout
+      class="advocates-meet-the-advocates__filters-result-section"
+    >
       <template #filters-on-m-l-screen>
         <UiFieldset :label="filter.label">
           <client-only>
@@ -66,7 +71,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/checkbox/index.js";
 import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
 import rawAdvocates from "~/content/advocates/advocates.json";
 
@@ -123,7 +127,7 @@ const joinSlackLink = "https://qisk.it/join-slack";
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.meet-the-advocates {
+.advocates-meet-the-advocates {
   margin-top: carbon.$spacing-12;
 
   &__filters-result-section {

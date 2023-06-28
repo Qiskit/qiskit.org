@@ -1,26 +1,29 @@
 <template>
-  <header class="page-header-with-img">
+  <header class="layout-lead-space-with-image">
     <div class="cds--grid">
-      <div v-if="backLink" class="cds--row page-header-with-img__back-link">
+      <div
+        v-if="backLink"
+        class="cds--row layout-lead-space-with-image__back-link"
+      >
         <UiLinkBack
           :label="backLink.label"
           :segment="backLink.segment"
           :url="backLink.url"
         />
       </div>
-      <div class="cds--row page-header-with-img__content">
-        <h1 class="page-header-with-img__headline">
+      <div class="cds--row layout-lead-space-with-image__content">
+        <h1 class="layout-lead-space-with-image__headline">
           <slot name="title" />
         </h1>
-        <div class="page-header-with-img__image-wrapper">
+        <div class="layout-lead-space-with-image__image-wrapper">
           <slot name="image" />
         </div>
-        <div class="page-header-with-img__description">
+        <div class="layout-lead-space-with-image__description">
           <slot name="description" />
         </div>
         <UiCta
           v-if="cta"
-          class="page-header-with-img__cta"
+          class="layout-lead-space-with-image__cta"
           :label="cta.label"
           :segment="cta.segment"
           :title="cta.title"
@@ -45,11 +48,11 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.page-header-with-img {
+.layout-lead-space-with-image {
   &__back-link {
     height: 0;
 
-    :deep(.nav-back-link) {
+    :deep(.ui-link-back) {
       padding-left: carbon.$spacing-05;
       margin: 0;
     }
@@ -104,7 +107,7 @@ defineProps<Props>();
   }
 }
 
-:deep(.page-header-with-img__image) {
+:deep(.layout-lead-space-with-image__image) {
   max-height: 25rem;
   width: auto;
 

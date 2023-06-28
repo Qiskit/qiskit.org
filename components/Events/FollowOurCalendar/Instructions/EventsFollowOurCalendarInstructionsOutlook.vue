@@ -11,7 +11,3 @@
     <bx-list-item>Click “Import”</bx-list-item>
   </bx-ordered-list>
 </template>
-
-<script setup lang="ts">
-// import "@carbon/web-components/es/components/list/index.js";
-</script>

@@ -1,12 +1,12 @@
 <template>
-  <section class="prerequisite-material-section">
+  <section class="learn-course-prerequisite-material">
     <h2>Prerequisite material</h2>
-    <div class="prerequisite-material-section__cards">
+    <div class="learn-course-prerequisite-material__cards">
       <UiDescriptionCard
         v-for="{ title, description, segment, url } in data"
         :key="title"
         :description="description"
-        class="prerequisite-material-section__card"
+        class="learn-course-prerequisite-material__card"
         :cta="{ label: 'Go to page', segment, url }"
         :title="title"
       />
@@ -27,7 +27,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.prerequisite-material-section {
+.learn-course-prerequisite-material {
   &__card {
     align-items: strech;
     background: carbon.$cool-gray-10;

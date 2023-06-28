@@ -1,17 +1,17 @@
 <template>
-  <footer class="page-footer">
+  <footer class="layout-footer">
     <section
-      class="page-footer__primary"
-      :class="`page-footer__primary_theme_${theme}`"
+      class="layout-footer__primary"
+      :class="`layout-footer__primary_theme_${theme}`"
     >
       <div
-        :class="oldContainer ? 'page-footer__primary-container' : 'cds--grid'"
+        :class="oldContainer ? 'layout-footer__primary-container' : 'cds--grid'"
       >
         <div class="cds--row">
           <div class="cds--col-lg-4 cds--col-md">
             <UiLogo
-              class="page-footer__logo"
-              :class="`page-footer__logo_theme_${theme}`"
+              class="layout-footer__logo"
+              :class="`layout-footer__logo_theme_${theme}`"
             />
           </div>
           <LayoutFooterLinksGroup
@@ -23,7 +23,7 @@
             :title="sectionElements.title"
           />
           <LayoutFooterLinksGroup
-            class="cds--col-lg-3 cds--col-md page-footer__stay-connected"
+            class="cds--col-lg-3 cds--col-md layout-footer__stay-connected"
             :elements="stayConnectedElements.elements"
             icons-only
             :theme="theme"
@@ -33,22 +33,22 @@
       </div>
     </section>
     <section
-      class="page-footer__secondary"
-      :class="`page-footer__secondary_theme_${theme}`"
+      class="layout-footer__secondary"
+      :class="`layout-footer__secondary_theme_${theme}`"
     >
       <div
-        class="page-footer__secondary-container"
+        class="layout-footer__secondary-container"
         :class="{ 'cds--grid': !oldContainer }"
       >
-        <div class="caption" :class="`page-footer__copyright_theme_${theme}`">
+        <div class="caption" :class="`layout-footer__copyright_theme_${theme}`">
           ©Qiskit | All Rights Reserved
         </div>
-        <div class="page-footer__secondary-links">
+        <div class="layout-footer__secondary-links">
           <UiLink
             v-for="link in secondaryFooterLinks"
             :key="link.label"
-            class="caption page-footer__secondary-link"
-            :class="`page-footer__secondary-link_theme_${theme}`"
+            class="caption layout-footer__secondary-link"
+            :class="`layout-footer__secondary-link_theme_${theme}`"
             :url="link.url"
           >
             {{ link.label }}
@@ -195,8 +195,8 @@ const secondaryFooterLinks: TextLink[] = [
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.page-footer {
-  .page-footer__primary {
+.layout-footer {
+  &__primary {
     padding: carbon.$spacing-07 0;
 
     &_theme_light {
@@ -208,7 +208,7 @@ const secondaryFooterLinks: TextLink[] = [
     }
   }
 
-  .page-footer__secondary {
+  &__secondary {
     padding: carbon.$spacing-07 0;
     padding-bottom: carbon.$spacing-07 + 2.5rem; // make room for the "cookies preferences" button
 

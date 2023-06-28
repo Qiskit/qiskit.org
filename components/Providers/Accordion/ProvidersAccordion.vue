@@ -1,11 +1,11 @@
 <template>
-  <bx-accordion class="content-accordion">
+  <bx-accordion class="providers-accordion">
     <div v-for="(tab, index) in tabs" :key="tab.title">
       <bx-accordion-item
         :key="tab.title"
         :class="
           index === expandedItem
-            ? 'content-accordion__accordion-item_expanded'
+            ? 'providers-accordion__accordion-item_expanded'
             : ''
         "
         :open="index === expandedItem"
@@ -55,7 +55,7 @@ function handleAccordionItemToggled(
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.content-accordion {
+.providers-accordion {
   & bx-accordion-item {
     border-bottom: none;
     border-top-color: qiskit.$border-color;
@@ -80,7 +80,7 @@ function handleAccordionItemToggled(
       background-color: qiskit.$background-color-light;
     }
 
-    &.content-accordion__accordion-item_expanded {
+    &.providers-accordion__accordion-item_expanded {
       &::part(expando) {
         background-color: qiskit.$button-background-color;
         color: qiskit.$text-color-white;

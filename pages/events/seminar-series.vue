@@ -1,5 +1,5 @@
 <template>
-  <main class="event-page seminar-series-page">
+  <main>
     <LayoutLeadSpaceWithCard :cta="headerCTA" :card-title="headerCardTitle">
       <template #title>
         {{ headerTitle }}

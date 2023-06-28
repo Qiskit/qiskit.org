@@ -2,7 +2,7 @@
   <section class="cds--grid">
     <div class="cds--row">
       <article
-        class="cds--col-lg-4 cds--col-md-4 join-section__feature join-section__intro"
+        class="cds--col-lg-4 cds--col-md-4 advocates-join__feature advocates-join__intro"
       >
         <p>
           The Qiskit advocate program is a global program that provides support
@@ -18,7 +18,7 @@
       <div
         v-for="benefit in advocateBenefits"
         :key="`benefit-${benefit.icon}`"
-        class="cds--col-lg-4 cds--col-md-4 join-section__feature"
+        class="cds--col-lg-4 cds--col-md-4 advocates-join__feature"
       >
         <UiCompactFeature
           :description="benefit.description"
@@ -70,7 +70,7 @@ const joinAction: TextLink = {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.join-section {
+.advocates-join {
   &__feature {
     @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;

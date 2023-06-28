@@ -1,8 +1,8 @@
 <template>
-  <section class="course-pages-section">
+  <section class="learn-course-pages">
     <div>
       <h2>Pages</h2>
-      <nav class="course-pages-section__nav">
+      <nav class="learn-course-pages__nav">
         <ul class="courses">
           <li
             v-for="{ label, segment, url } in courses"
@@ -22,30 +22,30 @@
         </ul>
       </nav>
     </div>
-    <main class="course-pages-section__main">
-      <div class="course-pages-section__main__title-wrapper">
-        <div class="course-pages-section__main__title copy__subtitle">
+    <main class="learn-course-pages__main">
+      <div class="learn-course-pages__main__title-wrapper">
+        <div class="learn-course-pages__main__title copy__subtitle">
           Page preview
         </div>
       </div>
-      <div v-if="activeCourse" class="course-pages-section__main__preview">
+      <div v-if="activeCourse" class="learn-course-pages__main__preview">
         <UiLink :url="activeCourse.url">
           <!-- TODO: investigate why this particular img is not being populated -->
           <!-- <nuxt-img
-            class="course-pages-section__main__preview__image"
+            class="learn-course-pages__main__preview__image"
             format="webp"
             preload
             sizes="md:650px lg:500px xl:750px"
             :src="activeCoursePreviewImage"
           /> -->
           <img
-            class="course-pages-section__main__preview__image"
+            class="learn-course-pages__main__preview__image"
             :src="activeCoursePreviewImage"
           />
         </UiLink>
         <UiCta
           label="Go to page"
-          class="course-pages-section__main__preview__cta"
+          class="learn-course-pages__main__preview__cta"
           :segment="activeCourse.segment"
           :url="activeCourse.url"
         />
@@ -95,7 +95,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.course-pages-section {
+.learn-course-pages {
   display: grid;
   column-gap: carbon.$spacing-07;
   grid-template-areas: ". main main .";

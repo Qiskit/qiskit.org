@@ -1,7 +1,7 @@
 <template>
-  <div class="request-event__section">
+  <div class="events-request__section">
     <h3>Start an event</h3>
-    <p class="request-event__section__description">
+    <p class="events-request__section__description">
       We can help you bring Qiskit experts to your campus for guest lectures,
       hackathons, and other events.
     </p>
@@ -15,7 +15,7 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.request-event {
+.events-request {
   &__section {
     margin-top: carbon.$spacing-10;
     margin-bottom: carbon.$spacing-10;

@@ -1,7 +1,7 @@
 <template>
-  <div class="event-page__section">
+  <div class="events-follow-our-calendar__section">
     <h3>Follow our event calendar</h3>
-    <p class="event-page__section__description">
+    <p class="events-follow-our-calendar__section__description">
       Stay up to date with all of our scheduled events by following our
       calendar. You can view the calendar by visiting
       <UiLinkText :link="qiskitCalendarLink">{{
@@ -9,7 +9,7 @@
       }}</UiLinkText
       >, or subscribe to it by adding to the calendar app of your choice.
     </p>
-    <div class="event-page__tabs">
+    <div class="events-follow-our-calendar__tabs">
       <bx-tabs value="Google">
         <bx-tab
           v-for="{ name } in calendarsInstructions"
@@ -30,7 +30,7 @@
       :aria-labelledby="`tab-${name}`"
       hidden
     >
-      <p class="event-page__sync">
+      <p>
         Start by copying the calendar subscription link
         <bx-code-snippet
           copy-button-feedback-text="Copy calendar sync url"
@@ -39,7 +39,10 @@
           <span>{{ qiskitCalendarSyncLink }}</span>
         </bx-code-snippet>
       </p>
-      <component :is="instructions" class="event-page__instructions" />
+      <component
+        :is="instructions"
+        class="events-follow-our-calendar__instructions"
+      />
     </div>
   </div>
 </template>
@@ -77,3 +80,34 @@ const qiskitCalendarLink: TextLink = {
   title: "Qiskit events calendar",
 };
 </script>
+
+<style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
+.events-follow-our-calendar {
+  &__section {
+    margin-top: carbon.$spacing-10;
+    margin-bottom: carbon.$spacing-10;
+  }
+
+  &__section__description {
+    margin-top: carbon.$spacing-06;
+    margin-bottom: carbon.$spacing-07;
+    max-width: 20rem;
+
+    @include carbon.breakpoint-up(lg) {
+      max-width: 24rem;
+    }
+  }
+
+  &__tabs {
+    margin-top: carbon.$spacing-07;
+    margin-bottom: carbon.$spacing-09;
+    padding-top: carbon.$spacing-06;
+  }
+
+  &__instructions {
+    padding-left: carbon.$spacing-06;
+  }
+}
+</style>

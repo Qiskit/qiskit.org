@@ -1,8 +1,8 @@
 <template>
-  <section class="features-section">
-    <div class="features-section__container">
+  <section class="metal-features">
+    <div class="metal-features__container">
       <h2>Why Qiskit Metal</h2>
-      <p class="features-section__description">
+      <p class="metal-features__description">
         Designing quantum devices is the bedrock of the quantum ecosystem, but
         it is a difficult, multi-step process that connects traditionally
         disparate worlds.
@@ -15,7 +15,7 @@
       <MetalFeaturesCard
         v-for="feature in metalFeatures"
         :key="feature.title"
-        class="features-section__card"
+        class="metal-features__card"
         :title="feature.title"
         :description="feature.description"
         :image="feature.image"
@@ -34,7 +34,7 @@ const metalFeatures = METAL_FEATURES;
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.features-section {
+.metal-features {
   background-color: qiskit.$background-color-dark;
 
   &__container {

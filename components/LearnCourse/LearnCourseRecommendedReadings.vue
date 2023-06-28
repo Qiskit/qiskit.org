@@ -1,5 +1,5 @@
 <template>
-  <section class="external-recommended-readings">
+  <section class="learn-course-recommended-readings">
     <div class="cds--grid cds--no-gutter">
       <div class="cds--row">
         <div class="cds--col-lg-12">
@@ -7,19 +7,19 @@
           <p v-if="preamble">
             {{ preamble }}
           </p>
-          <ol class="external-recommended-readings__list">
+          <ol class="learn-course-recommended-readings__list">
             <li v-for="reference in references" :key="reference">
-              <span class="external-recommended-readings__reference">
+              <span class="learn-course-recommended-readings__reference">
                 {{ reference }}
               </span>
             </li>
             <li
               v-for="link in links"
               :key="link.label"
-              class="external-recommended-readings__list__item"
+              class="learn-course-recommended-readings__list__item"
             >
               <UiLinkText
-                class="external-recommended-readings__link"
+                class="learn-course-recommended-readings__link"
                 :segment="link.segment"
                 :url="link.url"
               >
@@ -28,7 +28,9 @@
                 </span>
                 <span
                   :class="
-                    link.author ? 'external-recommended-readings__title' : ''
+                    link.author
+                      ? 'learn-course-recommended-readings__title'
+                      : ''
                   "
                 >
                   {{ link.label }}
@@ -61,7 +63,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.external-recommended-readings {
+.learn-course-recommended-readings {
   &__list {
     list-style: decimal;
     margin-left: carbon.$spacing-05;

@@ -1,10 +1,10 @@
 <template>
-  <header class="dark-header">
+  <header class="metal-lead-space">
     <UiLinkBack label="Back to Qiskit.org" theme="dark" url="/" />
 
-    <div class="dark-header__container">
+    <div class="metal-lead-space__container">
       <svg
-        class="dark-header__title"
+        class="metal-lead-space__title"
         aria-labelledby="qiskitQuantumDeviceDesign"
         width="606"
         height="95"
@@ -129,21 +129,21 @@
         />
       </svg>
 
-      <div class="dark-header__media">
+      <div class="metal-lead-space__media">
         <nuxt-img
-          class="dark-header__media-cryo"
+          class="metal-lead-space__media-cryo"
           format="webp"
           sizes="sm:500px md:700px lg:900px"
           src="/images/metal/hero/cryo.png"
           alt="drawing of the inside of a Quantum computer focused on the chip"
         />
         <nuxt-img
-          class="dark-header__media-transmon-outline"
+          class="metal-lead-space__media-transmon-outline"
           src="/images/metal/hero/transmon.svg"
           alt="drawing of the inside of a Quantum computer focused on the chip"
         />
         <nuxt-img
-          class="dark-header__media-transmon"
+          class="metal-lead-space__media-transmon"
           format="webp"
           src="/images/metal/hero/transmon.png"
           alt="drawing of the inside of a Quantum computer focused on the chip"
@@ -158,7 +158,7 @@
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.dark-header {
+.metal-lead-space {
   @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-dark.svg",
     auto,

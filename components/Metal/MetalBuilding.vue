@@ -1,17 +1,17 @@
 <template>
-  <section class="building-section">
-    <div class="building-section__container">
+  <section class="metal-building">
+    <div class="metal-building__container">
       <h2>Building together</h2>
-      <p class="building-section__text">
+      <p class="metal-building__text">
         Whether you are learning, teaching, or performing scientific research,
         we hope Metal will get you there faster.
       </p>
-      <div class="building-section__content">
-        <div class="building-section__copy">
-          <h3 class="building-section__subtitle">
+      <div class="metal-building__content">
+        <div class="metal-building__copy">
+          <h3 class="metal-building__subtitle">
             Call for community participation
           </h3>
-          <p class="building-section__text">
+          <p class="metal-building__text">
             This may just be the beginning, but we think Qiskit Metal has
             immense potential. We hope to form this software into something that
             is usable by superconducting quantum hardware designers across
@@ -22,8 +22,8 @@
             hardware experts will be able to write their own quantum analysis
             plugins and run them as their own Qiskit Metal backends.
           </p>
-          <h3 class="building-section__subtitle">Open source</h3>
-          <p class="building-section__text">
+          <h3 class="metal-building__subtitle">Open source</h3>
+          <p class="metal-building__text">
             Qiskit Metal is a visionary work in progress in its early
             development stages. We're working toward a vision—a quantum design
             and analysis platform built from the ground up specifically for
@@ -33,10 +33,10 @@
             the innovation in and growth of the field as a whole. If Qiskit
             Metal doesn't have what you want, then you extend Metal to build it!
           </p>
-          <h3 class="building-section__subtitle">Education</h3>
+          <h3 class="metal-building__subtitle">Education</h3>
           <!-- Disabling linter to keep the quotations and phrasing content together. -->
           <!-- eslint-disable vue/multiline-html-element-content-newline -->
-          <p class="building-section__text">
+          <p class="metal-building__text">
             Learn more about the physics behind Qiskit Metal and qubit design
             from the
             <UiLinkText
@@ -59,10 +59,10 @@
           />
           <!-- eslint-enable -->
         </div>
-        <div class="building-section__media">
+        <div class="metal-building__media">
           <nuxt-img
             alt="Sketched illustration of a group standing in front of a whiteboard."
-            class="building-section__media-img"
+            class="metal-building__media-img"
             format="webp"
             sizes="lg:600px"
             src="/images/metal/whiteboard-dark.png"
@@ -84,7 +84,7 @@ const stayInTouchLink = {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.building-section {
+.metal-building {
   @include qiskit.responsive-grid-bg("/images/grid/grid-right-dark.svg", 36rem);
 
   background-position: right -1rem bottom -2px;

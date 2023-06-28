@@ -1,7 +1,7 @@
 <template>
   <article>
     <UiCard
-      class="ecosystem-item-card"
+      class="ecosystem-card"
       :title="member.name"
       :tags="member.labels"
       :primary-tag="member.tier"
@@ -13,16 +13,16 @@
       :to="member.url"
       :secondary-cta="websiteCta"
     >
-      <div class="ecosystem-item-card__details">
-        <span class="ecosystem-item-card__licence">
+      <div class="ecosystem-card__details">
+        <span class="ecosystem-card__licence">
           {{ member.licence }}
         </span>
-        <span class="ecosystem-item-card__stars">
+        <span class="ecosystem-card__stars">
           <StarFilled16 />
           <span v-if="member.stars > 0">{{ member.stars }}</span>
         </span>
       </div>
-      <p class="ecosystem-item-card__description">
+      <p class="ecosystem-card__description">
         {{ member.description }}
       </p>
     </UiCard>
@@ -100,7 +100,7 @@ function formatTimestamp(timestamp: number): string {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.ecosystem-item-card {
+.ecosystem-card {
   &__licence {
     font-size: 12px;
     margin-right: carbon.$spacing-05;

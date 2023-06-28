@@ -1,14 +1,14 @@
 <template>
-  <nav class="table-of-contents">
+  <nav class="providers-toc">
     <!-- Needed to avoid multiline to remove blank space around the content. -->
     <!-- eslint-disable vue/multiline-html-element-content-newline -->
     <UiLink
       v-for="entry in entries"
       :key="entry.sectionId || entry.title"
-      class="table-of-contents__entry"
+      class="providers-toc__entry"
       :class="{
-        'table-of-contents__entry_active': isActive(entry),
-        'table-of-contents__entry_second-level': entry.isSecondary,
+        'providers-toc__entry_active': isActive(entry),
+        'providers-toc__entry_second-level': entry.isSecondary,
       }"
       :url="entry.sectionId && `#${entry.sectionId}`"
       >{{ entry.title }}</UiLink
@@ -36,7 +36,7 @@ function isActive(entry: TableOfContentEntry): boolean {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.table-of-contents {
+.providers-toc {
   display: flex;
   flex-direction: column;
 

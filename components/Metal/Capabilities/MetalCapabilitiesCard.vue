@@ -1,10 +1,10 @@
 <template>
-  <article class="capability-card">
-    <div class="capability-card__container">
-      <h3 class="capability-card__title">
+  <article class="metal-capabilities-card">
+    <div class="metal-capabilities-card__container">
+      <h3 class="metal-capabilities-card__title">
         {{ title }}
       </h3>
-      <div class="capability-card__description">
+      <div class="metal-capabilities-card__description">
         <!-- TODO: HTML content should not be in strings but in components
         but lacking of a better solution given time constraints. -->
         <!-- eslint-disable vue/no-v-html -->
@@ -12,7 +12,13 @@
         <!-- estlint-enable -->
       </div>
     </div>
-    <video class="capability-card__video" loop autoplay muted playsinline>
+    <video
+      class="metal-capabilities-card__video"
+      loop
+      autoplay
+      muted
+      playsinline
+    >
       <source :src="video" type="video/mp4" />
       <source :src="video" type="video/ogg" />
       Your browser does not support video.
@@ -33,7 +39,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.capability-card {
+.metal-capabilities-card {
   display: flex;
   min-height: 20rem;
 

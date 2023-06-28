@@ -1,6 +1,6 @@
 <template>
-  <header class="page-header-fixed">
-    <div class="cds--grid page-header-fixed__container">
+  <header class="layout-lead-space-fixed">
+    <div class="cds--grid layout-lead-space-fixed__container">
       <div class="cds--row">
         <h1 class="cds--col-sm cds--col-md-10 cds--col-lg-10 cds--col-max-10">
           <slot />
@@ -14,7 +14,7 @@
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.page-header-fixed {
+.layout-lead-space-fixed {
   @include qiskit.responsive-grid-bg-strip(
     "/images/grid/grid-hero-learn.svg",
     auto,

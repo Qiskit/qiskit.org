@@ -1,8 +1,8 @@
 <template>
-  <section class="content-menu-section">
-    <div class="content-menu-section__container">
+  <section class="learn-content-menu">
+    <div class="learn-content-menu__container">
       <LearnMegaMenu
-        classes="content-menu-section__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
+        classes="learn-content-menu__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
       />
     </div>
   </section>
@@ -11,7 +11,7 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.content-menu-section {
+.learn-content-menu {
   background: qiskit.$background-color-lighter;
   border-top: 1px solid qiskit.$border-color;
   border-bottom: 1px solid qiskit.$border-color;

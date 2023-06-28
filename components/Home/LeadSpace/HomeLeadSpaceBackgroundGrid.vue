@@ -1,26 +1,27 @@
 <template>
-  <section class="landing-hero-moment-grid">
-    <div class="landing-hero-moment-grid__container">
+  <section class="home-lead-space-background-grid">
+    <div class="home-lead-space-background-grid__container">
       <div
         v-for="(row, index) in positions"
         :key="getRowId(index)"
-        class="landing-hero-moment-grid__row"
+        class="home-lead-space-background-grid__row"
       >
         <div
           v-for="pos in row"
           :key="getPosId(pos)"
-          class="landing-hero-moment-grid__cell"
+          class="home-lead-space-background-grid__cell"
           :class="{
-            'landing-hero-moment-grid__cell_decoherent': pos.isDecoherent,
+            'home-lead-space-background-grid__cell_decoherent':
+              pos.isDecoherent,
           }"
         />
       </div>
     </div>
     <div
       ref="slot-container"
-      class="landing-hero-moment-grid__slot-container"
+      class="home-lead-space-background-grid__slot-container"
       :class="{
-        'landing-hero-moment-grid__slot-container_hidden':
+        'home-lead-space-background-grid__slot-container_hidden':
           slotContainerIsHidden,
       }"
     >
@@ -105,7 +106,7 @@ function getRowId(index: number): string {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.landing-hero-moment-grid {
+.home-lead-space-background-grid {
   position: relative;
   height: 100%;
   width: 100%;

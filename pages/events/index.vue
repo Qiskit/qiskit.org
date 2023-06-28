@@ -392,30 +392,5 @@ const selectTab = (selectedTab: string) => {
       margin-top: carbon.$spacing-06;
     }
   }
-
-  &:deep(.event-page__section) {
-    margin-top: carbon.$spacing-10;
-    margin-bottom: carbon.$spacing-10;
-  }
-
-  &:deep(.event-page__section__description) {
-    margin-top: carbon.$spacing-06;
-    margin-bottom: carbon.$spacing-07;
-    max-width: 20rem;
-
-    @include carbon.breakpoint-up(lg) {
-      max-width: 24rem;
-    }
-  }
-
-  &:deep(.event-page__tabs) {
-    margin-top: carbon.$spacing-07;
-    margin-bottom: carbon.$spacing-09;
-    padding-top: carbon.$spacing-06;
-  }
-
-  &:deep(.event-page__instructions) {
-    padding-left: carbon.$spacing-06;
-  }
 }
 </style>

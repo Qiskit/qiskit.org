@@ -1,18 +1,20 @@
 <template>
-  <article class="learn-card">
-    <div class="cds--col-max-3 cds--col-lg-4 cds--col-md-3 learn-card__content">
+  <article class="home-learn-card">
+    <div
+      class="cds--col-max-3 cds--col-lg-4 cds--col-md-3 home-learn-card__content"
+    >
       <div
-        class="cds--aspect-ratio cds--aspect-ratio--4x3 learn-card__content__aspect-ratio"
+        class="cds--aspect-ratio cds--aspect-ratio--4x3 home-learn-card__content__aspect-ratio"
       >
         <div
-          class="cds--aspect-ratio--object learn-card__content__aspect-ratio__object"
+          class="cds--aspect-ratio--object home-learn-card__content__aspect-ratio__object"
         >
-          <p class="learn-card__description">
+          <p class="home-learn-card__description">
             Gain access to a free, digital textbook to study the concepts of
             quantum computing using Qiskit.
           </p>
           <UiCta
-            class="learn-card__cta"
+            class="home-learn-card__cta"
             kind="ghost"
             :label="learnLink.label"
             :segment="learnLink.segment"
@@ -21,9 +23,9 @@
         </div>
       </div>
     </div>
-    <div class="cds--col-md learn-card__media">
+    <div class="cds--col-md home-learn-card__media">
       <nuxt-img
-        class="learn-card__media__image"
+        class="home-learn-card__media__image"
         format="webp"
         sizes="sm:500px md:700 xl:1000"
         src="/images/landing-page/learn-image.jpg"
@@ -47,7 +49,7 @@ const learnLink: TextLink = {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.learn-card {
+.home-learn-card {
   display: flex;
   flex-wrap: wrap;
 

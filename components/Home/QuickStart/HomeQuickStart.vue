@@ -1,16 +1,16 @@
 <template>
-  <article class="cds--grid page-section quick-start">
+  <article class="cds--grid page-section home-quick-start">
     <div class="cds--row">
       <div class="cds--col-md-8 cds--col-lg-8">
-        <div class="quick-start__introduction">
+        <div class="home-quick-start__introduction">
           <h2>Backend compatibility</h2>
-          <p class="quick-start__introduction__copy">
+          <p class="home-quick-start__introduction__copy">
             You can use Qiskit to construct quantum programs and run them on
             simulators or real quantum computers. With our extensive network of
             providers you can compile your Qiskit code for a huge range of
             different backends, more than any other quantum framework!
           </p>
-          <p class="quick-start__introduction__copy">
+          <p class="home-quick-start__introduction__copy">
             Select a provider below and explore code examples of how to use it
             with Qiskit:
           </p>
@@ -56,7 +56,7 @@ function updateSelectedProvider(selectedProviderId: number) {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.quick-start {
+.home-quick-start {
   &__introduction {
     margin-bottom: carbon.$spacing-06;
 

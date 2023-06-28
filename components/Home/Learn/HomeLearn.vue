@@ -1,5 +1,5 @@
 <template>
-  <article class="page-section learn-section">
+  <article class="page-section home-learn">
     <div class="cds--grid">
       <h2>Learn with Qiskit</h2>
       <HomeLearnCard />
@@ -10,7 +10,7 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.learn-section {
+.home-learn {
   @include qiskit.responsive-grid-bg("/images/grid/grid-left.svg", 36rem);
 
   background-repeat: no-repeat;

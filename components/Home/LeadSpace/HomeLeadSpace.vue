@@ -1,21 +1,21 @@
 <template>
-  <article class="hero-moment">
+  <article class="home-lead-space">
     <HomeLeadSpaceBackgroundGrid>
-      <div class="cds--grid hero-moment__container">
+      <div class="cds--grid home-lead-space__container">
         <HomeLeadSpaceVersion
-          class="hero-moment__version-info"
+          class="home-lead-space__version-info"
           :version="version"
         />
         <div class="cds--row">
           <h1
-            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-6 cds--col-max-7 hero-moment__title"
+            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-6 cds--col-max-7 home-lead-space__title"
           >
             Your open-source toolkit for useful quantum computing
           </h1>
         </div>
         <div class="cds--row">
           <p
-            class="cds--col-sm cds--col-md-3 cds--col-lg-5 cds--col-xlg-4 hero-moment__description"
+            class="cds--col-sm cds--col-md-3 cds--col-lg-5 cds--col-xlg-4 home-lead-space__description"
           >
             Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
             with quantum computers at the level of pulses, circuits, and
@@ -23,13 +23,13 @@
           </p>
         </div>
         <UiCta
-          class="hero-moment__cta"
+          class="home-lead-space__cta"
           :label="getStartedLink.label"
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
         />
         <img
-          class="hero-moment__container__image"
+          class="home-lead-space__container__image"
           src="/images/landing-page/new-hero-illustration.png"
           alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
@@ -64,7 +64,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.hero-moment {
+.home-lead-space {
   height: calc(#{math.div(56rem * 40, 64)} + 2px);
   position: relative;
   overflow: hidden;

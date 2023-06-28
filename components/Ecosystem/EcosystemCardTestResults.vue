@@ -1,6 +1,6 @@
 <template>
   <UiDataTable
-    class="test-table"
+    class="ecosystem-card-test-results"
     :columns="[
       'Status',
       'Test Type',
@@ -118,7 +118,7 @@ const tableData = computed(() => {
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.test-table {
+.ecosystem-card-test-results {
   overflow-x: scroll;
 }
 

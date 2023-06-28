@@ -1,5 +1,5 @@
 <template>
-  <section class="summer-school-faq">
+  <section>
     <h2>Frequently asked questions</h2>
     <bx-accordion>
       <bx-accordion-item

@@ -1,27 +1,27 @@
 <template>
   <article>
-    <div class="qiskit-capability-card__container">
-      <div class="qiskit-capability-card__thumbnail">
+    <div class="home-capabilities-card__container">
+      <div class="home-capabilities-card__thumbnail">
         <nuxt-img
-          class="qiskit-capability-card__thumbnail__media"
+          class="home-capabilities-card__thumbnail__media"
           format="webp"
           :src="thumbnailResource"
           width="160px"
           alt=""
         />
       </div>
-      <div class="qiskit-capability-card__copy">
-        <h3 class="qiskit-capability-card__title">
+      <div class="home-capabilities-card__copy">
+        <h3 class="home-capabilities-card__title">
           {{ title }}
         </h3>
         <nuxt-img
-          class="qiskit-capability-card__thumbnail__mobile"
+          class="home-capabilities-card__thumbnail__mobile"
           format="webp"
           :src="thumbnailResource"
           width="160px"
           alt=""
         />
-        <div class="qiskit-capability-card__description">
+        <div class="home-capabilities-card__description">
           <p v-text="description" />
           <UiCta
             v-if="link"
@@ -56,7 +56,7 @@ withDefaults(defineProps<Props>(), {
 
 $card-img-width: 10rem;
 
-.qiskit-capability-card {
+.home-capabilities-card {
   &__container {
     display: flex;
 

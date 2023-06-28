@@ -1,6 +1,6 @@
 <template>
-  <main class="course-overview-page">
-    <LearnContentMenu class="course-overview-page__content-menu" />
+  <main class="learn-course">
+    <LearnContentMenu class="learn-course__content-menu" />
     <LayoutLeadSpaceWithImage
       :cta="startLearningCta"
       :back-link="backToTextbookHomeLink"
@@ -17,27 +17,27 @@
       </template>
       <template #image>
         <nuxt-img
-          class="page-header-with-img__image"
+          class="layout-lead-space-with-image__image"
           format="webp"
           sizes="sm:300px md:650px lg:500px xl:750px"
           :src="headerImg"
         />
       </template>
     </LayoutLeadSpaceWithImage>
-    <LearnPrerequisiteMaterial
+    <LearnCoursePrerequisiteMaterial
       v-if="prerequisites.length > 0"
-      class="course-overview-page__section"
+      class="learn-course__section"
       :data="prerequisites"
     />
     <LearnCourseRecommendedReadings
       v-if="links.length > 0 || references.length > 0"
-      class="course-overview-page__section"
+      class="learn-course__section"
       :links="links"
       :references="references"
       :preamble="externalRecommendedReadingsPreamble"
     />
     <LearnCoursePages
-      class="course-overview-page__section"
+      class="learn-course__section"
       :courses="courses"
       :img-base="imageUrlBase"
     />
@@ -79,7 +79,7 @@ const backToTextbookHomeLink: TextLink = {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.course-overview-page {
+.learn-course {
   &__section {
     @include qiskit.contained;
 
@@ -87,7 +87,7 @@ const backToTextbookHomeLink: TextLink = {
     margin-bottom: carbon.$spacing-07;
     margin-top: carbon.$spacing-10;
 
-    :deep(.course-pages-section__main) {
+    :deep(.learn-course-pages__main) {
       min-height: 20rem;
       height: max-content;
     }

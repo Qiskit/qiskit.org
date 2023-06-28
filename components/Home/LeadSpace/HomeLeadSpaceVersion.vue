@@ -1,15 +1,15 @@
 <template>
-  <div class="qiskit-version-info">
+  <div class="home-lead-space-version">
     <UiLinkText :link="githubRepoLink">
-      <LogoGitHub32 class="qiskit-version-info__github-icon" />
+      <LogoGitHub32 class="home-lead-space-version__github-icon" />
     </UiLinkText>
-    <div class="qiskit-version-info__content">
-      <div class="qiskit-version-info__version-string">
+    <div class="home-lead-space-version__content">
+      <div class="home-lead-space-version__version-string">
         <UiLinkText class="code" kind="secondary" :link="githubRepoLink">
           qiskit {{ version }}
         </UiLinkText>
       </div>
-      <div class="qiskit-version-info__release-notes">
+      <div class="home-lead-space-version__release-notes">
         <UiLinkText class="code" :link="releaseNotesLink">
           see release notes
         </UiLinkText>
@@ -47,7 +47,7 @@ const releaseNotesLink: Link = {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.qiskit-version-info {
+.home-lead-space-version {
   display: flex;
   flex-direction: row;
   align-items: center;

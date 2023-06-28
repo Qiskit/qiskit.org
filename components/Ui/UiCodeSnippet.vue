@@ -1,10 +1,10 @@
 <template>
-  <div class="code-snippet">
-    <code class="code-snippet__code-cell">
+  <div class="ui-code-snippet">
+    <code class="ui-code-snippet__code-cell">
       <pre
         v-for="(line, index) in codeLines"
         :key="index"
-        :class="{ 'code-snippet__code-cell_comment': line.startsWith('#') }"
+        :class="{ 'ui-code-snippet__code-cell_comment': line.startsWith('#') }"
         v-text="line"
       />
     </code>
@@ -15,7 +15,7 @@
       }"
       title="Copy"
       size="sm"
-      class="code-snippet__copy-button"
+      class="ui-code-snippet__copy-button"
       @click="copyToClipboard($event)"
     >
       Copy
@@ -51,7 +51,7 @@ const copyCodeCta = "Copy";
 function copyToClipboard(e: { target: any }) {
   const buttonElement = e.target;
   const codeBlock = buttonElement.parentNode;
-  const codeSnippet = codeBlock.querySelector(".code-snippet__code-cell");
+  const codeSnippet = codeBlock.querySelector(".ui-code-snippet__code-cell");
 
   if (codeSnippet !== null) {
     navigator.clipboard.writeText(codeSnippet.innerText);
@@ -69,7 +69,7 @@ function copyToClipboard(e: { target: any }) {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.code-snippet {
+.ui-code-snippet {
   position: relative;
   margin-bottom: carbon.$spacing-05;
   max-width: initial;

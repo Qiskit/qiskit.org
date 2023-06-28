@@ -1,13 +1,13 @@
 <template>
-  <section class="intro-section">
-    <div class="intro-section__container">
+  <section class="metal-intro">
+    <div class="metal-intro__container">
       <div class="cds--row">
         <h2 class="cds--col-md-6 cds--col-lg-8">
           Qiskit Metal | quantum device design is now open
         </h2>
       </div>
-      <div class="intro-section__content">
-        <p class="intro-section__description">
+      <div class="metal-intro__content">
+        <p class="metal-intro__description">
           Our vision is to develop a community-driven universal toolkit capable
           of orchestrating quantum chip development from concept to fabrication
           in a simple, scalable, and open framework.
@@ -16,7 +16,7 @@
           to design superconducting quantum devices with ease: Qiskit Metal.
         </p>
         <iframe
-          class="intro-section__video"
+          class="metal-intro__video"
           width="560"
           height="315"
           src="https://www.youtube.com/embed/C5jDrZgLQ_s"
@@ -26,7 +26,7 @@
         />
       </div>
       <UiCta
-        class="intro-section__cta"
+        class="metal-intro__cta"
         :label="joinWaitingListLink.label"
         theme="dark"
         :url="joinWaitingListLink.url"
@@ -48,7 +48,7 @@ const joinWaitingListLink = {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.intro-section {
+.metal-intro {
   position: relative;
   margin-top: -18.5rem;
 

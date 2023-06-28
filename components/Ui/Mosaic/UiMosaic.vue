@@ -1,6 +1,6 @@
 <template>
-  <section class="mosaic">
-    <dl class="mosaic__layout">
+  <section class="ui-mosaic">
+    <dl class="ui-mosaic__layout">
       <div
         v-for="{
           position,
@@ -11,33 +11,37 @@
           cta,
         } in mosaicElements"
         :key="title"
-        class="mosaic__element"
-        :class="`mosaic__element_${position}`"
+        class="ui-mosaic__element"
+        :class="`ui-mosaic__element_${position}`"
       >
         <div
-          class="mosaic__element-copy"
-          :class="`mosaic__element-copy_${position}`"
+          class="ui-mosaic__element-copy"
+          :class="`ui-mosaic__element-copy_${position}`"
         >
           <dt class="h3" v-text="title" />
           <!-- eslint-disable vue/no-v-html -->
           <dd
-            class="mosaic__element-copy-description"
-            :class="`mosaic__element-copy-description_${position}`"
+            class="ui-mosaic__element-copy-description"
+            :class="`ui-mosaic__element-copy-description_${position}`"
             v-html="description"
           />
           <!-- eslint-enable vue/no-v-html -->
-          <UiLinkText v-if="cta" class="mosaic__element-copy-link" :link="cta">
+          <UiLinkText
+            v-if="cta"
+            class="ui-mosaic__element-copy-link"
+            :link="cta"
+          >
             {{ cta.label }}
           </UiLinkText>
         </div>
         <div
           v-if="image"
-          class="mosaic__element-image-container"
-          :class="`mosaic__element-image-container_${position}`"
+          class="ui-mosaic__element-image-container"
+          :class="`ui-mosaic__element-image-container_${position}`"
         >
           <nuxt-img
-            class="mosaic__element-image"
-            :class="`mosaic__element-image_${position}`"
+            class="ui-mosaic__element-image"
+            :class="`ui-mosaic__element-image_${position}`"
             format="webp"
             sizes="sm:350px md:700px"
             :src="image"
@@ -63,7 +67,7 @@ defineProps<Props>();
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.mosaic {
+.ui-mosaic {
   &__layout {
     display: grid;
     gap: carbon.$spacing-07;

@@ -1,10 +1,7 @@
 <template>
-  <div ref="canvasWrapperRef" class="dynamic-background-logo">
-    <canvas
-      ref="canvasRef"
-      class="dynamic-background-logo__background-canvas"
-    />
-    <LearnLeadSpaceLogoOverlay class="dynamic-background-logo__overlay" />
+  <div ref="canvasWrapperRef" class="learn-lead-space-logo">
+    <canvas ref="canvasRef" class="learn-lead-space-logo__background-canvas" />
+    <LearnLeadSpaceLogoOverlay class="learn-lead-space-logo__overlay" />
   </div>
 </template>
 
@@ -528,7 +525,7 @@ function interactionRedraw() {
 </script>
 
 <style lang="scss" scoped>
-.dynamic-background-logo {
+.learn-lead-space-logo {
   &__background-canvas {
     position: absolute;
     left: 50%;

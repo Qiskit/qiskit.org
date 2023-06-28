@@ -1,6 +1,6 @@
 <template>
-  <fieldset class="fieldset">
-    <legend class="fieldset__label">
+  <fieldset class="ui-fieldset">
+    <legend class="ui-fieldset__label">
       {{ label }}
     </legend>
     <slot />
@@ -18,7 +18,7 @@ defineProps<Props>();
 <style lang="scss">
 @use "~/assets/scss/carbon.scss";
 
-.fieldset {
+.ui-fieldset {
   margin-bottom: carbon.$spacing-07;
 
   &__label {

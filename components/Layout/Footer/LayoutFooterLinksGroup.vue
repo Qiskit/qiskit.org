@@ -1,24 +1,24 @@
 <template>
-  <section class="footer-section">
+  <section class="layout-footer-links-group">
     <h2
-      class="h4 footer-section__title"
-      :class="`footer-section__title_theme_${theme}`"
+      class="h4 layout-footer-links-group__title"
+      :class="`layout-footer-links-group__title_theme_${theme}`"
     >
       {{ title }}
     </h2>
-    <nav :class="{ 'footer-section__icons-group': iconsOnly }">
+    <nav :class="{ 'layout-footer-links-group__icons-group': iconsOnly }">
       <UiLinkText
         v-for="element in elements"
         :key="element.url"
-        class="caption footer-section__link"
-        :class="`footer-section__link_theme_${theme}`"
+        class="caption layout-footer-links-group__link"
+        :class="`layout-footer-links-group__link_theme_${theme}`"
         kind="secondary"
         :link="element"
       >
         <component
           :is="element.icon"
           v-if="iconsOnly"
-          :class="`footer-section__icon-link footer-section__icon-link_theme_${theme}`"
+          :class="`layout-footer-links-group__icon-link layout-footer-links-group__icon-link_theme_${theme}`"
         />
         <span v-else>{{ element.label }}</span>
       </UiLinkText>
@@ -46,7 +46,7 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.footer-section {
+.layout-footer-links-group {
   &__title {
     margin-bottom: carbon.$spacing-06;
 

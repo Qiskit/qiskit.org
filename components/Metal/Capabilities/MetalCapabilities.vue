@@ -1,33 +1,33 @@
 <template>
-  <section id="capabilities" class="capabilities-section">
-    <div class="capabilities-section__container">
+  <section id="capabilities" class="metal-capabilities">
+    <div class="metal-capabilities__container">
       <h2>Our vision</h2>
-      <div class="capabilities-section__capabilities">
-        <div class="capabilities-section__content">
+      <div class="metal-capabilities__capabilities">
+        <div class="metal-capabilities__content">
           <MetalCapabilitiesCard
             v-for="item in capabilities"
             :id="item.title"
             :key="item.title"
-            class="capabilities-section__card scrollable"
+            class="metal-capabilities__card scrollable"
             :title="item.title"
             :description="item.description"
             :video="item.video"
           />
         </div>
-        <div class="capabilities-section__scrolling-ui">
+        <div class="metal-capabilities__scrolling-ui">
           <div
             v-for="(item, index) in capabilities"
             :key="item.video"
-            class="capabilities-section__video-container"
+            class="metal-capabilities__video-container"
             :class="{
-              'capabilities-section__video-container_active': isActiveImage(
+              'metal-capabilities__video-container_active': isActiveImage(
                 item,
                 index
               ),
             }"
           >
             <video
-              class="capabilities-section__video"
+              class="metal-capabilities__video"
               alt="short Video showcasing the GUI"
               loop
               autoplay
@@ -64,7 +64,7 @@ const isActiveImage = (item: MetalCapability, index: number): boolean => {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.capabilities-section {
+.metal-capabilities {
   // multiple backgrounds in one section
   background-image: url("/images/grid/grid-right-dark.svg"),
     url("/images/grid/grid-left-dark.svg");

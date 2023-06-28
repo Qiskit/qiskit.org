@@ -1,6 +1,6 @@
 <template>
-  <article class="accordion-layout">
-    <p class="accordion-layout__description">
+  <article class="providers-accordion-content">
+    <p class="providers-accordion-content__description">
       {{ description }}
     </p>
     <UiCodeSnippet
@@ -8,14 +8,14 @@
       :code-snippet-title="title"
       :code-snippet-location="'providers'"
     />
-    <div class="accordion-layout__code-block">
+    <div class="providers-accordion-content__code-block">
       <UiCodeSnippet
         :code="codeExamples[0].fullCode"
         :code-snippet-title="title"
         :code-snippet-location="'providers'"
       />
     </div>
-    <div class="accordion-layout__cta-group">
+    <div class="providers-accordion-content__cta-group">
       <UiCta
         v-for="cta in validCtas"
         :key="cta.label"
@@ -58,7 +58,7 @@ const validCtas = computed(() => {
 
 $cta-max-width: 4rem;
 
-.accordion-layout {
+.providers-accordion-content {
   display: flex;
   flex-direction: column;
 

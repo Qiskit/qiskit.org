@@ -1,5 +1,5 @@
 <template>
-  <section class="university-directory-section">
+  <section class="events-fall-fest-university-directory">
     <article class="cds--row">
       <div class="cds--col-lg-4">
         <h2>University directory</h2>
@@ -24,7 +24,7 @@
               :segment="cta.segment"
               :image="image"
               :title="title"
-              class="university-directory-section__card"
+              class="events-fall-fest-university-directory__card"
               :description-whole-size="true"
             >
               <p>
@@ -426,7 +426,7 @@ const universities: University[] = [
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.university-directory-section {
+.events-fall-fest-university-directory {
   &__subtitle {
     margin-bottom: carbon.$spacing-05;
   }

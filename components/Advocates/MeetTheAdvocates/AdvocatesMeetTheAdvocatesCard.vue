@@ -1,17 +1,20 @@
 <template>
   <UiCard
-    class="advocate-card"
+    class="advocates-meet-the-advocates-card"
     :image="image"
     :title="name"
     :tags="formattedRegion"
     :alt-text="`${name} profile photo`"
   >
-    <div v-if="location" class="advocate-card__location">
-      <Map20 class="advocate-card__icon" />
+    <div v-if="location" class="advocates-meet-the-advocates-card__location">
+      <Map20 class="advocates-meet-the-advocates-card__icon" />
       {{ location }}
     </div>
-    <div v-if="slackUsername" class="advocate-card__contact">
-      <LogoSlack20 class="advocate-card__icon" />
+    <div
+      v-if="slackUsername"
+      class="advocates-meet-the-advocates-card__contact"
+    >
+      <LogoSlack20 class="advocates-meet-the-advocates-card__icon" />
       <UiLinkText :url="`https://qiskit.slack.com/team/${slackId}`">
         @{{ slackUsername }}
       </UiLinkText>
@@ -52,7 +55,7 @@ const location = computed(() =>
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.advocate-card {
+.advocates-meet-the-advocates-card {
   margin-bottom: carbon.$spacing-06;
 
   @include carbon.breakpoint-down(lg) {

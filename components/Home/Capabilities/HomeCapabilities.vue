@@ -1,12 +1,12 @@
 <template>
-  <article class="cds--grid page-section qiskit-capabilities-section">
+  <article class="cds--grid page-section home-capabilities">
     <h2>What Can Qiskit Do</h2>
-    <div class="cds--row qiskit-capabilities-section__container">
+    <div class="cds--row home-capabilities__container">
       <HomeCapabilitiesCard
         v-for="item in capabilities"
         :id="item.title"
         :key="item.title"
-        class="cds--col-md-4 qiskit-capabilities-section__card"
+        class="cds--col-md-4 home-capabilities__card"
         :title="item.title"
         :description="item.description"
         :thumbnail-resource="item.thumbnailResource"
@@ -87,7 +87,7 @@ const capabilities: QiskitCapability[] = [
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.qiskit-capabilities-section {
+.home-capabilities {
   padding-bottom: carbon.$spacing-09;
 
   &__container {

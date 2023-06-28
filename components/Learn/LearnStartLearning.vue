@@ -1,8 +1,8 @@
 <template>
-  <section class="start-learning-section">
+  <section class="learn-start-learning">
     <h2>Start learning in the best way for you</h2>
-    <div class="start-learning-section__tabs-wrapper">
-      <bx-tabs class="start-learning-section__tabs" value="Learn">
+    <div class="learn-start-learning__tabs-wrapper">
+      <bx-tabs class="learn-start-learning__tabs" value="Learn">
         <bx-tab id="tab-learn" target="tab-learn-content" value="Learn">
           Learn
         </bx-tab>
@@ -49,7 +49,7 @@
                 image-contain
                 :title="courseTitle"
                 :subtitle="courseSubtitle"
-                class="start-learning-section__card"
+                class="learn-start-learning__card"
                 :description-whole-size="true"
               >
                 {{ courseDescription }}
@@ -77,7 +77,7 @@
             section to edit and share by clicking on the syllabus and choosing
             “Add to Profile”
           </p>
-          <div class="start-learning-section__teach-section-cta">
+          <div class="learn-start-learning__teach-section-cta">
             <h3>Want to create your own?</h3>
             <UiCta
               kind="ghost"
@@ -103,7 +103,7 @@
                 :segment="cta.segment"
                 image-contain
                 :title="syllabusTitle"
-                class="start-learning-section__card"
+                class="learn-start-learning__card"
                 :description-whole-size="true"
               >
                 <p>
@@ -572,7 +572,7 @@ const teachingSections: TeachingSection[] = [
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.start-learning-section {
+.learn-start-learning {
   &__subtitle {
     margin-bottom: carbon.$spacing-05;
   }

@@ -1,12 +1,12 @@
 <template>
-  <article class="feature-card">
-    <h3 class="feature-card__title">
+  <article class="metal-features-card">
+    <h3 class="metal-features-card__title">
       {{ title }}
     </h3>
-    <div class="feature-card__content">
-      <div class="feature-card__image-container">
+    <div class="metal-features-card__content">
+      <div class="metal-features-card__image-container">
         <nuxt-img
-          class="feature-card__image"
+          class="metal-features-card__image"
           format="webp"
           sizes="sm:300px md:600px lg:300px"
           alt=""
@@ -16,7 +16,7 @@
       <!-- TODO: HTML content should not be in strings but in components
       but lacking of a better solution given time constraints. -->
       <!-- eslint-disable vue/no-v-html -->
-      <div class="feature-card__description" v-html="description" />
+      <div class="metal-features-card__description" v-html="description" />
       <!-- eslint-enable -->
     </div>
   </article>
@@ -35,7 +35,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.feature-card {
+.metal-features-card {
   width: 100%;
   display: flex;
 
