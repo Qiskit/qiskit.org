@@ -2,32 +2,36 @@
   <article class="hero-moment">
     <LandingHeroMomentGrid>
       <div class="cds--grid hero-moment__container">
-        <LandingHeroMomentVersionInfo
-          class="hero-moment__version-info"
-          :version="version"
-        />
         <div class="cds--row">
           <h1
-            class="cds--col-md-3 cds--col-lg-5 cds--col-xlg-6 cds--col-max-7 hero-moment__title"
+            class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
           >
-            Your open-source toolkit for useful quantum computing
+            Qiskit
           </h1>
         </div>
         <div class="cds--row">
-          <p
-            class="cds--col-sm cds--col-md-3 cds--col-lg-5 cds--col-xlg-4 hero-moment__description"
+          <div
+            class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
           >
-            Qiskit {{ qiskitPronunciation }} is an open-source SDK for working
-            with quantum computers focus in how build circuits and optimize them
-            using the last transpiler passes, and bringing access to the last
-            quantum hardware interfaces.
-          </p>
+            <p>
+              <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
+            </p>
+            <hr />
+            <ol>
+              <li>open-source toolkit for useful quantum computing</li>
+              <li>production-ready circuit compiler.</li>
+            </ol>
+          </div>
         </div>
         <UiCta
           class="hero-moment__cta"
           :label="getStartedLink.label"
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
+        />
+        <LandingHeroMomentVersionInfo
+          class="hero-moment__version-info"
+          :version="version"
         />
         <img
           class="hero-moment__container__image"
@@ -104,7 +108,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
       top: 0;
       z-index: -1;
 
-      @include carbon.breakpoint-down(md) {
+      @include carbon.breakpoint-down(lg) {
         display: none;
       }
     }
@@ -124,6 +128,8 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 
   &__title {
     margin-bottom: carbon.$spacing-06;
+    font-weight: 500;
+    font-size: 7rem;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
@@ -134,7 +140,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     }
 
     @include carbon.breakpoint-up(lg) {
-      margin-bottom: carbon.$spacing-11;
+      margin-bottom: carbon.$spacing-08;
     }
   }
 
@@ -145,12 +151,29 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     // when decomissioning the Metal page.
     pointer-events: auto;
 
+    p {
+      color: carbon.$gray-80;
+      font-size: 1.3rem;
+    }
+
+    hr {
+      border: 1px solid carbon.$gray-80;
+      border-width: 1px 0 0 0;
+      margin: 0 0 carbon.$spacing-05 0;
+    }
+
+    ol {
+      list-style: decimal;
+      margin-left: carbon.$spacing-06;
+      font-size: 1.3rem;
+    }
+
     @include carbon.breakpoint-up(md) {
       margin-bottom: carbon.$spacing-07;
     }
 
     @include carbon.breakpoint-up(lg) {
-      margin-bottom: carbon.$spacing-11;
+      margin-bottom: carbon.$spacing-08;
     }
   }
 
@@ -158,6 +181,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
     pointer-events: auto;
+    margin-bottom: carbon.$spacing-06;
   }
 }
 </style>
