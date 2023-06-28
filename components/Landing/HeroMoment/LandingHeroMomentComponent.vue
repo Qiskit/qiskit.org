@@ -7,7 +7,7 @@
             class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
           >
             <img
-              src="/images/qiskit-logo.png"
+              src="/images/landing-page/logo.png"
               class="hero-moment__title__logo"
             />
             Qiskit
