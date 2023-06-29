@@ -1,12 +1,15 @@
 <template>
   <main>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <HomeProviders />
     <HomeLearn />
 =======
     <SchemaOrgDebug />
+=======
+>>>>>>> 2535aa84b (add list of events)
     <LandingHeroMomentComponent :version="qiskitVersion" />
     <LandingQiskitCapabilitiesSectionComponent />
     <LandingQuickStartComponent />

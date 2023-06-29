@@ -2,11 +2,18 @@ import { CommunityEvent } from "../types/events";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
 
 export function useQiskitSchemaOrg() {
+
   const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
 
   const createEventSchema = (events: CommunityEvent[]) => {
-    const entities = events
+    const eventEntities = events
       .filter((event) => event.startDate)
+      .sort((a, b) => {
+        const dateA = new Date(a.startDate);
+        const dateB = new Date(b.startDate);
+
+        return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
+      })
       .map((event) => {
         let location;
         if (["YouTube", "Virtual"].includes(event.location)) {
@@ -48,14 +55,14 @@ export function useQiskitSchemaOrg() {
           schemaEvent.endDate = endDate.toISOString();
         }
 
-        if (schemaEvent.name === "Qiskit Office Hour") {
-          console.log(schemaEvent);
-        }
-
         return defineEvent(schemaEvent);
       });
 
-    return entities;
+    return defineItemList({
+      itemListElement: eventEntities,
+      itemListOrder: "Ascending",
+      numberOfItems: eventEntities.length,
+    });
   };
 
   const eventsSchema = createEventSchema(upcomingEvents);
@@ -69,6 +76,6 @@ export function useQiskitSchemaOrg() {
       logo: "/images/qiskit-logo.png",
     }),
     defineWebPage(),
-    ...eventsSchema,
+    eventsSchema,
   ]);
 }
