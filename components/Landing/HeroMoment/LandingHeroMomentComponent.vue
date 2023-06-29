@@ -3,20 +3,19 @@
     <LandingHeroMomentGrid>
       <div class="cds--grid hero-moment__container">
         <div class="cds--row">
-          <h1
-            class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
-          >
-            <nuxt-img
-              class="hero-moment__title__logo"
-              format="webp"
-              src="/images/landing-page/logo_wordmark.svg"
-              alt="The Qiskit logo"
-            />
-          </h1>
+          <div class="cds--col-md-4 cds--col-lg-5 cds--col-max-7">
+            <h1 class="hero-moment__title">
+              <nuxt-img
+                class="hero-moment__title__logo"
+                src="/images/landing-page/logo_wordmark.svg"
+                alt="The Qiskit logo"
+              />
+            </h1>
+          </div>
         </div>
         <div class="cds--row">
           <div
-            class="cds--col-sm cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 hero-moment__description"
+            class="cds--col-sm cds--col-md-4 cds--col-lg-5 hero-moment__description"
           >
             <h3 class="hero-moment__description__title">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
