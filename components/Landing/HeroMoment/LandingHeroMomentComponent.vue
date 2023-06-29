@@ -22,7 +22,7 @@
             <hr class="hero-moment__description__divider" />
             <h3>
               <ol class="hero-moment__description__content">
-                <li>open-source toolkit for useful quantum computing</li>
+                <li>open-source toolkit for useful quantum computing.</li>
                 <li>production-ready circuit compiler.</li>
               </ol>
             </h3>
@@ -189,6 +189,7 @@ print(quasi_dist)`;
           width: 445px;
           height: 276px;
         }
+
         &__comment {
           color: qiskit.$text-active-color;
         }
