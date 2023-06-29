@@ -1,6 +1,5 @@
 <template>
   <main>
-    <SchemaOrgDebug />
     <LandingHeroMomentComponent :version="qiskitVersion" />
     <LandingQiskitCapabilitiesSectionComponent />
     <LandingQuickStartComponent />
