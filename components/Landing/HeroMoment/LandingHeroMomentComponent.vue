@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   version: string;
@@ -49,7 +49,7 @@ defineProps<Props>();
 
 const config = useRuntimeConfig();
 
-const getStartedLink: Link = {
+const getStartedLink: TextLink = {
   url: `${config.public.siteUrl}/documentation/getting_started.html`,
   label: "Get started",
   segment: { cta: "get-started", location: "hero-moment" },

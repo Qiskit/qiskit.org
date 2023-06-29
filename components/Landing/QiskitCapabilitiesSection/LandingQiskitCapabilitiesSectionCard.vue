@@ -37,13 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
   thumbnailResource: string;
   title: string;
   description: string;
-  link?: Link | undefined;
+  link?: TextLink | undefined;
 }
 
 withDefaults(defineProps<Props>(), {

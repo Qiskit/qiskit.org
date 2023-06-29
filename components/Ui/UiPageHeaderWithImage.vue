@@ -32,11 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Props {
-  backLink?: Link;
-  cta: Link;
+  backLink?: TextLink;
+  cta: TextLink;
 }
 
 defineProps<Props>();
