@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-// import "@qiskit/web-components/ui-shell";
+import { useQiskitSchemaOrg } from "../composables/useQiskitSchemaOrg";
 
 const route = useRoute();
 const { trackClickEvent } = useSegment();
@@ -20,6 +20,8 @@ function onClick(e: CustomEvent) {
 }
 
 const isALearningPage = computed(() => route.path.includes("/learn"));
+
+useQiskitSchemaOrg();
 </script>
 
 <style lang="scss" scoped>
