@@ -14,6 +14,8 @@ const { trackClickEvent } = useSegment();
 function onClick(e: CustomEvent) {
   trackClickEvent(`${e.detail?.label?.toLowerCase()}`, "menu");
 }
+
+useQiskitSchemaOrg();
 </script>
 
 <style lang="scss" scoped>

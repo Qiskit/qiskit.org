@@ -18,6 +18,8 @@ function onClick(e: CustomEvent) {
 }
 
 const isALearningPage = computed(() => route.path.includes("/learn"));
+
+useQiskitSchemaOrg();
 </script>
 
 <style lang="scss" scoped>
