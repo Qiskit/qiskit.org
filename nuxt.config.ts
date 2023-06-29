@@ -4,7 +4,7 @@ import fetchEcosystemMembers from "./hooks/update-ecosystem";
 import { generateMocks } from "./hooks/mock/mock-service";
 import pkg from "./package.json";
 
-const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_DATA } =
+const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
   process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 
@@ -74,10 +74,11 @@ export default defineNuxtConfig({
  * @returns A promise that resolves when the content has been generated
  */
 async function generateContent() {
-  if (MOCK_DATA && MOCK_DATA === "true") {
+  if (MOCK_CONTENT && MOCK_CONTENT === "true") {
     // eslint-disable-next-line no-console
     console.info("Mocking content...");
     await generateMocks();
+    // eslint-disable-next-line no-console
     console.info("Content generated...");
     return;
   }
