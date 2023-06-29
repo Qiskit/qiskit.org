@@ -49,4 +49,15 @@ const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
 );
 
 const qiskitVersion = packageInfo.value?.info.version ?? "";
+
+useSchemaOrg([
+  defineWebSite({
+    name: "Qiskit.org",
+  }),
+  defineOrganization({
+    name: "Qiskit",
+    logo: "/images/qiskit-logo.png",
+  }),
+  defineWebPage(),
+]);
 </script>
