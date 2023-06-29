@@ -7,10 +7,9 @@
             class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
           >
             <img
-              src="/images/landing-page/logo.png"
+              src="/images/landing-page/logo_wordmark.svg"
               class="hero-moment__title__logo"
             />
-            Qiskit
           </h1>
         </div>
         <div class="cds--row">
@@ -41,17 +40,25 @@
         />
         <img
           class="hero-moment__container__image"
-          src="/images/landing-page/cryo-new.png"
+          src="/images/landing-page/cryo.png"
           alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
         />
         <div class="hero-moment__container__laptop">
           <img
             class="hero-moment__container__laptop__frame"
-            src="/images/landing-page/laptop-frame.png"
+            src="/images/landing-page/laptop.png"
             alt="Laptop"
           />
           <code class="hero-moment__container__laptop__code">
-            <pre>{{ heroCodeSnippet }}</pre>
+            <pre
+              v-for="(line, index) in heroCodeSnippet.split('\n')"
+              :key="index"
+              :class="{
+                'hero-moment__container__laptop__code__comment':
+                  line.startsWith('#'),
+              }"
+              v-text="line"
+            />
           </code>
         </div>
       </div>
@@ -78,17 +85,18 @@ const getStartedLink: TextLink = {
 
 // TODO: Fix hydration text content mismatch
 const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
-const heroCodeSnippet = `from <quantum provider> import Sampler
-sampler = Sampler()
-
-# Build circuit
+const heroCodeSnippet = `# Build a circuit
 from qiskit import QuantumCircuit
 circuit = QuantumCircuit(2, 2)
 circuit.h(0)
 circuit.cx(0,1)
 circuit.measure([0,1], [0,1])
-
-# Run the circuit and get result distribution
+ 
+# Connect to your quantum provider
+from <quantum provider> import Sampler
+sampler = Sampler()
+ 
+# Run the circuit and get the result
 job = sampler.run(circuit)
 quasi_dist = job.result().quasi_dists[0]
 print(quasi_dist)`;
@@ -136,7 +144,7 @@ print(quasi_dist)`;
       height: auto;
       width: 60%;
       position: absolute;
-      right: 15%;
+      right: 9%;
       top: 0;
       z-index: -1;
 
@@ -146,7 +154,7 @@ print(quasi_dist)`;
     }
 
     &__laptop {
-      width: 773px;
+      width: 793px;
       position: absolute;
       right: 3%;
       top: 0;
@@ -168,18 +176,21 @@ print(quasi_dist)`;
 
       &__code {
         position: absolute;
-        left: 87px;
-        top: 119px;
-        width: 598px;
-        height: 368px;
+        left: 115px;
+        top: 109px;
+        width: 594px;
+        height: 367px;
         background-color: #fff;
         padding: 15px;
 
         @include carbon.breakpoint-down(xlg) {
-          left: 68px;
-          top: 105px;
-          width: 460px;
-          height: 284px;
+          left: 86px;
+          top: 98px;
+          width: 445px;
+          height: 276px;
+        }
+        &__comment {
+          color: qiskit.$text-active-color;
         }
       }
     }
@@ -218,11 +229,11 @@ print(quasi_dist)`;
     }
 
     &__logo {
-      width: 65px;
+      width: 450px;
       margin-right: carbon.$spacing-05;
 
-      @include carbon.breakpoint-up(md) {
-        width: 130px;
+      @include carbon.breakpoint-down(md) {
+        width: 270px;
       }
     }
   }
