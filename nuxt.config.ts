@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from "nuxt/config";
 import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
@@ -7,6 +8,7 @@ import pkg from "./package.json";
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
   process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
+const siteUrl = SITE_URL || "https://qiskit.org";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -21,7 +23,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/content", "@nuxt/image-edge", "nuxt-schema-org"],
 
   schemaOrg: {
-    host: "https://qiskit.org",
+    host: siteUrl,
   },
 
   runtimeConfig: {
@@ -35,7 +37,7 @@ export default defineNuxtConfig({
       IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE: "",
       IBM_ANALYTICS_SEGMENT_SCRIPT_SRC: "",
       IBM_ANALYTICS_SEGMENT_UT30: "",
-      siteUrl: SITE_URL || "https://qiskit.org",
+      siteUrl,
     },
   },
 
