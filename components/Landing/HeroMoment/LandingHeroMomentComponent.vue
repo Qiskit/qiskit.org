@@ -6,9 +6,10 @@
           <h1
             class="cds--col-md-4 cds--col-lg-5 cds--col-xlg-5 cds--col-max-7 hero-moment__title"
           >
-            <img
-              src="/images/landing-page/logo_wordmark.svg"
+            <nuxt-img
               class="hero-moment__title__logo"
+              format="webp"
+              src="/images/landing-page/logo_wordmark.svg"
               alt="The Qiskit logo"
             />
           </h1>
@@ -39,14 +40,16 @@
           class="hero-moment__version-info"
           :version="version"
         />
-        <img
+        <nuxt-img
           class="hero-moment__container__image"
+          format="webp"
           src="/images/landing-page/cryo.png"
           alt="A visual composition of a sketched a quantum computer"
         />
         <div class="hero-moment__container__laptop">
-          <img
+          <nuxt-img
             class="hero-moment__container__laptop__frame"
+            format="webp"
             src="/images/landing-page/laptop.png"
             :alt="`A laptop with the following code sample: ${heroCodeSnippet}`"
           />
