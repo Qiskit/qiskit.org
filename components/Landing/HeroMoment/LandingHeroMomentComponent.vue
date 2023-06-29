@@ -158,7 +158,7 @@ print(quasi_dist)`;
     }
 
     &__laptop {
-      width: 793px;
+      width: 55%;
       position: absolute;
       right: 3%;
       top: 0;
@@ -169,10 +169,6 @@ print(quasi_dist)`;
         display: none;
       }
 
-      @include carbon.breakpoint-down(xlg) {
-        width: 595px;
-      }
-
       &__frame {
         height: 100%;
         width: 100%;
@@ -180,18 +176,12 @@ print(quasi_dist)`;
 
       &__code {
         position: absolute;
-        left: 115px;
-        top: 109px;
-        width: 594px;
-        height: 367px;
-        background-color: #fff;
-        padding: 15px;
+        left: 16%;
+        top: 23%;
 
-        @include carbon.breakpoint-down(xlg) {
-          left: 86px;
-          top: 98px;
-          width: 445px;
-          height: 276px;
+        @include carbon.breakpoint-up(xlg) {
+          left: 16%;
+          top: 21%;
         }
 
         &__comment {
