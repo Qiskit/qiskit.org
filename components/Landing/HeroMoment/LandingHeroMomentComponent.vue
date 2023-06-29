@@ -39,12 +39,14 @@
         />
         <nuxt-img
           class="hero-moment__container__image"
+          format="webp"
           src="/images/landing-page/cryo.png"
           alt="A visual composition of a sketched a quantum computer"
         />
         <div class="hero-moment__container__laptop">
           <nuxt-img
             class="hero-moment__container__laptop__frame"
+            format="webp"
             src="/images/landing-page/laptop.png"
             :alt="`A laptop with the following code sample: ${heroCodeSnippet}`"
           />
