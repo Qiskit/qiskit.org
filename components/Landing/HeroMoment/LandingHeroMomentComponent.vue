@@ -9,6 +9,7 @@
             <img
               src="/images/landing-page/logo_wordmark.svg"
               class="hero-moment__title__logo"
+              alt="The Qiskit logo"
             />
           </h1>
         </div>
@@ -41,13 +42,13 @@
         <img
           class="hero-moment__container__image"
           src="/images/landing-page/cryo.png"
-          alt="A visual composition of a sketched a quantum computer backdrop, a progress bar indicating a running job, and a laptop screen displaying the text 'running job...'"
+          alt="A visual composition of a sketched a quantum computer"
         />
         <div class="hero-moment__container__laptop">
           <img
             class="hero-moment__container__laptop__frame"
             src="/images/landing-page/laptop.png"
-            alt="Laptop"
+            :alt="`A laptop with the following code sample: ${heroCodeSnippet}`"
           />
           <code class="hero-moment__container__laptop__code">
             <pre
