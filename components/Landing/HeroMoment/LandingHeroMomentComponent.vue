@@ -203,9 +203,6 @@ print(quasi_dist)`;
   &__title {
     margin-bottom: carbon.$spacing-06;
     font-weight: 500;
-    font-size: 5rem;
-    display: flex;
-    align-items: center;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
@@ -213,7 +210,6 @@ print(quasi_dist)`;
 
     @include carbon.breakpoint-up(md) {
       margin-bottom: carbon.$spacing-07;
-      font-size: 7rem;
     }
 
     @include carbon.breakpoint-up(lg) {
