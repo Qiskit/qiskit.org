@@ -12,15 +12,15 @@
           work with them, as well as notions such as linear independence, bases,
           and dimension. You will also need to know how complex numbers work and
           be comfortable with some basic mathematical concepts, such as sets and
-          functions. <UiLink v-bind="basicsOfQuantumInformation">Here</UiLink>,
+          functions. <UiLink :link="basicsOfQuantumInformation">Here</UiLink>,
           you can find these foundational concepts explained.
         </p>
         <p>
           To make the most out of the lectures, you may also consider looking
           through the
-          <UiLink v-bind="linearAlgebra">linear algebra prerequisites</UiLink>
+          <UiLink :link="linearAlgebra">linear algebra prerequisites</UiLink>
           section of the Qiskit Textbook and
-          <UiLink v-bind="pythonAndJupyter"
+          <UiLink :link="pythonAndJupyter"
             >brushing up on Python programming</UiLink
           >.
         </p>
@@ -123,9 +123,9 @@
       >
         <p>
           Explore IBM Quantum’s Educators Program
-          <UiLink v-bind="qCEducators"> online here </UiLink>
+          <UiLink :link="qCEducators"> online here </UiLink>
           , or email
-          <UiLink v-bind="mailtoQCEducators">
+          <UiLink :link="mailtoQCEducators">
             quantum.education@us.ibm.com
           </UiLink>
           to connect with the latest coursework and classroom resources for
@@ -139,18 +139,18 @@
         <p>
           There are several ways you can connect with the IBM Quantum Community.
           Depending on your preference, you can
-          <UiLink v-bind="twitterQiskit"> follow Qiskit </UiLink>
+          <UiLink :link="twitterQiskit"> follow Qiskit </UiLink>
           and
-          <UiLink v-bind="twitterIBMResearch"> IBM Research </UiLink>
+          <UiLink :link="twitterIBMResearch"> IBM Research </UiLink>
           on Twitter for the latest updates on new events, activities, and
           features on what is going on with the community. There is also a
-          <UiLink v-bind="githubQiskit"> community GitHub </UiLink>
+          <UiLink :link="githubQiskit"> community GitHub </UiLink>
           that you can explore and contribute to, and you can read regular
-          <UiLink v-bind="mediumQiskit">
+          <UiLink :link="mediumQiskit">
             blog posts from our team and community members on Medium
           </UiLink>
           . You can also
-          <UiLink v-bind="qiskitSubscribe">
+          <UiLink :link="qiskitSubscribe">
             subscribe to the Qiskit YouTube
           </UiLink>
           for the latest video content and our weekly live Seminar Series.
@@ -160,7 +160,7 @@
           If you want to collaborate and connect with other members of the
           community, and participate in some of the ongoing conversations about
           quantum computing, you will want to
-          <UiLink v-bind="joinQiskitSlack">
+          <UiLink :link="joinQiskitSlack">
             check out our ever-growing Slack Community
           </UiLink>
           . From there you can connect with current and past interns, IBM
@@ -173,12 +173,12 @@
       >
         <p>
           All of our announced
-          <UiLink v-bind="qiskitEvents">
+          <UiLink :link="qiskitEvents">
             upcoming events are listed on qiskit.org
           </UiLink>
           , which is continually updated as we roll out more events throughout
           the year. You can also
-          <UiLink v-bind="twitterQiskit">follow Qiskit on Twitter</UiLink>
+          <UiLink :link="twitterQiskit">follow Qiskit on Twitter</UiLink>
           for the latest announcements on new and upcoming events!
         </p>
       </bx-accordion-item>
@@ -187,72 +187,78 @@
 </template>
 
 <script setup lang="ts">
-import { CtaClickedEventProp } from "~/types/segment";
-
-interface TrackedLink {
-  url: string;
-  segment: CtaClickedEventProp;
-}
+import { Link } from "~/types/links";
 
 const config = useRuntimeConfig();
 
-const pythonAndJupyter: TrackedLink = {
+const pythonAndJupyter: Link = {
+  title: "Introduction to Python and Jupyter Notebooks",
   url: "https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks",
   segment: { cta: "textbook-python-and-jupyter-notebooks", location: "faq" },
 };
 
-const linearAlgebra: TrackedLink = {
+const linearAlgebra: Link = {
+  title: "Introduction to Linear Algebra for Quantum Computing",
   url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
   segment: { cta: "qiskit-linear-algebra", location: "faq" },
 };
 
-const basicsOfQuantumInformation: TrackedLink = {
+const basicsOfQuantumInformation: Link = {
+  title: "Basics of Quantum Information",
   url: `${config.public.siteUrl}/learn/course/basics-quantum-information/`,
   segment: { cta: "basics-of-quantum-information", location: "faq" },
 };
 
-const qCEducators: TrackedLink = {
+const qCEducators: Link = {
+  title: "IBM Quantum Educators Program",
   url: "https://quantum-computing.ibm.com/programs/educators",
   segment: { cta: "ibm-quantum-educators-program", location: "faq" },
 };
 
-const mailtoQCEducators: TrackedLink = {
+const mailtoQCEducators: Link = {
+  title: "Email IBM Quantum Educators Program",
   url: "mailto:quantum.education@us.ibm.com",
   segment: { cta: "mailto-quantum-educators-program", location: "faq" },
 };
 
-const twitterQiskit: TrackedLink = {
+const twitterQiskit: Link = {
+  title: "Qiskit Twitter",
   url: "https://twitter.com/qiskit",
   segment: { cta: "qiskit-twitter", location: "faq" },
 };
 
-const twitterIBMResearch: TrackedLink = {
+const twitterIBMResearch: Link = {
+  title: "IBM Research Twitter",
   url: "https://twitter.com/IBMResearch",
   segment: { cta: "ibmresearch-twitter", location: "faq" },
 };
 
-const githubQiskit: TrackedLink = {
+const githubQiskit: Link = {
+  title: "Qiskit GitHub",
   url: "https://github.com/Qiskit",
   segment: { cta: "qiskit-github", location: "faq" },
 };
 
-const mediumQiskit: TrackedLink = {
+const mediumQiskit: Link = {
+  title: "Qiskit Medium",
   url: "https://medium.com/qiskit",
   segment: { cta: "qiskit-medium", location: "faq" },
 };
 
-const qiskitSubscribe: TrackedLink = {
+const qiskitSubscribe: Link = {
+  title: "Subscribe to the Qiskit YouTube",
   url: "https://qisk.it/sub",
   segment: { cta: "qiskit-youtube-subscribe", location: "faq" },
 };
 
-// TODO: Refactor links (https://github.com/Qiskit/qiskit.org/issues/1566)
-const joinQiskitSlack: TrackedLink = {
+const joinQiskitSlack: Link = {
+  title: "Join the Qiskit Slack",
   url: "https://qisk.it/join-slack",
   segment: { cta: "qiskit-slack-join", location: "faq" },
 };
 
-const qiskitEvents: TrackedLink = {
+const qiskitEvents: Link = {
+  title: "Qiskit Events",
   url: `${config.public.siteUrl}/events`,
   segment: { cta: "qiskit-org-events", location: "faq" },
 };

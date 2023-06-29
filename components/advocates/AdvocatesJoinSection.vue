@@ -20,14 +20,18 @@
         :key="`benefit-${benefit.icon}`"
         class="cds--col-lg-4 cds--col-md-4 join-section__feature"
       >
-        <UiCompactFeature v-bind="benefit" />
+        <UiCompactFeature
+          :description="benefit.description"
+          :icon="benefit.icon"
+          :title="benefit.title"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import { TextLink } from "~/types/links";
 
 interface Benefit {
   icon: string;
@@ -56,7 +60,7 @@ const advocateBenefits: Benefit[] = [
   },
 ];
 
-const joinAction: Link = {
+const joinAction: TextLink = {
   url: "https://qisk.it/advocateapplication",
   label: "Join the program",
   segment: { cta: "join-the-program", location: "join-section" },
