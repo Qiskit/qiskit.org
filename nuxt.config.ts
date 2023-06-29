@@ -2,7 +2,7 @@ import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
 import pkg from "./package.json";
-import { generateMocks } from "./mock/mock-service";
+import { generateMocks } from "./hooks/mock/mock-service";
 
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL } = process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
