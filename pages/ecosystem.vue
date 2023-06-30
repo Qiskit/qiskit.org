@@ -32,7 +32,7 @@
             class="ecosystem__tiers__tabs"
             trigger-content="Select an item"
             value="Main"
-            @bx-tabs-selected="selectTab($event.target.value)"
+            @bx-tabs-selected="updateSelectedTab($event.target.value)"
           >
             <bx-tab
               v-for="tierName in tiersNames"
@@ -41,7 +41,7 @@
               :target="`panel${tierName}`"
               :value="`${tierName}`"
             >
-              {{ `${tierName} (${getFilteredMembers(tierName).length})` }}
+              {{ `${tierName} (${filteredMembersByTier[tierName].length})` }}
             </bx-tab>
           </bx-tabs>
           <div class="ecosystem__tiers__description">
@@ -81,7 +81,7 @@
             <div class="ecosystem__search cds--col-lg-13 cds--col-md-6">
               <bx-search
                 placeholder="Search using keywords like algorithms, simulator, or machine learning"
-                @bx-search-input="searchOnMembers($event.detail.value)"
+                @bx-search-input="updateSearchTerm($event.detail.value)"
               />
             </div>
             <bx-dropdown
@@ -103,21 +103,23 @@
               :aria-labelledby="`tab${tierName}`"
             >
               <template v-if="selectedTab === tierName">
-                <div
-                  v-if="getFilteredMembers(tierName).length > 0"
-                  class="cds--row ecosystem__members"
+                <p
+                  v-if="filteredMembersFromSelectedTier.length === 0"
+                  class="cds--col"
                 >
+                  Try using wider search criteria, or consider
+                  <UiLink v-bind="joinAction">joining the ecosystem.</UiLink>
+                </p>
+                <div v-else class="cds--row ecosystem__members">
                   <EcosystemItemCard
-                    v-for="member in sortMembers(getFilteredMembers(tierName))"
+                    v-for="member in sortMembers(
+                      filteredMembersFromSelectedTier
+                    )"
                     :key="member.name"
                     class="cds--col-sm-4 cds--col-xlg-8"
                     :member="member"
                   />
                 </div>
-                <p v-else class="cds--col">
-                  Try using wider search criteria, or consider
-                  <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
-                </p>
               </template>
             </div>
           </div>
@@ -138,7 +140,6 @@ interface MembersByTier {
 }
 
 const members = rawMembers as Member[];
-const tiers = rawTiers as Tier[];
 const config = useRuntimeConfig();
 
 const joinAction: TextLink = {
@@ -163,62 +164,88 @@ useSeoMeta({
   ogUrl: `${config.public.siteUrl}/ecosystem/`,
 });
 
-const categoryFilters = ref<string[]>([]);
+/**
+ * Tier selection
+ */
+const tiers = rawTiers as Tier[];
+const tiersNames = tiers.map((tier) => tier.name);
 const selectedTab = ref<string>("Main");
-const searchedText = ref<string>("");
+
+function updateSelectedTab(tab: string) {
+  selectedTab.value = tab;
+}
+
+/**
+ * Category filters
+ */
+const categoryFilters = ref<string[]>([]);
+const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
+
+/**
+ * Search
+ */
+const searchTerm = ref<string>("");
+
+function updateSearchTerm(newSearchTerm: string) {
+  searchTerm.value = newSearchTerm.trim();
+}
+
+/**
+ * Sorting
+ */
 const propToSortBy = ref<string>("name");
 
-const tiersNames = tiers.map((tier) => tier.name);
 const membersCategories = members.map((member) => member.labels);
 const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
   (a, b) => a.localeCompare(b)
 );
 
-const membersByTier = computed<MembersByTier>(() => {
+/**
+ * Members
+ */
+const filteredMembers = computed(() => {
+  if (!members) {
+    return [];
+  }
+
+  let filteredMembers = members;
+
+  // Category filter
+  if (categoryFilters.value.length > 0) {
+    filteredMembers = filteredMembers.filter((member) =>
+      categoryFilters.value.some((filter) => member.labels.includes(filter))
+    );
+  }
+
+  // Search term filter
+  if (searchTerm.value !== "") {
+    filteredMembers = filteredMembers.filter((member) =>
+      member.description.toLowerCase().includes(searchTerm.value.toLowerCase())
+    );
+  }
+
+  return filteredMembers;
+});
+
+const filteredMembersByTier = computed<MembersByTier>(() => {
   const result: MembersByTier = {};
 
   tiersNames.forEach((tierName) => {
-    result[tierName] = members.filter((member) => member.tier === tierName);
+    result[tierName] = filteredMembers.value.filter(
+      (member) => member.tier === tierName
+    );
   });
 
   return result;
 });
 
-const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
+const filteredMembersFromSelectedTier = computed(() => {
+  return filteredMembersByTier.value[selectedTab.value];
+});
 
 function getSelectedTierDescription() {
   const tier = tiers.find((tier) => tier.name === selectedTab.value);
   return tier?.description || "";
-}
-
-function getFilteredMembers(tierName: string) {
-  if (!members) {
-    return [];
-  }
-
-  const filteredMembersByTier = membersByTier.value[tierName];
-
-  let result = filteredMembersByTier;
-
-  if (searchedText.value !== "") {
-    result = result.filter((member) =>
-      member.description
-        .toLowerCase()
-        .includes(searchedText.value.toLowerCase())
-    );
-  }
-
-  if (categoryFilters.value.length > 0) {
-    result = result.filter((member) =>
-      categoryFilters.value.some((filter) => member.labels.includes(filter))
-    );
-  }
-
-  return result;
-}
-
-function selectTab(tab: string) {
-  selectedTab.value = tab;
 }
 
 function setSortValue(inputValue: string) {
@@ -244,10 +271,6 @@ function updateCategoryFilters(newCategoryFilters: string) {
 
 function isCategoryFilterChecked(filterValue: string): boolean {
   return categoryFilters.value.includes(filterValue);
-}
-
-function searchOnMembers(inputText: string) {
-  searchedText.value = inputText;
 }
 
 function sortMembers(membersToSort: Member[]) {
