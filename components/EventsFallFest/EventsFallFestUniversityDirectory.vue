@@ -43,6 +43,7 @@
 
 <script setup lang="ts">
 import { TextLink } from "~/types/links";
+import { useEventListSchemaOrg } from "~/composables/useEventListSchemaOrg";
 
 type University = {
   image: string;
@@ -421,6 +422,19 @@ const universities: University[] = [
     },
   },
 ];
+
+const config = useRuntimeConfig();
+
+useEventListSchemaOrg(
+  universities.map((event) => ({
+    startDate: new Date(event.startDate),
+    location: event.title,
+    mode: event.detail === "In Person" ? "Offline" : "Online",
+    url: `${config.public.siteUrl}/fall-fest`,
+    name: event.title,
+    imageUrl: event.image,
+  }))
+);
 </script>
 
 <style lang="scss" scoped>
