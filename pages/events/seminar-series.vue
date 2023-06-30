@@ -320,6 +320,19 @@ function dataPerRow(
     },
   ]);
 }
+
+useEventListSchemaOrg(
+  (upcomingSeminarSerieEvents as SeminarSeriesEvent[]).map((event) => ({
+    startDate: new Date(event.startDate),
+    mode: "Online",
+    location: event.location,
+    url: event.to,
+    name: event.title,
+    imageUrl: `${config.public.siteUrl}/${event.image}`,
+    performer: event.speaker,
+    endDate: event.endDate ? new Date(event.endDate) : undefined,
+  }))
+);
 </script>
 
 <style lang="scss" scoped>
