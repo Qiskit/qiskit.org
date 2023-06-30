@@ -175,6 +175,17 @@ const headerData = header;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
+
+const config = useRuntimeConfig();
+useEventSchemaOrg({
+  startDate: new Date("2022-07-18"),
+  mode: "Online",
+  location: "",
+  url: `${config.public.siteUrl}/events/summer-school-2022/`,
+  name: headerData.card.title,
+  imageUrl: `${config.public.siteUrl}${headerData.card.image}`,
+  endDate: new Date("2022-07-29"),
+});
 </script>
 
 <style lang="scss" scoped>
