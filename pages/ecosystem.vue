@@ -173,12 +173,16 @@ const membersCategories = members.map((member) => member.labels);
 const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
   (a, b) => a.localeCompare(b)
 );
-const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
-  return {
-    ...acc,
-    ...{ [tierName]: members.filter((member) => member.tier === tierName) },
-  };
-}, {});
+
+const membersByTier = computed<MembersByTier>(() => {
+  const result: MembersByTier = {};
+
+  tiersNames.forEach((tierName) => {
+    result[tierName] = members.filter((member) => member.tier === tierName);
+  });
+
+  return result;
+});
 
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
@@ -192,7 +196,7 @@ function getFilteredMembers(tierName: string) {
     return [];
   }
 
-  const filteredMembersByTier = membersByTier[tierName];
+  const filteredMembersByTier = membersByTier.value[tierName];
 
   let result = filteredMembersByTier;
 
