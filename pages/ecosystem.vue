@@ -87,8 +87,10 @@
             <bx-dropdown
               class="ecosystem__sort-dropdown cds--col-lg-3 cds--col-md-2"
               label-text="Sort by"
-              :value="propToSortBy"
-              @bx-dropdown-selected="setSortValue($event.detail.item.value)"
+              :value="selectedSortingOption"
+              @bx-dropdown-selected="
+                updateSelectedSortingOption($event.detail.item.value)
+              "
             >
               <bx-dropdown-item value="name">Name</bx-dropdown-item>
               <bx-dropdown-item value="stars">Stars</bx-dropdown-item>
@@ -112,9 +114,7 @@
                 </p>
                 <div v-else class="cds--row ecosystem__members">
                   <EcosystemItemCard
-                    v-for="member in sortMembers(
-                      filteredMembersFromSelectedTier
-                    )"
+                    v-for="member in filteredMembersFromSelectedTierSorted"
                     :key="member.name"
                     class="cds--col-sm-4 cds--col-xlg-8"
                     :member="member"
@@ -182,7 +182,7 @@ const categoryFilters = ref<string[]>([]);
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
 /**
- * Search
+ * Search term
  */
 const searchTerm = ref<string>("");
 
@@ -191,19 +191,19 @@ function updateSearchTerm(newSearchTerm: string) {
 }
 
 /**
- * Sorting
+ * Sorting options
  */
-const propToSortBy = ref<string>("name");
+type SortingOption = "name" | "stars";
+const selectedSortingOption = ref<SortingOption>("name");
 
-const membersCategories = members.map((member) => member.labels);
-const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
-  (a, b) => a.localeCompare(b)
-);
+function updateSelectedSortingOption(sortingOption: SortingOption) {
+  selectedSortingOption.value = sortingOption;
+}
 
 /**
  * Members
  */
-const filteredMembers = computed(() => {
+const filteredMembers = computed<Member[]>(() => {
   if (!members) {
     return [];
   }
@@ -239,17 +239,29 @@ const filteredMembersByTier = computed<MembersByTier>(() => {
   return result;
 });
 
-const filteredMembersFromSelectedTier = computed(() => {
+const filteredMembersFromSelectedTier = computed<Member[]>(() => {
   return filteredMembersByTier.value[selectedTab.value];
 });
+
+const filteredMembersFromSelectedTierSorted = computed<Member[]>(() => {
+  if (selectedSortingOption.value === "stars") {
+    return filteredMembersFromSelectedTier.value.sort(
+      (a, b) => b.stars - a.stars
+    );
+  }
+
+  // The list of members is sorted by name by default.
+  return filteredMembersFromSelectedTier.value;
+});
+
+const membersCategories = members.map((member) => member.labels);
+const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
+  (a, b) => a.localeCompare(b)
+);
 
 function getSelectedTierDescription() {
   const tier = tiers.find((tier) => tier.name === selectedTab.value);
   return tier?.description || "";
-}
-
-function setSortValue(inputValue: string) {
-  propToSortBy.value = inputValue;
 }
 
 function updateCategoryFilter(filterValue: string, isChecked: boolean) {
@@ -271,14 +283,6 @@ function updateCategoryFilters(newCategoryFilters: string) {
 
 function isCategoryFilterChecked(filterValue: string): boolean {
   return categoryFilters.value.includes(filterValue);
-}
-
-function sortMembers(membersToSort: Member[]) {
-  if (propToSortBy.value === "name")
-    return membersToSort.sort((a, b) => a.name.localeCompare(b.name));
-
-  if (propToSortBy.value === "stars")
-    return membersToSort.sort((a, b) => b.stars - a.stars);
 }
 </script>
 
