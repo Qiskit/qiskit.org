@@ -17,9 +17,9 @@
           <div
             class="cds--col-sm cds--col-md-4 cds--col-lg-5 hero-moment__description"
           >
-            <h3 class="hero-moment__description__title">
+            <p class="hero-moment__description__title">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
-            </h3>
+            </p>
             <hr class="hero-moment__description__divider" />
             <ol class="hero-moment__description__content">
               <li>open-source toolkit for useful quantum computing.</li>
