@@ -45,7 +45,7 @@
             </bx-tab>
           </bx-tabs>
           <div class="ecosystem__tiers__description">
-            {{ getSelectedTierDescription() }}
+            {{ selectedTierDescription }}
           </div>
         </client-only>
       </div>
@@ -171,6 +171,14 @@ const tiers = rawTiers as Tier[];
 const tiersNames = tiers.map((tier) => tier.name);
 const selectedTab = ref<string>("Main");
 
+const selectedTier = computed<Tier | undefined>(() => {
+  return tiers.find((tier) => tier.name === selectedTab.value);
+});
+
+const selectedTierDescription = computed<string>(() => {
+  return selectedTier.value?.description ?? "";
+});
+
 function updateSelectedTab(tab: string) {
   selectedTab.value = tab;
 }
@@ -180,6 +188,27 @@ function updateSelectedTab(tab: string) {
  */
 const categoryFilters = ref<string[]>([]);
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
+
+function updateCategoryFilter(filterValue: string, isChecked: boolean) {
+  if (isChecked) {
+    categoryFilters.value.push(filterValue);
+  } else {
+    const index = categoryFilters.value.indexOf(filterValue);
+    if (index !== -1) {
+      categoryFilters.value.splice(index, 1);
+    }
+  }
+}
+
+function updateCategoryFilters(newCategoryFilters: string) {
+  const newCategoryFiltersAsArray =
+    newCategoryFilters === "" ? [] : newCategoryFilters.split(",");
+  categoryFilters.value = newCategoryFiltersAsArray;
+}
+
+function isCategoryFilterChecked(filterValue: string): boolean {
+  return categoryFilters.value.includes(filterValue);
+}
 
 /**
  * Search term
@@ -258,32 +287,6 @@ const membersCategories = members.map((member) => member.labels);
 const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
   (a, b) => a.localeCompare(b)
 );
-
-function getSelectedTierDescription() {
-  const tier = tiers.find((tier) => tier.name === selectedTab.value);
-  return tier?.description || "";
-}
-
-function updateCategoryFilter(filterValue: string, isChecked: boolean) {
-  if (isChecked) {
-    categoryFilters.value.push(filterValue);
-  } else {
-    const index = categoryFilters.value.indexOf(filterValue);
-    if (index !== -1) {
-      categoryFilters.value.splice(index, 1);
-    }
-  }
-}
-
-function updateCategoryFilters(newCategoryFilters: string) {
-  const newCategoryFiltersAsArray =
-    newCategoryFilters === "" ? [] : newCategoryFilters.split(",");
-  categoryFilters.value = newCategoryFiltersAsArray;
-}
-
-function isCategoryFilterChecked(filterValue: string): boolean {
-  return categoryFilters.value.includes(filterValue);
-}
 </script>
 
 <style lang="scss" scoped>
