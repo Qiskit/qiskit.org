@@ -102,21 +102,23 @@
               role="tabpanel"
               :aria-labelledby="`tab${tierName}`"
             >
-              <div
-                v-if="getFilteredMembers(tierName).length > 0"
-                class="cds--row ecosystem__members"
-              >
-                <EcosystemItemCard
-                  v-for="member in sortMembers(getFilteredMembers(tierName))"
-                  :key="member.name"
-                  class="cds--col-sm-4 cds--col-xlg-8"
-                  :member="member"
-                />
-              </div>
-              <p v-else class="cds--col">
-                Try using wider search criteria, or consider
-                <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
-              </p>
+              <template v-if="selectedTab === tierName">
+                <div
+                  v-if="getFilteredMembers(tierName).length > 0"
+                  class="cds--row ecosystem__members"
+                >
+                  <EcosystemItemCard
+                    v-for="member in sortMembers(getFilteredMembers(tierName))"
+                    :key="member.name"
+                    class="cds--col-sm-4 cds--col-xlg-8"
+                    :member="member"
+                  />
+                </div>
+                <p v-else class="cds--col">
+                  Try using wider search criteria, or consider
+                  <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
+                </p>
+              </template>
             </div>
           </div>
         </template>
