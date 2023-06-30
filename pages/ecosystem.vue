@@ -54,7 +54,7 @@
           <UiFieldset class="ecosystem__categories" label="Category">
             <client-only>
               <bx-checkbox
-                v-for="category in sortedMembersCategories"
+                v-for="category in categoryFilterOptionsSorted"
                 :key="category"
                 :checked="isCategoryFilterChecked(category)"
                 :label-text="category"
@@ -70,7 +70,7 @@
           <div class="ecosystem__categories__multiselect">
             <UiMultiSelect
               label="Category"
-              :options="sortedMembersCategories"
+              :options="categoryFilterOptionsSorted"
               :value="categoryFiltersAsString"
               @change-selection="updateCategoryFilters($event)"
             />
@@ -186,6 +186,11 @@ function updateSelectedTab(tab: string) {
 /**
  * Category filters
  */
+const categoryFilterOptions = members.map((member) => member.labels);
+const categoryFilterOptionsSorted = [
+  ...new Set(categoryFilterOptions.flat()),
+].sort((a, b) => a.localeCompare(b));
+
 const categoryFilters = ref<string[]>([]);
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
@@ -282,11 +287,6 @@ const filteredMembersFromSelectedTierSorted = computed<Member[]>(() => {
   // The list of members is sorted by name by default.
   return filteredMembersFromSelectedTier.value;
 });
-
-const membersCategories = members.map((member) => member.labels);
-const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
-  (a, b) => a.localeCompare(b)
-);
 </script>
 
 <style lang="scss" scoped>
