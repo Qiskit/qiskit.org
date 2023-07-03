@@ -848,7 +848,7 @@ describe("fetchCommunityEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => { });
+        await callBack(fakeRecords, () => {});
 
         return Promise.resolve();
       },
@@ -903,7 +903,7 @@ describe("fetchCommunityEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => { });
+        await callBack(fakeRecords, () => {});
 
         return Promise.resolve();
       },
@@ -954,7 +954,7 @@ describe("fetchCommunityEvents", () => {
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: (callBack: (records: any, nextPage: any) => void) => {
-        callBack(fakeRecords, () => { });
+        callBack(fakeRecords, () => {});
 
         return Promise.resolve();
       },
@@ -1008,7 +1008,7 @@ describe("fetchSeminarSeriesEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => { });
+        await callBack(fakeRecords, () => {});
 
         return Promise.resolve();
       },
@@ -1062,7 +1062,7 @@ describe("fetchSeminarSeriesEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => { });
+        await callBack(fakeRecords, () => {});
 
         return Promise.resolve();
       },
@@ -1112,7 +1112,7 @@ describe("fetchSeminarSeriesEvents", () => {
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: (callBack: (records: any, nextPage: any) => void) => {
-        callBack(fakeRecords, () => { });
+        callBack(fakeRecords, () => {});
 
         return Promise.resolve();
       },
