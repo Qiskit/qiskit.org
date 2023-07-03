@@ -30,7 +30,7 @@ export type SeminarSeriesEvent = {
   to: string;
 };
 
-const RECORD_FIELDS_IDS = Object.freeze({
+export const RECORD_FIELDS_IDS = Object.freeze({
   name: "fldTqTxKr3ZzUhzKT",
   startDate: "fldPGzoUf9wxsBDYJ",
   endDate: "fldeFv42sqOY7oMy0",
@@ -62,6 +62,9 @@ class EventsAirtableRecords extends AirtableRecords {
       undefined,
       recordFields
     );
+    this.airtableBase = new Airtable({ apiKey: this.apiKey }).base(
+      AIRTABLE_BASE_ID
+    );
   }
 
   /**
@@ -92,9 +95,7 @@ class EventsAirtableRecords extends AirtableRecords {
    * @returns The Airtable query.
    */
   getEventsQuery(filterFormula: string): Airtable.Query<{}> {
-    const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID);
-
-    return base("Event Calendar").select({
+    return this.airtableBase("Event Calendar").select({
       filterByFormula: filterFormula,
     });
   }
@@ -178,7 +179,6 @@ class EventsAirtableRecords extends AirtableRecords {
         for (const record of records) {
           this.id = record.id;
           const communityEvent = await this.convertToCommunityEvent(record);
-
           if (this.isEventInDateRange(communityEvent, days)) {
             communityEvents.push(communityEvent);
           }

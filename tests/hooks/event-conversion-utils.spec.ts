@@ -1,10 +1,32 @@
+import axios from "axios";
 import { beforeEach, describe, expect, test, vi } from "vitest";
+import { AirtableBase } from "airtable/lib/airtable_base";
 import EventsAirtableRecords from "../../hooks/event-conversion-utils";
 import {
   CommunityEvent,
   COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
 } from "../../types/events";
+import { mock } from "./mock/seminarSeriesMock";
+
+vi.mock("axios");
+
+const { hackathon } = COMMUNITY_EVENT_TYPES;
+const { europe } = WORLD_REGIONS;
+
+class FakeEventsAirtableRecords extends EventsAirtableRecords {
+  constructor(
+    apiKey: string,
+    view: string,
+    airtableBase?: AirtableBase,
+    public recordFields?: Record<string, any>
+  ) {
+    super(apiKey, view, recordFields);
+    if (airtableBase) {
+      this.airtableBase = airtableBase;
+    }
+  }
+}
 
 describe("isEventInDateRange", () => {
   let eventsAirtableRecords: EventsAirtableRecords;
@@ -47,6 +69,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(-7),
       endDate: getFormattedDate(-1),
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -58,6 +81,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(7),
       endDate: "",
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -69,6 +93,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(0),
       endDate: "",
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -80,6 +105,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(7),
       endDate: getFormattedDate(20),
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -91,6 +117,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(15),
       endDate: "",
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -102,6 +129,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(100),
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -117,6 +145,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(-20),
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -128,6 +157,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(-7),
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       true
@@ -139,6 +169,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(7),
       endDate: "",
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -150,6 +181,7 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(0),
       endDate: "",
       startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -161,6 +193,23 @@ describe("isEventInDateRange", () => {
       startDate: getFormattedDate(-100),
       endDate: getFormattedDate(100),
       startDateAndTime: null,
+      speaker: "",
+    };
+    expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
+      false
+    );
+  });
+
+  test("returns false if invalid date", () => {
+    const days = 15;
+
+    // Event happened before the last 15 days
+    mockEvent = {
+      ...mockEventBase,
+      startDate: "invalid date",
+      endDate: getFormattedDate(-20),
+      startDateAndTime: null,
+      speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
       false
@@ -170,9 +219,6 @@ describe("isEventInDateRange", () => {
 
 describe("convertToCommunityEvent", () => {
   let eventsAirtableRecords: EventsAirtableRecords;
-
-  const { hackathon } = COMMUNITY_EVENT_TYPES;
-  const { europe } = WORLD_REGIONS;
 
   const fakeRecord = {
     get: (field: string) => {
@@ -711,5 +757,374 @@ describe("formatDates", () => {
     expect(eventsAirtableRecords.formatDates(start, endNextDay)).toBe(
       "January 1-2, 2020"
     );
+  });
+});
+
+describe("getEventsQuery", () => {
+  test("check query arguments", () => {
+    const airtableSelectMockFn = vi.fn();
+    const airtableBase = vi.fn().mockReturnValue({
+      select: airtableSelectMockFn,
+    });
+
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView",
+      airtableBase as unknown as AirtableBase
+    );
+
+    eventsAirtableRecords.getEventsQuery("filter");
+
+    expect(airtableBase).toHaveBeenCalledWith("Event Calendar");
+    expect(airtableSelectMockFn).toHaveBeenCalledWith({
+      filterByFormula: "filter",
+    });
+  });
+});
+
+describe("fetchCommunityEvents", () => {
+  const mockRecordFields = {
+    name: "Name",
+    types: "Types",
+    location: "Location",
+    regions: "Regions",
+    startDate: "Start date",
+    endDate: "End date",
+    website: "Website",
+  };
+
+  const fakeRecords = [
+    {
+      get: (field: string) => {
+        switch (field) {
+          case "Name":
+            return "Fake conference";
+          case "Types":
+            return [hackathon];
+          case "Location":
+            return "Someplace";
+          case "Regions":
+            return [europe];
+          case "Start date":
+            return "2020-01-01";
+          case "End date":
+            return "2020-01-02";
+          case "Website":
+            return "https://qiskit.org/events";
+        }
+      },
+    },
+    {
+      get: (field: string) => {
+        switch (field) {
+          case "Name":
+            return "Fake conference 2";
+          case "Types":
+            return [hackathon];
+          case "Location":
+            return "Someplace";
+          case "Regions":
+            return [europe];
+          case "Start date":
+            return "2020-03-01";
+          case "End date":
+            return "2020-03-02";
+          case "Website":
+            return "https://qiskit.org/events";
+        }
+      },
+    },
+  ];
+
+  test("fetch in date range events", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView",
+      undefined,
+      mockRecordFields
+    );
+
+    const getEventsQueryMock = vi.fn().mockReturnValue({
+      eachPage: async (
+        callBack: (records: any, nextPage: any) => Promise<void>
+      ) => {
+        await callBack(fakeRecords, () => { });
+
+        return Promise.resolve();
+      },
+    });
+
+    eventsAirtableRecords.getEventsQuery = getEventsQueryMock;
+    eventsAirtableRecords.isEventInDateRange = vi.fn().mockReturnValue(true);
+
+    const result = await eventsAirtableRecords.fetchCommunityEvents(10);
+
+    expect(result).toStrictEqual([
+      {
+        abstract: "",
+        date: "January 1-2, 2020",
+        endDate: "2020-01-02",
+        image: "/images/events/no-picture.jpg",
+        location: "Someplace",
+        regions: ["Europe"],
+        speaker: "",
+        startDate: "2020-01-01",
+        startDateAndTime: null,
+        title: "Fake conference",
+        to: "https://qiskit.org/events",
+        types: ["Hackathon"],
+      },
+      {
+        abstract: "",
+        date: "March 1-2, 2020",
+        endDate: "2020-03-02",
+        image: "/images/events/no-picture.jpg",
+        location: "Someplace",
+        regions: ["Europe"],
+        speaker: "",
+        startDate: "2020-03-01",
+        startDateAndTime: null,
+        title: "Fake conference 2",
+        to: "https://qiskit.org/events",
+        types: ["Hackathon"],
+      },
+    ]);
+  });
+
+  test("fetch in date range events sorted descending", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView",
+      undefined,
+      mockRecordFields
+    );
+
+    const getEventsQueryMock = vi.fn().mockReturnValue({
+      eachPage: async (
+        callBack: (records: any, nextPage: any) => Promise<void>
+      ) => {
+        await callBack(fakeRecords, () => { });
+
+        return Promise.resolve();
+      },
+    });
+
+    eventsAirtableRecords.getEventsQuery = getEventsQueryMock;
+    eventsAirtableRecords.isEventInDateRange = vi.fn().mockReturnValue(true);
+
+    const result = await eventsAirtableRecords.fetchCommunityEvents(-10);
+
+    expect(result).toStrictEqual([
+      {
+        abstract: "",
+        date: "March 1-2, 2020",
+        endDate: "2020-03-02",
+        image: "/images/events/no-picture.jpg",
+        location: "Someplace",
+        regions: ["Europe"],
+        speaker: "",
+        startDate: "2020-03-01",
+        startDateAndTime: null,
+        title: "Fake conference 2",
+        to: "https://qiskit.org/events",
+        types: ["Hackathon"],
+      },
+      {
+        abstract: "",
+        date: "January 1-2, 2020",
+        endDate: "2020-01-02",
+        image: "/images/events/no-picture.jpg",
+        location: "Someplace",
+        regions: ["Europe"],
+        speaker: "",
+        startDate: "2020-01-01",
+        startDateAndTime: null,
+        title: "Fake conference",
+        to: "https://qiskit.org/events",
+        types: ["Hackathon"],
+      },
+    ]);
+  });
+
+  test("If no recordFields should get from getAllFieldNames", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView"
+    );
+
+    const getEventsQueryMock = vi.fn().mockReturnValue({
+      eachPage: (callBack: (records: any, nextPage: any) => void) => {
+        callBack(fakeRecords, () => { });
+
+        return Promise.resolve();
+      },
+    });
+
+    const getAllFieldNamesMock = vi.fn().mockReturnValue(mockRecordFields);
+
+    eventsAirtableRecords.getEventsQuery = getEventsQueryMock;
+    eventsAirtableRecords.getAllFieldNames = getAllFieldNamesMock;
+
+    await eventsAirtableRecords.fetchCommunityEvents(10);
+
+    expect(eventsAirtableRecords.recordFields).toStrictEqual(mockRecordFields);
+  });
+});
+
+describe("fetchSeminarSeriesEvents", () => {
+  const mockRecordFields = {
+    name: "Name",
+    startDate: "Event Start Date",
+    types: "Type of Engagement",
+    website: "Event Website",
+    location: "Event City/State",
+    regions: "Region",
+    image: "Image / Icon",
+    institution: "Institution",
+    showOnEventsPage: "Add to Event Site",
+    showOnSeminarSeriesPage: "Add to Seminar Series Site",
+    speaker: "Speaker (S.S.)",
+    abstract: "Event Abstract",
+  };
+
+  const fakeRecords = [
+    {
+      get: (field: string) => mock[0][field],
+    },
+    {
+      get: (field: string) => mock[1][field],
+    },
+  ];
+
+  test("fetch in date range events", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView",
+      undefined,
+      mockRecordFields
+    );
+
+    const getEventsQueryMock = vi.fn().mockReturnValue({
+      eachPage: async (
+        callBack: (records: any, nextPage: any) => Promise<void>
+      ) => {
+        await callBack(fakeRecords, () => { });
+
+        return Promise.resolve();
+      },
+    });
+
+    eventsAirtableRecords.getEventsQuery = getEventsQueryMock;
+    eventsAirtableRecords.isEventInDateRange = vi.fn().mockReturnValue(true);
+
+    (axios.get as any).mockResolvedValue({
+      data: "Omnis non molestiae voluptatem beatae soluta nobis ducimus.",
+    });
+    const result = await eventsAirtableRecords.fetchSeminarSeriesEvents(10);
+
+    expect(result).toStrictEqual([
+      {
+        endDate: "",
+        institution: "Okuneva Group",
+        location: "YouTube",
+        speaker: "Lela Bahringer",
+        title: "delectus eaque consectetur",
+        to: "http://overlooked-sleeping.org",
+        abstract: "",
+        date: "July 29, 2022",
+        image: "/images/events/downloaded/undefined.jpg",
+        startDate: "2022-07-29",
+      },
+      {
+        endDate: "",
+        institution: "Kihn - Rolfson",
+        location: "YouTube",
+        speaker: "Deondre Halvorson",
+        title: "Ea commodi earum id.",
+        to: "http://jam-packed-unity.com",
+        abstract: "Qui facere assumenda ducimus.",
+        date: "June 9, 2023",
+        image: "/images/events/downloaded/undefined.jpg",
+        startDate: "2023-06-09",
+      },
+    ]);
+  });
+
+  test("fetch in date range events descending", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView",
+      undefined,
+      mockRecordFields
+    );
+
+    const getEventsQueryMock = vi.fn().mockReturnValue({
+      eachPage: async (
+        callBack: (records: any, nextPage: any) => Promise<void>
+      ) => {
+        await callBack(fakeRecords, () => { });
+
+        return Promise.resolve();
+      },
+    });
+
+    eventsAirtableRecords.getEventsQuery = getEventsQueryMock;
+    eventsAirtableRecords.isEventInDateRange = vi.fn().mockReturnValue(true);
+
+    (axios.get as any).mockResolvedValue({
+      data: "Omnis non molestiae voluptatem beatae soluta nobis ducimus.",
+    });
+    const result = await eventsAirtableRecords.fetchSeminarSeriesEvents(-10);
+
+    expect(result).toStrictEqual([
+      {
+        endDate: "",
+        institution: "Kihn - Rolfson",
+        location: "YouTube",
+        speaker: "Deondre Halvorson",
+        title: "Ea commodi earum id.",
+        to: "http://jam-packed-unity.com",
+        abstract: "Qui facere assumenda ducimus.",
+        date: "June 9, 2023",
+        image: "/images/events/downloaded/undefined.jpg",
+        startDate: "2023-06-09",
+      },
+      {
+        endDate: "",
+        institution: "Okuneva Group",
+        location: "YouTube",
+        speaker: "Lela Bahringer",
+        title: "delectus eaque consectetur",
+        to: "http://overlooked-sleeping.org",
+        abstract: "",
+        date: "July 29, 2022",
+        image: "/images/events/downloaded/undefined.jpg",
+        startDate: "2022-07-29",
+      },
+    ]);
+  });
+
+  test("If no recordFields should get from getAllFieldNames", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView"
+    );
+
+    const getEventsQueryMock = vi.fn().mockReturnValue({
+      eachPage: (callBack: (records: any, nextPage: any) => void) => {
+        callBack(fakeRecords, () => { });
+
+        return Promise.resolve();
+      },
+    });
+
+    const getAllFieldNamesMock = vi.fn().mockReturnValue(mockRecordFields);
+
+    eventsAirtableRecords.getEventsQuery = getEventsQueryMock;
+    eventsAirtableRecords.getAllFieldNames = getAllFieldNamesMock;
+
+    await eventsAirtableRecords.fetchSeminarSeriesEvents(10);
+
+    expect(eventsAirtableRecords.recordFields).toStrictEqual(mockRecordFields);
   });
 });
