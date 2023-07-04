@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LayoutLeadSpaceFixed class="ecosystem-header">
+    <LayoutLeadSpaceFixed class="ecosystem-page__leadspace">
       Explore
       <br class="show-in-md" />
       <UiTypewriterEffect
@@ -22,14 +22,14 @@
         </p>
       </div>
       <UiCta
-        class="ecosystem-header__cta"
+        class="ecosystem-page__header__cta"
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <div class="ecosystem__tiers">
+      <div class="ecosystem-page__tiers">
         <client-only>
           <bx-tabs
-            class="ecosystem__tiers__tabs"
+            class="ecosystem-page__tiers__tabs"
             trigger-content="Select an item"
             value="Main"
             @bx-tabs-selected="selectTab($event.target.value)"
@@ -44,14 +44,14 @@
               {{ `${tierName} (${getFilteredMembers(tierName).length})` }}
             </bx-tab>
           </bx-tabs>
-          <div class="ecosystem__tiers__description">
+          <div class="ecosystem-page__tiers__description">
             {{ getSelectedTierDescription() }}
           </div>
         </client-only>
       </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
-          <UiFieldset class="ecosystem__categories" label="Category">
+          <UiFieldset class="ecosystem-page__categories" label="Category">
             <client-only>
               <bx-checkbox
                 v-for="category in sortedMembersCategories"
@@ -67,7 +67,7 @@
           </UiFieldset>
         </template>
         <template #filters-on-s-screen>
-          <div class="ecosystem__categories__multiselect">
+          <div class="ecosystem-page__categories__multiselect">
             <UiMultiSelect
               label="Category"
               :options="sortedMembersCategories"
@@ -77,15 +77,15 @@
           </div>
         </template>
         <template #results>
-          <div class="ecosystem__toolbar cds--row">
-            <div class="ecosystem__search cds--col-lg-13 cds--col-md-6">
+          <div class="ecosystem-page__toolbar cds--row">
+            <div class="ecosystem-page__search cds--col-lg-13 cds--col-md-6">
               <bx-search
                 placeholder="Search using keywords like algorithms, simulator, or machine learning"
                 @bx-search-input="searchOnMembers($event.detail.value)"
               />
             </div>
             <bx-dropdown
-              class="ecosystem__sort-dropdown cds--col-lg-3 cds--col-md-2"
+              class="ecosystem-page__sort-dropdown cds--col-lg-3 cds--col-md-2"
               label-text="Sort by"
               :value="propToSortBy"
               @bx-dropdown-selected="setSortValue($event.detail.item.value)"
@@ -94,7 +94,7 @@
               <bx-dropdown-item value="stars">Stars</bx-dropdown-item>
             </bx-dropdown>
           </div>
-          <div class="ecosystem__tier-panel">
+          <div class="ecosystem-page__tier-panel">
             <div
               v-for="tierName in tiersNames"
               :id="`panel${tierName}`"
@@ -104,7 +104,7 @@
             >
               <div
                 v-if="getFilteredMembers(tierName).length > 0"
-                class="cds--row ecosystem__members"
+                class="cds--row ecosystem-page__members"
               >
                 <EcosystemCard
                   v-for="member in sortMembers(getFilteredMembers(tierName))"
@@ -259,7 +259,7 @@ function sortMembers(membersToSort: Member[]) {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/classes.scss";
 
-.ecosystem {
+.ecosystem-page {
   &__tiers {
     margin-top: carbon.$spacing-10;
 

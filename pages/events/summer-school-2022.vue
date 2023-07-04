@@ -43,14 +43,14 @@
       </template>
     </LayoutLeadSpaceWithCard>
 
-    <div class="cds--grid summer-school-page__content">
+    <div class="cds--grid summer-school-2022-page__content">
       <UiMosaicSection
-        class="summer-school-page__section"
+        class="summer-school-2022-page__section"
         :title="mosaicData.title"
         :elements="mosaicData.tiles"
       />
 
-      <section class="summer-school-page__section">
+      <section class="summer-school-2022-page__section">
         <h2 v-text="agendaData.title" />
         <p v-text="agendaData.subtitle" />
         <bx-tabs trigger-content="Select an item" value="Week 1">
@@ -63,12 +63,12 @@
             {{ week.tabName }}
           </bx-tab>
         </bx-tabs>
-        <div class="summer-school-page__agenda">
+        <div class="summer-school-2022-page__agenda">
           <div
             v-for="week in agendaData.weeks"
             :id="week.tabName"
             :key="week.tabName"
-            class="summer-school-page__agenda__table"
+            class="summer-school-2022-page__agenda__table"
             role="tabpanel"
             :aria-labelledby="week.tabName"
             hidden
@@ -90,10 +90,10 @@
         </div>
       </section>
 
-      <EventsSummerSchoolFaq2022 class="summer-school-page__section" />
+      <EventsSummerSchoolFaq2022 class="summer-school-2022-page__section" />
 
       <UiHelpfulResources
-        class="summer-school-page__section"
+        class="summer-school-2022-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"
       />
