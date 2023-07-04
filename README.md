@@ -65,13 +65,13 @@ Qiskit is an open-source quantum computing software development framework for le
 
 2. **Install dependencies**
 
-```shell
+   ```shell
     npm install
    ```
 
 3. **Run a local server with hot reload at [localhost:3000](localhost:3000)**
 
-```shell
+   ```shell
    npm run dev
    ```
 
