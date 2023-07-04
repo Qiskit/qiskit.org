@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "cross-env MOCK_CONTENT=true GENERATE_CONTENT=true nuxt dev",
     "format": "npm run format:eslint && npm run format:prettier && npm run format:stylelint",
     "format:eslint": "npm run lint:eslint -- --fix",
     "format:prettier": "prettier . --ignore-path .gitignore --write",
@@ -39,6 +39,7 @@
     "@vitest/coverage-c8": "^0.32.2",
     "airtable": "^0.12.1",
     "axios": "^1.4.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
