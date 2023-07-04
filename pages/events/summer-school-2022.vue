@@ -1,5 +1,5 @@
 <template>
-  <main class="summer-school-page">
+  <main class="summer-school-2022-page">
     <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
@@ -182,7 +182,7 @@ const helpfulResourcesData = helpfulResources;
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.summer-school-page {
+.summer-school-2022-page {
   display: flex;
   flex-direction: column;
 

@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LayoutLeadSpaceFixed class="ecosystem-header__hero">
+    <LayoutLeadSpaceFixed class="ecosystem-header">
       Explore
       <br class="show-in-md" />
       <UiTypewriterEffect

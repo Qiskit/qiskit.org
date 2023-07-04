@@ -1,7 +1,7 @@
 <template>
-  <section class="home-quick-start-providers-code">
-    <div class="home-quick-start-providers-code__container">
-      <div class="home-quick-start-providers-code__section">
+  <section class="home-providers-code">
+    <div class="home-providers-code__container">
+      <div class="home-providers-code__section">
         <h3>Install</h3>
         <UiCodeSnippet
           :code="installCode"
@@ -9,7 +9,7 @@
           :code-snippet-location="'quick-start-providers-code-examples'"
         />
       </div>
-      <div class="home-quick-start-providers-code__section">
+      <div class="home-providers-code__section">
         <h3>Build and run</h3>
         <bx-tabs
           container
@@ -78,7 +78,7 @@ watch(
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.home-quick-start-providers-code {
+.home-providers-code {
   --cds-heading-01-font-weight: 500;
 
   padding: carbon.$spacing-05;

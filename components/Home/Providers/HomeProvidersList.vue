@@ -1,15 +1,15 @@
 <template>
-  <section class="home-quick-start-providers-list">
-    <ul class="home-quick-start-providers-list__list">
+  <section class="home-providers-list">
+    <ul class="home-providers-list__list">
       <template v-for="(item, index) in providersList">
         <li
           v-if="item.docsCta && item.docsCta.url"
           :key="index"
-          class="home-quick-start-providers-list__list-item"
+          class="home-providers-list__list-item"
           :class="
             activeIndex === index
-              ? 'home-quick-start-providers-list__list-item_active'
-              : 'home-quick-start-providers-list__list-item_inactive'
+              ? 'home-providers-list__list-item_active'
+              : 'home-providers-list__list-item_inactive'
           "
           tabindex="0"
           @click="updateSelectedProvider(index)"
@@ -17,7 +17,7 @@
         >
           {{ item.title }}
           <UiCta
-            class="home-quick-start-providers-list__list__cta"
+            class="home-providers-list__list__cta"
             label="Learn more"
             :url="item.docsCta.url"
             kind="ghost"
@@ -26,7 +26,7 @@
       </template>
     </ul>
     <UiCta
-      class="home-quick-start-providers-list__btn"
+      class="home-providers-list__btn"
       :url="providersPage.url"
       :label="providersPage.label"
       :segment="providersPage.segment"
@@ -67,7 +67,7 @@ function updateSelectedProvider(selectedProviderIndex: number) {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.home-quick-start-providers-list {
+.home-providers-list {
   padding-top: carbon.$spacing-05;
 
   &__list {
@@ -111,7 +111,7 @@ function updateSelectedProvider(selectedProviderIndex: number) {
         background-color: qiskit.$background-color-light;
         border-left: 2px solid qiskit.$border-color-secondary;
 
-        .home-quick-start-providers-list__list__cta {
+        .home-providers-list__list__cta {
           opacity: 1;
         }
       }

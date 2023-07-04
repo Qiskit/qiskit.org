@@ -1,5 +1,5 @@
 <template>
-  <div class="event-page">
+  <div class="events-page">
     <LayoutLeadSpaceFixed>
       Join
       <UiTypewriterEffect
@@ -286,7 +286,7 @@ const selectTab = (selectedTab: string) => {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 @use "~/assets/scss/helpers/classes.scss";
 
-.event-page {
+.events-page {
   &__card {
     margin-bottom: carbon.$spacing-06;
 

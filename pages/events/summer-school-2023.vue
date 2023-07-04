@@ -1,5 +1,5 @@
 <template>
-  <main class="summer-school-page">
+  <main class="summer-school-2023-page">
     <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
@@ -156,7 +156,7 @@ const helpfulResourcesData = helpfulResources;
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.summer-school-page {
+.summer-school-2023-page {
   display: flex;
   flex-direction: column;
 

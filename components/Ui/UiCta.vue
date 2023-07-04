@@ -17,7 +17,7 @@
     </span>
     <component
       :is="iconPerLinkType"
-      class="cta__icon"
+      class="ui-cta__icon"
       :class="`cta__icon_${iconPerLinkType}`"
     />
   </UiLink>
