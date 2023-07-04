@@ -1,6 +1,6 @@
 <template>
   <main>
-    <LayoutLeadSpaceFixed class="ecosystem-page__leadspace">
+    <LayoutLeadSpaceFixed class="ecosystem-page__lead-space">
       Explore
       <br class="show-in-md" />
       <UiTypewriterEffect
