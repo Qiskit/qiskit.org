@@ -202,7 +202,6 @@ print(quasi_dist)`;
 
   &__title {
     margin-bottom: carbon.$spacing-06;
-    font-weight: 500;
 
     // TODO: Force pointer events to allow the user to select text. Remove
     // when decomissioning the Metal page.
@@ -235,6 +234,7 @@ print(quasi_dist)`;
 
     &__title {
       color: carbon.$gray-80;
+      font-size: carbon.type-scale(4);
     }
 
     &__divider {
@@ -246,6 +246,7 @@ print(quasi_dist)`;
     &__content {
       list-style: decimal;
       margin-left: carbon.$spacing-06;
+      font-size: carbon.type-scale(4);
     }
 
     @include carbon.breakpoint-up(md) {
