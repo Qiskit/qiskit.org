@@ -3,7 +3,7 @@
     <HomeLeadSpaceBackgroundGrid>
       <div class="cds--grid home-lead-space__container">
         <HomeLeadSpaceVersion
-          class="home-lead-space__version-info"
+          class="home-lead-space__version"
           :version="version"
         />
         <div class="cds--row">
@@ -109,7 +109,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
     }
   }
 
-  &__version-info {
+  &__version {
     margin-bottom: carbon.$spacing-06;
 
     @include carbon.breakpoint-up(md) {
