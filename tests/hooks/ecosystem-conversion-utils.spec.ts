@@ -7,6 +7,13 @@ import {
 
 vi.mock("axios");
 
+interface Member {
+  name: string;
+  tier: string;
+  testsResults: string;
+  stars?: number;
+}
+
 describe("fetchMembers", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -20,23 +27,33 @@ describe("fetchMembers", () => {
           tier: "MAIN",
           tests_results: "",
         },
+        2: [
+          // this is a rare case but the code contemplates it.
+          {
+            name: "member1",
+            tier: "MAIN",
+            tests_results: "",
+          },
+        ],
       },
     },
   };
 
   test("fetches members and formats correctly", async () => {
-    const formattedMembers: {
-      name: string;
-      tier: string;
-      testsResults: string;
-      stars: number;
-    }[] = [
+    const formattedMembers: (Member | Member[])[] = [
       {
         name: "member1",
         tier: "MAIN",
         testsResults: "",
         stars: 0,
       },
+      [
+        {
+          name: "member1",
+          testsResults: "",
+          tier: "MAIN",
+        },
+      ],
     ];
 
     (axios.get as any).mockResolvedValueOnce(members);
