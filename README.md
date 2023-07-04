@@ -59,9 +59,7 @@ Qiskit is an open-source quantum computing software development framework for le
 
 1. **Download this repository and go to its folder**
 
-   
-
-```shell
+   ```shell
    git clone git@github.com:Qiskit/qiskit.org.git && cd qiskit.org
    ```
 
