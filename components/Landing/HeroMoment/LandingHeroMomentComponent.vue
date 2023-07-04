@@ -235,6 +235,7 @@ print(quasi_dist)`;
 
     &__title {
       color: carbon.$gray-80;
+      font-size: carbon.type-scale(4);
     }
 
     &__divider {
