@@ -1,4 +1,4 @@
-import { EventSchemaOrg } from "./useEventSchemaOrg";
+import { EventSchemaOrg, createEventSchemaOrg } from "./useEventSchemaOrg";
 
 export function useEventListSchemaOrg(events: EventSchemaOrg[]) {
   const eventEntities = events
