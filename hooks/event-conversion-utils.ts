@@ -311,27 +311,22 @@ class EventsAirtableRecords extends AirtableRecords {
 
   formatDates(startDate?: Date, endDate?: Date): string {
     if (!startDate) {
-      console.log("1");
       return "TBD";
     }
 
     const [startYear, startMonth, startDay] = this.dateParts(startDate);
     if (!endDate || startDate.getTime() === endDate.getTime()) {
-      console.log("2");
       return `${startMonth} ${startDay}, ${startYear}`;
     }
 
     const [endYear, endMonth, endDay] = this.dateParts(endDate);
     if (startYear !== endYear) {
-      console.log("3");
       return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
     }
     if (startMonth !== endMonth) {
-      console.log("4");
       return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
     }
     if (startDay !== endDay) {
-      console.log("5");
       return `${startMonth} ${startDay}-${endDay}, ${startYear}`;
     }
     throw new Error("Unreachable: should have all the cases covered.");

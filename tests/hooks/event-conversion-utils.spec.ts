@@ -220,26 +220,48 @@ describe("isEventInDateRange", () => {
 describe("convertToCommunityEvent", () => {
   let eventsAirtableRecords: EventsAirtableRecords;
 
-  const fakeRecord = {
-    get: (field: string) => {
-      switch (field) {
-        case "Name":
-          return "Fake conference";
-        case "Types":
-          return [hackathon];
-        case "Location":
-          return "Someplace";
-        case "Regions":
-          return [europe];
-        case "Start date":
-          return "2020-01-01";
-        case "End date":
-          return "2020-01-02";
-        case "Website":
-          return "https://qiskit.org/events";
-      }
+  const fakeRecords = [
+    {
+      get: (field: string) => {
+        switch (field) {
+          case "Name":
+            return "Fake conference";
+          case "Types":
+            return [hackathon];
+          case "Location":
+            return "Someplace";
+          case "Regions":
+            return [europe];
+          case "Start date":
+            return "2020-01-01";
+          case "End date":
+            return "2020-01-02";
+          case "Website":
+            return "https://qiskit.org/events";
+        }
+      },
     },
-  };
+    {
+      get: (field: string) => {
+        switch (field) {
+          case "Name":
+            return "Fake conference";
+          case "Types":
+            return hackathon;
+          case "Location":
+            return "Someplace";
+          case "Regions":
+            return [europe];
+          case "Start date":
+            return "2020-01-01";
+          case "End date":
+            return "2020-01-02";
+          case "Website":
+            return "https://qiskit.org/events";
+        }
+      },
+    },
+  ];
 
   const mockRecordFields = {
     name: "Name",
@@ -262,16 +284,44 @@ describe("convertToCommunityEvent", () => {
   test("extracts and format information from the record", async () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES;
     const { europe } = WORLD_REGIONS;
-    const { title, types, location, regions, date, to } =
-      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
+    const event = await eventsAirtableRecords.convertToCommunityEvent(
+      fakeRecords[0]
+    );
 
-    expect({ title, types, location, regions, date, to }).toEqual({
-      title: "Fake conference",
-      types: [hackathon],
+    expect(event).toStrictEqual({
+      endDate: "2020-01-02",
       location: "Someplace",
       regions: [europe],
-      date: "January 1-2, 2020",
+      speaker: "",
+      title: "Fake conference",
       to: "https://qiskit.org/events",
+      abstract: "",
+      date: "January 1-2, 2020",
+      image: "/images/events/no-picture.jpg",
+      startDate: "2020-01-01",
+      startDateAndTime: null,
+      types: [hackathon],
+    });
+  });
+
+  test("extracts and format information from the record without types as array", async () => {
+    const event2 = await eventsAirtableRecords.convertToCommunityEvent(
+      fakeRecords[1]
+    );
+
+    expect(event2).toStrictEqual({
+      endDate: "2020-01-02",
+      location: "Someplace",
+      regions: [europe],
+      speaker: "",
+      title: "Fake conference",
+      to: "https://qiskit.org/events",
+      abstract: "",
+      date: "January 1-2, 2020",
+      image: "/images/events/no-picture.jpg",
+      startDate: "2020-01-01",
+      startDateAndTime: null,
+      types: [hackathon],
     });
   });
 });
