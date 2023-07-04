@@ -158,7 +158,7 @@ const qiskitPronunciation = Math.random() < 0.5 ? "[kiss-kit]" : "[quiss-kit]";
 
     hr {
       border: 1px solid carbon.$gray-80;
-      border-width: 1px 0 0 0;
+      border-width: 1px 0 0;
       margin: 0 0 carbon.$spacing-05 0;
     }
 
