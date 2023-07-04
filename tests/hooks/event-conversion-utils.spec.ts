@@ -975,6 +975,7 @@ describe("fetchSeminarSeriesEvents", () => {
   const mockRecordFields = {
     name: "Name",
     startDate: "Event Start Date",
+    startDateAndTime: "Event Start Date Time",
     types: "Type of Engagement",
     website: "Event Website",
     location: "Event City/State",
@@ -1126,5 +1127,45 @@ describe("fetchSeminarSeriesEvents", () => {
     await eventsAirtableRecords.fetchSeminarSeriesEvents(10);
 
     expect(eventsAirtableRecords.recordFields).toStrictEqual(mockRecordFields);
+  });
+
+  test("test fallback cases", async () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView",
+      undefined,
+      {}
+    );
+
+    const seminarEvent =
+      await eventsAirtableRecords.convertToSeminarSeriesEvent(fakeRecords[0]);
+
+    expect(seminarEvent).toStrictEqual({
+      abstract: "",
+      date: "TBD",
+      endDate: "",
+      image: "/images/events/no-picture.jpg",
+      institution: "",
+      location: "TBD",
+      speaker: "",
+      startDate: "",
+      title: "",
+      to: "",
+    });
+  });
+});
+
+describe("formatTime", () => {
+  test("format a valid date", () => {
+    const eventsAirtableRecords = new FakeEventsAirtableRecords(
+      "testApiKey",
+      "testView"
+    );
+
+    eventsAirtableRecords.recordFields = {};
+
+    const date = eventsAirtableRecords.formatTime("2020-10-10");
+
+    expect(date).toBe("12:00\u202FAM UTC");
   });
 });

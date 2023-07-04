@@ -41,6 +41,7 @@ export const mock: any[] = [
   {
     Name: "Ea commodi earum id.",
     "Event Start Date": "2023-06-09",
+    "Event Start Date Time": "2023-06-09 14:00:00",
     "Type of Engagement": ["Seminar Series"],
     "Event City/State": "YouTube",
     "Event Abstract": "Qui facere assumenda ducimus.",
