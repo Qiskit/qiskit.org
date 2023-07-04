@@ -77,8 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
-import { TextLink } from "~/types/links";
+import { Link, TextLink } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
@@ -167,10 +166,6 @@ function hasTags(tags: string[]) {
       flex: 0 0 24rem;
     }
   }
-  &__body {
-    overflow-wrap: break-word;
-  }
-
   &__body {
     overflow-wrap: break-word;
   }
