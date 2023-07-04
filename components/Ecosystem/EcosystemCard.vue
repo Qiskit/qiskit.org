@@ -65,6 +65,7 @@ const hasTestsResults = computed(() => props.member.testsResults.length !== 0);
 const testRows = computed(() => {
   if (props.member.testsResults) {
     return props.member.testsResults.map((res) => {
+      // TODO: Format properties during data fetching instead for better performance.
       const timestamp = formatTimestamp(res.timestamp);
       // Convert package name to title case
       let packageName;
