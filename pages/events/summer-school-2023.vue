@@ -27,11 +27,10 @@
         </p>
         <p>See you soon!</p>
         <UiCta
-          class="summer-school-page__cta summer-school-page__cta_disabled"
-          :url="header.cta.url"
-          :label="header.cta.label"
-          :segment="header.cta.segment"
-          kind="secondary"
+          class="summer-school-page__cta"
+          :url="headerCta.url"
+          :label="headerCta.label"
+          :segment="headerCta.segment"
         />
       </template>
       <template #card>
@@ -145,6 +144,7 @@ useSeoMeta({
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
+const headerCta = headerData.cta;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
@@ -189,16 +189,6 @@ const helpfulResourcesData = helpfulResources;
 
   &__cta {
     margin-top: carbon.$spacing-07;
-
-    &_disabled {
-      pointer-events: none;
-      color: qiskit.$text-color-light;
-      width: fit-content;
-
-      &:deep(.cta__icon) {
-        display: none;
-      }
-    }
   }
 
   &__header-card {
