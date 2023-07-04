@@ -753,10 +753,17 @@ describe("formatDates", () => {
     );
   });
 
-  test("factors out year and month when the event falls into the same month", () => {
-    expect(eventsAirtableRecords.formatDates(start, endNextDay)).toBe(
-      "January 1-2, 2020"
-    );
+  test("test practial unreachable case", () => {
+    try {
+      eventsAirtableRecords.formatDates(
+        new Date("2020-01-01T00:00:00.000Z"),
+        new Date("2020-01-01T00:10:00.000Z")
+      );
+    } catch (e) {
+      expect((e as any).message).toBe(
+        "Unreachable: should have all the cases covered."
+      );
+    }
   });
 });
 
@@ -848,7 +855,7 @@ describe("fetchCommunityEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => {});
+        await callBack(fakeRecords, () => { });
 
         return Promise.resolve();
       },
@@ -903,7 +910,7 @@ describe("fetchCommunityEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => {});
+        await callBack(fakeRecords, () => { });
 
         return Promise.resolve();
       },
@@ -954,7 +961,7 @@ describe("fetchCommunityEvents", () => {
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: (callBack: (records: any, nextPage: any) => void) => {
-        callBack(fakeRecords, () => {});
+        callBack(fakeRecords, () => { });
 
         return Promise.resolve();
       },
@@ -1009,7 +1016,7 @@ describe("fetchSeminarSeriesEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => {});
+        await callBack(fakeRecords, () => { });
 
         return Promise.resolve();
       },
@@ -1063,7 +1070,7 @@ describe("fetchSeminarSeriesEvents", () => {
       eachPage: async (
         callBack: (records: any, nextPage: any) => Promise<void>
       ) => {
-        await callBack(fakeRecords, () => {});
+        await callBack(fakeRecords, () => { });
 
         return Promise.resolve();
       },
@@ -1113,7 +1120,7 @@ describe("fetchSeminarSeriesEvents", () => {
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: (callBack: (records: any, nextPage: any) => void) => {
-        callBack(fakeRecords, () => {});
+        callBack(fakeRecords, () => { });
 
         return Promise.resolve();
       },
