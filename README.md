@@ -99,6 +99,14 @@ Notice that, for communicating with the team tools, API keys may be required. It
 GENERATE_CONTENT=1 AIRTABLE_API_KEY=<your airtable api key> npm run dev
 ```
 
+#### 🥸 Mocking content
+
+If you should not have access to the content tables (or you don't want to fetch these data), it can be mocked by setting the environment variable `MOCK_CONTENT` to `true` .
+
+If you start up the project with `npm run dev` , mocked content is enabled by default.
+
+The project has a default mocked content under the `hooks/mock/content` folder. If you want your own custom mocked content, you can create a new folder and set it as your mocked content folder using the environment variable `MOCK_BASE_PATH` which should be an absolute path of your system.
+
 <br/>
 
 ## ✏️ How to Contribute
