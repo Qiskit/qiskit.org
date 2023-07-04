@@ -13,7 +13,7 @@
       computing community
     </LayoutLeadSpaceFixed>
     <div class="cds--grid">
-      <div class="event-page__tabs">
+      <div class="events-page__tabs">
         <client-only>
           <bx-tabs
             value="upcoming"
@@ -27,7 +27,7 @@
       </div>
       <div v-if="showCalendar">
         <iframe
-          class="event-page__calendar"
+          class="events-page__calendar"
           src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
           width="100%"
           height="560"
@@ -74,7 +74,7 @@
                 alt-text="Warning sign icon"
                 :title="emptyCard.title"
               >
-                <div class="event-page__empty-card-description">
+                <div class="events-page__empty-card-description">
                   {{ emptyCard.description }}
                 </div>
               </UiCard>
@@ -87,7 +87,7 @@
               class="cds--col-sm-4 cds--col-xlg-8"
             >
               <EventsCard
-                class="event-page__card"
+                class="events-page__card"
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
