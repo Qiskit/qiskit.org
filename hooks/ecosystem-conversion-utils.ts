@@ -19,6 +19,10 @@ async function fetchMembers() {
         membersArray.push(member);
       });
     });
+
+    // Sort ecosystem projects alphabetically
+    membersArray.sort((a, b) => a.name.localeCompare(b.name));
+
     return membersArray.map((obj: any) => toCamelCase(obj));
   } catch (err) {
     // eslint-disable-next-line no-console

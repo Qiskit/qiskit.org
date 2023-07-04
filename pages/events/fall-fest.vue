@@ -1,6 +1,6 @@
 <template>
   <main class="fall-fest-page">
-    <UiPageHeaderWithCard
+    <LayoutLeadSpaceWithCard
       :cta="headerData.cta"
       :card-title="headerData.cardSectionHeading"
     >
@@ -20,7 +20,7 @@
         </p>
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :cta-label="headerData.card.ctaLabel"
           :image="headerData.card.image"
           :location="headerData.card.location"
@@ -31,13 +31,13 @@
           vertical-layout
         >
           {{ headerData.card.description }}
-        </EventsItemCard>
+        </EventsCard>
       </template>
-    </UiPageHeaderWithCard>
+    </LayoutLeadSpaceWithCard>
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <EventsFallFestUniversityDirectorySection />
+        <EventsFallFestUniversityDirectory />
       </section>
     </div>
 
@@ -75,14 +75,14 @@
                 v-for="({ styles, data, link }, elementIndex) in row"
                 :key="`${elementIndex}`"
               >
-                <UiLink
+                <UiLinkText
                   v-if="link"
                   class="fall-fest-page__table-link"
                   :style="styles"
                   :url="link"
                 >
                   Link to event
-                </UiLink>
+                </UiLinkText>
                 <span v-else :style="styles">{{ data }}</span>
               </bx-table-cell>
             </bx-table-row>
@@ -90,7 +90,7 @@
         </div>
       </section>
 
-      <UiHelpfulResourcesSection
+      <UiHelpfulResources
         class="fall-fest-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"

@@ -1,12 +1,12 @@
 <template>
-  <article class="syllabus-card">
-    <div class="syllabus-card__body">
+  <article class="learn-syllabus-card">
+    <div class="learn-syllabus-card__body">
       <h4>{{ title }}</h4>
       <slot />
     </div>
-    <div class="syllabus-card__footer">
+    <div class="learn-syllabus-card__footer">
       <UiCta
-        class="syllabus-card__footer__cta"
+        class="learn-syllabus-card__footer__cta"
         label="View syllabus"
         :segment="segment"
         :url="url"
@@ -33,7 +33,7 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.syllabus-card {
+.learn-syllabus-card {
   width: 100%;
   background-color: qiskit.$background-color-lighter;
   display: flex;
@@ -52,7 +52,7 @@ withDefaults(defineProps<Props>(), {
 </style>
 
 <style lang="scss" scoped>
-.syllabus-card {
+.learn-syllabus-card {
   .cta {
     width: 100%;
     max-width: 50%;

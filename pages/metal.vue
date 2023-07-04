@@ -1,11 +1,11 @@
 <template>
   <div>
-    <MetalDarkHeader />
-    <MetalIntroSection />
-    <MetalCapabilitiesSection />
-    <MetalFeaturesSection />
-    <MetalBuildingSection />
-    <MetalJoinUsSection />
+    <MetalLeadSpace />
+    <MetalIntro />
+    <MetalCapabilities />
+    <MetalFeatures />
+    <MetalBuilding />
+    <MetalJoinUs />
   </div>
 </template>
 

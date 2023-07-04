@@ -1,6 +1,6 @@
 <template>
   <main>
-    <UiPageHeaderFixed class="ecosystem-header__hero">
+    <LayoutLeadSpaceFixed>
       Explore
       <br class="show-in-md" />
       <UiTypewriterEffect
@@ -10,8 +10,8 @@
       from Qiskit and the
       <br />
       Qiskit community
-    </UiPageHeaderFixed>
-    <section id="ecosystem" class="cds--grid ecosystem">
+    </LayoutLeadSpaceFixed>
+    <section id="ecosystem" class="cds--grid ecosystem-page">
       <h2>Ecosystem Resources</h2>
       <div class="cds--row">
         <p class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
@@ -22,17 +22,17 @@
         </p>
       </div>
       <UiCta
-        class="ecosystem-header__cta"
+        class="ecosystem-page__header__cta"
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <div class="ecosystem__tiers">
+      <div class="ecosystem-page__tiers">
         <client-only>
           <bx-tabs
-            class="ecosystem__tiers__tabs"
+            class="ecosystem-page__tiers__tabs"
             trigger-content="Select an item"
             value="Main"
-            @bx-tabs-selected="selectTab($event.target.value)"
+            @bx-tabs-selected="updateSelectedTab($event.target.value)"
           >
             <bx-tab
               v-for="tierName in tiersNames"
@@ -41,20 +41,20 @@
               :target="`panel${tierName}`"
               :value="`${tierName}`"
             >
-              {{ `${tierName} (${getFilteredMembers(tierName).length})` }}
+              {{ `${tierName} (${filteredMembersByTier[tierName].length})` }}
             </bx-tab>
           </bx-tabs>
-          <div class="ecosystem__tiers__description">
-            {{ getSelectedTierDescription() }}
+          <div class="ecosystem-page__tiers__description">
+            {{ selectedTierDescription }}
           </div>
         </client-only>
       </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
-          <UiFieldset class="ecosystem__categories" label="Category">
+          <UiFieldset class="ecosystem-page__categories" label="Category">
             <client-only>
               <bx-checkbox
-                v-for="category in sortedMembersCategories"
+                v-for="category in categoryFilterOptionsSorted"
                 :key="category"
                 :checked="isCategoryFilterChecked(category)"
                 :label-text="category"
@@ -67,34 +67,36 @@
           </UiFieldset>
         </template>
         <template #filters-on-s-screen>
-          <div class="ecosystem__categories__multiselect">
+          <div class="ecosystem-page__categories__multiselect">
             <UiMultiSelect
               label="Category"
-              :options="sortedMembersCategories"
+              :options="categoryFilterOptionsSorted"
               :value="categoryFiltersAsString"
               @change-selection="updateCategoryFilters($event)"
             />
           </div>
         </template>
         <template #results>
-          <div class="ecosystem__toolbar cds--row">
-            <div class="ecosystem__search cds--col-lg-13 cds--col-md-6">
+          <div class="ecosystem-page__toolbar cds--row">
+            <div class="ecosystem-page__search cds--col-lg-13 cds--col-md-6">
               <bx-search
                 placeholder="Search using keywords like algorithms, simulator, or machine learning"
-                @bx-search-input="searchOnMembers($event.detail.value)"
+                @bx-search-input="updateSearchTerm($event.detail.value)"
               />
             </div>
             <bx-dropdown
-              class="ecosystem__sort-dropdown cds--col-lg-3 cds--col-md-2"
+              class="ecosystem-page__sort-dropdown cds--col-lg-3 cds--col-md-2"
               label-text="Sort by"
-              :value="propToSortBy"
-              @bx-dropdown-selected="setSortValue($event.detail.item.value)"
+              :value="selectedSortingOption"
+              @bx-dropdown-selected="
+                updateSelectedSortingOption($event.detail.item.value)
+              "
             >
               <bx-dropdown-item value="name">Name</bx-dropdown-item>
               <bx-dropdown-item value="stars">Stars</bx-dropdown-item>
             </bx-dropdown>
           </div>
-          <div class="ecosystem__tier-panel">
+          <div class="ecosystem-page__tier-panel">
             <div
               v-for="tierName in tiersNames"
               :id="`panel${tierName}`"
@@ -102,21 +104,23 @@
               role="tabpanel"
               :aria-labelledby="`tab${tierName}`"
             >
-              <div
-                v-if="getFilteredMembers(tierName).length > 0"
-                class="cds--row ecosystem__members"
-              >
-                <EcosystemItemCard
-                  v-for="member in sortMembers(getFilteredMembers(tierName))"
-                  :key="member.name"
-                  class="cds--col-sm-4 cds--col-xlg-8"
-                  :member="member"
-                />
-              </div>
-              <p v-else class="cds--col">
-                Try using wider search criteria, or consider
-                <UiLink v-bind="joinAction">joining the ecosystem. </UiLink>
-              </p>
+              <template v-if="selectedTab === tierName">
+                <p
+                  v-if="filteredMembersFromSelectedTier.length === 0"
+                  class="cds--col"
+                >
+                  Try using wider search criteria, or consider
+                  <UiLink v-bind="joinAction">joining the ecosystem.</UiLink>
+                </p>
+                <div v-else class="cds--row ecosystem-page__members">
+                  <EcosystemCard
+                    v-for="member in filteredMembersFromSelectedTierSorted"
+                    :key="member.name"
+                    class="cds--col-sm-4 cds--col-xlg-8"
+                    :member="member"
+                  />
+                </div>
+              </template>
             </div>
           </div>
         </template>
@@ -136,7 +140,6 @@ interface MembersByTier {
 }
 
 const members = rawMembers as Member[];
-const tiers = rawTiers as Tier[];
 const config = useRuntimeConfig();
 
 const joinAction: TextLink = {
@@ -161,63 +164,35 @@ useSeoMeta({
   ogUrl: `${config.public.siteUrl}/ecosystem/`,
 });
 
-const categoryFilters = ref<string[]>([]);
-const selectedTab = ref<string>("Main");
-const searchedText = ref<string>("");
-const propToSortBy = ref<string>("name");
-
+/**
+ * Tier selection
+ */
+const tiers = rawTiers as Tier[];
 const tiersNames = tiers.map((tier) => tier.name);
-const membersCategories = members.map((member) => member.labels);
-const sortedMembersCategories = [...new Set(membersCategories.flat())].sort(
-  (a, b) => a.localeCompare(b)
-);
-const membersByTier: MembersByTier = tiersNames.reduce((acc, tierName) => {
-  return {
-    ...acc,
-    ...{ [tierName]: members.filter((member) => member.tier === tierName) },
-  };
-}, {});
+const selectedTab = ref<string>("Main");
 
-const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
+const selectedTier = computed<Tier | undefined>(() => {
+  return tiers.find((tier) => tier.name === selectedTab.value);
+});
 
-function getSelectedTierDescription() {
-  const tier = tiers.find((tier) => tier.name === selectedTab.value);
-  return tier?.description || "";
-}
+const selectedTierDescription = computed<string>(() => {
+  return selectedTier.value?.description ?? "";
+});
 
-function getFilteredMembers(tierName: string) {
-  if (!members) {
-    return [];
-  }
-
-  const filteredMembersByTier = membersByTier[tierName];
-
-  let result = filteredMembersByTier;
-
-  if (searchedText.value !== "") {
-    result = result.filter((member) =>
-      member.description
-        .toLowerCase()
-        .includes(searchedText.value.toLowerCase())
-    );
-  }
-
-  if (categoryFilters.value.length > 0) {
-    result = result.filter((member) =>
-      categoryFilters.value.some((filter) => member.labels.includes(filter))
-    );
-  }
-
-  return result;
-}
-
-function selectTab(tab: string) {
+function updateSelectedTab(tab: string) {
   selectedTab.value = tab;
 }
 
-function setSortValue(inputValue: string) {
-  propToSortBy.value = inputValue;
-}
+/**
+ * Category filters
+ */
+const categoryFilterOptions = members.map((member) => member.labels);
+const categoryFilterOptionsSorted = [
+  ...new Set(categoryFilterOptions.flat()),
+].sort((a, b) => a.localeCompare(b));
+
+const categoryFilters = ref<string[]>([]);
+const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
 
 function updateCategoryFilter(filterValue: string, isChecked: boolean) {
   if (isChecked) {
@@ -240,24 +215,85 @@ function isCategoryFilterChecked(filterValue: string): boolean {
   return categoryFilters.value.includes(filterValue);
 }
 
-function searchOnMembers(inputText: string) {
-  searchedText.value = inputText;
+/**
+ * Search term
+ */
+const searchTerm = ref<string>("");
+
+function updateSearchTerm(newSearchTerm: string) {
+  searchTerm.value = newSearchTerm.trim();
 }
 
-function sortMembers(membersToSort: Member[]) {
-  if (propToSortBy.value === "name")
-    return membersToSort.sort((a, b) => a.name.localeCompare(b.name));
+/**
+ * Sorting options
+ */
+type SortingOption = "name" | "stars";
+const selectedSortingOption = ref<SortingOption>("name");
 
-  if (propToSortBy.value === "stars")
-    return membersToSort.sort((a, b) => b.stars - a.stars);
+function updateSelectedSortingOption(sortingOption: SortingOption) {
+  selectedSortingOption.value = sortingOption;
 }
+
+/**
+ * Members
+ */
+const filteredMembers = computed<Member[]>(() => {
+  if (!members) {
+    return [];
+  }
+
+  let filteredMembers = members;
+
+  // Category filter
+  if (categoryFilters.value.length > 0) {
+    filteredMembers = filteredMembers.filter((member) =>
+      categoryFilters.value.some((filter) => member.labels.includes(filter))
+    );
+  }
+
+  // Search term filter
+  if (searchTerm.value !== "") {
+    filteredMembers = filteredMembers.filter((member) =>
+      member.description.toLowerCase().includes(searchTerm.value.toLowerCase())
+    );
+  }
+
+  return filteredMembers;
+});
+
+const filteredMembersByTier = computed<MembersByTier>(() => {
+  const result: MembersByTier = {};
+
+  tiersNames.forEach((tierName) => {
+    result[tierName] = filteredMembers.value.filter(
+      (member) => member.tier === tierName
+    );
+  });
+
+  return result;
+});
+
+const filteredMembersFromSelectedTier = computed<Member[]>(() => {
+  return filteredMembersByTier.value[selectedTab.value];
+});
+
+const filteredMembersFromSelectedTierSorted = computed<Member[]>(() => {
+  if (selectedSortingOption.value === "stars") {
+    return filteredMembersFromSelectedTier.value.sort(
+      (a, b) => b.stars - a.stars
+    );
+  }
+
+  // The list of members is sorted by name by default.
+  return filteredMembersFromSelectedTier.value;
+});
 </script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/classes.scss";
 
-.ecosystem {
+.ecosystem-page {
   &__tiers {
     margin-top: carbon.$spacing-10;
 

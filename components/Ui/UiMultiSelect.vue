@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <bx-multi-select
-      class="multi-select"
+      class="ui-multi-select"
       :theme="theme"
       :label-text="label"
       :value="value"
@@ -20,9 +20,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/multi-select/index.js";
-// import "@carbon/web-components/es/components/multi-select/multi-select-item.js";
-
 defineEmits(["change-selection"]);
 
 type multiSelectOption = {
@@ -57,7 +54,7 @@ function formatOptions(optionsList: any): Array<multiSelectOption> {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.multi-select {
+.ui-multi-select {
   & .bx--list-box--light,
   & .bx--list-box__menu {
     background-color: qiskit.$background-color-white;
