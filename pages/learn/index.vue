@@ -1,8 +1,8 @@
 <template>
   <main class="learn-page">
-    <LearnPageHeader />
-    <LearnStartLearningSection class="learn-page__section" />
-    <UiHelpfulResourcesSection
+    <LearnLeadSpace />
+    <LearnStartLearning class="learn-page__section" />
+    <UiHelpfulResources
       class="learn-page__section"
       :resources="helpfulResources"
     />

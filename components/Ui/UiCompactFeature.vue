@@ -1,10 +1,10 @@
 <template>
-  <article class="compact-feature">
-    <nuxt-img class="compact-feature__icon" :src="`/images/icons/${icon}`" />
-    <h3 class="h4 compact-feature__title">
+  <article class="ui-compact-feature">
+    <nuxt-img class="ui-compact-feature__icon" :src="`/images/icons/${icon}`" />
+    <h3 class="h4 ui-compact-feature__title">
       {{ title }}
     </h3>
-    <div class="compact-feature__description">
+    <div class="ui-compact-feature__description">
       {{ description }}
     </div>
   </article>
@@ -26,7 +26,7 @@ defineProps<Props>();
 
 $feature-icon-size: 2.25rem;
 
-.compact-feature {
+.ui-compact-feature {
   background-color: qiskit.$background-color-secondary;
   height: 100%;
   padding: carbon.$spacing-05;

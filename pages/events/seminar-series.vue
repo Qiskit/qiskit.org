@@ -1,6 +1,6 @@
 <template>
-  <main class="event-page seminar-series-page">
-    <UiPageHeaderWithCard :cta="headerCTA" :card-title="headerCardTitle">
+  <main>
+    <LayoutLeadSpaceWithCard :cta="headerCTA" :card-title="headerCardTitle">
       <template #title>
         {{ headerTitle }}
       </template>
@@ -12,7 +12,7 @@
         />
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :date="cardContent.date"
           :image="cardContent.image"
           :institution="cardContent.institution"
@@ -22,7 +22,7 @@
           vertical-layout
         />
       </template>
-    </UiPageHeaderWithCard>
+    </LayoutLeadSpaceWithCard>
 
     <div class="cds--grid">
       <UiMosaicSection
@@ -106,7 +106,7 @@
         />
       </UiDataTableSection>
 
-      <UiHelpfulResourcesSection
+      <UiHelpfulResources
         class="seminar-series-page__section"
         :resources="helpfulResources"
       />
@@ -116,7 +116,7 @@
 
 <script setup lang="ts">
 import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-import { TableRowElement } from "~/components/Ui/UiDataTable.vue";
+import { TableRowElement } from "~/components/Ui/DataTable/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
 import { TextLink } from "~/types/links";

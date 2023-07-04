@@ -1,6 +1,6 @@
 <template>
-  <main class="summer-school-page">
-    <UiPageHeaderWithCard :card-title="headerData.cardSectionHeading">
+  <main class="summer-school-2023-page">
+    <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
         <br />
@@ -18,25 +18,27 @@
         </p>
         <p>
           Please follow
-          <UiLink :link="headerData.qiskitTwitterLink">Qiskit Twitter</UiLink>
+          <UiLinkText :link="headerData.qiskitTwitterLink"
+            >Qiskit Twitter</UiLinkText
+          >
           for updates and
-          <UiLink :link="headerData.researchBlogLink">
+          <UiLinkText :link="headerData.researchBlogLink">
             read the announcement blog
-          </UiLink>
+          </UiLinkText>
           for more details. For any questions, please check out our FAQ below!
         </p>
         <p>See you soon!</p>
         <UiCta
-          class="summer-school-page__cta"
+          class="summer-school-2023-page__cta"
           :url="headerCta.url"
           :label="headerCta.label"
           :segment="headerCta.segment"
         />
       </template>
       <template #card>
-        <EventsItemCard
+        <EventsCard
           :alt-text="header.card.altText"
-          class="summer-school-page__header-card"
+          class="summer-school-2023-page__header-card"
           :cta-label="headerData.card.ctaLabel"
           :date="headerData.card.date"
           :image="headerData.card.image"
@@ -48,18 +50,18 @@
           vertical-layout
         >
           {{ headerData.card.description }}
-        </EventsItemCard>
+        </EventsCard>
       </template>
-    </UiPageHeaderWithCard>
+    </LayoutLeadSpaceWithCard>
 
-    <div class="cds--grid summer-school-page__content">
+    <div class="cds--grid summer-school-2023-page__content">
       <UiMosaicSection
-        class="summer-school-page__section"
+        class="summer-school-2023-page__section"
         :title="mosaicData.title"
         :elements="mosaicData.tiles"
       />
 
-      <section class="summer-school-page__section">
+      <section class="summer-school-2023-page__section">
         <h2 v-text="agendaData.title" />
         <p v-text="agendaData.subtitle" />
         <bx-tabs trigger-content="Select an item" value="Week 1">
@@ -72,12 +74,12 @@
             {{ week.tabName }}
           </bx-tab>
         </bx-tabs>
-        <div class="summer-school-page__agenda">
+        <div class="summer-school-2023-page__agenda">
           <div
             v-for="week in agendaData.weeks"
             :id="week.tabName"
             :key="week.tabName"
-            class="summer-school-page__agenda__table"
+            class="summer-school-2023-page__agenda__table"
             role="tabpanel"
             :aria-labelledby="week.tabName"
             hidden
@@ -99,10 +101,10 @@
         </div>
       </section>
 
-      <EventsSummerSchoolFaq2023 class="summer-school-page__section" />
+      <EventsSummerSchoolFaq2023 class="summer-school-2023-page__section" />
 
-      <UiHelpfulResourcesSection
-        class="summer-school-page__section"
+      <UiHelpfulResources
+        class="summer-school-2023-page__section"
         :title="helpfulResourcesData.title"
         :resources="helpfulResourcesData.resources"
       />
@@ -154,7 +156,7 @@ const helpfulResourcesData = helpfulResources;
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.summer-school-page {
+.summer-school-2023-page {
   display: flex;
   flex-direction: column;
 

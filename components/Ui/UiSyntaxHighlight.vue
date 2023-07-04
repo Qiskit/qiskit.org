@@ -1,15 +1,15 @@
 <template>
-  <div class="syntax-highlight">
+  <div class="ui-syntax-highlight">
     <bx-btn
       v-track-click="segmentAction"
       size="sm"
       title="Copy to clipboard"
-      class="syntax-highlight__copy-button"
+      class="ui-syntax-highlight__copy-button"
       @click="copyToClipboard(code)"
     >
       copy
     </bx-btn>
-    <code class="syntax-highlight__code" v-text="code" />
+    <code class="ui-syntax-highlight__code" v-text="code" />
   </div>
 </template>
 
@@ -40,7 +40,7 @@ function copyToClipboard(code: string) {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.syntax-highlight {
+.ui-syntax-highlight {
   position: relative;
   background-color: qiskit.$background-color-lighter;
   padding: carbon.$spacing-05 carbon.$spacing-07;
