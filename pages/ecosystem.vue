@@ -221,7 +221,7 @@ function isCategoryFilterChecked(filterValue: string): boolean {
 const searchTerm = ref<string>("");
 
 function updateSearchTerm(newSearchTerm: string) {
-  searchTerm.value = newSearchTerm.trim();
+  searchTerm.value = newSearchTerm;
 }
 
 /**
@@ -253,8 +253,12 @@ const filteredMembers = computed<Member[]>(() => {
 
   // Search term filter
   if (searchTerm.value !== "") {
-    filteredMembers = filteredMembers.filter((member) =>
-      member.description.toLowerCase().includes(searchTerm.value.toLowerCase())
+    filteredMembers = filteredMembers.filter(
+      (member) =>
+        member.description
+          .toLowerCase()
+          .includes(searchTerm.value.toLowerCase()) ||
+        member.name.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
   }
 
