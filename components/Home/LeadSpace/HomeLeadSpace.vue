@@ -181,6 +181,7 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
         position: absolute;
         left: 16%;
         top: 23%;
+        pointer-events: all;
 
         @include carbon.breakpoint-up(xlg) {
           left: 16%;
