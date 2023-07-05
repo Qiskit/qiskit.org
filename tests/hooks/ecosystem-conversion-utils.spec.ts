@@ -24,18 +24,23 @@ describe("fetchMembers", () => {
     data: {
       MAIN: {
         1: {
-          name: "member1",
+          name: "member3",
           tier: "MAIN",
           tests_results: "",
         },
+        // this is a rare case but the code contemplates it.
         2: [
-          // this is a rare case but the code contemplates it.
           {
-            name: "member1",
+            name: "member2",
             tier: "MAIN",
             tests_results: "",
           },
         ],
+        3: {
+          name: "member1",
+          tier: "MAIN",
+          tests_results: "",
+        },
       },
     },
   };
@@ -48,17 +53,25 @@ describe("fetchMembers", () => {
         testsResults: "",
         stars: 0,
       },
+      {
+        name: "member3",
+        tier: "MAIN",
+        testsResults: "",
+        stars: 0,
+      },
       [
         {
-          name: "member1",
-          testsResults: "",
+          name: "member2",
           tier: "MAIN",
+          testsResults: "",
         },
       ],
     ];
 
     (axios.get as any).mockResolvedValueOnce(members);
     const result = await fetchMembers();
+
+    console.log(result);
 
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(result).toEqual(formattedMembers);
