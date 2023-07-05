@@ -4,7 +4,7 @@ export interface EventSchemaOrg {
   location: string;
   url: string;
   name: string;
-  imageUrl: string;
+  image: string;
   performer?: string;
   endDate?: Date;
 }
@@ -31,7 +31,7 @@ export function createEventSchemaOrg(event: EventSchemaOrg) {
   const schemaEvent: any = {
     name: event.name,
     eventAttendanceMode,
-    image: event.imageUrl,
+    image: event.image,
     location,
     startDate: new Date(event.startDate).toISOString(),
     organizer: {
@@ -49,10 +49,4 @@ export function createEventSchemaOrg(event: EventSchemaOrg) {
   }
 
   return defineEvent(schemaEvent);
-}
-
-export function useEventSchemaOrg(event: EventSchemaOrg) {
-  const eventSchemaOrg = createEventSchemaOrg(event);
-
-  useSchemaOrg([eventSchemaOrg]);
 }

@@ -120,6 +120,7 @@ import {
 
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
+import { createEventSchemaOrg } from "~/utils/event-schemaorg";
 
 type TabActiveSet = "calendar" | "past" | "upcoming";
 
@@ -277,64 +278,35 @@ const selectTab = (selectedTab: string) => {
   tabsIsDirty.value = true;
 };
 
-const orderedEvents = upcomingEvents
+const sortedEvents = upcomingEvents
   .filter((event) => event.startDate)
   .sort((a, b) => {
-    const dateA = a.startDate;
-    const dateB = b.startDate;
+    const dateA = new Date(a.startDate);
+    const dateB = new Date(b.startDate);
 
     return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
   });
 
-const eventsEntities = [];
-for (const event of orderedEvents) {
-  let location;
-  if (["YouTube", "Virtual"].includes(event.location)) {
-    location = defineVirtualLocation({
-      url: event.to,
-    });
-  } else {
-    location = definePlace({
-      name: event.location,
-      address: event.location,
-      url: event.to,
-    });
-  }
-
-  const eventAttendanceMode = ["YouTube", "Virtual"].includes(event.location)
-    ? "OnlineEventAttendanceMode"
-    : "OfflineEventAttendanceMode";
-
-  const schemaEvent: any = {
-    name: event.title,
-    eventAttendanceMode,
-    image: event.image,
-    location,
-    startDate: new Date(event.startDate).toISOString(),
-    organizer: {
-      name: "IBM Quantum",
-      url: "https://ibm.com/quantum",
-    },
-  };
-
-  if (event.speaker) {
-    schemaEvent.performer = event.speaker;
-  }
-
-  if (event.endDate) {
-    schemaEvent.endDate = new Date(event.endDate).toISOString();
-  }
-
-  eventsEntities.push(defineEvent(schemaEvent));
-}
-
-const eventsSchema = defineItemList({
-  itemListElement: eventsEntities,
-  itemListOrder: "Ascending",
-  numberOfItems: eventsEntities.length,
-});
-
-useSchemaOrg([eventsSchema]);
+useSchemaOrg([
+  defineItemList({
+    itemListElement: sortedEvents.map((event) =>
+      createEventSchemaOrg({
+        startDate: new Date(event.startDate),
+        mode: ["YouTube", "Virtual"].includes(event.location)
+          ? "Online"
+          : "Offline",
+        location: event.location,
+        url: event.to,
+        name: event.title,
+        image: event.image,
+        performer: event.speaker,
+        endDate: event.endDate ? new Date(event.endDate) : undefined,
+      })
+    ),
+    itemListOrder: "Ascending",
+    numberOfItems: sortedEvents.length,
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>
