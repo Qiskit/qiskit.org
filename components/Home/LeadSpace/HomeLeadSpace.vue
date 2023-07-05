@@ -155,21 +155,26 @@ print(quasi_dist)`;
       top: 0;
       z-index: -1;
       padding-top: carbon.$spacing-10;
+
       @include carbon.breakpoint-down(lg) {
         display: none;
       }
+
       &__frame {
         height: 100%;
         width: 100%;
       }
+
       &__code {
         position: absolute;
         left: 16%;
         top: 23%;
+
         @include carbon.breakpoint-up(xlg) {
           left: 16%;
           top: 21%;
         }
+
         &__comment {
           color: qiskit.$text-active-color;
         }
@@ -207,6 +212,7 @@ print(quasi_dist)`;
     &__logo {
       width: 450px;
       margin-right: carbon.$spacing-05;
+
       @include carbon.breakpoint-down(md) {
         width: 270px;
       }
