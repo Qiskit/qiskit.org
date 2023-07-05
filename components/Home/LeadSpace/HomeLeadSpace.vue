@@ -115,11 +115,11 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
   position: relative;
   overflow: hidden;
 
-  @include carbon.breakpoint-up(lg) {
+  @include carbon.breakpoint-up(md) {
     // In Figma, the height is not enforced but the background is always
     // visible completely so we do it in the CSS. A small correction is needed
     // to be able of displaying the bottom lines of the grid.
-    height: calc(56rem + 2px);
+    height: 40rem;
   }
 
   &__square-link {
@@ -219,7 +219,7 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
 
     &__logo {
       width: 450px;
-      margin-right: carbon.$spacing-05;
+      margin-top: carbon.$spacing-05;
 
       @include carbon.breakpoint-down(md) {
         width: 270px;
@@ -264,6 +264,11 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
     // when decomissioning the Metal page.
     pointer-events: auto;
     margin-bottom: carbon.$spacing-06;
+    margin-top: carbon.$spacing-09;
+
+    @include carbon.breakpoint-down(lg) {
+      margin-top: carbon.$spacing-11;
+    }
   }
 }
 </style>
