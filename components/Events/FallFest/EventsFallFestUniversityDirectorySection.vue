@@ -43,7 +43,6 @@
 
 <script setup lang="ts">
 import { TextLink } from "~/types/links";
-import { useEventListSchemaOrg } from "~/composables/useEventListSchemaOrg";
 
 type University = {
   image: string;
@@ -425,16 +424,31 @@ const universities: University[] = [
 
 const config = useRuntimeConfig();
 
-useEventListSchemaOrg(
-  universities.map((event) => ({
-    startDate: new Date(event.startDate),
-    location: event.title,
-    mode: event.detail === "In Person" ? "Offline" : "Online",
-    url: `${config.public.siteUrl}/fall-fest`,
-    name: event.title,
-    imageUrl: event.image,
-  }))
-);
+const sortedEvents = universities
+  .filter((event) => event.startDate)
+  .sort((a, b) => {
+    const dateA = new Date(a.startDate);
+    const dateB = new Date(b.startDate);
+
+    return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
+  });
+
+useSchemaOrg([
+  defineItemList({
+    itemListElement: sortedEvents.map((event) =>
+      createEventSchemaOrg({
+        startDate: new Date(event.startDate),
+        location: event.title,
+        mode: event.detail === "In Person" ? "Offline" : "Online",
+        url: `${config.public.siteUrl}/fall-fest`,
+        name: event.title,
+        image: event.image,
+      })
+    ),
+    itemListOrder: "Ascending",
+    numberOfItems: sortedEvents.length,
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>
