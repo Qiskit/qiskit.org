@@ -17,6 +17,7 @@ interface Member {
 describe("fetchMembers", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mock("axios");
   });
 
   const members = {
@@ -64,7 +65,7 @@ describe("fetchMembers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchMembers();
@@ -78,6 +79,7 @@ describe("fetchMembers", () => {
 describe("fetchTiers", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mock("axios");
   });
 
   const tiers = [
@@ -105,7 +107,7 @@ describe("fetchTiers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchTiers();
