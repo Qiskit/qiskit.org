@@ -46,7 +46,7 @@
           />
           <code class="home-lead-space__container__laptop__code">
             <pre
-              v-for="(line, index) in heroCodeSnippet.split('\n')"
+              v-for="(line, index) in heroCodeSnippetLines"
               :key="index"
               :class="{
                 'home-lead-space__container__laptop__code__comment':
@@ -95,6 +95,8 @@ sampler = Sampler()
 job = sampler.run(circuit)
 quasi_dist = job.result().quasi_dists[0]
 print(quasi_dist)`;
+
+const heroCodeSnippetLines = heroCodeSnippet.split("\n");
 </script>
 
 <style lang="scss">
