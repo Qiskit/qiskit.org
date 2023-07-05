@@ -112,7 +112,6 @@
 </template>
 
 <script setup lang="ts">
-import { useEventListSchemaOrg } from "~/composables/useEventListSchemaOrg";
 import {
   CommunityEvent,
   WORLD_REGION_OPTIONS,
@@ -278,20 +277,64 @@ const selectTab = (selectedTab: string) => {
   tabsIsDirty.value = true;
 };
 
-useEventListSchemaOrg(
-  upcomingEvents.map((event) => ({
-    startDate: new Date(event.startDate),
-    location: event.location,
-    mode: ["YouTube", "Virtual"].includes(event.location)
-      ? "Online"
-      : "Offline",
-    url: event.to,
+const orderedEvents = upcomingEvents
+  .filter((event) => event.startDate)
+  .sort((a, b) => {
+    const dateA = a.startDate;
+    const dateB = b.startDate;
+
+    return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
+  });
+
+const eventsEntities = [];
+for (const event of orderedEvents) {
+  let location;
+  if (["YouTube", "Virtual"].includes(event.location)) {
+    location = defineVirtualLocation({
+      url: event.to,
+    });
+  } else {
+    location = definePlace({
+      name: event.location,
+      address: event.location,
+      url: event.to,
+    });
+  }
+
+  const eventAttendanceMode = ["YouTube", "Virtual"].includes(event.location)
+    ? "OnlineEventAttendanceMode"
+    : "OfflineEventAttendanceMode";
+
+  const schemaEvent: any = {
     name: event.title,
-    imageUrl: event.image,
-    performer: event.speaker,
-    endDate: event.endDate ? new Date(event.endDate) : undefined,
-  }))
-);
+    eventAttendanceMode,
+    image: event.image,
+    location,
+    startDate: new Date(event.startDate).toISOString(),
+    organizer: {
+      name: "IBM Quantum",
+      url: "https://ibm.com/quantum",
+    },
+  };
+
+  if (event.speaker) {
+    schemaEvent.performer = event.speaker;
+  }
+
+  if (event.endDate) {
+    schemaEvent.endDate = new Date(event.endDate).toISOString();
+  }
+
+  eventsEntities.push(defineEvent(schemaEvent));
+}
+
+const eventsSchema = defineItemList({
+  itemListElement: eventsEntities,
+  itemListOrder: "Ascending",
+  numberOfItems: eventsEntities.length,
+});
+
+useSchemaOrg([eventsSchema]);
 </script>
 
 <style lang="scss" scoped>
