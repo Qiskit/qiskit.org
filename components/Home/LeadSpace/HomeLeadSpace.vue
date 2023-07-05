@@ -37,6 +37,12 @@
           class="home-lead-space__version-info"
           :version="version"
         />
+        <nuxt-img
+          class="home-lead-space__container__image"
+          format="webp"
+          src="/images/landing-page/cryo.png"
+          alt="A visual composition of a sketched a quantum computer"
+        />
         <div class="home-lead-space__container__laptop">
           <nuxt-img
             class="home-lead-space__container__laptop__frame"
