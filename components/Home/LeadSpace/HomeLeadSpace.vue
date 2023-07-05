@@ -111,7 +111,7 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .home-lead-space {
-  height: calc(#{math.div(56rem * 40, 64)} + 2px);
+  height: calc(#{math.div(56rem * 42, 64)} + 2px);
   position: relative;
   overflow: hidden;
 
@@ -134,13 +134,17 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
   &__container {
     height: 100%;
     overflow: hidden;
-    padding-top: carbon.$spacing-10;
+    padding-top: carbon.$spacing-12;
     pointer-events: none;
     position: relative;
 
+    @include carbon.breakpoint-down(lg) {
+      padding-top: carbon.$spacing-11;
+    }
+
     @include carbon.breakpoint-down(md) {
       background-image: none;
-      padding-top: carbon.$spacing-05;
+      padding-top: carbon.$spacing-12;
     }
 
     &__image {
@@ -219,7 +223,6 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
 
     &__logo {
       width: 450px;
-      margin-top: carbon.$spacing-05;
 
       @include carbon.breakpoint-down(md) {
         width: 270px;
