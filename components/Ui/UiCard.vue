@@ -47,6 +47,9 @@
           <bx-tag v-if="primaryTag" class="card__tag" type="purple">
             {{ primaryTag }}
           </bx-tag>
+          <bx-tag v-if="primaryTag" class="card__tag" type="purple">
+            {{ primaryTag }}
+          </bx-tag>
         </div>
       </header>
       <div class="card__body">
@@ -77,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link, TextLink } from "~/types/links";
+import { Link } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
@@ -93,8 +96,6 @@ interface Props {
   to?: string;
   secondaryCta?: Link | null;
   primaryTag?: string[];
-  secondaryCta?: TextLink | null;
-  primaryTag?: string;
   verticalLayout?: boolean;
 }
 
@@ -120,6 +121,7 @@ const ctaLink = computed(() => ({
 }));
 
 // TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
+
 function hasTags(tags: string[]) {
   return Array.isArray(tags) && tags.length > 0;
 }
@@ -166,6 +168,7 @@ function hasTags(tags: string[]) {
       flex: 0 0 24rem;
     }
   }
+
   &__body {
     overflow-wrap: break-word;
   }
