@@ -3,7 +3,7 @@ import { DescriptionCard } from "~/types/uiComponents";
 const header = {
   titleLine1: "Qiskit Fall Fest 2022:",
   cta: {
-    label: "Learn more!",
+    label: "Read the blog",
     url: "https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557",
     segment: {
       cta: "learn",
@@ -19,7 +19,7 @@ const header = {
     location: "",
     time: "",
     to: "https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557",
-    ctaLabel: "Learn more",
+    ctaLabel: "Learn about the Fall Fest",
     segment: {
       cta: "qiskit-fall-fest-blog",
       location: "header",
@@ -361,7 +361,7 @@ const helpfulResources: HelpfulResourcesSection = {
       description:
         "Prepare for the Fall Fest by reviewing the documentation and installing Qiskit.",
       cta: {
-        url: "https://qiskit.org/documentation/install.html",
+        url: "https://qiskit.org/documentation/getting_started.html#installation",
         label: "Install here",
         segment: {
           cta: "qiskit-install",
