@@ -1,11 +1,11 @@
 <template>
-  <article class="introductory-content">
+  <article class="ui-introductory-content">
     <div class="cds--grid bx--no-gutter">
       <div class="cds--row">
         <div class="cds--col-lg-4">
-          <div class="introductory-content__overview">
+          <div class="ui-introductory-content__overview">
             <h2 v-text="title" />
-            <p class="introductory-content__description">
+            <p class="ui-introductory-content__description">
               {{ description }}
             </p>
           </div>
@@ -30,7 +30,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.introductory-content {
+.ui-introductory-content {
   @include carbon.breakpoint-down(lg) {
     display: block;
   }

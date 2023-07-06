@@ -1,5 +1,5 @@
 <template>
-  <CourseOverviewPage
+  <LearnCourse
     :courses="courses"
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble

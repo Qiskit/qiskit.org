@@ -1,9 +1,9 @@
 <template>
   <div
-    class="typewriter-effect"
-    :class="{ 'typewriter-effect_cursor-visible': showCursor }"
+    class="ui-typewriter-effect"
+    :class="{ 'ui-typewriter-effect_cursor-visible': showCursor }"
   >
-    <span class="typewriter-effect__content">{{ content }}</span>
+    <span class="ui-typewriter-effect__content">{{ content }}</span>
   </div>
 </template>
 
@@ -90,7 +90,7 @@ onMounted(() => {
 @use "~/assets/scss/carbon.scss";
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
-.typewriter-effect {
+.ui-typewriter-effect {
   background-color: qiskit.$background-color-secondary;
   display: inline-block;
 
@@ -104,7 +104,7 @@ onMounted(() => {
   &_cursor-visible {
     animation: 0.75s flash step-end infinite;
 
-    .typewriter-effect__content {
+    .ui-typewriter-effect__content {
       margin-left: 0;
     }
   }

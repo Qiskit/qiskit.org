@@ -5,7 +5,7 @@
     <div class="main-container">
       <slot />
     </div>
-    <FooterComponent theme="light" />
+    <LayoutFooter theme="light" />
   </div>
 </template>
 

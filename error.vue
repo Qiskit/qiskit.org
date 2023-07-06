@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <FooterComponent />
+    <LayoutFooter />
   </div>
 </template>
 

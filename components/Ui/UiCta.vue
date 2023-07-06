@@ -1,10 +1,10 @@
 <template>
-  <UiBasicLink
+  <UiLink
     ref="link"
-    class="cta"
+    class="ui-cta"
     :class="[
-      `cta_${kind}`,
-      `cta_${kind}_theme_${theme}`,
+      `ui-cta_${kind}`,
+      `ui-cta_${kind}_theme_${theme}`,
       { cta_wider: isWider },
     ]"
     :segment="segment"
@@ -12,15 +12,15 @@
     :url="urlString"
     @click="$emit('click')"
   >
-    <span class="cta__content">
+    <span class="ui-cta__content">
       {{ label }}
     </span>
     <component
       :is="iconPerLinkType"
-      class="cta__icon"
-      :class="`cta__icon_${iconPerLinkType}`"
+      class="ui-cta__icon"
+      :class="`ui-cta__icon_${iconPerLinkType}`"
     />
-  </UiBasicLink>
+  </UiLink>
 </template>
 
 <script setup lang="ts">
@@ -94,7 +94,7 @@ function isIdAnchor(url: string) {
   );
 }
 
-.cta {
+.ui-cta {
   display: flex;
   justify-content: space-between;
   text-decoration: none;

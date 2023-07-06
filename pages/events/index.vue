@@ -1,6 +1,6 @@
 <template>
-  <div class="event-page">
-    <UiPageHeaderFixed>
+  <div class="events-page">
+    <LayoutLeadSpaceFixed>
       Join
       <UiTypewriterEffect
         :values="['events', 'hackathons', 'camps', 'unconferences', 'talks']"
@@ -11,9 +11,9 @@
       world&rsquo;s largest quantum
       <br class="hide-in-md" />
       computing community
-    </UiPageHeaderFixed>
+    </LayoutLeadSpaceFixed>
     <div class="cds--grid">
-      <div class="event-page__tabs">
+      <div class="events-page__tabs">
         <client-only>
           <bx-tabs
             value="upcoming"
@@ -27,13 +27,13 @@
       </div>
       <div v-if="showCalendar">
         <iframe
-          class="event-page__calendar"
+          class="events-page__calendar"
           src="https://airtable.com/embed/shrzmTpiOo1Ye8Nrs?backgroundColor=purple&viewControls=on"
           width="100%"
           height="560"
         />
-        <EventsFollowCalendar />
-        <EventsRequestEvent />
+        <EventsFollowOurCalendar />
+        <EventsRequest />
       </div>
       <UiFiltersResultsLayout v-else>
         <template #filters-on-m-l-screen>
@@ -74,7 +74,7 @@
                 alt-text="Warning sign icon"
                 :title="emptyCard.title"
               >
-                <div class="event-page__empty-card-description">
+                <div class="events-page__empty-card-description">
                   {{ emptyCard.description }}
                 </div>
               </UiCard>
@@ -86,8 +86,8 @@
               :key="index"
               class="cds--col-sm-4 cds--col-xlg-8"
             >
-              <EventsItemCard
-                class="event-page__card"
+              <EventsCard
+                class="events-page__card"
                 :types="eventItem.types"
                 :title="eventItem.title"
                 :image="eventItem.image"
@@ -98,13 +98,13 @@
                 :to="eventItem.to"
               >
                 {{ eventItem.abstract }}
-              </EventsItemCard>
+              </EventsCard>
             </div>
           </div>
         </template>
         <template #extra-info>
-          <EventsFollowCalendar id="follow-our-event-calendar" />
-          <EventsRequestEvent />
+          <EventsFollowOurCalendar id="follow-our-event-calendar" />
+          <EventsRequest />
         </template>
       </UiFiltersResultsLayout>
     </div>
@@ -286,7 +286,7 @@ const selectTab = (selectedTab: string) => {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 @use "~/assets/scss/helpers/classes.scss";
 
-.event-page {
+.events-page {
   &__card {
     margin-bottom: carbon.$spacing-06;
 
@@ -391,31 +391,6 @@ const selectTab = (selectedTab: string) => {
     @include carbon.breakpoint-down(md) {
       margin-top: carbon.$spacing-06;
     }
-  }
-
-  &:deep(.event-page__section) {
-    margin-top: carbon.$spacing-10;
-    margin-bottom: carbon.$spacing-10;
-  }
-
-  &:deep(.event-page__section__description) {
-    margin-top: carbon.$spacing-06;
-    margin-bottom: carbon.$spacing-07;
-    max-width: 20rem;
-
-    @include carbon.breakpoint-up(lg) {
-      max-width: 24rem;
-    }
-  }
-
-  &:deep(.event-page__tabs) {
-    margin-top: carbon.$spacing-07;
-    margin-bottom: carbon.$spacing-09;
-    padding-top: carbon.$spacing-06;
-  }
-
-  &:deep(.event-page__instructions) {
-    padding-left: carbon.$spacing-06;
   }
 }
 </style>

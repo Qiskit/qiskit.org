@@ -1,13 +1,13 @@
 <template>
-  <article class="description-card">
+  <article class="ui-description-card">
     <div>
       <h4 v-text="title" />
       <p v-text="description" />
     </div>
-    <div class="description-card__footer">
+    <div class="ui-description-card__footer">
       <UiCta
         v-if="cta && cta.url"
-        class="description-card__cta"
+        class="ui-description-card__cta"
         kind="ghost"
         :label="cta.label"
         :segment="cta.segment"
@@ -30,7 +30,7 @@ defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
-.description-card {
+.ui-description-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
