@@ -71,14 +71,12 @@ describe("fetchMembers", () => {
     (axios.get as any).mockResolvedValueOnce(members);
     const result = await fetchMembers();
 
-    console.log(result);
-
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(result).toEqual(formattedMembers);
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchMembers();
@@ -120,7 +118,7 @@ describe("fetchTiers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchTiers();
