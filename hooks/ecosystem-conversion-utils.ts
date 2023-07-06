@@ -20,7 +20,6 @@ async function fetchMembers() {
         membersArray.push(member);
       });
     });
-    console.log(membersArray);
 
     // Sort ecosystem projects alphabetically
     membersArray.sort((a, b) => a.name?.localeCompare(b.name));
