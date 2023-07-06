@@ -4,9 +4,9 @@
       <div class="cds--grid home-lead-space__container">
         <div class="cds--row">
           <div class="cds--col-md-4 cds--col-lg-5 cds--col-max-7">
-            <h1 class="home-lead-space__title">
+            <h1 class="home-lead-space__container__title">
               <nuxt-img
-                class="home-lead-space__title__logo"
+                class="home-lead-space__container__title__logo"
                 src="/images/landing-page/logo_wordmark.svg"
                 alt="The Qiskit logo"
               />
@@ -15,26 +15,26 @@
         </div>
         <div class="cds--row">
           <div
-            class="cds--col-sm cds--col-md-4 cds--col-lg-5 home-lead-space__description"
+            class="cds--col-sm cds--col-md-4 cds--col-lg-5 home-lead-space__container__description"
           >
-            <p class="home-lead-space__description__title">
+            <p class="home-lead-space__container__description__title">
               <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
             </p>
-            <hr class="home-lead-space__description__divider" />
-            <ol class="home-lead-space__description__content">
+            <hr class="home-lead-space__container__description__divider" />
+            <ol class="home-lead-space__container__description__content">
               <li>open-source toolkit for useful quantum computing.</li>
               <li>production-ready circuit compiler.</li>
             </ol>
           </div>
         </div>
         <UiCta
-          class="home-lead-space__cta"
+          class="home-lead-space__container__cta"
           :label="getStartedLink.label"
           :segment="getStartedLink.segment"
           :url="getStartedLink.url"
         />
         <HomeLeadSpaceVersion
-          class="home-lead-space__version-info"
+          class="home-lead-space__container__version-info"
           :version="version"
         />
         <nuxt-img
@@ -119,16 +119,7 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
     // In Figma, the height is not enforced but the background is always
     // visible completely so we do it in the CSS. A small correction is needed
     // to be able of displaying the bottom lines of the grid.
-    height: 40rem;
-  }
-
-  &__square-link {
-    width: 4rem;
-    height: 4rem;
-    background-color: qiskit.$background-color-black;
-    position: absolute;
-    top: 21%;
-    left: 43%;
+    height: calc(#{math.div(73rem * 42, 64)} + 2px);
   }
 
   &__container {
@@ -147,11 +138,91 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
       padding-top: carbon.$spacing-12;
     }
 
+    &__title {
+      margin-bottom: carbon.$spacing-06;
+
+      // TODO: Force pointer events to allow the user to select text. Remove
+      // when decomissioning the Metal page.
+      pointer-events: auto;
+
+      @include carbon.breakpoint-up(md) {
+        margin-bottom: carbon.$spacing-07;
+      }
+
+      @include carbon.breakpoint-up(lg) {
+        margin-bottom: carbon.$spacing-08;
+      }
+
+      &__logo {
+        width: 450px;
+
+        @include carbon.breakpoint-down(md) {
+          width: 90vw;
+        }
+      }
+    }
+
+    &__description {
+      margin-bottom: carbon.$spacing-06;
+
+      // TODO: Force pointer events to allow the user to select text. Remove
+      // when decomissioning the Metal page.
+      pointer-events: auto;
+
+      @include carbon.breakpoint-up(md) {
+        margin-bottom: carbon.$spacing-04;
+      }
+
+      @include carbon.breakpoint-up(lg) {
+        margin-bottom: carbon.$spacing-08;
+      }
+
+      &__title {
+        color: carbon.$gray-80;
+        font-size: carbon.type-scale(4);
+      }
+
+      &__divider {
+        border: 0;
+        border-top: 1px solid carbon.$gray-80;
+        margin: 0 0 carbon.$spacing-05 0;
+      }
+
+      &__content {
+        list-style: decimal;
+        margin-left: carbon.$spacing-06;
+      }
+    }
+
+    &__cta {
+      // TODO: Force pointer events to allow the user to select text. Remove
+      // when decomissioning the Metal page.
+      pointer-events: auto;
+      margin-bottom: carbon.$spacing-06;
+      margin-top: carbon.$spacing-09;
+
+      @include carbon.breakpoint-down(lg) {
+        margin-top: carbon.$spacing-11;
+      }
+    }
+
+    &__version {
+      margin-bottom: carbon.$spacing-05;
+
+      @include carbon.breakpoint-up(md) {
+        margin-bottom: carbon.$spacing-07;
+      }
+
+      @include carbon.breakpoint-up(lg) {
+        margin-bottom: carbon.$spacing-11;
+      }
+    }
+
     &__image {
       height: auto;
-      width: 60%;
+      width: 50%;
       position: absolute;
-      right: 9%;
+      right: 13%;
       top: 0;
       z-index: -1;
 
@@ -192,86 +263,6 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
           color: qiskit.$text-active-color;
         }
       }
-    }
-  }
-
-  &__version {
-    margin-bottom: carbon.$spacing-05;
-
-    @include carbon.breakpoint-up(md) {
-      margin-bottom: carbon.$spacing-07;
-    }
-
-    @include carbon.breakpoint-up(lg) {
-      margin-bottom: carbon.$spacing-11;
-    }
-  }
-
-  &__title {
-    margin-bottom: carbon.$spacing-06;
-
-    // TODO: Force pointer events to allow the user to select text. Remove
-    // when decomissioning the Metal page.
-    pointer-events: auto;
-
-    @include carbon.breakpoint-up(md) {
-      margin-bottom: carbon.$spacing-07;
-    }
-
-    @include carbon.breakpoint-up(lg) {
-      margin-bottom: carbon.$spacing-08;
-    }
-
-    &__logo {
-      width: 450px;
-
-      @include carbon.breakpoint-down(md) {
-        width: 270px;
-      }
-    }
-  }
-
-  &__description {
-    margin-bottom: carbon.$spacing-06;
-
-    // TODO: Force pointer events to allow the user to select text. Remove
-    // when decomissioning the Metal page.
-    pointer-events: auto;
-
-    @include carbon.breakpoint-up(md) {
-      margin-bottom: carbon.$spacing-04;
-    }
-
-    @include carbon.breakpoint-up(lg) {
-      margin-bottom: carbon.$spacing-08;
-    }
-
-    &__title {
-      color: carbon.$gray-80;
-      font-size: carbon.type-scale(4);
-    }
-
-    &__divider {
-      border: 0;
-      border-top: 1px solid carbon.$gray-80;
-      margin: 0 0 carbon.$spacing-05 0;
-    }
-
-    &__content {
-      list-style: decimal;
-      margin-left: carbon.$spacing-06;
-    }
-  }
-
-  &__cta {
-    // TODO: Force pointer events to allow the user to select text. Remove
-    // when decomissioning the Metal page.
-    pointer-events: auto;
-    margin-bottom: carbon.$spacing-06;
-    margin-top: carbon.$spacing-09;
-
-    @include carbon.breakpoint-down(lg) {
-      margin-top: carbon.$spacing-11;
     }
   }
 }
