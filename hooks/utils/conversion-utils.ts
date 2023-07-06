@@ -8,7 +8,13 @@ export async function writeJSONToFile(
 ) {
   const folderExists = await exists(outputFolder);
   if (!folderExists) {
-    await fs.promises.mkdir(outputFolder);
+    try {
+      await fs.promises.mkdir(outputFolder);
+    } catch (e) {
+      if (!(e as any).message?.includes("file already exists, mkdir")) {
+        throw e;
+      }
+    }
   }
 
   const filePath = path.join(outputFolder, filename);
