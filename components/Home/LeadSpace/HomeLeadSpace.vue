@@ -3,7 +3,9 @@
     <HomeLeadSpaceBackgroundGrid>
       <div class="cds--grid home-lead-space__container">
         <div class="cds--row">
-          <div class="cds--col-md-4 cds--col-lg-5 cds--col-max-7">
+          <div
+            class="cds--col-sm-4 cds--col-md-5 cds--col-lg-6 cds--col-xlg-5 cds--col-max-5"
+          >
             <h1 class="home-lead-space__container__title">
               <nuxt-img
                 class="home-lead-space__container__title__logo"
@@ -15,28 +17,31 @@
         </div>
         <div class="cds--row">
           <div
-            class="cds--col-sm cds--col-md-4 cds--col-lg-5 home-lead-space__container__description"
+            class="cds--col-sm-4 cds--col-md-4 cds--col-lg-5 cds--col-xlg-4 cds--col-max-4"
           >
-            <p class="home-lead-space__container__description__title">
-              <strong>{{ qiskitPronunciation }}</strong> <em>noun, software</em>
-            </p>
-            <hr class="home-lead-space__container__description__divider" />
-            <ol class="home-lead-space__container__description__content">
-              <li>open-source toolkit for useful quantum computing.</li>
-              <li>production-ready circuit compiler.</li>
-            </ol>
+            <div class="home-lead-space__container__description">
+              <p class="home-lead-space__container__description__title">
+                <strong>{{ qiskitPronunciation }}</strong>
+                <em>noun, software</em>
+              </p>
+              <hr class="home-lead-space__container__description__divider" />
+              <ol class="home-lead-space__container__description__content">
+                <li>open-source toolkit for useful quantum computing.</li>
+                <li>production-ready circuit compiler.</li>
+              </ol>
+            </div>
+            <UiCta
+              class="home-lead-space__container__cta"
+              :label="getStartedLink.label"
+              :segment="getStartedLink.segment"
+              :url="getStartedLink.url"
+            />
+            <HomeLeadSpaceVersion
+              class="home-lead-space__container__version-info"
+              :version="version"
+            />
           </div>
         </div>
-        <UiCta
-          class="home-lead-space__container__cta"
-          :label="getStartedLink.label"
-          :segment="getStartedLink.segment"
-          :url="getStartedLink.url"
-        />
-        <HomeLeadSpaceVersion
-          class="home-lead-space__container__version-info"
-          :version="version"
-        />
         <nuxt-img
           class="home-lead-space__container__image"
           format="webp"
@@ -111,9 +116,13 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .home-lead-space {
-  height: calc(#{math.div(56rem * 42, 64)} + 2px);
+  height: 60vh;
   position: relative;
   overflow: hidden;
+
+  @include carbon.breakpoint-up(sm) {
+    height: 70vh;
+  }
 
   @include carbon.breakpoint-up(md) {
     // In Figma, the height is not enforced but the background is always
@@ -154,28 +163,15 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
       }
 
       &__logo {
-        width: 450px;
-
-        @include carbon.breakpoint-down(md) {
-          width: 90vw;
-        }
+        width: 100%;
       }
     }
 
     &__description {
-      margin-bottom: carbon.$spacing-06;
-
       // TODO: Force pointer events to allow the user to select text. Remove
       // when decomissioning the Metal page.
       pointer-events: auto;
-
-      @include carbon.breakpoint-up(md) {
-        margin-bottom: carbon.$spacing-04;
-      }
-
-      @include carbon.breakpoint-up(lg) {
-        margin-bottom: carbon.$spacing-08;
-      }
+      margin-bottom: carbon.$spacing-11;
 
       &__title {
         color: carbon.$gray-80;
@@ -198,6 +194,7 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
       // TODO: Force pointer events to allow the user to select text. Remove
       // when decomissioning the Metal page.
       pointer-events: auto;
+      width: 100% !important;
       margin-bottom: carbon.$spacing-06;
       margin-top: carbon.$spacing-09;
 
