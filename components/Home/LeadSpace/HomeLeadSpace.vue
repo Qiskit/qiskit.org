@@ -22,7 +22,7 @@
             <div class="home-lead-space__container__description">
               <p class="home-lead-space__container__description__title">
                 <strong>{{ qiskitPronunciation }}</strong>
-                <em>noun, software</em>
+                <em> noun, software</em>
               </p>
               <hr class="home-lead-space__container__description__divider" />
               <ol class="home-lead-space__container__description__content">
