@@ -221,7 +221,7 @@ function isCategoryFilterChecked(filterValue: string): boolean {
 const searchTerm = ref<string>("");
 
 function updateSearchTerm(newSearchTerm: string) {
-  searchTerm.value = newSearchTerm;
+  searchTerm.value = newSearchTerm.trim();
 }
 
 /**
