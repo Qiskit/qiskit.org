@@ -12,9 +12,11 @@
           work with them, as well as notions such as linear independence, bases,
           and dimension. You will also need to know how complex numbers work and
           be comfortable with some basic mathematical concepts, such as sets and
-          functions.
-          <UiLinkText :link="basicsOfQuantumInformation">Here</UiLinkText>, you
-          you can find these foundational concepts explained.
+          functions. Visit the
+          <UiLinkText :link="basicsOfQuantumInformation"
+            >Basics of Quantum Information course page</UiLinkText
+          >
+          to find these foundational concepts explained.
         </p>
         <p>
           To make the most out of the lectures, you may also consider looking
