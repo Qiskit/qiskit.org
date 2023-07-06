@@ -36,7 +36,7 @@ const header = {
     date: "July 17 – 28, 2023",
     time: "",
     to: "https://qisk.it/QGSS23REG",
-    ctaLabel: "Learn more",
+    ctaLabel: "View the event",
     segment: {
       cta: "ibm-research-blog",
       location: "header",
@@ -388,7 +388,7 @@ const helpfulResources: HelpfulResourcesSection = {
       description:
         "Prepare for the Summer School by reviewing the documentation and installing Qiskit.",
       cta: {
-        url: "https://qiskit.org/documentation/install.html",
+        url: "https://qiskit.org/documentation/getting_started.html#installation",
         label: "Install here",
         segment: {
           cta: "qiskit-install",
