@@ -361,7 +361,7 @@ const helpfulResources: HelpfulResourcesSection = {
       description:
         "Prepare for the Fall Fest by reviewing the documentation and installing Qiskit.",
       cta: {
-        url: "https://qiskit.org/documentation/install.html",
+        url: "https://qiskit.org/documentation/getting_started.html#installation",
         label: "Install here",
         segment: {
           cta: "qiskit-install",
