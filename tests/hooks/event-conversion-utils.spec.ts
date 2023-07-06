@@ -1221,7 +1221,7 @@ describe("formatTime", () => {
 
     eventsAirtableRecords.recordFields = {};
 
-    const date = eventsAirtableRecords.formatTime("2020-10-10");
+    const date = eventsAirtableRecords.formatTime("2020-10-10 00:00:00 UTC");
 
     expect(date).toBe("12:00\u202FAM UTC");
   });
