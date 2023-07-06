@@ -18,7 +18,7 @@
           {{ item.title }}
           <UiCta
             class="home-providers-list__list__cta"
-            label="Learn more"
+            label="View docs"
             :url="item.docsCta.url"
             kind="ghost"
           />
