@@ -24,9 +24,11 @@ const isALearningPage = computed(() => route.path.includes("/learn"));
 </script>
 
 <style lang="scss" scoped>
-.main-container {
-  margin-top: 3.25rem;
-}
+/* I don't remove this styles because we will need it once we remove the banner
+ .main-container {
+   margin-top: 3.25rem;
+ }
+*/
 
 qiskit-ui-shell {
   --header-content-max-width: 96rem;
