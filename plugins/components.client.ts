@@ -12,5 +12,6 @@ import "@carbon/web-components/es/components/tooltip/tooltip-icon.js";
 
 import "@qiskit/web-components/mega-menu-dropdown";
 import "@qiskit/web-components/ui-shell";
+import "@qiskit/web-components/banner";
 
 export default defineNuxtPlugin(() => {});
