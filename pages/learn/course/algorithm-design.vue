@@ -4,9 +4,9 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
-    :header-img="headerImg"
+    :header-img="image"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -28,18 +28,30 @@ definePageMeta({
   routeName: "algorithm-design",
 });
 
-useHead({
-  title: "Variational Algorithm Design",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Variational algorithm design";
+const description =
+  "This course teaches how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage.";
+const image = `${config.public.siteUrl}/images/learn/course/algorithm-design/algorithm-design.png`;
+const pageUrl = `${config.public.siteUrl}/learn/algorithm-design`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "algorithm-design";
-
-const headerTitle = "Variational algorithm design";
 const headerDescription = [
   "This course teaches how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage. Throughout this course, you'll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.",
 ];
-
-const headerImg = "/images/learn/course/algorithm-design/algorithm-design.png";
 
 const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.AlgorithmDesign,
@@ -55,8 +67,6 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = `To make the most out of this
   course, we recommend familiarity with the basics of quantum information. You may
   also want to install Qiskit and the IBM Qiskit Runtime package:`;
-
-const config = useRuntimeConfig();
 
 const links: RecommendedReading[] = [
   {
