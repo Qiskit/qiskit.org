@@ -1,6 +1,7 @@
 <template>
   <div>
     <qiskit-ui-shell variant="hide-account" @on-click="onClick" />
+    <LayoutBannerNewLearningPlatform />
     <div class="main-container">
       <slot />
     </div>

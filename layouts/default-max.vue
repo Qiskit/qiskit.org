@@ -2,6 +2,7 @@
   <div>
     <qiskit-ui-shell v-if="isALearningPage" @on-click="onClick" />
     <qiskit-ui-shell v-else variant="hide-account" @on-click="onClick" />
+    <LayoutBannerNewLearningPlatform />
     <div class="main-container">
       <slot />
     </div>
