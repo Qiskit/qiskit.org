@@ -4,9 +4,9 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
-    :header-img="headerImg"
+    :header-img="image"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -28,13 +28,28 @@ definePageMeta({
   routeName: "basics-quantum-information-course",
 });
 
-useHead({
-  title: "Basics of quantum information",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Basics of quantum information";
+const description =
+  "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.";
+const image = `${config.public.siteUrl}/images/learn/course/basics-quantum-information/atom.png`;
+const pageUrl = `${config.public.siteUrl}/learn/basics-quantum-information`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "basics-quantum-information-course";
 
-const headerTitle = "Basics of quantum information";
 const headerDescription = [
   `Quantum computing has become a global conversation, and whether in media or
   movies, fact or fiction, the excitement for quantum is growing every day. This
@@ -42,8 +57,6 @@ const headerDescription = [
   John Watrous as you explore quantum information, quantum algorithms, and how
   to understand and mitigate noise.`,
 ];
-
-const headerImg = "/images/learn/course/basics-quantum-information/atom.png";
 
 const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.BasicsQuantumInformation,
