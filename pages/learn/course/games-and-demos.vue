@@ -4,9 +4,9 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
-    :header-img="headerImg"
+    :header-img="image"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -34,17 +34,31 @@ definePageMeta({
   routeName: "games-and-demos",
 });
 
-useHead({
-  title: "Games and demos",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Games and demos";
+const description =
+  "These pages contain cool experiments with Qiskit that don't belong in a course, allowing you to mess around with quantum effects to strengthen your knowledge";
+const image = `${config.public.siteUrl}/images/learn/course/games-and-demos/games-and-demos.png`;
+const pageUrl = `${config.public.siteUrl}/learn/games-and-demos`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "games-and-demos";
 
-const headerTitle = "Games and demos";
 const headerDescription = [
   "Qiskit, and the Qiskit Textbook website, are interactive learning environments. Unlike with traditional, ink-and-paper textbooks, you can mess around with quantum effects to strengthen your knowledge. These pages contain cool experiments with Qiskit that don't belong in a course.",
 ];
-const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
 const startLearningCTA: TextLink = {
   url: GamesAndDemosUrl.HelloQiskit,
