@@ -6,7 +6,7 @@
     "
     :header-title="title"
     :header-description="headerDescription"
-    :header-img="image"
+    :header-img="headerImg"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -35,7 +35,7 @@ const title = "Introduction course";
 const description =
   "This short 3-hour course contains is aimed at self-learners from all backgrounds, and gives a solid understanding of the principles behind quantum computing, focusing on developing intuition.";
 const image = `${config.public.siteUrl}/images/learn/course/introduction-course/header.png`;
-const pageUrl = `${config.public.siteUrl}/learn/introduction-course`;
+const pageUrl = `${config.public.siteUrl}/learn/course/introduction-course`;
 
 useSeoMeta({
   title,
@@ -62,6 +62,7 @@ const headerDescription = [
   protocols, near term quantum algorithms, and quantum machine
   learning.`,
 ];
+const headerImg = "/images/learn/course/introduction-course/header.png";
 
 const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.Introduction,

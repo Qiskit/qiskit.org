@@ -6,7 +6,7 @@
     "
     :header-title="title"
     :header-description="headerDescription"
-    :header-img="image"
+    :header-img="headerImg"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -41,7 +41,7 @@ const title = "Games and demos";
 const description =
   "These pages contain cool experiments with Qiskit that don't belong in a course, allowing you to mess around with quantum effects to strengthen your knowledge";
 const image = `${config.public.siteUrl}/images/learn/course/games-and-demos/games-and-demos.png`;
-const pageUrl = `${config.public.siteUrl}/learn/games-and-demos`;
+const pageUrl = `${config.public.siteUrl}/learn/course/games-and-demos`;
 
 useSeoMeta({
   title,
@@ -59,6 +59,7 @@ const routeName = "games-and-demos";
 const headerDescription = [
   "Qiskit, and the Qiskit Textbook website, are interactive learning environments. Unlike with traditional, ink-and-paper textbooks, you can mess around with quantum effects to strengthen your knowledge. These pages contain cool experiments with Qiskit that don't belong in a course.",
 ];
+const headerImg = "/images/learn/course/games-and-demos/games-and-demos.png";
 
 const startLearningCTA: TextLink = {
   url: GamesAndDemosUrl.HelloQiskit,

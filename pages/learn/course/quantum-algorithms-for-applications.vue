@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -39,17 +39,31 @@ definePageMeta({
   routeName: "quantum-algorithms-for-applications",
 });
 
-useHead({
-  title: "Quantum Algorithms for Applications",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Quantum Algorithms for Applications";
+const description =
+  "The useful algorithms in the quantum algorithms pages solve very general problems. These pages apply quantum algorithms to specific, real-world cases.";
+const image = `${config.public.siteUrl}/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-algorithms-for-applications`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "quantum-algorithms-for-applications";
 
-const headerTitle = "Quantum Algorithms for Applications";
 const headerDescription = [
   "The useful algorithms in the quantum algorithms pages solve very general problems. These pages apply quantum algorithms to specific, real-world cases.",
 ];
-
 const headerImg =
   "/images/learn/course/quantum-algorithms-for-applications/quantum-algorithms-for-applications.png";
 

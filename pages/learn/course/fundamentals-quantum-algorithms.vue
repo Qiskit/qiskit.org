@@ -6,7 +6,7 @@
     "
     :header-title="title"
     :header-description="headerDescription"
-    :header-img="image"
+    :header-img="headerImg"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -35,7 +35,7 @@ const title = "Fundamentals of quantum algorithms";
 const description =
   "This unit explores computational advantages of quantum information, including what we can do with quantum computers and their advantages over classical computers.";
 const image = `${config.public.siteUrl}/images/learn/course/fundamentals-quantum-algorithms/hero.png`;
-const pageUrl = `${config.public.siteUrl}/learn/fundamentals-quantum-algorithms`;
+const pageUrl = `${config.public.siteUrl}/learn/course/fundamentals-quantum-algorithms`;
 
 useSeoMeta({
   title,
@@ -63,6 +63,8 @@ const headerDescription = [
   are more representative of the types of computational problems that might be
   encountered in real-world scenarios.`,
 ];
+const headerImg =
+  "/images/learn/course/fundamentals-quantum-algorithms/hero.png";
 
 const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.FundamentalsQuantumAlgorithms,

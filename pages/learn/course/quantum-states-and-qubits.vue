@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -35,17 +35,31 @@ definePageMeta({
   routeName: "quantum-states-and-qubits",
 });
 
-useHead({
-  title: "Quantum States and Qubits",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Quantum States and Qubits";
+const description =
+  "This chapter introduces the computing concepts that we'll explore in later chapters, then introduces basic quantum concepts.";
+const image = `${config.public.siteUrl}/images/learn/course/quantum-states-and-qubits/bloch-sphere.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-states-and-qubits`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "quantum-states-and-qubits";
 
-const headerTitle = "Quantum States and Qubits";
 const headerDescription = [
   "If you think quantum mechanics sounds challenging, you’re not alone. Our intuitions come from day-to-day experiences, and so are better at understanding the behavior of balls and bananas than atoms or electrons. Though quantum objects can seem random and chaotic at first, they just follow a different set of rules. Once we know what those rules are, we can use them to create new and powerful technology. Quantum computing will be the most revolutionary example of this.",
 ];
-
 const headerImg =
   "/images/learn/course/quantum-states-and-qubits/bloch-sphere.png";
 

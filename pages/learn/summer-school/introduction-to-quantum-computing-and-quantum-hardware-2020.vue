@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -28,15 +28,29 @@ definePageMeta({
   routeName: "introduction-to-quantum-computing-and-quantum-hardware-2020",
 });
 
-useHead({
-  title:
-    "2020 Qiskit global summer school on quantum computing and quantum hardware",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title =
+  "2020 Qiskit global summer school on quantum computing and quantum hardware";
+const description =
+  "This introduction to the world of quantum computing explores key quantum algorithms, as well as the quantum hardware designed to run these algorithms. These lectures were first released in July 2020.";
+const image = `${config.public.siteUrl}/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/introduction-to-quantum-computing-and-quantum-hardware-2020`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "introduction-to-quantum-computing-and-quantum-hardware-2020";
 
-const headerTitle =
-  "2020 Qiskit Global Summer School on Quantum Computing and Quantum Hardware";
 const headerDescription = [
   `This course is an introduction to the world of quantum computing, with
   an exploration of some of the key quantum algorithms and their
@@ -46,7 +60,6 @@ const headerDescription = [
   summer school. There are 27 lectures in this course, which cover the
   material in 9 lecture notes and 9 associated labs.`,
 ];
-
 const headerImg =
   "/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png";
 

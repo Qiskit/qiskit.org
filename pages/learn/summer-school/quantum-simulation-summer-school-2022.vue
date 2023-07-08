@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -27,13 +27,28 @@ definePageMeta({
   routeName: "quantum-simulation-summer-school-2022",
 });
 
-useHead({
-  title: "2022 Qiskit global summer school on quantum simulation",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "2022 Qiskit global summer school on quantum simulation";
+const description =
+  "This summer school provides a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry. These lectures were first released in July 2022.";
+const image = `${config.public.siteUrl}/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-simulation-summer-school-2022`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "quantum-simulation-summer-school-2022";
 
-const headerTitle = "2022 Qiskit global summer school on quantum simulation";
 const headerDescription = [
   `This summer school provides a focused introduction to quantum computing
   and its applications to quantum simulation, with a specific focus on
@@ -41,7 +56,6 @@ const headerDescription = [
   intensive summer school in July 2022. This course contains 9 lectures
   (split over 19 videos totalling ~17 hours) and 4 labs.`,
 ];
-
 const headerImg =
   "/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png";
 
@@ -140,8 +154,6 @@ const courses: Course[] = [
 const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: TextLink[] = [];
-
-const config = useRuntimeConfig();
 
 const prerequisites: Prerequisite[] = [
   {

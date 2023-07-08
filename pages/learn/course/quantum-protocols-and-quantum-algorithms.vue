@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -44,17 +44,31 @@ definePageMeta({
   routeName: "quantum-protocols-and-quantum-algorithms",
 });
 
-useHead({
-  title: "Quantum Protocols and Quantum Algorithms",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Quantum Protocols and Quantum Algorithms";
+const description =
+  "Discover quantum gates, operations, and algorithms that surpass classical counterparts. Explore their properties and practical applications.";
+const image = `${config.public.siteUrl}/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-protocols-and-quantum-algorithms`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "quantum-protocols-and-quantum-algorithms";
 
-const headerTitle = "Quantum Protocols and Quantum Algorithms";
 const headerDescription = [
   "So far, we've seen various quantum gates and operations, and we've explored some interesting properties of these gates. Each of these pages shows how we can combine quantum operations into a quantum algorithm that outperforms their classical counterpart. As a bonus, some of these algorithms are actually useful too!",
 ];
-
 const headerImg =
   "/images/learn/course/quantum-protocols-and-quantum-algorithms/quantum-protocols-and-quantum-algorithms.png";
 

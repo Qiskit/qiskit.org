@@ -6,7 +6,7 @@
     "
     :header-title="title"
     :header-description="headerDescription"
-    :header-img="image"
+    :header-img="headerImg"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -35,7 +35,7 @@ const title = "Variational algorithm design";
 const description =
   "This course teaches how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage.";
 const image = `${config.public.siteUrl}/images/learn/course/algorithm-design/algorithm-design.png`;
-const pageUrl = `${config.public.siteUrl}/learn/algorithm-design`;
+const pageUrl = `${config.public.siteUrl}/learn/course/algorithm-design`;
 
 useSeoMeta({
   title,
@@ -52,6 +52,7 @@ const routeName = "algorithm-design";
 const headerDescription = [
   "This course teaches how to write variational algorithms: near-term, hybrid-quantum-classical algorithms that are ideal candidates to achieve quantum advantage. Throughout this course, you'll learn each step in the variational algorithm design workflow, tradeoffs associated with each step, and how to use Qiskit Runtime primitives to optimize for speed and accuracy.",
 ];
+const headerImg = "/images/learn/course/algorithm-design/algorithm-design.png";
 
 const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.AlgorithmDesign,

@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -34,17 +34,31 @@ definePageMeta({
   routeName: "quantum-hardware-circuits",
 });
 
-useHead({
-  title: "Investigating Quantum Hardware Using Quantum Circuits",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Investigating Quantum Hardware Using Quantum Circuits";
+const description =
+  "Most gate-based quantum computers share similar challenges with noise and errors. These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.";
+const image = `${config.public.siteUrl}/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-hardware-circuits`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "quantum-hardware-circuits";
 
-const headerTitle = "Investigating Quantum Hardware Using Quantum Circuits";
 const headerDescription = [
   "Most gate-based quantum computers share similar challenges with noise and errors. These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.",
 ];
-
 const headerImg =
   "/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png";
 

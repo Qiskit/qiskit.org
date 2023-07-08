@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -27,13 +27,28 @@ definePageMeta({
   routeName: "machine-learning-course",
 });
 
-useHead({
-  title: "Quantum machine learning course",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Quantum machine learning course";
+const description =
+  "This eight-hour will take you through key concepts in quantum machine learning, such as parameterized quantum circuits, training circuits, and applying them to basic problems.";
+const image = `${config.public.siteUrl}/images/learn/course/machine-learning-course/header.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/machine-learning-course`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
 });
 
 const routeName = "machine-learning-course";
 
-const headerTitle = "Quantum machine learning";
 const headerDescription = [
   `This course contains around eight hours of content, and
 is aimed at self-learners who are comfortable with undergraduate-level
@@ -48,7 +63,6 @@ learnt.`,
   `This course was created by IBM Quantum with the help of Qiskit Advocates
 through the Qiskit Advocate Mentoring Program.`,
 ];
-
 const headerImg = "/images/learn/course/machine-learning-course/header.png";
 
 const startLearningCTA: TextLink = {

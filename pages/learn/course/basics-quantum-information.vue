@@ -6,7 +6,7 @@
     "
     :header-title="title"
     :header-description="headerDescription"
-    :header-img="image"
+    :header-img="headerImg"
     :image-url-base="imageUrlBase"
     :links="links"
     :prerequisites="prerequisites"
@@ -35,7 +35,7 @@ const title = "Basics of quantum information";
 const description =
   "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.";
 const image = `${config.public.siteUrl}/images/learn/course/basics-quantum-information/atom.png`;
-const pageUrl = `${config.public.siteUrl}/learn/basics-quantum-information`;
+const pageUrl = `${config.public.siteUrl}/learn/course/basics-quantum-information`;
 
 useSeoMeta({
   title,
@@ -57,6 +57,7 @@ const headerDescription = [
   John Watrous as you explore quantum information, quantum algorithms, and how
   to understand and mitigate noise.`,
 ];
+const headerImg = "/images/learn/course/basics-quantum-information/atom.png";
 
 const startLearningCTA: TextLink = {
   url: LearnStartLearningUrl.BasicsQuantumInformation,
