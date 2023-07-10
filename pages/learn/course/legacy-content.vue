@@ -44,7 +44,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "Legacy content";
 const description =
-  "Access older versions of the Qiskit Textbook through our versioning system. Stable pages of the original version (v1) are available. Note: They may be outdated and not compatible with current Qiskit versions.";
+  "Explore prior versions of the Qiskit Textbook. Access stable pages of the original version (v1). They may be outdated/incompatible with current Qiskit versions.";
 const image = `${config.public.siteUrl}/images/learn/course/legacy-content/legacy-content.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/legacy-content`;
 

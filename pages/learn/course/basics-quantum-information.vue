@@ -33,7 +33,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "Basics of quantum information";
 const description =
-  "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.";
+  "Join John Watrous in this free, detailed mathematical exploration of quantum information, algorithms, and noise mitigation.";
 const image = `${config.public.siteUrl}/images/learn/course/basics-quantum-information/atom.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/basics-quantum-information`;
 

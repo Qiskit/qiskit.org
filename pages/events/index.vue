@@ -136,7 +136,7 @@ const pastEvents = rawPastEvents as CommunityEvent[];
 const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
 const config = useRuntimeConfig();
 const description =
-  "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!";
+  "Find all past and upcoming Qiskit events, as well as our event calendar. Join hackathons, challenges, camps, talks & more.";
 
 useSeoMeta({
   title: "Qiskit Events",

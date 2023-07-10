@@ -33,7 +33,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "Introduction course";
 const description =
-  "This short 3-hour course contains is aimed at self-learners from all backgrounds, and gives a solid understanding of the principles behind quantum computing, focusing on developing intuition.";
+  "Ideal for self-learners of any background, this 3-hour course provides a solid grasp of quantum computing principles, emphasizing intuitive development.";
 const image = `${config.public.siteUrl}/images/learn/course/introduction-course/header.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/introduction-course`;
 

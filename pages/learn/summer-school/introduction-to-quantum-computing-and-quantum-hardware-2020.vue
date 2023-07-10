@@ -34,7 +34,7 @@ const config = useRuntimeConfig();
 const title =
   "2020 Qiskit global summer school on quantum computing and quantum hardware";
 const description =
-  "This introduction to the world of quantum computing explores key quantum algorithms, as well as the quantum hardware designed to run these algorithms. These lectures were first released in July 2020.";
+  "This introduction to quantum computing explores quantum algorithms and the quantum hardware designed to run them. These lectures were first released in July 2020.";
 const image = `${config.public.siteUrl}/images/learn/summer-school/intro-quantum-computing-quantum-hardware-2020/header.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/introduction-to-quantum-computing-and-quantum-hardware-2020`;
 

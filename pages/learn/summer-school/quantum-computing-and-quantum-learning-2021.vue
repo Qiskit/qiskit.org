@@ -33,7 +33,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "2021 Qiskit Global Summer School on Quantum Machine Learning";
 const description =
-  "An introductory crash course designed to empower the next generation of quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
+  "An introductory course designed to empower aspiring quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
 const image = `${config.public.siteUrl}/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/quantum-computing-and-quantum-learning-2021`;
 

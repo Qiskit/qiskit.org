@@ -44,7 +44,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "Quantum Computing Labs";
 const description =
-  "These are hands-on exercises that interact with IBM Quantum’s real quantum systems. Lab modules cover basic quantum circuits, to exploring core algorithms such as Grover search and Shor's algorithm.";
+  "Hands-on exercises that interact with real IBM Quantum systems. Labs cover basic quantum circuits to core algorithms such as Grover search and Shor's algorithm.";
 const image = `${config.public.siteUrl}/images/learn/course/quantum-computing-labs/quantum-lab.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/quantum-computing-labs`;
 

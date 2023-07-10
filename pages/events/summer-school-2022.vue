@@ -119,7 +119,7 @@ const config = useRuntimeConfig();
 
 const title = "Qiskit Global Summer School 2022";
 const description =
-  "The Qiskit Global Summer School 2022—an immersive two-week program empowering aspiring quantum researchers and developers to explore quantum applications independently.";
+  "The Qiskit Global Summer School 2022 — an immersive two-week program empowering aspiring quantum researchers and developers to explore quantum applications independently.";
 const image = `${config.public.siteUrl}/images/events/summer-school-2022/summer-school-logo.png`;
 const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
 

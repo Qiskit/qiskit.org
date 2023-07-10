@@ -39,7 +39,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "Investigating Quantum Hardware Using Quantum Circuits";
 const description =
-  "Most gate-based quantum computers share similar challenges with noise and errors. These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.";
+  "These pages explore how errors affect quantum circuits, and how we can mitigate them, without worrying about the physics of the device itself.";
 const image = `${config.public.siteUrl}/images/learn/course/quantum-hardware-circuits/quantum-hardware-circuits.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/quantum-hardware-circuits`;
 

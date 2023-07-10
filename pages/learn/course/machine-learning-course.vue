@@ -32,7 +32,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "Quantum machine learning course";
 const description =
-  "This eight-hour will take you through key concepts in quantum machine learning, such as parameterized quantum circuits, training circuits, and applying them to basic problems.";
+  "This 8-hour course covers key concepts in quantum machine learning, such as parameterized quantum circuits, training circuits, and applying them to basic problems.";
 const image = `${config.public.siteUrl}/images/learn/course/machine-learning-course/header.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/machine-learning-course`;
 
