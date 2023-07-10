@@ -32,7 +32,7 @@ const config = useRuntimeConfig();
 // SEO specific definitions
 const title = "2022 Qiskit global summer school on quantum simulation";
 const description =
-  "This summer school provides a focused introduction to quantum computing and its applications to quantum simulation, with a specific focus on quantum chemistry. These lectures were first released in July 2022.";
+  "This summer school gives an introduction to quantum computing and its applications to quantum simulation, focusing on quantum chemistry. The lectures are from July 2022.";
 const image = `${config.public.siteUrl}/images/learn/summer-school/quantum-simulation-summer-school-2022/header.png`;
 const pageUrl = `${config.public.siteUrl}/learn/course/quantum-simulation-summer-school-2022`;
 
