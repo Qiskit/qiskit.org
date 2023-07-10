@@ -57,6 +57,8 @@ useSeoMeta({
   ogImageAlt: title,
   ogUrl: pageUrl,
   ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "quantum-algorithms-for-applications";

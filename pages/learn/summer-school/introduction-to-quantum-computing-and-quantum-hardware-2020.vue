@@ -47,6 +47,8 @@ useSeoMeta({
   ogImageAlt: title,
   ogUrl: pageUrl,
   ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "introduction-to-quantum-computing-and-quantum-hardware-2020";
