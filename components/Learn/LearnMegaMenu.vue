@@ -1299,14 +1299,6 @@ const ALGORITHMS: MegaDropdownMenuGroup = {
       },
     },
     {
-      label: "Shor’s algorithms",
-      url: `${tutorialsBaseUrl}/algorithms/08_factorizers.html`,
-      segment: {
-        cta: "08_factorizers",
-        location: sectionTutorials,
-      },
-    },
-    {
       label: "Iterative Quantum Phase Estimation Algorithm",
       url: `${tutorialsBaseUrl}/algorithms/09_IQPE.html`,
       segment: {
