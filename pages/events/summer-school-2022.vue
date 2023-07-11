@@ -115,61 +115,25 @@ definePageMeta({
   routeName: "summer-school-2022",
 });
 
-const title = "Qiskit Global Summer School 2022";
-const description = `The Qiskit Global Summer School 2022 is a two-week intensive summer school
-designed to empower the next generation of quantum researchers and developers with the skills
-and know-how to explore quantum applications on their own`;
-const image = "/images/events/summer-school-2022/summer-school-logo.png";
+const config = useRuntimeConfig();
 
-useHead({
+const title = "Qiskit Global Summer School 2022";
+const description =
+  "The Qiskit Global Summer School 2022 — an immersive two-week program empowering aspiring quantum researchers and developers to explore quantum applications independently.";
+const image = `${config.public.siteUrl}/images/events/summer-school-2022/summer-school-logo.png`;
+const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
+
+useSeoMeta({
   title,
-  meta: [
-    {
-      hid: "twitter:title",
-      name: "twitter:title",
-      content: title,
-    },
-    {
-      hid: "twitter:description",
-      name: "twitter:description",
-      content: description,
-    },
-    {
-      hid: "twitter:image",
-      name: "twitter:image",
-      content: image,
-    },
-    {
-      hid: "twitter:image:alt",
-      name: "twitter:image:alt",
-      content: title,
-    },
-    {
-      hid: "og:title",
-      property: "og:title",
-      content: title,
-    },
-    {
-      hid: "og:description",
-      property: "og:description",
-      content: description,
-    },
-    {
-      hid: "og:image",
-      property: "og:image",
-      content: image,
-    },
-    {
-      hid: "og:image:secure_url",
-      property: "og:image:secure_url",
-      content: image,
-    },
-    {
-      hid: "og:image:alt",
-      property: "og:image:alt",
-      content: title,
-    },
-  ],
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];

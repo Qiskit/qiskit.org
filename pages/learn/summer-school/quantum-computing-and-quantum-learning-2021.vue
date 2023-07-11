@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -28,21 +28,36 @@ definePageMeta({
   routeName: "quantum-computing-and-quantum-learning-2021",
 });
 
-useHead({
-  title: "2021 Qiskit Global Summer School on Quantum Machine Learning",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "2021 Qiskit Global Summer School on Quantum Machine Learning";
+const description =
+  "An introductory course designed to empower aspiring quantum researchers and developers with the skills and know-how to explore quantum applications on their own.";
+const image = `${config.public.siteUrl}/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-computing-and-quantum-learning-2021`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "quantum-computing-and-quantum-learning-2021";
 
-const headerTitle =
-  "2021 Qiskit Global Summer School on Quantum Machine Learning";
 const headerDescription = [
   `Quantum computing experts and mentors share valuable insights through
   twenty lectures and five applied lab exercises that provide deep-dives
   exploring concepts in quantum computing, focused on the implementations
   of quantum machine learning algorithms in Qiskit.`,
 ];
-
 const headerImg =
   "/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png";
 

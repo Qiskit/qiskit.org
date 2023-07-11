@@ -21,16 +21,19 @@ definePageMeta({
 });
 
 const config = useRuntimeConfig();
+const description =
+  "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.";
 
 useSeoMeta({
   title: "Qiskit",
   ogTitle: "Qiskit",
-  description:
-    "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.",
-  ogDescription:
-    "Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.",
+  description,
+  ogDescription: description,
   ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
   ogUrl: `${config.public.siteUrl}`,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
