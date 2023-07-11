@@ -62,7 +62,7 @@
         padding-top: carbon.$spacing-09;
       }
 
-      &__main {
+      &__content {
         display: flex;
         flex-flow: column;
         gap: carbon.$spacing-05;
