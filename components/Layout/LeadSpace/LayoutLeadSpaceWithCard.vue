@@ -1,4 +1,5 @@
-<header class="layout-lead-space-with-card">
+<template>
+  <header class="layout-lead-space-with-card">
     <div class="cds--grid">
       <div class="cds--row">
         <aside
@@ -18,13 +19,11 @@
     </div>
   </header>
   <div class="cds--col layout-lead-space-with-card__content">
-    <div>
-      <h1 class="layout-lead-space-with-card__headline">
-        <slot name="title" />
-      </h1>
-      <div class="layout-lead-space-with-card__description">
-        <slot name="description" />
-      </div>
+    <h1 class="layout-lead-space-with-card__headline">
+      <slot name="title" />
+    </h1>
+    <div class="layout-lead-space-with-card__description">
+      <slot name="description" />
     </div>
     <UiCta
       v-if="cta"
@@ -63,7 +62,7 @@
         padding-top: carbon.$spacing-09;
       }
 
-      &__content {
+      &__main {
         display: flex;
         flex-flow: column;
         gap: carbon.$spacing-05;
