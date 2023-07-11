@@ -14,7 +14,7 @@ qiskit-banner {
   width: 100%;
   background: carbon.$cool-gray-20 0%;
   color: inherit;
-  
+
   a,
   a:visited {
     color: inherit;
