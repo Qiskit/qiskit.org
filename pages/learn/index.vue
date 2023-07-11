@@ -19,10 +19,26 @@ definePageMeta({
   routeName: "learn",
 });
 
-useHead({
-  title: "Qiskit Textbook",
-});
 const config = useRuntimeConfig();
+
+const title = "Qiskit Textbook";
+const description =
+  "A university quantum algorithms/computation course supplement based on Qiskit.";
+const image = `${config.public.siteUrl}/images/learn/qiskit-logo-header.png`;
+const pageUrl = `${config.public.siteUrl}/learn`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
+});
 
 const helpfulResources: DescriptionCard[] = [
   {

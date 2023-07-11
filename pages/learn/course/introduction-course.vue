@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -28,13 +28,29 @@ definePageMeta({
   routeName: "introduction-course",
 });
 
-useHead({
-  title: "Introduction course",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Introduction course";
+const description =
+  "Ideal for self-learners of any background, this 3-hour course provides a solid grasp of quantum computing principles, emphasizing intuitive development.";
+const image = `${config.public.siteUrl}/images/learn/course/introduction-course/header.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/introduction-course`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "introduction-course";
-
-const headerTitle = "Introduction to Quantum Computing";
 const headerDescription = [
   `This short course contains around 3 hours of content and is
   aimed at self-learners from all backgrounds (technical and
@@ -48,7 +64,6 @@ const headerDescription = [
   protocols, near term quantum algorithms, and quantum machine
   learning.`,
 ];
-
 const headerImg = "/images/learn/course/introduction-course/header.png";
 
 const startLearningCTA: TextLink = {

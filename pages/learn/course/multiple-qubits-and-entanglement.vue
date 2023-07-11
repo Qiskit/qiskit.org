@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -36,17 +36,33 @@ definePageMeta({
   routeName: "multiple-qubits-and-entanglement",
 });
 
-useHead({
-  title: "Multiple Qubits and Entanglement",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Multiple Qubits and Entanglement";
+const description =
+  "In this section we will introduce multiple qubit gates and explore the interesting behaviours of multi-qubit systems.";
+const image = `${config.public.siteUrl}/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/multiple-qubits-and-entanglement`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "multiple-qubits-and-entanglement";
 
-const headerTitle = "Multiple Qubits and Entanglement";
 const headerDescription = [
   "We've seen some interesting effects with isolated qubits and single qubit gates, but the true power of quantum computing comes from interactions between qubits. In this section we will introduce multiple qubit gates and explore the interesting behaviours of multi-qubit systems.",
 ];
-
 const headerImg =
   "/images/learn/course/multiple-qubits-and-entanglement/multiple-qubits-and-entanglement.png";
 

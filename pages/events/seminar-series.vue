@@ -129,16 +129,19 @@ definePageMeta({
 });
 
 const config = useRuntimeConfig();
+const description =
+  "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!";
 
 useSeoMeta({
   title: "Qiskit Seminar Series",
   ogTitle: "Qiskit Seminar Series",
-  description:
-    "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!",
-  ogDescription:
-    "The Qiskit Quantum Information Science Seminar Series is a broad and deep dive into the latest cutting edge quantum research. Join us live every Friday at 12:00 PM ET!",
+  description,
+  ogDescription: description,
   ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
   ogUrl: `${config.public.siteUrl}/events/seminar-series/`,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const playlistUrl =

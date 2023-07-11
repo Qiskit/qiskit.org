@@ -135,16 +135,19 @@ definePageMeta({
 const pastEvents = rawPastEvents as CommunityEvent[];
 const upcomingEvents = rawUpcomingEvents as CommunityEvent[];
 const config = useRuntimeConfig();
+const description =
+  "Find all past and upcoming Qiskit events, as well as our event calendar. Join hackathons, challenges, camps, talks & more.";
 
 useSeoMeta({
   title: "Qiskit Events",
   ogTitle: "Qiskit Events",
-  description:
-    "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
-  ogDescription:
-    "All past and upcoming events Qiskit related in one place! Hackathons, challenge, camps, talks and more are waiting for you to join!",
+  description,
+  ogDescription: description,
   ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
   ogUrl: `${config.public.siteUrl}/events/`,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const { trackClickEvent } = useSegment();

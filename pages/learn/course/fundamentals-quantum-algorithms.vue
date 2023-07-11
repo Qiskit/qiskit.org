@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -28,13 +28,30 @@ definePageMeta({
   routeName: "fundamentals-quantum-algorithms-course",
 });
 
-useHead({
-  title: "Fundamentals of quantum algorithms",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Fundamentals of quantum algorithms";
+const description =
+  "This unit explores computational advantages of quantum information, including what we can do with quantum computers and their advantages over classical computers.";
+const image = `${config.public.siteUrl}/images/learn/course/fundamentals-quantum-algorithms/hero.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/fundamentals-quantum-algorithms`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "fundamentals-quantum-algorithms-course";
 
-const headerTitle = "Fundamentals of quantum algorithms";
 const headerDescription = [
   `This is the second unit of the "Understanding quantum information and
   computation" series, which explains quantum information and computation at a
@@ -48,7 +65,6 @@ const headerDescription = [
   are more representative of the types of computational problems that might be
   encountered in real-world scenarios.`,
 ];
-
 const headerImg =
   "/images/learn/course/fundamentals-quantum-algorithms/hero.png";
 
