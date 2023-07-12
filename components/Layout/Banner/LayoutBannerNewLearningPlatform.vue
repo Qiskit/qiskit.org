@@ -2,7 +2,8 @@
   <qiskit-banner>
     Introducing&nbsp;
     <a href="#">IBM Quantum Learning</a>, a new home for free quantum education
-    resources. Continue to use Learn on Qiskit until December 1st, 2023.
+    resources. Continue to use&nbsp;
+    <a href="/learn">qiskit.org/learn</a>&nbsp;until December 1st, 2023.
   </qiskit-banner>
 </template>
 
