@@ -3,7 +3,6 @@
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <HomeProviders />
-    <HomeLearn />
   </main>
 </template>
 
