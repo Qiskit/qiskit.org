@@ -160,7 +160,7 @@ const learningSections: LearningSection[] = [
     content, and if you can’t find what you’re looking for you can ask the
     community on Slack.`,
     courses: [
-    {
+      {
         image: "/images/learn/introduction-course.png",
         title: "Introduction course",
         description: `Not sure where to start? This path is for you.
