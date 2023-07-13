@@ -173,6 +173,22 @@ const learningSections: LearningSection[] = [
         },
       },
       {
+        image: "/images/learn/course/fundamentals-quantum-algorithms/hero.png",
+        title: "Understanding quantum information and computation",
+        subtitle: "Unit 2: Fundamentals of quantum algorithms",
+        description: `Discover how we can use quantum systems to solve problems more
+          efficiently, including problems with real-world applications such as
+          searching and factoring.`,
+        cta: {
+          label: "Go to this course",
+          url: "/learn/course/fundamentals-quantum-algorithms",
+          segment: {
+            cta: "fundamentals-quantum-algorithms",
+            location: "course",
+          },
+        },
+      },
+      {
         image: "/images/learn/course/algorithm-design/algorithm-design.png",
         title: "Variational algorithm design",
         description: `This course teaches how to write variational 
@@ -210,22 +226,6 @@ const learningSections: LearningSection[] = [
           label: "Go to this course",
           url: "/learn/course/machine-learning-course",
           segment: { cta: "machine-learning", location: "course" },
-        },
-      },
-      {
-        image: "/images/learn/course/fundamentals-quantum-algorithms/hero.png",
-        title: "Understanding quantum information and computation",
-        subtitle: "Unit 2: Fundamentals of quantum algorithms",
-        description: `Discover how we can use quantum systems to solve problems more
-          efficiently, including problems with real-world applications such as
-          searching and factoring.`,
-        cta: {
-          label: "Go to this course",
-          url: "/learn/course/fundamentals-quantum-algorithms",
-          segment: {
-            cta: "fundamentals-quantum-algorithms",
-            location: "course",
-          },
         },
       },
     ],
