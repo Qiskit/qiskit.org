@@ -11,7 +11,10 @@
     <UiLink :segment="qiskitLearnLink.segment" :url="qiskitLearnLink.url">
       {{ qiskitLearnLink.label }}
     </UiLink>
-    &nbsp;until December 1st, 2023.
+    &nbsp;<strong>until December 1st, 2023</strong>.&nbsp;
+    <UiLink :segment="moreInfoBlogLink.segment" :url="moreInfoBlogLink.url">
+      {{ moreInfoBlogLink.label }}
+    </UiLink>
   </qiskit-banner>
 </template>
 
@@ -28,6 +31,12 @@ const qiskitLearnLink: TextLink = {
   url: "/learn",
   label: "qiskit.org/learn",
   segment: { cta: "qiskit-learn", location: "announcement-banner" },
+};
+
+const moreInfoBlogLink: TextLink = {
+  url: "#",
+  label: "More information...",
+  segment: { cta: "more-info-blog", location: "announcement-banner" },
 };
 </script>
 
