@@ -160,6 +160,20 @@ const learningSections: LearningSection[] = [
     content, and if you can’t find what you’re looking for you can ask the
     community on Slack.`,
     courses: [
+    {
+        image: "/images/learn/introduction-course.png",
+        title: "Introduction course",
+        description: `Not sure where to start? This path is for you.
+        This introduction is aimed at audiences from all backgrounds.
+        Whether you're keen to start your journey into quantum computing,
+        or just curious as to what it's all about, this course will take
+        you from zero to one, without the hand waving.`,
+        cta: {
+          label: "Go to this course",
+          url: "/learn/course/introduction-course",
+          segment: { cta: "introduction-course", location: "course" },
+        },
+      },
       {
         image: "/images/learn/course/basics-quantum-information/atom.png",
         title: "Understanding quantum information and computation",
@@ -199,20 +213,6 @@ const learningSections: LearningSection[] = [
           label: "Go to this course",
           url: "/learn/course/algorithm-design",
           segment: { cta: "algorithm-design", location: "course" },
-        },
-      },
-      {
-        image: "/images/learn/introduction-course.png",
-        title: "Introduction course",
-        description: `Not sure where to start? This path is for you.
-        This introduction is aimed at audiences from all backgrounds.
-        Whether you're keen to start your journey into quantum computing,
-        or just curious as to what it's all about, this course will take
-        you from zero to one, without the hand waving.`,
-        cta: {
-          label: "Go to this course",
-          url: "/learn/course/introduction-course",
-          segment: { cta: "introduction-course", location: "course" },
         },
       },
       {
