@@ -2,6 +2,22 @@
   <header class="layout-lead-space-with-card">
     <div class="cds--grid">
       <div class="cds--row">
+        <div class="cds--col layout-lead-space-with-card__div">
+          <div>
+            <h1 class="layout-lead-space-with-card__headline">
+              <slot name="title" />
+            </h1>
+            <div class="layout-lead-space-with-card__description">
+              <slot name="description" />
+            </div>
+          </div>
+          <UiCta
+            v-if="cta"
+            :label="cta.label"
+            :segment="cta.segment"
+            :url="cta.url"
+          />
+        </div>
         <aside
           class="cds--col-lg-5 cds--col-md-4 layout-lead-space-with-card__aside"
         >
@@ -18,32 +34,18 @@
       </div>
     </div>
   </header>
-  <div class="cds--col layout-lead-space-with-card__content">
-    <h1 class="layout-lead-space-with-card__headline">
-      <slot name="title" />
-    </h1>
-    <div class="layout-lead-space-with-card__description">
-      <slot name="description" />
-    </div>
-    <UiCta
-      v-if="cta"
-      :label="cta.label"
-      :segment="cta.segment"
-      :url="cta.url"
-    />
-  </div>
-
-  <script setup lang="ts">
-    import { TextLink } from "~/types/links";
-
-    interface Props {
-      cardTitle: string;
-      cta?: TextLink;
-    }
-
-    defineProps<Props>();
-  </script>
 </template>
+
+<script setup lang="ts">
+import { TextLink } from "~/types/links";
+
+interface Props {
+  cardTitle: string;
+  cta?: TextLink;
+}
+
+defineProps<Props>();
+</script>
 
 <style lang="scss" scoped>
 @use "sass:math";
@@ -63,7 +65,7 @@
     padding-top: carbon.$spacing-09;
   }
 
-  &__content {
+  &__div {
     display: flex;
     flex-flow: column;
     gap: carbon.$spacing-05;
