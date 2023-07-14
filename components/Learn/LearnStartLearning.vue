@@ -161,31 +161,6 @@ const learningSections: LearningSection[] = [
     community on Slack.`,
     courses: [
       {
-        image: "/images/learn/course/basics-quantum-information/atom.png",
-        title: "Understanding quantum information and computation",
-        subtitle: "Unit 1: Basics of quantum information",
-        description:
-          "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.",
-        cta: {
-          label: "Go to this course",
-          url: "/learn/course/basics-quantum-information",
-          segment: { cta: "basics-quatum-information", location: "course" },
-        },
-      },
-      {
-        image: "/images/learn/course/algorithm-design/algorithm-design.png",
-        title: "Variational algorithm design",
-        description: `This course teaches how to write variational 
-        algorithms: near-term, hybrid-quantum-classical algorithms that 
-        are ideal candidates to achieve quantum advantage. We'll also cover how to 
-        use Qiskit Runtime primitives to optimize for speed and accuracy.`,
-        cta: {
-          label: "Go to this course",
-          url: "/learn/course/algorithm-design",
-          segment: { cta: "algorithm-design", location: "course" },
-        },
-      },
-      {
         image: "/images/learn/introduction-course.png",
         title: "Introduction course",
         description: `Not sure where to start? This path is for you.
@@ -200,16 +175,15 @@ const learningSections: LearningSection[] = [
         },
       },
       {
-        image: "/images/learn/machine-learning.png",
-        title: "Quantum machine learning",
-        description: `Want to learn about this exciting, developing field? If
-        you're familiar with quantum computing basics, this course will give
-        you a primer on machine learning, walk you through key concepts, and
-        bring you up to speed with recent developments.`,
+        image: "/images/learn/course/basics-quantum-information/atom.png",
+        title: "Understanding quantum information and computation",
+        subtitle: "Unit 1: Basics of quantum information",
+        description:
+          "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.",
         cta: {
           label: "Go to this course",
-          url: "/learn/course/machine-learning-course",
-          segment: { cta: "machine-learning", location: "course" },
+          url: "/learn/course/basics-quantum-information",
+          segment: { cta: "basics-quatum-information", location: "course" },
         },
       },
       {
@@ -226,6 +200,32 @@ const learningSections: LearningSection[] = [
             cta: "fundamentals-quantum-algorithms",
             location: "course",
           },
+        },
+      },
+      {
+        image: "/images/learn/course/algorithm-design/algorithm-design.png",
+        title: "Variational algorithm design",
+        description: `This course teaches how to write variational 
+        algorithms: near-term, hybrid-quantum-classical algorithms that 
+        are ideal candidates to achieve quantum advantage. We'll also cover how to 
+        use Qiskit Runtime primitives to optimize for speed and accuracy.`,
+        cta: {
+          label: "Go to this course",
+          url: "/learn/course/algorithm-design",
+          segment: { cta: "algorithm-design", location: "course" },
+        },
+      },
+      {
+        image: "/images/learn/machine-learning.png",
+        title: "Quantum machine learning",
+        description: `Want to learn about this exciting, developing field? If
+        you're familiar with quantum computing basics, this course will give
+        you a primer on machine learning, walk you through key concepts, and
+        bring you up to speed with recent developments.`,
+        cta: {
+          label: "Go to this course",
+          url: "/learn/course/machine-learning-course",
+          segment: { cta: "machine-learning", location: "course" },
         },
       },
     ],
