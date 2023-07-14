@@ -20,15 +20,18 @@ definePageMeta({
 });
 
 const config = useRuntimeConfig();
+const description =
+  "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!";
 
 useSeoMeta({
   title: "Qiskit Advocates",
   ogTitle: "Qiskit Advocates",
-  description:
-    "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
-  ogDescription:
-    "The Qiskit advocate program is a global program that provides support to the individuals who actively contribute to the Qiskit Community. Join the program today!",
+  description,
+  ogDescription: description,
   ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
   ogUrl: `${config.public.siteUrl}/advocates/`,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 </script>

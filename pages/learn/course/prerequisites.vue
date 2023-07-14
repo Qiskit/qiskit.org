@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -32,17 +32,33 @@ definePageMeta({
   routeName: "prerequisites",
 });
 
-useHead({
-  title: "Prerequisites",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Prerequisites";
+const description =
+  "This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook.";
+const image = `${config.public.siteUrl}/images/learn/course/prerequisites/prerequisites.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/prerequisites`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "prerequisites";
 
-const headerTitle = "Prerequisites";
 const headerDescription = [
   "This is a comprehensive guide for setting up your environment on your personal computer for working with Qiskit Textbook. This will help you reproduce the results as you see them on the textbook website. The Qiskit Textbook is written in Jupyter Notebooks.",
 ];
-
 const headerImg = "/images/learn/course/prerequisites/prerequisites.png";
 
 const startLearningCTA: TextLink = {

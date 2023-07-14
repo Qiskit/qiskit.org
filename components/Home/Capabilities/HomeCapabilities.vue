@@ -41,7 +41,7 @@ const capabilities: QiskitCapability[] = [
     thumbnailResource: "/images/landing-page/feature-circuit.png",
     link: {
       url: `${config.public.siteUrl}/documentation/apidoc/circuit_library.html`,
-      label: "Learn more",
+      label: "View the circuit library",
       segment: { cta: "circuit-library", location: "homepage-capabilities" },
     },
   },
@@ -52,7 +52,7 @@ const capabilities: QiskitCapability[] = [
     thumbnailResource: "/images/landing-page/transpiler.png",
     link: {
       url: `${config.public.siteUrl}/documentation/apidoc/transpiler.html`,
-      label: "Learn more",
+      label: "Read about transpilation",
       segment: { cta: "transpiler", location: "homepage-capabilities" },
     },
   },
@@ -63,7 +63,7 @@ const capabilities: QiskitCapability[] = [
     thumbnailResource: "/images/library/chip-01.png",
     link: {
       url: "/providers",
-      label: "Learn more",
+      label: "See all providers",
       segment: {
         cta: "transpile-to-any-hardware",
         location: "homepage-capabilities",
@@ -77,7 +77,7 @@ const capabilities: QiskitCapability[] = [
     thumbnailResource: "/images/landing-page/med_02_1.png",
     link: {
       url: `${config.public.siteUrl}/documentation/getting_started.html`,
-      label: "Learn more",
+      label: "Get started here",
       segment: { cta: "try-it-yourself", location: "homepage-capabilities" },
     },
   },

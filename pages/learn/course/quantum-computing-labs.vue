@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -39,17 +39,33 @@ definePageMeta({
   routeName: "quantum-computing-labs",
 });
 
-useHead({
-  title: "Quantum Computing Labs",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Quantum Computing Labs";
+const description =
+  "Hands-on exercises that interact with real IBM Quantum systems. Labs cover basic quantum circuits to core algorithms such as Grover search and Shor's algorithm.";
+const image = `${config.public.siteUrl}/images/learn/course/quantum-computing-labs/quantum-lab.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-computing-labs`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "quantum-computing-labs";
 
-const headerTitle = "Quantum Computing Labs";
 const headerDescription = [
   "These pages are hands-on exercises that interact with IBM Quantum's real quantum systems. Aimed at late-undergraduate / early-graduate courses, these lab modules start cover basic quantum circuits, to exploring core algorithms such as Grover search and Shor's algorithm. These pages tackle the limitations of today's quantum computers, and ways to account for them.",
 ];
-
 const headerImg = "/images/learn/course/quantum-computing-labs/quantum-lab.png";
 
 const startLearningCTA: TextLink = {

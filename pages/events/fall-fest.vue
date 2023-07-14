@@ -113,64 +113,25 @@ definePageMeta({
   routeName: "fall-fest",
 });
 
+const config = useRuntimeConfig();
+
 const title = "Qiskit Fall Fest 2022";
 const description =
-  "The Qiskit Fall Fest is a collection of quantum computing events on college campuses around the world. Every Fall Fest event is organized and run by the students on each campus, with support from the entire IBM Quantum team. Student leaders work alongside IBM throughout the month of September to design and plan their event, which are then run in October. The events vary from technical hackathons to beginner-friendly challenges, all with the goal of helping to grow the local community’s skill set.";
-const image = "/images/events/fall-fest/fall-fest.png";
+  "The Qiskit Fall Fest is a collection of quantum computing events from universities around the world, organized by students and supported by the IBM Quantum community.";
+const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest.png`;
+const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
 
-useHead({
+useSeoMeta({
   title,
-  meta: [
-    {
-      name: "description",
-      content: description,
-    },
-    {
-      hid: "twitter:title",
-      name: "twitter:title",
-      content: title,
-    },
-    {
-      hid: "twitter:description",
-      name: "twitter:description",
-      content: description,
-    },
-    {
-      hid: "twitter:image",
-      name: "twitter:image",
-      content: image,
-    },
-    {
-      hid: "twitter:image:alt",
-      name: "twitter:image:alt",
-      content: title,
-    },
-    {
-      hid: "og:title",
-      property: "og:title",
-      content: title,
-    },
-    {
-      hid: "og:description",
-      property: "og:description",
-      content: description,
-    },
-    {
-      hid: "og:image",
-      property: "og:image",
-      content: image,
-    },
-    {
-      hid: "og:image:secure_url",
-      property: "og:image:secure_url",
-      content: image,
-    },
-    {
-      hid: "og:image:alt",
-      property: "og:image:alt",
-      content: title,
-    },
-  ],
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const agendaData = agenda;

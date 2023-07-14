@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -39,13 +39,30 @@ definePageMeta({
   routeName: "legacy-content",
 });
 
-useHead({
-  title: "Legacy content",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Legacy content";
+const description =
+  "Explore prior versions of the Qiskit Textbook. Access stable pages of the original version (v1). They may be outdated/incompatible with current Qiskit versions.";
+const image = `${config.public.siteUrl}/images/learn/course/legacy-content/legacy-content.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/legacy-content`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "legacy-content";
 
-const headerTitle = "Legacy content";
 const headerDescription = [
   `We're constantly updating and improving the Qiskit Textbook, but we know
   these changes can be disruptive. For this reason, you can always access
@@ -57,7 +74,6 @@ const headerDescription = [
   Qiskit. See the bottom of each page for the package versions used at the
   time of writing.`,
 ];
-
 const headerImg = "/images/learn/course/legacy-content/legacy-content.png";
 
 const startLearningCTA: TextLink = {
