@@ -102,6 +102,7 @@
 </template>
 
 <script setup lang="ts">
+import { createEventSchemaOrg } from "~/utils/event-schemaorg";
 import {
   header,
   mosaic,
@@ -141,8 +142,6 @@ const headerData = header;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
-
-const config = useRuntimeConfig();
 
 useSchemaOrg([
   createEventSchemaOrg({
