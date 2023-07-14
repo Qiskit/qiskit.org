@@ -4,7 +4,7 @@
     :external-recommended-readings-preamble="
       externalRecommendedReadingsPreamble
     "
-    :header-title="headerTitle"
+    :header-title="title"
     :header-description="headerDescription"
     :header-img="headerImg"
     :image-url-base="imageUrlBase"
@@ -36,17 +36,33 @@ definePageMeta({
   routeName: "quantum-hardware-pulses",
 });
 
-useHead({
-  title: "Investigating Quantum Hardware Using Microwave Pulses",
+const config = useRuntimeConfig();
+
+// SEO specific definitions
+const title = "Investigating Quantum Hardware Using Microwave Pulses";
+const description =
+  "These pages explore the physics of superconducting qubits, and using Qiskit to program operations on devices at the level of microwave pulses.";
+const image = `${config.public.siteUrl}/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png`;
+const pageUrl = `${config.public.siteUrl}/learn/course/quantum-hardware-pulses`;
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+  ogImage: image,
+  ogImageAlt: title,
+  ogUrl: pageUrl,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const routeName = "quantum-hardware-pulses";
 
-const headerTitle = "Investigating Quantum Hardware Using Microwave Pulses";
 const headerDescription = [
   "The Qiskit Textbook mostly assumes we have a quantum computer that can carry out quantum operations, and doesn't worry about how the devices actually work. These pages go a step deeper, exploring the physics of superconducting qubits, and using Qiskit to program operations on these devices at the level of microwave pulses.",
 ];
-
 const headerImg =
   "/images/learn/course/quantum-hardware-pulses/quantum-hardware-pulses.png";
 

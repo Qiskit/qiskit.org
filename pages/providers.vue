@@ -75,16 +75,19 @@ definePageMeta({
 });
 
 const config = useRuntimeConfig();
+const description =
+  "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware";
 
 useSeoMeta({
   title: "Qiskit Providers",
   ogTitle: "Qiskit Providers",
-  description:
-    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
-  ogDescription:
-    "All the ways you can run Qiskit! From Local Simulators to real Quantum Hardware",
+  description,
+  ogDescription: description,
   ogImage: `${config.public.siteUrl}/images/metal/hero/cryo.png`,
   ogUrl: `${config.public.siteUrl}/providers/`,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 const { data: providersData } = await useAsyncData("providers", () =>

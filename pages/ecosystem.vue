@@ -153,15 +153,19 @@ definePageMeta({
   routeName: "ecosystem",
 });
 
+const description =
+  "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!";
+
 useSeoMeta({
   title: "Qiskit Ecosystem",
   ogTitle: "Qiskit Ecosystem",
-  description:
-    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
-  ogDescription:
-    "Discover the Qiskit Ecosystem, a vibrant community accelerating quantum technologies with projects, tools, libraries, and tutorials. Join us now!",
+  description,
+  ogDescription: description,
   ogImage: `${config.public.siteUrl}/images/qiskit-logo.png`,
   ogUrl: `${config.public.siteUrl}/ecosystem/`,
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterDescription: description,
 });
 
 /**
