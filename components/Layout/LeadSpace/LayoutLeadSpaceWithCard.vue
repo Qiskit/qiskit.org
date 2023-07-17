@@ -2,7 +2,7 @@
   <header class="layout-lead-space-with-card">
     <div class="cds--grid">
       <div class="cds--row">
-        <div class="cds--col layout-lead-space-with-card__div">
+        <div class="cds--col layout-lead-space-with-card__content">
           <div>
             <h1 class="layout-lead-space-with-card__headline">
               <slot name="title" />
@@ -65,7 +65,7 @@ defineProps<Props>();
     padding-top: carbon.$spacing-09;
   }
 
-  &__div {
+  &__content {
     display: flex;
     flex-flow: column;
     gap: carbon.$spacing-05;
