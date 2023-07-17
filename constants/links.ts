@@ -2,7 +2,6 @@ import { TextLink } from "~/types/links";
 
 enum LearnStartLearningUrl {
   Introduction = "https://learn.qiskit.org/course/introduction",
-  AlgorithmDesign = "https://learn.qiskit.org/course/algorithm-design",
   QML = "https://learn.qiskit.org/course/machine-learning",
   SummerSchool2020 = "https://learn.qiskit.org/summer-school/2020/",
   SummerSchool2021 = "https://learn.qiskit.org/summer-school/2021/",
