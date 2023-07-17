@@ -210,8 +210,8 @@ const learningSections: LearningSection[] = [
         are ideal candidates to achieve quantum advantage. We'll also cover how to 
         use Qiskit Runtime primitives to optimize for speed and accuracy.`,
         cta: {
-          label: "Go to this course",
-          url: "/learn/course/algorithm-design",
+          label: "Take this course in IBM Quantum Learning",
+          url: "https://qiskit.org/learn/course/algorithm-design",
           segment: { cta: "algorithm-design", location: "course" },
         },
       },
