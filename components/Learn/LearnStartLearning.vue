@@ -182,7 +182,7 @@ const learningSections: LearningSection[] = [
           "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.",
         cta: {
           label: "Take this course in IBM Quantum Learning",
-          url: "/learn/course/basics-quantum-information",
+          url: "https://qiskit.org/learn/course/basics-quantum-information",
           segment: { cta: "basics-quatum-information", location: "course" },
         },
       },
@@ -195,7 +195,7 @@ const learningSections: LearningSection[] = [
           searching and factoring.`,
         cta: {
           label: "Take this course in IBM Quantum Learning",
-          url: "/learn/course/fundamentals-quantum-algorithms",
+          url: "https://qiskit.org/learn/course/fundamentals-quantum-algorithms",
           segment: {
             cta: "fundamentals-quantum-algorithms",
             location: "course",
