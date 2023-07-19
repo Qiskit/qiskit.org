@@ -1,60 +1,84 @@
 <template>
-  <component
-    :is="isNuxtLink ? 'NuxtLink' : 'a'"
+  <NuxtLink
     v-track-click="segment"
-    :href="isAnchor && url"
-    :to="isNuxtLink && url"
-    :style="hasLink && 'cursor:pointer'"
-    :rel="isExternal && 'noopener'"
-    :target="isExternal ? '_blank' : undefined"
+    :external="computedExternal"
+    :target="computedTarget"
     :title="title"
+    :to="url"
     @click="emit('click')"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />
-  </component>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
+import { hasProtocol } from "ufo";
 import { CtaClickedEventProp } from "~/types/segment";
 
+type NuxtLinkTarget =
+  | "_blank"
+  | "_parent"
+  | "_self"
+  | "_top"
+  | (string & {})
+  | null;
+
 interface Props {
+  external?: boolean;
   segment?: CtaClickedEventProp | undefined;
+  target?: NuxtLinkTarget;
   title?: string;
-  url?: string;
+  url: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  external: undefined,
   segment: undefined,
+  target: undefined,
   title: undefined,
-  url: "",
 });
 
 const emit = defineEmits(["click", "mouseenter"]);
 
-const isExternal = computed(() => {
-  return !!props.url && props.url.startsWith("http");
+const config = useRuntimeConfig();
+
+const isExternalFromSameDomain = computed<boolean>(() => {
+  return props.url.startsWith(config.public.siteUrl);
 });
 
-const isInternal = computed(() => {
-  return !!props.url && props.url.startsWith("/");
+// Resolving link type (Based on https://github.com/nuxt/nuxt/blob/v3.6.3/packages/nuxt/src/app/components/nuxt-link.ts#L179)
+const isExternalFromDifferentDomain = computed<boolean>(() => {
+  if (isExternalFromSameDomain.value) {
+    return false;
+  }
+
+  // External prop is explicitly set
+  if (props.external) {
+    return true;
+  }
+
+  // When `target` prop is set, link is external
+  if (props.target && props.target !== "_self") {
+    return true;
+  }
+
+  return props.url === "" || hasProtocol(props.url, { acceptRelative: true });
 });
 
-const isMail = computed(() => {
-  return !!props.url && props.url.startsWith("mailto");
+const computedExternal = computed<boolean>(() => {
+  return isExternalFromSameDomain.value || isExternalFromDifferentDomain.value;
 });
 
-const isIdAnchor = computed(() => {
-  return !!props.url && props.url.startsWith("#");
+const computedTarget = computed<NuxtLinkTarget | undefined>(() => {
+  if (typeof props.target !== "undefined") {
+    return props.target;
+  } else if (isExternalFromSameDomain.value) {
+    return "_self";
+  } else if (isExternalFromDifferentDomain.value) {
+    return "_blank";
+  }
+
+  return undefined;
 });
-
-const hasLink = computed(() => !!props.url);
-
-const isAnchor = computed(() => {
-  return (
-    isExternal.value || isMail.value || isIdAnchor.value || isInternal.value
-  );
-});
-
-const isNuxtLink = computed(() => !isAnchor.value);
 </script>

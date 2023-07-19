@@ -10,7 +10,7 @@
         'providers-toc__entry_active': isActive(entry),
         'providers-toc__entry_second-level': entry.isSecondary,
       }"
-      :url="entry.sectionId && `#${entry.sectionId}`"
+      :url="(entry.sectionId && `#${entry.sectionId}`) || ''"
       >{{ entry.title }}</UiLink
     >
     <!-- eslint-enable -->
