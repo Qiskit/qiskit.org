@@ -188,14 +188,25 @@ describe("storeImage", () => {
     });
 
     test("If a field causes a handled error, it shouln'd appear in the final object", async () => {
+      const fields = [
+        { fields: { City: "" } },
+        { fields: { Country: "" } },
+        { fields: { Region: "" } },
+        { fields: { Image: "" } },
+        { fields: { "Slack Id": "" } },
+        { fields: { "Slack Username": "" } },
+      ];
+      let fieldsIdx = 0;
       const airtableEachPageMockFn = vi
         .fn()
         .mockImplementation(
           (cb: (records: any, nextPage: any) => void): Promise<void> => {
+            const element = fields[fieldsIdx];
+            fieldsIdx++;
             // eslint-disable-next-line n/no-callback-literal
             cb(
               // two elements to check the  for loop in getFieldName
-              [{ fields: { City: "" } }, { fields: { Country: "" } }],
+              [element],
               () => {}
             );
             return Promise.resolve();
@@ -225,28 +236,37 @@ describe("storeImage", () => {
       // throws the exception
       expect(result).toStrictEqual({
         city: "City",
-        country: "City",
-        region: "City",
-        image: "City",
-        slackUsername: "City",
-        slackId: "City",
+        country: "Country",
+        region: "Region",
+        image: "Image",
+        slackUsername: "Slack Username",
+        slackId: "Slack Id",
       });
     });
 
     test('If getFieldName gets 0 records, all fieldNames should be "" then, this field should not appears in result object', async () => {
       let callIndex = 0;
+      const fields = [
+        { fields: { Name: "" } },
+        { fields: { City: "" } },
+        { fields: { Country: "" } },
+        { fields: { Region: "" } },
+        { fields: { Image: "" } },
+        { fields: { "Slack Id": "" } },
+        { fields: { "Slack Username": "" } },
+      ];
       const airtableEachPageMockFn = vi
         .fn()
         .mockImplementation(
           (cb: (records: any, nextPage: any) => void): Promise<void> => {
             // this should pass 0 records for the first field (which is name)
-            const records = callIndex === 0 ? [] : [{ fields: { City: "" } }];
+            const records = callIndex === 0 ? [] : [fields[callIndex]];
+            callIndex++;
             cb(
               // two elements to check the  for loop in getFieldName
               records,
               () => {}
             );
-            callIndex++;
             return Promise.resolve();
           }
         );
@@ -266,15 +286,16 @@ describe("storeImage", () => {
       );
 
       const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
+
       // notice that in this object, there is no name because is th one that
       // throws the exception
       expect(result).toStrictEqual({
         city: "City",
-        country: "City",
-        region: "City",
-        image: "City",
-        slackUsername: "City",
-        slackId: "City",
+        country: "Country",
+        region: "Region",
+        image: "Image",
+        slackUsername: "Slack Username",
+        slackId: "Slack Id",
       });
     });
   });
