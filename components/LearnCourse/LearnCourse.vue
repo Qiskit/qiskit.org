@@ -1,5 +1,5 @@
 <template>
-  <main class="learn-course">
+  <div class="learn-course">
     <LearnContentMenu class="learn-course__content-menu" />
     <LayoutLeadSpaceWithImage
       :cta="startLearningCta"
@@ -41,7 +41,7 @@
       :courses="courses"
       :img-base="imageUrlBase"
     />
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">

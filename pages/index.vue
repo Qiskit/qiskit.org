@@ -1,10 +1,10 @@
 <template>
-  <main>
+  <div>
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <HomeProviders />
     <HomeLearn />
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">

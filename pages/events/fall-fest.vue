@@ -1,5 +1,5 @@
 <template>
-  <main class="fall-fest-page">
+  <div class="fall-fest-page">
     <LayoutLeadSpaceWithCard
       :cta="headerData.cta"
       :card-title="headerData.cardSectionHeading"
@@ -96,7 +96,7 @@
         :resources="helpfulResourcesData.resources"
       />
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
