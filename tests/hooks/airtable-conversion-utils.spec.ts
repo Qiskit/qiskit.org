@@ -194,7 +194,7 @@ describe("storeImage", () => {
           (cb: (records: any, nextPage: any) => void): Promise<void> => {
             // eslint-disable-next-line n/no-callback-literal
             cb(
-              // two elements to check the  for loop in getFieldName
+              // two elements to check the for loop in `getFieldName`
               [{ fields: { City: "" } }, { fields: { Country: "" } }],
               () => {}
             );
