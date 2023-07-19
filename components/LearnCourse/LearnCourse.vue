@@ -87,7 +87,7 @@ const backToTextbookHomeLink: TextLink = {
     margin-bottom: carbon.$spacing-07;
     margin-top: carbon.$spacing-10;
 
-    :deep(.learn-course-pages__main) {
+    :deep(.learn-course-pages__content) {
       min-height: 20rem;
       height: max-content;
     }
