@@ -187,7 +187,7 @@ describe("storeImage", () => {
       });
     });
 
-    test("If a field causes a handled error, it shouln'd appear in the final object", async () => {
+    test("removes a field from the final object if a handled error is thrown", async () => {
       const airtableEachPageMockFn = vi
         .fn()
         .mockImplementation(
