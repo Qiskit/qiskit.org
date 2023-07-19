@@ -27,7 +27,6 @@
 import ArrowDown16 from "@carbon/icons-vue/lib/arrow--down/16";
 import ArrowRight16 from "@carbon/icons-vue/lib/arrow--right/16";
 import Launch16 from "@carbon/icons-vue/lib/launch/16";
-import { hasProtocol } from "ufo";
 import { Link } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
 
@@ -61,10 +60,7 @@ const urlString = computed(() => {
 
 // Resolving link type (Based on https://github.com/nuxt/nuxt/blob/v3.6.3/packages/nuxt/src/app/components/nuxt-link.ts#L179)
 const isExternalLogically = computed<boolean>(() => {
-  return (
-    urlString.value === "" ||
-    hasProtocol(urlString.value, { acceptRelative: true })
-  );
+  return urlString.value === "" || urlHasProtocol(urlString.value);
 });
 
 const isExternalVisually = computed<boolean>(() => {

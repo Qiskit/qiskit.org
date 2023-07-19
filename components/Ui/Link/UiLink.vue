@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { hasProtocol } from "ufo";
 import { CtaClickedEventProp } from "~/types/segment";
 
 type NuxtLinkTarget =
@@ -63,7 +62,7 @@ const isExternalFromDifferentDomain = computed<boolean>(() => {
     return true;
   }
 
-  return props.url === "" || hasProtocol(props.url, { acceptRelative: true });
+  return props.url === "" || urlHasProtocol(props.url);
 });
 
 const computedExternal = computed<boolean>(() => {
