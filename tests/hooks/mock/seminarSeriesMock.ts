@@ -3,7 +3,7 @@ export const mock: any[] = [
     Name: "delectus eaque consectetur",
     "Event Start Date": "2022-07-29",
     "Type of Engagement": ["Seminar Series"],
-    "Event Website": "http://overlooked-sleeping.org",
+    "Event Website": "http://example.com",
     "Event City/State": "YouTube",
     Region: ["Online"],
     "Image / Icon": [
@@ -11,23 +11,23 @@ export const mock: any[] = [
         id: "18f3a44d-cae2-4e12-9403-25dbdc5b90a2",
         width: 295,
         height: 295,
-        url: "https://wide-necktie.biz",
+        url: "https://example.com",
         filename: "french_e_services_digital.docx",
         size: 60078,
         type: "image/jpeg",
         thumbnails: {
           small: {
-            url: "https://total-niece.name",
+            url: "https://example.com",
             width: 36,
             height: 36,
           },
           large: {
-            url: "https://nice-color.com",
+            url: "https://example.com",
             width: 295,
             height: 295,
           },
           full: {
-            url: "https://married-precedent.name",
+            url: "https://example.com",
             width: 3000,
             height: 3000,
           },
@@ -46,7 +46,7 @@ export const mock: any[] = [
     "Event City/State": "YouTube",
     "Event Abstract": "Qui facere assumenda ducimus.",
     "Add to Event Site": true,
-    "Event Website": "http://jam-packed-unity.com",
+    "Event Website": "http://example.com",
     "Image / Icon": [
       {
         id: "att8eF6mVuKzbZxk0",
@@ -63,12 +63,12 @@ export const mock: any[] = [
             height: 36,
           },
           large: {
-            url: "https://beloved-programme.info",
+            url: "https://example.com",
             width: 512,
             height: 580,
           },
           full: {
-            url: "https://safe-bid.biz",
+            url: "https://example.com",
             width: 3000,
             height: 3000,
           },

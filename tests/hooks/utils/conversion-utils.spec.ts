@@ -18,13 +18,13 @@ describe("writeJSONToFile", () => {
 
     const mock = [
       {
-        name: "Abby Mitchell",
+        name: "Scottie Wuckert",
         image: "/images/advocates/downloaded/rec8zXNiryVq3Q6kh.jpg",
         region: "America (North)",
         city: "New York",
         country: ["United States"],
         slackId: "U017XULSMUY",
-        slackUsername: "Abby Mitchell",
+        slackUsername: "Maria.Dickens34",
       },
       {
         name: "Abeer Vaishnav",
@@ -58,22 +58,22 @@ describe("writeJSONToFile", () => {
 
     const mock = [
       {
-        name: "Abby Mitchell",
+        name: "Earline Gulgowski",
         image: "/images/advocates/downloaded/rec8zXNiryVq3Q6kh.jpg",
         region: "America (North)",
         city: "New York",
         country: ["United States"],
         slackId: "U017XULSMUY",
-        slackUsername: "Abby Mitchell",
+        slackUsername: "Britney1",
       },
       {
-        name: "Abeer Vaishnav",
+        name: "Frederik Davis",
         image: "/images/advocates/downloaded/recFKAk7KoXr3IMTH.jpg",
         region: "America (North)",
         city: "Durham",
         country: ["United States"],
         slackId: "U01313A0AGP",
-        slackUsername: "Abeer",
+        slackUsername: "Lou.Bechtelar",
       },
     ];
 
