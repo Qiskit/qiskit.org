@@ -9,7 +9,7 @@ describe("writeJSONToFile", () => {
     vi.mock("fs");
   });
 
-  test("write a file in an unexistent folder", async () => {
+  test("writes a file in an nonexistent directory", async () => {
     fs.promises.stat = vi.fn().mockImplementation(() => {
       throw new Error("Mocked error");
     });
@@ -51,7 +51,7 @@ describe("writeJSONToFile", () => {
     );
   });
 
-  test("write a file in an unexistent folder", async () => {
+  test("writes a file in an existent directory", async () => {
     fs.promises.stat = vi.fn().mockImplementation(() => true);
     fs.promises.mkdir = vi.fn().mockImplementation(() => true);
     fs.promises.writeFile = vi.fn().mockImplementation(() => true);

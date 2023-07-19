@@ -187,7 +187,7 @@ describe("storeImage", () => {
       });
     });
 
-    test("If a field causes a handled error, it shouln'd appear in the final object", async () => {
+    test("removes a field from the final object if a handled error is thrown", async () => {
       const fields = [
         { fields: { City: "" } },
         { fields: { Country: "" } },
@@ -232,8 +232,8 @@ describe("storeImage", () => {
       );
 
       const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
-      // notice that in this object, there is no name because is th one that
-      // throws the exception
+      // notice that in this object, there is no "name" field because it's the
+      // one that throws the exception
       expect(result).toStrictEqual({
         city: "City",
         country: "Country",
