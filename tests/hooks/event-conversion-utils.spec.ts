@@ -1186,7 +1186,7 @@ describe("fetchSeminarSeriesEvents", () => {
     expect(eventsAirtableRecords.recordFields).toStrictEqual(mockRecordFields);
   });
 
-  test("test fallback cases", async () => {
+  test("Each field has a default value if `record.get(field)` returns falsy", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView",
