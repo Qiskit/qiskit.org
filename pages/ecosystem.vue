@@ -26,8 +26,22 @@
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <UiFiltersResultsLayout>
+      <UiFiltersResultsLayout class="ecosystem-page__results">
         <template #filters-on-m-l-screen>
+          <UiFieldset class="ecosystem-page__categories" label="Tier">
+            <client-only>
+              <bx-checkbox
+                v-for="tier in tiersNames"
+                :key="tier"
+                :checked="isTierFilterChecked(tier)"
+                :label-text="tier"
+                :value="tier"
+                @bx-checkbox-changed="
+                  updateTierFilter(tier, $event.target.checked)
+                "
+              />
+            </client-only>
+          </UiFieldset>
           <UiFieldset class="ecosystem-page__categories" label="Category">
             <client-only>
               <bx-checkbox
@@ -44,6 +58,14 @@
           </UiFieldset>
         </template>
         <template #filters-on-s-screen>
+          <div class="ecosystem-page__tiers__multiselect">
+            <UiMultiSelect
+              label="Tiers"
+              :options="tiersNames"
+              :value="tierFiltersAsString"
+              @change-selection="updateTierFilters($event)"
+            />
+          </div>
           <div class="ecosystem-page__categories__multiselect">
             <UiMultiSelect
               label="Category"
@@ -144,6 +166,8 @@ const categoryFilterOptionsSorted = [
 
 const categoryFilters = ref<string[]>([]);
 const categoryFiltersAsString = computed(() => categoryFilters.value.join(","));
+const tierFilters = ref<string[]>([]);
+const tierFiltersAsString = computed(() => tierFilters.value.join(","));
 
 function updateCategoryFilter(filterValue: string, isChecked: boolean) {
   if (isChecked) {
@@ -164,6 +188,27 @@ function updateCategoryFilters(newCategoryFilters: string) {
 
 function isCategoryFilterChecked(filterValue: string): boolean {
   return categoryFilters.value.includes(filterValue);
+}
+
+function updateTierFilter(filterValue: string, isChecked: boolean) {
+  if (isChecked) {
+    tierFilters.value.push(filterValue);
+  } else {
+    const index = tierFilters.value.indexOf(filterValue);
+    if (index !== -1) {
+      tierFilters.value.splice(index, 1);
+    }
+  }
+}
+
+function updateTierFilters(newTierFilters: string) {
+  const newTierFiltersAsArray =
+    newTierFilters === "" ? [] : newTierFilters.split(",");
+  tierFilters.value = newTierFiltersAsArray;
+}
+
+function isTierFilterChecked(filterValue: string): boolean {
+  return tierFiltersAsString.value.includes(filterValue);
 }
 
 /**
@@ -194,6 +239,13 @@ const filteredMembers = computed<Member[]>(() => {
   }
 
   let filteredMembers = members;
+
+  // Tier filter
+  if (tierFilters.value.length > 0) {
+    filteredMembers = filteredMembers.filter((member) =>
+      tierFilters.value.some((filter) => member.tier.includes(filter))
+    );
+  }
 
   // Category filter
   if (categoryFilters.value.length > 0) {
@@ -248,12 +300,8 @@ const filteredMembersSorted = computed<Member[]>(() => {
     }
   }
 
-  &__toolbar {
-    margin-top: carbon.$spacing-06;
-
-    @include carbon.breakpoint-down(md) {
-      margin-top: initial;
-    }
+  &__results {
+    margin-top: carbon.$spacing-07;
   }
 
   &__search {
