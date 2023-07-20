@@ -102,7 +102,6 @@
 </template>
 
 <script setup lang="ts">
-import { createEventSchemaOrg } from "~/utils/event-schemaorg";
 import {
   header,
   mosaic,

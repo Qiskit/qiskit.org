@@ -1,4 +1,4 @@
-export interface EventSchemaOrg {
+interface EventSchemaOrg {
   startDate: Date;
   mode: "Online" | "Offline";
   location: string;
