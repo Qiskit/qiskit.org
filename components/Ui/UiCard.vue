@@ -32,21 +32,21 @@
           <h5 v-if="subtitle">
             {{ subtitle }}
           </h5>
-        </div>
-        <div class="cds--row">
-          <div v-if="hasTags(tags)" class="card__tags">
-            <bx-tag
-              v-for="tag in tags"
-              :key="tag"
-              class="card__tag"
-              type="purple"
-            >
-              {{ tag }}
-            </bx-tag>
+          <div class="card__tags">
+            <template v-if="hasTags(tags)">
+              <bx-tag v-if="primaryTag" class="card__tag" type="purple">
+                {{ primaryTag }}
+              </bx-tag>
+              <bx-tag
+                v-for="tag in tags"
+                :key="tag"
+                class="card__tag"
+                type="purple"
+              >
+                {{ tag }}
+              </bx-tag>
+            </template>
           </div>
-          <bx-tag v-if="primaryTag" class="card__tag" type="purple">
-            {{ primaryTag }}
-          </bx-tag>
         </div>
       </header>
       <div class="card__body">
@@ -187,7 +187,7 @@ function hasTags(tags: string[]) {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: carbon.$spacing-03;
+    margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-down(lg) {
       flex-direction: column;
@@ -201,16 +201,20 @@ function hasTags(tags: string[]) {
   }
 
   &__tag {
-    white-space: nowrap;
+    margin-right: carbon.$spacing-03;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   &__tags {
+    display: flex;
     margin-right: carbon.$spacing-03;
   }
 
   &__title {
     flex: 1;
-    margin-bottom: carbon.$spacing-02;
+    margin-bottom: carbon.$spacing-03;
   }
 }
 
@@ -258,18 +262,6 @@ function hasTags(tags: string[]) {
       justify-content: space-between;
       flex: 1;
     }
-  }
-}
-
-bx-tag {
-  background-color: qiskit.$tag-background-color;
-  color: qiskit.$tag-text-color;
-  margin-right: carbon.$spacing-03;
-  margin-left: 0;
-  min-width: 0;
-
-  &:last-child {
-    margin-right: 0;
   }
 }
 </style>
