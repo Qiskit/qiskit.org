@@ -811,7 +811,7 @@ describe("formatDates", () => {
       );
     } catch (e) {
       expect((e as any).message).toBe(
-        "Unreachable: should have been covered by a case."
+        "Unreachable: should have all the cases covered."
       );
     }
   });

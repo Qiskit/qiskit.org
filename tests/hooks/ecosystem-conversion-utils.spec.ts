@@ -4,15 +4,9 @@ import {
   fetchMembers,
   fetchTiers,
 } from "../../hooks/ecosystem-conversion-utils";
+import { Member } from "../../types/ecosystem";
 
 vi.mock("axios");
-
-interface Member {
-  name: string;
-  tier: string;
-  testsResults: string;
-  stars?: number;
-}
 
 describe("fetchMembers", () => {
   beforeEach(() => {
@@ -49,21 +43,85 @@ describe("fetchMembers", () => {
     const formattedMembers: (Member | Member[])[] = [
       {
         name: "member1",
-        tier: "MAIN",
-        testsResults: "",
+        tier: "Main",
+        testsResults: [
+          {
+            testType: "development",
+            passed: true,
+            package: "",
+            packageVersion: "",
+            terraVersion: "",
+            timestamp: 0,
+            logsLink: "",
+            packageCommitHash: "",
+          },
+        ],
         stars: 0,
+        url: "https://example.com",
+        description:
+          "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
+        licence: "",
+        contactInfo: "",
+        alternatives: null,
+        labels: [],
+        createdAt: 0,
+        updatedAt: 0,
+        skipTests: false,
       },
       {
-        name: "member3",
-        tier: "MAIN",
-        testsResults: "",
+        name: "member1",
+        tier: "Main",
+        testsResults: [
+          {
+            testType: "development",
+            passed: true,
+            package: "",
+            packageVersion: "",
+            terraVersion: "",
+            timestamp: 0,
+            logsLink: "",
+            packageCommitHash: "",
+          },
+        ],
         stars: 0,
+        url: "https://example.com",
+        description:
+          "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
+        licence: "",
+        contactInfo: "",
+        alternatives: null,
+        labels: [],
+        createdAt: 0,
+        updatedAt: 0,
+        skipTests: false,
       },
       [
         {
-          name: "member2",
-          tier: "MAIN",
-          testsResults: "",
+          name: "member1",
+          tier: "Main",
+          testsResults: [
+            {
+              testType: "development",
+              passed: true,
+              package: "",
+              packageVersion: "",
+              terraVersion: "",
+              timestamp: 0,
+              logsLink: "",
+              packageCommitHash: "",
+            },
+          ],
+          stars: 0,
+          url: "https://example.com",
+          description:
+            "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
+          licence: "",
+          contactInfo: "",
+          alternatives: null,
+          labels: [],
+          createdAt: 0,
+          updatedAt: 0,
+          skipTests: false,
         },
       ],
     ];
@@ -76,7 +134,7 @@ describe("fetchMembers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchMembers();
@@ -118,7 +176,7 @@ describe("fetchTiers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchTiers();
