@@ -281,7 +281,7 @@ describe("convertToCommunityEvent", () => {
     );
   });
 
-  test("extracts and format information from the record", async () => {
+  test("extracts and formats information from the record", async () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES;
     const { europe } = WORLD_REGIONS;
     const event = await eventsAirtableRecords.convertToCommunityEvent(
