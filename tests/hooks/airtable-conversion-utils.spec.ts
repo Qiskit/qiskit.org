@@ -136,7 +136,7 @@ describe("storeImage", () => {
       slackUsername: "fldY1nP63OKVsdvRC",
     } as const);
 
-    test("If this.getFieldName throws an unhandled error for a field, it should be null", async () => {
+    test("sets the field's value to `null` if `getFieldName` throws an unhandled error", async () => {
       const airtableEachPageMockFn = vi
         .fn()
         .mockImplementation(
