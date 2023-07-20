@@ -263,7 +263,7 @@ describe("storeImage", () => {
             const records = callIndex === 0 ? [] : [fields[callIndex]];
             callIndex++;
             cb(
-              // two elements to check the  for loop in getFieldName
+              // two elements to check the for loop in `getFieldName`
               records,
               () => {}
             );
