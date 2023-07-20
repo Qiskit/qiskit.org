@@ -284,7 +284,7 @@ describe("fetchAdvocates", () => {
   });
   // END PREPARING MOCKED DATA
 
-  test("airtable query", async () => {
+  test("has a working Airtable query", async () => {
     const advocatesAirtableRecords = new FakeAdvocatesAirtableRecords(
       "testApiKey",
       airtableBase as unknown as AirtableBase,
