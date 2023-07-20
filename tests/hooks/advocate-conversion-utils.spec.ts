@@ -321,7 +321,7 @@ describe("fetchAdvocates", () => {
     ]);
   });
 
-  test("If no recordFields should get from getAllFieldNames", async () => {
+  test("gets record fields from `getAllFieldNames` if there are none yet", async () => {
     const advocatesAirtableRecords = new FakeAdvocatesAirtableRecords(
       "testApiKey",
       airtableBase as unknown as AirtableBase
