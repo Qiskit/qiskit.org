@@ -26,29 +26,6 @@
         :label="joinAction.label"
         :url="joinAction.url"
       />
-      <div class="ecosystem-page__tiers">
-        <client-only>
-          <bx-tabs
-            class="ecosystem-page__tiers__tabs"
-            trigger-content="Select an item"
-            value="Main"
-            @bx-tabs-selected="updateSelectedTab($event.target.value)"
-          >
-            <bx-tab
-              v-for="tierName in tiersNames"
-              :id="`tab${tierName}`"
-              :key="tierName"
-              :target="`panel${tierName}`"
-              :value="`${tierName}`"
-            >
-              {{ `${tierName} (${filteredMembersByTier[tierName].length})` }}
-            </bx-tab>
-          </bx-tabs>
-          <div class="ecosystem-page__tiers__description">
-            {{ selectedTierDescription }}
-          </div>
-        </client-only>
-      </div>
       <UiFiltersResultsLayout>
         <template #filters-on-m-l-screen>
           <UiFieldset class="ecosystem-page__categories" label="Category">
@@ -97,30 +74,17 @@
             </bx-dropdown>
           </div>
           <div class="ecosystem-page__tier-panel">
-            <div
-              v-for="tierName in tiersNames"
-              :id="`panel${tierName}`"
-              :key="tierName"
-              role="tabpanel"
-              :aria-labelledby="`tab${tierName}`"
-            >
-              <template v-if="selectedTab === tierName">
-                <p
-                  v-if="filteredMembersFromSelectedTier.length === 0"
-                  class="cds--col"
-                >
-                  Try using wider search criteria, or consider
-                  <UiLink v-bind="joinAction">joining the ecosystem.</UiLink>
-                </p>
-                <div v-else class="cds--row ecosystem-page__members">
-                  <EcosystemCard
-                    v-for="member in filteredMembersFromSelectedTierSorted"
-                    :key="member.name"
-                    class="cds--col-sm-4 cds--col-xlg-8"
-                    :member="member"
-                  />
-                </div>
-              </template>
+            <p v-if="filteredMembersSorted.length === 0" class="cds--col">
+              Try using wider search criteria, or consider
+              <UiLink v-bind="joinAction">joining the ecosystem.</UiLink>
+            </p>
+            <div v-else class="cds--row ecosystem-page__members">
+              <EcosystemCard
+                v-for="member in filteredMembersSorted"
+                :key="member.name"
+                class="cds--col-sm-4 cds--col-xlg-8"
+                :member="member"
+              />
             </div>
           </div>
         </template>
@@ -134,10 +98,6 @@ import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import { Member, Tier } from "~/types/ecosystem";
 import { TextLink } from "~/types/links";
-
-interface MembersByTier {
-  [key: string]: Member[];
-}
 
 const members = rawMembers as Member[];
 const config = useRuntimeConfig();
@@ -173,19 +133,6 @@ useSeoMeta({
  */
 const tiers = rawTiers as Tier[];
 const tiersNames = tiers.map((tier) => tier.name);
-const selectedTab = ref<string>("Main");
-
-const selectedTier = computed<Tier | undefined>(() => {
-  return tiers.find((tier) => tier.name === selectedTab.value);
-});
-
-const selectedTierDescription = computed<string>(() => {
-  return selectedTier.value?.description ?? "";
-});
-
-function updateSelectedTab(tab: string) {
-  selectedTab.value = tab;
-}
 
 /**
  * Category filters
@@ -269,31 +216,12 @@ const filteredMembers = computed<Member[]>(() => {
   return filteredMembers;
 });
 
-const filteredMembersByTier = computed<MembersByTier>(() => {
-  const result: MembersByTier = {};
-
-  tiersNames.forEach((tierName) => {
-    result[tierName] = filteredMembers.value.filter(
-      (member) => member.tier === tierName
-    );
-  });
-
-  return result;
-});
-
-const filteredMembersFromSelectedTier = computed<Member[]>(() => {
-  return filteredMembersByTier.value[selectedTab.value];
-});
-
-const filteredMembersFromSelectedTierSorted = computed<Member[]>(() => {
+const filteredMembersSorted = computed<Member[]>(() => {
   if (selectedSortingOption.value === "stars") {
-    return filteredMembersFromSelectedTier.value.sort(
-      (a, b) => b.stars - a.stars
-    );
+    return filteredMembers.value.sort((a, b) => b.stars - a.stars);
   }
 
-  // The list of members is sorted by name by default.
-  return filteredMembersFromSelectedTier.value;
+  return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
 });
 </script>
 
@@ -302,14 +230,6 @@ const filteredMembersFromSelectedTierSorted = computed<Member[]>(() => {
 @use "~/assets/scss/helpers/classes.scss";
 
 .ecosystem-page {
-  &__tiers {
-    margin-top: carbon.$spacing-10;
-
-    &__description {
-      padding-top: carbon.$spacing-05;
-    }
-  }
-
   &__tier-panel {
     margin-top: carbon.$spacing-07;
   }
