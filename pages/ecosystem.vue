@@ -11,21 +11,8 @@
       <br />
       Qiskit community
     </LayoutLeadSpaceFixed>
+    <EcosystemJoin />
     <section id="ecosystem" class="cds--grid ecosystem-page">
-      <h2>Ecosystem Resources</h2>
-      <div class="cds--row">
-        <p class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-          The Ecosystem consists of projects, tools, utilities, libraries and
-          tutorials from a broad community of developers and researchers. The
-          goal of the Ecosystem is to celebrate, support and accelerate
-          development of quantum technologies using Qiskit.
-        </p>
-      </div>
-      <UiCta
-        class="ecosystem-page__header__cta"
-        :label="joinAction.label"
-        :url="joinAction.url"
-      />
       <UiFiltersResultsLayout class="ecosystem-page__results">
         <template #filters-on-m-l-screen>
           <UiFieldset class="ecosystem-page__categories" label="Tier">
@@ -98,7 +85,7 @@
           <div class="ecosystem-page__tier-panel">
             <p v-if="filteredMembersSorted.length === 0" class="cds--col">
               Try using wider search criteria, or consider
-              <UiLink v-bind="joinAction">joining the ecosystem.</UiLink>
+              <UiLink v-bind="EcosystemJoinLink">joining the ecosystem.</UiLink>
             </p>
             <div v-else class="cds--row ecosystem-page__members">
               <EcosystemCard
@@ -119,15 +106,10 @@
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import { Member, Tier } from "~/types/ecosystem";
-import { TextLink } from "~/types/links";
+import { EcosystemJoinLink } from "~/constants/links";
 
 const members = rawMembers as Member[];
 const config = useRuntimeConfig();
-
-const joinAction: TextLink = {
-  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
-  label: "Join the ecosystem",
-};
 
 definePageMeta({
   layout: "default-max",
