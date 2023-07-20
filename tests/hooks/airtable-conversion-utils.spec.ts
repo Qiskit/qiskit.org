@@ -205,7 +205,7 @@ describe("storeImage", () => {
             fieldsIdx++;
             // eslint-disable-next-line n/no-callback-literal
             cb(
-              // two elements to check the  for loop in getFieldName
+              // two elements to check the for loop in `getFieldName`
               [element],
               () => {}
             );
