@@ -244,7 +244,7 @@ describe("storeImage", () => {
       });
     });
 
-    test('If getFieldName gets 0 records, all fieldNames should be "" then, this field should not appears in result object', async () => {
+    test("removes a field from the final object if `getFieldName` gets 0 records", async () => {
       let callIndex = 0;
       const fields = [
         { fields: { Name: "" } },
