@@ -133,6 +133,22 @@ const ALGORITHM_FUNDAMENTALS_COURSE: MegaDropdownMenuGroup = {
         location: sectionAlgorithmFundamentalsCourse,
       },
     },
+    {
+      label: "Algorithmic foundations",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/algorithmic-foundations`,
+      segment: {
+        cta: "algorithmic_foundations",
+        location: sectionAlgorithmFundamentalsCourse,
+      },
+    },
+    {
+      label: "Phase estimation and factoring",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/phase-estimation`,
+      segment: {
+        cta: "phase_estimation",
+        location: sectionAlgorithmFundamentalsCourse,
+      },
+    },
   ],
 };
 

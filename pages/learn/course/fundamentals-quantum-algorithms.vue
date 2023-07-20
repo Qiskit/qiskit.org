@@ -150,6 +150,21 @@ const courses: Course[] = [
     url:
       LearnStartLearningUrl.FundamentalsQuantumAlgorithms + "/query-algorithms",
   },
+  {
+    image: "algorithmic-foundations-preview.png",
+    label: "Algorithmic foundations",
+    segment: { cta: "algorithmic-foundations", location: "course" },
+    url:
+      LearnStartLearningUrl.FundamentalsQuantumAlgorithms +
+      "/algorithmic-foundations",
+  },
+  {
+    image: "phase-estimation-and-factoring-preview.png",
+    label: "Phase estimation and factoring",
+    segment: { cta: "phase-estimation-and-factoring", location: "course" },
+    url:
+      LearnStartLearningUrl.FundamentalsQuantumAlgorithms + "/phase-estimation",
+  },
 ];
 
 const imageUrlBase = "/images/learn/course/fundamentals-quantum-algorithms";
