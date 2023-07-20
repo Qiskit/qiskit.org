@@ -200,7 +200,7 @@ describe("isEventInDateRange", () => {
     );
   });
 
-  test("returns false if invalid date", () => {
+  test("returns false if date is invalid", () => {
     const days = 15;
 
     // Event happened before the last 15 days
