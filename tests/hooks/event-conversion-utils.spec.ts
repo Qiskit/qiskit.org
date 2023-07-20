@@ -304,7 +304,7 @@ describe("convertToCommunityEvent", () => {
     });
   });
 
-  test("extracts and format information from the record without types as array", async () => {
+  test("extracts and formats information from the record when `types` is not an array", async () => {
     const event2 = await eventsAirtableRecords.convertToCommunityEvent(
       fakeRecords[1]
     );
@@ -803,7 +803,7 @@ describe("formatDates", () => {
     );
   });
 
-  test("test practial unreachable case", () => {
+  test("practically unreachable case", () => {
     try {
       eventsAirtableRecords.formatDates(
         new Date("2020-01-01T00:00:00.000Z"),
@@ -811,14 +811,14 @@ describe("formatDates", () => {
       );
     } catch (e) {
       expect((e as any).message).toBe(
-        "Unreachable: should have all the cases covered."
+        "Unreachable: should have been covered by a case."
       );
     }
   });
 });
 
 describe("getEventsQuery", () => {
-  test("check query arguments", () => {
+  test("uses expected arguments for the Airtable query", () => {
     const airtableSelectMockFn = vi.fn();
     const airtableBase = vi.fn().mockReturnValue({
       select: airtableSelectMockFn,
@@ -893,7 +893,7 @@ describe("fetchCommunityEvents", () => {
     },
   ];
 
-  test("fetch in date range events", async () => {
+  test("fetches events in date range", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView",
@@ -948,7 +948,7 @@ describe("fetchCommunityEvents", () => {
     ]);
   });
 
-  test("fetch in date range events sorted descending", async () => {
+  test("fetches events in date range and sorts them in descending order", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView",
@@ -1162,7 +1162,7 @@ describe("fetchSeminarSeriesEvents", () => {
     ]);
   });
 
-  test("If no recordFields should get from getAllFieldNames", async () => {
+  test("gets record fields from `getAllFieldNames` if there are none yet", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView"
@@ -1213,7 +1213,7 @@ describe("fetchSeminarSeriesEvents", () => {
 });
 
 describe("formatTime", () => {
-  test("format a valid date", () => {
+  test("formats date", () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView"
