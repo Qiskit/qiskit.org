@@ -109,7 +109,7 @@ describe("fetchTiers", () => {
     },
   ];
 
-  test("fetch tiers and formats correctly", async () => {
+  test("fetches tiers and formats them", async () => {
     (axios.get as any).mockResolvedValueOnce(tiers);
     const result = await fetchTiers();
 
