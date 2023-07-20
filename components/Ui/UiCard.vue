@@ -192,12 +192,6 @@ function hasTags(tags: string[]) {
     @include carbon.breakpoint-down(lg) {
       flex-direction: column;
     }
-
-    .cds--row {
-      margin-right: 0;
-      margin-left: 0;
-      margin-bottom: carbon.$spacing-03;
-    }
   }
 
   &__tag {
