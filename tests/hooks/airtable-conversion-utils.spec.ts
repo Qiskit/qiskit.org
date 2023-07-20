@@ -287,8 +287,8 @@ describe("storeImage", () => {
 
       const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
 
-      // notice that in this object, there is no name because is th one that
-      // throws the exception
+      // notice that in this object, there is no "name" field because it's the
+      // one that throws the exception
       expect(result).toStrictEqual({
         city: "City",
         country: "Country",
