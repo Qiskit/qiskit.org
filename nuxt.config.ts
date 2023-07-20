@@ -2,7 +2,6 @@ import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
 import { generateMocks } from "./hooks/mock/mock-service";
-import pkg from "./package.json";
 
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
   process.env;
@@ -10,14 +9,6 @@ const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: {
-    head: {
-      meta: [
-        { hid: "description", name: "description", content: pkg.description },
-      ],
-    },
-  },
-
   modules: ["@nuxt/content", "@nuxt/image-edge", "nuxt-schema-org"],
 
   schemaOrg: {
