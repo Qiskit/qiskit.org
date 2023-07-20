@@ -45,7 +45,7 @@ describe("fetchMembers", () => {
     },
   };
 
-  test("fetches members and formats correctly", async () => {
+  test("fetches members and formats them", async () => {
     const formattedMembers: (Member | Member[])[] = [
       {
         name: "member1",
