@@ -200,7 +200,7 @@ describe("fetchMembers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchMembers();
@@ -242,7 +242,7 @@ describe("fetchTiers", () => {
   });
 
   test("throws error if api call fails", async () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => { });
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     (axios.get as any).mockRejectedValueOnce("example error");
     await fetchTiers();

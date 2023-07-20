@@ -1223,6 +1223,7 @@ describe("formatTime", () => {
 
     const date = eventsAirtableRecords.formatTime("2020-10-10 00:00:00 UTC");
 
-    expect(date.replace("\u202F", " ")).toBe("12:00 AM UTC");
+    expect(date).not.toBeNull();
+    expect(date?.replace("\u202F", " ")).toBe("12:00 AM UTC");
   });
 });
