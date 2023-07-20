@@ -196,6 +196,7 @@ function hasTags(tags: string[]) {
 
   &__tag {
     margin-right: carbon.$spacing-03;
+
     &:first-child {
       margin-left: 0;
     }
