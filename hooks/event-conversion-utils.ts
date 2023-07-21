@@ -329,7 +329,7 @@ class EventsAirtableRecords extends AirtableRecords {
     if (startDay !== endDay) {
       return `${startMonth} ${startDay}-${endDay}, ${startYear}`;
     }
-    throw new Error("Unreachable: should have all the cases covered.");
+    throw new Error("Unreachable: should have been covered by a case.");
   }
 
   /**

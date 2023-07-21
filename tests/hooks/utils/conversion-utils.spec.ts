@@ -18,22 +18,22 @@ describe("writeJSONToFile", () => {
 
     const mock = [
       {
-        name: "Scottie Wuckert",
+        name: "John Doe",
         image: "/images/advocates/downloaded/rec8zXNiryVq3Q6kh.jpg",
         region: "America (North)",
         city: "New York",
         country: ["United States"],
         slackId: "U017XULSMUY",
-        slackUsername: "Maria.Dickens34",
+        slackUsername: "John.Doe",
       },
       {
-        name: "Abeer Vaishnav",
+        name: "Jena Doe",
         image: "/images/advocates/downloaded/recFKAk7KoXr3IMTH.jpg",
         region: "America (North)",
         city: "Durham",
         country: ["United States"],
         slackId: "U01313A0AGP",
-        slackUsername: "Abeer",
+        slackUsername: "J.Doe",
       },
     ];
 
@@ -58,22 +58,22 @@ describe("writeJSONToFile", () => {
 
     const mock = [
       {
-        name: "Earline Gulgowski",
+        name: "Jena Doe",
         image: "/images/advocates/downloaded/rec8zXNiryVq3Q6kh.jpg",
         region: "America (North)",
         city: "New York",
         country: ["United States"],
         slackId: "U017XULSMUY",
-        slackUsername: "Britney1",
+        slackUsername: "J.Doe",
       },
       {
-        name: "Frederik Davis",
+        name: "John Doe",
         image: "/images/advocates/downloaded/recFKAk7KoXr3IMTH.jpg",
         region: "America (North)",
         city: "Durham",
         country: ["United States"],
         slackId: "U01313A0AGP",
-        slackUsername: "Lou.Bechtelar",
+        slackUsername: "John.Doe",
       },
     ];
 
