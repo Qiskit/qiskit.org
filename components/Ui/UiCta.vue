@@ -79,7 +79,9 @@ const isFragment = computed<boolean>(() => {
 const iconPerLinkType = computed(() => {
   if (isExternalVisually.value) {
     return Launch16;
-  } else if (isFragment.value) {
+  }
+
+  if (isFragment.value) {
     return ArrowDown16;
   }
 

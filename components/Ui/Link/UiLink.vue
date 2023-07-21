@@ -67,9 +67,13 @@ const computedExternal = computed<boolean>(() => {
 const computedTarget = computed<NuxtLinkTarget | undefined>(() => {
   if (typeof props.target !== "undefined") {
     return props.target;
-  } else if (isExternalFromSameDomain.value) {
+  }
+
+  if (isExternalFromSameDomain.value) {
     return "_self";
-  } else if (isExternalFromDifferentDomain.value) {
+  }
+
+  if (isExternalFromDifferentDomain.value) {
     return "_blank";
   }
 
