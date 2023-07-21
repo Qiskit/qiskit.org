@@ -811,7 +811,7 @@ describe("formatDates", () => {
       );
     } catch (e) {
       expect((e as any).message).toBe(
-        "Unreachable: should have all the cases covered."
+        "Unreachable: should have been covered by a case."
       );
     }
   });
@@ -1186,7 +1186,7 @@ describe("fetchSeminarSeriesEvents", () => {
     expect(eventsAirtableRecords.recordFields).toStrictEqual(mockRecordFields);
   });
 
-  test("Each field has a default value if `record.get(field)` returns falsy", async () => {
+  test("sets default values for each field if `get(field)` is falsy", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView",
