@@ -52,13 +52,13 @@ export const mock: any[] = [
         id: "att8eF6mVuKzbZxk0",
         width: 604,
         height: 684,
-        url: "http://dimwitted-claw.org",
+        url: "http://example.com",
         filename: "intelligent_deposit.sass",
         size: 400718,
         type: "image/png",
         thumbnails: {
           small: {
-            url: "http://amused-microwave.org",
+            url: "http://example.com",
             width: 32,
             height: 36,
           },

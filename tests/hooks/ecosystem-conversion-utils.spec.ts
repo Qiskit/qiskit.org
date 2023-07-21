@@ -14,7 +14,9 @@ describe("fetchMembers", () => {
     vi.mock("axios");
   });
 
-  const members = {
+  const members: {
+    data: { [key: string]: { [key: number]: Member | Member[] } };
+  } = {
     data: {
       MAIN: {
         1: {
