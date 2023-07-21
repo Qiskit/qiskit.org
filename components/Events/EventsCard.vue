@@ -3,7 +3,8 @@
     class="events-card"
     :image="image"
     :title="title"
-    :tags="types"
+    :primary-tag="regions[0]"
+    :secondary-tags="types"
     :to="to"
     :cta-label="ctaLabel"
     :segment="segment"
@@ -54,6 +55,7 @@ interface Props {
   ctaLabel?: string;
   segment?: CtaClickedEventProp | undefined;
   verticalLayout?: boolean;
+  regions?: string[];
 }
 
 withDefaults(defineProps<Props>(), {
@@ -66,6 +68,7 @@ withDefaults(defineProps<Props>(), {
   segment: undefined,
   time: undefined,
   verticalLayout: false,
+  regions: () => [],
 });
 </script>
 

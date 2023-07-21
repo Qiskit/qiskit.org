@@ -33,16 +33,11 @@
             {{ subtitle }}
           </h5>
           <div class="card__tags">
-            <template v-if="hasTags(tags)">
-              <bx-tag v-if="primaryTag" class="card__tag" type="purple">
-                {{ primaryTag }}
-              </bx-tag>
-              <bx-tag
-                v-for="tag in tags"
-                :key="tag"
-                class="card__tag"
-                type="purple"
-              >
+            <bx-tag v-if="primaryTag" class="card__tag">
+              {{ primaryTag }}
+            </bx-tag>
+            <template v-if="hasTags(secondaryTags)">
+              <bx-tag v-for="tag in secondaryTags" :key="tag" type="purple">
                 {{ tag }}
               </bx-tag>
             </template>
@@ -88,7 +83,7 @@ interface Props {
   altText?: string;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
-  tags?: string[];
+  secondaryTags?: string[];
   title: string;
   to?: string;
   secondaryCta?: TextLink | null;
@@ -104,7 +99,7 @@ const props = withDefaults(defineProps<Props>(), {
   altText: "No description available",
   segment: undefined,
   subtitle: "",
-  tags: () => [],
+  secondaryTags: () => [],
   to: "",
   secondaryCta: undefined,
   primaryTag: undefined,
@@ -196,6 +191,8 @@ function hasTags(tags: string[]) {
 
   &__tag {
     margin-right: carbon.$spacing-03;
+    background-color: qiskit.$tag-background-color;
+    color: qiskit.$tag-text-color;
 
     &:first-child {
       margin-left: 0;
