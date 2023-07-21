@@ -1,5 +1,5 @@
 <template>
-  <div class="summer-school-2022-page">
+  <article class="summer-school-2022-page">
     <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
@@ -98,7 +98,7 @@
         :resources="helpfulResourcesData.resources"
       />
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
