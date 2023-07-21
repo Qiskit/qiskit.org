@@ -35,10 +35,6 @@ This content is then stored in JSON files and used to be displayed in the websit
 
 We use web components from the [Carbon Web Components](https://github.com/carbon-design-system/carbon-for-ibm-dotcom) component library.
 
-### Hotjar
-
-We use Hotjar for analytics.
-
 ### Segment
 
 We use [Segment](https://segment.com/) for analytics.
