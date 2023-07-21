@@ -25,18 +25,13 @@ type NuxtLinkTarget =
 
 interface Props {
   external?: boolean;
-  segment?: CtaClickedEventProp | undefined;
+  segment?: CtaClickedEventProp;
   target?: NuxtLinkTarget;
   title?: string;
   url: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  external: undefined,
-  segment: undefined,
-  target: undefined,
-  title: undefined,
-});
+const props = defineProps<Props>();
 
 const emit = defineEmits(["click", "mouseenter"]);
 
