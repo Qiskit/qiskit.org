@@ -8,7 +8,7 @@
         :class="oldContainer ? 'layout-footer__primary-container' : 'cds--grid'"
       >
         <div class="cds--row">
-          <div class="cds--col-lg-4 cds--col-md">
+          <div class="cds--col-lg-7 cds--col-md">
             <UiLogo
               class="layout-footer__logo"
               :class="`layout-footer__logo_theme_${theme}`"
@@ -90,27 +90,6 @@ withDefaults(defineProps<Props>(), {
 const config = useRuntimeConfig();
 
 const footerElements: LinksGroup[] = [
-  {
-    title: "Learn",
-    elements: [
-      {
-        label: "Textbook",
-        url: "/learn",
-      },
-      {
-        label: "Tutorials",
-        url: `${config.public.siteUrl}/documentation/tutorials.html`,
-        segment: {
-          cta: "tutorials",
-          location: "menu",
-        },
-      },
-      {
-        label: "Videos",
-        url: "https://www.youtube.com/qiskit",
-      },
-    ],
-  },
   {
     title: "Community",
     elements: [
