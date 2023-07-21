@@ -41,7 +41,6 @@ const SocialMedia: { [key: string]: TextLink } = {
 const EcosystemJoinLink: TextLink = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
-  segment: { cta: "join-the-ecosystem", location: "ecosystem" },
 };
 
 export { LearnStartLearningUrl, SocialMedia, EcosystemJoinLink };
