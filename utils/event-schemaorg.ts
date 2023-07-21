@@ -1,4 +1,35 @@
+type EventAttendanceModeTypes =
+  | "OfflineEventAttendanceMode"
+  | "OnlineEventAttendanceMode"
+  | "MixedEventAttendanceMode";
+
+interface VirtualLocation {
+  "@type"?: "VirtualLocation";
+  url: string;
+}
+interface Place {
+  name: string;
+  address: string;
+  url: string;
+}
+
 interface EventSchemaOrg {
+  name: string;
+  eventAttendanceMode: EventAttendanceModeTypes;
+  image: string;
+  location: VirtualLocation | Place;
+  startDate: string;
+  organizer: {
+    name: string;
+    url: string;
+  };
+  performer?: {
+    name: string;
+  };
+  endDate?: string;
+}
+
+interface Event {
   startDate: Date;
   mode: "Online" | "Offline";
   location: string;
@@ -9,12 +40,12 @@ interface EventSchemaOrg {
   endDate?: Date;
 }
 
-export function createEventSchemaOrg(event: EventSchemaOrg) {
+export function createEventSchemaOrg(event: Event) {
   let location;
   if (event.mode === "Online") {
-    location = defineVirtualLocation({
+    location = {
       url: event.url,
-    });
+    };
   } else {
     location = definePlace({
       name: event.location,
@@ -28,7 +59,7 @@ export function createEventSchemaOrg(event: EventSchemaOrg) {
       ? "OnlineEventAttendanceMode"
       : "OfflineEventAttendanceMode";
 
-  const schemaEvent: any = {
+  const schemaEvent: EventSchemaOrg = {
     name: event.name,
     eventAttendanceMode,
     image: event.image,
@@ -41,7 +72,9 @@ export function createEventSchemaOrg(event: EventSchemaOrg) {
   };
 
   if (event.performer) {
-    schemaEvent.performer = event.performer;
+    schemaEvent.performer = {
+      name: event.performer,
+    };
   }
 
   if (event.endDate) {
