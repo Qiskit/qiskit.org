@@ -133,6 +133,22 @@ const ALGORITHM_FUNDAMENTALS_COURSE: MegaDropdownMenuGroup = {
         location: sectionAlgorithmFundamentalsCourse,
       },
     },
+    {
+      label: "Algorithmic foundations",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/algorithmic-foundations`,
+      segment: {
+        cta: "algorithmic_foundations",
+        location: sectionAlgorithmFundamentalsCourse,
+      },
+    },
+    {
+      label: "Phase estimation and factoring",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/phase-estimation`,
+      segment: {
+        cta: "phase_estimation",
+        location: sectionAlgorithmFundamentalsCourse,
+      },
+    },
   ],
 };
 
@@ -1295,14 +1311,6 @@ const ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${tutorialsBaseUrl}/algorithms/07_grover_examples.html`,
       segment: {
         cta: "07_grover_examples",
-        location: sectionTutorials,
-      },
-    },
-    {
-      label: "Shor’s algorithms",
-      url: `${tutorialsBaseUrl}/algorithms/08_factorizers.html`,
-      segment: {
-        cta: "08_factorizers",
         location: sectionTutorials,
       },
     },
