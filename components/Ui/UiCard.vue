@@ -201,15 +201,12 @@ function hasTags(tags: string[]) {
     &_primary {
       background-color: qiskit.$tag-background-color;
       color: qiskit.$tag-text-color;
-
-      &:first-child {
-        margin-left: 0;
-      }
     }
   }
 
   &__tags {
     display: flex;
+    margin-left: -#{carbon.$spacing-03};
   }
 
   &__title {
