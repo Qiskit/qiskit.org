@@ -9,6 +9,7 @@ async function fetchMembers() {
     const res = await axios.get(
       "https://raw.githubusercontent.com/qiskit-community/ecosystem/master/ecosystem/resources/members.json"
     );
+
     const membersArray: Member[] = [];
     Object.values(res.data).forEach((tier: any) => {
       Object.values(tier).forEach((member: any) => {
@@ -21,7 +22,7 @@ async function fetchMembers() {
     });
 
     // Sort ecosystem projects alphabetically
-    membersArray.sort((a, b) => a.name.localeCompare(b.name));
+    membersArray.sort((a, b) => a.name?.localeCompare(b.name));
 
     return membersArray.map((obj: any) => toCamelCase(obj));
   } catch (err) {
