@@ -34,12 +34,15 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const codeLines = props.code.split("\n");
-for (const line in codeLines) {
-  if (codeLines[line] === "") {
-    codeLines[line] = " ";
+const codeLines = computed(() => {
+  const providerCode = props.code.split("\n");
+  for (const line in providerCode) {
+    if (providerCode[line] === "") {
+      providerCode[line] = " ";
+    }
   }
-}
+  return providerCode;
+});
 
 const copyCodeCta = "Copy";
 
