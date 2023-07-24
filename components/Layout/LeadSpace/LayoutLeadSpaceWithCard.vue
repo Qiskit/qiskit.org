@@ -2,7 +2,7 @@
   <header class="layout-lead-space-with-card">
     <div class="cds--grid">
       <div class="cds--row">
-        <main class="cds--col layout-lead-space-with-card__main">
+        <div class="cds--col layout-lead-space-with-card__hero">
           <div>
             <h1 class="layout-lead-space-with-card__headline">
               <slot name="title" />
@@ -17,7 +17,7 @@
             :segment="cta.segment"
             :url="cta.url"
           />
-        </main>
+        </div>
         <aside
           class="cds--col-lg-5 cds--col-md-4 layout-lead-space-with-card__aside"
         >
@@ -65,7 +65,7 @@ defineProps<Props>();
     padding-top: carbon.$spacing-09;
   }
 
-  &__main {
+  &__hero {
     display: flex;
     flex-flow: column;
     gap: carbon.$spacing-05;

@@ -1,5 +1,5 @@
 <template>
-  <div class="providers-page">
+  <article class="providers-page">
     <LayoutLeadSpaceFixed>
       Run Qiskit compiled
       <br />
@@ -57,7 +57,7 @@
         </div>
       </div>
     </section>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
