@@ -1,5 +1,6 @@
 import { promises as fsPromises } from "fs";
 import Airtable from "airtable";
+import { AirtableBase } from "airtable/lib/airtable_base";
 import axios from "axios";
 
 function getImageUrl(imageAttachment: any): string {
@@ -25,9 +26,9 @@ function getThumbnailUrl(imageAttachment: any): string | null {
 class AirtableRecords {
   protected id: string;
   protected apiKey: string;
-  private baseId: string;
-  private tableId: string;
   protected recordFields?: Record<string, any>;
+  protected airtableBase: AirtableBase;
+  private tableId: string;
   private view: string;
 
   constructor(
@@ -39,11 +40,11 @@ class AirtableRecords {
     recordFields?: Record<string, any>
   ) {
     this.apiKey = apiKey;
-    this.baseId = baseId;
     this.tableId = tableId;
     this.recordFields = recordFields;
     this.view = view;
     this.id = id || "";
+    this.airtableBase = new Airtable({ apiKey: this.apiKey }).base(baseId);
   }
 
   /**
@@ -53,11 +54,10 @@ class AirtableRecords {
    * @returns {Promise<string | null>} Field name
    */
   private getFieldName(fieldId: string): Promise<string | null> {
-    const base = new Airtable({ apiKey: this.apiKey }).base(this.baseId);
     let fieldName: string | undefined;
 
     try {
-      return base(this.tableId)
+      return this.airtableBase(this.tableId)
         .select({
           fields: [fieldId],
           view: this.view,
@@ -69,7 +69,6 @@ class AirtableRecords {
             }
 
             const recordFields = Object.keys(record.fields);
-
             if (recordFields.length > 0) {
               fieldName = recordFields[0];
             }
