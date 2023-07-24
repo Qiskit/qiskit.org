@@ -1,12 +1,12 @@
 <template>
-  <main class="learn-page">
+  <article class="learn-page">
     <LearnLeadSpace />
     <LearnStartLearning class="learn-page__section" />
     <UiHelpfulResources
       class="learn-page__section"
       :resources="helpfulResources"
     />
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">

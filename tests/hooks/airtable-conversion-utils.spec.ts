@@ -1,7 +1,20 @@
 import { promises as fsPromises } from "fs";
 import axios from "axios";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { AirtableBase } from "airtable/lib/airtable_base";
 import { AirtableRecords } from "../../hooks/airtable-conversion-utils";
+
+class FakeAirtableRecords extends AirtableRecords {
+  constructor(
+    apiKey: string,
+    airtableBase: AirtableBase,
+    public recordFields?: Record<string, any>
+  ) {
+    super(apiKey, "testBaseId", "testTableId", "testView");
+    this.airtableBase = airtableBase;
+    this.recordFields = recordFields;
+  }
+}
 
 const id = "TESTID";
 const imageUrl = "https://example.com/image.jpg";
@@ -61,5 +74,229 @@ describe("storeImage", () => {
     await expect(
       airtableRecords.storeImage(imageUrl, imageFilePath)
     ).rejects.toThrowError("File system error");
+  });
+
+  describe("getAllFieldNames", () => {
+    // PREPARING MOCKED DATA
+    const mockRecordFields = {
+      name: "Name",
+      city: "City",
+      country: "Country",
+      region: "Region",
+      slackId: "Slack ID",
+      slackUsername: "Slack Username",
+      image: "Image",
+    };
+    const fakeRecords = [
+      {
+        get: (field: string) => {
+          switch (field) {
+            case "Name":
+              return "Nova";
+            case "City":
+              return "Gotham City";
+            case "Country":
+              return "Canada";
+            case "Region":
+              return "South America";
+            case "Slack ID":
+              return "ID1234567890";
+            case "Slack Username":
+              return "U1234567890";
+          }
+        },
+      },
+      {
+        get: (field: string) => {
+          switch (field) {
+            case "Name":
+              return "Nova";
+            case "City":
+              return "Gotham City";
+            case "Country":
+              return "Canada";
+            case "Region":
+              return "South America";
+            case "Slack ID":
+              return "ID1234567890";
+            case "Slack Username":
+              return "U1234567890";
+          }
+        },
+      },
+    ];
+
+    const RECORD_FIELDS_IDS = Object.freeze({
+      name: "fldkG2SqdvCKDUhCH",
+      city: "fldoCJjrveX4J9TV1",
+      country: "fldZcHGtjEK7fPyAT",
+      region: "fldG80tPB8heLWxBP",
+      image: "fldawRemxDatqlfLo",
+      slackId: "fld5aUddy1M4YRHTn",
+      slackUsername: "fldY1nP63OKVsdvRC",
+    } as const);
+
+    test("sets the field's value to `null` if `getFieldName` throws an unhandled error", async () => {
+      const airtableEachPageMockFn = vi
+        .fn()
+        .mockImplementation(
+          (cb: (records: any, nextPage: any) => void): void => {
+            cb(fakeRecords, () => {});
+          }
+        );
+      const airtableSelectMockFn = vi.fn().mockReturnValue({
+        eachPage: airtableEachPageMockFn,
+      });
+      const airtableBase = vi.fn().mockReturnValue({
+        select: airtableSelectMockFn,
+      });
+
+      const airtableRecords = new FakeAirtableRecords(
+        "testApiKey",
+        airtableBase as unknown as AirtableBase,
+        mockRecordFields
+      );
+
+      // eslint-disable-next-line dot-notation
+      airtableRecords["getFieldName"] = vi
+        .fn()
+        .mockImplementation((fieldId: string) => {
+          if (fieldId === "fld5aUddy1M4YRHTn") {
+            return Promise.reject(new Error("Mocked error"));
+          }
+          // if no exception, get field name from mockRecordFields
+          const name = (
+            Object.keys(RECORD_FIELDS_IDS) as (keyof typeof RECORD_FIELDS_IDS)[]
+          ).find((key) => {
+            return RECORD_FIELDS_IDS[key] === fieldId;
+          });
+          if (name) {
+            return Promise.resolve(mockRecordFields[name]);
+          }
+        });
+
+      const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
+      expect(result).toStrictEqual({
+        name: "Name",
+        city: "City",
+        country: "Country",
+        region: "Region",
+        image: "Image",
+        slackId: null,
+        slackUsername: "Slack Username",
+      });
+    });
+
+    test("removes a field from the final object if a handled error is thrown", async () => {
+      const fields = [
+        { fields: { City: "" } },
+        { fields: { Country: "" } },
+        { fields: { Region: "" } },
+        { fields: { Image: "" } },
+        { fields: { "Slack Id": "" } },
+        { fields: { "Slack Username": "" } },
+      ];
+      let fieldsIdx = 0;
+      const airtableEachPageMockFn = vi
+        .fn()
+        .mockImplementation(
+          (cb: (records: any, nextPage: any) => void): Promise<void> => {
+            const element = fields[fieldsIdx];
+            fieldsIdx++;
+            // eslint-disable-next-line n/no-callback-literal
+            cb(
+              // two elements to check the for loop in `getFieldName`
+              [element],
+              () => {}
+            );
+            return Promise.resolve();
+          }
+        );
+
+      const airtableBase = vi.fn().mockReturnValue({
+        select: (params: { fields: string[]; view: string }) => {
+          if (params.fields && params.fields[0] === "fldkG2SqdvCKDUhCH") {
+            throw new Error("Mocked error");
+          }
+
+          return {
+            eachPage: airtableEachPageMockFn,
+          };
+        },
+      });
+
+      const airtableRecords = new FakeAirtableRecords(
+        "testApiKey",
+        airtableBase as unknown as AirtableBase,
+        mockRecordFields
+      );
+
+      const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
+      // notice that in this object, there is no "name" field because it's the
+      // one that throws the exception
+      expect(result).toStrictEqual({
+        city: "City",
+        country: "Country",
+        region: "Region",
+        image: "Image",
+        slackUsername: "Slack Username",
+        slackId: "Slack Id",
+      });
+    });
+
+    test("removes a field from the final object if `getFieldName` gets 0 records", async () => {
+      let callIndex = 0;
+      const fields = [
+        { fields: { Name: "" } },
+        { fields: { City: "" } },
+        { fields: { Country: "" } },
+        { fields: { Region: "" } },
+        { fields: { Image: "" } },
+        { fields: { "Slack Id": "" } },
+        { fields: { "Slack Username": "" } },
+      ];
+      const airtableEachPageMockFn = vi
+        .fn()
+        .mockImplementation(
+          (cb: (records: any, nextPage: any) => void): Promise<void> => {
+            // this should pass 0 records for the first field (which is name)
+            const records = callIndex === 0 ? [] : [fields[callIndex]];
+            callIndex++;
+            cb(
+              // two elements to check the for loop in `getFieldName`
+              records,
+              () => {}
+            );
+            return Promise.resolve();
+          }
+        );
+
+      const airtableBase = vi.fn().mockReturnValue({
+        select: () => {
+          return {
+            eachPage: airtableEachPageMockFn,
+          };
+        },
+      });
+
+      const airtableRecords = new FakeAirtableRecords(
+        "testApiKey",
+        airtableBase as unknown as AirtableBase,
+        mockRecordFields
+      );
+
+      const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
+
+      // notice that in this object, there is no "name" field because it's the
+      // one that throws the exception
+      expect(result).toStrictEqual({
+        city: "City",
+        country: "Country",
+        region: "Region",
+        image: "Image",
+        slackUsername: "Slack Username",
+        slackId: "Slack Id",
+      });
+    });
   });
 });
