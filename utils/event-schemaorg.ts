@@ -40,6 +40,19 @@ interface Event {
   endDate?: Date;
 }
 
+export function sortEvents(
+  events: { [key: string]: any; startDate: string }[]
+) {
+  return events
+    .filter((event) => event.startDate)
+    .sort((a, b) => {
+      const dateA = new Date(a.startDate);
+      const dateB = new Date(b.startDate);
+
+      return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
+    });
+}
+
 export function createEventSchemaOrg(event: Event) {
   let location;
   if (event.mode === "Online") {

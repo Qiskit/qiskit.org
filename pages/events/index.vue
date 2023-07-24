@@ -120,6 +120,7 @@ import {
 
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
+import { sortEvents } from "~/utils/event-schemaorg";
 
 type TabActiveSet = "calendar" | "past" | "upcoming";
 
@@ -280,14 +281,7 @@ const selectTab = (selectedTab: string) => {
   tabsIsDirty.value = true;
 };
 
-const sortedEvents = upcomingEvents
-  .filter((event) => event.startDate)
-  .sort((a, b) => {
-    const dateA = new Date(a.startDate);
-    const dateB = new Date(b.startDate);
-
-    return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
-  });
+const sortedEvents = sortEvents(upcomingEvents);
 
 useSchemaOrg([
   defineItemList({

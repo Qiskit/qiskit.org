@@ -43,6 +43,7 @@
 
 <script setup lang="ts">
 import { TextLink } from "~/types/links";
+import { sortEvents } from "~/utils/event-schemaorg";
 
 type University = {
   image: string;
@@ -424,14 +425,7 @@ const universities: University[] = [
 
 const config = useRuntimeConfig();
 
-const sortedEvents = universities
-  .filter((event) => event.startDate)
-  .sort((a, b) => {
-    const dateA = new Date(a.startDate);
-    const dateB = new Date(b.startDate);
-
-    return dateA > dateB ? 1 : dateA < dateB ? -1 : 0;
-  });
+const sortedEvents = sortEvents(universities);
 
 useSchemaOrg([
   defineItemList({
