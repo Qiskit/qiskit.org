@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <article>
     <LayoutLeadSpaceFixed>
       Explore
       <br class="show-in-md" />
@@ -120,7 +120,7 @@
         </template>
       </UiFiltersResultsLayout>
     </section>
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">

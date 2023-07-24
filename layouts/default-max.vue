@@ -1,10 +1,12 @@
 <template>
   <div>
-    <qiskit-ui-shell v-if="isALearningPage" @on-click="onClick" />
-    <qiskit-ui-shell v-else variant="hide-account" @on-click="onClick" />
-    <div class="main-container">
+    <header>
+      <qiskit-ui-shell v-if="isALearningPage" @on-click="onClick" />
+      <qiskit-ui-shell v-else variant="hide-account" @on-click="onClick" />
+    </header>
+    <main class="main">
       <slot />
-    </div>
+    </main>
     <LayoutFooter theme="light" />
   </div>
 </template>
@@ -23,7 +25,7 @@ const isALearningPage = computed(() => route.path.includes("/learn"));
 </script>
 
 <style lang="scss" scoped>
-.main-container {
+.main {
   margin-top: 3.25rem;
 }
 
