@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <article>
     <LayoutLeadSpaceWithCard :cta="headerCTA" :card-title="headerCardTitle">
       <template #title>
         {{ headerTitle }}
@@ -111,7 +111,7 @@
         :resources="helpfulResources"
       />
     </div>
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">
