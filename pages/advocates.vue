@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <article>
     <LayoutLeadSpaceFixed>
       Connect with the<br />
       <UiTypewriterEffect
@@ -9,7 +9,7 @@
     </LayoutLeadSpaceFixed>
     <AdvocatesJoin />
     <AdvocatesMeetTheAdvocates />
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">
