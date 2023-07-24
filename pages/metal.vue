@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <article>
     <MetalLeadSpace />
     <MetalIntro />
     <MetalCapabilities />
     <MetalFeatures />
     <MetalBuilding />
     <MetalJoinUs />
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">

@@ -1,4 +1,3 @@
-import Airtable from "airtable";
 import { Advocate, AdvocatesWorldRegion } from "../types/advocates";
 import {
   AirtableRecords,
@@ -7,7 +6,7 @@ import {
 } from "./airtable-conversion-utils";
 // TODO: Understand why this import works with '../' and not with '~/'
 
-const RECORD_FIELDS_IDS = Object.freeze({
+export const RECORD_FIELDS_IDS = Object.freeze({
   name: "fldkG2SqdvCKDUhCH",
   city: "fldoCJjrveX4J9TV1",
   country: "fldZcHGtjEK7fPyAT",
@@ -38,7 +37,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
 
     const { slackId } = this.recordFields;
     const advocates: Advocate[] = [];
-    const base = new Airtable({ apiKey: this.apiKey }).base(AIRTABLE_BASE_ID);
+    const base = this.airtableBase;
 
     await base("Advocates")
       .select({
@@ -67,6 +66,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       slackId: this.getSlackId(record),
       slackUsername: this.getSlackUsername(record),
     };
+
     return advocate;
   }
 
@@ -95,7 +95,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
     return record.get(this.recordFields!.city);
   }
 
-  public getCountry(record: any): string {
+  public getCountry(record: any): string[] {
     return record.get(this.recordFields!.country);
   }
 
