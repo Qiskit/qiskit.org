@@ -47,11 +47,11 @@ export function createEventSchemaOrg(event: Event) {
       url: event.url,
     };
   } else {
-    location = definePlace({
+    location = {
       name: event.location,
       address: event.location,
       url: event.url,
-    });
+    };
   }
 
   const eventAttendanceMode =
