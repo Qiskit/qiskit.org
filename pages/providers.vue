@@ -12,8 +12,9 @@
         <div class="cds--col-sm-0 cds--col-md-3 cds--col-lg-3">
           <div class="providers-page__table-of-contents">
             <ProvidersToc
-              :entries="tocEntries"
               :active-section="activeSection"
+              :entries="tocEntries"
+              title="Run Qiskit with"
             />
             <UiCta
               :url="howToGuideLink.url"
@@ -100,16 +101,11 @@ if (!contentSections) {
   throw new Error("No providers data found");
 }
 
-const tocEntries: TableOfContentEntry[] = [
-  {
-    title: "Run Qiskit with",
-  },
-  ...contentSections.map((section) => ({
-    isSecondary: true,
-    sectionId: section.id,
-    title: section.title,
-  })),
-];
+const tocEntries: TableOfContentEntry[] = contentSections.map((section) => ({
+  isSecondary: true,
+  sectionId: section.id,
+  title: section.title,
+}));
 
 const { activeSection } = useScrollBetweenSections();
 

@@ -1,19 +1,17 @@
 <template>
   <nav class="providers-toc">
-    <!-- Needed to avoid multiline to remove blank space around the content. -->
-    <!-- eslint-disable vue/multiline-html-element-content-newline -->
+    <div class="providers-toc__entry" v-text="title" />
     <UiLink
       v-for="entry in entries"
-      :key="entry.sectionId || entry.title"
+      :key="entry.sectionId"
       class="providers-toc__entry"
       :class="{
         'providers-toc__entry_active': isActive(entry),
         'providers-toc__entry_second-level': entry.isSecondary,
       }"
-      :url="entry.sectionId && `#${entry.sectionId}`"
+      :url="`#${entry.sectionId}`"
       >{{ entry.title }}</UiLink
     >
-    <!-- eslint-enable -->
   </nav>
 </template>
 
@@ -21,8 +19,9 @@
 import { TableOfContentEntry } from "~/types/providers";
 
 interface Props {
-  entries: Array<TableOfContentEntry>;
   activeSection: string;
+  entries: TableOfContentEntry[];
+  title: string;
 }
 
 const props = defineProps<Props>();

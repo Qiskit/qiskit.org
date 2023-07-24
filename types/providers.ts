@@ -36,7 +36,7 @@ export interface TableOfContentEntry {
   /** The visible name of the link */
   title: string;
   /** Id of the section we want to jump to */
-  sectionId?: string;
+  sectionId: string;
   /** Use when the link is on secondary level */
   isSecondary?: boolean;
 }
