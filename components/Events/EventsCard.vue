@@ -3,7 +3,7 @@
     class="events-card"
     :image="image"
     :title="title"
-    :primary-tag="regions[0]"
+    :primary-tags="regions"
     :secondary-tags="types"
     :to="to"
     :cta-label="ctaLabel"

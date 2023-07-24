@@ -3,7 +3,7 @@
     class="advocates-meet-the-advocates-card"
     :image="image"
     :title="name"
-    :primary-tag="formattedRegion"
+    :primary-tags="formattedRegion"
     :alt-text="`${name} profile photo`"
   >
     <div v-if="location" class="advocates-meet-the-advocates-card__location">
@@ -44,7 +44,8 @@ const props = withDefaults(defineProps<Props>(), {
   slackUsername: "",
 });
 
-const formattedRegion = computed(() => (props.region ? props.region : ""));
+// Tags on UiCard is an Array
+const formattedRegion = computed(() => (props.region ? [props.region] : []));
 
 const location = computed(() =>
   [props.city, props.country].filter((e) => !!e).join(", ")

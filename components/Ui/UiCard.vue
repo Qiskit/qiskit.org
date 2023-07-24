@@ -33,9 +33,15 @@
             {{ subtitle }}
           </h5>
           <div class="card__tags">
-            <bx-tag v-if="primaryTag" class="card__tag">
-              {{ primaryTag }}
-            </bx-tag>
+            <template v-if="primaryTags">
+              <bx-tag
+                v-for="tag in primaryTags"
+                :key="tag"
+                class="card__tag_primary"
+              >
+                {{ tag }}
+              </bx-tag>
+            </template>
             <template v-if="hasTags(secondaryTags)">
               <bx-tag v-for="tag in secondaryTags" :key="tag" type="purple">
                 {{ tag }}
@@ -87,7 +93,7 @@ interface Props {
   title: string;
   to?: string;
   secondaryCta?: TextLink | null;
-  primaryTag?: string;
+  primaryTags?: string[];
   verticalLayout?: boolean;
 }
 
@@ -191,17 +197,19 @@ function hasTags(tags: string[]) {
 
   &__tag {
     margin-right: carbon.$spacing-03;
-    background-color: qiskit.$tag-background-color;
-    color: qiskit.$tag-text-color;
 
-    &:first-child {
-      margin-left: 0;
+    &_primary {
+      background-color: qiskit.$tag-background-color;
+      color: qiskit.$tag-text-color;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 
   &__tags {
     display: flex;
-    margin-right: carbon.$spacing-03;
   }
 
   &__title {
