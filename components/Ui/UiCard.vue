@@ -108,7 +108,7 @@ const props = withDefaults(defineProps<Props>(), {
   secondaryTags: () => [],
   to: "",
   secondaryCta: undefined,
-  primaryTag: undefined,
+  primaryTags: () => [],
   verticalLayout: false,
 });
 
