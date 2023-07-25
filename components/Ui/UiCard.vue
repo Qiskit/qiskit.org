@@ -33,7 +33,7 @@
             {{ subtitle }}
           </h5>
           <div class="card__tags">
-            <template v-if="primaryTags">
+            <template v-if="hasTags(primaryTags)">
               <bx-tag
                 v-for="tag in primaryTags"
                 :key="tag"
