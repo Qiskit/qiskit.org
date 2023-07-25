@@ -3,8 +3,8 @@
     <UiCard
       class="ecosystem-card"
       :title="member.name"
-      :tags="member.labels"
-      :primary-tag="member.tier"
+      :secondary-tags="member.labels"
+      :primary-tags="[member.tier]"
       cta-label="Go to repo"
       :segment="{
         cta: `go-to-repo-${member.name}`,
