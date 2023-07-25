@@ -40,9 +40,7 @@ interface Event {
   endDate?: Date;
 }
 
-export function sortEvents(
-  events: { [key: string]: any; startDate: string }[]
-) {
+export function sortEvents<T extends { startDate: string }>(events: T[]): T[] {
   return events
     .filter((event) => event.startDate)
     .sort((a, b) => {
