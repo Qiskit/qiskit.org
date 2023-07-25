@@ -207,6 +207,7 @@ function hasTags(tags: string[]) {
   &__tags {
     display: flex;
     margin-left: -#{carbon.$spacing-03};
+    flex-wrap: wrap;
   }
 
   &__title {
