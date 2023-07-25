@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import ArrowDown16 from "@carbon/icons-vue/lib/arrow--down/16";
 import ArrowRight16 from "@carbon/icons-vue/lib/arrow--right/16";
-import ErrorOutline16 from "@carbon/icons-vue/lib/error--outline/16";
 import Launch16 from "@carbon/icons-vue/lib/launch/16";
 import { Link } from "~/types/links";
 import { CtaClickedEventProp } from "~/types/segment";
@@ -49,35 +48,45 @@ const props = withDefaults(defineProps<Props>(), {
 
 defineEmits(["click"]);
 
+const config = useRuntimeConfig();
+
 const urlString = computed(() => {
   if (typeof props.url === "string") {
     return props.url;
   }
+
   return props.url.url;
 });
 
-const iconPerLinkType = computed(() => {
-  const url = props.url;
-
-  if (props.label === "Under construction") {
-    return ErrorOutline16;
-  }
-  if (isExternal(url as string)) {
-    return Launch16;
-  }
-  if (isIdAnchor(url as string)) {
-    return ArrowDown16;
-  }
-  return ArrowRight16;
+// Resolving link type (Based on https://github.com/nuxt/nuxt/blob/v3.6.3/packages/nuxt/src/app/components/nuxt-link.ts#L179)
+const isExternalLogically = computed<boolean>(() => {
+  return urlString.value === "" || urlHasProtocol(urlString.value);
 });
 
-function isExternal(url: string) {
-  return !!url && url.startsWith("http");
-}
+const isExternalVisually = computed<boolean>(() => {
+  // Same domain
+  if (urlString.value.startsWith(config.public.siteUrl)) {
+    return false;
+  }
 
-function isIdAnchor(url: string) {
-  return !!url && url.startsWith("#");
-}
+  return isExternalLogically.value;
+});
+
+const isFragment = computed<boolean>(() => {
+  return urlString.value.startsWith("#");
+});
+
+const iconPerLinkType = computed(() => {
+  if (isExternalVisually.value) {
+    return Launch16;
+  }
+
+  if (isFragment.value) {
+    return ArrowDown16;
+  }
+
+  return ArrowRight16;
+});
 </script>
 
 <style lang="scss" scoped>

@@ -32,21 +32,22 @@
           <h5 v-if="subtitle">
             {{ subtitle }}
           </h5>
-        </div>
-        <div class="cds--row">
-          <div v-if="hasTags(tags)" class="card__tags">
-            <bx-tag
-              v-for="tag in tags"
-              :key="tag"
-              class="card__tag"
-              type="purple"
-            >
-              {{ tag }}
-            </bx-tag>
+          <div class="card__tags">
+            <template v-if="hasTags(primaryTags)">
+              <bx-tag
+                v-for="tag in primaryTags"
+                :key="tag"
+                class="card__tag_primary"
+              >
+                {{ tag }}
+              </bx-tag>
+            </template>
+            <template v-if="hasTags(secondaryTags)">
+              <bx-tag v-for="tag in secondaryTags" :key="tag" type="purple">
+                {{ tag }}
+              </bx-tag>
+            </template>
           </div>
-          <bx-tag v-if="primaryTag" class="card__tag" type="purple">
-            {{ primaryTag }}
-          </bx-tag>
         </div>
       </header>
       <div class="card__body">
@@ -88,11 +89,11 @@ interface Props {
   altText?: string;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
-  tags?: string[];
+  secondaryTags?: string[];
   title: string;
   to?: string;
   secondaryCta?: TextLink | null;
-  primaryTag?: string;
+  primaryTags?: string[];
   verticalLayout?: boolean;
 }
 
@@ -104,10 +105,10 @@ const props = withDefaults(defineProps<Props>(), {
   altText: "No description available",
   segment: undefined,
   subtitle: "",
-  tags: () => [],
+  secondaryTags: () => [],
   to: "",
   secondaryCta: undefined,
-  primaryTag: undefined,
+  primaryTags: () => [],
   verticalLayout: false,
 });
 
@@ -187,30 +188,31 @@ function hasTags(tags: string[]) {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: carbon.$spacing-03;
+    margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-down(lg) {
       flex-direction: column;
     }
-
-    .cds--row {
-      margin-right: 0;
-      margin-left: 0;
-      margin-bottom: carbon.$spacing-03;
-    }
   }
 
   &__tag {
-    white-space: nowrap;
+    margin-right: carbon.$spacing-03;
+
+    &_primary {
+      background-color: qiskit.$tag-background-color;
+      color: qiskit.$tag-text-color;
+    }
   }
 
   &__tags {
-    margin-right: carbon.$spacing-03;
+    display: flex;
+    margin-left: -#{carbon.$spacing-03};
+    flex-wrap: wrap;
   }
 
   &__title {
     flex: 1;
-    margin-bottom: carbon.$spacing-02;
+    margin-bottom: carbon.$spacing-03;
   }
 }
 
@@ -258,18 +260,6 @@ function hasTags(tags: string[]) {
       justify-content: space-between;
       flex: 1;
     }
-  }
-}
-
-bx-tag {
-  background-color: qiskit.$tag-background-color;
-  color: qiskit.$tag-text-color;
-  margin-right: carbon.$spacing-03;
-  margin-left: 0;
-  min-width: 0;
-
-  &:last-child {
-    margin-right: 0;
   }
 }
 </style>

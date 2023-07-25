@@ -96,6 +96,7 @@
                 :date="eventItem.date"
                 :time="eventItem.startDateAndTime"
                 :to="eventItem.to"
+                :regions="eventItem.regions"
               >
                 {{ eventItem.abstract }}
               </EventsCard>
