@@ -155,17 +155,17 @@ useSeoMeta({
 
 const joinSectionCards = [
   {
-    name: "Main",
+    name: "Main tier",
     description: "The main Qiskit packages maintained by IBM Quantum.",
     icon: "quantum.svg",
   },
   {
-    name: "Extensions",
+    name: "Extensions tier",
     description: "IBM Quantum supported Qiskit extensions.",
     icon: "transform--02.svg",
   },
   {
-    name: "Community",
+    name: "Community tier",
     description:
       "Software packages supported by the Qiskit community, not maintained by IBM Quantum.",
     icon: "group.svg",
