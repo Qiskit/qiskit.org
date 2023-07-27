@@ -7,17 +7,14 @@
       /><br />
       within the Qiskit community
     </LayoutLeadSpaceFixed>
-    <LayoutLeadSpaceJoinWithCards
-      :cards="joinSectionCards"
-      :cta="advocatesJoinLink"
-    >
+    <UiJoinWithCards :cards="joinSectionCards" :cta="advocatesJoinLink">
       <template #description>
         <p>
           The Qiskit advocate program is a global program that provides support
           to the individuals who actively contribute to the Qiskit Community.
         </p>
       </template>
-    </LayoutLeadSpaceJoinWithCards>
+    </UiJoinWithCards>
     <AdvocatesMeetTheAdvocates />
   </article>
 </template>

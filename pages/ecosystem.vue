@@ -11,10 +11,7 @@
       <br />
       Qiskit community
     </LayoutLeadSpaceFixed>
-    <LayoutLeadSpaceJoinWithCards
-      :cards="joinSectionCards"
-      :cta="EcosystemJoinLink"
-    >
+    <UiJoinWithCards :cards="joinSectionCards" :cta="EcosystemJoinLink">
       <template #description>
         <p>
           The Ecosystem consists of projects, tools, utilities, libraries and
@@ -23,7 +20,7 @@
           development of quantum technologies using Qiskit.
         </p>
       </template>
-    </LayoutLeadSpaceJoinWithCards>
+    </UiJoinWithCards>
     <section id="ecosystem" class="cds--grid ecosystem-page">
       <h2>Ecosystem Resources</h2>
       <UiFiltersResultsLayout class="ecosystem-page__results">
