@@ -26,14 +26,6 @@
     </LayoutLeadSpaceJoinWithCards>
     <section id="ecosystem" class="cds--grid ecosystem-page">
       <h2>Ecosystem Resources</h2>
-      <div class="cds--row">
-        <p class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
-          The Ecosystem consists of projects, tools, utilities, libraries and
-          tutorials from a broad community of developers and researchers. The
-          goal of the Ecosystem is to celebrate, support and accelerate
-          development of quantum technologies using Qiskit.
-        </p>
-      </div>
       <UiFiltersResultsLayout class="ecosystem-page__results">
         <template #filters-on-m-l-screen>
           <UiFieldset class="ecosystem-page__categories" label="Tier">
