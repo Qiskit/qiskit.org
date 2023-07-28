@@ -126,7 +126,6 @@ const members = rawMembers as Member[];
 const config = useRuntimeConfig();
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Ecosystem",
   routeName: "ecosystem",
 });

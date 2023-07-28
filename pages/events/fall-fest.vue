@@ -100,7 +100,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/tabs/index.js";
 import {
   header,
   agenda,
@@ -108,7 +107,6 @@ import {
 } from "~/constants/fallFest2022Content";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Fall Fest 2022",
   routeName: "fall-fest",
 });

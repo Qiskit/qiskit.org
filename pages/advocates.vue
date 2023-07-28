@@ -27,7 +27,6 @@
 import { TextLink } from "types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Advocates",
   routeName: "advocates",
 });
