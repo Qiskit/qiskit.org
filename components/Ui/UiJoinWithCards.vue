@@ -1,5 +1,5 @@
 <template>
-  <section class="cds--grid join-with-cards">
+  <section class="cds--grid">
     <div class="cds--row">
       <article
         class="cds--col-lg-4 cds--col-md-4 join-with-cards__feature join-with-cards__intro"
