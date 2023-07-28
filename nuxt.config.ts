@@ -9,7 +9,7 @@ const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/content", "@nuxt/image-edge", "nuxt-schema-org"],
+  modules: ["@nuxt/content", "@nuxt/image", "nuxt-schema-org"],
 
   schemaOrg: {
     host: "https://qiskit.org",

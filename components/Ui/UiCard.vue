@@ -7,19 +7,12 @@
     }"
   >
     <div v-if="image" class="card__image-container">
-      <!-- TODO: investigate why this particular img is not being populated in past Events tab-->
-      <!-- <nuxt-img
+      <nuxt-img
         class="card__image"
         :class="imageContain ? 'card__image_contain' : null"
         format="webp"
         loading="lazy"
         sizes="sm:300px md:650px"
-        :src="image"
-      /> -->
-      <img
-        class="card__image"
-        :alt="altText"
-        :class="imageContain ? 'card__image_contain' : null"
         :src="image"
       />
     </div>

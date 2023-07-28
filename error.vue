@@ -18,7 +18,7 @@
             />
           </div>
           <div class="cds--col-lg-8">
-            <img
+            <nuxt-img
               class="error-page__img"
               :src="errorImgSrc"
               alt="Playful illustration of a cat in a cardboard box"
