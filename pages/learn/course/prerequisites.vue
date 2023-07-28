@@ -27,7 +27,6 @@ enum PrerequisitesUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Prerequisites",
   routeName: "prerequisites",
 });

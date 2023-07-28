@@ -31,7 +31,6 @@ enum QuantumHardwarePulsesUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Investigating Quantum Hardware Using Microwave Pulses",
   routeName: "quantum-hardware-pulses",
 });
