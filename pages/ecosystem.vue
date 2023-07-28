@@ -164,7 +164,7 @@ const joinSectionCards = [
   },
 ];
 
-const EcosystemJoinLink: TextLink = {
+const ecosystemJoinLink: TextLink = {
   url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
   label: "Join the ecosystem",
 };
