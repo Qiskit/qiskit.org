@@ -22,7 +22,6 @@ import { LearnStartLearningUrl } from "~/constants/links";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Quantum machine learning course",
   routeName: "machine-learning-course",
 });

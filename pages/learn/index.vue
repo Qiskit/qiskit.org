@@ -14,7 +14,6 @@ import { SocialMedia } from "~/constants/links";
 import { DescriptionCard } from "~/types/uiComponents";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Textbook",
   routeName: "learn",
 });
