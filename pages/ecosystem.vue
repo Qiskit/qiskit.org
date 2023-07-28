@@ -11,7 +11,11 @@
       <br />
       Qiskit community
     </LayoutLeadSpaceFixed>
-    <UiJoinWithCards :cards="joinSectionCards" :cta="EcosystemJoinLink">
+    <UiJoinWithCards
+      class="ecosystem-page__join-section"
+      :cards="joinSectionCards"
+      :cta="EcosystemJoinLink"
+    >
       <template #description>
         <p>
           The Ecosystem consists of projects, tools, utilities, libraries and
@@ -113,10 +117,10 @@
 </template>
 
 <script setup lang="ts">
+import { TextLink } from "types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
 import { Member, Tier } from "~/types/ecosystem";
-import { EcosystemJoinLink } from "~/constants/links";
 
 const members = rawMembers as Member[];
 const config = useRuntimeConfig();
@@ -160,6 +164,11 @@ const joinSectionCards = [
     icon: "group.svg",
   },
 ];
+
+const EcosystemJoinLink: TextLink = {
+  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
+  label: "Join the ecosystem",
+};
 
 /**
  * Tier selection
@@ -293,6 +302,10 @@ const filteredMembersSorted = computed<Member[]>(() => {
 @use "~/assets/scss/helpers/classes.scss";
 
 .ecosystem-page {
+  &__join-section {
+    margin-bottom: carbon.$spacing-12;
+  }
+
   &__tier-panel {
     margin-top: carbon.$spacing-07;
   }

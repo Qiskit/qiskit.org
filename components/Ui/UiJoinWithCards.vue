@@ -6,7 +6,6 @@
       >
         <slot name="description" />
         <UiCta
-          v-if="cta"
           is-wider
           :label="cta.label"
           :segment="cta.segment"
@@ -38,7 +37,7 @@ interface Card {
 }
 
 interface Props {
-  cta?: TextLink;
+  cta: TextLink;
   cards: Card[];
 }
 
@@ -49,8 +48,6 @@ defineProps<Props>();
 @use "~/assets/scss/carbon.scss";
 
 .join-with-cards {
-  margin-bottom: carbon.$spacing-12;
-
   &__feature {
     @include carbon.breakpoint-down(lg) {
       margin-bottom: carbon.$spacing-07;

@@ -7,7 +7,11 @@
       /><br />
       within the Qiskit community
     </LayoutLeadSpaceFixed>
-    <UiJoinWithCards :cards="joinSectionCards" :cta="advocatesJoinLink">
+    <UiJoinWithCards
+      class="advocates-page__join-section"
+      :cards="joinSectionCards"
+      :cta="advocatesJoinLink"
+    >
       <template #description>
         <p>
           The Qiskit advocate program is a global program that provides support
@@ -20,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { TextLink } from "types/links";
+
 definePageMeta({
   layout: "default-max",
   pageTitle: "Qiskit Advocates",
@@ -42,7 +48,7 @@ useSeoMeta({
   twitterDescription: description,
 });
 
-const advocatesJoinLink = {
+const advocatesJoinLink: TextLink = {
   url: "https://qisk.it/advocateapplication",
   label: "Join the program",
   segment: { cta: "join-the-program", location: "advocates" },
@@ -69,3 +75,11 @@ const joinSectionCards = [
   },
 ];
 </script>
+
+<style lang="scss" scoped>
+@use "~/assets/scss/carbon.scss";
+
+.advocates-page__join-section {
+  margin-bottom: carbon.$spacing-12;
+}
+</style>

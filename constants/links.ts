@@ -38,9 +38,4 @@ const SocialMedia: { [key: string]: TextLink } = {
   },
 } as const;
 
-const EcosystemJoinLink: TextLink = {
-  url: "https://github.com/qiskit-community/ecosystem#ecosystem--",
-  label: "Join the ecosystem",
-};
-
-export { LearnStartLearningUrl, SocialMedia, EcosystemJoinLink };
+export { LearnStartLearningUrl, SocialMedia };
