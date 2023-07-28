@@ -33,7 +33,7 @@
 import { TextLink } from "~/types/links";
 import { ProviderCodeExample } from "~/types/providers";
 
-export interface AccordionLayoutProps {
+interface Props {
   title: string;
   description: string;
   installation: string;
@@ -43,7 +43,7 @@ export interface AccordionLayoutProps {
   codeExamples: ProviderCodeExample[];
 }
 
-const props = defineProps<AccordionLayoutProps>();
+const props = defineProps<Props>();
 
 const ctas = computed(() => {
   const ctas = [];
