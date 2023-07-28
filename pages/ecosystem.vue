@@ -14,7 +14,7 @@
     <UiJoinWithCards
       class="ecosystem-page__join-section"
       :cards="joinSectionCards"
-      :cta="EcosystemJoinLink"
+      :cta="ecosystemJoinLink"
     >
       <template #description>
         <p>
@@ -99,7 +99,7 @@
           <div class="ecosystem-page__tier-panel">
             <p v-if="filteredMembersSorted.length === 0" class="cds--col">
               Try using wider search criteria, or consider
-              <UiLink v-bind="EcosystemJoinLink">joining the ecosystem.</UiLink>
+              <UiLink v-bind="ecosystemJoinLink">joining the ecosystem.</UiLink>
             </p>
             <div v-else class="cds--row ecosystem-page__members">
               <EcosystemCard
