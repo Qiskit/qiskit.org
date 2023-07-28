@@ -17,7 +17,7 @@
     </div>
     <div class="providers-accordion-content__cta-group">
       <UiCta
-        v-for="cta in validCtas"
+        v-for="cta in ctas"
         :key="cta.label"
         kind="ghost"
         :url="cta.url"
@@ -37,19 +37,28 @@ export interface AccordionLayoutProps {
   title: string;
   description: string;
   installation: string;
-  websiteCta: TextLink;
-  docsCta: TextLink;
-  sourceCta: TextLink;
+  docsCta?: TextLink;
+  sourceCta?: TextLink;
+  websiteCta?: TextLink;
   codeExamples: ProviderCodeExample[];
 }
 
 const props = defineProps<AccordionLayoutProps>();
 
-// FIX: This should already be checked by the GeneralLink type
-const validCtas = computed(() => {
-  return [props.websiteCta, props.docsCta, props.sourceCta].filter(
-    (cta) => cta.url !== null
-  );
+const ctas = computed(() => {
+  const ctas = [];
+
+  if (props.websiteCta) {
+    ctas.push(props.websiteCta);
+  }
+  if (props.docsCta) {
+    ctas.push(props.docsCta);
+  }
+  if (props.sourceCta) {
+    ctas.push(props.sourceCta);
+  }
+
+  return ctas;
 });
 </script>
 
