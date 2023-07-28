@@ -29,7 +29,6 @@ enum GamesAndDemosUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Games and demos",
   routeName: "games-and-demos",
 });

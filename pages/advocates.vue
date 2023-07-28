@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Advocates",
   routeName: "advocates",
 });

@@ -34,7 +34,6 @@ enum QuantumAlgorithmsForApplicationsUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Quantum Algorithms for Applications",
   routeName: "quantum-algorithms-for-applications",
 });
