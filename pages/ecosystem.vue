@@ -147,7 +147,6 @@ const joinAction: TextLink = {
 };
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Ecosystem",
   routeName: "ecosystem",
 });

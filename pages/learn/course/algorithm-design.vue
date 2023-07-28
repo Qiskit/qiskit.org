@@ -23,7 +23,6 @@ import { RecommendedReading } from "~/types/learn";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Variational Algorithm Design",
   routeName: "algorithm-design",
 });
