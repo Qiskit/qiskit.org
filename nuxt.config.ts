@@ -9,6 +9,10 @@ const IS_PRODUCTION = NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
+
   modules: ["@nuxt/content", "@nuxt/image-edge", "nuxt-schema-org"],
 
   schemaOrg: {
