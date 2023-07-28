@@ -31,7 +31,6 @@ enum MultipleQubitsAndEntanglementUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Multiple Qubits and Entanglement",
   routeName: "multiple-qubits-and-entanglement",
 });

@@ -23,7 +23,6 @@ import { RecommendedReading } from "~/types/learn";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Fundamentals of quantum algorithms",
   routeName: "fundamentals-quantum-algorithms-course",
 });
