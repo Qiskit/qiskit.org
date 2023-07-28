@@ -23,7 +23,6 @@ import { RecommendedReading } from "~/types/learn";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Introduction course",
   routeName: "introduction-course",
 });

@@ -34,7 +34,6 @@ enum LegacyContentUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Legacy content",
   routeName: "legacy-content",
 });

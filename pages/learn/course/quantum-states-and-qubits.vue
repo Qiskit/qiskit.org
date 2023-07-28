@@ -30,7 +30,6 @@ enum QuantumStatesAndQubitsUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Quantum States and Qubits",
   routeName: "quantum-states-and-qubits",
 });

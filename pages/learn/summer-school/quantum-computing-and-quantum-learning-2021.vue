@@ -23,7 +23,6 @@ import { RecommendedReading } from "~/types/learn";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "2021 Qiskit Global Summer School on Quantum Machine Learning",
   routeName: "quantum-computing-and-quantum-learning-2021",
 });
