@@ -34,7 +34,6 @@ enum QuantumComputingLabsUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Quantum Computing Labs",
   routeName: "quantum-computing-labs",
 });
