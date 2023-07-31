@@ -32,10 +32,7 @@
     >
       <p>
         Start by copying the calendar subscription link
-        <bx-code-snippet
-          copy-button-feedback-text="Copy calendar sync url"
-          type="inline"
-        >
+        <bx-code-snippet copy-button-feedback-text="Copied!" type="inline">
           <span>{{ qiskitCalendarSyncLink }}</span>
         </bx-code-snippet>
       </p>

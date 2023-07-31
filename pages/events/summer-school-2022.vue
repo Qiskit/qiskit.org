@@ -110,7 +110,6 @@ import {
 } from "~/constants/summerSchool2022Content";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Global Summer School 2022",
   routeName: "summer-school-2022",
 });

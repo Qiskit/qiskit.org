@@ -39,7 +39,6 @@ enum QuantumProtocolsAndQuantumAlgorithmsUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Quantum Protocols and Quantum Algorithms",
   routeName: "quantum-protocols-and-quantum-algorithms",
 });

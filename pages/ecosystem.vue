@@ -29,7 +29,6 @@
       <div class="ecosystem-page__tiers">
         <client-only>
           <bx-tabs
-            class="ecosystem-page__tiers__tabs"
             trigger-content="Select an item"
             value="Main"
             @bx-tabs-selected="updateSelectedTab($event.target.value)"
@@ -148,7 +147,6 @@ const joinAction: TextLink = {
 };
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Ecosystem",
   routeName: "ecosystem",
 });

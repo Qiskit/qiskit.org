@@ -125,7 +125,6 @@ import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
 type TabActiveSet = "calendar" | "past" | "upcoming";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Events",
   routeName: "events",
 });

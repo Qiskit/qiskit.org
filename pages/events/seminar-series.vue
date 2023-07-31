@@ -123,7 +123,6 @@ import { TextLink } from "~/types/links";
 import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Seminar Series",
   routeName: "seminar-series",
 });

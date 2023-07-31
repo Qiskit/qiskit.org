@@ -15,7 +15,6 @@ interface PackageInfo {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit",
   routeName: "qiskit-landing-page",
 });
