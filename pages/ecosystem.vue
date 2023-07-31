@@ -26,7 +26,14 @@
       </template>
     </UiJoinWithCards>
     <section id="ecosystem" class="cds--grid ecosystem-page">
-      <h2>Ecosystem Resources</h2>
+      <h2>Explore the ecosystem resources</h2>
+      <div class="cds--row">
+        <p class="cds--col-md-5 cds--col-lg-8 cds--col-xlg-7 cds--col-max-6">
+          Browse through the ecosystem using search, filter, and sort options.
+          Find inspiration for your own projects or collaborate with others to
+          unlock the true potential of Qiskit.
+        </p>
+      </div>
       <UiFiltersResultsLayout class="ecosystem-page__results">
         <template #filters-on-m-l-screen>
           <UiFieldset class="ecosystem-page__categories" label="Tier">
