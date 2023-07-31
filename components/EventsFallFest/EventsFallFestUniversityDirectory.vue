@@ -43,7 +43,6 @@
 
 <script setup lang="ts">
 import { TextLink } from "~/types/links";
-import { sortEvents } from "~/utils/event-schemaorg";
 
 type University = {
   image: string;

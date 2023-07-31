@@ -121,7 +121,6 @@ import {
 
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";
-import { sortEvents } from "~/utils/event-schemaorg";
 
 type TabActiveSet = "calendar" | "past" | "upcoming";
 
