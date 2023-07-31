@@ -73,15 +73,6 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
-    url: "http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf",
-    author: "Nielsen & Chuang,",
-    label: "Quantum Computation and Quantum Information",
-    segment: {
-      cta: "qc-qi-pdf",
-      location: "external-recommended-readings",
-    },
-  },
-  {
     url: "https://www.deeplearningbook.org/",
     author: "Ian Goodfellow et al.,",
     label: "Deep Learning",
