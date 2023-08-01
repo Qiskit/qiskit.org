@@ -7,6 +7,9 @@
     <div class="ui-compact-feature__description">
       {{ description }}
     </div>
+    <div v-if="detail" class="ui-compact-feature__detail">
+      {{ detail }}
+    </div>
   </article>
 </template>
 
@@ -15,6 +18,7 @@ interface Props {
   description: string;
   icon: string;
   title: string;
+  detail: string;
 }
 
 defineProps<Props>();
@@ -30,6 +34,7 @@ $feature-icon-size: 2.25rem;
   background-color: qiskit.$background-color-secondary;
   height: 100%;
   padding: carbon.$spacing-05;
+  position: relative;
 
   @include carbon.breakpoint-down(lg) {
     padding-bottom: carbon.$spacing-06;
@@ -52,6 +57,12 @@ $feature-icon-size: 2.25rem;
 
   &__description {
     color: qiskit.$text-color-white;
+  }
+
+  &__detail {
+    color: qiskit.$text-color-white;
+    position: absolute;
+    bottom: carbon.$spacing-05;
   }
 }
 </style>

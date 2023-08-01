@@ -156,17 +156,20 @@ const joinSectionCards = [
   {
     name: "Main tier",
     description: "The main Qiskit packages maintained by IBM Quantum.",
+    detail: `${getTierProjectCount("Main")} projects`,
     icon: "quantum.svg",
   },
   {
     name: "Extensions tier",
     description: "IBM Quantum supported Qiskit extensions.",
+    detail: `${getTierProjectCount("Extensions")} projects`,
     icon: "transform--02.svg",
   },
   {
     name: "Community tier",
     description:
       "Software packages supported by the Qiskit community, not maintained by IBM Quantum.",
+    detail: `${getTierProjectCount("Community")} projects`,
     icon: "group.svg",
   },
 ];
@@ -301,6 +304,17 @@ const filteredMembersSorted = computed<Member[]>(() => {
 
   return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
 });
+
+function getTierProjectCount(tierName: string) {
+  const tierCount = members.reduce((acc, member) => {
+    if (member.tier === tierName) {
+      acc += 1;
+    }
+    return acc;
+  }, 0);
+
+  return tierCount;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -399,6 +413,20 @@ const filteredMembersSorted = computed<Member[]>(() => {
 
   &::part(expando) {
     background-color: carbon.$cool-gray-20;
+  }
+}
+</style>
+
+<style lang="scss">
+@use "~/assets/scss/carbon.scss";
+
+.ecosystem-page__join-section {
+  .join-with-cards__feature {
+    height: 15.5rem;
+
+    @include carbon.breakpoint-down(md) {
+      height: 14.5rem;
+    }
   }
 }
 </style>

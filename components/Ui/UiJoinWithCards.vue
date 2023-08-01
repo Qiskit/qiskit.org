@@ -21,6 +21,7 @@
           :description="card.description"
           :icon="card.icon"
           :title="card.name"
+          :detail="card.detail"
         />
       </div>
     </div>
@@ -34,6 +35,7 @@ interface Card {
   name: string;
   description: string;
   icon: string;
+  detail: string;
 }
 
 interface Props {
