@@ -86,6 +86,24 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
+    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE#overview",
+    author: "Michael Nielsen, et al.,",
+    label: "Quantum Computation and Quantum Information (Chapters 4-6)",
+    segment: {
+      cta: "quantum-computation-and-quantum-information",
+      location: "external-recommended-readings",
+    },
+  },
+  {
+    url: "https://global.oup.com/academic/product/an-introduction-to-quantum-computing-9780198570493?cc=nl&lang=en&",
+    author: "Phillip Kaye, et al.,",
+    label: "An Introduction to Quantum Computing (Chapters 5-8)",
+    segment: {
+      cta: "an-introduction-to-quantum-computing",
+      location: "external-recommended-readings",
+    },
+  },
+  {
     url: "http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart1.pdf",
     author: "Richard Cleve,",
     label: "Quantum Information Processing — Quantum Algorithms I",
