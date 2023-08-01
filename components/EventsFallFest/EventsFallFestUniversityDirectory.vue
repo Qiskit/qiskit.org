@@ -421,6 +421,27 @@ const universities: University[] = [
     },
   },
 ];
+
+const config = useRuntimeConfig();
+
+const sortedEvents = sortEvents(universities);
+
+useSchemaOrg([
+  defineItemList({
+    itemListElement: sortedEvents.map((event) =>
+      createEventSchemaOrg({
+        startDate: new Date(event.startDate),
+        location: event.title,
+        mode: event.detail === "In Person" ? "Offline" : "Online",
+        url: `${config.public.siteUrl}/fall-fest`,
+        name: event.title,
+        image: event.image,
+      })
+    ),
+    itemListOrder: "Ascending",
+    numberOfItems: sortedEvents.length,
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>
