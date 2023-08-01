@@ -279,6 +279,29 @@ const selectTab = (selectedTab: string) => {
 
   tabsIsDirty.value = true;
 };
+
+const sortedEvents = sortEvents(upcomingEvents);
+
+useSchemaOrg([
+  defineItemList({
+    itemListElement: sortedEvents.map((event) =>
+      createEventSchemaOrg({
+        startDate: new Date(event.startDate),
+        mode: ["YouTube", "Virtual"].includes(event.location)
+          ? "Online"
+          : "Offline",
+        location: event.location,
+        url: event.to,
+        name: event.title,
+        image: event.image,
+        performer: event.speaker,
+        endDate: event.endDate ? new Date(event.endDate) : undefined,
+      })
+    ),
+    itemListOrder: "Ascending",
+    numberOfItems: sortedEvents.length,
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>
