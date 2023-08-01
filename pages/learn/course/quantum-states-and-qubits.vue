@@ -77,24 +77,6 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
-    url: "http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf",
-    author: "Michael Nielsen, et al.,",
-    label: "Quantum Computation and Quantum Information (Chapter 1)",
-    segment: {
-      cta: "quantum-computation-and-quantum-information-ch-1",
-      location: "external-recommended-readings",
-    },
-  },
-  {
-    url: "http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf",
-    author: "Phillip Kaye, et al.,",
-    label: "An Introduction to Quantum Computing (Chapters 1-3)",
-    segment: {
-      cta: "introduction-to-quantum-computing-ch-1-3",
-      location: "external-recommended-readings",
-    },
-  },
-  {
     url: "https://arxiv.org/abs/1907.09415",
     author: "Ronald de Wolf,",
     label: "Quantum Computing: Lecture Notes (Chapters 1 and 2)",
