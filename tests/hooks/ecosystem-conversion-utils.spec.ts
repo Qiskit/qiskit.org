@@ -136,33 +136,6 @@ describe("fetchMembers", () => {
         updatedAt: 0,
         skipTests: false,
       },
-      {
-        name: "member1",
-        tier: "Main",
-        testsResults: [
-          {
-            testType: "development",
-            passed: true,
-            package: "",
-            packageVersion: "",
-            terraVersion: "",
-            timestamp: 0,
-            logsLink: "",
-            packageCommitHash: "",
-          },
-        ],
-        stars: 0,
-        url: "https://example.com",
-        description:
-          "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
-        licence: "",
-        contactInfo: "",
-        alternatives: null,
-        labels: [],
-        createdAt: 0,
-        updatedAt: 0,
-        skipTests: false,
-      },
       [
         {
           name: "member1",
@@ -192,6 +165,33 @@ describe("fetchMembers", () => {
           skipTests: false,
         },
       ],
+      {
+        name: "member1",
+        tier: "Main",
+        testsResults: [
+          {
+            testType: "development",
+            passed: true,
+            package: "",
+            packageVersion: "",
+            terraVersion: "",
+            timestamp: 0,
+            logsLink: "",
+            packageCommitHash: "",
+          },
+        ],
+        stars: 0,
+        url: "https://example.com",
+        description:
+          "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
+        licence: "",
+        contactInfo: "",
+        alternatives: null,
+        labels: [],
+        createdAt: 0,
+        updatedAt: 0,
+        skipTests: false,
+      },
     ];
 
     (axios.get as any).mockResolvedValueOnce(members);
