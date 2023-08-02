@@ -17,14 +17,6 @@ const header = {
       location: "header",
     },
   },
-  cta: {
-    label: "Register now!",
-    url: "https://qisk.it/QGSS23REG",
-    segment: {
-      cta: "register",
-      location: "header",
-    },
-  },
   cardSectionHeading: "About the event:",
   card: {
     image: "/images/events/summer-school-2023/summer-school-2023-logo.png",
