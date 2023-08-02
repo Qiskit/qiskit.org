@@ -27,13 +27,7 @@
           </UiLinkText>
           for more details. For any questions, please check out our FAQ below!
         </p>
-        <p>See you soon!</p>
-        <UiCta
-          class="summer-school-2023-page__cta"
-          :url="headerCta.url"
-          :label="headerCta.label"
-          :segment="headerCta.segment"
-        />
+        <p>See you next year!</p>
       </template>
       <template #card>
         <EventsCard
@@ -145,7 +139,6 @@ useSeoMeta({
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
-const headerCta = headerData.cta;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
@@ -198,10 +191,6 @@ useSchemaOrg([
     @include carbon.breakpoint-down(lg) {
       max-width: 100%;
     }
-  }
-
-  &__cta {
-    margin-top: carbon.$spacing-07;
   }
 
   &__header-card {
