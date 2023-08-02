@@ -193,10 +193,6 @@ useSchemaOrg([
     }
   }
 
-  &__cta {
-    margin-top: carbon.$spacing-07;
-  }
-
   &__header-card {
     :deep(.card__image-container) {
       flex: 0 0 24rem;
