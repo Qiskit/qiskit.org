@@ -1,13 +1,18 @@
 <template>
   <article class="ui-compact-feature">
-    <nuxt-img class="ui-compact-feature__icon" :src="`/images/icons/${icon}`" />
-    <h3 class="h4 ui-compact-feature__title">
-      {{ title }}
-    </h3>
-    <div class="ui-compact-feature__description">
-      {{ description }}
+    <div>
+      <nuxt-img
+        class="ui-compact-feature__icon"
+        :src="`/images/icons/${icon}`"
+      />
+      <h3 class="h4 ui-compact-feature__title">
+        {{ title }}
+      </h3>
+      <div class="ui-compact-feature__copy">
+        {{ description }}
+      </div>
     </div>
-    <div v-if="detail" class="ui-compact-feature__detail">
+    <div v-if="detail" class="ui-compact-feature__copy">
       {{ detail }}
     </div>
   </article>
@@ -34,7 +39,9 @@ $feature-icon-size: 2.25rem;
   background-color: qiskit.$background-color-secondary;
   height: 100%;
   padding: carbon.$spacing-05;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @include carbon.breakpoint-down(lg) {
     padding-bottom: carbon.$spacing-06;
@@ -55,14 +62,8 @@ $feature-icon-size: 2.25rem;
     }
   }
 
-  &__description {
+  &__copy {
     color: qiskit.$text-color-white;
-  }
-
-  &__detail {
-    color: qiskit.$text-color-white;
-    position: absolute;
-    bottom: carbon.$spacing-05;
   }
 }
 </style>
