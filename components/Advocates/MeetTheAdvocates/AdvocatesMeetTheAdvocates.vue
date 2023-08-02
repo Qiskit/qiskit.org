@@ -128,8 +128,6 @@ const joinSlackLink = "https://qisk.it/join-slack";
 @use "~/assets/scss/carbon.scss";
 
 .advocates-meet-the-advocates {
-  margin-top: carbon.$spacing-12;
-
   &__filters-result-section {
     margin-top: carbon.$spacing-10;
   }

@@ -61,7 +61,7 @@ const backToHomeCta: TextLink = {
 };
 
 const backToDocsCta: TextLink = {
-  url: "/documentation",
+  url: "https://qiskit.org/documentation/",
   label: "Back to Qiskit documentation",
   segment: {
     cta: "back-to-documentation",

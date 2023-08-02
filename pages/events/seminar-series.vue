@@ -123,7 +123,6 @@ import { TextLink } from "~/types/links";
 import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Seminar Series",
   routeName: "seminar-series",
 });
@@ -323,6 +322,27 @@ function dataPerRow(
     },
   ]);
 }
+
+const sortedEvents = sortEvents(upcomingSeminarSerieEvents);
+
+useSchemaOrg([
+  defineItemList({
+    itemListElement: sortedEvents.map((event) =>
+      createEventSchemaOrg({
+        startDate: new Date(event.startDate),
+        mode: "Online",
+        location: event.location,
+        url: event.to,
+        name: event.title,
+        image: event.image,
+        performer: event.speaker,
+        endDate: event.endDate ? new Date(event.endDate) : undefined,
+      })
+    ),
+    itemListOrder: "Ascending",
+    numberOfItems: sortedEvents.length,
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>

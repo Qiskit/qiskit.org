@@ -30,7 +30,6 @@ enum QuantumStatesAndQubitsUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Quantum States and Qubits",
   routeName: "quantum-states-and-qubits",
 });
@@ -78,20 +77,20 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
-    url: "http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf",
+    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE#overview",
     author: "Michael Nielsen, et al.,",
     label: "Quantum Computation and Quantum Information (Chapter 1)",
     segment: {
-      cta: "quantum-computation-and-quantum-information-ch-1",
+      cta: "quantum-computation-and-quantum-information",
       location: "external-recommended-readings",
     },
   },
   {
-    url: "http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf",
+    url: "https://global.oup.com/academic/product/an-introduction-to-quantum-computing-9780198570493?cc=nl&lang=en&",
     author: "Phillip Kaye, et al.,",
     label: "An Introduction to Quantum Computing (Chapters 1-3)",
     segment: {
-      cta: "introduction-to-quantum-computing-ch-1-3",
+      cta: "an-introduction-to-quantum-computing",
       location: "external-recommended-readings",
     },
   },

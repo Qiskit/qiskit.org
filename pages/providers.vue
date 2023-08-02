@@ -70,7 +70,6 @@ import {
 } from "~/types/providers";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Providers",
   routeName: "providers",
 });

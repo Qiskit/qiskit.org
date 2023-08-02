@@ -29,7 +29,6 @@ enum QuantumHardwareCircuitsUrl {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Investigating Quantum Hardware Using Quantum Circuits",
   routeName: "quantum-hardware-circuits",
 });

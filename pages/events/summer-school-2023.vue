@@ -121,7 +121,6 @@ import {
 } from "~/constants/summerSchool2023Content";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Global Summer School 2023",
   routeName: "/events/summer-school-2023",
 });
@@ -150,6 +149,18 @@ const headerCta = headerData.cta;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
+
+useSchemaOrg([
+  createEventSchemaOrg({
+    startDate: new Date("2023-07-17"),
+    mode: "Online",
+    location: "",
+    url: `${config.public.siteUrl}/events/summer-school-2023/`,
+    name: headerData.card.title,
+    image: `${config.public.siteUrl}${headerData.card.image}`,
+    endDate: new Date("2023-07-28"),
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>

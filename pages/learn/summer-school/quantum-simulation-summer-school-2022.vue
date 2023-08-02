@@ -22,7 +22,6 @@ import { LearnStartLearningUrl } from "~/constants/links";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "2022 Qiskit global summer school on quantum simulation",
   routeName: "quantum-simulation-summer-school-2022",
 });
