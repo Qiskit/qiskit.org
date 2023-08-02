@@ -1,7 +1,8 @@
 <template>
-  <!-- The class `alchemer-survey-trigger` is required to trigger the popup -->
+  <!-- The ID `alchemer-survey-trigger` is required to trigger the popup -->
   <bx-btn
-    class="ui-alchemer-survey-trigger alchemer-survey-trigger"
+    id="alchemer-survey-trigger"
+    class="ui-alchemer-survey-trigger"
     size="sm"
     type="button"
   >
