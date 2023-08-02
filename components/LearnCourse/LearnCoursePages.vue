@@ -28,14 +28,14 @@
           Page preview
         </div>
       </div>
-      <div v-if="activeCourse" class="learn-course-pages__content__preview">
-        <UiLink :url="activeCourse.url">
+      <div class="learn-course-pages__content__preview">
+        <UiLink v-for="course in courses" :key="course.url" :url="course.url">
           <nuxt-img
+            v-show="activeCourse === course"
             class="learn-course-pages__content__preview__image"
             format="webp"
-            preload
             sizes="md:650px lg:500px xl:750px"
-            :src="activeCoursePreviewImage"
+            :src="`${imgBase}/${course.image}`"
           />
         </UiLink>
         <UiCta
@@ -65,17 +65,7 @@ const activeCourse = computed(() => {
   const activeCourse = props.courses.find(
     ({ label }) => label === activeCourseLabel.value
   );
-  return activeCourse || null;
-});
-
-const activeCoursePreviewImage = computed(() => {
-  if (!activeCourse.value) {
-    return "";
-  }
-
-  const imageUrlBase = props.imgBase;
-
-  return `${imageUrlBase}/${activeCourse.value.image}`;
+  return activeCourse || props.courses[0];
 });
 
 const selectCourse = (courseLabel: string) => {
