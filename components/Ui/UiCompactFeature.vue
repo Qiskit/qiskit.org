@@ -18,7 +18,7 @@ interface Props {
   description: string;
   icon: string;
   title: string;
-  detail: string;
+  detail?: string;
 }
 
 defineProps<Props>();
