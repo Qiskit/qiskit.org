@@ -27,7 +27,7 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "https://qisk.it/QGSS23REG",
+    to: "",
     ctaLabel: "View the event",
     segment: {
       cta: "ibm-research-blog",
