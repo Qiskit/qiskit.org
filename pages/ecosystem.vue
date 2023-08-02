@@ -127,7 +127,7 @@
 import { TextLink } from "types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
-import { Member, Tier } from "~/types/ecosystem";
+import { Member, Tier, TierName } from "~/types/ecosystem";
 
 const members = rawMembers as Member[];
 const config = useRuntimeConfig();
@@ -305,7 +305,7 @@ const filteredMembersSorted = computed<Member[]>(() => {
   return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
 });
 
-function getTierProjectCount(tierName: string) {
+function getTierProjectCount(tierName: TierName) {
   const tierCount = members.reduce((acc, member) => {
     if (member.tier === tierName) {
       acc += 1;

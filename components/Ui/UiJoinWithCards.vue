@@ -35,7 +35,7 @@ interface Card {
   name: string;
   description: string;
   icon: string;
-  detail: string;
+  detail?: string;
 }
 
 interface Props {
