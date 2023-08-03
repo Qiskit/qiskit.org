@@ -12,7 +12,7 @@
         {{ description }}
       </div>
     </div>
-    <div v-if="detail" class="ui-compact-feature__copy">
+    <div v-if="detail" class="ui-compact-feature__detail">
       {{ detail }}
     </div>
   </article>
@@ -64,7 +64,11 @@ $feature-icon-size: 2.25rem;
 
   &__copy {
     color: qiskit.$text-color-white;
-    margin-bottom: carbon.$spacing-05;
+  }
+
+  &__detail {
+    color: qiskit.$text-color-white;
+    margin-top: carbon.$spacing-05;
   }
 }
 </style>
