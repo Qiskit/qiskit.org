@@ -272,7 +272,7 @@ const prerequisites: Prerequisite[] = [
       cta: "linear-algebra",
       location: "related-material",
     },
-    url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
+    url: "https://learn.qiskit.org/course/ch-appendix/linear_algebra",
   },
   {
     title: "Probability Theory — Random Variables and Distributions",
