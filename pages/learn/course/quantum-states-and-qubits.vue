@@ -23,7 +23,7 @@ import { TextLink } from "~/types/links";
 
 enum QuantumStatesAndQubitsUrl {
   Introduction = "https://learn.qiskit.org/course/ch-states/introduction",
-  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/the-atoms-of-computation",
+  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/atoms-computation",
   RepresentingQubitStates = "https://learn.qiskit.org/course/ch-states/representing-qubit-states",
   SingleQubitGates = "https://learn.qiskit.org/course/ch-states/single-qubit-gates",
   CaseForQuantum = "https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers",

@@ -424,7 +424,7 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
     },
     {
       label: "The Atoms of Computation",
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/the-atoms-of-computation`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/atoms-computation`,
       segment: {
         cta: "the-atoms-of-computation",
         location: sectionQuantumStatesAndQubits,
