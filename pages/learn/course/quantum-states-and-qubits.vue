@@ -23,7 +23,7 @@ import { TextLink } from "~/types/links";
 
 enum QuantumStatesAndQubitsUrl {
   Introduction = "https://learn.qiskit.org/course/ch-states/introduction",
-  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/the-atoms-of-computation",
+  AtomsOfComputation = "https://learn.qiskit.org/course/ch-states/atoms-computation",
   RepresentingQubitStates = "https://learn.qiskit.org/course/ch-states/representing-qubit-states",
   SingleQubitGates = "https://learn.qiskit.org/course/ch-states/single-qubit-gates",
   CaseForQuantum = "https://learn.qiskit.org/course/ch-states/the-case-for-quantum-computers",
@@ -77,7 +77,7 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
-    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE#overview",
+    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE",
     author: "Michael Nielsen, et al.,",
     label: "Quantum Computation and Quantum Information (Chapter 1)",
     segment: {

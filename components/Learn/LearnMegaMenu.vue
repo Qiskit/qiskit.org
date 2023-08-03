@@ -424,7 +424,7 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
     },
     {
       label: "The Atoms of Computation",
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/the-atoms-of-computation`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/atoms-computation`,
       segment: {
         cta: "the-atoms-of-computation",
         location: sectionQuantumStatesAndQubits,
@@ -538,7 +538,7 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     },
     {
       label: "Estimating Pi Using Quantum Phase Estimation Algorithm",
-      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-using-quantum-phase-estimation-algorithm`,
+      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
         cta: "estimating-pi-using-quantum-phase-estimation-algorithm",
         location: sectionGamesAndDemos,
