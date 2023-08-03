@@ -16,14 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { TextLink } from "~/types/links";
+import { Link } from "~/types/links";
 
 export interface TableRowElement {
   addTooltip?: boolean;
   component?: string;
   packageName?: string;
   styles?: string;
-  data: string | TextLink;
+  data: string | Link;
 }
 
 interface Props {

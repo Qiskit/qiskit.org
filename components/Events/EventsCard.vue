@@ -11,8 +11,23 @@
     :vertical-layout="verticalLayout"
     :alt-text="altText"
   >
-    <div class="events-card__description">
-      <slot v-if="$slots.default" />
+    <div v-if="description" class="events-card__description">
+      <p v-if="tooLongDescription && !showMore">
+        {{ description.substring(0, MAX_DESCRIPTION_LENGTH_CH).trim() }}...
+        <span
+          class="events-card__description__toggle"
+          @click="toggleDescriptionLength"
+          >show more</span
+        >
+      </p>
+      <p v-if="showMore">
+        {{ description }}
+        <span
+          class="events-card__description__toggle"
+          @click="toggleDescriptionLength"
+          >show less</span
+        >
+      </p>
     </div>
     <div>
       <div v-if="location" class="events-card__detail">
@@ -46,19 +61,20 @@ interface Props {
   types?: string[];
   title: string;
   image: string;
+  description?: string;
   altText?: string;
   institution?: string;
   location?: string;
   date?: string;
   time?: string | null;
-  to: string;
+  to?: string;
   ctaLabel?: string;
   segment?: CtaClickedEventProp | undefined;
   verticalLayout?: boolean;
   regions?: string[];
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   types: () => [],
   altText: "Event image",
   institution: "",
@@ -68,8 +84,19 @@ withDefaults(defineProps<Props>(), {
   segment: undefined,
   time: undefined,
   verticalLayout: false,
+  description: undefined,
+  to: "",
   regions: () => [],
 });
+
+const MAX_DESCRIPTION_LENGTH_CH = 240;
+const tooLongDescription =
+  props.description && props.description.length > MAX_DESCRIPTION_LENGTH_CH;
+
+const showMore = ref(false);
+function toggleDescriptionLength() {
+  showMore.value = !showMore.value;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -78,6 +105,13 @@ withDefaults(defineProps<Props>(), {
 .events-card {
   &__description {
     margin-bottom: carbon.$spacing-06;
+    max-height: 240ch;
+
+    &__toggle {
+      text-decoration: underline;
+      cursor: pointer;
+      color: var(--cds-link-primary, #{carbon.$purple-80});
+    }
   }
 
   &__detail {
