@@ -64,6 +64,7 @@ $feature-icon-size: 2.25rem;
 
   &__copy {
     color: qiskit.$text-color-white;
+    margin-bottom: carbon.$spacing-05;
   }
 }
 </style>

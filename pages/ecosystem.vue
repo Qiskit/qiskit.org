@@ -416,17 +416,3 @@ function getTierProjectCount(tierName: TierName) {
   }
 }
 </style>
-
-<style lang="scss">
-@use "~/assets/scss/carbon.scss";
-
-.ecosystem-page__join-section {
-  .join-with-cards__feature {
-    height: 15.5rem;
-
-    @include carbon.breakpoint-down(md) {
-      height: 14.5rem;
-    }
-  }
-}
-</style>

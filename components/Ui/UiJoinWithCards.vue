@@ -56,15 +56,15 @@ defineProps<Props>();
     }
 
     @include carbon.breakpoint-up(md) {
-      height: 14rem;
+      min-height: 14rem;
     }
 
     @include carbon.breakpoint-up(lg) {
-      height: 16.5rem;
+      min-height: 16.5rem;
     }
 
     @include carbon.breakpoint-up(xlg) {
-      height: 14rem;
+      min-height: 14rem;
     }
   }
 
