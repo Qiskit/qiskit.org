@@ -103,7 +103,7 @@ const footerElements: LinksGroup[] = [
       },
       {
         label: "Advocates",
-        url: "/advocates#become-an-advocate",
+        url: "/advocates",
       },
       {
         label: "Code of conduct",

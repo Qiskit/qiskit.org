@@ -73,7 +73,7 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
-    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE#overview",
+    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE",
     author: "Michael Nielsen, et al.,",
     label: "Quantum Computation and Quantum Information",
     segment: {
@@ -272,7 +272,7 @@ const prerequisites: Prerequisite[] = [
       cta: "linear-algebra",
       location: "related-material",
     },
-    url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
+    url: "https://learn.qiskit.org/course/ch-appendix/linear_algebra",
   },
   {
     title: "Probability Theory — Random Variables and Distributions",
