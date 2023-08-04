@@ -1,14 +1,26 @@
 <template>
   <!-- The ID `alchemer-survey-trigger` is required to trigger the popup -->
   <bx-btn
-    id="alchemer-survey-trigger"
+    :id="buttonId"
     class="ui-alchemer-survey-trigger"
     size="sm"
     type="button"
+    @click="hideButton"
   >
     Feedback</bx-btn
   >
 </template>
+
+<script setup lang="ts">
+const buttonId = "alchemer-survey-trigger";
+
+function hideButton() {
+  const button = document.getElementById(buttonId);
+  if (button) {
+    button.style.display = "none";
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
