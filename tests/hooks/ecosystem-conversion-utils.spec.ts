@@ -18,10 +18,10 @@ describe("fetchMembers", () => {
     data: { [key: string]: { [key: number]: Member | Member[] } };
   } = {
     data: {
-      MAIN: {
+      COMMUNITY: {
         1: {
-          name: "member1",
-          tier: "Main",
+          name: "member-in-community",
+          tier: "Community",
           testsResults: [
             {
               testType: "development",
@@ -46,38 +46,39 @@ describe("fetchMembers", () => {
           updatedAt: 0,
           skipTests: false,
         },
-        // this is a rare case but the code contemplates it.
-        2: [
-          {
-            name: "member1",
-            tier: "Main",
-            testsResults: [
-              {
-                testType: "development",
-                passed: true,
-                package: "",
-                packageVersion: "",
-                terraVersion: "",
-                timestamp: 0,
-                logsLink: "",
-                packageCommitHash: "",
-              },
-            ],
-            stars: 0,
-            url: "https://example.com",
-            description:
-              "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
-            licence: "",
-            contactInfo: "",
-            alternatives: null,
-            labels: [],
-            createdAt: 0,
-            updatedAt: 0,
-            skipTests: false,
-          },
-        ],
-        3: {
-          name: "member1",
+      },
+      EXTENSIONS: {
+        1: {
+          name: "member-in-extensions",
+          tier: "Extensions",
+          testsResults: [
+            {
+              testType: "development",
+              passed: true,
+              package: "",
+              packageVersion: "",
+              terraVersion: "",
+              timestamp: 0,
+              logsLink: "",
+              packageCommitHash: "",
+            },
+          ],
+          stars: 0,
+          url: "https://example.com",
+          description:
+            "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
+          licence: "",
+          contactInfo: "",
+          alternatives: null,
+          labels: [],
+          createdAt: 0,
+          updatedAt: 0,
+          skipTests: false,
+        },
+      },
+      MAIN: {
+        1: {
+          name: "member-in-main",
           tier: "Main",
           testsResults: [
             {
@@ -110,7 +111,7 @@ describe("fetchMembers", () => {
   test("fetches members and formats them", async () => {
     const formattedMembers: (Member | Member[])[] = [
       {
-        name: "member1",
+        name: "member-in-main",
         tier: "Main",
         testsResults: [
           {
@@ -136,38 +137,36 @@ describe("fetchMembers", () => {
         updatedAt: 0,
         skipTests: false,
       },
-      [
-        {
-          name: "member1",
-          tier: "Main",
-          testsResults: [
-            {
-              testType: "development",
-              passed: true,
-              package: "",
-              packageVersion: "",
-              terraVersion: "",
-              timestamp: 0,
-              logsLink: "",
-              packageCommitHash: "",
-            },
-          ],
-          stars: 0,
-          url: "https://example.com",
-          description:
-            "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
-          licence: "",
-          contactInfo: "",
-          alternatives: null,
-          labels: [],
-          createdAt: 0,
-          updatedAt: 0,
-          skipTests: false,
-        },
-      ],
       {
-        name: "member1",
-        tier: "Main",
+        name: "member-in-extensions",
+        tier: "Extensions",
+        testsResults: [
+          {
+            testType: "development",
+            passed: true,
+            package: "",
+            packageVersion: "",
+            terraVersion: "",
+            timestamp: 0,
+            logsLink: "",
+            packageCommitHash: "",
+          },
+        ],
+        stars: 0,
+        url: "https://example.com",
+        description:
+          "A ad sint quis omnis aperiam et. Cupiditate molestias voluptatibus repudiandae debitis ab omnis. Voluptas voluptatem ut facilis qui cum aspernatur voluptatem cupiditate quasi. Nemo voluptate sed possimus cumque dolores illo accusamus nobis occaecati.",
+        licence: "",
+        contactInfo: "",
+        alternatives: null,
+        labels: [],
+        createdAt: 0,
+        updatedAt: 0,
+        skipTests: false,
+      },
+      {
+        name: "member-in-community",
+        tier: "Community",
         testsResults: [
           {
             testType: "development",
@@ -196,6 +195,12 @@ describe("fetchMembers", () => {
 
     (axios.get as any).mockResolvedValueOnce(members);
     const result = await fetchMembers();
+
+    let firstMember;
+    if (result) {
+      firstMember = result[0];
+      expect(firstMember).toEqual(formattedMembers[0]);
+    }
 
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(result).toEqual(formattedMembers);
