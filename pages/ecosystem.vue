@@ -127,7 +127,7 @@
 import { TextLink } from "types/links";
 import rawMembers from "~/content/ecosystem/members.json";
 import rawTiers from "~/content/ecosystem/tiers.json";
-import { Member, Tier } from "~/types/ecosystem";
+import { Member, Tier, TierName } from "~/types/ecosystem";
 
 const members = rawMembers as Member[];
 const config = useRuntimeConfig();
@@ -156,17 +156,20 @@ const joinSectionCards = [
   {
     name: "Main tier",
     description: "The main Qiskit packages maintained by IBM Quantum.",
+    detail: `${getTierProjectCount("Main")} projects`,
     icon: "quantum.svg",
   },
   {
     name: "Extensions tier",
     description: "IBM Quantum supported Qiskit extensions.",
+    detail: `${getTierProjectCount("Extensions")} projects`,
     icon: "transform--02.svg",
   },
   {
     name: "Community tier",
     description:
       "Software packages supported by the Qiskit community, not maintained by IBM Quantum.",
+    detail: `${getTierProjectCount("Community")} projects`,
     icon: "group.svg",
   },
 ];
@@ -301,6 +304,17 @@ const filteredMembersSorted = computed<Member[]>(() => {
 
   return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
 });
+
+function getTierProjectCount(tierName: TierName) {
+  const tierCount = members.reduce((acc, member) => {
+    if (member.tier === tierName) {
+      acc += 1;
+    }
+    return acc;
+  }, 0);
+
+  return tierCount;
+}
 </script>
 
 <style lang="scss" scoped>

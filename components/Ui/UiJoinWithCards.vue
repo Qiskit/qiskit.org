@@ -21,6 +21,7 @@
           :description="card.description"
           :icon="card.icon"
           :title="card.name"
+          :detail="card.detail"
         />
       </div>
     </div>
@@ -34,6 +35,7 @@ interface Card {
   name: string;
   description: string;
   icon: string;
+  detail?: string;
 }
 
 interface Props {
@@ -54,15 +56,15 @@ defineProps<Props>();
     }
 
     @include carbon.breakpoint-up(md) {
-      height: 14rem;
+      min-height: 14rem;
     }
 
     @include carbon.breakpoint-up(lg) {
-      height: 16.5rem;
+      min-height: 16.5rem;
     }
 
     @include carbon.breakpoint-up(xlg) {
-      height: 14rem;
+      min-height: 14rem;
     }
   }
 
