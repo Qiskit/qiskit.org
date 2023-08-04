@@ -305,7 +305,7 @@ const filteredMembersSorted = computed<Member[]>(() => {
     return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  return filteredMembers.value.sort((a, b) => b.tier.localeCompare(a.tier));
+  return filteredMembers.value;
 });
 
 function getTierProjectCount(tierName: TierName) {

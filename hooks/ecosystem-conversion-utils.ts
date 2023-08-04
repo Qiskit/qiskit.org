@@ -21,6 +21,12 @@ async function fetchMembers() {
       });
     });
 
+    // Sort ecosystem projects alphabetically
+    membersArray.sort((a, b) => a.name?.localeCompare(b.name));
+
+    // HACK: This reverse sorting happens to match the requested tier order: "Main", "Ecosystem", "Community"
+    membersArray.sort((a, b) => b.tier?.localeCompare(a.tier));
+
     return membersArray.map((obj: any) => toCamelCase(obj));
   } catch (err) {
     // eslint-disable-next-line no-console
