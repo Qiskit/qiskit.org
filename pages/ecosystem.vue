@@ -300,9 +300,11 @@ const filteredMembers = computed<Member[]>(() => {
 
 const filteredMembersSorted = computed<Member[]>(() => {
   if (selectedSortingOption.value === "stars") {
-    return filteredMembers.value.sort((a, b) => b.stars - a.stars);
+    return [...filteredMembers.value].sort((a, b) => b.stars - a.stars);
   } else if (selectedSortingOption.value === "name") {
-    return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
+    return [...filteredMembers.value].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
   }
 
   return filteredMembers.value;
