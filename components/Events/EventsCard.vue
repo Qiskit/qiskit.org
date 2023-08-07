@@ -10,28 +10,8 @@
     :segment="segment"
     :vertical-layout="verticalLayout"
     :alt-text="altText"
+    :description="description"
   >
-    <div v-if="description" class="events-card__description">
-      <p v-if="!tooLongDescription">
-        {{ description }}
-      </p>
-      <p v-if="tooLongDescription && !showMore">
-        {{ description.substring(0, MAX_DESCRIPTION_LENGTH_CH).trim() }}...
-        <span
-          class="events-card__description__toggle"
-          @click="toggleDescriptionLength"
-          >show more</span
-        >
-      </p>
-      <p v-if="showMore">
-        {{ description }}
-        <span
-          class="events-card__description__toggle"
-          @click="toggleDescriptionLength"
-          >show less</span
-        >
-      </p>
-    </div>
     <div>
       <div v-if="location" class="events-card__detail">
         <Map20 class="events-card__icon" />
@@ -77,7 +57,7 @@ interface Props {
   regions?: string[];
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   types: () => [],
   altText: "Event image",
   institution: "",
@@ -91,15 +71,6 @@ const props = withDefaults(defineProps<Props>(), {
   to: "",
   regions: () => [],
 });
-
-const MAX_DESCRIPTION_LENGTH_CH = 240;
-const tooLongDescription =
-  props.description && props.description.length > MAX_DESCRIPTION_LENGTH_CH;
-
-const showMore = ref(false);
-function toggleDescriptionLength() {
-  showMore.value = !showMore.value;
-}
 </script>
 
 <style lang="scss" scoped>
@@ -107,17 +78,6 @@ function toggleDescriptionLength() {
 @use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .events-card {
-  &__description {
-    margin-bottom: carbon.$spacing-06;
-    max-height: 240ch;
-    height: 100%;
-
-    &__toggle {
-      cursor: pointer;
-      color: qiskit.$link-color-tertiary;
-    }
-  }
-
   &__detail {
     display: flex;
     align-items: center;

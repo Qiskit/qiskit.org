@@ -51,10 +51,51 @@
         </div>
       </header>
       <div class="card__body">
-        <div class="card__description">
-          <slot />
+        <div class="card__body__top">
+          <div class="card__eyebrow">
+            <slot name="eyebrow"></slot>
+          </div>
+          <div v-if="description" class="card__description">
+            <p v-if="!tooLongDescription">
+              {{ description }}
+            </p>
+            <p v-if="tooLongDescription && !showMore">
+              {{
+                description.substring(0, MAX_DESCRIPTION_LENGTH_CH).trim()
+              }}...
+              <UiLinkText
+                :link="{
+                  url: '',
+                  segment: segment
+                    ? {
+                        cta: 'show-more',
+                        location: segment?.location,
+                      }
+                    : undefined,
+                }"
+                class="card__description__toggle"
+                @click="toggleDescriptionLength"
+                >show more</UiLinkText
+              >
+            </p>
+            <p v-if="showMore">
+              {{ description }}
+              <UiLinkText
+                :link="{
+                  url: '',
+                }"
+                class="card__description__toggle"
+                @click="toggleDescriptionLength"
+                >show less</UiLinkText
+              >
+            </p>
+          </div>
         </div>
-        <div class="card__ctas">
+        <div class="card__body__bottom">
+          <div class="card__slot">
+            <slot></slot>
+          </div>
+          <div class="card__ctas"></div>
           <UiCta
             v-if="to"
             is-wider
@@ -87,6 +128,7 @@ interface Props {
   image?: string;
   imageContain?: boolean;
   altText?: string;
+  description?: string;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
   secondaryTags?: string[];
@@ -103,6 +145,7 @@ const props = withDefaults(defineProps<Props>(), {
   image: "",
   imageContain: false,
   altText: "No description available",
+  description: undefined,
   segment: undefined,
   subtitle: "",
   secondaryTags: () => [],
@@ -121,6 +164,15 @@ const ctaLink = computed(() => ({
 // TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
 function hasTags(tags: string[]) {
   return Array.isArray(tags) && tags.length > 0;
+}
+
+const MAX_DESCRIPTION_LENGTH_CH = 240;
+const tooLongDescription =
+  props.description && props.description.length > MAX_DESCRIPTION_LENGTH_CH;
+
+const showMore = ref(false);
+function toggleDescriptionLength() {
+  showMore.value = !showMore.value;
 }
 </script>
 
@@ -168,10 +220,18 @@ function hasTags(tags: string[]) {
 
   &__body {
     overflow-wrap: break-word;
-    height: 100%;
     display: flex;
-    justify-content: flex-end;
     flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+
+    &__top {
+      height: 100%;
+    }
+  }
+
+  &__eyebrow {
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__content {
@@ -183,10 +243,17 @@ function hasTags(tags: string[]) {
   }
 
   &__description {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    margin-bottom: carbon.$spacing-06;
+    max-height: 240ch;
+
+    &__toggle {
+      cursor: pointer;
+      color: qiskit.$link-color-tertiary;
+
+      &:hover {
+        color: qiskit.$link-color-tertiary;
+      }
+    }
   }
 
   &__ctas {

@@ -97,6 +97,10 @@
                 :to="eventItem.to"
                 :regions="eventItem.regions"
                 :description="eventItem.abstract || ''"
+                :segment="{
+                  cta: '',
+                  location: 'event-pages-index',
+                }"
               />
             </div>
           </div>
