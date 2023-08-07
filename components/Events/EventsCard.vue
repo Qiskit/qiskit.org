@@ -12,6 +12,9 @@
     :alt-text="altText"
   >
     <div v-if="description" class="events-card__description">
+      <p v-if="!tooLongDescription">
+        {{ description }}
+      </p>
       <p v-if="tooLongDescription && !showMore">
         {{ description.substring(0, MAX_DESCRIPTION_LENGTH_CH).trim() }}...
         <span
@@ -101,16 +104,17 @@ function toggleDescriptionLength() {
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
+@use "~/assets/scss/helpers/index.scss" as qiskit;
 
 .events-card {
   &__description {
     margin-bottom: carbon.$spacing-06;
     max-height: 240ch;
+    height: 100%;
 
     &__toggle {
-      text-decoration: underline;
       cursor: pointer;
-      color: var(--cds-link-primary, #{carbon.$purple-80});
+      color: qiskit.$link-color-tertiary;
     }
   }
 

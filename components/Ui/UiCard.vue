@@ -168,6 +168,10 @@ function hasTags(tags: string[]) {
 
   &__body {
     overflow-wrap: break-word;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
   }
 
   &__content {
@@ -176,6 +180,13 @@ function hasTags(tags: string[]) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__description {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   &__ctas {
