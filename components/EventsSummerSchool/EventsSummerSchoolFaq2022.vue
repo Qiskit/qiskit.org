@@ -218,7 +218,7 @@ const pythonAndJupyter: Link = {
 
 const linearAlgebra: Link = {
   title: "Introduction to Linear Algebra for Quantum Computing",
-  url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
+  url: "https://learn.qiskit.org/course/ch-appendix/linear_algebra",
   segment: { cta: "qiskit-linear-algebra", location: "faq" },
 };
 

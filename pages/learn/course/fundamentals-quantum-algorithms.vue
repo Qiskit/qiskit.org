@@ -95,7 +95,7 @@ const externalRecommendedReadingsPreamble = `Alongside this course, you may find
 
 const links: RecommendedReading[] = [
   {
-    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE#overview",
+    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE",
     author: "Michael Nielsen, Isaac Chuang, ",
     label: "Quantum Computation and Quantum Information (Chapters 4-6)",
     segment: {

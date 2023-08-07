@@ -33,6 +33,8 @@ type ProjectConfig = {
   coveragesCheckCommand: string[];
 };
 
+type TierName = "Main" | "Extensions" | "Community";
+
 interface Member {
   name: string;
   url: string;
@@ -50,14 +52,14 @@ interface Member {
   coveragesResults?: CoveragesResults[];
   configuration?: ProjectConfig | null;
   historicalTestResults?: TestResult[];
-  tier: "Main" | "Community" | "Extensions";
+  tier: TierName;
   skipTests: boolean;
   stars: number;
 }
 
 interface Tier {
-  name: string;
+  name: TierName;
   description: string;
 }
 
-export { Member, Tier };
+export { Member, Tier, TierName };

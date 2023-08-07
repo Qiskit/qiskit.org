@@ -17,14 +17,6 @@ const header = {
       location: "header",
     },
   },
-  cta: {
-    label: "Register now!",
-    url: "https://qisk.it/QGSS23REG",
-    segment: {
-      cta: "register",
-      location: "header",
-    },
-  },
   cardSectionHeading: "About the event:",
   card: {
     image: "/images/events/summer-school-2023/summer-school-2023-logo.png",
@@ -35,7 +27,7 @@ const header = {
     location: "Online",
     date: "July 17 – 28, 2023",
     time: "",
-    to: "https://qisk.it/QGSS23REG",
+    to: "",
     ctaLabel: "View the event",
     segment: {
       cta: "ibm-research-blog",
