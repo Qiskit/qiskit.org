@@ -87,12 +87,25 @@ const features: Feature[] = [
 
   &__container {
     display: flex;
-    gap: carbon.$spacing-12;
+    flex-direction: column;
+    gap: carbon.$spacing-10;
+
+    @include carbon.breakpoint-up(lg) {
+      flex-direction: row;
+      gap: carbon.$spacing-10;
+    }
+
+    @include carbon.breakpoint-up(xlg) {
+      gap: carbon.$spacing-12;
+    }
   }
 
   &__copy-section {
-    padding-bottom: carbon.$spacing-10;
     padding-top: carbon.$spacing-10;
+
+    @include carbon.breakpoint-up(lg) {
+      padding-bottom: carbon.$spacing-10;
+    }
 
     &__title {
       margin-bottom: carbon.$spacing-10;
@@ -100,7 +113,12 @@ const features: Feature[] = [
 
     &__features {
       display: flex;
+      flex-direction: column;
       gap: carbon.$spacing-10;
+
+      @include carbon.breakpoint-up(md) {
+        flex-direction: row;
+      }
 
       &__feature {
         flex: 1;
@@ -112,9 +130,30 @@ const features: Feature[] = [
     align-items: center;
     background-color: #fafafa;
     display: grid;
+    justify-content: center;
+
+    @include carbon.breakpoint-down(lg) {
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+
+    @include carbon.breakpoint-down(md) {
+      margin-left: -1rem;
+      margin-right: -1rem;
+    }
 
     &__image {
-      width: 35rem;
+      max-width: 30rem;
+      width: 100%;
+
+      @include carbon.breakpoint-up(lg) {
+        width: 22rem;
+      }
+
+      @include carbon.breakpoint-up(xlg) {
+        max-width: initial;
+        width: 36rem;
+      }
     }
   }
 }
