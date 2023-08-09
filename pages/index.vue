@@ -2,6 +2,7 @@
   <article>
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
+    <HomeOneXP />
     <HomeProviders />
   </article>
 </template>
