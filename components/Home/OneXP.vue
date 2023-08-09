@@ -15,6 +15,7 @@
               <h3 v-text="feature.title" />
               <p v-text="feature.description" />
               <UiCta
+                kind="one-xp"
                 :label="feature.cta.label"
                 :segment="feature.cta.segment"
                 :url="feature.cta.url"
