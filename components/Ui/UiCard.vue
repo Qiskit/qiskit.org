@@ -56,38 +56,25 @@
             <slot name="eyebrow"></slot>
           </div>
           <div v-if="description" class="card__description">
-            <p v-if="!tooLongDescription">
-              {{ description }}
-            </p>
-            <p v-if="tooLongDescription && !showMore">
-              {{
-                description.substring(0, MAX_DESCRIPTION_LENGTH_CH).trim()
-              }}...
+            <p :id="`ui-card-desc-${$.uid}`">
+              {{ showMaxDescription(description) }}
               <UiLinkText
+                v-if="descriptionTooLong"
                 :link="{
                   url: '',
-                  segment: segment
-                    ? {
-                        cta: 'show-more',
-                        location: segment?.location,
-                      }
-                    : undefined,
+                  segment:
+                    segment && descriptionTooLong && !showMore
+                      ? {
+                          cta: 'show-more',
+                          location: segment?.location,
+                        }
+                      : undefined,
                 }"
                 class="card__description__toggle"
                 @click="toggleDescriptionLength"
-                >show more</UiLinkText
               >
-            </p>
-            <p v-if="showMore">
-              {{ description }}
-              <UiLinkText
-                :link="{
-                  url: '',
-                }"
-                class="card__description__toggle"
-                @click="toggleDescriptionLength"
-                >show less</UiLinkText
-              >
+                {{ !showMore ? "Show more" : "Show less" }}
+              </UiLinkText>
             </p>
           </div>
         </div>
@@ -129,6 +116,7 @@ interface Props {
   imageContain?: boolean;
   altText?: string;
   description?: string;
+  maxDescriptionLength?: number;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
   secondaryTags?: string[];
@@ -146,6 +134,7 @@ const props = withDefaults(defineProps<Props>(), {
   imageContain: false,
   altText: "No description available",
   description: undefined,
+  maxDescriptionLength: 240,
   segment: undefined,
   subtitle: "",
   secondaryTags: () => [],
@@ -166,13 +155,20 @@ function hasTags(tags: string[]) {
   return Array.isArray(tags) && tags.length > 0;
 }
 
-const MAX_DESCRIPTION_LENGTH_CH = 240;
-const tooLongDescription =
-  props.description && props.description.length > MAX_DESCRIPTION_LENGTH_CH;
+const descriptionTooLong =
+  props.description && props.description.length > props.maxDescriptionLength;
 
 const showMore = ref(false);
 function toggleDescriptionLength() {
   showMore.value = !showMore.value;
+}
+
+function showMaxDescription(description: string) {
+  if (descriptionTooLong && !showMore.value) {
+    return description.substring(0, props.maxDescriptionLength).trim() + "...";
+  }
+
+  return description;
 }
 </script>
 
