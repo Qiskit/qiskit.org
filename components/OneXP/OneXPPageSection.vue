@@ -1,25 +1,27 @@
 <template>
   <section class="page-section">
-    <div class="one-xp">
-      <div class="one-xp__container cds--grid">
-        <div class="one-xp__copy-section">
-          <h2 class="one-xp__copy-section__title">
+    <div class="one-xp-page-section">
+      <div class="one-xp-page-section__container cds--grid">
+        <div class="one-xp-page-section__copy-section">
+          <h2 class="one-xp-page-section__copy-section__title">
             <slot name="title" />
           </h2>
-          <div class="one-xp__copy-section__features">
+          <div class="one-xp-page-section__copy-section__features">
             <div
               v-for="feature in features"
               :key="feature.title"
-              class="one-xp__copy-section__features__feature"
+              class="one-xp-page-section__copy-section__features__feature"
             >
               <h3 v-if="feature.title" v-text="feature.title" />
               <p
                 v-for="description in feature.descriptionParagraphs"
                 :key="description"
-                class="one-xp__copy-section__features__feature__description"
+                class="one-xp-page-section__copy-section__features__feature__description"
                 v-text="description"
               />
-              <div class="one-xp__copy-section__features__feature__ctas">
+              <div
+                class="one-xp-page-section__copy-section__features__feature__ctas"
+              >
                 <UiCta
                   kind="one-xp"
                   :label="feature.cta.label"
@@ -37,10 +39,10 @@
             </div>
           </div>
         </div>
-        <div class="one-xp__image-section">
+        <div class="one-xp-page-section__image-section">
           <nuxt-img
             :alt="imgAlt"
-            class="one-xp__image-section__image"
+            class="one-xp-page-section__image-section__image"
             format="webp"
             sizes="sm:800px"
             :src="imgSrc"
@@ -78,7 +80,7 @@ defineProps<Props>();
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
 
-.one-xp {
+.one-xp-page-section {
   background-color: carbon.$cool-gray-10;
 
   &__container {
