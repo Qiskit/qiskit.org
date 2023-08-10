@@ -8,12 +8,13 @@
           cta: 'learn-more-1xp',
           location: '1xp-banner',
         },
-        url: 'https://example.com',
+        url: '#new-experience',
       }"
     />
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <OneXPPageSection
+      id="new-experience"
       :features="[
         {
           title: 'Documentation',
