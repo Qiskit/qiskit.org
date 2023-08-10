@@ -1,6 +1,36 @@
 <template>
   <article class="learn-page">
     <LearnLeadSpace />
+    <OneXPPageSection
+      :features="[
+        {
+          descriptionParagraphs: [
+            'We are building a new home for the Qiskit Textbook on IBM Quantum, and we will be migrating courses and tutorials in the coming months.',
+            'Just getting started with Qiskit? Start your learning journey on the new platform today!',
+          ],
+          cta: {
+            label: 'Check it out',
+            segment: {
+              cta: 'go-to-learning',
+              location: 'one-xp-banner',
+            },
+            url: 'https://example.com',
+          },
+          secondaryCta: {
+            label: 'Learn more',
+            segment: {
+              cta: 'learn-more-learning',
+              location: 'one-xp-banner',
+            },
+            url: 'https://example.com',
+          },
+        },
+      ]"
+      img-alt="Screenshot of the new Qiskit learning experience"
+      img-src="/images/one-xp/learning-screenshot.png"
+    >
+      <template #title>Qiskit is getting a new learning experience!</template>
+    </OneXPPageSection>
     <LearnStartLearning class="learn-page__section" />
     <UiHelpfulResources
       class="learn-page__section"
@@ -93,7 +123,6 @@ const helpfulResources: DescriptionCard[] = [
 
     max-width: qiskit.$max-size;
     margin-bottom: carbon.$spacing-07;
-    margin-top: carbon.$spacing-10;
   }
 }
 </style>

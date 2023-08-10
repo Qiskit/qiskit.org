@@ -4,7 +4,7 @@
       <div class="one-xp__container cds--grid">
         <div class="one-xp__copy-section">
           <h2 class="one-xp__copy-section__title">
-            Qiskit is getting a new documentation<br />and learning experience →
+            <slot name="title" />
           </h2>
           <div class="one-xp__copy-section__features">
             <div
@@ -12,27 +12,38 @@
               :key="feature.title"
               class="one-xp__copy-section__features__feature"
             >
-              <h3 v-text="feature.title" />
+              <h3 v-if="feature.title" v-text="feature.title" />
               <p
+                v-for="description in feature.descriptionParagraphs"
+                :key="description"
                 class="one-xp__copy-section__features__feature__description"
-                v-text="feature.description"
+                v-text="description"
               />
-              <UiCta
-                kind="one-xp"
-                :label="feature.cta.label"
-                :segment="feature.cta.segment"
-                :url="feature.cta.url"
-              />
+              <div class="one-xp__copy-section__features__feature__ctas">
+                <UiCta
+                  kind="one-xp"
+                  :label="feature.cta.label"
+                  :segment="feature.cta.segment"
+                  :url="feature.cta.url"
+                />
+                <UiCta
+                  v-if="feature.secondaryCta"
+                  kind="ghost"
+                  :label="feature.secondaryCta.label"
+                  :segment="feature.secondaryCta.segment"
+                  :url="feature.secondaryCta.url"
+                />
+              </div>
             </div>
           </div>
         </div>
         <div class="one-xp__image-section">
           <nuxt-img
-            alt="Screenshot of the new Qiskit documentation"
+            :alt="imgAlt"
             class="one-xp__image-section__image"
             format="webp"
             sizes="sm:800px"
-            src="/images/one-xp/documentation-screenshot.png"
+            :src="imgSrc"
           />
         </div>
       </div>
@@ -43,44 +54,25 @@
 <script setup lang="ts">
 import { CtaClickedEventProp } from "~/types/segment";
 
-interface Feature {
-  title: string;
-  description: string;
-  cta: {
-    label: string;
-    segment: CtaClickedEventProp;
-    url: string;
-  };
+interface FeatureCta {
+  label: string;
+  segment: CtaClickedEventProp;
+  url: string;
 }
 
-const features: Feature[] = [
-  {
-    title: "Documentation",
-    description:
-      "We are reorganizing Qiskit documentation on IBM Quantum to better support your research and development workflows.",
-    cta: {
-      label: "Check out Documentation",
-      segment: {
-        cta: "go-to-documentation",
-        location: "one-xp-banner",
-      },
-      url: "https://example.com",
-    },
-  },
-  {
-    title: "Learning",
-    description:
-      "We are building a new learning application with courses and tutorials to help you learn the basics and start experimenting with Qiskit.",
-    cta: {
-      label: "Check out Learning",
-      segment: {
-        cta: "go-to-learning",
-        location: "one-xp-banner",
-      },
-      url: "https://example.com",
-    },
-  },
-];
+interface Feature {
+  title?: string;
+  descriptionParagraphs: string[];
+  cta: FeatureCta;
+  secondaryCta?: FeatureCta;
+}
+interface Props {
+  features: Feature[];
+  imgAlt: string;
+  imgSrc: string;
+}
+
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>
@@ -110,6 +102,8 @@ const features: Feature[] = [
   }
 
   &__copy-section {
+    flex: auto;
+
     &__title {
       margin-bottom: carbon.$spacing-07;
     }
@@ -129,6 +123,12 @@ const features: Feature[] = [
 
         &__description {
           margin-bottom: carbon.$spacing-06;
+          max-width: 28rem;
+        }
+
+        &__ctas {
+          display: flex;
+          gap: carbon.$spacing-06;
         }
       }
     }
@@ -137,16 +137,15 @@ const features: Feature[] = [
   &__image-section {
     align-items: center;
     display: grid;
-    justify-content: center;
+    flex: 0;
 
-    @include carbon.breakpoint-down(lg) {
-      margin-left: -2rem;
-      margin-right: -2rem;
+    @include carbon.breakpoint-up(lg) {
+      justify-content: center;
     }
 
-    @include carbon.breakpoint-down(md) {
-      margin-left: -1rem;
-      margin-right: -1rem;
+    @include carbon.breakpoint-down(lg) {
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
     }
 
     &__image {
@@ -159,7 +158,7 @@ const features: Feature[] = [
 
       @include carbon.breakpoint-up(xlg) {
         max-width: initial;
-        width: 36rem;
+        width: 30rem;
       }
     }
   }

@@ -2,7 +2,44 @@
   <article>
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
-    <HomeOneXP />
+    <OneXPPageSection
+      :features="[
+        {
+          title: 'Documentation',
+          descriptionParagraphs: [
+            'We are reorganizing Qiskit documentation on IBM Quantum to better support your research and development workflows.',
+          ],
+          cta: {
+            label: 'Check out Documentation',
+            segment: {
+              cta: 'go-to-documentation',
+              location: 'one-xp-banner',
+            },
+            url: 'https://example.com',
+          },
+        },
+        {
+          title: 'Learning',
+          descriptionParagraphs: [
+            'We are building a new learning application with courses and tutorials to help you learn the basics and start experimenting with Qiskit.',
+          ],
+          cta: {
+            label: 'Check out Learning',
+            segment: {
+              cta: 'go-to-learning',
+              location: 'one-xp-banner',
+            },
+            url: 'https://example.com',
+          },
+        },
+      ]"
+      img-alt="Screenshot of the new Qiskit documentation"
+      img-src="/images/one-xp/documentation-screenshot.png"
+    >
+      <template #title>
+        Qiskit is getting a new documentation<br />and learning experience →
+      </template>
+    </OneXPPageSection>
     <HomeProviders />
   </article>
 </template>
