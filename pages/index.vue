@@ -1,6 +1,16 @@
 <template>
   <article>
-    <OneXPBanner />
+    <OneXPBanner
+      copy="🎉 Qiskit is getting a new documentation and learning experience on IBM Quantum!"
+      :cta="{
+        label: 'Learn more',
+        segment: {
+          cta: 'learn-more-1xp',
+          location: '1xp-banner',
+        },
+        url: 'https://example.com',
+      }"
+    />
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <OneXPPageSection
@@ -13,8 +23,8 @@
           cta: {
             label: 'Check out Documentation',
             segment: {
-              cta: 'go-to-documentation',
-              location: 'one-xp-banner',
+              cta: 'go-to-1xp-documentation',
+              location: '1xp-page-section',
             },
             url: 'https://example.com',
           },
@@ -27,8 +37,8 @@
           cta: {
             label: 'Check out Learning',
             segment: {
-              cta: 'go-to-learning',
-              location: 'one-xp-banner',
+              cta: 'go-to-1xp-learning',
+              location: '1xp-page-section',
             },
             url: 'https://example.com',
           },

@@ -1,5 +1,16 @@
 <template>
   <article class="learn-page">
+    <OneXPBanner
+      copy="🎉 Qiskit is getting a new learning experience on IBM Quantum!"
+      :cta="{
+        label: 'Check it out!',
+        segment: {
+          cta: 'go-to-1xp-learning',
+          location: '1xp-banner',
+        },
+        url: 'https://example.com',
+      }"
+    />
     <LearnLeadSpace />
     <OneXPPageSection
       :features="[
@@ -11,16 +22,16 @@
           cta: {
             label: 'Check it out',
             segment: {
-              cta: 'go-to-learning',
-              location: 'one-xp-banner',
+              cta: 'go-to-1xp-learning',
+              location: '1xp-page-section',
             },
             url: 'https://example.com',
           },
           secondaryCta: {
             label: 'Learn more',
             segment: {
-              cta: 'learn-more-learning',
-              location: 'one-xp-banner',
+              cta: 'learn-more-1px-learning',
+              location: '1xp-page-section',
             },
             url: 'https://example.com',
           },

@@ -1,20 +1,32 @@
 <template>
   <div class="one-xp-banner">
-    <div class="one-xp-banner__container cds--grid">
-      <span class="one-xp-banner__copy">
-        🎉 Qiskit is getting a new documentation and learning experience on IBM
-        Quantum!
-      </span>
-      <UiCta
-        class="one-xp-banner__cta"
-        kind="ghost"
-        label="Learn more"
-        segment="feature.secondaryCta.segment"
-        url="https://example.com"
-      />
+    <div class="cds--grid">
+      <div class="one-xp-banner__container">
+        <span class="one-xp-banner__copy" v-text="copy" />
+        <UiCta
+          class="one-xp-banner__cta"
+          kind="ghost"
+          :label="cta.label"
+          :segment="cta.segment"
+          :url="cta.url"
+        />
+      </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  copy: string;
+  cta: {
+    label: string;
+    segment: CtaClickedEventProp;
+    url: string;
+  };
+}
+
+defineProps<Props>();
+</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
