@@ -4,7 +4,7 @@
       <div class="one-xp__container cds--grid">
         <div class="one-xp__copy-section">
           <h2 class="one-xp__copy-section__title">
-            Qiskit is getting a new documentation<br />and learning experience!
+            Qiskit is getting a new documentation<br />and learning experience →
           </h2>
           <div class="one-xp__copy-section__features">
             <div
@@ -13,7 +13,10 @@
               class="one-xp__copy-section__features__feature"
             >
               <h3 v-text="feature.title" />
-              <p v-text="feature.description" />
+              <p
+                class="one-xp__copy-section__features__feature__description"
+                v-text="feature.description"
+              />
               <UiCta
                 kind="one-xp"
                 :label="feature.cta.label"
@@ -25,11 +28,11 @@
         </div>
         <div class="one-xp__image-section">
           <nuxt-img
-            alt="Laptop showing the Qiskit documentation"
+            alt="Screenshot of the new Qiskit documentation"
             class="one-xp__image-section__image"
             format="webp"
             sizes="sm:800px"
-            src="/images/one-xp/laptop-with-documentation.png"
+            src="/images/one-xp/documentation-screenshot.png"
           />
         </div>
       </div>
@@ -54,7 +57,7 @@ const features: Feature[] = [
   {
     title: "Documentation",
     description:
-      "The new documentation experience on IBM Quantum organizes content to make it easier to use Qiskit with IBM Quantum hardware.",
+      "We are reorganizing Qiskit documentation on IBM Quantum to better support your research and development workflows.",
     cta: {
       label: "Check out Documentation",
       segment: {
@@ -67,7 +70,7 @@ const features: Feature[] = [
   {
     title: "Learning",
     description:
-      "We’ve built a new learning experience and will be migrating content from the Qiskit Textbook to the new system in the coming months.",
+      "We are building a new learning application with courses and tutorials to help you learn the basics and start experimenting with Qiskit.",
     cta: {
       label: "Check out Learning",
       segment: {
@@ -89,11 +92,16 @@ const features: Feature[] = [
   &__container {
     display: flex;
     flex-direction: column;
-    gap: carbon.$spacing-10;
+    gap: carbon.$spacing-08;
+    padding-bottom: carbon.$spacing-09;
+    padding-top: carbon.$spacing-09;
+
+    @include carbon.breakpoint-up(md) {
+      gap: carbon.$spacing-09;
+    }
 
     @include carbon.breakpoint-up(lg) {
       flex-direction: row;
-      gap: carbon.$spacing-10;
     }
 
     @include carbon.breakpoint-up(xlg) {
@@ -102,34 +110,32 @@ const features: Feature[] = [
   }
 
   &__copy-section {
-    padding-top: carbon.$spacing-10;
-
-    @include carbon.breakpoint-up(lg) {
-      padding-bottom: carbon.$spacing-10;
-    }
-
     &__title {
-      margin-bottom: carbon.$spacing-10;
+      margin-bottom: carbon.$spacing-07;
     }
 
     &__features {
       display: flex;
       flex-direction: column;
-      gap: carbon.$spacing-10;
+      gap: carbon.$spacing-08;
 
       @include carbon.breakpoint-up(md) {
         flex-direction: row;
+        gap: carbon.$spacing-10;
       }
 
       &__feature {
         flex: 1;
+
+        &__description {
+          margin-bottom: carbon.$spacing-06;
+        }
       }
     }
   }
 
   &__image-section {
     align-items: center;
-    background-color: #fafafa;
     display: grid;
     justify-content: center;
 

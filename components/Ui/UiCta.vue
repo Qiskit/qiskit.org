@@ -199,17 +199,9 @@ const iconPerLinkType = computed(() => {
   &_one-xp {
     background-image: linear-gradient(
       90deg,
-      carbon.$purple-40 0%,
-      carbon.$blue-50 100%
+      carbon.$purple-70 50%,
+      carbon.$blue-60 100%
     );
-    background-position-x: 0;
-    border-radius: 0.25rem;
-
-    &:hover,
-    &:focus,
-    &:active {
-      background-position-x: 100%;
-    }
   }
 
   /*
