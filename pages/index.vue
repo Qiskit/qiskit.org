@@ -1,5 +1,6 @@
 <template>
   <article>
+    <OneXPBanner />
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <OneXPPageSection
