@@ -50,7 +50,7 @@ defineProps<Props>();
   }
 
   &__cta {
-    padding: 0;
+    padding: 0 !important;
   }
 }
 </style>
