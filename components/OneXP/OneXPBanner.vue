@@ -50,6 +50,8 @@ defineProps<Props>();
   }
 
   &__cta {
+    // HACK: Override UiCta's default padding. We might want to update UiCta to
+    // allow for this if we need to do it again.
     padding: 0 !important;
   }
 }
