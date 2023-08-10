@@ -97,7 +97,7 @@ defineProps<Props>();
     }
 
     @include carbon.breakpoint-up(xlg) {
-      gap: carbon.$spacing-12;
+      gap: carbon.$spacing-13;
     }
   }
 
@@ -116,6 +116,10 @@ defineProps<Props>();
       @include carbon.breakpoint-up(md) {
         flex-direction: row;
         gap: carbon.$spacing-10;
+      }
+
+      @include carbon.breakpoint-up(xlg) {
+        gap: carbon.$spacing-12;
       }
 
       &__feature {
