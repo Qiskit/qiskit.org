@@ -20,19 +20,8 @@
         />
       </div>
     </div>
-    <transition name="scroll-in">
-      <!-- FIX: This is never rendered -->
-      <LearnContentMenu
-        v-if="!appMegaDropdownMenuIsVisible"
-        class="learn-lead-space__dropdown-fixed"
-      />
-    </transition>
   </header>
 </template>
-
-<script setup lang="ts">
-const appMegaDropdownMenuIsVisible = ref(true);
-</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
@@ -115,28 +104,11 @@ const appMegaDropdownMenuIsVisible = ref(true);
     z-index: 1;
   }
 
-  &__dropdown-fixed {
-    position: fixed;
-    top: 0;
-    transition: 0.3s ease-in-out;
-    width: 100%;
-    z-index: 100;
-  }
-
   &__cta {
     align-self: flex-end;
 
     // this is necessary to respect z ordering with the absolute elements.
     position: relative;
   }
-}
-
-.scroll-in-enter,
-.scroll-in-leave-to {
-  margin-top: -40px;
-}
-
-.scroll-in-leave-to {
-  opacity: 0;
 }
 </style>
