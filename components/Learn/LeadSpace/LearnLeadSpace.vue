@@ -12,12 +12,6 @@
             classes="learn-lead-space__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
           />
         </div>
-        <UiCta
-          class="learn-lead-space__cta"
-          label="Start learning"
-          :segment="{ cta: 'start-learning', location: 'header' }"
-          url="/learn/course/introduction-course"
-        />
       </div>
     </div>
   </header>
@@ -34,7 +28,7 @@
     carbon.$blue-40 25%,
     carbon.$purple-70 100%
   );
-  height: 37.5rem;
+  height: 17rem;
 
   &__headline {
     color: qiskit.$text-color-white;
@@ -61,7 +55,7 @@
       @include qiskit.responsive-grid-bg-strip(
         "/images/grid/grid-hero-textbook.svg",
         auto,
-        95%
+        200%
       );
 
       display: flex;
@@ -71,11 +65,15 @@
 
   &__logo {
     position: absolute;
-    top: 50%;
+    top: 150%;
     left: 50%;
     width: 100%;
     padding-top: 100%;
     transform: translate(-50%, -50%);
+
+    @include carbon.breakpoint-up(md) {
+      top: 110%;
+    }
 
     &-container {
       // the #{_______} is added to force scss to compile carbon.$spacing-11 value.
@@ -102,13 +100,6 @@
   &__dropdown {
     position: relative;
     z-index: 1;
-  }
-
-  &__cta {
-    align-self: flex-end;
-
-    // this is necessary to respect z ordering with the absolute elements.
-    position: relative;
   }
 }
 </style>
