@@ -33,7 +33,7 @@ defineProps<Props>();
 
 .one-xp-banner {
   background-image: linear-gradient(to right, carbon.$purple-10, carbon.$white);
-  padding: carbon.$spacing-04 0;
+  padding: carbon.$spacing-05 0;
 
   &__container {
     display: inline-flex;
