@@ -49,7 +49,7 @@
       img-src="/images/one-xp/documentation-screenshot.png"
     >
       <template #title>
-        Qiskit is getting a new documentation<br />and learning experience →
+        Qiskit is getting a new documentation<br />and learning experience!
       </template>
     </OneXPPageSection>
     <HomeProviders />
