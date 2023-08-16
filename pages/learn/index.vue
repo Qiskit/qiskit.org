@@ -3,7 +3,7 @@
     <OneXPBanner
       copy="🎉 Qiskit is getting a new learning experience on IBM Quantum!"
       :cta="{
-        label: 'Check it out!',
+        label: 'Check it out',
         segment: {
           cta: 'go-to-1xp-learning',
           location: '1xp-banner',
