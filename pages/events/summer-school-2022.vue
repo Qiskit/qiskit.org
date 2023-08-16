@@ -1,5 +1,5 @@
 <template>
-  <main class="summer-school-2022-page">
+  <article class="summer-school-2022-page">
     <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
@@ -98,7 +98,7 @@
         :resources="helpfulResourcesData.resources"
       />
     </div>
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">
@@ -110,7 +110,6 @@ import {
 } from "~/constants/summerSchool2022Content";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Global Summer School 2022",
   routeName: "summer-school-2022",
 });
@@ -141,6 +140,18 @@ const headerData = header;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
+
+useSchemaOrg([
+  createEventSchemaOrg({
+    startDate: new Date("2022-07-18"),
+    mode: "Online",
+    location: "",
+    url: `${config.public.siteUrl}/events/summer-school-2022/`,
+    name: headerData.card.title,
+    image: `${config.public.siteUrl}${headerData.card.image}`,
+    endDate: new Date("2022-07-29"),
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>

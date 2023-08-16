@@ -22,14 +22,13 @@ import { TextLink } from "~/types/links";
 
 enum GamesAndDemosUrl {
   HelloQiskit = "https://learn.qiskit.org/course/ch-demos/hello-qiskit",
-  EstimatingPiUsingQPEA = "https://learn.qiskit.org/course/ch-demos/estimating-pi-using-quantum-phase-estimation-algorithm",
+  EstimatingPiUsingQPEA = "https://learn.qiskit.org/course/ch-demos/estimating-pi-pi-using-quantum-phase-estimation-algorithm",
   LocalRealityAndTheChshInequality = "https://learn.qiskit.org/course/ch-demos/local-reality-and-the-chsh-inequality",
   QuantumCoinGame = "https://learn.qiskit.org/course/ch-demos/coin-game",
   VariationalQuantumRegression = "https://learn.qiskit.org/course/ch-demos/variational-quantum-regression",
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Games and demos",
   routeName: "games-and-demos",
 });

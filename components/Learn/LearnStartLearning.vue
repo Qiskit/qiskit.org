@@ -394,10 +394,10 @@ const learningSections: LearningSection[] = [
         image: "/images/learn/tutorials/classical-simulators.png",
         title: "Classical Simulators",
         description:
-          "Qiskit includes powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. These tutorials show you how to use advanced features of these simulators.",
+          "Aer is powerful quantum simulators to investigate how quantum circuits will behave on both ideal, and noisy hardware. It is fully integrated to Qiskit.",
         cta: {
-          label: "View resource",
-          url: `${config.public.siteUrl}/documentation/tutorials.html#classical-simulators`,
+          label: "Aer tutorials",
+          url: "https://qiskit.org/ecosystem/aer/tutorials/index.html",
           segment: { cta: "classical-simulators", location: "tutorials" },
         },
       },

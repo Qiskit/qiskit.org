@@ -1,12 +1,16 @@
 <template>
   <div class="ui-code-snippet">
     <code class="ui-code-snippet__code-cell">
-      <pre
-        v-for="(line, index) in codeLines"
-        :key="index"
-        :class="{ 'ui-code-snippet__code-cell_comment': line.startsWith('#') }"
-        v-text="line"
-      />
+      <template v-for="(line, index) in codeLines" :key="index">
+        <br v-if="line === ''" />
+        <pre
+          v-else
+          :class="{
+            'ui-code-snippet__code-cell_comment': line.startsWith('#'),
+          }"
+          v-text="line"
+        />
+      </template>
     </code>
     <bx-btn
       v-track-click="{
@@ -24,8 +28,6 @@
 </template>
 
 <script setup lang="ts">
-// import "@carbon/web-components/es/components/button/index.js";
-
 interface Props {
   code: string;
   codeSnippetTitle: string;
@@ -35,15 +37,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const codeLines = computed(() => {
-  const code = props.code;
-  const codeLines = code.split("\n");
-  const codeLinesWithEmptyLines = codeLines.map((line) => {
-    if (line === "") {
-      return "\n";
-    }
-    return line;
-  });
-  return codeLinesWithEmptyLines;
+  return props.code.split("\n");
 });
 
 const copyCodeCta = "Copy";

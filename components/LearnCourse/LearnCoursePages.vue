@@ -22,35 +22,35 @@
         </ul>
       </nav>
     </div>
-    <main class="learn-course-pages__main">
-      <div class="learn-course-pages__main__title-wrapper">
-        <div class="learn-course-pages__main__title copy__subtitle">
+    <div class="learn-course-pages__content">
+      <div class="learn-course-pages__content__title-wrapper">
+        <div class="learn-course-pages__content__title copy__subtitle">
           Page preview
         </div>
       </div>
-      <div v-if="activeCourse" class="learn-course-pages__main__preview">
+      <div v-if="activeCourse" class="learn-course-pages__content__preview">
         <UiLink :url="activeCourse.url">
           <!-- TODO: investigate why this particular img is not being populated -->
           <!-- <nuxt-img
-            class="learn-course-pages__main__preview__image"
+            class="learn-course-pages__content__preview__image"
             format="webp"
             preload
             sizes="md:650px lg:500px xl:750px"
             :src="activeCoursePreviewImage"
           /> -->
           <img
-            class="learn-course-pages__main__preview__image"
+            class="learn-course-pages__content__preview__image"
             :src="activeCoursePreviewImage"
           />
         </UiLink>
         <UiCta
           label="Go to page"
-          class="learn-course-pages__main__preview__cta"
+          class="learn-course-pages__content__preview__cta"
           :segment="activeCourse.segment"
           :url="activeCourse.url"
         />
       </div>
-    </main>
+    </div>
   </section>
 </template>
 
@@ -110,7 +110,7 @@ onMounted(() => {
     grid-template-columns: 1fr;
   }
 
-  &__main {
+  &__content {
     display: grid;
     grid-area: main;
     grid-template-rows: auto 1fr;

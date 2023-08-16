@@ -1,5 +1,5 @@
 <template>
-  <main class="summer-school-2023-page">
+  <article class="summer-school-2023-page">
     <LayoutLeadSpaceWithCard :card-title="headerData.cardSectionHeading">
       <template #title>
         {{ headerData.titleLine1 }}
@@ -27,13 +27,7 @@
           </UiLinkText>
           for more details. For any questions, please check out our FAQ below!
         </p>
-        <p>See you soon!</p>
-        <UiCta
-          class="summer-school-2023-page__cta"
-          :url="headerCta.url"
-          :label="headerCta.label"
-          :segment="headerCta.segment"
-        />
+        <p>See you next year!</p>
       </template>
       <template #card>
         <EventsCard
@@ -109,7 +103,7 @@
         :resources="helpfulResourcesData.resources"
       />
     </div>
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">
@@ -121,7 +115,6 @@ import {
 } from "~/constants/summerSchool2023Content";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit Global Summer School 2023",
   routeName: "/events/summer-school-2023",
 });
@@ -146,10 +139,21 @@ useSeoMeta({
 
 const agendaColumnsDataTable: string[] = ["Day", "Topic", "Speaker", "Format"];
 const headerData = header;
-const headerCta = headerData.cta;
 const mosaicData = mosaic;
 const agendaData = agenda;
 const helpfulResourcesData = helpfulResources;
+
+useSchemaOrg([
+  createEventSchemaOrg({
+    startDate: new Date("2023-07-17"),
+    mode: "Online",
+    location: "",
+    url: `${config.public.siteUrl}/events/summer-school-2023/`,
+    name: headerData.card.title,
+    image: `${config.public.siteUrl}${headerData.card.image}`,
+    endDate: new Date("2023-07-28"),
+  }),
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -187,10 +191,6 @@ const helpfulResourcesData = helpfulResources;
     @include carbon.breakpoint-down(lg) {
       max-width: 100%;
     }
-  }
-
-  &__cta {
-    margin-top: carbon.$spacing-07;
   }
 
   &__header-card {

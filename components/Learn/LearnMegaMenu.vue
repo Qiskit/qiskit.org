@@ -133,6 +133,22 @@ const ALGORITHM_FUNDAMENTALS_COURSE: MegaDropdownMenuGroup = {
         location: sectionAlgorithmFundamentalsCourse,
       },
     },
+    {
+      label: "Algorithmic foundations",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/algorithmic-foundations`,
+      segment: {
+        cta: "algorithmic_foundations",
+        location: sectionAlgorithmFundamentalsCourse,
+      },
+    },
+    {
+      label: "Phase estimation and factoring",
+      url: `${baseUrl}${pathAlgorithmFundamentalsCourse}/phase-estimation`,
+      segment: {
+        cta: "phase_estimation",
+        location: sectionAlgorithmFundamentalsCourse,
+      },
+    },
   ],
 };
 
@@ -408,7 +424,7 @@ const QUANTUM_STATES_AND_QUBITS: MegaDropdownMenuGroup = {
     },
     {
       label: "The Atoms of Computation",
-      url: `${baseUrl}${pathQuantumStatesAndQubits}/the-atoms-of-computation`,
+      url: `${baseUrl}${pathQuantumStatesAndQubits}/atoms-computation`,
       segment: {
         cta: "the-atoms-of-computation",
         location: sectionQuantumStatesAndQubits,
@@ -522,7 +538,7 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     },
     {
       label: "Estimating Pi Using Quantum Phase Estimation Algorithm",
-      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-using-quantum-phase-estimation-algorithm`,
+      url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
         cta: "estimating-pi-using-quantum-phase-estimation-algorithm",
         location: sectionGamesAndDemos,
@@ -1295,14 +1311,6 @@ const ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${tutorialsBaseUrl}/algorithms/07_grover_examples.html`,
       segment: {
         cta: "07_grover_examples",
-        location: sectionTutorials,
-      },
-    },
-    {
-      label: "Shor’s algorithms",
-      url: `${tutorialsBaseUrl}/algorithms/08_factorizers.html`,
-      segment: {
-        cta: "08_factorizers",
         location: sectionTutorials,
       },
     },

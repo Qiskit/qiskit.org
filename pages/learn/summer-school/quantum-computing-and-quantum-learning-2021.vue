@@ -23,7 +23,6 @@ import { RecommendedReading } from "~/types/learn";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "2021 Qiskit Global Summer School on Quantum Machine Learning",
   routeName: "quantum-computing-and-quantum-learning-2021",
 });
@@ -74,11 +73,11 @@ const references: string[] = [];
 const externalRecommendedReadingsPreamble = "";
 const links: RecommendedReading[] = [
   {
-    url: "http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf",
-    author: "Nielsen & Chuang,",
+    url: "https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE",
+    author: "Michael Nielsen, et al.,",
     label: "Quantum Computation and Quantum Information",
     segment: {
-      cta: "qc-qi-pdf",
+      cta: "quantum-computation-and-quantum-information",
       location: "external-recommended-readings",
     },
   },
@@ -273,7 +272,7 @@ const prerequisites: Prerequisite[] = [
       cta: "linear-algebra",
       location: "related-material",
     },
-    url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
+    url: "https://learn.qiskit.org/course/ch-appendix/linear_algebra",
   },
   {
     title: "Probability Theory — Random Variables and Distributions",

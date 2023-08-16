@@ -22,7 +22,6 @@ import { LearnStartLearningUrl } from "~/constants/links";
 import { TextLink } from "~/types/links";
 
 definePageMeta({
-  layout: "default-max",
   pageTitle:
     "2020 Qiskit global summer school on quantum computing and quantum hardware",
   routeName: "introduction-to-quantum-computing-and-quantum-hardware-2020",
@@ -175,7 +174,7 @@ const prerequisites: Prerequisite[] = [
       cta: "linear-algebra",
       location: "related-material",
     },
-    url: "https://learn.qiskit.org/course/ch-appendix/an-introduction-to-linear-algebra-for-quantum-computing",
+    url: "https://learn.qiskit.org/course/ch-appendix/linear_algebra",
   },
 ];
 

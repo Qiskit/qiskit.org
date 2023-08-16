@@ -1,9 +1,9 @@
 <template>
-  <main>
+  <article>
     <HomeLeadSpace :version="qiskitVersion" />
     <HomeCapabilities />
     <HomeProviders />
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">
@@ -14,7 +14,6 @@ interface PackageInfo {
 }
 
 definePageMeta({
-  layout: "default-max",
   pageTitle: "Qiskit",
   routeName: "qiskit-landing-page",
 });
