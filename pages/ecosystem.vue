@@ -99,6 +99,7 @@
                 updateSelectedSortingOption($event.detail.item.value)
               "
             >
+              <bx-dropdown-item value="default">Default</bx-dropdown-item>
               <bx-dropdown-item value="name">Name</bx-dropdown-item>
               <bx-dropdown-item value="stars">Stars</bx-dropdown-item>
             </bx-dropdown>
@@ -252,8 +253,8 @@ function updateSearchTerm(newSearchTerm: string) {
 /**
  * Sorting options
  */
-type SortingOption = "name" | "stars";
-const selectedSortingOption = ref<SortingOption>("name");
+type SortingOption = "default" | "name" | "stars";
+const selectedSortingOption = ref<SortingOption>("default");
 
 function updateSelectedSortingOption(sortingOption: SortingOption) {
   selectedSortingOption.value = sortingOption;
@@ -299,10 +300,14 @@ const filteredMembers = computed<Member[]>(() => {
 
 const filteredMembersSorted = computed<Member[]>(() => {
   if (selectedSortingOption.value === "stars") {
-    return filteredMembers.value.sort((a, b) => b.stars - a.stars);
+    return [...filteredMembers.value].sort((a, b) => b.stars - a.stars);
+  } else if (selectedSortingOption.value === "name") {
+    return [...filteredMembers.value].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
   }
 
-  return filteredMembers.value.sort((a, b) => a.name.localeCompare(b.name));
+  return filteredMembers.value;
 });
 
 function getTierProjectCount(tierName: TierName) {
