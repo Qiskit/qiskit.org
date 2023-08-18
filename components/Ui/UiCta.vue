@@ -32,7 +32,7 @@ import { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
   isWider?: boolean;
-  kind?: "primary" | "secondary" | "ghost";
+  kind?: "primary" | "secondary" | "ghost" | "one-xp";
   label: string;
   segment?: CtaClickedEventProp;
   theme?: "light" | "dark";
@@ -194,6 +194,14 @@ const iconPerLinkType = computed(() => {
         color: qiskit.$link-hover-color-quaternary;
       }
     }
+  }
+
+  &_one-xp {
+    background-image: linear-gradient(
+      90deg,
+      carbon.$purple-70 50%,
+      carbon.$blue-60 100%
+    );
   }
 
   /*
