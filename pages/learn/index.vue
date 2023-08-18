@@ -8,7 +8,7 @@
           cta: 'go-to-1xp-learning',
           location: '1xp-banner',
         },
-        url: 'https://example.com',
+        url: 'https://learning.quantum-computing.ibm.com',
       }"
     />
     <LearnLeadSpace />
@@ -25,7 +25,7 @@
               cta: 'go-to-1xp-learning',
               location: '1xp-page-section',
             },
-            url: 'https://example.com',
+            url: 'https://learning.quantum-computing.ibm.com',
           },
           secondaryCta: {
             label: 'Learn more',
@@ -33,7 +33,7 @@
               cta: 'learn-more-1px-learning',
               location: '1xp-page-section',
             },
-            url: 'https://example.com',
+            url: 'https://docs.quantum-computing.ibm.com/announcements/product-updates/2023-08-18-new-navigation-and-application-updates',
           },
         },
       ]"

@@ -27,7 +27,7 @@
               cta: 'go-to-1xp-documentation',
               location: '1xp-page-section',
             },
-            url: 'https://example.com',
+            url: 'https://docs.quantum-computing.ibm.com',
           },
         },
         {
@@ -41,7 +41,7 @@
               cta: 'go-to-1xp-learning',
               location: '1xp-page-section',
             },
-            url: 'https://example.com',
+            url: 'https://learning.quantum-computing.ibm.com',
           },
         },
       ]"
