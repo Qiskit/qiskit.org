@@ -1,12 +1,7 @@
 <template>
   <UiDataTable
     class="ecosystem-card-test-results"
-    :columns="[
-      'Status',
-      'Test Type',
-      `${tableData[0][2].packageName} Version`,
-      'Test Logs',
-    ]"
+    :columns="['Status', 'Test Type', `Qiskit Version`, 'Test Logs']"
   >
     <bx-table-row v-for="(row, rowIndex) in tableData" :key="`${rowIndex}`">
       <bx-table-cell
