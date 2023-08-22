@@ -1,6 +1,47 @@
 <template>
   <article class="learn-page">
+    <OneXPBanner
+      copy="🎉 Qiskit is getting a new learning experience on IBM Quantum!"
+      :cta="{
+        label: 'Check it out',
+        segment: {
+          cta: 'go-to-1xp-learning',
+          location: '1xp-banner',
+        },
+        url: 'https://learning.quantum-computing.ibm.com',
+      }"
+    />
     <LearnLeadSpace />
+    <OneXPPageSection
+      :features="[
+        {
+          descriptionParagraphs: [
+            'We are building a new home for the Qiskit Textbook on IBM Quantum, and we will be migrating courses and tutorials in the coming months.',
+            'Just getting started with Qiskit? Start your learning journey on the new platform today!',
+          ],
+          cta: {
+            label: 'Check it out',
+            segment: {
+              cta: 'go-to-1xp-learning',
+              location: '1xp-page-section',
+            },
+            url: 'https://learning.quantum-computing.ibm.com',
+          },
+          secondaryCta: {
+            label: 'Learn more',
+            segment: {
+              cta: 'learn-more-1px-learning',
+              location: '1xp-page-section',
+            },
+            url: 'https://docs.quantum-computing.ibm.com/announcements/product-updates/2023-08-18-new-navigation-and-application-updates',
+          },
+        },
+      ]"
+      img-alt="Screenshot of the new Qiskit learning experience"
+      img-src="/images/one-xp/learning-screenshot.png"
+    >
+      <template #title>Qiskit is getting a new learning experience!</template>
+    </OneXPPageSection>
     <LearnStartLearning class="learn-page__section" />
     <UiHelpfulResources
       class="learn-page__section"
@@ -93,7 +134,6 @@ const helpfulResources: DescriptionCard[] = [
 
     max-width: qiskit.$max-size;
     margin-bottom: carbon.$spacing-07;
-    margin-top: carbon.$spacing-10;
   }
 }
 </style>

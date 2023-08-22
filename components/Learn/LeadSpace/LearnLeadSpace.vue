@@ -12,27 +12,10 @@
             classes="learn-lead-space__dropdown cds--col-md-4 cds--col-lg-4 cds--no-gutter"
           />
         </div>
-        <UiCta
-          class="learn-lead-space__cta"
-          label="Start learning"
-          :segment="{ cta: 'start-learning', location: 'header' }"
-          url="/learn/course/introduction-course"
-        />
       </div>
     </div>
-    <transition name="scroll-in">
-      <!-- FIX: This is never rendered -->
-      <LearnContentMenu
-        v-if="!appMegaDropdownMenuIsVisible"
-        class="learn-lead-space__dropdown-fixed"
-      />
-    </transition>
   </header>
 </template>
-
-<script setup lang="ts">
-const appMegaDropdownMenuIsVisible = ref(true);
-</script>
 
 <style lang="scss" scoped>
 @use "~/assets/scss/carbon.scss";
@@ -45,7 +28,7 @@ const appMegaDropdownMenuIsVisible = ref(true);
     carbon.$blue-40 25%,
     carbon.$purple-70 100%
   );
-  height: 37.5rem;
+  height: 17rem;
 
   &__headline {
     color: qiskit.$text-color-white;
@@ -72,7 +55,7 @@ const appMegaDropdownMenuIsVisible = ref(true);
       @include qiskit.responsive-grid-bg-strip(
         "/images/grid/grid-hero-textbook.svg",
         auto,
-        95%
+        200%
       );
 
       display: flex;
@@ -82,11 +65,15 @@ const appMegaDropdownMenuIsVisible = ref(true);
 
   &__logo {
     position: absolute;
-    top: 50%;
+    top: 150%;
     left: 50%;
     width: 100%;
     padding-top: 100%;
     transform: translate(-50%, -50%);
+
+    @include carbon.breakpoint-up(md) {
+      top: 110%;
+    }
 
     &-container {
       // the #{_______} is added to force scss to compile carbon.$spacing-11 value.
@@ -114,29 +101,5 @@ const appMegaDropdownMenuIsVisible = ref(true);
     position: relative;
     z-index: 1;
   }
-
-  &__dropdown-fixed {
-    position: fixed;
-    top: 0;
-    transition: 0.3s ease-in-out;
-    width: 100%;
-    z-index: 100;
-  }
-
-  &__cta {
-    align-self: flex-end;
-
-    // this is necessary to respect z ordering with the absolute elements.
-    position: relative;
-  }
-}
-
-.scroll-in-enter,
-.scroll-in-leave-to {
-  margin-top: -40px;
-}
-
-.scroll-in-leave-to {
-  opacity: 0;
 }
 </style>
