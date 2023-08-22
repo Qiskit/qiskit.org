@@ -7,8 +7,8 @@
     type="button"
     @click="hideButton"
   >
-    Feedback</bx-btn
-  >
+    <div class="ui-alchemer-survey-trigger__label">Feedback</div>
+  </bx-btn>
 </template>
 
 <script setup lang="ts">
@@ -32,8 +32,11 @@ function hideButton() {
     right: 0;
     top: 50%;
     transform: rotate(180deg);
-    writing-mode: vertical-lr;
     z-index: 300;
+  }
+
+  &__label {
+    writing-mode: vertical-rl;
   }
 }
 </style>
