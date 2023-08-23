@@ -1,5 +1,16 @@
 <template>
   <article class="learn-course">
+    <OneXPBanner
+      copy="🎉 Qiskit is getting a new learning experience on IBM Quantum!"
+      :cta="{
+        label: 'Check it out',
+        segment: {
+          cta: 'go-to-1xp-learning',
+          location: '1xp-banner',
+        },
+        url: 'https://learning.quantum-computing.ibm.com',
+      }"
+    />
     <LearnContentMenu class="learn-course__content-menu" />
     <LayoutLeadSpaceWithImage
       :cta="startLearningCta"
