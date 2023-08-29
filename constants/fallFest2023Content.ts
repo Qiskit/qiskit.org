@@ -3,8 +3,8 @@ import { DescriptionCard } from "~/types/uiComponents";
 const header = {
   titleLine1: "Qiskit Fall Fest 2023:",
   cta: {
-    label: "Read the blog",
-    url: "https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557",
+    label: "2022 Fall Fest events",
+    url: "/events/fall-fest-2022",
     segment: {
       cta: "learn",
       location: "header",
@@ -12,7 +12,7 @@ const header = {
   },
   cardSectionHeading: "About the event:",
   card: {
-    image: "/images/events/fall-fest/fall-fest-logo.png",
+    image: "/images/events/fall-fest/fall-fest-logo-2023.png",
     title: "Qiskit Fall Fest 2023",
     description:
       "The Qiskit Fall Fest is a collection of quantum computing events each held by a university!",

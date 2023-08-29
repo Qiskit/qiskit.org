@@ -9,10 +9,14 @@
       </template>
       <template #description>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-          hic, corporis quas quia voluptatibus, impedit blanditiis, inventore
-          consectetur laudantium veritatis voluptates! Sapiente eum a
-          praesentium iste sint quis, quasi delectus!
+          The Qiskit Fall Fest is a collection of quantum computing events on
+          college campuses around the world. Every Fall Fest event is organized
+          and run by the students on each campus, with support from IBM Quantum.
+          Student leaders work alongside IBM to design and plan their event,
+          which are run in October and November. Each event is standalone - only
+          made for the students on that particular campus. The events vary from
+          technical hackathons to beginner-friendly challenges, all with the
+          goal of helping to grow the local community’s skill set.
         </p>
       </template>
       <template #card>
@@ -33,7 +37,7 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <EventsFallFestUniversityDirectory />
+        <EventsFallFestUniversityDirectory2023 />
       </section>
     </div>
 
@@ -59,7 +63,8 @@
           role="tabpanel"
           hidden
         >
-          <UiDataTable
+          <p>New schedule coming soon</p>
+          <!-- <UiDataTable
             class="fall-fest-page__section"
             :columns="agendaColumnsDataTable"
           >
@@ -82,7 +87,7 @@
                 <span v-else :style="styles">{{ data }}</span>
               </bx-table-cell>
             </bx-table-row>
-          </UiDataTable>
+          </UiDataTable> -->
         </div>
       </section>
 
@@ -129,14 +134,14 @@ useSeoMeta({
 });
 
 const agendaData = agenda;
-const agendaColumnsDataTable: string[] = [
-  "University",
-  "Start Date",
-  "End Date",
-  "Detail",
-  "Type of Event",
-  "Link",
-];
+// const agendaColumnsDataTable: string[] = [
+//   "University",
+//   "Start Date",
+//   "End Date",
+//   "Detail",
+//   "Type of Event",
+//   "Link",
+// ];
 const headerData = header;
 const helpfulResourcesData = helpfulResources;
 </script>
