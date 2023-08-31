@@ -252,7 +252,7 @@ const searchTerm = ref<string>("");
 
 function updateSearchTerm(newSearchTerm: string) {
   searchTerm.value = newSearchTerm.trim();
-  trackClickEvent(newSearchTerm.value, "ecosystem-search");
+  trackClickEvent(searchTerm.value, "ecosystem-search");
 }
 
 /**
