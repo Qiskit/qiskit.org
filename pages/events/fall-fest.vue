@@ -37,75 +37,18 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <EventsFallFestUniversityDirectory2023 />
+        <UiHelpfulResources
+          class="fall-fest-page__section"
+          :title="helpfulResourcesData.title"
+          :resources="helpfulResourcesData.resources"
+        />
       </section>
-    </div>
-
-    <div class="cds--grid fall-fest-page__content">
-      <section class="fall-fest-page__section">
-        <h2 v-text="agendaData.title" />
-        <p v-text="agendaData.subtitle" />
-        <bx-tabs value="Wave 1">
-          <bx-tab
-            v-for="week in agendaData.weeks"
-            :key="week.tabName"
-            :target="week.tabName"
-            :value="week.tabName"
-          >
-            {{ week.tabName }}
-          </bx-tab>
-        </bx-tabs>
-        <div
-          v-for="week in agendaData.weeks"
-          :id="week.tabName"
-          :key="week.tabName"
-          :aria-labelledby="week.tabName"
-          role="tabpanel"
-          hidden
-        >
-          <p>New schedule coming soon</p>
-          <!-- <UiDataTable
-            class="fall-fest-page__section"
-            :columns="agendaColumnsDataTable"
-          >
-            <bx-table-row
-              v-for="(row, rowIndex) in week.tableData"
-              :key="`${rowIndex}`"
-            >
-              <bx-table-cell
-                v-for="({ styles, data, link }, elementIndex) in row"
-                :key="`${elementIndex}`"
-              >
-                <UiLinkText
-                  v-if="link"
-                  class="fall-fest-page__table-link"
-                  :style="styles"
-                  :url="link"
-                >
-                  Link to event
-                </UiLinkText>
-                <span v-else :style="styles">{{ data }}</span>
-              </bx-table-cell>
-            </bx-table-row>
-          </UiDataTable> -->
-        </div>
-      </section>
-
-      <UiHelpfulResources
-        class="fall-fest-page__section"
-        :title="helpfulResourcesData.title"
-        :resources="helpfulResourcesData.resources"
-      />
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import {
-  header,
-  agenda,
-  helpfulResources,
-} from "~/constants/fallFest2023Content";
+import { header, helpfulResources } from "~/constants/fallFest2023Content";
 
 definePageMeta({
   pageTitle: "Qiskit Fall Fest 2023",
@@ -133,15 +76,6 @@ useSeoMeta({
   twitterDescription: description,
 });
 
-const agendaData = agenda;
-// const agendaColumnsDataTable: string[] = [
-//   "University",
-//   "Start Date",
-//   "End Date",
-//   "Detail",
-//   "Type of Event",
-//   "Link",
-// ];
 const headerData = header;
 const helpfulResourcesData = helpfulResources;
 </script>
