@@ -1,7 +1,9 @@
 import { DescriptionCard } from "~/types/uiComponents";
 
 const header = {
-  titleLine1: "Qiskit Fall Fest 2022:",
+  titleLine1: "Qiskit Fall Fest 2022",
+  description:
+    "The Qiskit Fall Fest is a collection of quantum computing events on college campuses around the world. Every Fall Fest event is organized and run by the students on each campus, with support from the entire IBM Quantum team. Student leaders work alongside IBM throughout the month of September to design and plan their event, which are then run in October. The events vary from technical hackathons to beginner-friendly challenges, all with the goal of helping to grow the local community’s skill set.",
   cta: {
     label: "Read the blog",
     url: "https://medium.com/qiskit/introducing-the-qiskit-fall-fest-feb8456b557",

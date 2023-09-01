@@ -41,20 +41,17 @@
 <script setup lang="ts">
 import { header, helpfulResources } from "~/constants/fallFest2023Content";
 
-const headerData = header;
-const helpfulResourcesData = helpfulResources;
-
 definePageMeta({
-  pageTitle: headerData.titleLine1,
+  pageTitle: header.titleLine1,
   routeName: "fall-fest",
 });
 
 const config = useRuntimeConfig();
 
-const title = headerData.titleLine1;
+const title = header.titleLine1;
 const description =
   "The Qiskit Fall Fest is a collection of quantum computing events from universities around the world, organized by students and supported by the IBM Quantum community.";
-const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest.png`;
+const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest-logo-2023.png`;
 const pageUrl = `${config.public.siteUrl}/events/fall-fest`;
 
 useSeoMeta({
@@ -69,6 +66,9 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   twitterDescription: description,
 });
+
+const headerData = header;
+const helpfulResourcesData = helpfulResources;
 </script>
 
 <style lang="scss" scoped>
