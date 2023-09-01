@@ -41,6 +41,9 @@
 <script setup lang="ts">
 import { header, helpfulResources } from "~/constants/fallFest2023Content";
 
+const headerData = header;
+const helpfulResourcesData = helpfulResources;
+
 definePageMeta({
   pageTitle: headerData.titleLine1,
   routeName: "fall-fest",
@@ -66,9 +69,6 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   twitterDescription: description,
 });
-
-const headerData = header;
-const helpfulResourcesData = helpfulResources;
 </script>
 
 <style lang="scss" scoped>
