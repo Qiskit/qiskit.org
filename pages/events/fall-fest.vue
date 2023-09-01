@@ -42,17 +42,17 @@
 import { header, helpfulResources } from "~/constants/fallFest2023Content";
 
 definePageMeta({
-  pageTitle: "Qiskit Fall Fest 2023",
+  pageTitle: headerData.titleLine1,
   routeName: "fall-fest",
 });
 
 const config = useRuntimeConfig();
 
-const title = "Qiskit Fall Fest 2023";
+const title = headerData.titleLine1;
 const description =
   "The Qiskit Fall Fest is a collection of quantum computing events from universities around the world, organized by students and supported by the IBM Quantum community.";
 const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest.png`;
-const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
+const pageUrl = `${config.public.siteUrl}/events/fall-fest`;
 
 useSeoMeta({
   title,
