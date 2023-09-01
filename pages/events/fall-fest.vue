@@ -57,7 +57,7 @@ definePageMeta({
 
 const config = useRuntimeConfig();
 
-const title = "Qiskit Fall Fest 2023";
+const title = headerData.titleLine1;
 const description =
   "The Qiskit Fall Fest is a collection of quantum computing events from universities around the world, organized by students and supported by the IBM Quantum community.";
 const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest.png`;
