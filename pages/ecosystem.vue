@@ -263,7 +263,7 @@ const selectedSortingOption = ref<SortingOption>("default");
 
 function updateSelectedSortingOption(sortingOption: SortingOption) {
   selectedSortingOption.value = sortingOption;
-  trackClickEvent(sortingOption, "ecosystem-search");
+  trackClickEvent(sortingOption, "ecosystem-sort");
 }
 
 /**
