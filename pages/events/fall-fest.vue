@@ -51,7 +51,7 @@
 import { header, helpfulResources } from "~/constants/fallFest2023Content";
 
 definePageMeta({
-  pageTitle: "Qiskit Fall Fest 2023",
+  pageTitle: headerData.titleLine1,
   routeName: "fall-fest",
 });
 
