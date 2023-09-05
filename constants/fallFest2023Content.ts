@@ -8,7 +8,7 @@ const header = {
     label: "2022 Fall Fest events",
     url: "/events/fall-fest-2022",
     segment: {
-      cta: "learn",
+      cta: "qiskit-fall-fest-blog",
       location: "header",
     },
   },
