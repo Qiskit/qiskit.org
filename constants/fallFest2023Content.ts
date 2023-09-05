@@ -24,7 +24,7 @@ const header = {
     ctaLabel: "Learn about the Fall Fest",
     segment: {
       cta: "qiskit-fall-fest-blog",
-      location: "header",
+      location: "card-header",
     },
   },
 };
