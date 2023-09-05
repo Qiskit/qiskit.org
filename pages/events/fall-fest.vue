@@ -17,6 +17,7 @@
           :location="headerData.card.location"
           :segment="headerData.card.segment"
           :time="headerData.card.time"
+          :alt-text="headerData.card.altText"
           :title="headerData.card.title"
           :to="headerData.card.to"
           vertical-layout

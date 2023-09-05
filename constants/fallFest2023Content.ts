@@ -15,6 +15,8 @@ const header = {
   cardSectionHeading: "About the event:",
   card: {
     image: "/images/events/fall-fest/fall-fest-logo-2023.png",
+    altText:
+      "The Qiskit logo centered with a playful background of colorful, gradient shapes",
     title: "Qiskit Fall Fest 2023",
     description:
       "The Qiskit Fall Fest is a collection of quantum computing events each held by a university!",
