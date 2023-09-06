@@ -2,6 +2,7 @@
   <NuxtLink
     v-track-click="segment"
     :external="computedExternal"
+    :rel="computedExternal ? 'noopener' : undefined"
     :target="computedTarget"
     :title="title"
     :to="url"

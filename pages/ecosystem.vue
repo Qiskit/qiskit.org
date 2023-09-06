@@ -153,6 +153,8 @@ useSeoMeta({
   twitterDescription: description,
 });
 
+const { trackClickEvent } = useSegment();
+
 const joinSectionCards = [
   {
     name: "Main tier",
@@ -201,6 +203,7 @@ const tierFiltersAsString = computed(() => tierFilters.value.join(","));
 
 function updateCategoryFilter(filterValue: string, isChecked: boolean) {
   if (isChecked) {
+    trackClickEvent(filterValue, "ecosystem-filters");
     categoryFilters.value.push(filterValue);
   } else {
     const index = categoryFilters.value.indexOf(filterValue);
@@ -222,6 +225,7 @@ function isCategoryFilterChecked(filterValue: string): boolean {
 
 function updateTierFilter(filterValue: string, isChecked: boolean) {
   if (isChecked) {
+    trackClickEvent(filterValue, "ecosystem-filters");
     tierFilters.value.push(filterValue);
   } else {
     const index = tierFilters.value.indexOf(filterValue);
@@ -248,6 +252,7 @@ const searchTerm = ref<string>("");
 
 function updateSearchTerm(newSearchTerm: string) {
   searchTerm.value = newSearchTerm.trim();
+  trackClickEvent(searchTerm.value, "ecosystem-search");
 }
 
 /**
@@ -258,6 +263,7 @@ const selectedSortingOption = ref<SortingOption>("default");
 
 function updateSelectedSortingOption(sortingOption: SortingOption) {
   selectedSortingOption.value = sortingOption;
+  trackClickEvent(sortingOption, "ecosystem-sort");
 }
 
 /**
