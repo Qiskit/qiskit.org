@@ -33,22 +33,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -115,22 +121,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -190,22 +202,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -279,22 +297,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -359,22 +383,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -438,22 +468,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -527,22 +563,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -606,22 +648,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -686,22 +734,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -766,22 +820,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -843,22 +903,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -923,22 +989,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -1000,22 +1072,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -1081,22 +1159,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -1161,22 +1245,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -1262,22 +1352,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -1343,22 +1439,28 @@
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      hamiltonian = SparsePauliOp.from_list(
-          [("YZ", 0.3980), ("ZI", -0.3980), ("ZZ", -0.0113), ("XX", 0.1810)]
-      )
-
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
+      ])
+      
       # Define VQE ansatz, initial point and cost function
-      from qiskit.circuit.library import EfficientSU2
-      ansatz = EfficientSU2(hamiltonian.num_qubits)
-      initial_point = [0]*16
+      from qiskit.circuit.library import TwoLocal
+      ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
+      initial_point = initial_point = [0] * 8
+      
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-
+      
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-
+      
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
