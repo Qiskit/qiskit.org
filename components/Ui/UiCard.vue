@@ -82,23 +82,24 @@
           <div class="card__slot">
             <slot></slot>
           </div>
-          <div class="card__ctas"></div>
-          <UiCta
-            v-if="to"
-            is-wider
-            kind="ghost"
-            :label="ctaLink.label"
-            :segment="ctaLink.segment"
-            :url="ctaLink.url"
-          />
-          <UiCta
-            v-if="secondaryCta"
-            is-wider
-            kind="ghost"
-            :label="secondaryCta.label"
-            :segment="secondaryCta.segment"
-            :url="secondaryCta.url"
-          />
+          <div class="card__ctas">
+            <UiCta
+              v-if="to"
+              is-wider
+              kind="ghost"
+              :label="ctaLink.label"
+              :segment="ctaLink.segment"
+              :url="ctaLink.url"
+            />
+            <UiCta
+              v-if="secondaryCta"
+              is-wider
+              kind="ghost"
+              :label="secondaryCta.label"
+              :segment="secondaryCta.segment"
+              :url="secondaryCta.url"
+            />
+          </div>
         </div>
       </div>
     </div>
