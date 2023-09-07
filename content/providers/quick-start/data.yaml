@@ -31,26 +31,32 @@
       from qiskit.primitives import Estimator
       estimator = Estimator()
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Run quantum circuits and algorithms using Qiskit as a stand-alone tool
@@ -61,7 +67,7 @@
   installation: pip install qiskit
   sourceCta:
     label: GitHub
-    url: https://github.com/Qiskit/qiskit-terra
+    url: https://github.com/Qiskit/qiskit
   title: Qiskit (with built-in simulator)
   websiteCta:
     label: Website
@@ -113,26 +119,32 @@
       backend = service.backend("ibm_perth")
       estimator = Estimator(session=backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: IBM Quantum offers both open and premium access to a wide variety of
@@ -188,26 +200,32 @@
       from qiskit_aer.primitives import Estimator
       estimator = Estimator()
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Aer is a high performance simulator for quantum circuits that includes
@@ -277,26 +295,32 @@
       backend = provider.backends("Aquila")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Amazon Braket is a fully managed quantum computing service designed
@@ -357,26 +381,32 @@
       backend = aqt.get_backend('aqt_innsbruck')
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: AQT provides access to Calcium trapped-ion quantum devices.
@@ -436,26 +466,32 @@
       backend = provider.get_backend("quantinuum.qpu.h1-2")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Azure Quantum is the cloud quantum computing service of Azure, with
@@ -525,26 +561,32 @@
       backend = QiskitGaqqie.get_backend("qiskit_simulator")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Gaqqie is an open-source quantum computer cloud platform.
@@ -604,26 +646,32 @@
       backend = provider.get_backend("ionq_qpu")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: IonQ offers access to Ytterbium trapped-ion quantum computers with
@@ -684,26 +732,32 @@
       backend = provider.get_backend()
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: IQM offers access to gate-model based superconducting qubits quantum
@@ -764,26 +818,32 @@
       backend = provider.get_backend('qasm_simulator')
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: MQT DDSIM is a quantum circuit simulator based on decision diagrams
@@ -841,26 +901,32 @@
       backend = StatevectorSimulator()
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: NVIDIA cuStateVec is a high-performance library dedicated to operations
@@ -921,26 +987,32 @@
       backend = provider.get_backend('forge_statevector')
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: QC Ware Forge is an unique and efficient turn-key algorithms for data
@@ -998,26 +1070,32 @@
       backend = Quac.get_backend("fake_vigo_density_simulator")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: QuaC is a parallel time dependent open quantum systems solver.
@@ -1079,26 +1157,32 @@
       backend = Quantinuum.get_backend("deadhead")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Quantinuum provides access to Ytterbium trapped-ion systems with high-fidelity,
@@ -1159,26 +1243,32 @@
       backend = provider.get_backend("Aspen-11")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Rigetti offers access to universal, gate-model machines based on tunable
@@ -1260,26 +1350,32 @@
       backend = provider.get_backend("borealis")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: Strangeworks is the ultimate collaboration of hardware, software, education,
@@ -1341,26 +1437,32 @@
       backend = provider.get_backend("aws_sv1_simulator")
       estimator = BackendEstimator(backend)
 
-      # Express hydrogen molecule Hamiltonian as an operator
+      # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      H2_operator = SparsePauliOp.from_list([
-          ("II", -1.052373245772859),
-          ("IZ", 0.39793742484318045),
-          ("ZI", -0.39793742484318045),
-          ("ZZ", -0.01128010425623538),
-          ("XX", 0.18093119978423156)
+      
+      hamiltonian = SparsePauliOp.from_list([
+         ("II", -1.052373245772859),
+         ("IZ", 0.39793742484318045),
+         ("ZI", -0.39793742484318045),
+         ("ZZ", -0.01128010425623538),
+         ("XX", 0.18093119978423156)
       ])
-
-      # Calculate ground state energy using VQE
+      
+      # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
-      from qiskit.algorithms.optimizers import SLSQP
-      from qiskit.algorithms.minimum_eigensolvers import VQE
-
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
-      optimizer = SLSQP(maxiter=100)
-      vqe = VQE(estimator, ansatz, optimizer)
-      result = vqe.compute_minimum_eigenvalue(operator=H2_operator)
-      print(result.eigenvalue)
+      initial_point = initial_point = [0] * 8
+      
+      def cost_function(params, ansatz, hamiltonian, estimator):
+          energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
+          return energy
+      
+      # Run VQE using SciPy minimizer routine
+      from scipy.optimize import minimize
+      result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
+      
+      # Print minimum eigenvalue
+      print(result.fun)
     name: Run VQE
     runMethod: estimator
   description: SuperstaQ is a hardware-agnostic software platform that connects applications
