@@ -16,7 +16,7 @@ const ADVOCATES_WORLD_REGION_OPTIONS = Object.values(
 
 interface Advocate {
   city: string;
-  country: string[];
+  country: string;
   image: string;
   location?: string;
   name: string;
