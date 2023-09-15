@@ -33,7 +33,6 @@
           height="560"
         />
         <EventsFollowOurCalendar />
-        <EventsRequest />
       </div>
       <UiFiltersResultsLayout v-else>
         <template #filters-on-m-l-screen>
@@ -105,7 +104,6 @@
         </template>
         <template #extra-info>
           <EventsFollowOurCalendar id="follow-our-event-calendar" />
-          <EventsRequest />
         </template>
       </UiFiltersResultsLayout>
     </div>
