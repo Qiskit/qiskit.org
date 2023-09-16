@@ -2,6 +2,7 @@ import { defineNuxtConfig } from "nuxt/config";
 import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
+import fetchFallFestEvents from "./hooks/update-fall-fest-events";
 import { generateMocks } from "./hooks/mock/mock-service";
 
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
@@ -96,6 +97,10 @@ async function generateContent() {
     // eslint-disable-next-line no-console
     console.info("Generating the events content...");
     await fetchEvents(AIRTABLE_API_KEY, "./content/events");
+
+    // eslint-disable-next-line no-console
+    console.info("Generating the fall fest events content...");
+    await fetchFallFestEvents(AIRTABLE_API_KEY, "./content/fall-fest-events");
 
     // eslint-disable-next-line no-console
     console.info("Generating the advocates content...");
