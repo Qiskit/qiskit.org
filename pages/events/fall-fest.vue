@@ -29,6 +29,10 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
+        <EventsFallFestUniversityDirectory :directory-data="partnerEvents" />
+      </section>
+
+      <section class="fall-fest-page__section">
         <UiHelpfulResources
           class="fall-fest-page__section"
           :title="helpfulResourcesData.title"
@@ -41,6 +45,7 @@
 
 <script setup lang="ts">
 import { header, helpfulResources } from "~/constants/fallFest2023Content";
+import partnerEvents from "~/content/fall-fest-events/fall-fest-partner-events.json";
 
 definePageMeta({
   pageTitle: header.titleLine1,

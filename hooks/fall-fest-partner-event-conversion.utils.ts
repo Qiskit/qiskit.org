@@ -7,12 +7,10 @@ import {
 import { FallFestPartnerEvent } from "types/fall-fest";
 
 export const RECORD_FIELDS_IDS = Object.freeze({
-  university: "fld7dWQ6pkQHYg2kj",
-  location: "fldoZ4E5pqOxartJj",
+  title: "fld7dWQ6pkQHYg2kj",
   startDate: "fldf9c8jHEJ7GGbUA",
-  endDate: "fldWeeg2OkTS26lNI",
-  type: "fld5T3Gd8Ti576bry",
-  link: "fldscZgANb59Ued8M",
+  detail: "fld5T3Gd8Ti576bry",
+  cta: "fldscZgANb59Ued8M",
   image: "fld1tyBDGz4o67y1a",
 } as const);
 
@@ -76,12 +74,10 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
     record: Record<string, any>
   ): Promise<FallFestPartnerEvent> {
     const event = {
-      university: this.getUniversity(record),
-      location: this.getLocation(record),
-      startDate: this.getStart(record),
-      endDate: this.getEnd(record),
-      type: this.getType(record),
-      link: this.getLink(record),
+      title: this.getTitle(record),
+      startDate: this.getStart(record) || "",
+      detail: this.getDetail(record),
+      cta: this.getCTA(record),
       image: await this.getImage(record),
     };
     return event;
@@ -93,28 +89,36 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
     return date.toLocaleDateString("en-US", options);
   }
 
-  public getUniversity(record: any): string {
-    return record.get(this.recordFields!.university);
-  }
-
-  public getLocation(record: any): string {
-    return record.get(this.recordFields!.location);
+  public getTitle(record: any): string {
+    return record.get(this.recordFields!.title);
   }
 
   public getStart(record: any): string {
-    return this.formatDate(record.get(this.recordFields!.start));
+    return this.formatDate(record.get(this.recordFields!.startDate));
   }
 
-  public getEnd(record: any): string {
-    return this.formatDate(record.get(this.recordFields!.end));
+  public getDetail(record: any): string {
+    return record.get(this.recordFields!.detail);
   }
 
-  public getType(record: any): string {
-    return record.get(this.recordFields!.type);
+  convertEventTitleToSlug(title: string) {
+    return title
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]+/g, "");
   }
 
-  public getLink(record: any): string {
-    return record.get(this.recordFields!.link);
+  public getCTA(record: any): any {
+    const title = record.get(this.recordFields?.title);
+    const link = record.get(this.recordFields?.cta);
+    return {
+      label: "Learn more here",
+      url: link,
+      segment: {
+        cta: this.convertEventTitleToSlug(title),
+        location: "fall-fest-page",
+      },
+    };
   }
 
   public async getImage(record: any): Promise<string> {

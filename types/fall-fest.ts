@@ -4,12 +4,10 @@ interface FallFestExtensionEvent {
 }
 
 interface FallFestPartnerEvent {
-  university: string;
-  location: string;
+  title: string;
   startDate: string;
-  endDate: string;
-  type: string;
-  link: string;
+  detail: string;
+  cta: string;
   image: string;
 }
 
