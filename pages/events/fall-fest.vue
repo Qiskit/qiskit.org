@@ -33,6 +33,20 @@
       </section>
 
       <section class="fall-fest-page__section">
+        <UiDataTableSection
+          :section-title="agenda.title"
+          :data-table-columns="dataTable.headers"
+        >
+          <template #data-table-elements>
+            <bx-table-row v-for="event in agenda.tableData" :key="event">
+              <bx-table-cell v-for="{ styles, data } in event" :key="data">
+                <span :style="styles"> {{ data }}</span>
+              </bx-table-cell>
+            </bx-table-row>
+          </template>
+        </UiDataTableSection>
+      </section>
+      <section class="fall-fest-page__section">
         <UiHelpfulResources
           class="fall-fest-page__section"
           :title="helpfulResourcesData.title"
@@ -46,6 +60,12 @@
 <script setup lang="ts">
 import { header, helpfulResources } from "~/constants/fallFest2023Content";
 import partnerEvents from "~/content/fall-fest-events/fall-fest-partner-events.json";
+import extensionEvents from "~/content/fall-fest-events/fall-fest-extension-events.json";
+
+interface eventDetails {
+  university: string;
+  country: string;
+}
 
 definePageMeta({
   pageTitle: header.titleLine1,
@@ -72,6 +92,29 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   twitterDescription: description,
 });
+
+const dataTable = {
+  headers: ["University", "Country"],
+};
+
+const scheduleToTableData = (slot: eventDetails) => [
+  {
+    styles:
+      "max-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold",
+    data: slot.university,
+  },
+  {
+    styles: "min-width: 9rem; display: inline-block;",
+    data: slot.country,
+  },
+];
+
+const agenda = {
+  title: "Schedule of Events",
+  subtitle: "*Schedule subject to change",
+  headers: ["University", "Country"],
+  tableData: extensionEvents.map(scheduleToTableData),
+};
 
 const headerData = header;
 const helpfulResourcesData = helpfulResources;

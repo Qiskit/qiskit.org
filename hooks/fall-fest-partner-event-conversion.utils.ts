@@ -84,7 +84,11 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
   }
 
   formatDate(isoDateString: string | number | Date) {
-    const options = { year: "numeric", month: "long", day: "numeric" };
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     const date = new Date(isoDateString);
     return date.toLocaleDateString("en-US", options);
   }
@@ -122,6 +126,7 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
   }
 
   public async getImage(record: any): Promise<string> {
+    // TODO: figure out what we do if there is no image
     const fallbackImage = "/images/advocates/no-advocate-photo.png";
     const attachments = record.get(this.recordFields!.image);
     const imageAttachment = attachments && findImageAttachment(attachments);
