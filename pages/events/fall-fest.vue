@@ -63,7 +63,7 @@ import partnerEvents from "~/content/fall-fest-events/fall-fest-partner-events.j
 import extensionEvents from "~/content/fall-fest-events/fall-fest-extension-events.json";
 
 interface eventDetails {
-  university: string;
+  institution: string;
   country: string;
 }
 
@@ -101,7 +101,7 @@ const scheduleToTableData = (slot: eventDetails) => [
   {
     styles:
       "max-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold",
-    data: slot.university,
+    data: slot.institution,
   },
   {
     styles: "min-width: 9rem; display: inline-block;",

@@ -1,5 +1,5 @@
 interface FallFestExtensionEvent {
-  university: string;
+  institution: string;
   country: string;
 }
 

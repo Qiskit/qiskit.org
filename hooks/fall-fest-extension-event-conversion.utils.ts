@@ -3,7 +3,7 @@ import { AirtableRecords } from "./airtable-conversion-utils";
 import { FallFestExtensionEvent } from "types/fall-fest";
 
 export const RECORD_FIELDS_IDS = Object.freeze({
-  university: "flddG950A6KMmF19G",
+  institution: "fldbhoWi3U8r3W36W",
   country: "fldkH49PJK7ZgkU4R",
 } as const);
 
@@ -43,7 +43,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
     await base("Extension Website")
       .select({
         fields: Object.values(this.recordFields),
-        view: "Extension events",
+        view: "Universities",
         // sort: [{ field: this.recordFields.name, direction: "asc" }],
       })
       .eachPage(async (records, nextPage) => {
@@ -67,7 +67,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
     record: Record<string, any>
   ): Promise<FallFestExtensionEvent> {
     const event = {
-      university: (record.get(this.recordFields!.university) as string) || "",
+      institution: (record.get(this.recordFields!.institution) as string) || "",
       country: (record.get(this.recordFields!.country) as string) || "",
     };
     return event;

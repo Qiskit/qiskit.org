@@ -4,7 +4,7 @@ import { writeJSONToFile } from "./utils/conversion-utils";
 
 export default async function (apiKey: string, outputFolder: string) {
   const extensionEventsAirtableRecords =
-    new FallFestExtensionEventAirtableRecords(apiKey, "Extension events");
+    new FallFestExtensionEventAirtableRecords(apiKey, "Universities");
   const fallFestExtensionEvents =
     await extensionEventsAirtableRecords.fetchExtensionEvents();
 

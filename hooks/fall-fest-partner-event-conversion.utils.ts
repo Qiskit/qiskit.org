@@ -125,22 +125,17 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
     };
   }
 
-  public async getImage(record: any): Promise<string> {
-    // TODO: figure out what we do if there is no image
-    const fallbackImage = "/images/advocates/no-advocate-photo.png";
+  public async getImage(record: any) {
     const attachments = record.get(this.recordFields!.image);
     const imageAttachment = attachments && findImageAttachment(attachments);
     const imageUrl = imageAttachment && getImageUrl(imageAttachment);
-
-    if (!imageUrl) {
-      return fallbackImage;
-    }
 
     const imagePublicPath = `/images/events/downloaded/${this.id}.jpg`;
 
     return await this.storeImage(imageUrl, `public/${imagePublicPath}`)
       .then(() => imagePublicPath)
-      .catch(() => fallbackImage);
+      // eslint-disable-next-line no-console
+      .catch(() => console.log("The event image is missing"));
   }
 }
 
