@@ -17,7 +17,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
     super(
       apiKey,
       AIRTABLE_BASE_ID,
-      "Extension Website",
+      "Website View",
       view,
       undefined,
       recordFields
