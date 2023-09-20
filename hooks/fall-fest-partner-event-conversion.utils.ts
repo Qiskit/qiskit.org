@@ -24,7 +24,7 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
     super(
       apiKey,
       AIRTABLE_BASE_ID,
-      "Partner Website",
+      "Website view",
       view,
       undefined,
       recordFields
