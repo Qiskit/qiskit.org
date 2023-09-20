@@ -24,7 +24,7 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
     super(
       apiKey,
       AIRTABLE_BASE_ID,
-      "Website view",
+      "Partner Website",
       view,
       undefined,
       recordFields
@@ -50,7 +50,7 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
     await base("Partner Website")
       .select({
         fields: Object.values(this.recordFields),
-        view: "Universities",
+        view: "Website view",
         // sort: [{ field: this.recordFields.name, direction: "asc" }],
       })
       .eachPage(async (records, nextPage) => {

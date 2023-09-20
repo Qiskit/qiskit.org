@@ -3,7 +3,7 @@ import { AirtableRecords } from "./airtable-conversion-utils";
 import { FallFestExtensionEvent } from "types/fall-fest";
 
 export const RECORD_FIELDS_IDS = Object.freeze({
-  institution: "fldbhoWi3U8r3W36W",
+  institution: "flddG950A6KMmF19G",
   country: "fldkH49PJK7ZgkU4R",
 } as const);
 
@@ -17,7 +17,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
     super(
       apiKey,
       AIRTABLE_BASE_ID,
-      "Website View",
+      "Extension Website",
       view,
       undefined,
       recordFields
@@ -43,7 +43,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
     await base("Extension Website")
       .select({
         fields: Object.values(this.recordFields),
-        view: "Universities",
+        view: "Website View",
         // sort: [{ field: this.recordFields.name, direction: "asc" }],
       })
       .eachPage(async (records, nextPage) => {
