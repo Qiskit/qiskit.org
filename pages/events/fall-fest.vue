@@ -110,7 +110,7 @@ const scheduleToTableData = (slot: eventDetails) => [
 ];
 
 const agenda = {
-  title: "Schedule of Events",
+  title: "Qiskit Fall Fest Extension Events",
   subtitle: "*Schedule subject to change",
   headers: ["University", "Country"],
   tableData: extensionEvents.map(scheduleToTableData),
