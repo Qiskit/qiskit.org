@@ -30,7 +30,9 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <EventsFallFestUniversityDirectory />
+        <EventsFallFestUniversityDirectory
+          :directory-data="fallFest2022UniversityDirectory"
+        />
       </section>
     </div>
 
@@ -97,6 +99,7 @@ import {
   header,
   agenda,
   helpfulResources,
+  fallFest2022UniversityDirectory,
 } from "~/constants/fallFest2022Content";
 
 definePageMeta({
