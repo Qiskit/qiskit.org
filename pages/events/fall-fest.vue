@@ -33,10 +33,13 @@
       </section>
 
       <section class="fall-fest-page__section">
+        
         <UiDataTableSection
           :section-title="agenda.title"
+          :section-description="agenda.description"
           :data-table-columns="dataTable.headers"
         >
+
           <template #data-table-elements>
             <bx-table-row v-for="event in agenda.tableData" :key="event">
               <bx-table-cell v-for="{ styles, data } in event" :key="data">
@@ -46,6 +49,7 @@
           </template>
         </UiDataTableSection>
       </section>
+      
       <section class="fall-fest-page__section">
         <UiHelpfulResources
           class="fall-fest-page__section"
@@ -110,11 +114,13 @@ const scheduleToTableData = (slot: eventDetails) => [
 ];
 
 const agenda = {
-  title: "Qiskit Fall Fest Extension Events",
+  title: "Qiskit Fall Fest: Extension Events",
   subtitle: "*Schedule subject to change",
   headers: ["University", "Country"],
   tableData: extensionEvents.map(scheduleToTableData),
+  sectionDescription: "Extension Events are intimate gatherings at various campuses, tailored for a select few attendees. Due to their close-knit nature, we do not provide links as these events primarily take place within the institutions community.",
 };
+
 
 const headerData = header;
 const helpfulResourcesData = helpfulResources;
