@@ -7,7 +7,6 @@
         Due to their close-knit nature, we do not provide links as these events primarily take place within the institution's community.
       </p>
     </div>
-    <!--<p v-if="sectionDescription">{{ sectionDescription }}</p>-->
     <div class="scrollable-table">
       <UiDataTable :columns="dataTableColumns">
         <slot name="data-table-elements" />
@@ -31,13 +30,12 @@ defineProps<Props>();
 
 
 <style lang="scss" scoped>
-/* ... (previous styles) */
 
 .scrollable-table {
   display: flex;
   flex-direction: column;
   position: relative;
-  max-height: 637px; /* Adjust the desired max height for scrollability */
+  max-height: 637px;
   overflow-y: auto;
 }
 

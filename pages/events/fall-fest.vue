@@ -36,7 +36,6 @@
         
         <UiDataTableSection
           :section-title="agenda.title"
-          :section-description="agenda.description"
           :data-table-columns="dataTable.headers"
         >
 
@@ -118,7 +117,6 @@ const agenda = {
   subtitle: "*Schedule subject to change",
   headers: ["University", "Country"],
   tableData: extensionEvents.map(scheduleToTableData),
-  sectionDescription: "Extension Events are intimate gatherings at various campuses, tailored for a select few attendees. Due to their close-knit nature, we do not provide links as these events primarily take place within the institutions community.",
 };
 
 
