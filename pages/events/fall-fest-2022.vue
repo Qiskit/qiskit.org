@@ -29,14 +29,7 @@
     </LayoutLeadSpaceWithCard>
 
     <div class="cds--grid fall-fest-page__content">
-      
       <section class="fall-fest-page__section">
-        <!-- Insert the "Join us" paragraph here -->
-        <p>Join us</p>
-      </section>
-
-      <section class="fall-fest-page__section">
-        
         <EventsFallFestUniversityDirectory
           :directory-data="fallFest2022UniversityDirectory"
         />

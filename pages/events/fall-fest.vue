@@ -33,12 +33,10 @@
       </section>
 
       <section class="fall-fest-page__section">
-        
         <UiDataTableSection
           :section-title="agenda.title"
           :data-table-columns="dataTable.headers"
         >
-
           <template #data-table-elements>
             <bx-table-row v-for="event in agenda.tableData" :key="event">
               <bx-table-cell v-for="{ styles, data } in event" :key="data">
@@ -48,7 +46,7 @@
           </template>
         </UiDataTableSection>
       </section>
-      
+
       <section class="fall-fest-page__section">
         <UiHelpfulResources
           class="fall-fest-page__section"
@@ -118,7 +116,6 @@ const agenda = {
   headers: ["University", "Country"],
   tableData: extensionEvents.map(scheduleToTableData),
 };
-
 
 const headerData = header;
 const helpfulResourcesData = helpfulResources;

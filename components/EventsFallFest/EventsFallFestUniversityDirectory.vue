@@ -4,9 +4,9 @@
       <div class="cds--col-lg-4">
         <h2>Event Directory</h2>
         <p>
-          Discover the array of events taking place at this years Qiskit Fall Fest!
-          These select events take months of preparation and help showcase or teach
-          quantum computing skills to local communities.
+          Discover the array of events taking place at this years Qiskit Fall
+          Fest! These select events take months of preparation and help showcase
+          or teach quantum computing skills to local communities.
         </p>
       </div>
       <div class="cds--col-xlg-12 cds--col-lg-12">
