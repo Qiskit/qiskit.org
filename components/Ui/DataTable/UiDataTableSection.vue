@@ -1,9 +1,19 @@
 <template>
   <section>
     <h2 v-text="sectionTitle" />
-    <UiDataTable :columns="dataTableColumns">
-      <slot name="data-table-elements" />
-    </UiDataTable>
+    <div style="max-width: 550px">
+      <p>
+        Extension Events are intimate gatherings at various campuses, tailored
+        for a select few attendees. Due to their close-knit nature, we do not
+        provide links as these events primarily take place within the
+        institution's community.
+      </p>
+    </div>
+    <div class="scrollable-table">
+      <UiDataTable :columns="dataTableColumns">
+        <slot name="data-table-elements" />
+      </UiDataTable>
+    </div>
     <slot />
   </section>
 </template>
@@ -12,7 +22,18 @@
 interface Props {
   dataTableColumns: string[];
   sectionTitle: string;
+  sectionDescription: string;
 }
 
 defineProps<Props>();
 </script>
+
+<style lang="scss" scoped>
+.scrollable-table {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-height: 637px;
+  overflow-y: auto;
+}
+</style>

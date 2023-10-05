@@ -46,6 +46,7 @@
           </template>
         </UiDataTableSection>
       </section>
+
       <section class="fall-fest-page__section">
         <UiHelpfulResources
           class="fall-fest-page__section"
@@ -110,7 +111,7 @@ const scheduleToTableData = (slot: eventDetails) => [
 ];
 
 const agenda = {
-  title: "Qiskit Fall Fest Extension Events",
+  title: "Qiskit Fall Fest: Extension Events",
   subtitle: "*Schedule subject to change",
   headers: ["University", "Country"],
   tableData: extensionEvents.map(scheduleToTableData),
