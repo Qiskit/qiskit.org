@@ -34,6 +34,7 @@
 
       <section class="fall-fest-page__section">
         <UiDataTableSection
+          class="fall-fest-page__data-table"
           :section-title="agenda.title"
           :data-table-columns="dataTable.headers"
         >
@@ -142,6 +143,11 @@ const helpfulResourcesData = helpfulResources;
     @include carbon.breakpoint-down(lg) {
       max-width: 100%;
     }
+  }
+
+  &__data-table {
+    max-height: 41rem;
+    overflow-y: auto;
   }
 }
 </style>
