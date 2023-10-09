@@ -8,7 +8,9 @@
         {{ headerData.titleLine1 }}
       </template>
       <template #description>
-        <p>{{ headerData.description }}</p>
+        <p>
+          {{ headerData.description }}
+        </p>
       </template>
       <template #card>
         <EventsCard
@@ -17,7 +19,6 @@
           :location="headerData.card.location"
           :segment="headerData.card.segment"
           :time="headerData.card.time"
-          :alt-text="headerData.card.altText"
           :title="headerData.card.title"
           :to="headerData.card.to"
           vertical-layout
@@ -29,43 +30,77 @@
 
     <div class="cds--grid fall-fest-page__content">
       <section class="fall-fest-page__section">
-        <EventsFallFestUniversityDirectory :directory-data="partnerEvents" />
-      </section>
-
-      <section class="fall-fest-page__section">
-        <UiDataTableSection
-          :section-title="agenda.title"
-          :data-table-columns="dataTable.headers"
-        >
-          <template #data-table-elements>
-            <bx-table-row v-for="event in agenda.tableData" :key="event">
-              <bx-table-cell v-for="{ styles, data } in event" :key="data">
-                <span :style="styles"> {{ data }}</span>
-              </bx-table-cell>
-            </bx-table-row>
-          </template>
-        </UiDataTableSection>
-      </section>
-      <section class="fall-fest-page__section">
-        <UiHelpfulResources
-          class="fall-fest-page__section"
-          :title="helpfulResourcesData.title"
-          :resources="helpfulResourcesData.resources"
+        <EventsFallFestUniversityDirectory
+          :directory-data="fallFest2022UniversityDirectory"
         />
       </section>
+    </div>
+
+    <div class="cds--grid fall-fest-page__content">
+      <section class="fall-fest-page__section">
+        <h2 v-text="agendaData.title" />
+        <p v-text="agendaData.subtitle" />
+        <bx-tabs value="Wave 1">
+          <bx-tab
+            v-for="week in agendaData.weeks"
+            :key="week.tabName"
+            :target="week.tabName"
+            :value="week.tabName"
+          >
+            {{ week.tabName }}
+          </bx-tab>
+        </bx-tabs>
+        <div
+          v-for="week in agendaData.weeks"
+          :id="week.tabName"
+          :key="week.tabName"
+          :aria-labelledby="week.tabName"
+          role="tabpanel"
+          hidden
+        >
+          <UiDataTable
+            class="fall-fest-page__section"
+            :columns="agendaColumnsDataTable"
+          >
+            <bx-table-row
+              v-for="(row, rowIndex) in week.tableData"
+              :key="`${rowIndex}`"
+            >
+              <bx-table-cell
+                v-for="({ styles, data, link }, elementIndex) in row"
+                :key="`${elementIndex}`"
+              >
+                <UiLinkText
+                  v-if="link"
+                  class="fall-fest-page__table-link"
+                  :style="styles"
+                  :url="link"
+                >
+                  Link to event
+                </UiLinkText>
+                <span v-else :style="styles">{{ data }}</span>
+              </bx-table-cell>
+            </bx-table-row>
+          </UiDataTable>
+        </div>
+      </section>
+
+      <UiHelpfulResources
+        class="fall-fest-page__section"
+        :title="helpfulResourcesData.title"
+        :resources="helpfulResourcesData.resources"
+      />
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import { header, helpfulResources } from "~/constants/fallFest2023Content";
-import partnerEvents from "~/content/fall-fest-events/fall-fest-partner-events.json";
-import extensionEvents from "~/content/fall-fest-events/fall-fest-extension-events.json";
-
-interface eventDetails {
-  institution: string;
-  country: string;
-}
+import {
+  header,
+  agenda,
+  helpfulResources,
+  fallFest2022UniversityDirectory,
+} from "~/constants/fallFest2022Content";
 
 definePageMeta({
   pageTitle: header.titleLine1,
@@ -77,8 +112,8 @@ const config = useRuntimeConfig();
 const title = header.titleLine1;
 const description =
   "The Qiskit Fall Fest is a collection of quantum computing events from universities around the world, organized by students and supported by the IBM Quantum community.";
-const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest-logo-2023.png`;
-const pageUrl = `${config.public.siteUrl}/events/fall-fest`;
+const image = `${config.public.siteUrl}/images/events/fall-fest/fall-fest-logo-2022.png`;
+const pageUrl = `${config.public.siteUrl}/events/summer-school-2023`;
 
 useSeoMeta({
   title,
@@ -93,29 +128,15 @@ useSeoMeta({
   twitterDescription: description,
 });
 
-const dataTable = {
-  headers: ["University", "Country"],
-};
-
-const scheduleToTableData = (slot: eventDetails) => [
-  {
-    styles:
-      "max-width: 20rem; display: inline-block; padding-top: 8px; padding-bottom: 8px; font-weight: bold",
-    data: slot.institution,
-  },
-  {
-    styles: "min-width: 9rem; display: inline-block;",
-    data: slot.country,
-  },
+const agendaData = agenda;
+const agendaColumnsDataTable: string[] = [
+  "University",
+  "Start Date",
+  "End Date",
+  "Detail",
+  "Type of Event",
+  "Link",
 ];
-
-const agenda = {
-  title: "Qiskit Fall Fest Extension Events",
-  subtitle: "*Schedule subject to change",
-  headers: ["University", "Country"],
-  tableData: extensionEvents.map(scheduleToTableData),
-};
-
 const headerData = header;
 const helpfulResourcesData = helpfulResources;
 </script>

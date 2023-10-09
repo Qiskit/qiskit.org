@@ -3,7 +3,7 @@ interface TestResult {
   passed: boolean;
   package: string;
   packageVersion: string;
-  terraVersion: string;
+  qiskitVersion: string;
   timestamp: number;
   logsLink: string;
   packageCommitHash: string;

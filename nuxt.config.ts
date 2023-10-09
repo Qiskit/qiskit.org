@@ -2,6 +2,7 @@ import { defineNuxtConfig } from "nuxt/config";
 import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
 import fetchEcosystemMembers from "./hooks/update-ecosystem";
+import fetchFallFestEvents from "./hooks/update-fall-fest-events";
 import { generateMocks } from "./hooks/mock/mock-service";
 
 const { AIRTABLE_API_KEY, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
@@ -33,6 +34,18 @@ export default defineNuxtConfig({
   },
 
   css: ["~/assets/scss/main.scss"],
+
+  app: {
+    head: {
+      script: [
+        // Alchemer Beacon
+        {
+          children: `(function(d,e,j,h,f,c,b){d.SurveyGizmoBeacon=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)};c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,'script','//d2bnxibecyz4h5.cloudfront.net/runtimejs/intercept/intercept.js','sg_beacon');sg_beacon('init','MzI0MTk0LTBjOWMxOGI3ZDVkMTg3ZGE0MmQ2ZjNkMTg0NDZjYjkxMTdkNDExMWFkYzQ0ZGIxNGY4');`,
+          body: true,
+        },
+      ],
+    },
+  },
 
   hooks: {
     "build:before": async () => {
@@ -84,6 +97,10 @@ async function generateContent() {
     // eslint-disable-next-line no-console
     console.info("Generating the events content...");
     await fetchEvents(AIRTABLE_API_KEY, "./content/events");
+
+    // eslint-disable-next-line no-console
+    console.info("Generating the fall fest events content...");
+    await fetchFallFestEvents(AIRTABLE_API_KEY, "./content/fall-fest-events");
 
     // eslint-disable-next-line no-console
     console.info("Generating the advocates content...");
