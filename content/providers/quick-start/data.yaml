@@ -341,8 +341,8 @@
 - codeExamples:
   - fullCode: |-
       from qiskit_aqt_provider import AQTProvider
-      aqt = AQTProvider('MY_TOKEN')
-      backend = aqt.get_backend('aqt_innsbruck')
+      provider = AQTProvider('ACCESS_TOKEN')
+      backend = provider.get_backend('offline_simulator_no_noise')
 
       # Build circuit
       from qiskit.circuit.library import QuantumVolume
@@ -356,10 +356,10 @@
     runMethod: backend
   - fullCode: |-
       from qiskit_aqt_provider import AQTProvider
-      from qiskit.primitives import BackendSampler
-      aqt = AQTProvider('MY_TOKEN')
-      backend = aqt.get_backend('aqt_innsbruck')
-      sampler = BackendSampler(backend)
+      from qiskit_aqt_provider.primitives import AQTSampler
+      provider = AQTProvider('ACCESS_TOKEN')
+      backend = provider.get_backend('offline_simulator_no_noise')
+      sampler = AQTSampler(backend)
 
       # Build circuit
       from qiskit import QuantumCircuit
@@ -376,14 +376,14 @@
     runMethod: sampler
   - fullCode: |-
       from qiskit_aqt_provider import AQTProvider
-      from qiskit.primitives import BackendEstimator
-      aqt = AQTProvider('MY_TOKEN')
-      backend = aqt.get_backend('aqt_innsbruck')
-      estimator = BackendEstimator(backend)
+      from qiskit_aqt_provider.primitives import AQTEstimator
+      provider = AQTProvider('ACCESS_TOKEN')
+      backend = provider.get_backend('offline_simulator_no_noise')
+      estimator = AQTEstimator(backend)
 
       # Specify problem hamiltonian
       from qiskit.quantum_info import SparsePauliOp
-      
+
       hamiltonian = SparsePauliOp.from_list([
          ("II", -1.052373245772859),
          ("IZ", 0.39793742484318045),
@@ -391,20 +391,20 @@
          ("ZZ", -0.01128010425623538),
          ("XX", 0.18093119978423156)
       ])
-      
+
       # Define VQE ansatz, initial point and cost function
       from qiskit.circuit.library import TwoLocal
       ansatz = TwoLocal(num_qubits=2, rotation_blocks="ry", entanglement_blocks="cz")
       initial_point = initial_point = [0] * 8
-      
+
       def cost_function(params, ansatz, hamiltonian, estimator):
           energy = estimator.run(ansatz, hamiltonian, parameter_values=params).result().values[0]
           return energy
-      
+
       # Run VQE using SciPy minimizer routine
       from scipy.optimize import minimize
       result = minimize(cost_function, initial_point, args=(ansatz, hamiltonian, estimator), method="cobyla")
-      
+
       # Print minimum eigenvalue
       print(result.fun)
     name: Run VQE
@@ -412,13 +412,12 @@
   description: AQT provides access to Calcium trapped-ion quantum devices.
   docsCta:
     label: Docs
-    url: https://qiskit.org/documentation/partners/aqt/
+    url: https://qiskit-community.github.io/qiskit-aqt-provider/
   installation: |-
-    pip install qiskit
     pip install qiskit-aqt-provider
   sourceCta:
     label: GitHub
-    url: https://github.com/Qiskit-Partners/qiskit-aqt-provider
+    url: https://github.com/qiskit-community/qiskit-aqt-provider/
   title: AQT
   websiteCta:
     label: Website
