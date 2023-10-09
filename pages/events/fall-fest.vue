@@ -34,7 +34,9 @@
 
       <section class="fall-fest-page__section">
         <UiDataTableSection
+          class="fall-fest-page__data-table"
           :section-title="agenda.title"
+          :section-description="agenda.description"
           :data-table-columns="dataTable.headers"
         >
           <template #data-table-elements>
@@ -46,6 +48,7 @@
           </template>
         </UiDataTableSection>
       </section>
+
       <section class="fall-fest-page__section">
         <UiHelpfulResources
           class="fall-fest-page__section"
@@ -110,7 +113,9 @@ const scheduleToTableData = (slot: eventDetails) => [
 ];
 
 const agenda = {
-  title: "Qiskit Fall Fest Extension Events",
+  title: "Qiskit Fall Fest: Extension Events",
+  description:
+    "Extension Events are intimate gatherings at various campuses, tailored for a select few attendees. Due to their close-knit nature, we do not provide links as these events primarily take place within the institution's community.",
   subtitle: "*Schedule subject to change",
   headers: ["University", "Country"],
   tableData: extensionEvents.map(scheduleToTableData),
@@ -141,6 +146,11 @@ const helpfulResourcesData = helpfulResources;
     @include carbon.breakpoint-down(lg) {
       max-width: 100%;
     }
+  }
+
+  &__data-table {
+    max-height: 41rem;
+    overflow-y: auto;
   }
 }
 </style>
