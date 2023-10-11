@@ -149,8 +149,10 @@ const helpfulResourcesData = helpfulResources;
   }
 
   &__data-table {
-    max-height: 41rem;
-    overflow-y: auto;
+    :deep(.ui-data-table) {
+      max-height: 41rem;
+      overflow-y: auto;
+    }
   }
 }
 </style>
