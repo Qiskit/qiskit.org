@@ -2,13 +2,11 @@
   <section class="events-fall-fest-university-directory">
     <article class="cds--row">
       <div class="cds--col-lg-4">
-        <h2>University directory</h2>
+        <h2>Event Directory</h2>
         <p>
-          See your local community listed here? Click through and join the
-          Qiskit Fall Fest in your town! Don't see your area represented? Dive
-          into the Qiskit Community and learn how you can host your own event
-          next year. Check out the Qiskit Advocate program, or apply to an IBM
-          Quantum internship!
+          Discover the array of events taking place at this years Qiskit Fall
+          Fest! These select events take months of preparation and help showcase
+          or teach quantum computing skills to local communities.
         </p>
       </div>
       <div class="cds--col-xlg-12 cds--col-lg-12">
