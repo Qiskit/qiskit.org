@@ -49,7 +49,8 @@
       img-src="/images/one-xp/documentation-screenshot.png"
     >
       <template #title>
-        Qiskit documentation and learning resources are<br />moving to IBM Quantum on Nov 29, 2023
+        Qiskit documentation and learning resources are<br />moving to IBM
+        Quantum on Nov 29, 2023
       </template>
     </OneXPPageSection>
     <HomeProviders />
