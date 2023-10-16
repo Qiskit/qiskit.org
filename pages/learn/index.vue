@@ -1,7 +1,7 @@
 <template>
   <article class="learn-page">
     <OneXPBanner
-      copy="🎉 Qiskit is getting a new learning experience on IBM Quantum!"
+      copy="🎉  Starting on November 29, 2023 Qiskit Learning Resource will only live on IBM Quantum"
       :cta="{
         label: 'Check it out',
         segment: {
@@ -16,7 +16,7 @@
       :features="[
         {
           descriptionParagraphs: [
-            'We are building a new home for the Qiskit Textbook on IBM Quantum, and we will be migrating courses and tutorials in the coming months.',
+            'We are building a new home for the Qiskit Textbook on IBM Quantum, and we will be migrating courses and tutorials over the coming months. After December 1, 2023, you can continue to access this page’s content on the Qiskit Github.',
             'Just getting started with Qiskit? Start your learning journey on the new platform today!',
           ],
           cta: {
@@ -40,7 +40,10 @@
       img-alt="Screenshot of the new Qiskit learning experience"
       img-src="/images/one-xp/learning-screenshot.png"
     >
-      <template #title>Qiskit is getting a new learning experience!</template>
+      <template #title
+        >Starting on November 29, 2023 Qiskit’s learning experience will only
+        live on IBM Quantum</template
+      >
     </OneXPPageSection>
     <LearnStartLearning class="learn-page__section" />
     <UiHelpfulResources
