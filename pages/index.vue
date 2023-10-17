@@ -1,9 +1,9 @@
 <template>
   <article>
     <OneXPBanner
-      copy="🎉 Qiskit is getting a new documentation and learning experience on IBM Quantum!"
+      copy="🎉 Starting on November 29, 2023 Qiskit Documentation and Learning will only be live on IBM Quantum"
       :cta="{
-        label: 'Learn more',
+        label: 'Check it out',
         segment: {
           cta: 'learn-more-1xp',
           location: '1xp-banner',
@@ -19,7 +19,7 @@
         {
           title: 'Documentation',
           descriptionParagraphs: [
-            'We are reorganizing Qiskit documentation on IBM Quantum to better support your research and development workflows.',
+            'We have reorganized Qiskit documentation on IBM Quantum Platform to better support your research and development workflows.',
           ],
           cta: {
             label: 'Check out Documentation',
@@ -33,7 +33,7 @@
         {
           title: 'Learning',
           descriptionParagraphs: [
-            'We are building a new learning application with courses and tutorials to help you learn the basics and start experimenting with Qiskit.',
+            'We have built a new learning application with courses and tutorials to help you learn the basics and start experimenting with Qiskit.',
           ],
           cta: {
             label: 'Check out Learning',
@@ -49,7 +49,8 @@
       img-src="/images/one-xp/documentation-screenshot.png"
     >
       <template #title>
-        Qiskit is getting a new documentation<br />and learning experience!
+        Qiskit documentation and learning resources are moving to IBM Quantum on
+        Nov 29, 2023
       </template>
     </OneXPPageSection>
     <HomeProviders />
