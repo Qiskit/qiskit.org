@@ -1,7 +1,7 @@
 <template>
   <article>
     <OneXPBanner
-      copy="🎉  Starting on November 29, 2023 Qiskit Documentation and Learning will only be live on IBM Quantum"
+      copy="🎉 Starting on November 29, 2023 Qiskit Documentation and Learning will only be live on IBM Quantum"
       :cta="{
         label: 'Check it out',
         segment: {
@@ -49,8 +49,8 @@
       img-src="/images/one-xp/documentation-screenshot.png"
     >
       <template #title>
-        Qiskit documentation and learning resources are<br />moving to IBM
-        Quantum on Nov 29, 2023
+        Qiskit documentation and learning resources are moving to IBM Quantum on
+        Nov 29, 2023
       </template>
     </OneXPPageSection>
     <HomeProviders />

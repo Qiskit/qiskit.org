@@ -1,7 +1,7 @@
 <template>
   <article class="learn-course">
     <OneXPBanner
-      copy="🎉  Starting on November 29, 2023 Qiskit Learning Resource will only live on IBM Quantum"
+      copy="🎉 Starting on November 29, 2023 Qiskit Learning Resource will only live on IBM Quantum"
       :cta="{
         label: 'Check it out',
         segment: {
