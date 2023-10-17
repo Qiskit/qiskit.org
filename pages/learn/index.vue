@@ -16,7 +16,7 @@
       :features="[
         {
           descriptionParagraphs: [
-            'We are building a new home for the Qiskit Textbook on IBM Quantum, and we will be migrating courses and tutorials over the coming months. After December 1, 2023, you can continue to access this page’s content on the Qiskit Github.',
+            'We are building a new home for the Qiskit Textbook on IBM Quantum, and we will be migrating courses and tutorials over the coming months. After November 29, 2023, you can continue to access this page’s content on the Qiskit Github.',
             'Just getting started with Qiskit? Start your learning journey on the new platform today!',
           ],
           cta: {
