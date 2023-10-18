@@ -1,7 +1,7 @@
 <template>
   <article class="learn-page">
     <OneXPBanner
-      copy="🎉 Starting on November 29, 2023 Qiskit Learning Resource will only live on IBM Quantum"
+      copy="🎉 Starting on November 29, 2023 Qiskit learning resources will only live on IBM Quantum"
       :cta="{
         label: 'Check it out',
         segment: {
@@ -33,7 +33,7 @@
               cta: 'learn-more-1px-learning',
               location: '1xp-page-section',
             },
-            url: 'https://docs.quantum-computing.ibm.com/announcements/product-updates/2023-08-18-new-navigation-and-application-updates',
+            url: 'https://medium.com/qiskit/important-changes-to-qiskits-documentation-and-learning-7f4e346b19ab',
           },
         },
       ]"
