@@ -99,7 +99,7 @@ defineProps<Props>();
     }
 
     @include carbon.breakpoint-up(xlg) {
-      gap: carbon.$spacing-10;
+      gap: carbon.$spacing-13;
     }
   }
 

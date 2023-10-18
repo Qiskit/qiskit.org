@@ -49,12 +49,12 @@
       img-src="/images/one-xp/documentation-screenshot.png"
     >
       <template #title>
-        <div class="custom-title">
+        <div>
           Qiskit documentation and learning resources are moving to IBM Quantum
-          on Nov 29, 2023
+          on Nov 29, 2023.
           <a
             href="https://medium.com/qiskit/important-changes-to-qiskits-documentation-and-learning-7f4e346b19ab"
-            class="custom-link"
+            class="index-page__one-xp-section__link"
             >Learn more &rarr;</a
           >
         </div>
@@ -110,13 +110,13 @@ useSchemaOrg([
 ]);
 </script>
 
-<style>
-.custom-title {
-  width: 52rem;
-}
-
-.custom-link {
-  color: rgb(0, 110, 255);
-  text-decoration: none;
+<style lang="scss" scoped>
+.index-page {
+  &__one-xp-section {
+    &__link {
+      color: rgb(0 110 255);
+      text-decoration: none;
+    }
+  }
 }
 </style>
