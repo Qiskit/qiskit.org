@@ -48,16 +48,6 @@
       img-alt="Screenshot of the new Qiskit documentation"
       img-src="/images/one-xp/documentation-screenshot.png"
     >
-      <!-- <template #title>
-        Qiskit documentation and learning resources are moving to IBM Quantum on
-        Nov 29, 2023
-        <a
-          href="https://medium.com/qiskit/important-changes-to-qiskits-documentation-and-learning-7f4e346b19ab"
-          style="color: rgb(0, 110, 255); text-decoration: none"
-          >Learn more &rarr;</a
-        >
-      </template> -->
-
       <template #title>
         <div class="custom-title">
           Qiskit documentation and learning resources are moving to IBM Quantum
