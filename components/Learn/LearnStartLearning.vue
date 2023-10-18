@@ -181,8 +181,8 @@ const learningSections: LearningSection[] = [
         description:
           "This free course covers quantum information at a detailed mathematical level. Join John Watrous as you explore quantum information, quantum algorithms, and how to understand and mitigate noise.",
         cta: {
-          label: "Go to this course",
-          url: "/learn/course/basics-quantum-information",
+          label: "Take this course in IBM Quantum Learning",
+          url: "https://qiskit.org/learn/course/basics-quantum-information",
           segment: { cta: "basics-quatum-information", location: "course" },
         },
       },
@@ -194,8 +194,8 @@ const learningSections: LearningSection[] = [
           efficiently, including problems with real-world applications such as
           searching and factoring.`,
         cta: {
-          label: "Go to this course",
-          url: "/learn/course/fundamentals-quantum-algorithms",
+          label: "Take this course in IBM Quantum Learning",
+          url: "https://qiskit.org/learn/course/fundamentals-quantum-algorithms",
           segment: {
             cta: "fundamentals-quantum-algorithms",
             location: "course",
@@ -210,8 +210,8 @@ const learningSections: LearningSection[] = [
         are ideal candidates to achieve quantum advantage. We'll also cover how to 
         use Qiskit Runtime primitives to optimize for speed and accuracy.`,
         cta: {
-          label: "Go to this course",
-          url: "/learn/course/algorithm-design",
+          label: "Take this course in IBM Quantum Learning",
+          url: "https://qiskit.org/learn/course/algorithm-design",
           segment: { cta: "algorithm-design", location: "course" },
         },
       },
