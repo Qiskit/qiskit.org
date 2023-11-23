@@ -27,11 +27,6 @@
             :title="section.title"
             :description="section.description"
           >
-            <ProvidersAccordion
-              v-if="section.providers"
-              class="providers-page__content-section-details"
-              :tabs="asTabs(section.providers)"
-            />
           </UiIntroductoryContent>
         </div>
       </div>
