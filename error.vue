@@ -12,9 +12,12 @@
               Or as we like to say, <span v-html="randomMessage" />
             </p>
             <UiCta
-              :label="backToCta.label"
-              :segment="backToCta.segment"
-              :url="backToCta.url"
+              v-for="externalLink in externalLinks"
+              :key="externalLink.label"
+              kind="ghost"
+              :label="externalLink.label"
+              :segment="externalLink.segment"
+              :url="externalLink.url"
             />
           </div>
           <div class="cds--col-lg-8">
@@ -33,13 +36,10 @@
 
 <script setup lang="ts">
 import { NuxtError } from "#app";
-import { TextLink } from "~/types/links";
 
 interface Props {
   error: NuxtError;
 }
-
-const route = useRoute();
 
 const props = defineProps<Props>();
 
@@ -51,27 +51,32 @@ useHead({
   title: pageTitle,
 });
 
-const backToHomeCta: TextLink = {
-  url: "/",
-  label: "Back to Qiskit home page",
-  segment: {
-    cta: "back-to-home",
-    location: "error-page",
+const externalLinks = [
+  {
+    url: "https://learning.quantum-computing.ibm.com/",
+    label: "Learning",
+    segment: {
+      cta: "go-to-learning-platform",
+      location: "error-page",
+    },
   },
-};
-
-const backToDocsCta: TextLink = {
-  url: "https://qiskit.org/documentation/",
-  label: "Back to Qiskit documentation",
-  segment: {
-    cta: "back-to-documentation",
-    location: "error-page",
+  {
+    url: "https://docs.quantum-computing.ibm.com/",
+    label: "Documentation",
+    segment: {
+      cta: "go-to-documentation",
+      location: "error-page",
+    },
   },
-};
-
-const backToCta = route.path.startsWith("/documentation/")
-  ? backToDocsCta
-  : backToHomeCta;
+  {
+    url: "https://qiskit.github.io/ecosystem/",
+    label: "Ecosystem",
+    segment: {
+      cta: "go-to-ecosystem",
+      location: "error-page",
+    },
+  },
+];
 
 const errorImgSrc = `/images/error-page/cat${getRandomInt(1, 9)}.png`;
 
