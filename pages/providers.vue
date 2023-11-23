@@ -18,17 +18,6 @@
             />
           </div>
         </div>
-        <div class="cds--col-md-5 cds--col-lg-13">
-          <UiIntroductoryContent
-            v-for="section in contentSections"
-            :id="section.id"
-            :key="section.id"
-            class="providers-page__content-section scrollable"
-            :title="section.title"
-            :description="section.description"
-          >
-          </UiIntroductoryContent>
-        </div>
       </div>
       <div class="cds--row providers-page__join-section">
         <div class="cds--col-md-5 bx--offset-lg-3 cds--col-lg-5">
