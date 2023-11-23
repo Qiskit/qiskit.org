@@ -63,11 +63,6 @@
 
 <script setup lang="ts">
 import { useScrollBetweenSections } from "~/composables/useScrollBetweenSections";
-import {
-  Provider,
-  ProvidersSection,
-  TableOfContentEntry,
-} from "~/types/providers";
 
 definePageMeta({
   pageTitle: "Qiskit Providers",

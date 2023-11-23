@@ -2,7 +2,6 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import { describe, test } from "vitest";
 import { parse } from "yaml";
-import { Provider, ProvidersSection } from "~/types/providers";
 
 describe("list", async () => {
   const contentFilesPath = "content/providers/list";

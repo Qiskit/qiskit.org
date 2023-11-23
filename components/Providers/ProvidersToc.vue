@@ -16,8 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { TableOfContentEntry } from "~/types/providers";
-
 interface Props {
   activeSection: string;
   entries: TableOfContentEntry[];

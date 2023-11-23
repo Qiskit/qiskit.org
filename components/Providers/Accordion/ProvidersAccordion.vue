@@ -29,8 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { Provider } from "~/types/providers";
-
 interface Props {
   tabs: Array<Provider>;
 }

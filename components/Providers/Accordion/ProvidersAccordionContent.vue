@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { TextLink } from "~/types/links";
-import { ProviderCodeExample } from "~/types/providers";
 
 export interface AccordionLayoutProps {
   title: string;
