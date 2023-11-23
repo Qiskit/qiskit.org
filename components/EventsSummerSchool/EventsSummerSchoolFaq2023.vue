@@ -212,7 +212,7 @@ const linearAlgebra: Link = {
 
 const basicsOfQuantumInformation: Link = {
   title: "Basics of Quantum Information",
-  url: `${config.public.siteUrl}/learn/course/basics-quantum-information/`,
+  url: `https://learning.quantum-computing.ibm.com/course/basics-of-quantum-information`,
   segment: { cta: "basics-of-quantum-information", location: "faq" },
 };
 
