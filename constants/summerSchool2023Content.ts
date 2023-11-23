@@ -49,7 +49,7 @@ const mosaic: MosaicSection = {
       title: "Qiskit YouTube Channel",
       description:
         "Join us for engaging lectures, tips & tricks, tutorials, community updates and access to exclusive Qiskit content!",
-      image: "/images/learn/other-platforms/youtube.png",
+      image: "/images/youtube.png",
       altText: "",
       cta: {
         url: "https://www.youtube.com/@qiskit",
