@@ -98,8 +98,7 @@ const mosaic: MosaicSection = {
       title: "Quantum Computing & Quantum Machine Learning (2021)",
       description:
         "The Qiskit Global Summer School 2021 coursework, lab, and lecture materials are now available online.",
-      image:
-        "/images/learn/summer-school/quantum-computing-and-quantum-learning-2021/header.png",
+      image: "/images/events/summer-school-2021/header.png",
       altText: "",
       cta: {
         url: "https://qiskit.org/learn/summer-school/quantum-computing-and-quantum-learning-2021",
