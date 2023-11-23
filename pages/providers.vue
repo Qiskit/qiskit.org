@@ -85,12 +85,6 @@ useSeoMeta({
   twitterDescription: description,
 });
 
-const { data: providersData } = await useAsyncData("providers", () =>
-  queryContent<ProvidersSection>("/providers/list").find()
-);
-
-const contentSections = providersData.value;
-
 if (!contentSections) {
   throw new Error("No providers data found");
 }

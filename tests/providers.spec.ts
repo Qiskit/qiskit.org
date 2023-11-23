@@ -4,8 +4,6 @@ import { describe, test } from "vitest";
 import { parse } from "yaml";
 
 describe("list", async () => {
-  const contentFilesPath = "content/providers/list";
-
   const resolvedContentFilesPath = path.resolve(
     process.cwd(),
     contentFilesPath
