@@ -126,11 +126,9 @@
 
 <script setup lang="ts">
 import { TextLink } from "types/links";
-import rawMembers from "~/content/ecosystem/members.json";
-import rawTiers from "~/content/ecosystem/tiers.json";
 import { Member, Tier, TierName } from "~/types/ecosystem";
 
-const members = rawMembers as Member[];
+const members = [] as Member[];
 const config = useRuntimeConfig();
 
 definePageMeta({
