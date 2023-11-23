@@ -260,7 +260,7 @@ const helpfulResources: DescriptionCard[] = [
     description:
       "If the content of the seminar series is too dense or technical, we have a host of content to help you get up to speed.",
     cta: {
-      url: `${config.public.siteUrl}/learn`,
+      url: `https://learning.quantum-computing.ibm.com/`,
       label: "Start learning",
       segment: {
         cta: "qiskit-org-learn",
