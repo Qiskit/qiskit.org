@@ -34,8 +34,6 @@ Qiskit is an open-source quantum computing software development framework for le
   <span> · </span>
   <a href="https://qiskit.org/advocates/">Advocates</a>
   <span> · </span>
-  <a href="https://qiskit.org/ecosystem/">Ecosystem</a>
-  <span> · </span>
   <a href="https://qiskit.org/documentation/">Documentation</a>
   <span> · </span>
   <a href="https://qiskit.org/providers/">Providers</a>
@@ -45,12 +43,15 @@ Qiskit is an open-source quantum computing software development framework for le
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [💻 Technology Used](#-technology-used)
 - [🏭 Content Generation](#-content-generation)
+    - [🥸 Mocking content](#-mocking-content)
 - [🏷️ Naming Conventions](#️-naming-conventions)
+  - [Nuxt Components](#nuxt-components)
 - [✏️ How to Contribute](#️-how-to-contribute)
-- [🗓 Open Backlog](#-open-backlog)
+- [🗓 Open backlog](#-open-backlog)
 - [👩‍💻 Maintainers](#-maintainers)
 - [🔗 Connect with Qiskit](#-connect-with-qiskit)
 

@@ -74,7 +74,7 @@ export default defineNuxtConfig({
 });
 
 /**
- * Fetches data from Airtable and generates the advocates, ecosystem and events
+ * Fetches data from Airtable and generates the advocates and events
  * content.
  * @returns A promise that resolves when the content has been generated
  */
