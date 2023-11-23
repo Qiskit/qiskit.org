@@ -11,11 +11,6 @@
       <div class="cds--row">
         <div class="cds--col-sm-0 cds--col-md-3 cds--col-lg-3">
           <div class="providers-page__table-of-contents">
-            <ProvidersToc
-              :active-section="activeSection"
-              :entries="tocEntries"
-              title="Run Qiskit with"
-            />
             <UiCta
               :url="howToGuideLink.url"
               :label="howToGuideLink.label"
