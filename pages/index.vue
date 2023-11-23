@@ -60,7 +60,6 @@
         </div>
       </template>
     </OneXPPageSection>
-    <HomeProviders />
   </article>
 </template>
 
