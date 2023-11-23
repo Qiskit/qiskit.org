@@ -61,6 +61,7 @@ const mosaic: MosaicSection = {
       },
     },
     {
+      // TODO: Update this content
       position: "second",
       title: "Qiskit Textbook",
       description:
@@ -68,7 +69,7 @@ const mosaic: MosaicSection = {
       image: "/images/events/summer-school-2023/qiskit-textbook.jpg",
       altText: "",
       cta: {
-        url: "/learn",
+        url: "https://learning.quantum-computing.ibm.com/",
         label: "Read the Textbook",
         segment: {
           cta: "read-the-textbook",

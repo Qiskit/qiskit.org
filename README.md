@@ -28,8 +28,6 @@ Qiskit is an open-source quantum computing software development framework for le
 <h3 align="center">
   <a href="https://qiskit.org/">Home page</a>
   <span> · </span>
-  <a href="https://qiskit.org/learn/">Learn</a>
-  <span> · </span>
   <a href="https://qiskit.org/events/">Events</a>  
   <span> · </span>
   <a href="https://qiskit.org/advocates/">Advocates</a>
