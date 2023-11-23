@@ -40,7 +40,7 @@
             Learn more about the physics behind Qiskit Metal and qubit design
             from the
             <UiLinkText
-              url="/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020"
+              url="https://qiskit.org/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020"
               >Introduction to Quantum Computing and Quantum
               Hardware</UiLinkText
             >
