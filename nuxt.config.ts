@@ -1,7 +1,6 @@
 import { defineNuxtConfig } from "nuxt/config";
 import fetchEvents from "./hooks/update-events";
 import fetchAdvocates from "./hooks/update-advocates";
-import fetchEcosystemMembers from "./hooks/update-ecosystem";
 import fetchFallFestEvents from "./hooks/update-fall-fest-events";
 import { generateMocks } from "./hooks/mock/mock-service";
 
@@ -75,7 +74,7 @@ export default defineNuxtConfig({
 });
 
 /**
- * Fetches data from Airtable and generates the advocates, ecosystem and events
+ * Fetches data from Airtable and generates the advocates and events
  * content.
  * @returns A promise that resolves when the content has been generated
  */
@@ -88,10 +87,6 @@ async function generateContent() {
     console.info("Content generated...");
     return;
   }
-
-  // eslint-disable-next-line no-console
-  console.info("Generating the ecosystem content...");
-  await fetchEcosystemMembers("./content/ecosystem");
 
   if (AIRTABLE_API_KEY) {
     // eslint-disable-next-line no-console
