@@ -109,14 +109,7 @@
               Try using wider search criteria, or consider
               <UiLink v-bind="ecosystemJoinLink">joining the ecosystem.</UiLink>
             </p>
-            <div v-else class="cds--row ecosystem-page__members">
-              <EcosystemCard
-                v-for="member in filteredMembersSorted"
-                :key="member.name"
-                class="cds--col-sm-4 cds--col-xlg-8"
-                :member="member"
-              />
-            </div>
+            <div v-else class="cds--row ecosystem-page__members"></div>
           </div>
         </template>
       </UiFiltersResultsLayout>
