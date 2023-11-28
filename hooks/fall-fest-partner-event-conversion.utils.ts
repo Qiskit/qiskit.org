@@ -69,7 +69,6 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
    * @param record The Airtable record to convert.
    * @returns The converted FallFestPartnerEvent.
    */
-  // eslint-disable-next-line require-await
   async convertToPartnerEvent(
     record: Record<string, any>
   ): Promise<FallFestPartnerEvent> {
