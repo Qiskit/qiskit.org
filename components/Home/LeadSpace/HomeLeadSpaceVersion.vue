@@ -53,17 +53,6 @@ const releaseNotesLink: Link = {
   align-items: center;
   text-decoration: none;
 
-  // TODO: Force pointer events to pass through to avoid covering the trigger
-  // tile to the Metal page. Remove when decomissioning the Metal page.
-  pointer-events: none;
-
-  * {
-    // TODO: Force pointer events to allow the user to select text and
-    // click links in the internal elements. Remove when decomissioning the
-    // Metal page.
-    pointer-events: auto;
-  }
-
   &__github-icon {
     fill: qiskit.$link-color-tertiary;
     margin-right: carbon.$spacing-07;
