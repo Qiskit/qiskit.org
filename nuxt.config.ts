@@ -4,8 +4,13 @@ import fetchAdvocates from "./hooks/update-advocates";
 import fetchFallFestEvents from "./hooks/update-fall-fest-events";
 import { generateMocks } from "./hooks/mock/mock-service";
 
-const { AIRTABLE_ACCESS_TOKEN, GENERATE_CONTENT, NODE_ENV, SITE_URL, MOCK_CONTENT } =
-  process.env;
+const {
+  AIRTABLE_ACCESS_TOKEN,
+  GENERATE_CONTENT,
+  NODE_ENV,
+  SITE_URL,
+  MOCK_CONTENT,
+} = process.env;
 const IS_PRODUCTION = NODE_ENV === "production";
 const siteUrl = SITE_URL || "https://qiskit.org";
 
