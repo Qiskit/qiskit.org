@@ -100,7 +100,7 @@ async function generateContent() {
 
     // eslint-disable-next-line no-console
     console.info("Generating the fall fest events content...");
-    await fetchFallFestEvents(AIRTABLE_API_KEY, "./content/fall-fest-events");
+    await fetchFallFestEvents(AIRTABLE_ACCESS_TOKEN, "./content/fall-fest-events");
 
     // eslint-disable-next-line no-console
     console.info("Generating the advocates content...");
