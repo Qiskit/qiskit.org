@@ -51,7 +51,7 @@ const mosaic: MosaicSection = {
         "The Qiskit Textbook is a free digital open-source textbook that will teach you the concepts of quantum computing while you learn to use Qiskit.",
       image: "/images/events/seminar-series/mosaic-experts.png",
       cta: {
-        url: "/learn",
+        url: "https://learning.quantum-computing.ibm.com/",
         label: "Read the textbook",
         segment: {
           cta: "read-the-textbook",
@@ -75,13 +75,14 @@ const mosaic: MosaicSection = {
       },
     },
     {
+      // TODO: Update this content
       position: "third",
       title: "Introduction to Quantum Computing and Quantum Hardware",
       description:
         "The Qiskit Global Summer School 2020 coursework, lab, and lecture materials are now available online.",
       image: "/images/events/summer-school-2022/chip.png",
       cta: {
-        url: "/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020",
+        url: "https://qiskit.org/learn/summer-school/introduction-to-quantum-computing-and-quantum-hardware-2020",
         label: "Start the course",
         segment: {
           cta: "start-the-course",

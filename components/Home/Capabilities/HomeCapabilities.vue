@@ -62,7 +62,7 @@ const capabilities: QiskitCapability[] = [
       "Qiskit helps users schedule and run quantum programs on a variety of local simulators and cloud-based quantum processors. It supports several quantum hardware designs, such as superconducting qubits and trapped ions.",
     thumbnailResource: "/images/library/chip-01.png",
     link: {
-      url: "/providers",
+      url: "https://qiskit.github.io/ecosystem/#providers",
       label: "See all providers",
       segment: {
         cta: "transpile-to-any-hardware",

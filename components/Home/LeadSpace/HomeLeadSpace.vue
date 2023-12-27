@@ -150,10 +150,6 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
     &__title {
       margin-bottom: carbon.$spacing-06;
 
-      // TODO: Force pointer events to allow the user to select text. Remove
-      // when decomissioning the Metal page.
-      pointer-events: auto;
-
       @include carbon.breakpoint-up(md) {
         margin-bottom: carbon.$spacing-07;
       }
@@ -168,9 +164,6 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
     }
 
     &__description {
-      // TODO: Force pointer events to allow the user to select text. Remove
-      // when decomissioning the Metal page.
-      pointer-events: auto;
       margin-bottom: carbon.$spacing-11;
 
       &__title {
@@ -191,9 +184,6 @@ const heroCodeSnippetLines = heroCodeSnippet.split("\n");
     }
 
     &__cta {
-      // TODO: Force pointer events to allow the user to select text. Remove
-      // when decomissioning the Metal page.
-      pointer-events: auto;
       width: 100% !important;
       margin-bottom: carbon.$spacing-06;
       margin-top: carbon.$spacing-09;
