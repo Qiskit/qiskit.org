@@ -8,7 +8,7 @@ class FakeAirtableRecords extends AirtableRecords {
   constructor(
     apiKey: string,
     airtableBase: AirtableBase,
-    public recordFields?: Record<string, any>
+    public recordFields?: Record<string, any>,
   ) {
     super(apiKey, "testBaseId", "testTableId", "testView");
     this.airtableBase = airtableBase;
@@ -37,7 +37,7 @@ describe("storeImage", () => {
       "testBaseId",
       "testTableId",
       "testView",
-      id
+      id,
     );
     vi.spyOn(axios, "get");
   });
@@ -52,7 +52,7 @@ describe("storeImage", () => {
     const mockWriteFile = vi.spyOn(fsPromises, "writeFile").mockResolvedValue();
 
     await expect(
-      airtableRecords.storeImage(imageUrl, imageFilePath)
+      airtableRecords.storeImage(imageUrl, imageFilePath),
     ).resolves.not.toThrow();
     expect(mockWriteFile).toHaveBeenCalledWith(imageFilePath, mockImageBuffer);
   });
@@ -60,7 +60,7 @@ describe("storeImage", () => {
   test("should throw error when image URL is invalid", async () => {
     vi.spyOn(axios, "get").mockRejectedValue(new Error("Invalid image URL"));
     await expect(
-      airtableRecords.storeImage("invalidImageUrl", imageFilePath)
+      airtableRecords.storeImage("invalidImageUrl", imageFilePath),
     ).rejects.toThrowError("Invalid image URL");
   });
 
@@ -72,7 +72,7 @@ describe("storeImage", () => {
       data: Buffer.from("imageData"),
     });
     await expect(
-      airtableRecords.storeImage(imageUrl, imageFilePath)
+      airtableRecords.storeImage(imageUrl, imageFilePath),
     ).rejects.toThrowError("File system error");
   });
 
@@ -142,7 +142,7 @@ describe("storeImage", () => {
         .mockImplementation(
           (cb: (records: any, nextPage: any) => void): void => {
             cb(fakeRecords, () => {});
-          }
+          },
         );
       const airtableSelectMockFn = vi.fn().mockReturnValue({
         eachPage: airtableEachPageMockFn,
@@ -154,7 +154,7 @@ describe("storeImage", () => {
       const airtableRecords = new FakeAirtableRecords(
         "testApiKey",
         airtableBase as unknown as AirtableBase,
-        mockRecordFields
+        mockRecordFields,
       );
 
       // eslint-disable-next-line dot-notation
@@ -207,10 +207,10 @@ describe("storeImage", () => {
             cb(
               // two elements to check the for loop in `getFieldName`
               [element],
-              () => {}
+              () => {},
             );
             return Promise.resolve();
-          }
+          },
         );
 
       const airtableBase = vi.fn().mockReturnValue({
@@ -228,7 +228,7 @@ describe("storeImage", () => {
       const airtableRecords = new FakeAirtableRecords(
         "testApiKey",
         airtableBase as unknown as AirtableBase,
-        mockRecordFields
+        mockRecordFields,
       );
 
       const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);
@@ -265,10 +265,10 @@ describe("storeImage", () => {
             cb(
               // two elements to check the for loop in `getFieldName`
               records,
-              () => {}
+              () => {},
             );
             return Promise.resolve();
-          }
+          },
         );
 
       const airtableBase = vi.fn().mockReturnValue({
@@ -282,7 +282,7 @@ describe("storeImage", () => {
       const airtableRecords = new FakeAirtableRecords(
         "testApiKey",
         airtableBase as unknown as AirtableBase,
-        mockRecordFields
+        mockRecordFields,
       );
 
       const result = await airtableRecords.getAllFieldNames(RECORD_FIELDS_IDS);

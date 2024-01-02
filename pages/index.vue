@@ -92,7 +92,7 @@ useSeoMeta({
 });
 
 const { data: packageInfo } = await useAsyncData<PackageInfo>(() =>
-  $fetch("https://pypi.org/pypi/qiskit/json")
+  $fetch("https://pypi.org/pypi/qiskit/json"),
 );
 
 const qiskitVersion = packageInfo.value?.info.version ?? "";

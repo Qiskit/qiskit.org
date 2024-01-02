@@ -52,7 +52,7 @@ class EventsAirtableRecords extends AirtableRecords {
   constructor(
     apiKey: string,
     view: string,
-    recordFields?: Record<string, any>
+    recordFields?: Record<string, any>,
   ) {
     super(
       apiKey,
@@ -60,10 +60,10 @@ class EventsAirtableRecords extends AirtableRecords {
       "Event Calendar",
       view,
       undefined,
-      recordFields
+      recordFields,
     );
     this.airtableBase = new Airtable({ apiKey: this.apiKey }).base(
-      AIRTABLE_BASE_ID
+      AIRTABLE_BASE_ID,
     );
   }
 
@@ -75,7 +75,7 @@ class EventsAirtableRecords extends AirtableRecords {
    */
   private sortEventsByStartDate<T extends CommunityEvent | SeminarSeriesEvent>(
     events: T[],
-    direction: "asc" | "desc"
+    direction: "asc" | "desc",
   ): T[] {
     return events.sort((a, b) => {
       const aDate = new Date(a.startDate);
@@ -113,7 +113,7 @@ class EventsAirtableRecords extends AirtableRecords {
    */
   isEventInDateRange(
     event: CommunityEvent | SeminarSeriesEvent,
-    days: number
+    days: number,
   ): boolean {
     const { startDate, endDate } = event;
     const today: Date = new Date();
@@ -184,12 +184,12 @@ class EventsAirtableRecords extends AirtableRecords {
           }
         }
         nextPage();
-      }
+      },
     );
 
     const sortedCommunityEvents = this.sortEventsByStartDate(
       communityEvents,
-      days > 0 ? "asc" : "desc"
+      days > 0 ? "asc" : "desc",
     );
     return Promise.resolve(sortedCommunityEvents);
   }
@@ -212,9 +212,8 @@ class EventsAirtableRecords extends AirtableRecords {
       async (records, nextPage) => {
         for (const record of records) {
           this.id = record.id;
-          const seminarSeriesEvent = await this.convertToSeminarSeriesEvent(
-            record
-          );
+          const seminarSeriesEvent =
+            await this.convertToSeminarSeriesEvent(record);
 
           if (typeof seminarSeriesEvent.to !== "undefined") {
             if (this.isEventInDateRange(seminarSeriesEvent, days)) {
@@ -223,12 +222,12 @@ class EventsAirtableRecords extends AirtableRecords {
           }
         }
         nextPage();
-      }
+      },
     );
 
     const sortedSeminarSeriesEvents = this.sortEventsByStartDate(
       seminarSeriesEvents,
-      days > 0 ? "asc" : "desc"
+      days > 0 ? "asc" : "desc",
     );
     return Promise.resolve(sortedSeminarSeriesEvents);
   }
@@ -239,7 +238,7 @@ class EventsAirtableRecords extends AirtableRecords {
    * @returns The converted CommunityEvent.
    */
   async convertToCommunityEvent(
-    record: Record<string, any>
+    record: Record<string, any>,
   ): Promise<CommunityEvent> {
     const event = {
       endDate: (record.get(this.recordFields!.endDate) as string) || "",
@@ -258,7 +257,7 @@ class EventsAirtableRecords extends AirtableRecords {
       image: await this.getImage(record),
       startDate: this.getStartDate(record),
       startDateAndTime: this.formatTime(
-        record.get(this.recordFields!.startDateAndTime) || null
+        record.get(this.recordFields!.startDateAndTime) || null,
       ),
       types: this.getEventTypes(record),
     };
@@ -271,7 +270,7 @@ class EventsAirtableRecords extends AirtableRecords {
    * @returns The converted SeminarSeriesEvent.
    */
   async convertToSeminarSeriesEvent(
-    record: Record<string, any>
+    record: Record<string, any>,
   ): Promise<SeminarSeriesEvent> {
     const event = {
       endDate: record.get(this.recordFields!.endDate) || "",
@@ -362,7 +361,7 @@ class EventsAirtableRecords extends AirtableRecords {
     const valueList = (Array.isArray(value) ? value : [value]) as string[];
     const communityEventTypes = this.filterWithWhitelist(
       valueList,
-      COMMUNITY_EVENT_TYPE_OPTIONS
+      COMMUNITY_EVENT_TYPE_OPTIONS,
     );
     const noTypes = communityEventTypes.length === 0;
     return noTypes ? [COMMUNITY_EVENT_TYPES.talks] : communityEventTypes;
@@ -411,7 +410,7 @@ class EventsAirtableRecords extends AirtableRecords {
    * @returns The event's start and end dates.
    */
   public getDates(
-    record: Record<string, any>
+    record: Record<string, any>,
   ): [Date | undefined, Date | undefined] {
     const recordStartDate = this.getStartDate(record);
     const recordEndDate = record.get(this.recordFields!.endDate) as

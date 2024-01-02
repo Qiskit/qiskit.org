@@ -102,7 +102,7 @@ async function generateContent() {
     console.info("Generating the fall fest events content...");
     await fetchFallFestEvents(
       AIRTABLE_ACCESS_TOKEN,
-      "./content/fall-fest-events"
+      "./content/fall-fest-events",
     );
 
     // eslint-disable-next-line no-console
@@ -111,7 +111,7 @@ async function generateContent() {
   } else {
     // eslint-disable-next-line no-console
     console.warn(
-      "No AIRTABLE_ACCESS_TOKEN environment variable found. Skipping content generation."
+      "No AIRTABLE_ACCESS_TOKEN environment variable found. Skipping content generation.",
     );
   }
 }

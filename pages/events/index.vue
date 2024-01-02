@@ -175,10 +175,10 @@ const typeFilters = ref<string[]>([]);
 const showCalendar = computed(() => activeSet.value === "calendar");
 const showUpcomingEvents = computed(() => activeSet.value === "upcoming");
 const events = computed(() =>
-  showUpcomingEvents.value ? upcomingEvents : pastEvents
+  showUpcomingEvents.value ? upcomingEvents : pastEvents,
 );
 const noRegionFiltersSelected = computed(
-  () => regionFilters.value.length === 0
+  () => regionFilters.value.length === 0,
 );
 const noTypeFiltersSelected = computed(() => typeFilters.value.length === 0);
 
@@ -198,7 +198,7 @@ const filteredEvents = computed(() => {
   const eventsAfterApplyTypeFilter = filterBy(
     events.value,
     typeFilters.value,
-    "types"
+    "types",
   );
 
   return filterBy(eventsAfterApplyTypeFilter, regionFilters.value, "regions");
@@ -206,7 +206,7 @@ const filteredEvents = computed(() => {
   function filterBy(
     allEvents: CommunityEvent[],
     selectedFilters: string[],
-    propToFilter: keyof CommunityEvent
+    propToFilter: keyof CommunityEvent,
   ) {
     return allEvents.filter((event) => {
       const propValue = event[propToFilter] || [];
@@ -294,7 +294,7 @@ useSchemaOrg([
         image: event.image,
         performer: event.speaker,
         endDate: event.endDate ? new Date(event.endDate) : undefined,
-      })
+      }),
     ),
     itemListOrder: "Ascending",
     numberOfItems: sortedEvents.length,

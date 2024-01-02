@@ -17,7 +17,7 @@ export function useScrollBetweenSections(): UseScrollBetweenSections {
   function onSectionAppearing(
     entries:
       | Array<IntersectionObserverEntryWithId>
-      | IntersectionObserverEntry[]
+      | IntersectionObserverEntry[],
   ) {
     let highestTopValue = Infinity;
     (entries as Array<IntersectionObserverEntryWithId>).forEach((entry) => {

@@ -88,8 +88,8 @@ const positions = computed<CellSpecification[][]>(() =>
       }
 
       return generateRows();
-    })()
-  )
+    })(),
+  ),
 );
 
 function getPosId(pos: CellSpecification): string {
@@ -185,7 +185,10 @@ function getRowId(index: number): string {
       height: $large-cell - 1px;
       background-color: white;
       box-sizing: content-box;
-      transition: transform 300ms ease-in, opacity 300ms, border-radius 300ms;
+      transition:
+        transform 300ms ease-in,
+        opacity 300ms,
+        border-radius 300ms;
 
       @include carbon.breakpoint-down(lg) {
         width: $medium-cell - 1px;

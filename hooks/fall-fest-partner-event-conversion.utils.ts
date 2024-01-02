@@ -19,7 +19,7 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
   constructor(
     apiKey: string,
     view: string,
-    recordFields?: Record<string, any>
+    recordFields?: Record<string, any>,
   ) {
     super(
       apiKey,
@@ -27,10 +27,10 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
       "Partner Website",
       view,
       undefined,
-      recordFields
+      recordFields,
     );
     this.airtableBase = new Airtable({ apiKey: this.apiKey }).base(
-      AIRTABLE_BASE_ID
+      AIRTABLE_BASE_ID,
     );
   }
 
@@ -70,7 +70,7 @@ class FallFestPartnerEventAirtableRecords extends AirtableRecords {
    * @returns The converted FallFestPartnerEvent.
    */
   async convertToPartnerEvent(
-    record: Record<string, any>
+    record: Record<string, any>,
   ): Promise<FallFestPartnerEvent> {
     const event = {
       title: this.getTitle(record),

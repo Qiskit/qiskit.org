@@ -11,7 +11,7 @@ type AdvocatesWorldRegion =
   (typeof ADVOCATES_WORLD_REGIONS)[keyof typeof ADVOCATES_WORLD_REGIONS];
 
 const ADVOCATES_WORLD_REGION_OPTIONS = Object.values(
-  ADVOCATES_WORLD_REGIONS
+  ADVOCATES_WORLD_REGIONS,
 ).sort();
 
 interface Advocate {

@@ -12,7 +12,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
   constructor(
     apiKey: string,
     view: string,
-    recordFields?: Record<string, any>
+    recordFields?: Record<string, any>,
   ) {
     super(
       apiKey,
@@ -20,10 +20,10 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
       "Extension Website",
       view,
       undefined,
-      recordFields
+      recordFields,
     );
     this.airtableBase = new Airtable({ apiKey: this.apiKey }).base(
-      AIRTABLE_BASE_ID
+      AIRTABLE_BASE_ID,
     );
   }
 
@@ -64,7 +64,7 @@ class FallFestExtensionEventAirtableRecords extends AirtableRecords {
    */
   // eslint-disable-next-line require-await
   async convertToExtensionEvent(
-    record: Record<string, any>
+    record: Record<string, any>,
   ): Promise<FallFestExtensionEvent> {
     const event = {
       institution: (record.get(this.recordFields!.institution) as string) || "",

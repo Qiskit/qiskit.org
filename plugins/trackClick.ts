@@ -13,7 +13,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         "click",
         () =>
           binding.value &&
-          trackClickEvent(binding.value.cta, binding.value.location)
+          trackClickEvent(binding.value.cta, binding.value.location),
       );
     },
   });

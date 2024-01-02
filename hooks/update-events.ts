@@ -4,7 +4,7 @@ import { writeJSONToFile } from "./utils/conversion-utils";
 export default async function (apiKey: string, outputFolder: string) {
   const communityEventsAirtableRecords = new EventsAirtableRecords(
     apiKey,
-    "Add to Event Site"
+    "Add to Event Site",
   );
   const upcomingCommunityEvents =
     await communityEventsAirtableRecords.fetchCommunityEvents(62);
@@ -13,7 +13,7 @@ export default async function (apiKey: string, outputFolder: string) {
 
   const seminarSeriesEventsAirtableRecords = new EventsAirtableRecords(
     apiKey,
-    "Seminar Series ONLY"
+    "Seminar Series ONLY",
   );
   const upcomingSeminarSeriesEvents =
     await seminarSeriesEventsAirtableRecords.fetchSeminarSeriesEvents(31);
@@ -41,7 +41,7 @@ export default async function (apiKey: string, outputFolder: string) {
 
   await Promise.all(
     eventsAndOutputFilename.map((curr) =>
-      writeJSONToFile(outputFolder, curr.outputFilename, curr.events)
-    )
+      writeJSONToFile(outputFolder, curr.outputFilename, curr.events),
+    ),
   );
 }

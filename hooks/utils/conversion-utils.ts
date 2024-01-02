@@ -4,7 +4,7 @@ import path from "path";
 export async function writeJSONToFile(
   outputFolder: string,
   filename: string,
-  data: any
+  data: any,
 ) {
   const folderExists = await exists(outputFolder);
   if (!folderExists) {

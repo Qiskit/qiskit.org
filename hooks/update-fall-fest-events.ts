@@ -10,7 +10,7 @@ export default async function (apiKey: string, outputFolder: string) {
 
   const partnerEventsAirtableRecords = new FallFestPartnerEventAirtableRecords(
     apiKey,
-    "Website view"
+    "Website view",
   );
   const fallFestPartnerEvents =
     await partnerEventsAirtableRecords.fetchPartnerEvents();
@@ -28,7 +28,7 @@ export default async function (apiKey: string, outputFolder: string) {
 
   await Promise.all(
     fallFestEventsOutputAndFilename.map((curr) =>
-      writeJSONToFile(outputFolder, curr.outputFilename, curr.events)
-    )
+      writeJSONToFile(outputFolder, curr.outputFilename, curr.events),
+    ),
   );
 }

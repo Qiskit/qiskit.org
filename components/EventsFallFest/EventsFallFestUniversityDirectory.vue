@@ -70,7 +70,7 @@ useSchemaOrg([
         url: `${config.public.siteUrl}/fall-fest`,
         name: event.title,
         image: event.image,
-      })
+      }),
     ),
     itemListOrder: "Ascending",
     numberOfItems: sortedEvents.length,
