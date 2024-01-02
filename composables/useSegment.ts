@@ -40,7 +40,7 @@ function configureAnalytics(
   productCode: string,
   productCodeType: string,
   productTitle: string,
-  UT30: string
+  UT30: string,
 ) {
   window._analytics = {
     segment_key: key,
@@ -98,7 +98,7 @@ function installAnalytics(url: string) {
 function trackPage(
   context: AnalyticsContext,
   routeName: string,
-  title: string
+  title: string,
 ) {
   const runtimeConfig = useRuntimeConfig();
   const { bluemixAnalytics, digitalData } = context;
@@ -133,7 +133,7 @@ function trackPage(
 function trackClickEvent(
   context: AnalyticsContext,
   cta: string,
-  location: string
+  location: string,
 ) {
   const runtimeConfig = useRuntimeConfig();
   const { bluemixAnalytics, digitalData } = context;
@@ -194,11 +194,11 @@ export const useSegment = () => {
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_CODE_TYPE,
       runtimeConfig.public.IBM_ANALYTICS_SEGMENT_PRODUCT_TITLE,
-      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_UT30
+      runtimeConfig.public.IBM_ANALYTICS_SEGMENT_UT30,
     );
 
     useState("analyticsReady", () =>
-      installAnalytics(runtimeConfig.public.IBM_ANALYTICS_SEGMENT_SCRIPT_SRC)
+      installAnalytics(runtimeConfig.public.IBM_ANALYTICS_SEGMENT_SCRIPT_SRC),
     );
   }
 

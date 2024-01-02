@@ -47,7 +47,7 @@ describe("writeJSONToFile", () => {
     expect(fs.promises.mkdir).toBeCalledWith(folder);
     expect(fs.promises.writeFile).toBeCalledWith(
       filePath,
-      JSON.stringify(mock, null, 2)
+      JSON.stringify(mock, null, 2),
     );
   });
 
@@ -87,7 +87,7 @@ describe("writeJSONToFile", () => {
     expect(fs.promises.mkdir).not.toBeCalled();
     expect(fs.promises.writeFile).toBeCalledWith(
       filePath,
-      JSON.stringify(mock, null, 2)
+      JSON.stringify(mock, null, 2),
     );
   });
 });

@@ -37,7 +37,7 @@ class AirtableRecords {
     tableId: string,
     view: string,
     id?: string,
-    recordFields?: Record<string, any>
+    recordFields?: Record<string, any>,
   ) {
     this.apiKey = apiKey;
     this.tableId = tableId;
@@ -93,7 +93,7 @@ class AirtableRecords {
    * @returns {Promise<Record<string, string | null>>} Field names mapped to keys
    */
   public getAllFieldNames(
-    fieldIds: Record<string, string>
+    fieldIds: Record<string, string>,
   ): Promise<Record<string, string | null>> {
     const fieldNamesPromises = Object.entries(fieldIds).map(
       ([field, fieldId]) => {
@@ -111,13 +111,16 @@ class AirtableRecords {
             console.error(`Error in setAllFieldNames: ${error}`);
             return { [field]: null };
           });
-      }
+      },
     );
 
     return Promise.all(fieldNamesPromises).then((results) => {
-      return results.reduce((acc, result) => {
-        return { ...acc, ...result };
-      }, {} as Record<string, string | null>);
+      return results.reduce(
+        (acc, result) => {
+          return { ...acc, ...result };
+        },
+        {} as Record<string, string | null>,
+      );
     });
   }
 

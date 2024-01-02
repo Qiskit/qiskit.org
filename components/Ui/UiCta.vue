@@ -122,7 +122,9 @@ const iconPerLinkType = computed(() => {
 
   background-size: 200% 100%;
   background-position-x: 100%;
-  transition: background-position-x 0.3s ease-out, color 0.3s ease-out;
+  transition:
+    background-position-x 0.3s ease-out,
+    color 0.3s ease-out;
 
   &_wider {
     width: 100%;

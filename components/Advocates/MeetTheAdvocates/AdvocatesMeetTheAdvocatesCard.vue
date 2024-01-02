@@ -48,7 +48,7 @@ const props = withDefaults(defineProps<Props>(), {
 const formattedRegion = computed(() => (props.region ? [props.region] : []));
 
 const location = computed(() =>
-  [props.city, props.country].filter((e) => !!e).join(", ")
+  [props.city, props.country].filter((e) => !!e).join(", "),
 );
 </script>
 

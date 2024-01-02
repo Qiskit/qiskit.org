@@ -95,7 +95,7 @@ const filteredAdvocates = computed(() => {
   return noRegionFilters
     ? advocates
     : advocates.filter((advocate) =>
-        regionFilters.value.includes(advocate.region)
+        regionFilters.value.includes(advocate.region),
       );
 });
 
@@ -104,7 +104,7 @@ const isRegionFilterChecked = (filterValue: string): boolean =>
 
 function updateRegionFilter(option: string, isChecked: boolean) {
   const filteredRegionFilters = regionFilters.value.filter(
-    (oldOption) => oldOption !== option
+    (oldOption) => oldOption !== option,
   );
 
   if (isChecked) {

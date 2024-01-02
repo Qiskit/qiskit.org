@@ -43,7 +43,7 @@ Qiskit is an open-source quantum computing software development framework for le
 - [🚀 Get Up and Running](#-get-up-and-running)
 - [💻 Technology Used](#-technology-used)
 - [🏭 Content Generation](#-content-generation)
-    - [🥸 Mocking content](#-mocking-content)
+  - [🥸 Mocking content](#-mocking-content)
 - [🏷️ Naming Conventions](#️-naming-conventions)
   - [Nuxt Components](#nuxt-components)
 - [✏️ How to Contribute](#️-how-to-contribute)
@@ -69,9 +69,9 @@ Qiskit is an open-source quantum computing software development framework for le
 
 3. **Create an .env file**
 
-  ```shell
-  cp .env.example .env
-  ```
+```shell
+cp .env.example .env
+```
 
 4. **Run a local server with hot reload at [localhost:3000](localhost:3000)**
 

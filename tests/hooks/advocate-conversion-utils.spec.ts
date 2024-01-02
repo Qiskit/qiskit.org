@@ -8,7 +8,7 @@ class FakeAdvocatesAirtableRecords extends AdvocatesAirtableRecords {
   constructor(
     apiKey: string,
     airtableBase: AirtableBase,
-    public recordFields?: Record<string, any>
+    public recordFields?: Record<string, any>,
   ) {
     super(apiKey, recordFields);
     this.airtableBase = airtableBase;
@@ -46,7 +46,7 @@ describe("getters", () => {
   beforeEach(() => {
     advocatesAirtableRecords = new AdvocatesAirtableRecords(
       "testApiKey",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -60,19 +60,19 @@ describe("getters", () => {
 
   test("gets the region from the record", () => {
     expect(advocatesAirtableRecords.getRegion(fakeRecord)).toBe(
-      "South America"
+      "South America",
     );
   });
 
   test("gets the Slack ID from the record", () => {
     expect(advocatesAirtableRecords.getSlackId(fakeRecord)).toBe(
-      "ID1234567890"
+      "ID1234567890",
     );
   });
 
   test("gets the Slack username from the record", () => {
     expect(advocatesAirtableRecords.getSlackUsername(fakeRecord)).toBe(
-      "U1234567890"
+      "U1234567890",
     );
   });
 });
@@ -111,14 +111,13 @@ describe("convertToAdvocate", () => {
   beforeEach(() => {
     advocatesAirtableRecords = new AdvocatesAirtableRecords(
       "testApiKey",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
   test("converts the record to an advocate object", async () => {
-    const advocate = await advocatesAirtableRecords.convertToAdvocate(
-      fakeRecord
-    );
+    const advocate =
+      await advocatesAirtableRecords.convertToAdvocate(fakeRecord);
 
     expect(advocate).toEqual({
       name: "Nova",
@@ -142,7 +141,7 @@ describe("getImage", () => {
   beforeEach(() => {
     advocatesAirtableRecords = new AdvocatesAirtableRecords(
       "testApiKey",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -288,7 +287,7 @@ describe("fetchAdvocates", () => {
     const advocatesAirtableRecords = new FakeAdvocatesAirtableRecords(
       "testApiKey",
       airtableBase as unknown as AirtableBase,
-      mockRecordFields
+      mockRecordFields,
     );
 
     const result = await advocatesAirtableRecords.fetchAdvocates();
@@ -324,7 +323,7 @@ describe("fetchAdvocates", () => {
   test("gets record fields from `getAllFieldNames` if there are none yet", async () => {
     const advocatesAirtableRecords = new FakeAdvocatesAirtableRecords(
       "testApiKey",
-      airtableBase as unknown as AirtableBase
+      airtableBase as unknown as AirtableBase,
     );
 
     advocatesAirtableRecords.getAllFieldNames = vi
@@ -334,10 +333,10 @@ describe("fetchAdvocates", () => {
     await advocatesAirtableRecords.fetchAdvocates();
 
     expect(advocatesAirtableRecords.getAllFieldNames).toBeCalledWith(
-      RECORD_FIELDS_IDS
+      RECORD_FIELDS_IDS,
     );
     expect(advocatesAirtableRecords.recordFields).toStrictEqual(
-      mockRecordFields
+      mockRecordFields,
     );
   });
 });

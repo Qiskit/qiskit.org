@@ -26,7 +26,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
       "Advocates",
       "For website",
       undefined,
-      recordFields
+      recordFields,
     );
   }
 

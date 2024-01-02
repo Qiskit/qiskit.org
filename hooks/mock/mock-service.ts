@@ -17,7 +17,7 @@ export async function generateMocks() {
  */
 async function copyFiles(
   sourceBasePath: string,
-  targetBasePath: string
+  targetBasePath: string,
 ): Promise<void> {
   const dirContent = await fs.readdir(sourceBasePath, { withFileTypes: true });
 

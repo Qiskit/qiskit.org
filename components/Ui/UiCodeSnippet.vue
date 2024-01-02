@@ -102,7 +102,8 @@ function copyToClipboard(e: { target: any }) {
 
     &:focus {
       border-color: qiskit.$button-background-color-light;
-      box-shadow: inset 0 0 0 1px qiskit.$button-background-color-light,
+      box-shadow:
+        inset 0 0 0 1px qiskit.$button-background-color-light,
         inset 0 0 0 2px carbon.$white-0;
     }
 

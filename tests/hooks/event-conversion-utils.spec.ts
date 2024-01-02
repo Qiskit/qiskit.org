@@ -19,7 +19,7 @@ class FakeEventsAirtableRecords extends EventsAirtableRecords {
     apiKey: string,
     view: string,
     airtableBase?: AirtableBase,
-    public recordFields?: Record<string, any>
+    public recordFields?: Record<string, any>,
   ) {
     super(apiKey, view, recordFields);
     if (airtableBase) {
@@ -72,7 +72,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      false
+      false,
     );
 
     // Event starts within the next 15 days
@@ -84,7 +84,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      true
+      true,
     );
 
     // Event starts today
@@ -96,7 +96,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      true
+      true,
     );
 
     // Event starts within the next 15 days and ends after 15 days
@@ -108,7 +108,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      true
+      true,
     );
 
     // Event starts in exactly 15 days
@@ -120,7 +120,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      true
+      true,
     );
 
     // Event started 100 days ago and end in 100 days (ongoing event)
@@ -132,7 +132,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      true
+      true,
     );
   });
 
@@ -148,7 +148,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      false
+      false,
     );
 
     // Event started before the last 15 days and ended within the last 15 days
@@ -160,7 +160,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      true
+      true,
     );
 
     // Event starts in the future
@@ -172,7 +172,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      false
+      false,
     );
 
     // Event starts today
@@ -184,7 +184,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      false
+      false,
     );
 
     // Event started 100 days ago and end in 100 days (ongoing event)
@@ -196,7 +196,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      false
+      false,
     );
   });
 
@@ -212,7 +212,7 @@ describe("isEventInDateRange", () => {
       speaker: "",
     };
     expect(eventsAirtableRecords.isEventInDateRange(mockEvent, days)).toBe(
-      false
+      false,
     );
   });
 });
@@ -277,7 +277,7 @@ describe("convertToCommunityEvent", () => {
     eventsAirtableRecords = new EventsAirtableRecords(
       "testApiKey",
       "testView",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -285,7 +285,7 @@ describe("convertToCommunityEvent", () => {
     const { hackathon } = COMMUNITY_EVENT_TYPES;
     const { europe } = WORLD_REGIONS;
     const event = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecords[0]
+      fakeRecords[0],
     );
 
     expect(event).toStrictEqual({
@@ -306,7 +306,7 @@ describe("convertToCommunityEvent", () => {
 
   test("extracts and formats information from the record when `types` is not an array", async () => {
     const event2 = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecords[1]
+      fakeRecords[1],
     );
 
     expect(event2).toStrictEqual({
@@ -337,7 +337,7 @@ describe("convertToCommunityEvent types", () => {
     eventsAirtableRecords = new EventsAirtableRecords(
       "testApiKey",
       "testView",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -351,9 +351,8 @@ describe("convertToCommunityEvent types", () => {
       },
     };
 
-    const { types } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { types } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ types }).toEqual({
       types: [COMMUNITY_EVENT_TYPES.hackathon],
@@ -370,9 +369,8 @@ describe("convertToCommunityEvent types", () => {
       },
     };
 
-    const { types } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { types } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ types }).toEqual({
       types: [COMMUNITY_EVENT_TYPES.talks],
@@ -389,9 +387,8 @@ describe("convertToCommunityEvent types", () => {
       },
     };
 
-    const { types } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { types } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ types }).toEqual({
       types: [COMMUNITY_EVENT_TYPES.talks],
@@ -408,9 +405,8 @@ describe("convertToCommunityEvent types", () => {
       },
     };
 
-    const { types } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { types } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ types }).toEqual({
       types: [COMMUNITY_EVENT_TYPES.hackathon],
@@ -421,12 +417,12 @@ describe("convertToCommunityEvent types", () => {
 describe("filterByWhitelist", () => {
   const eventsAirtableRecords = new EventsAirtableRecords(
     "testApiKey",
-    "testView"
+    "testView",
   );
   test("creates a new list, from an input one, only with the values in a whitelist", () => {
     const list = ["a", "x", "b", "y", "c", "z", "a", "x", "b", "y"];
     expect(
-      eventsAirtableRecords.filterWithWhitelist(list, ["a", "b", "c"])
+      eventsAirtableRecords.filterWithWhitelist(list, ["a", "b", "c"]),
     ).toEqual(["a", "b", "c", "a", "b"]);
   });
 });
@@ -442,7 +438,7 @@ describe("convertToCommunityEvent regions", () => {
     eventsAirtableRecords = new EventsAirtableRecords(
       "testApiKey",
       "testView",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -456,9 +452,8 @@ describe("convertToCommunityEvent regions", () => {
       },
     };
 
-    const { regions } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { regions } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ regions }).toEqual({
       regions: [WORLD_REGIONS.tbd],
@@ -475,9 +470,8 @@ describe("convertToCommunityEvent regions", () => {
       },
     };
 
-    const { regions } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { regions } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ regions }).toEqual({
       regions: [WORLD_REGIONS.northAmerica],
@@ -494,9 +488,8 @@ describe("convertToCommunityEvent regions", () => {
       },
     };
 
-    const { regions } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { regions } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ regions }).toEqual({
       regions: ["Lemuria"],
@@ -515,7 +508,7 @@ describe("convertToCommunityEvent location", () => {
     eventsAirtableRecords = new EventsAirtableRecords(
       "testApiKey",
       "testView",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -529,9 +522,8 @@ describe("convertToCommunityEvent location", () => {
       },
     };
 
-    const { location } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { location } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ location }).toEqual({
       location: WORLD_REGIONS.tbd,
@@ -548,9 +540,8 @@ describe("convertToCommunityEvent location", () => {
       },
     };
 
-    const { location } = await eventsAirtableRecords.convertToCommunityEvent(
-      fakeRecord
-    );
+    const { location } =
+      await eventsAirtableRecords.convertToCommunityEvent(fakeRecord);
 
     expect({ location }).toEqual({
       location: "Gotham",
@@ -570,7 +561,7 @@ describe("getImage", () => {
     eventsAirtableRecords = new EventsAirtableRecords(
       "testApiKey",
       "testView",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -701,7 +692,7 @@ describe("getDates", () => {
     eventsAirtableRecords = new EventsAirtableRecords(
       "testApiKey",
       "testView",
-      mockRecordFields
+      mockRecordFields,
     );
   });
 
@@ -783,7 +774,7 @@ describe("formatDates", () => {
 
   test("shows start date when start and end dates are equal", () => {
     expect(eventsAirtableRecords.formatDates(start, endSameDate)).toBe(
-      "January 1, 2020"
+      "January 1, 2020",
     );
   });
 
@@ -793,13 +784,13 @@ describe("formatDates", () => {
 
   test("shows complete dates when the years are different", () => {
     expect(eventsAirtableRecords.formatDates(start, endNextYear)).toBe(
-      "January 1, 2020 - January 1, 2021"
+      "January 1, 2020 - January 1, 2021",
     );
   });
 
   test("factors out the year when years are equal", () => {
     expect(eventsAirtableRecords.formatDates(start, endNextMonth)).toBe(
-      "January 1 - February 1, 2020"
+      "January 1 - February 1, 2020",
     );
   });
 
@@ -807,11 +798,11 @@ describe("formatDates", () => {
     try {
       eventsAirtableRecords.formatDates(
         new Date("2020-01-01T00:00:00.000Z"),
-        new Date("2020-01-01T00:10:00.000Z")
+        new Date("2020-01-01T00:10:00.000Z"),
       );
     } catch (e) {
       expect((e as any).message).toBe(
-        "Unreachable: should have been covered by a case."
+        "Unreachable: should have been covered by a case.",
       );
     }
   });
@@ -827,7 +818,7 @@ describe("getEventsQuery", () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
       "testView",
-      airtableBase as unknown as AirtableBase
+      airtableBase as unknown as AirtableBase,
     );
 
     eventsAirtableRecords.getEventsQuery("filter");
@@ -898,12 +889,12 @@ describe("fetchCommunityEvents", () => {
       "testApiKey",
       "testView",
       undefined,
-      mockRecordFields
+      mockRecordFields,
     );
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: async (
-        callBack: (records: any, nextPage: any) => Promise<void>
+        callBack: (records: any, nextPage: any) => Promise<void>,
       ) => {
         await callBack(fakeRecords, () => {});
 
@@ -953,12 +944,12 @@ describe("fetchCommunityEvents", () => {
       "testApiKey",
       "testView",
       undefined,
-      mockRecordFields
+      mockRecordFields,
     );
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: async (
-        callBack: (records: any, nextPage: any) => Promise<void>
+        callBack: (records: any, nextPage: any) => Promise<void>,
       ) => {
         await callBack(fakeRecords, () => {});
 
@@ -1006,7 +997,7 @@ describe("fetchCommunityEvents", () => {
   test("If no recordFields should get from getAllFieldNames", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
-      "testView"
+      "testView",
     );
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
@@ -1059,12 +1050,12 @@ describe("fetchSeminarSeriesEvents", () => {
       "testApiKey",
       "testView",
       undefined,
-      mockRecordFields
+      mockRecordFields,
     );
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: async (
-        callBack: (records: any, nextPage: any) => Promise<void>
+        callBack: (records: any, nextPage: any) => Promise<void>,
       ) => {
         await callBack(fakeRecords, () => {});
 
@@ -1113,12 +1104,12 @@ describe("fetchSeminarSeriesEvents", () => {
       "testApiKey",
       "testView",
       undefined,
-      mockRecordFields
+      mockRecordFields,
     );
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
       eachPage: async (
-        callBack: (records: any, nextPage: any) => Promise<void>
+        callBack: (records: any, nextPage: any) => Promise<void>,
       ) => {
         await callBack(fakeRecords, () => {});
 
@@ -1165,7 +1156,7 @@ describe("fetchSeminarSeriesEvents", () => {
   test("gets record fields from `getAllFieldNames` if there are none yet", async () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
-      "testView"
+      "testView",
     );
 
     const getEventsQueryMock = vi.fn().mockReturnValue({
@@ -1191,7 +1182,7 @@ describe("fetchSeminarSeriesEvents", () => {
       "testApiKey",
       "testView",
       undefined,
-      {}
+      {},
     );
 
     const seminarEvent =
@@ -1216,7 +1207,7 @@ describe("formatTime", () => {
   test("formats date", () => {
     const eventsAirtableRecords = new FakeEventsAirtableRecords(
       "testApiKey",
-      "testView"
+      "testView",
     );
 
     eventsAirtableRecords.recordFields = {};

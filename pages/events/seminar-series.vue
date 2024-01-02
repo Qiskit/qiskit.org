@@ -220,11 +220,11 @@ const seminarSeriesDataTableColumns = [
 ];
 const upcomingEventsDataTable = dataPerRow(
   upcomingSeminarSerieEvents,
-  "upcoming-events-section"
+  "upcoming-events-section",
 );
 const pastEventsDataTable = dataPerRow(
   pastSeminarSeriesEvents,
-  "past-events-section"
+  "past-events-section",
 );
 
 // Data for the helpful resources section
@@ -289,7 +289,7 @@ function isAppCtaComponent(component: string): boolean {
 
 function dataPerRow(
   events: SeminarSeriesEvent[],
-  eventsSection: string
+  eventsSection: string,
 ): TableRowElement[][] {
   return events.map((event) => [
     {
@@ -337,7 +337,7 @@ useSchemaOrg([
         image: event.image,
         performer: event.speaker,
         endDate: event.endDate ? new Date(event.endDate) : undefined,
-      })
+      }),
     ),
     itemListOrder: "Ascending",
     numberOfItems: sortedEvents.length,

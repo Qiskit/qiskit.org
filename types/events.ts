@@ -55,7 +55,7 @@ type CommunityEvent = {
 };
 
 const COMMUNITY_EVENT_TYPE_OPTIONS = Object.values(
-  COMMUNITY_EVENT_TYPES
+  COMMUNITY_EVENT_TYPES,
 ).sort();
 
 export {
