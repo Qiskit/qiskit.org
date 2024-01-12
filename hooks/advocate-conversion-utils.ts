@@ -95,7 +95,7 @@ class AdvocatesAirtableRecords extends AirtableRecords {
     return record.get(this.recordFields!.city);
   }
 
-  public getCountry(record: any): string[] {
+  public getCountry(record: any): string {
     return record.get(this.recordFields!.country);
   }
 
