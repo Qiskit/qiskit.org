@@ -40,7 +40,7 @@ import Calendar20 from "@carbon/icons-vue/lib/calendar/20";
 import Education20 from "@carbon/icons-vue/lib/education/20";
 import Map20 from "@carbon/icons-vue/lib/map/20";
 import Time20 from "@carbon/icons-vue/lib/time/20";
-import { CtaClickedEventProp } from "~/types/segment";
+import { type CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
   types?: string[];

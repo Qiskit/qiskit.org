@@ -112,7 +112,7 @@
 
 <script setup lang="ts">
 import {
-  CommunityEvent,
+  type CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS,
 } from "~/types/events";

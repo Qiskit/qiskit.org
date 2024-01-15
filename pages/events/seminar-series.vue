@@ -115,12 +115,12 @@
 </template>
 
 <script setup lang="ts">
-import { SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
-import { TableRowElement } from "~/components/Ui/DataTable/UiDataTable.vue";
+import { type SeminarSeriesEvent } from "~/hooks/event-conversion-utils";
+import { type TableRowElement } from "~/components/Ui/DataTable/UiDataTable.vue";
 import upcomingSeminarSerieEvents from "~/content/events/upcoming-seminar-series-events.json";
 import pastSeminarSeriesEvents from "~/content/events/past-seminar-series-events.json";
-import { TextLink } from "~/types/links";
-import { DescriptionCard, MosaicElement } from "~/types/uiComponents";
+import { type TextLink } from "~/types/links";
+import type { DescriptionCard, MosaicElement } from "~/types/uiComponents";
 
 definePageMeta({
   pageTitle: "Qiskit Seminar Series",

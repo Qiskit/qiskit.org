@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ADVOCATES_WORLD_REGION_OPTIONS, Advocate } from "~/types/advocates";
+import { ADVOCATES_WORLD_REGION_OPTIONS, type Advocate } from "~/types/advocates";
 import rawAdvocates from "~/content/advocates/advocates.json";
 
 const advocates = rawAdvocates as Advocate[];

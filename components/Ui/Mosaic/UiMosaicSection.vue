@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { MosaicElement } from "~/types/uiComponents";
+import { type MosaicElement } from "~/types/uiComponents";
 
 interface Props {
   description?: string;

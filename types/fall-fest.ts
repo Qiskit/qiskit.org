@@ -11,4 +11,4 @@ interface FallFestPartnerEvent {
   image: string;
 }
 
-export { FallFestExtensionEvent, FallFestPartnerEvent };
+export type { FallFestExtensionEvent, FallFestPartnerEvent };

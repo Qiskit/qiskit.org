@@ -65,7 +65,7 @@ import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
 import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
 import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
 import { SocialMedia } from "~/constants/links";
-import { IconLink, TextLink } from "~/types/links";
+import { type IconLink, type TextLink } from "~/types/links";
 
 interface Props {
   oldContainer?: boolean;

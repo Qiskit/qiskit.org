@@ -48,7 +48,7 @@
 import EventsFollowOurCalendarInstructionsApple from "~/components/Events/FollowOurCalendar/Instructions/EventsFollowOurCalendarInstructionsApple.vue";
 import EventsFollowOurCalendarInstructionsGoogle from "~/components/Events/FollowOurCalendar/Instructions/EventsFollowOurCalendarInstructionsGoogle.vue";
 import EventsFollowOurCalendarInstructionsOutlook from "~/components/Events/FollowOurCalendar/Instructions/EventsFollowOurCalendarInstructionsOutlook.vue";
-import { TextLink } from "~/types/links";
+import { type TextLink } from "~/types/links";
 
 const calendarsInstructions = [
   {

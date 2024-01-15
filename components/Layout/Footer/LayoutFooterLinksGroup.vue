@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconLink } from "~/types/links";
+import { type IconLink } from "~/types/links";
 
 interface Props {
   title: string;

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AirtableBase } from "airtable/lib/airtable_base";
+import type { AirtableBase } from "airtable/lib/airtable_base";
 import AdvocatesAirtableRecords, {
   RECORD_FIELDS_IDS,
 } from "../../hooks/advocate-conversion-utils";

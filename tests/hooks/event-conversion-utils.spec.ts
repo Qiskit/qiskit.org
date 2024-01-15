@@ -1,9 +1,9 @@
 import axios from "axios";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AirtableBase } from "airtable/lib/airtable_base";
+import type { AirtableBase } from "airtable/lib/airtable_base";
 import EventsAirtableRecords from "../../hooks/event-conversion-utils";
 import {
-  CommunityEvent,
+  type CommunityEvent,
   COMMUNITY_EVENT_TYPES,
   WORLD_REGIONS,
 } from "../../types/events";

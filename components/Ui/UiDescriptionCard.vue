@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { TextLink } from "~/types/links";
+import { type TextLink } from "~/types/links";
 
 interface Props {
   cta: TextLink;

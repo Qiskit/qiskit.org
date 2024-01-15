@@ -1,6 +1,6 @@
 import Airtable from "airtable";
+import type { FallFestExtensionEvent } from "~/types/fall-fest";
 import { AirtableRecords } from "./airtable-conversion-utils";
-import { FallFestExtensionEvent } from "types/fall-fest";
 
 export const RECORD_FIELDS_IDS = Object.freeze({
   institution: "flddG950A6KMmF19G",
