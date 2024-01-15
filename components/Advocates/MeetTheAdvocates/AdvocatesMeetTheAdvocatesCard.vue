@@ -15,7 +15,7 @@
       class="advocates-meet-the-advocates-card__contact"
     >
       <LogoSlack20 class="advocates-meet-the-advocates-card__icon" />
-      <UiLinkText :url="`https://qiskit.slack.com/team/${slackId}`">
+      <UiLinkText :link="{ url: `https://qiskit.slack.com/team/${slackId}` }">
         @{{ slackUsername }}
       </UiLinkText>
     </div>

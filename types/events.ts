@@ -65,8 +65,4 @@ export {
   WORLD_REGION_OPTIONS,
 };
 
-export type {
-  CommunityEvent,
-  CommunityEventType,
-  WorldRegion,
-};
+export type { CommunityEvent, CommunityEventType, WorldRegion };

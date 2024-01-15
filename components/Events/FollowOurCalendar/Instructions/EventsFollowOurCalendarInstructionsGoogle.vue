@@ -3,7 +3,9 @@
     <bx-list-item>
       Open your Google Calendar by visiting
       <UiLinkText
-        url="https://calendar.google.com/calendar/u/0/r/settings/addbyurl?pli=1"
+        :link="{
+          url: 'https://calendar.google.com/calendar/u/0/r/settings/addbyurl?pli=1',
+        }"
       >
         this link
       </UiLinkText>
