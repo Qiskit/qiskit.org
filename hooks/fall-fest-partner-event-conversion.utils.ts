@@ -1,10 +1,10 @@
 import Airtable from "airtable";
-import { FallFestPartnerEvent } from "types/fall-fest";
 import {
   AirtableRecords,
   getImageUrl,
   findImageAttachment,
 } from "./airtable-conversion-utils";
+import { FallFestPartnerEvent } from "types/fall-fest";
 
 export const RECORD_FIELDS_IDS = Object.freeze({
   title: "fld7dWQ6pkQHYg2kj",
