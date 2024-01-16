@@ -263,7 +263,6 @@ function showMaxDescription(description: string) {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-down(lg) {
       flex-direction: column;
