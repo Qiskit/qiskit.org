@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { type TextLink } from "~/types/links";
+import type { TextLink } from "~/types/links";
 
 interface Card {
   name: string;

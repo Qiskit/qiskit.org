@@ -194,7 +194,7 @@
 </template>
 
 <script setup lang="ts">
-import { type Link } from "~/types/links";
+import type { Link } from "~/types/links";
 
 const config = useRuntimeConfig();
 

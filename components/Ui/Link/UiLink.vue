@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { type CtaClickedEventProp } from "~/types/segment";
+import type { CtaClickedEventProp } from "~/types/segment";
 
 type NuxtLinkTarget =
   | "_blank"
