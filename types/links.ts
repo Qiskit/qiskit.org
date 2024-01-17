@@ -2,7 +2,7 @@ import LogoMedium20 from "@carbon/icons-vue/lib/logo--medium/20";
 import LogoSlack20 from "@carbon/icons-vue/lib/logo--slack/20";
 import LogoTwitter20 from "@carbon/icons-vue/lib/logo--twitter/20";
 import LogoYouTube20 from "@carbon/icons-vue/lib/logo--youtube/20";
-import { CtaClickedEventProp } from "~/types/segment";
+import type { CtaClickedEventProp } from "~/types/segment";
 
 interface Link {
   segment?: CtaClickedEventProp;
@@ -22,4 +22,4 @@ interface TextLink extends Link {
   label: string;
 }
 
-export { IconLink, Link, TextLink };
+export type { IconLink, Link, TextLink };

@@ -1,6 +1,6 @@
 import { promises as fsPromises } from "fs";
 import Airtable from "airtable";
-import { AirtableBase } from "airtable/lib/airtable_base";
+import type { AirtableBase } from "airtable/lib/airtable_base";
 import axios from "axios";
 
 function getImageUrl(imageAttachment: any): string {

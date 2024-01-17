@@ -1,12 +1,9 @@
 import axios from "axios";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AirtableBase } from "airtable/lib/airtable_base";
+import type { AirtableBase } from "airtable/lib/airtable_base";
 import EventsAirtableRecords from "../../hooks/event-conversion-utils";
-import {
-  CommunityEvent,
-  COMMUNITY_EVENT_TYPES,
-  WORLD_REGIONS,
-} from "../../types/events";
+import { COMMUNITY_EVENT_TYPES, WORLD_REGIONS } from "../../types/events";
+import type { CommunityEvent } from "../../types/events";
 import { mock } from "./mock/seminarSeriesMock";
 
 vi.mock("axios");

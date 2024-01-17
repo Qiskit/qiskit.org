@@ -74,7 +74,7 @@
                   v-if="link"
                   class="fall-fest-page__table-link"
                   :style="styles"
-                  :url="link"
+                  :link="{ url: link }"
                 >
                   Link to event
                 </UiLinkText>

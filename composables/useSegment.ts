@@ -1,4 +1,4 @@
-import {
+import type {
   CtaClickedEventSegmentSchema,
   PageLoadedEventSegmentSchema,
 } from "~/types/segment";

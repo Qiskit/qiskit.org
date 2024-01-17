@@ -25,4 +25,6 @@ interface Advocate {
   slackUsername?: string;
 }
 
-export { AdvocatesWorldRegion, ADVOCATES_WORLD_REGION_OPTIONS, Advocate };
+export { ADVOCATES_WORLD_REGION_OPTIONS };
+
+export type { Advocate, AdvocatesWorldRegion };

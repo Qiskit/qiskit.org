@@ -1,12 +1,14 @@
 import Airtable from "airtable";
 
 import {
-  CommunityEvent,
-  CommunityEventType,
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
-  WorldRegion,
   WORLD_REGIONS,
+} from "../types/events";
+import type {
+  CommunityEvent,
+  CommunityEventType,
+  WorldRegion,
 } from "../types/events";
 import {
   AirtableRecords,

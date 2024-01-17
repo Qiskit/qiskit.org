@@ -1,4 +1,4 @@
-import { Advocate, AdvocatesWorldRegion } from "../types/advocates";
+import type { Advocate, AdvocatesWorldRegion } from "../types/advocates";
 import {
   AirtableRecords,
   getImageUrl,

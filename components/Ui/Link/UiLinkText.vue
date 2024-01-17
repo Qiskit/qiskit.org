@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import type { Link } from "~/types/links";
 
 interface Props {
   kind?: "primary" | "secondary";

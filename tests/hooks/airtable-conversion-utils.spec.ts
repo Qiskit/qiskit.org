@@ -1,7 +1,7 @@
 import { promises as fsPromises } from "fs";
 import axios from "axios";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { AirtableBase } from "airtable/lib/airtable_base";
+import type { AirtableBase } from "airtable/lib/airtable_base";
 import { AirtableRecords } from "../../hooks/airtable-conversion-utils";
 
 class FakeAirtableRecords extends AirtableRecords {

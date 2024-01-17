@@ -115,10 +115,10 @@
 
 <script setup lang="ts">
 import {
-  CommunityEvent,
   WORLD_REGION_OPTIONS,
   COMMUNITY_EVENT_TYPE_OPTIONS,
 } from "~/types/events";
+import type { CommunityEvent } from "~/types/events";
 
 import rawPastEvents from "~/content/events/past-community-events.json";
 import rawUpcomingEvents from "~/content/events/upcoming-community-events.json";

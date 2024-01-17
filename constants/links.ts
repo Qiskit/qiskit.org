@@ -1,4 +1,4 @@
-import { TextLink } from "~/types/links";
+import type { TextLink } from "~/types/links";
 
 const SocialMedia: { [key: string]: TextLink } = {
   github: {

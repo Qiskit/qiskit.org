@@ -59,11 +59,10 @@ const COMMUNITY_EVENT_TYPE_OPTIONS = Object.values(
 ).sort();
 
 export {
-  WorldRegion,
-  WORLD_REGIONS,
-  WORLD_REGION_OPTIONS,
-  CommunityEvent,
-  CommunityEventType,
   COMMUNITY_EVENT_TYPES,
   COMMUNITY_EVENT_TYPE_OPTIONS,
+  WORLD_REGIONS,
+  WORLD_REGION_OPTIONS,
 };
+
+export type { CommunityEvent, CommunityEventType, WorldRegion };

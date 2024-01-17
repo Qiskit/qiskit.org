@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from "~/types/links";
+import type { Link } from "~/types/links";
 
 export interface TableRowElement {
   addTooltip?: boolean;

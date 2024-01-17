@@ -27,8 +27,8 @@
 import ArrowDown16 from "@carbon/icons-vue/lib/arrow--down/16";
 import ArrowRight16 from "@carbon/icons-vue/lib/arrow--right/16";
 import Launch16 from "@carbon/icons-vue/lib/launch/16";
-import { Link } from "~/types/links";
-import { CtaClickedEventProp } from "~/types/segment";
+import type { Link } from "~/types/links";
+import type { CtaClickedEventProp } from "~/types/segment";
 
 interface Props {
   isWider?: boolean;
