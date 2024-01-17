@@ -10,10 +10,8 @@
     :segment="segment"
     :vertical-layout="verticalLayout"
     :alt-text="altText"
+    :description="description"
   >
-    <div class="events-card__description">
-      <slot v-if="$slots.default" />
-    </div>
     <div>
       <div v-if="location" class="events-card__detail">
         <Map20 class="events-card__icon" />
@@ -46,12 +44,13 @@ interface Props {
   types?: string[];
   title: string;
   image: string;
+  description?: string;
   altText?: string;
   institution?: string;
   location?: string;
   date?: string;
   time?: string | null;
-  to: string;
+  to?: string;
   ctaLabel?: string;
   segment?: CtaClickedEventProp | undefined;
   verticalLayout?: boolean;
@@ -68,6 +67,8 @@ withDefaults(defineProps<Props>(), {
   segment: undefined,
   time: undefined,
   verticalLayout: false,
+  description: undefined,
+  to: "",
   regions: () => [],
 });
 </script>
@@ -76,10 +77,6 @@ withDefaults(defineProps<Props>(), {
 @use "~/assets/scss/carbon.scss";
 
 .events-card {
-  &__description {
-    margin-bottom: carbon.$spacing-06;
-  }
-
   &__detail {
     display: flex;
     align-items: center;

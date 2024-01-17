@@ -51,26 +51,55 @@
         </div>
       </header>
       <div class="card__body">
-        <div class="card__description">
-          <slot />
+        <div class="card__body__top">
+          <div class="card__eyebrow">
+            <slot name="eyebrow"></slot>
+          </div>
+          <div v-if="description" class="card__description">
+            <p :id="`ui-card-desc-${$.uid}`">
+              {{ showMaxDescription(description) }}
+              <UiLinkText
+                v-if="descriptionTooLong"
+                :link="{
+                  url: '',
+                  segment:
+                    segment && descriptionTooLong && !showMore
+                      ? {
+                          cta: 'show-more',
+                          location: segment?.location,
+                        }
+                      : undefined,
+                }"
+                class="card__description__toggle"
+                @click="toggleDescriptionLength"
+              >
+                {{ !showMore ? "Show more" : "Show less" }}
+              </UiLinkText>
+            </p>
+          </div>
         </div>
-        <div class="card__ctas">
-          <UiCta
-            v-if="to"
-            is-wider
-            kind="ghost"
-            :label="ctaLink.label"
-            :segment="ctaLink.segment"
-            :url="ctaLink.url"
-          />
-          <UiCta
-            v-if="secondaryCta"
-            is-wider
-            kind="ghost"
-            :label="secondaryCta.label"
-            :segment="secondaryCta.segment"
-            :url="secondaryCta.url"
-          />
+        <div class="card__body__bottom">
+          <div class="card__slot">
+            <slot></slot>
+          </div>
+          <div class="card__ctas">
+            <UiCta
+              v-if="to"
+              is-wider
+              kind="ghost"
+              :label="ctaLink.label"
+              :segment="ctaLink.segment"
+              :url="ctaLink.url"
+            />
+            <UiCta
+              v-if="secondaryCta"
+              is-wider
+              kind="ghost"
+              :label="secondaryCta.label"
+              :segment="secondaryCta.segment"
+              :url="secondaryCta.url"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -87,6 +116,8 @@ interface Props {
   image?: string;
   imageContain?: boolean;
   altText?: string;
+  description?: string;
+  maxDescriptionLength?: number;
   segment?: CtaClickedEventProp | undefined;
   subtitle?: string;
   secondaryTags?: string[];
@@ -103,6 +134,8 @@ const props = withDefaults(defineProps<Props>(), {
   image: "",
   imageContain: false,
   altText: "No description available",
+  description: undefined,
+  maxDescriptionLength: 240,
   segment: undefined,
   subtitle: "",
   secondaryTags: () => [],
@@ -121,6 +154,22 @@ const ctaLink = computed(() => ({
 // TODO: Refactor to do a cleaner check for "tags" and "tooltip tags" (https://github.com/Qiskit/qiskit.org/pull/2935#discussion_r1088770246)
 function hasTags(tags: string[]) {
   return Array.isArray(tags) && tags.length > 0;
+}
+
+const descriptionTooLong =
+  props.description && props.description.length > props.maxDescriptionLength;
+
+const showMore = ref(false);
+function toggleDescriptionLength() {
+  showMore.value = !showMore.value;
+}
+
+function showMaxDescription(description: string) {
+  if (descriptionTooLong && !showMore.value) {
+    return description.substring(0, props.maxDescriptionLength).trim() + "...";
+  }
+
+  return description;
 }
 </script>
 
@@ -168,6 +217,18 @@ function hasTags(tags: string[]) {
 
   &__body {
     overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+
+    &__top {
+      height: 100%;
+    }
+  }
+
+  &__eyebrow {
+    margin-bottom: carbon.$spacing-05;
   }
 
   &__content {
@@ -176,6 +237,20 @@ function hasTags(tags: string[]) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__description {
+    margin-bottom: carbon.$spacing-06;
+    max-height: 240ch;
+
+    &__toggle {
+      cursor: pointer;
+      color: qiskit.$link-color-tertiary;
+
+      &:hover {
+        color: qiskit.$link-color-tertiary;
+      }
+    }
   }
 
   &__ctas {
@@ -188,7 +263,6 @@ function hasTags(tags: string[]) {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: carbon.$spacing-07;
 
     @include carbon.breakpoint-down(lg) {
       flex-direction: column;

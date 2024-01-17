@@ -18,7 +18,6 @@
           :institution="cardContent.institution"
           :location="cardContent.location"
           :title="cardContent.title"
-          :to="cardContent.to"
           vertical-layout
         />
       </template>
@@ -311,14 +310,16 @@ function dataPerRow(
     {
       component: "AppCta",
       styles: "min-width: 5rem;",
-      data: {
-        url: event.to,
-        label: "Join event",
-        segment: {
-          cta: "talk-on-youtube",
-          location: eventsSection,
-        },
-      },
+      data: event.to
+        ? {
+            url: event.to,
+            label: "Join event",
+            segment: {
+              cta: "talk-on-youtube",
+              location: eventsSection,
+            },
+          }
+        : "",
     },
   ]);
 }
@@ -332,7 +333,6 @@ useSchemaOrg([
         startDate: new Date(event.startDate),
         mode: "Online",
         location: event.location,
-        url: event.to,
         name: event.title,
         image: event.image,
         performer: event.speaker,
