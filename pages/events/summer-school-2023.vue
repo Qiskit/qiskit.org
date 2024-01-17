@@ -41,10 +41,9 @@
           :time="headerData.card.time"
           :title="headerData.card.title"
           :to="headerData.card.to"
+          :description="headerData.card.description"
           vertical-layout
-        >
-          {{ headerData.card.description }}
-        </EventsCard>
+        />
       </template>
     </LayoutLeadSpaceWithCard>
 

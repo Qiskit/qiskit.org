@@ -96,9 +96,12 @@
                 :time="eventItem.startDateAndTime"
                 :to="eventItem.to"
                 :regions="eventItem.regions"
-              >
-                {{ eventItem.abstract }}
-              </EventsCard>
+                :description="eventItem.abstract || ''"
+                :segment="{
+                  cta: '',
+                  location: 'event-pages-index',
+                }"
+              />
             </div>
           </div>
         </template>

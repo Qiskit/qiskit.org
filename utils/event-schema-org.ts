@@ -33,7 +33,7 @@ interface Event {
   startDate: Date;
   mode: "Online" | "Offline";
   location: string;
-  url: string;
+  url?: string;
   name: string;
   image: string;
   performer?: string;

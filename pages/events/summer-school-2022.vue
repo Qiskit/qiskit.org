@@ -37,9 +37,8 @@
           :title="headerData.card.title"
           :to="headerData.card.to"
           vertical-layout
-        >
-          {{ headerData.card.description }}
-        </EventsCard>
+          :description="headerData.card.description"
+        />
       </template>
     </LayoutLeadSpaceWithCard>
 
