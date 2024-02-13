@@ -7,7 +7,6 @@
       <slot />
     </main>
     <LayoutFooter />
-    <UiAlchemerSurveyTrigger />
   </div>
 </template>
 
