@@ -23,7 +23,6 @@ contributors and maintainers of this site and so, thank you!
   - [Working on an issue](#working-on-an-issue)
   - [Adding tests](#adding-tests)
   - [Pull requests](#pull-requests)
-  - [Live previews](#live-previews)
   - [Code review](#code-review)
   - [Merging](#merging)
 - [Code style](#code-style)
@@ -181,17 +180,6 @@ Linking the issue has the advantage of automatically closing the related issue w
 request is merged. Unfortunately, this does not work when merging pull requests agains a feature
 branch. In these occassions, remember to manually close the related pull requests after
 [merging the pull request](#merging).
-
-### Live previews
-
-As part of our continuous integration infrastructure, every pull request opened from the head repository that passes
-the build process, receives a dedicated deployment running on [IBM Code Engine](https://cloud.ibm.com/codeengine/overview).
-
-This allows the team to have live branch previews, making it easier to share
-links and review changes as necessary. You can preview your working branch at
-`https://qiskit-org-pr-<pull-request-number>.<unique_id>.us-south.codeengine.appdomain.cloud/`.
-
-This means that for forked repositories the pull request will not generate a live preview and that step will be skipped.
 
 ### Code review
 
