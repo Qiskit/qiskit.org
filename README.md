@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> This repository is deprecated and its content has been superseded by the [IBM Quantum | Community page](https://ibm.com/quantum/community). These source files are no longer maintained and may contain errors. Contributions to this repo are no longer accepted.
+> This repository is unmaintained  and the content in qiskit.org has been superseded by the [IBM Quantum | Community page](https://ibm.com/quantum/community). These source files are no longer maintained and may contain omissions or outdated information. Contributions to this repo are no longer accepted.
 
 <br/>
 
