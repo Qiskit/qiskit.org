@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This repository is deprecated and its content has been superseded by the [IBM Quantum | Community page](https://ibm.com/quantum/community). These source files are no longer maintained and may contain errors. Contributions to this repo are no longer accepted.
+
+<br/>
+
 <p align="center">
   <a href="https://qiskit.org/">
     <img alt="Qiskit" src="https://qiskit.org/images/qiskit-logo.png" width="70" />
@@ -47,8 +52,6 @@ Qiskit is an open-source quantum computing software development framework for le
 - [🏷️ Naming Conventions](#️-naming-conventions)
   - [Nuxt Components](#nuxt-components)
 - [✏️ How to Contribute](#️-how-to-contribute)
-- [🗓 Open backlog](#-open-backlog)
-- [👩‍💻 Maintainers](#-maintainers)
 - [🔗 Connect with Qiskit](#-connect-with-qiskit)
 
 <br/>
@@ -135,21 +138,6 @@ When working with files in the `components/` directory, please adhere to the fol
 Contributions are always welcomed, no matter how large or small. Before contributing, please read the [contributing guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md).
 
 <br/>
-
-## 🗓 Open backlog
-
-We actively maintain our backlog using [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects). You can view our backlog [here](https://github.com/orgs/Qiskit/projects/10).
-
-<br/>
-
-## 👩‍💻 Maintainers
-
-<table>
-<tr>
-<td align="center"><a href="https://github.com/eddybrando"><img src="https://avatars2.githubusercontent.com/u/22047320?s=460&u=58f460132271f2ea45d270841f3821eb46c4bb5e&v=4" width="120px;" alt="Eddybrando Vásquez"/><br /><sub><b>Eddybrando Vásquez</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Aeddybrando" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=eddybrando" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
-<td align="center"><a href="https://github.com/techtolentino"><img src="https://avatars2.githubusercontent.com/u/6276074?s=460&v=4" width="120px;" alt="Randy Tolentino"/><br /><sub><b>Randy Tolentino</b></sub></a><br /><a href="https://github.com/qiskit/qiskit.org/issues?q=author%3Atechtolentino" title="Bug reports">🐛</a><a href="https://github.com/qiskit/qiskit.org/commits?author=techtolentino" title="Code">💻</a><a href="https://join.slack.com/t/qiskit/shared_invite/enQtODQ2NTIyOTgwMTQ3LTI0NzM2NzkzZjJhNDgzZjY5MTQzNDY3MGNiZGQzNTNkZTE4Nzg1MjMwMmFjY2UwZTgyNDlmYWQwYmZjMjE1ZTM" title="Answering Questions on Slack">💬</a></td>
-</tr>
-</table>
 
 <br/>
 
